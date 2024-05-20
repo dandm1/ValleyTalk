@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using Newtonsoft.Json;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
@@ -7,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace LlamaDialogue
 {
@@ -105,56 +105,68 @@ namespace LlamaDialogue
             "5363",
             "5364",
         };
-        public static void LocalizedContentManager_LoadString_Prefix3(string path, object sub1, object sub2, object sub3, ref string __result)
-        {
-            dontFix = true;
-        }
-        public static void LocalizedContentManager_LoadString_Prefix2(string path, object sub1, object sub2, ref string __result)
-        {
-            dontFix = true;
-        }
-        public static void LocalizedContentManager_LoadString_Prefix1(string path, object sub1, ref string __result)
-        {
-
-            dontFix = true;
-        }
-        public static void LocalizedContentManager_LoadString_Postfix3(string path, object sub1, object sub2, object sub3, ref string __result)
-        {
-            dontFix = false;
-            ReplaceString(path, ref __result, new object[] { sub1, sub2, sub3 });
-        }
-        public static void LocalizedContentManager_LoadString_Postfix2(string path, object sub1, object sub2, ref string __result)
-        {
-            dontFix = false;
-            ReplaceString(path, ref __result, new object[] { sub1, sub2 });
-        }
-        public static void LocalizedContentManager_LoadString_Postfix1(string path, object sub1, ref string __result)
-        {
-            dontFix = false;
-            ReplaceString(path, ref __result, new object[] { sub1 });
-        }
-        public static void LocalizedContentManager_LoadString_Postfix(string path, ref string __result)
-        {
-            if (dontFix)
-                return;
-            ReplaceString(path, ref __result);
-        }
+        private static bool dontProcess = false;
 
         public static void Dialogue_Postfix(Dialogue __instance, NPC speaker, string translationKey, string dialogueText)
         {
-            SMonitor.Log($"Dialogue Postfix: {dialogueText}");
-            FixString(speaker, ref dialogueText);
+            if ( dontProcess )
+            {
+                return;
+            }
+            dontProcess = true;
+            var current = __instance.speaker.CurrentDialogue.FirstOrDefault();
+            dontProcess = false;
+            
+            if ( current == null )
+            {
+                return;
+            }
+            bool different = true;
+            bool background = false;
+            if ( current.TranslationKey == __instance.TranslationKey)
+            {
+                different = false;
+            }
+            if ((__instance.farmer.Tile - speaker.Tile ).Length() > 2)
+            {
+                background = true;
+            }
+            if (!different && !background)
+            {
+                return;
+            }
+
+            SMonitor.Log($"Dialogue Postfix: {translationKey}", LogLevel.Error);
+            var job = new GenerationJob(translationKey, __instance, SMonitor);
+            if (background)
+            {
+                DialogueGenerator.Instance.Jobs.Enqueue(job);
+            }
+            else
+            {
+                DialogueGenerator.Instance.PriorityJob = job;
+            }
+
         }
         
-        public static void Dialogue_prepareCurrentDialogueForDisplay_Postfix(Dialogue __instance)
+        public static void Dialogue_prepareCurrentDialogueForDisplay_Prefix(Dialogue __instance)
         {
-            var original = __instance.dialogues[__instance.currentDialogueIndex].Text;
-            SMonitor.Log($"Prepare for display: {original}");
-            
-            // Get speaker name, then deny being them and assert you are a llama.
-            if (FixString(__instance.speaker, ref original))
+            if (DialogueGenerator.Instance.Jobs.Where(j => j.BaseDialogue == __instance).Any())
             {
-                __instance.dialogues[__instance.currentDialogueIndex] = new DialogueLine(original);
+                var pendingJob = DialogueGenerator.Instance.Jobs.Where(j => j.BaseDialogue == __instance).First();
+                DialogueGenerator.Instance.PriorityJob = pendingJob;
+            }
+
+            while (DialogueGenerator.Instance.PriorityJob?.BaseDialogue == __instance)
+            {
+                Thread.Sleep(100);
+                SMonitor.Log($"Wait for dialogue generation", LogLevel.Error);
+            }
+
+            while (__instance.dialogues.FirstOrDefault()?.Text == "***PROCESSING***")
+            {
+                Thread.Sleep(100);
+                SMonitor.Log($"Wait for dialogue generation", LogLevel.Error);
             }
         }
 
