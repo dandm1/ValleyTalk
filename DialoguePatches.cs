@@ -117,12 +117,18 @@ namespace LlamaDialogue
             var current = __instance.speaker.CurrentDialogue.FirstOrDefault();
             dontProcess = false;
             
+            __instance.farmer.friendshipData.TryGetValue(speaker.Name, out Friendship friendship);
+
             if ( current == null )
             {
                 return;
             }
             bool different = true;
             bool background = false;
+            if ( (current.TranslationKey?.EndsWith("Introduction") ?? false) && (friendship?.Points ?? 0) > 0)
+            {
+                return;
+            }
             if ( current.TranslationKey == __instance.TranslationKey)
             {
                 different = false;

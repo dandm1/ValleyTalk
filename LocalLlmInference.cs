@@ -24,7 +24,7 @@ public class LocalLlmInference : ILlmInference
         Context = model.CreateContext(parameters);
         Executor = new InstructExecutor(Context); 
         
-        Formatter = new PromptFormatter("<s>[INST] {0} {1} [/INST]","</s>");
+        Formatter = PromptFormats.MistralFormat;
 
         Params = new InferenceParams() { Temperature = 0.8f, MaxTokens = 600,  };
     }

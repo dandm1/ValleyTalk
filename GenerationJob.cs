@@ -54,9 +54,9 @@ public class GenerationJob
                 nextSentence = string.Empty;
             }
         }
-        if (!string.IsNullOrWhiteSpace(nextLine))
+        if (!string.IsNullOrWhiteSpace(nextSentence) || !string.IsNullOrWhiteSpace(nextLine))
         {
-            dialogues.Add(new DialogueLine(nextLine));
+            dialogues.Add(new DialogueLine(nextLine + nextSentence));
         }
 
         BaseDialogue.dialogues = dialogues;

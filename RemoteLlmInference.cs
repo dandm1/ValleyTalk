@@ -13,13 +13,7 @@ internal class RemoteLlmInference : ILlmInference
     public RemoteLlmInference(string serverAddress)
     {
         this.serverAddress = serverAddress;
-        _formatter = new PromptFormatter(@"<|start_header_id|>system<|end_header_id|>
 
-{0}<|eot_id|><|start_header_id|>user<|end_header_id|>
-
-{1}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
-
-","<|eot_id|>");
     }
 
     public async IAsyncEnumerable<string> Generate(string system, string prompt)
@@ -31,6 +25,15 @@ internal class RemoteLlmInference : ILlmInference
         var requestBody = new { prompt = interpolatedPrompt, n_predict = 2048, stream = false };
         var response = await _client.PostAsJsonAsync($"{serverAddress}/completion", requestBody);
 
+        // do the same as below, but one streaming message at a time
+        // var responseStream = await response.Content.ReadAsStreamAsync();
+        // var responseJson = await JsonDocument.ParseAsync(responseStream);
+        // var responseText = responseJson.RootElement.GetProperty("content").GetString();
+        // responseText = _formatter.Strip(responseText);
+        // foreach (var word in responseText.Split(' '))
+        // {
+        //     yield return word+' ';
+        // }
 
         var responseStream = await response.Content.ReadAsStringAsync();
         var responseJson = JsonDocument.Parse(responseStream);
