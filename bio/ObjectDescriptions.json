@@ -1,0 +1,4808 @@
+{
+  "0": {
+    "Name": "Weeds",
+    "Description": "A bunch of obnoxious weeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "2": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain diamonds.",
+    "DisplayName": "Diamond Stone",
+    "Notes": null
+  },
+  "4": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain rubies.",
+    "DisplayName": "Ruby Stone",
+    "Notes": null
+  },
+  "6": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain jade.",
+    "DisplayName": "Jade Stone",
+    "Notes": null
+  },
+  "8": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain amethysts.",
+    "DisplayName": "Amethyst Stone",
+    "Notes": null
+  },
+  "10": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain topaz.",
+    "DisplayName": "Topaz Stone",
+    "Notes": null
+  },
+  "12": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain emeralds.",
+    "DisplayName": "Emerald Stone",
+    "Notes": null
+  },
+  "14": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain aquamarines.",
+    "DisplayName": "Aquamarine Stone",
+    "Notes": null
+  },
+  "16": {
+    "Name": "Wild Horseradish",
+    "Description": "A spicy root found in the spring.",
+    "DisplayName": "Wild Horseradish",
+    "Notes": null
+  },
+  "18": {
+    "Name": "Daffodil",
+    "Description": "A traditional spring flower that makes a nice gift.",
+    "DisplayName": "Daffodil",
+    "Notes": null
+  },
+  "20": {
+    "Name": "Leek",
+    "Description": "A tasty relative of the onion.",
+    "DisplayName": "Leek",
+    "Notes": null
+  },
+  "22": {
+    "Name": "Dandelion",
+    "Description": "Not the prettiest flower, but the leaves make a good salad.",
+    "DisplayName": "Dandelion",
+    "Notes": null
+  },
+  "24": {
+    "Name": "Parsnip",
+    "Description": "A spring tuber closely related to the carrot. It has an earthy taste and is full of nutrients.",
+    "DisplayName": "Parsnip",
+    "Notes": null
+  },
+  "30": {
+    "Name": "Lumber",
+    "Description": "A versatile resource used for building and fuel.",
+    "DisplayName": "Lumber",
+    "Notes": null
+  },
+  "32": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "34": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "36": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "38": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "40": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "42": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "44": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Gem Stone",
+    "Notes": null
+  },
+  "46": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Mystic Stone",
+    "Notes": null
+  },
+  "48": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Snowy Stone",
+    "Notes": null
+  },
+  "50": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Snowy Stone",
+    "Notes": null
+  },
+  "52": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Snowy Stone",
+    "Notes": null
+  },
+  "54": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Snowy Stone",
+    "Notes": null
+  },
+  "56": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Snowy Stone",
+    "Notes": null
+  },
+  "58": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Snowy Stone",
+    "Notes": null
+  },
+  "60": {
+    "Name": "Emerald",
+    "Description": "A precious stone with a brilliant green color.",
+    "DisplayName": "Emerald",
+    "Notes": null
+  },
+  "62": {
+    "Name": "Aquamarine",
+    "Description": "A shimmery blue-green gem.",
+    "DisplayName": "Aquamarine",
+    "Notes": null
+  },
+  "64": {
+    "Name": "Ruby",
+    "Description": "A precious stone that is sought after for its rich color and beautiful luster.",
+    "DisplayName": "Ruby",
+    "Notes": null
+  },
+  "66": {
+    "Name": "Amethyst",
+    "Description": "A purple variant of quartz.",
+    "DisplayName": "Amethyst",
+    "Notes": null
+  },
+  "68": {
+    "Name": "Topaz",
+    "Description": "Fairly common but still prized for its beauty.",
+    "DisplayName": "Topaz",
+    "Notes": null
+  },
+  "70": {
+    "Name": "Jade",
+    "Description": "A pale green ornamental stone.",
+    "DisplayName": "Jade",
+    "Notes": null
+  },
+  "71": {
+    "Name": "Trimmed Lucky Purple Shorts",
+    "Description": "Purple silk shorts trimmed in luxurious gold...",
+    "DisplayName": "Trimmed Lucky Purple Shorts",
+    "Notes": "Mayor Lewis's lucky purple shorts.  Highly embarrassing for the mayor, as they were found in Marnie's bedroom."
+  },
+  "72": {
+    "Name": "Diamond",
+    "Description": "A rare and valuable gem.",
+    "DisplayName": "Diamond",
+    "Notes": null
+  },
+  "74": {
+    "Name": "Prismatic Shard",
+    "Description": "A very rare and powerful substance with unknown origins.",
+    "DisplayName": "Prismatic Shard",
+    "Notes": null
+  },
+  "75": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain geodes.",
+    "DisplayName": "Geode Stone",
+    "Notes": null
+  },
+  "76": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain frozen geodes.",
+    "DisplayName": "Frozen Geode Stone",
+    "Notes": null
+  },
+  "77": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain magma geodes.",
+    "DisplayName": "Magma Geode Stone",
+    "Notes": null
+  },
+  "78": {
+    "Name": "Cave Carrot",
+    "Description": "A starchy snack found in caves. It helps miners work longer.",
+    "DisplayName": "Cave Carrot",
+    "Notes": null
+  },
+  "79": {
+    "Name": "Secret Note",
+    "Description": "It\u0027s old and crumpled, but if you look closely you can make out the details...",
+    "DisplayName": "Secret Note",
+    "Notes": null
+  },
+  "80": {
+    "Name": "Quartz",
+    "Description": "A clear crystal commonly found in caves and mines.",
+    "DisplayName": "Quartz",
+    "Notes": null
+  },
+  "82": {
+    "Name": "Fire Quartz",
+    "Description": "A glowing red crystal commonly found near hot lava.",
+    "DisplayName": "Fire Quartz",
+    "Notes": null
+  },
+  "84": {
+    "Name": "Frozen Tear",
+    "Description": "A crystal fabled to be the frozen tears of a yeti.",
+    "DisplayName": "Frozen Tear",
+    "Notes": null
+  },
+  "86": {
+    "Name": "Earth Crystal",
+    "Description": "A resinous substance found near the surface.",
+    "DisplayName": "Earth Crystal",
+    "Notes": null
+  },
+  "88": {
+    "Name": "Coconut",
+    "Description": "A seed of the coconut palm. It has many culinary uses.",
+    "DisplayName": "Coconut",
+    "Notes": null
+  },
+  "90": {
+    "Name": "Cactus Fruit",
+    "Description": "The sweet fruit of the prickly pear cactus.",
+    "DisplayName": "Cactus Fruit",
+    "Notes": null
+  },
+  "92": {
+    "Name": "Sap",
+    "Description": "A fluid obtained from trees.",
+    "DisplayName": "Sap",
+    "Notes": null
+  },
+  "93": {
+    "Name": "Torch",
+    "Description": "Provides a modest amount of light.",
+    "DisplayName": "Torch",
+    "Notes": null
+  },
+  "94": {
+    "Name": "Spirit Torch",
+    "Description": "It\u0027s unclear where the blue color comes from...",
+    "DisplayName": "Spirit Torch",
+    "Notes": null
+  },
+  "95": {
+    "Name": "Stone",
+    "Description": "Contains radioactive ore.",
+    "DisplayName": "Radioactive Stone",
+    "Notes": null
+  },
+  "96": {
+    "Name": "Dwarf Scroll I",
+    "Description": "A yellowed scroll of parchment filled with dwarven script. This one\u0027s tied with a red bow.",
+    "DisplayName": "Dwarf Scroll I",
+    "Notes": null
+  },
+  "97": {
+    "Name": "Dwarf Scroll II",
+    "Description": "A yellowed scroll of parchment filled with dwarven script. This one\u0027s tied with a green ribbon.",
+    "DisplayName": "Dwarf Scroll II",
+    "Notes": null
+  },
+  "98": {
+    "Name": "Dwarf Scroll III",
+    "Description": "A yellowed scroll of parchment filled with dwarven script. This one\u0027s tied with a blue rope.",
+    "DisplayName": "Dwarf Scroll III",
+    "Notes": null
+  },
+  "99": {
+    "Name": "Dwarf Scroll IV",
+    "Description": "A yellowed scroll of parchment filled with dwarven script. This one\u0027s tied with a golden chain.",
+    "DisplayName": "Dwarf Scroll IV",
+    "Notes": null
+  },
+  "100": {
+    "Name": "Chipped Amphora",
+    "Description": "An ancient vessel made of ceramic material. Used to transport both dry and wet goods.",
+    "DisplayName": "Chipped Amphora",
+    "Notes": null
+  },
+  "101": {
+    "Name": "Arrowhead",
+    "Description": "A crudely fashioned point used for hunting.",
+    "DisplayName": "Arrowhead",
+    "Notes": null
+  },
+  "102": {
+    "Name": "Lost Book",
+    "Description": "Writings from a wide variety of time periods.",
+    "DisplayName": "Lost Book",
+    "Notes": null
+  },
+  "103": {
+    "Name": "Ancient Doll",
+    "Description": "An ancient doll covered in grime. This doll may have been used as a toy, a decoration, or a prop in some kind of ritual.",
+    "DisplayName": "Ancient Doll",
+    "Notes": null
+  },
+  "104": {
+    "Name": "Elvish Jewelry",
+    "Description": "Dirty but still beautiful. On the side is a flowing script thought by some to be the ancient language of the elves. No Elvish bones have ever been found.",
+    "DisplayName": "Elvish Jewelry",
+    "Notes": null
+  },
+  "105": {
+    "Name": "Chewing Stick",
+    "Description": "Ancient people chewed on these to keep their teeth clean.",
+    "DisplayName": "Chewing Stick",
+    "Notes": null
+  },
+  "106": {
+    "Name": "Ornamental Fan",
+    "Description": "This exquisite fan most likely belonged to a noblewoman. Historians believe that the valley was a popular sixth-era vacation spot for the wealthy.",
+    "DisplayName": "Ornamental Fan",
+    "Notes": null
+  },
+  "107": {
+    "Name": "Dinosaur Egg",
+    "Description": "A giant dino egg... The entire shell is still intact!",
+    "DisplayName": "Dinosaur Egg",
+    "Notes": null
+  },
+  "108": {
+    "Name": "Rare Disc",
+    "Description": "A heavy black disc studded with peculiar red stones. When you hold it, you\u0027re overwhelmed with a feeling of dread.",
+    "DisplayName": "Rare Disc",
+    "Notes": null
+  },
+  "109": {
+    "Name": "Ancient Sword",
+    "Description": "It\u0027s the remains of an ancient sword. Most of the blade has turned to rust, but the hilt is very finely crafted.",
+    "DisplayName": "Ancient Sword",
+    "Notes": null
+  },
+  "110": {
+    "Name": "Rusty Spoon",
+    "Description": "A plain old spoon, probably ten years old. Not very interesting.",
+    "DisplayName": "Rusty Spoon",
+    "Notes": null
+  },
+  "111": {
+    "Name": "Rusty Spur",
+    "Description": "An old spur that was once attached to a cowboy\u0027s boot. People must have been raising animals in this area for many generations.",
+    "DisplayName": "Rusty Spur",
+    "Notes": null
+  },
+  "112": {
+    "Name": "Rusty Cog",
+    "Description": "A well preserved cog that must have been part of some ancient machine. This could be dwarven technology.",
+    "DisplayName": "Rusty Cog",
+    "Notes": null
+  },
+  "113": {
+    "Name": "Chicken Statue",
+    "Description": "It\u0027s a statue of a chicken on a bronze base. The ancient people of this area must have been very fond of chickens.",
+    "DisplayName": "Chicken Statue",
+    "Notes": null
+  },
+  "114": {
+    "Name": "Ancient Seed",
+    "Description": "It\u0027s a dry old seed from some ancient plant. By all appearances it\u0027s long since dead...",
+    "DisplayName": "Ancient Seed",
+    "Notes": null
+  },
+  "115": {
+    "Name": "Prehistoric Tool",
+    "Description": "Some kind of gnarly old digging tool.",
+    "DisplayName": "Prehistoric Tool",
+    "Notes": null
+  },
+  "116": {
+    "Name": "Dried Starfish",
+    "Description": "A starfish from the primordial ocean. It\u0027s an unusually pristine specimen!",
+    "DisplayName": "Dried Starfish",
+    "Notes": null
+  },
+  "117": {
+    "Name": "Anchor",
+    "Description": "It may have belonged to ancient pirates.",
+    "DisplayName": "Anchor",
+    "Notes": null
+  },
+  "118": {
+    "Name": "Glass Shards",
+    "Description": "A mixture of glass shards smoothed by centuries of ocean surf. These could have belonged to an ancient mosaic or necklace.",
+    "DisplayName": "Glass Shards",
+    "Notes": null
+  },
+  "119": {
+    "Name": "Bone Flute",
+    "Description": "It\u0027s a prehistoric wind instrument carved from an animal\u0027s bone. It produces an eerie tone.",
+    "DisplayName": "Bone Flute",
+    "Notes": null
+  },
+  "120": {
+    "Name": "Prehistoric Handaxe",
+    "Description": "One of the earliest tools employed by humans. This \u0022crude\u0022 tool was created by striking one rock with another to form a sharp edge.",
+    "DisplayName": "Prehistoric Handaxe",
+    "Notes": null
+  },
+  "121": {
+    "Name": "Dwarvish Helm",
+    "Description": "It\u0027s one of the helmets commonly worn by dwarves. The thick metal plating protects them from falling debris and stalactites.",
+    "DisplayName": "Dwarvish Helm",
+    "Notes": null
+  },
+  "122": {
+    "Name": "Dwarf Gadget",
+    "Description": "It\u0027s a piece of the advanced technology once known to the dwarves. It\u0027s still glowing and humming, but you\u0027re unable to understand how it works.",
+    "DisplayName": "Dwarf Gadget",
+    "Notes": null
+  },
+  "123": {
+    "Name": "Ancient Drum",
+    "Description": "It\u0027s a drum made from wood and animal skin. It has a low, reverberating tone.",
+    "DisplayName": "Ancient Drum",
+    "Notes": null
+  },
+  "124": {
+    "Name": "Golden Mask",
+    "Description": "A creepy golden mask probably used in an ancient magic ritual. A socket in the forehead contains a large purple gemstone.",
+    "DisplayName": "Golden Mask",
+    "Notes": null
+  },
+  "125": {
+    "Name": "Golden Relic",
+    "Description": "It\u0027s a golden slab with hieroglyphs and pictures emblazoned onto the front.",
+    "DisplayName": "Golden Relic",
+    "Notes": null
+  },
+  "126": {
+    "Name": "Strange Doll",
+    "Description": "???",
+    "DisplayName": "Strange Doll",
+    "Notes": null
+  },
+  "127": {
+    "Name": "Strange Doll",
+    "Description": "???",
+    "DisplayName": "Strange Doll",
+    "Notes": null
+  },
+  "128": {
+    "Name": "Pufferfish",
+    "Description": "Inflates when threatened.",
+    "DisplayName": "Pufferfish",
+    "Notes": null
+  },
+  "129": {
+    "Name": "Anchovy",
+    "Description": "A small silver fish found in the ocean.",
+    "DisplayName": "Anchovy",
+    "Notes": null
+  },
+  "130": {
+    "Name": "Tuna",
+    "Description": "A large fish that lives in the ocean.",
+    "DisplayName": "Tuna",
+    "Notes": null
+  },
+  "131": {
+    "Name": "Sardine",
+    "Description": "A common ocean fish.",
+    "DisplayName": "Sardine",
+    "Notes": null
+  },
+  "132": {
+    "Name": "Bream",
+    "Description": "A fairly common river fish that becomes active at night.",
+    "DisplayName": "Bream",
+    "Notes": null
+  },
+  "136": {
+    "Name": "Largemouth Bass",
+    "Description": "A popular fish that lives in lakes.",
+    "DisplayName": "Largemouth Bass",
+    "Notes": null
+  },
+  "137": {
+    "Name": "Smallmouth Bass",
+    "Description": "A freshwater fish that is very sensitive to pollution.",
+    "DisplayName": "Smallmouth Bass",
+    "Notes": null
+  },
+  "138": {
+    "Name": "Rainbow Trout",
+    "Description": "A freshwater trout with colorful markings.",
+    "DisplayName": "Rainbow Trout",
+    "Notes": null
+  },
+  "139": {
+    "Name": "Salmon",
+    "Description": "Swims upstream to lay its eggs.",
+    "DisplayName": "Salmon",
+    "Notes": null
+  },
+  "140": {
+    "Name": "Walleye",
+    "Description": "A freshwater fish caught at night.",
+    "DisplayName": "Walleye",
+    "Notes": null
+  },
+  "141": {
+    "Name": "Perch",
+    "Description": "A freshwater fish of the winter.",
+    "DisplayName": "Perch",
+    "Notes": null
+  },
+  "142": {
+    "Name": "Carp",
+    "Description": "A common pond fish.",
+    "DisplayName": "Carp",
+    "Notes": null
+  },
+  "143": {
+    "Name": "Catfish",
+    "Description": "An uncommon fish found in streams.",
+    "DisplayName": "Catfish",
+    "Notes": null
+  },
+  "144": {
+    "Name": "Pike",
+    "Description": "A freshwater fish that\u0027s difficult to catch.",
+    "DisplayName": "Pike",
+    "Notes": null
+  },
+  "145": {
+    "Name": "Sunfish",
+    "Description": "A common river fish.",
+    "DisplayName": "Sunfish",
+    "Notes": null
+  },
+  "146": {
+    "Name": "Red Mullet",
+    "Description": "Long ago these were kept as pets.",
+    "DisplayName": "Red Mullet",
+    "Notes": null
+  },
+  "147": {
+    "Name": "Herring",
+    "Description": "A common ocean fish.",
+    "DisplayName": "Herring",
+    "Notes": null
+  },
+  "148": {
+    "Name": "Eel",
+    "Description": "A long, slippery little fish.",
+    "DisplayName": "Eel",
+    "Notes": null
+  },
+  "149": {
+    "Name": "Octopus",
+    "Description": "A mysterious and intelligent creature.",
+    "DisplayName": "Octopus",
+    "Notes": null
+  },
+  "150": {
+    "Name": "Red Snapper",
+    "Description": "A popular fish with a nice red color.",
+    "DisplayName": "Red Snapper",
+    "Notes": null
+  },
+  "151": {
+    "Name": "Squid",
+    "Description": "A deep sea creature that can grow to enormous size.",
+    "DisplayName": "Squid",
+    "Notes": null
+  },
+  "152": {
+    "Name": "Seaweed",
+    "Description": "It can be used in cooking.",
+    "DisplayName": "Seaweed",
+    "Notes": null
+  },
+  "153": {
+    "Name": "Green Algae",
+    "Description": "It\u0027s really slimy.",
+    "DisplayName": "Green Algae",
+    "Notes": null
+  },
+  "154": {
+    "Name": "Sea Cucumber",
+    "Description": "A slippery, slimy creature found on the ocean floor.",
+    "DisplayName": "Sea Cucumber",
+    "Notes": null
+  },
+  "155": {
+    "Name": "Super Cucumber",
+    "Description": "A rare, purple variety of sea cucumber.",
+    "DisplayName": "Super Cucumber",
+    "Notes": null
+  },
+  "156": {
+    "Name": "Ghostfish",
+    "Description": "A pale, blind fish found in underground lakes.",
+    "DisplayName": "Ghostfish",
+    "Notes": null
+  },
+  "157": {
+    "Name": "White Algae",
+    "Description": "It\u0027s super slimy.",
+    "DisplayName": "White Algae",
+    "Notes": null
+  },
+  "158": {
+    "Name": "Stonefish",
+    "Description": "A bizarre fish that\u0027s shaped like a brick.",
+    "DisplayName": "Stonefish",
+    "Notes": null
+  },
+  "159": {
+    "Name": "Crimsonfish",
+    "Description": "Lives deep in the ocean but likes to lay its eggs in the warm summer water.",
+    "DisplayName": "Crimsonfish",
+    "Notes": null
+  },
+  "160": {
+    "Name": "Angler",
+    "Description": "Uses a bioluminescent dangler to attract prey.",
+    "DisplayName": "Angler",
+    "Notes": null
+  },
+  "161": {
+    "Name": "Ice Pip",
+    "Description": "A rare fish that thrives in extremely cold conditions.",
+    "DisplayName": "Ice Pip",
+    "Notes": null
+  },
+  "162": {
+    "Name": "Lava Eel",
+    "Description": "It can somehow survive in pools of red-hot lava.",
+    "DisplayName": "Lava Eel",
+    "Notes": null
+  },
+  "163": {
+    "Name": "Legend",
+    "Description": "The king of all fish! They said he\u0027d never be caught.",
+    "DisplayName": "Legend",
+    "Notes": null
+  },
+  "164": {
+    "Name": "Sandfish",
+    "Description": "It tries to hide using camouflage.",
+    "DisplayName": "Sandfish",
+    "Notes": null
+  },
+  "165": {
+    "Name": "Scorpion Carp",
+    "Description": "It\u0027s like a regular carp but with a sharp stinger.",
+    "DisplayName": "Scorpion Carp",
+    "Notes": null
+  },
+  "166": {
+    "Name": "Treasure Chest",
+    "Description": "Wow, it\u0027s loaded with treasure! This is sure to fetch a good price.",
+    "DisplayName": "Treasure Chest",
+    "Notes": null
+  },
+  "167": {
+    "Name": "Joja Cola",
+    "Description": "The flagship product of Joja corporation.",
+    "DisplayName": "Joja Cola",
+    "Notes": null
+  },
+  "168": {
+    "Name": "Trash",
+    "Description": "It\u0027s junk.",
+    "DisplayName": "Trash",
+    "Notes": null
+  },
+  "169": {
+    "Name": "Driftwood",
+    "Description": "A piece of wood from the sea.",
+    "DisplayName": "Driftwood",
+    "Notes": null
+  },
+  "170": {
+    "Name": "Broken Glasses",
+    "Description": "It looks like someone lost their glasses. They\u0027re busted.",
+    "DisplayName": "Broken Glasses",
+    "Notes": null
+  },
+  "171": {
+    "Name": "Broken CD",
+    "Description": "It\u0027s a JojaNet 2.0 trial CD. They must\u0027ve made a billion of these things.",
+    "DisplayName": "Broken CD",
+    "Notes": null
+  },
+  "172": {
+    "Name": "Soggy Newspaper",
+    "Description": "This is trash.",
+    "DisplayName": "Soggy Newspaper",
+    "Notes": null
+  },
+  "176": {
+    "Name": "Egg",
+    "Description": "A regular white chicken egg.",
+    "DisplayName": "Egg",
+    "Notes": null
+  },
+  "174": {
+    "Name": "Large Egg",
+    "Description": "It\u0027s an uncommonly large white egg!",
+    "DisplayName": "Large Egg",
+    "Notes": null
+  },
+  "178": {
+    "Name": "Hay",
+    "Description": "Dried grass used as animal food.",
+    "DisplayName": "Hay",
+    "Notes": null
+  },
+  "180": {
+    "Name": "Egg",
+    "Description": "A regular brown chicken egg.",
+    "DisplayName": "Egg",
+    "Notes": null
+  },
+  "182": {
+    "Name": "Large Egg",
+    "Description": "It\u0027s an uncommonly large brown egg!",
+    "DisplayName": "Large Egg",
+    "Notes": null
+  },
+  "184": {
+    "Name": "Milk",
+    "Description": "A jug of cow\u0027s milk.",
+    "DisplayName": "Milk",
+    "Notes": null
+  },
+  "186": {
+    "Name": "Large Milk",
+    "Description": "A large jug of cow\u0027s milk.",
+    "DisplayName": "Large Milk",
+    "Notes": null
+  },
+  "188": {
+    "Name": "Green Bean",
+    "Description": "A juicy little bean with a cool, crisp snap.",
+    "DisplayName": "Green Bean",
+    "Notes": null
+  },
+  "190": {
+    "Name": "Cauliflower",
+    "Description": "Valuable, but slow-growing. Despite its pale color, the florets are packed with nutrients.",
+    "DisplayName": "Cauliflower",
+    "Notes": null
+  },
+  "191": {
+    "Name": "Ornate Necklace",
+    "Description": "A fancy necklace found in the water outside of the bath house. It\u0027s still wet...",
+    "DisplayName": "Ornate Necklace",
+    "Notes": null
+  },
+  "192": {
+    "Name": "Potato",
+    "Description": "A widely cultivated tuber.",
+    "DisplayName": "Potato",
+    "Notes": null
+  },
+  "194": {
+    "Name": "Fried Egg",
+    "Description": "Sunny-side up.",
+    "DisplayName": "Fried Egg",
+    "Notes": null
+  },
+  "195": {
+    "Name": "Omelet",
+    "Description": "It\u0027s super fluffy.",
+    "DisplayName": "Omelet",
+    "Notes": null
+  },
+  "196": {
+    "Name": "Salad",
+    "Description": "A healthy garden salad.",
+    "DisplayName": "Salad",
+    "Notes": null
+  },
+  "197": {
+    "Name": "Cheese Cauliflower",
+    "Description": "It smells great!",
+    "DisplayName": "Cheese Cauliflower",
+    "Notes": null
+  },
+  "198": {
+    "Name": "Baked Fish",
+    "Description": "Baked fish on a bed of herbs.",
+    "DisplayName": "Baked Fish",
+    "Notes": null
+  },
+  "199": {
+    "Name": "Parsnip Soup",
+    "Description": "It\u0027s fresh and hearty.",
+    "DisplayName": "Parsnip Soup",
+    "Notes": null
+  },
+  "200": {
+    "Name": "Vegetable Medley",
+    "Description": "This is very nutritious.",
+    "DisplayName": "Vegetable Medley",
+    "Notes": null
+  },
+  "201": {
+    "Name": "Complete Breakfast",
+    "Description": "You\u0027ll feel ready to take on the world!",
+    "DisplayName": "Complete Breakfast",
+    "Notes": null
+  },
+  "202": {
+    "Name": "Fried Calamari",
+    "Description": "It\u0027s so chewy.",
+    "DisplayName": "Fried Calamari",
+    "Notes": null
+  },
+  "203": {
+    "Name": "Strange Bun",
+    "Description": "What\u0027s inside?",
+    "DisplayName": "Strange Bun",
+    "Notes": null
+  },
+  "204": {
+    "Name": "Lucky Lunch",
+    "Description": "A special little meal.",
+    "DisplayName": "Lucky Lunch",
+    "Notes": null
+  },
+  "205": {
+    "Name": "Fried Mushroom",
+    "Description": "Earthy and aromatic.",
+    "DisplayName": "Fried Mushroom",
+    "Notes": null
+  },
+  "206": {
+    "Name": "Pizza",
+    "Description": "It\u0027s popular for all the right reasons.",
+    "DisplayName": "Pizza",
+    "Notes": null
+  },
+  "207": {
+    "Name": "Bean Hotpot",
+    "Description": "It sure is healthy.",
+    "DisplayName": "Bean Hotpot",
+    "Notes": null
+  },
+  "208": {
+    "Name": "Glazed Yams",
+    "Description": "Sweet and satisfying... The sugar gives it a hint of caramel.",
+    "DisplayName": "Glazed Yams",
+    "Notes": null
+  },
+  "209": {
+    "Name": "Carp Surprise",
+    "Description": "It\u0027s bland and oily.",
+    "DisplayName": "Carp Surprise",
+    "Notes": null
+  },
+  "210": {
+    "Name": "Hashbrowns",
+    "Description": "Crispy and golden-brown!",
+    "DisplayName": "Hashbrowns",
+    "Notes": null
+  },
+  "211": {
+    "Name": "Pancakes",
+    "Description": "A double stack of fluffy, soft pancakes.",
+    "DisplayName": "Pancakes",
+    "Notes": null
+  },
+  "212": {
+    "Name": "Salmon Dinner",
+    "Description": "The lemon spritz makes it special.",
+    "DisplayName": "Salmon Dinner",
+    "Notes": null
+  },
+  "213": {
+    "Name": "Fish Taco",
+    "Description": "It smells delicious.",
+    "DisplayName": "Fish Taco",
+    "Notes": null
+  },
+  "214": {
+    "Name": "Crispy Bass",
+    "Description": "Wow, the breading is perfect.",
+    "DisplayName": "Crispy Bass",
+    "Notes": null
+  },
+  "215": {
+    "Name": "Pepper Poppers",
+    "Description": "Spicy breaded peppers filled with cheese.",
+    "DisplayName": "Pepper Poppers",
+    "Notes": null
+  },
+  "216": {
+    "Name": "Bread",
+    "Description": "A crusty baguette.",
+    "DisplayName": "Bread",
+    "Notes": null
+  },
+  "218": {
+    "Name": "Tom Kha Soup",
+    "Description": "These flavors are incredible!",
+    "DisplayName": "Tom Kha Soup",
+    "Notes": null
+  },
+  "219": {
+    "Name": "Trout Soup",
+    "Description": "Pretty salty.",
+    "DisplayName": "Trout Soup",
+    "Notes": null
+  },
+  "220": {
+    "Name": "Chocolate Cake",
+    "Description": "Rich and moist with a thick fudge icing.",
+    "DisplayName": "Chocolate Cake",
+    "Notes": null
+  },
+  "221": {
+    "Name": "Pink Cake",
+    "Description": "There\u0027s little heart candies on top.",
+    "DisplayName": "Pink Cake",
+    "Notes": null
+  },
+  "222": {
+    "Name": "Rhubarb Pie",
+    "Description": "Mmm, tangy and sweet!",
+    "DisplayName": "Rhubarb Pie",
+    "Notes": null
+  },
+  "223": {
+    "Name": "Cookie",
+    "Description": "Very chewy.",
+    "DisplayName": "Cookies",
+    "Notes": null
+  },
+  "224": {
+    "Name": "Spaghetti",
+    "Description": "An old favorite.",
+    "DisplayName": "Spaghetti",
+    "Notes": null
+  },
+  "225": {
+    "Name": "Fried Eel",
+    "Description": "Greasy but flavorful.",
+    "DisplayName": "Fried Eel",
+    "Notes": null
+  },
+  "226": {
+    "Name": "Spicy Eel",
+    "Description": "It\u0027s really spicy! Be careful.",
+    "DisplayName": "Spicy Eel",
+    "Notes": null
+  },
+  "227": {
+    "Name": "Sashimi",
+    "Description": "Raw fish sliced into thin pieces.",
+    "DisplayName": "Sashimi",
+    "Notes": null
+  },
+  "228": {
+    "Name": "Maki Roll",
+    "Description": "Fish and rice wrapped in seaweed.",
+    "DisplayName": "Maki Roll",
+    "Notes": null
+  },
+  "229": {
+    "Name": "Tortilla",
+    "Description": "Can be used as a vessel for food or eaten by itself.",
+    "DisplayName": "Tortilla",
+    "Notes": null
+  },
+  "230": {
+    "Name": "Red Plate",
+    "Description": "Full of antioxidants.",
+    "DisplayName": "Red Plate",
+    "Notes": null
+  },
+  "231": {
+    "Name": "Eggplant Parmesan",
+    "Description": "Tangy, cheesy, and wonderful.",
+    "DisplayName": "Eggplant Parmesan",
+    "Notes": null
+  },
+  "232": {
+    "Name": "Rice Pudding",
+    "Description": "It\u0027s creamy, sweet, and fun to eat.",
+    "DisplayName": "Rice Pudding",
+    "Notes": null
+  },
+  "233": {
+    "Name": "Ice Cream",
+    "Description": "It\u0027s hard to find someone who doesn\u0027t like this.",
+    "DisplayName": "Ice Cream",
+    "Notes": null
+  },
+  "234": {
+    "Name": "Blueberry Tart",
+    "Description": "It\u0027s subtle and refreshing.",
+    "DisplayName": "Blueberry Tart",
+    "Notes": null
+  },
+  "235": {
+    "Name": "Autumn\u0027s Bounty",
+    "Description": "A taste of the season.",
+    "DisplayName": "Autumn\u0027s Bounty",
+    "Notes": null
+  },
+  "236": {
+    "Name": "Pumpkin Soup",
+    "Description": "A seasonal favorite.",
+    "DisplayName": "Pumpkin Soup",
+    "Notes": null
+  },
+  "237": {
+    "Name": "Super Meal",
+    "Description": "It\u0027s a really energizing meal.",
+    "DisplayName": "Super Meal",
+    "Notes": null
+  },
+  "238": {
+    "Name": "Cranberry Sauce",
+    "Description": "A festive treat.",
+    "DisplayName": "Cranberry Sauce",
+    "Notes": null
+  },
+  "239": {
+    "Name": "Stuffing",
+    "Description": "Ahh... the smell of warm bread and sage.",
+    "DisplayName": "Stuffing",
+    "Notes": null
+  },
+  "240": {
+    "Name": "Farmer\u0027s Lunch",
+    "Description": "This\u0027ll keep you going.",
+    "DisplayName": "Farmer\u0027s Lunch",
+    "Notes": null
+  },
+  "241": {
+    "Name": "Survival Burger",
+    "Description": "A convenient snack for the explorer.",
+    "DisplayName": "Survival Burger",
+    "Notes": null
+  },
+  "242": {
+    "Name": "Dish O\u0027 The Sea",
+    "Description": "This\u0027ll keep you warm in the cold sea air.",
+    "DisplayName": "Dish O\u0027 The Sea",
+    "Notes": null
+  },
+  "243": {
+    "Name": "Miner\u0027s Treat",
+    "Description": "This should keep your energy up.",
+    "DisplayName": "Miner\u0027s Treat",
+    "Notes": null
+  },
+  "244": {
+    "Name": "Roots Platter",
+    "Description": "This\u0027ll get you digging for more.",
+    "DisplayName": "Roots Platter",
+    "Notes": null
+  },
+  "245": {
+    "Name": "Sugar",
+    "Description": "Adds sweetness to pastries and candies. Too much can be unhealthy.",
+    "DisplayName": "Sugar",
+    "Notes": null
+  },
+  "246": {
+    "Name": "Wheat Flour",
+    "Description": "A common cooking ingredient made from crushed wheat seeds.",
+    "DisplayName": "Wheat Flour",
+    "Notes": null
+  },
+  "247": {
+    "Name": "Oil",
+    "Description": "All purpose cooking oil.",
+    "DisplayName": "Oil",
+    "Notes": null
+  },
+  "248": {
+    "Name": "Garlic",
+    "Description": "Adds a wonderful zestiness to dishes. High quality garlic can be pretty spicy.",
+    "DisplayName": "Garlic",
+    "Notes": null
+  },
+  "250": {
+    "Name": "Kale",
+    "Description": "The waxy leaves are great in soups and stir fries.",
+    "DisplayName": "Kale",
+    "Notes": null
+  },
+  "251": {
+    "Name": "Tea Sapling",
+    "Description": "Takes 20 days to mature. Produces tea leaves during the final week of each season, except winter. No watering necessary!",
+    "DisplayName": "Tea Sapling",
+    "Notes": null
+  },
+  "252": {
+    "Name": "Rhubarb",
+    "Description": "The stalks are extremely tart, but make a great dessert when sweetened.",
+    "DisplayName": "Rhubarb",
+    "Notes": null
+  },
+  "253": {
+    "Name": "Triple Shot Espresso",
+    "Description": "It\u0027s more potent than regular coffee!",
+    "DisplayName": "Triple Shot Espresso",
+    "Notes": null
+  },
+  "254": {
+    "Name": "Melon",
+    "Description": "A cool, sweet summer treat.",
+    "DisplayName": "Melon",
+    "Notes": null
+  },
+  "256": {
+    "Name": "Tomato",
+    "Description": "Rich and slightly tangy, the Tomato has a wide variety of culinary uses.",
+    "DisplayName": "Tomato",
+    "Notes": null
+  },
+  "257": {
+    "Name": "Morel",
+    "Description": "Sought after for its unique nutty flavor.",
+    "DisplayName": "Morel",
+    "Notes": null
+  },
+  "258": {
+    "Name": "Blueberry",
+    "Description": "A popular berry reported to have many health benefits. The blue skin has the highest nutrient concentration.",
+    "DisplayName": "Blueberry",
+    "Notes": null
+  },
+  "259": {
+    "Name": "Fiddlehead Fern",
+    "Description": "The young shoots are an edible specialty.",
+    "DisplayName": "Fiddlehead Fern",
+    "Notes": null
+  },
+  "260": {
+    "Name": "Hot Pepper",
+    "Description": "Fiery hot with a hint of sweetness.",
+    "DisplayName": "Hot Pepper",
+    "Notes": null
+  },
+  "261": {
+    "Name": "Warp Totem: Desert",
+    "Description": "Warp directly to Calico Desert. Consumed on use.",
+    "DisplayName": "Warp Totem: Desert",
+    "Notes": null
+  },
+  "262": {
+    "Name": "Wheat",
+    "Description": "One of the most widely cultivated grains. Makes a great flour for breads and cakes.",
+    "DisplayName": "Wheat",
+    "Notes": null
+  },
+  "264": {
+    "Name": "Radish",
+    "Description": "A crisp and refreshing root vegetable with hints of pepper when eaten raw.",
+    "DisplayName": "Radish",
+    "Notes": null
+  },
+  "266": {
+    "Name": "Red Cabbage",
+    "Description": "Often used in salads and coleslaws. The color can range from purple to blue to green-yellow depending on soil conditions.",
+    "DisplayName": "Red Cabbage",
+    "Notes": null
+  },
+  "268": {
+    "Name": "Starfruit",
+    "Description": "An extremely juicy fruit that grows in hot, humid weather. Slightly sweet with a sour undertone.",
+    "DisplayName": "Starfruit",
+    "Notes": null
+  },
+  "270": {
+    "Name": "Corn",
+    "Description": "One of the most popular grains. The sweet, fresh cobs are a summer favorite.",
+    "DisplayName": "Corn",
+    "Notes": null
+  },
+  "271": {
+    "Name": "Unmilled Rice",
+    "Description": "Rice in its rawest form. Run this through a mill to increase the value.",
+    "DisplayName": "Unmilled Rice",
+    "Notes": null
+  },
+  "272": {
+    "Name": "Eggplant",
+    "Description": "A rich and wholesome relative of the tomato. Delicious fried or stewed.",
+    "DisplayName": "Eggplant",
+    "Notes": null
+  },
+  "273": {
+    "Name": "Rice Shoot",
+    "Description": "Plant these in the spring. Takes 8 days to mature. Grows faster if planted near a body of water. Harvest with the scythe.",
+    "DisplayName": "Rice Shoot",
+    "Notes": null
+  },
+  "274": {
+    "Name": "Artichoke",
+    "Description": "The bud of a thistle plant. The spiny outer leaves conceal a fleshy, filling interior.",
+    "DisplayName": "Artichoke",
+    "Notes": null
+  },
+  "275": {
+    "Name": "Artifact Trove",
+    "Description": "A blacksmith can open this for you. These troves often contain ancient relics and curiosities.",
+    "DisplayName": "Artifact Trove",
+    "Notes": null
+  },
+  "276": {
+    "Name": "Pumpkin",
+    "Description": "A fall favorite, grown for its crunchy seeds and delicately flavored flesh. As a bonus, the hollow shell can be carved into a festive decoration.",
+    "DisplayName": "Pumpkin",
+    "Notes": null
+  },
+  "277": {
+    "Name": "Wilted Bouquet",
+    "Description": "A gift that shows you want to stop dating someone.",
+    "DisplayName": "Wilted Bouquet",
+    "Notes": null
+  },
+  "278": {
+    "Name": "Bok Choy",
+    "Description": "The leafy greens and fibrous stalks are healthy and delicious.",
+    "DisplayName": "Bok Choy",
+    "Notes": null
+  },
+  "279": {
+    "Name": "Magic Rock Candy",
+    "Description": "A rare and powerful candy infused with the essence of the prismatic shard.",
+    "DisplayName": "Magic Rock Candy",
+    "Notes": null
+  },
+  "280": {
+    "Name": "Yam",
+    "Description": "A starchy tuber with a lot of culinary versatility.",
+    "DisplayName": "Yam",
+    "Notes": null
+  },
+  "281": {
+    "Name": "Chanterelle",
+    "Description": "A tasty mushroom with a fruity smell and slightly peppery flavor.",
+    "DisplayName": "Chanterelle",
+    "Notes": null
+  },
+  "282": {
+    "Name": "Cranberries",
+    "Description": "These tart red berries are a traditional winter food.",
+    "DisplayName": "Cranberries",
+    "Notes": null
+  },
+  "283": {
+    "Name": "Holly",
+    "Description": "The leaves and bright red berries make a popular winter decoration.",
+    "DisplayName": "Holly",
+    "Notes": null
+  },
+  "284": {
+    "Name": "Beet",
+    "Description": "A sweet and earthy root vegetable. As a bonus, the leaves make a great salad.",
+    "DisplayName": "Beet",
+    "Notes": null
+  },
+  "286": {
+    "Name": "Cherry Bomb",
+    "Description": "Generates a small explosion. Stand back!",
+    "DisplayName": "Cherry Bomb",
+    "Notes": null
+  },
+  "287": {
+    "Name": "Bomb",
+    "Description": "Generates an explosion. Watch out!",
+    "DisplayName": "Bomb",
+    "Notes": null
+  },
+  "288": {
+    "Name": "Mega Bomb",
+    "Description": "Generates a powerful explosion. Use with extreme caution.",
+    "DisplayName": "Mega Bomb",
+    "Notes": null
+  },
+  "290": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain iron ore.",
+    "DisplayName": "Iron Stone",
+    "Notes": null
+  },
+  "293": {
+    "Name": "Brick Floor",
+    "Description": "Place on the ground to create paths or to decorate your floors.",
+    "DisplayName": "Brick Floor",
+    "Notes": null
+  },
+  "294": {
+    "Name": "Twig",
+    "Description": "A broken branch. Chop with an axe to obtain wood.",
+    "DisplayName": "Twig",
+    "Notes": null
+  },
+  "295": {
+    "Name": "Twig",
+    "Description": "A broken branch. Chop with an axe to obtain wood.",
+    "DisplayName": "Twig",
+    "Notes": null
+  },
+  "296": {
+    "Name": "Salmonberry",
+    "Description": "A spring-time berry with the flavor of the forest.",
+    "DisplayName": "Salmonberry",
+    "Notes": null
+  },
+  "297": {
+    "Name": "Grass Starter",
+    "Description": "Place this on your farm to start a new patch of grass.",
+    "DisplayName": "Grass Starter",
+    "Notes": null
+  },
+  "298": {
+    "Name": "Hardwood Fence",
+    "Description": "The most durable type of fence.",
+    "DisplayName": "Hardwood Fence",
+    "Notes": null
+  },
+  "299": {
+    "Name": "Amaranth Seeds",
+    "Description": "Plant these in the fall. Takes 7 days to grow. Harvest with the scythe.",
+    "DisplayName": "Amaranth Seeds",
+    "Notes": null
+  },
+  "300": {
+    "Name": "Amaranth",
+    "Description": "A purple grain cultivated by an ancient civilization.",
+    "DisplayName": "Amaranth",
+    "Notes": null
+  },
+  "301": {
+    "Name": "Grape Starter",
+    "Description": "Plant these in the fall. Takes 10 days to grow, but keeps producing after that. Grows on a trellis.",
+    "DisplayName": "Grape Starter",
+    "Notes": null
+  },
+  "302": {
+    "Name": "Hops Starter",
+    "Description": "Plant these in the summer. Takes 11 days to grow, but keeps producing after that. Grows on a trellis.",
+    "DisplayName": "Hops Starter",
+    "Notes": null
+  },
+  "303": {
+    "Name": "Pale Ale",
+    "Description": "Drink in moderation.",
+    "DisplayName": "Pale Ale",
+    "Notes": null
+  },
+  "304": {
+    "Name": "Hops",
+    "Description": "A bitter, tangy flower used to flavor beer.",
+    "DisplayName": "Hops",
+    "Notes": null
+  },
+  "305": {
+    "Name": "Void Egg",
+    "Description": "A jet-black egg with red flecks. It\u0027s warm to the touch.",
+    "DisplayName": "Void Egg",
+    "Notes": null
+  },
+  "306": {
+    "Name": "Mayonnaise",
+    "Description": "It looks spreadable.",
+    "DisplayName": "Mayonnaise",
+    "Notes": null
+  },
+  "307": {
+    "Name": "Duck Mayonnaise",
+    "Description": "It\u0027s a rich, yellow mayonnaise.",
+    "DisplayName": "Duck Mayonnaise",
+    "Notes": null
+  },
+  "308": {
+    "Name": "Void Mayonnaise",
+    "Description": "A thick, black paste that smells like burnt hair.",
+    "DisplayName": "Void Mayonnaise",
+    "Notes": null
+  },
+  "309": {
+    "Name": "Acorn",
+    "Description": "This can be planted to grow an oak tree.",
+    "DisplayName": "Acorn",
+    "Notes": null
+  },
+  "310": {
+    "Name": "Maple Seed",
+    "Description": "This can be planted to grow a maple tree.",
+    "DisplayName": "Maple Seed",
+    "Notes": null
+  },
+  "311": {
+    "Name": "Pine Cone",
+    "Description": "This can be planted to grow a pine tree.",
+    "DisplayName": "Pine Cone",
+    "Notes": null
+  },
+  "313": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "314": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "315": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "316": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "317": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "318": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "319": {
+    "Name": "Weeds",
+    "Description": "Might contain refined quartz.",
+    "DisplayName": "Ice Crystal",
+    "Notes": null
+  },
+  "320": {
+    "Name": "Weeds",
+    "Description": "Might contain refined quartz.",
+    "DisplayName": "Ice Crystal",
+    "Notes": null
+  },
+  "321": {
+    "Name": "Weeds",
+    "Description": "Might contain refined quartz.",
+    "DisplayName": "Ice Crystal",
+    "Notes": null
+  },
+  "322": {
+    "Name": "Wood Fence",
+    "Description": "Keeps grass and animals contained!",
+    "DisplayName": "Wood Fence",
+    "Notes": null
+  },
+  "323": {
+    "Name": "Stone Fence",
+    "Description": "Lasts longer than a wood fence.",
+    "DisplayName": "Stone Fence",
+    "Notes": null
+  },
+  "324": {
+    "Name": "Iron Fence",
+    "Description": "Lasts longer than a stone fence.",
+    "DisplayName": "Iron Fence",
+    "Notes": null
+  },
+  "325": {
+    "Name": "Gate",
+    "Description": "Allows you to pass through a fence.",
+    "DisplayName": "Gate",
+    "Notes": null
+  },
+  "326": {
+    "Name": "Dwarvish Translation Guide",
+    "Description": "Teaches you dwarvish.",
+    "DisplayName": "Dwarvish Translation Guide",
+    "Notes": null
+  },
+  "328": {
+    "Name": "Wood Floor",
+    "Description": "Place on the ground to create paths or to decorate your floors.",
+    "DisplayName": "Wood Floor",
+    "Notes": null
+  },
+  "329": {
+    "Name": "Stone Floor",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Stone Floor",
+    "Notes": null
+  },
+  "330": {
+    "Name": "Clay",
+    "Description": "Used in crafting and construction.",
+    "DisplayName": "Clay",
+    "Notes": null
+  },
+  "331": {
+    "Name": "Weathered Floor",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Weathered Floor",
+    "Notes": null
+  },
+  "333": {
+    "Name": "Crystal Floor",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Crystal Floor",
+    "Notes": null
+  },
+  "334": {
+    "Name": "Copper Bar",
+    "Description": "A bar of pure copper.",
+    "DisplayName": "Copper Bar",
+    "Notes": null
+  },
+  "335": {
+    "Name": "Iron Bar",
+    "Description": "A bar of pure iron.",
+    "DisplayName": "Iron Bar",
+    "Notes": null
+  },
+  "336": {
+    "Name": "Gold Bar",
+    "Description": "A bar of pure gold.",
+    "DisplayName": "Gold Bar",
+    "Notes": null
+  },
+  "337": {
+    "Name": "Iridium Bar",
+    "Description": "A bar of pure iridium.",
+    "DisplayName": "Iridium Bar",
+    "Notes": null
+  },
+  "338": {
+    "Name": "Refined Quartz",
+    "Description": "A more pure form of quartz.",
+    "DisplayName": "Refined Quartz",
+    "Notes": null
+  },
+  "340": {
+    "Name": "Honey",
+    "Description": "It\u0027s a sweet syrup produced by bees.",
+    "DisplayName": "Honey",
+    "Notes": null
+  },
+  "341": {
+    "Name": "Tea Set",
+    "Description": "Fine porcelain.",
+    "DisplayName": "Tea Set",
+    "Notes": null
+  },
+  "342": {
+    "Name": "Pickles",
+    "Description": "A jar of your home-made pickles.",
+    "DisplayName": "Pickles",
+    "Notes": null
+  },
+  "343": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "344": {
+    "Name": "Jelly",
+    "Description": "Gooey.",
+    "DisplayName": "Jelly",
+    "Notes": null
+  },
+  "346": {
+    "Name": "Beer",
+    "Description": "Drink in moderation.",
+    "DisplayName": "Beer",
+    "Notes": null
+  },
+  "347": {
+    "Name": "Rare Seed",
+    "Description": "Sow in fall. Takes all season to grow.",
+    "DisplayName": "Rare Seed",
+    "Notes": null
+  },
+  "348": {
+    "Name": "Wine",
+    "Description": "Drink in moderation.",
+    "DisplayName": "Wine",
+    "Notes": null
+  },
+  "349": {
+    "Name": "Energy Tonic",
+    "Description": "Restores a lot of energy.",
+    "DisplayName": "Energy Tonic",
+    "Notes": null
+  },
+  "350": {
+    "Name": "Juice",
+    "Description": "A sweet, nutritious beverage.",
+    "DisplayName": "Juice",
+    "Notes": null
+  },
+  "351": {
+    "Name": "Muscle Remedy",
+    "Description": "When you\u0027ve pushed your body too hard, drink this to remove \u0027Exhaustion\u0027.",
+    "DisplayName": "Muscle Remedy",
+    "Notes": null
+  },
+  "368": {
+    "Name": "Basic Fertilizer",
+    "Description": "Improves soil quality a little, increasing your chance to grow quality crops. Mix into tilled soil.",
+    "DisplayName": "Basic Fertilizer",
+    "Notes": null
+  },
+  "369": {
+    "Name": "Quality Fertilizer",
+    "Description": "Improves soil quality, increasing your chance to grow quality crops. Mix into tilled soil.",
+    "DisplayName": "Quality Fertilizer",
+    "Notes": null
+  },
+  "370": {
+    "Name": "Basic Retaining Soil",
+    "Description": "This soil has a chance of staying watered overnight. Mix into tilled soil.",
+    "DisplayName": "Basic Retaining Soil",
+    "Notes": null
+  },
+  "371": {
+    "Name": "Quality Retaining Soil",
+    "Description": "This soil has a good chance of staying watered overnight. Mix into tilled soil.",
+    "DisplayName": "Quality Retaining Soil",
+    "Notes": null
+  },
+  "372": {
+    "Name": "Clam",
+    "Description": "There\u0027s a chewy little guy in there...",
+    "DisplayName": "Clam",
+    "Notes": null
+  },
+  "373": {
+    "Name": "Golden Pumpkin",
+    "Description": "It\u0027s valuable but has no other purpose.",
+    "DisplayName": "Golden Pumpkin",
+    "Notes": "The only way to get a Golden Pumpkin is to complete the maze in the Spirit\u0027s Eve festival."
+  },
+  "378": {
+    "Name": "Copper Ore",
+    "Description": "A common ore that can be smelted into bars.",
+    "DisplayName": "Copper Ore",
+    "Notes": null
+  },
+  "380": {
+    "Name": "Iron Ore",
+    "Description": "A fairly common ore that can be smelted into bars.",
+    "DisplayName": "Iron Ore",
+    "Notes": null
+  },
+  "382": {
+    "Name": "Coal",
+    "Description": "A combustible rock that is useful for crafting and smelting.",
+    "DisplayName": "Coal",
+    "Notes": null
+  },
+  "384": {
+    "Name": "Gold Ore",
+    "Description": "A precious ore that can be smelted into bars.",
+    "DisplayName": "Gold Ore",
+    "Notes": null
+  },
+  "386": {
+    "Name": "Iridium Ore",
+    "Description": "An exotic ore with many curious properties. Can be smelted into bars.",
+    "DisplayName": "Iridium Ore",
+    "Notes": null
+  },
+  "388": {
+    "Name": "Wood",
+    "Description": "A sturdy, yet flexible plant material with a wide variety of uses.",
+    "DisplayName": "Wood",
+    "Notes": null
+  },
+  "390": {
+    "Name": "Stone",
+    "Description": "A common material with many uses in crafting and building.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "392": {
+    "Name": "Nautilus Shell",
+    "Description": "An ancient shell.",
+    "DisplayName": "Nautilus Shell",
+    "Notes": null
+  },
+  "393": {
+    "Name": "Coral",
+    "Description": "A colony of tiny creatures that clump together to form beautiful structures.",
+    "DisplayName": "Coral",
+    "Notes": null
+  },
+  "394": {
+    "Name": "Rainbow Shell",
+    "Description": "It\u0027s a very beautiful shell.",
+    "DisplayName": "Rainbow Shell",
+    "Notes": null
+  },
+  "395": {
+    "Name": "Coffee",
+    "Description": "It smells delicious. This is sure to give you a boost.",
+    "DisplayName": "Coffee",
+    "Notes": null
+  },
+  "396": {
+    "Name": "Spice Berry",
+    "Description": "It fills the air with a pungent aroma.",
+    "DisplayName": "Spice Berry",
+    "Notes": null
+  },
+  "397": {
+    "Name": "Sea Urchin",
+    "Description": "A slow-moving, spiny creature that some consider a delicacy.",
+    "DisplayName": "Sea Urchin",
+    "Notes": null
+  },
+  "398": {
+    "Name": "Grape",
+    "Description": "A sweet cluster of fruit.",
+    "DisplayName": "Grape",
+    "Notes": null
+  },
+  "399": {
+    "Name": "Spring Onion",
+    "Description": "These grow wild during the spring.",
+    "DisplayName": "Spring Onion",
+    "Notes": null
+  },
+  "400": {
+    "Name": "Strawberry",
+    "Description": "A sweet, juicy favorite with an appealing red color.",
+    "DisplayName": "Strawberry",
+    "Notes": null
+  },
+  "401": {
+    "Name": "Straw Floor",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Straw Floor",
+    "Notes": null
+  },
+  "402": {
+    "Name": "Sweet Pea",
+    "Description": "A fragrant summer flower.",
+    "DisplayName": "Sweet Pea",
+    "Notes": null
+  },
+  "403": {
+    "Name": "Field Snack",
+    "Description": "A quick snack to fuel the hungry forager.",
+    "DisplayName": "Field Snack",
+    "Notes": null
+  },
+  "404": {
+    "Name": "Common Mushroom",
+    "Description": "Slightly nutty, with good texture.",
+    "DisplayName": "Common Mushroom",
+    "Notes": null
+  },
+  "405": {
+    "Name": "Wood Path",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Wood Path",
+    "Notes": null
+  },
+  "406": {
+    "Name": "Wild Plum",
+    "Description": "Tart and juicy with a pungent aroma.",
+    "DisplayName": "Wild Plum",
+    "Notes": null
+  },
+  "407": {
+    "Name": "Gravel Path",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Gravel Path",
+    "Notes": null
+  },
+  "408": {
+    "Name": "Hazelnut",
+    "Description": "That\u0027s one big hazelnut!",
+    "DisplayName": "Hazelnut",
+    "Notes": null
+  },
+  "409": {
+    "Name": "Crystal Path",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Crystal Path",
+    "Notes": null
+  },
+  "410": {
+    "Name": "Blackberry",
+    "Description": "An early-fall treat.",
+    "DisplayName": "Blackberry",
+    "Notes": null
+  },
+  "411": {
+    "Name": "Cobblestone Path",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Cobblestone Path",
+    "Notes": null
+  },
+  "412": {
+    "Name": "Winter Root",
+    "Description": "A starchy tuber.",
+    "DisplayName": "Winter Root",
+    "Notes": null
+  },
+  "413": {
+    "Name": "Blue Slime Egg",
+    "Description": "Can be hatched in a slime incubator.",
+    "DisplayName": "Blue Slime Egg",
+    "Notes": null
+  },
+  "414": {
+    "Name": "Crystal Fruit",
+    "Description": "A delicate fruit that pops up from the snow.",
+    "DisplayName": "Crystal Fruit",
+    "Notes": null
+  },
+  "415": {
+    "Name": "Stepping Stone Path",
+    "Description": "Place on the ground to create paths or to spruce up your floors.",
+    "DisplayName": "Stepping Stone Path",
+    "Notes": null
+  },
+  "416": {
+    "Name": "Snow Yam",
+    "Description": "This little yam was hiding beneath the snow.",
+    "DisplayName": "Snow Yam",
+    "Notes": null
+  },
+  "417": {
+    "Name": "Sweet Gem Berry",
+    "Description": "It\u0027s by far the sweetest thing you\u0027ve ever smelled.",
+    "DisplayName": "Sweet Gem Berry",
+    "Notes": null
+  },
+  "418": {
+    "Name": "Crocus",
+    "Description": "A flower that can bloom in the winter.",
+    "DisplayName": "Crocus",
+    "Notes": null
+  },
+  "419": {
+    "Name": "Vinegar",
+    "Description": "An aged fermented liquid used in many cooking recipes.",
+    "DisplayName": "Vinegar",
+    "Notes": null
+  },
+  "420": {
+    "Name": "Red Mushroom",
+    "Description": "A spotted mushroom sometimes found in caves.",
+    "DisplayName": "Red Mushroom",
+    "Notes": null
+  },
+  "421": {
+    "Name": "Sunflower",
+    "Description": "A common misconception is that the flower turns so it\u0027s always facing the sun.",
+    "DisplayName": "Sunflower",
+    "Notes": null
+  },
+  "422": {
+    "Name": "Purple Mushroom",
+    "Description": "A rare mushroom found deep in caves.",
+    "DisplayName": "Purple Mushroom",
+    "Notes": null
+  },
+  "423": {
+    "Name": "Rice",
+    "Description": "A basic grain often served under vegetables.",
+    "DisplayName": "Rice",
+    "Notes": null
+  },
+  "424": {
+    "Name": "Cheese",
+    "Description": "It\u0027s your basic cheese.",
+    "DisplayName": "Cheese",
+    "Notes": null
+  },
+  "426": {
+    "Name": "Goat Cheese",
+    "Description": "Soft cheese made from goat\u0027s milk.",
+    "DisplayName": "Goat Cheese",
+    "Notes": null
+  },
+  "428": {
+    "Name": "Cloth",
+    "Description": "A bolt of fine wool cloth.",
+    "DisplayName": "Cloth",
+    "Notes": null
+  },
+  "430": {
+    "Name": "Truffle",
+    "Description": "A gourmet type of mushroom with a unique taste.",
+    "DisplayName": "Truffle",
+    "Notes": null
+  },
+  "432": {
+    "Name": "Truffle Oil",
+    "Description": "A gourmet cooking ingredient.",
+    "DisplayName": "Truffle Oil",
+    "Notes": null
+  },
+  "433": {
+    "Name": "Coffee Bean",
+    "Description": "Plant in spring or summer to grow a coffee plant. Place five beans in a keg to make coffee.",
+    "DisplayName": "Coffee Bean",
+    "Notes": null
+  },
+  "434": {
+    "Name": "Stardrop",
+    "Description": "A mysterious fruit that empowers those who eat it. The flavor is like a dream... a powerful personal experience, yet difficult to describe to others.",
+    "DisplayName": "Stardrop",
+    "Notes": null
+  },
+  "436": {
+    "Name": "Goat Milk",
+    "Description": "The milk of a goat.",
+    "DisplayName": "Goat Milk",
+    "Notes": null
+  },
+  "437": {
+    "Name": "Red Slime Egg",
+    "Description": "Can be hatched in a slime incubator.",
+    "DisplayName": "Red Slime Egg",
+    "Notes": null
+  },
+  "438": {
+    "Name": "L. Goat Milk",
+    "Description": "A gallon of creamy goat\u0027s milk.",
+    "DisplayName": "L. Goat Milk",
+    "Notes": null
+  },
+  "439": {
+    "Name": "Purple Slime Egg",
+    "Description": "Can be hatched in a slime incubator.",
+    "DisplayName": "Purple Slime Egg",
+    "Notes": null
+  },
+  "440": {
+    "Name": "Wool",
+    "Description": "Soft, fluffy wool.",
+    "DisplayName": "Wool",
+    "Notes": null
+  },
+  "441": {
+    "Name": "Explosive Ammo",
+    "Description": "Fire this with the slingshot.",
+    "DisplayName": "Explosive Ammo",
+    "Notes": null
+  },
+  "442": {
+    "Name": "Duck Egg",
+    "Description": "It\u0027s still warm.",
+    "DisplayName": "Duck Egg",
+    "Notes": null
+  },
+  "444": {
+    "Name": "Duck Feather",
+    "Description": "It\u0027s so colorful.",
+    "DisplayName": "Duck Feather",
+    "Notes": null
+  },
+  "446": {
+    "Name": "Rabbit\u0027s Foot",
+    "Description": "Some say it\u0027s lucky.",
+    "DisplayName": "Rabbit\u0027s Foot",
+    "Notes": null
+  },
+  "447": {
+    "Name": "Aged Roe",
+    "Description": "Fish eggs aged in salt to bring out the flavor.",
+    "DisplayName": "Aged Roe",
+    "Notes": null
+  },
+  "449": {
+    "Name": "Stone Base",
+    "Description": "A simple block of stone.",
+    "DisplayName": "Stone Base",
+    "Notes": null
+  },
+  "450": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "452": {
+    "Name": "Weeds",
+    "Description": "A cluster of dry old bushes. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "454": {
+    "Name": "Ancient Fruit",
+    "Description": "It\u0027s been dormant for eons.",
+    "DisplayName": "Ancient Fruit",
+    "Notes": null
+  },
+  "456": {
+    "Name": "Algae Soup",
+    "Description": "It\u0027s a little slimy.",
+    "DisplayName": "Algae Soup",
+    "Notes": null
+  },
+  "457": {
+    "Name": "Pale Broth",
+    "Description": "A delicate broth with a hint of sulfur.",
+    "DisplayName": "Pale Broth",
+    "Notes": null
+  },
+  "458": {
+    "Name": "Bouquet",
+    "Description": "A gift that shows your romantic interest.",
+    "DisplayName": "Bouquet",
+    "Notes": null
+  },
+  "459": {
+    "Name": "Mead",
+    "Description": "A fermented beverage made from honey. Drink in moderation.",
+    "DisplayName": "Mead",
+    "Notes": null
+  },
+  "460": {
+    "Name": "Mermaid\u0027s Pendant",
+    "Description": "Give this to the person you want to marry.",
+    "DisplayName": "Mermaid\u0027s Pendant",
+    "Notes": null
+  },
+  "461": {
+    "Name": "Decorative Pot",
+    "Description": "A replica of an ancient pot.",
+    "DisplayName": "Decorative Pot",
+    "Notes": null
+  },
+  "463": {
+    "Name": "Drum Block",
+    "Description": "Plays a drum sound when you walk past.",
+    "DisplayName": "Drum Block",
+    "Notes": null
+  },
+  "464": {
+    "Name": "Flute Block",
+    "Description": "Plays a flute sound when you walk past.",
+    "DisplayName": "Flute Block",
+    "Notes": null
+  },
+  "465": {
+    "Name": "Speed-Gro",
+    "Description": "Stimulates leaf production. Guaranteed to increase growth rate by at least 10%. Mix into tilled soil.",
+    "DisplayName": "Speed-Gro",
+    "Notes": null
+  },
+  "466": {
+    "Name": "Deluxe Speed-Gro",
+    "Description": "Stimulates leaf production. Guaranteed to increase growth rate by at least 25%. Mix into tilled soil.",
+    "DisplayName": "Deluxe Speed-Gro",
+    "Notes": null
+  },
+  "472": {
+    "Name": "Parsnip Seeds",
+    "Description": "Plant these in the spring. Takes 4 days to mature.",
+    "DisplayName": "Parsnip Seeds",
+    "Notes": null
+  },
+  "473": {
+    "Name": "Bean Starter",
+    "Description": "Plant these in the spring. Takes 10 days to mature, but keeps producing after that. Grows on a trellis.",
+    "DisplayName": "Bean Starter",
+    "Notes": null
+  },
+  "474": {
+    "Name": "Cauliflower Seeds",
+    "Description": "Plant these in the spring. Takes 12 days to produce a large cauliflower.",
+    "DisplayName": "Cauliflower Seeds",
+    "Notes": null
+  },
+  "475": {
+    "Name": "Potato Seeds",
+    "Description": "Plant these in the spring. Takes 6 days to mature, and has a chance of yielding multiple potatoes at harvest.",
+    "DisplayName": "Potato Seeds",
+    "Notes": null
+  },
+  "476": {
+    "Name": "Garlic Seeds",
+    "Description": "Plant these in the spring. Takes 4 days to mature.",
+    "DisplayName": "Garlic Seeds",
+    "Notes": null
+  },
+  "477": {
+    "Name": "Kale Seeds",
+    "Description": "Plant these in the spring. Takes 6 days to mature. Harvest with the scythe.",
+    "DisplayName": "Kale Seeds",
+    "Notes": null
+  },
+  "478": {
+    "Name": "Rhubarb Seeds",
+    "Description": "Plant these in the spring. Takes 13 days to mature.",
+    "DisplayName": "Rhubarb Seeds",
+    "Notes": null
+  },
+  "479": {
+    "Name": "Melon Seeds",
+    "Description": "Plant these in the summer. Takes 12 days to mature.",
+    "DisplayName": "Melon Seeds",
+    "Notes": null
+  },
+  "480": {
+    "Name": "Tomato Seeds",
+    "Description": "Plant these in the summer. Takes 11 days to mature, and continues to produce after first harvest.",
+    "DisplayName": "Tomato Seeds",
+    "Notes": null
+  },
+  "481": {
+    "Name": "Blueberry Seeds",
+    "Description": "Plant these in the summer. Takes 13 days to mature, and continues to produce after first harvest.",
+    "DisplayName": "Blueberry Seeds",
+    "Notes": null
+  },
+  "482": {
+    "Name": "Pepper Seeds",
+    "Description": "Plant these in the summer. Takes 5 days to mature, and continues to produce after first harvest.",
+    "DisplayName": "Pepper Seeds",
+    "Notes": null
+  },
+  "483": {
+    "Name": "Wheat Seeds",
+    "Description": "Plant these in the summer or fall. Takes 4 days to mature. Harvest with the scythe.",
+    "DisplayName": "Wheat Seeds",
+    "Notes": null
+  },
+  "484": {
+    "Name": "Radish Seeds",
+    "Description": "Plant these in the summer. Takes 6 days to mature.",
+    "DisplayName": "Radish Seeds",
+    "Notes": null
+  },
+  "485": {
+    "Name": "Red Cabbage Seeds",
+    "Description": "Plant these in the summer. Takes 9 days to mature.",
+    "DisplayName": "Red Cabbage Seeds",
+    "Notes": null
+  },
+  "486": {
+    "Name": "Starfruit Seeds",
+    "Description": "Plant these in the summer. Takes 13 days to mature.",
+    "DisplayName": "Starfruit Seeds",
+    "Notes": null
+  },
+  "487": {
+    "Name": "Corn Seeds",
+    "Description": "Plant these in the summer or fall. Takes 14 days to mature, and continues to produce after first harvest.",
+    "DisplayName": "Corn Seeds",
+    "Notes": null
+  },
+  "488": {
+    "Name": "Eggplant Seeds",
+    "Description": "Plant these in the fall. Takes 5 days to mature, and continues to produce after first harvest.",
+    "DisplayName": "Eggplant Seeds",
+    "Notes": null
+  },
+  "489": {
+    "Name": "Artichoke Seeds",
+    "Description": "Plant these in the fall. Takes 8 days to mature.",
+    "DisplayName": "Artichoke Seeds",
+    "Notes": null
+  },
+  "490": {
+    "Name": "Pumpkin Seeds",
+    "Description": "Plant these in the fall. Takes 13 days to mature.",
+    "DisplayName": "Pumpkin Seeds",
+    "Notes": null
+  },
+  "491": {
+    "Name": "Bok Choy Seeds",
+    "Description": "Plant these in the fall. Takes 4 days to mature.",
+    "DisplayName": "Bok Choy Seeds",
+    "Notes": null
+  },
+  "492": {
+    "Name": "Yam Seeds",
+    "Description": "Plant these in the fall. Takes 10 days to mature.",
+    "DisplayName": "Yam Seeds",
+    "Notes": null
+  },
+  "493": {
+    "Name": "Cranberry Seeds",
+    "Description": "Plant these in the fall. Takes 7 days to mature, and continues to produce after first harvest.",
+    "DisplayName": "Cranberry Seeds",
+    "Notes": null
+  },
+  "494": {
+    "Name": "Beet Seeds",
+    "Description": "Plant these in the fall. Takes 6 days to mature.",
+    "DisplayName": "Beet Seeds",
+    "Notes": null
+  },
+  "495": {
+    "Name": "Spring Seeds",
+    "Description": "An assortment of wild spring seeds.",
+    "DisplayName": "Spring Seeds",
+    "Notes": null
+  },
+  "496": {
+    "Name": "Summer Seeds",
+    "Description": "An assortment of wild summer seeds.",
+    "DisplayName": "Summer Seeds",
+    "Notes": null
+  },
+  "497": {
+    "Name": "Fall Seeds",
+    "Description": "An assortment of wild fall seeds.",
+    "DisplayName": "Fall Seeds",
+    "Notes": null
+  },
+  "498": {
+    "Name": "Winter Seeds",
+    "Description": "An assortment of wild winter seeds.",
+    "DisplayName": "Winter Seeds",
+    "Notes": null
+  },
+  "499": {
+    "Name": "Ancient Seeds",
+    "Description": "Could these still grow?",
+    "DisplayName": "Ancient Seeds",
+    "Notes": null
+  },
+  "427": {
+    "Name": "Tulip Bulb",
+    "Description": "Plant in spring. Takes 6 days to produce a colorful flower. Assorted colors.",
+    "DisplayName": "Tulip Bulb",
+    "Notes": null
+  },
+  "429": {
+    "Name": "Jazz Seeds",
+    "Description": "Plant in spring. Takes 7 days to produce a blue puffball flower.",
+    "DisplayName": "Jazz Seeds",
+    "Notes": null
+  },
+  "453": {
+    "Name": "Poppy Seeds",
+    "Description": "Plant in summer. Produces a bright red flower in 7 days.",
+    "DisplayName": "Poppy Seeds",
+    "Notes": null
+  },
+  "455": {
+    "Name": "Spangle Seeds",
+    "Description": "Plant in summer. Takes 8 days to produce a vibrant tropical flower. Assorted colors.",
+    "DisplayName": "Spangle Seeds",
+    "Notes": null
+  },
+  "431": {
+    "Name": "Sunflower Seeds",
+    "Description": "Plant in summer or fall. Takes 8 days to produce a large sunflower. Yields more seeds at harvest.",
+    "DisplayName": "Sunflower Seeds",
+    "Notes": null
+  },
+  "425": {
+    "Name": "Fairy Seeds",
+    "Description": "Plant in fall. Takes 12 days to produce a mysterious flower. Assorted Colors.",
+    "DisplayName": "Fairy Seeds",
+    "Notes": null
+  },
+  "516": {
+    "Name": "Small Glow Ring",
+    "Description": "Emits a small, constant light.",
+    "DisplayName": "Small Glow Ring",
+    "Notes": null
+  },
+  "517": {
+    "Name": "Glow Ring",
+    "Description": "Emits a constant light.",
+    "DisplayName": "Glow Ring",
+    "Notes": null
+  },
+  "518": {
+    "Name": "Small Magnet Ring",
+    "Description": "Slightly increases your radius for collecting items.",
+    "DisplayName": "Small Magnet Ring",
+    "Notes": null
+  },
+  "519": {
+    "Name": "Magnet Ring",
+    "Description": "Increases your radius for collecting items.",
+    "DisplayName": "Magnet Ring",
+    "Notes": null
+  },
+  "520": {
+    "Name": "Slime Charmer Ring",
+    "Description": "Prevents damage from slimes.",
+    "DisplayName": "Slime Charmer Ring",
+    "Notes": null
+  },
+  "521": {
+    "Name": "Warrior Ring",
+    "Description": "Occasionally infuses the wearer with \u0022warrior energy\u0022 after slaying a monster.",
+    "DisplayName": "Warrior Ring",
+    "Notes": null
+  },
+  "522": {
+    "Name": "Vampire Ring",
+    "Description": "Gain a little health every time you slay a monster.",
+    "DisplayName": "Vampire Ring",
+    "Notes": null
+  },
+  "523": {
+    "Name": "Savage Ring",
+    "Description": "Gain a short speed boost whenever you slay a monster.",
+    "DisplayName": "Savage Ring",
+    "Notes": null
+  },
+  "524": {
+    "Name": "Ring of Yoba",
+    "Description": "Occasionally shields the wearer from damage.",
+    "DisplayName": "Ring of Yoba",
+    "Notes": null
+  },
+  "525": {
+    "Name": "Sturdy Ring",
+    "Description": "Cuts the duration of negative status effects in half.",
+    "DisplayName": "Sturdy Ring",
+    "Notes": null
+  },
+  "526": {
+    "Name": "Burglar\u0027s Ring",
+    "Description": "Monsters have a greater chance of dropping loot.",
+    "DisplayName": "Burglar\u0027s Ring",
+    "Notes": null
+  },
+  "527": {
+    "Name": "Iridium Band",
+    "Description": "Glows, attracts items, and increases attack damage by 10%.",
+    "DisplayName": "Iridium Band",
+    "Notes": null
+  },
+  "528": {
+    "Name": "Jukebox Ring",
+    "Description": "Plays a random assortment of music you\u0027ve heard.",
+    "DisplayName": "Jukebox Ring",
+    "Notes": null
+  },
+  "529": {
+    "Name": "Amethyst Ring",
+    "Description": "Increases knockback by 10%.",
+    "DisplayName": "Amethyst Ring",
+    "Notes": null
+  },
+  "530": {
+    "Name": "Topaz Ring",
+    "Description": "You feel a little bit safer wearing this.",
+    "DisplayName": "Topaz Ring",
+    "Notes": null
+  },
+  "531": {
+    "Name": "Aquamarine Ring",
+    "Description": "Increases critical strike chance by 10%.",
+    "DisplayName": "Aquamarine Ring",
+    "Notes": null
+  },
+  "532": {
+    "Name": "Jade Ring",
+    "Description": "Increases critical strike power by 10%.",
+    "DisplayName": "Jade Ring",
+    "Notes": null
+  },
+  "533": {
+    "Name": "Emerald Ring",
+    "Description": "Increases weapon speed by 10%.",
+    "DisplayName": "Emerald Ring",
+    "Notes": null
+  },
+  "534": {
+    "Name": "Ruby Ring",
+    "Description": "Increases attack by 10%.",
+    "DisplayName": "Ruby Ring",
+    "Notes": null
+  },
+  "535": {
+    "Name": "Geode",
+    "Description": "A blacksmith can break this open for you.",
+    "DisplayName": "Geode",
+    "Notes": null
+  },
+  "536": {
+    "Name": "Frozen Geode",
+    "Description": "A blacksmith can break this open for you.",
+    "DisplayName": "Frozen Geode",
+    "Notes": null
+  },
+  "537": {
+    "Name": "Magma Geode",
+    "Description": "A blacksmith can break this open for you.",
+    "DisplayName": "Magma Geode",
+    "Notes": null
+  },
+  "538": {
+    "Name": "Alamite",
+    "Description": "Its distinctive fluorescence makes it a favorite among rock collectors.",
+    "DisplayName": "Alamite",
+    "Notes": null
+  },
+  "539": {
+    "Name": "Bixite",
+    "Description": "A dark metallic Mineral sought after for its cubic structure.",
+    "DisplayName": "Bixite",
+    "Notes": null
+  },
+  "540": {
+    "Name": "Baryte",
+    "Description": "The best specimens resemble a desert rose.",
+    "DisplayName": "Baryte",
+    "Notes": null
+  },
+  "541": {
+    "Name": "Aerinite",
+    "Description": "These crystals are curiously light.",
+    "DisplayName": "Aerinite",
+    "Notes": null
+  },
+  "542": {
+    "Name": "Calcite",
+    "Description": "This yellow crystal is speckled with shimmering nodules.",
+    "DisplayName": "Calcite",
+    "Notes": null
+  },
+  "543": {
+    "Name": "Dolomite",
+    "Description": "It can occur in coral reefs, often near an underwater volcano.",
+    "DisplayName": "Dolomite",
+    "Notes": null
+  },
+  "544": {
+    "Name": "Esperite",
+    "Description": "The crystals glow bright green when stimulated.",
+    "DisplayName": "Esperite",
+    "Notes": null
+  },
+  "545": {
+    "Name": "Fluorapatite",
+    "Description": "Small amounts are found in human teeth.",
+    "DisplayName": "Fluorapatite",
+    "Notes": null
+  },
+  "546": {
+    "Name": "Geminite",
+    "Description": "Occurs in brilliant clusters.",
+    "DisplayName": "Geminite",
+    "Notes": null
+  },
+  "547": {
+    "Name": "Helvite",
+    "Description": "It grows in a triangular column.",
+    "DisplayName": "Helvite",
+    "Notes": null
+  },
+  "548": {
+    "Name": "Jamborite",
+    "Description": "The crystals are so tightly packed it almost looks fuzzy.",
+    "DisplayName": "Jamborite",
+    "Notes": null
+  },
+  "549": {
+    "Name": "Jagoite",
+    "Description": "A high volume of tiny crystals makes it very glittery.",
+    "DisplayName": "Jagoite",
+    "Notes": null
+  },
+  "550": {
+    "Name": "Kyanite",
+    "Description": "The geometric faces are as smooth as glass.",
+    "DisplayName": "Kyanite",
+    "Notes": null
+  },
+  "551": {
+    "Name": "Lunarite",
+    "Description": "The cratered white orbs form a tight cluster.",
+    "DisplayName": "Lunarite",
+    "Notes": null
+  },
+  "552": {
+    "Name": "Malachite",
+    "Description": "A popular ornamental stone, used in sculpture and to make green paint.",
+    "DisplayName": "Malachite",
+    "Notes": null
+  },
+  "553": {
+    "Name": "Neptunite",
+    "Description": "A jet-black crystal that is unusually reflective.",
+    "DisplayName": "Neptunite",
+    "Notes": null
+  },
+  "554": {
+    "Name": "Lemon Stone",
+    "Description": "Some claim the powdered crystal is a dwarvish delicacy.",
+    "DisplayName": "Lemon Stone",
+    "Notes": null
+  },
+  "555": {
+    "Name": "Nekoite",
+    "Description": "The delicate shards form a tiny pink meadow.",
+    "DisplayName": "Nekoite",
+    "Notes": null
+  },
+  "556": {
+    "Name": "Orpiment",
+    "Description": "Despite its high toxicity, this Mineral is widely used in manufacturing and folk medicine.",
+    "DisplayName": "Orpiment",
+    "Notes": null
+  },
+  "557": {
+    "Name": "Petrified Slime",
+    "Description": "This little guy may be 100,000 years old.",
+    "DisplayName": "Petrified Slime",
+    "Notes": null
+  },
+  "558": {
+    "Name": "Thunder Egg",
+    "Description": "According to legend, angry thunder spirits would throw these stones at one another.",
+    "DisplayName": "Thunder Egg",
+    "Notes": null
+  },
+  "559": {
+    "Name": "Pyrite",
+    "Description": "Commonly known as \u0022Fool\u0027s Gold\u0022.",
+    "DisplayName": "Pyrite",
+    "Notes": null
+  },
+  "560": {
+    "Name": "Ocean Stone",
+    "Description": "An old legend claims these stones are the mosaics of ancient mermaids.",
+    "DisplayName": "Ocean Stone",
+    "Notes": null
+  },
+  "561": {
+    "Name": "Ghost Crystal",
+    "Description": "There is an aura of coldness around this crystal.",
+    "DisplayName": "Ghost Crystal",
+    "Notes": null
+  },
+  "562": {
+    "Name": "Tigerseye",
+    "Description": "A stripe of shimmering gold gives this gem a warm luster.",
+    "DisplayName": "Tigerseye",
+    "Notes": null
+  },
+  "563": {
+    "Name": "Jasper",
+    "Description": "When polished, this stone becomes attractively luminous. Prized by ancient peoples for thousands of years.",
+    "DisplayName": "Jasper",
+    "Notes": null
+  },
+  "564": {
+    "Name": "Opal",
+    "Description": "Its internal structure causes it to reflect a rainbow of light.",
+    "DisplayName": "Opal",
+    "Notes": null
+  },
+  "565": {
+    "Name": "Fire Opal",
+    "Description": "A rare variety of opal, named for its red spots.",
+    "DisplayName": "Fire Opal",
+    "Notes": null
+  },
+  "566": {
+    "Name": "Celestine",
+    "Description": "Some early life forms had bones made from this.",
+    "DisplayName": "Celestine",
+    "Notes": null
+  },
+  "567": {
+    "Name": "Marble",
+    "Description": "A very popular material for sculptures and construction.",
+    "DisplayName": "Marble",
+    "Notes": null
+  },
+  "568": {
+    "Name": "Sandstone",
+    "Description": "A common type of stone with red and brown striations.",
+    "DisplayName": "Sandstone",
+    "Notes": null
+  },
+  "569": {
+    "Name": "Granite",
+    "Description": "A speckled Mineral that is commonly used in construction.",
+    "DisplayName": "Granite",
+    "Notes": null
+  },
+  "570": {
+    "Name": "Basalt",
+    "Description": "Forms near searing hot magma.",
+    "DisplayName": "Basalt",
+    "Notes": null
+  },
+  "571": {
+    "Name": "Limestone",
+    "Description": "A very common type of stone. It\u0027s not worth very much.",
+    "DisplayName": "Limestone",
+    "Notes": null
+  },
+  "572": {
+    "Name": "Soapstone",
+    "Description": "Because of its relatively soft consistency, this stone is very popular for carving.",
+    "DisplayName": "Soapstone",
+    "Notes": null
+  },
+  "573": {
+    "Name": "Hematite",
+    "Description": "An iron-based Mineral with interesting magnetic properties.",
+    "DisplayName": "Hematite",
+    "Notes": null
+  },
+  "574": {
+    "Name": "Mudstone",
+    "Description": "A fine-grained rock made from ancient clay or mud.",
+    "DisplayName": "Mudstone",
+    "Notes": null
+  },
+  "575": {
+    "Name": "Obsidian",
+    "Description": "A volcanic glass that forms when lava cools rapidly.",
+    "DisplayName": "Obsidian",
+    "Notes": null
+  },
+  "576": {
+    "Name": "Slate",
+    "Description": "It\u0027s extremely resistant to water, making it a good roofing material.",
+    "DisplayName": "Slate",
+    "Notes": null
+  },
+  "577": {
+    "Name": "Fairy Stone",
+    "Description": "An old miner\u0027s song suggests these are made from the bones of ancient fairies.",
+    "DisplayName": "Fairy Stone",
+    "Notes": null
+  },
+  "578": {
+    "Name": "Star Shards",
+    "Description": "No one knows how these form. Some scientists claim that the microscopic structure displays unnatural regularity.",
+    "DisplayName": "Star Shards",
+    "Notes": null
+  },
+  "579": {
+    "Name": "Prehistoric Scapula",
+    "Description": "Commonly known as a \u0022shoulder blade\u0022... It\u0027s unclear what species it belonged to.",
+    "DisplayName": "Prehistoric Scapula",
+    "Notes": null
+  },
+  "580": {
+    "Name": "Prehistoric Tibia",
+    "Description": "A thick and sturdy leg bone.",
+    "DisplayName": "Prehistoric Tibia",
+    "Notes": null
+  },
+  "581": {
+    "Name": "Prehistoric Skull",
+    "Description": "This is definitely a mammalian skull.",
+    "DisplayName": "Prehistoric Skull",
+    "Notes": null
+  },
+  "582": {
+    "Name": "Skeletal Hand",
+    "Description": "It\u0027s a wonder all these ancient little pieces lasted so long.",
+    "DisplayName": "Skeletal Hand",
+    "Notes": null
+  },
+  "583": {
+    "Name": "Prehistoric Rib",
+    "Description": "Little gouge marks on the side suggest that this rib was someone\u0027s dinner.",
+    "DisplayName": "Prehistoric Rib",
+    "Notes": null
+  },
+  "584": {
+    "Name": "Prehistoric Vertebra",
+    "Description": "A segment of some prehistoric creature\u0027s spine.",
+    "DisplayName": "Prehistoric Vertebra",
+    "Notes": null
+  },
+  "585": {
+    "Name": "Skeletal Tail",
+    "Description": "It\u0027s pretty short for a tail.",
+    "DisplayName": "Skeletal Tail",
+    "Notes": null
+  },
+  "586": {
+    "Name": "Nautilus Fossil",
+    "Description": "This must\u0027ve washed up ages ago from an ancient coral reef. ",
+    "DisplayName": "Nautilus Fossil",
+    "Notes": null
+  },
+  "587": {
+    "Name": "Amphibian Fossil",
+    "Description": "The relatively short hind legs suggest some kind of primordial toad.",
+    "DisplayName": "Amphibian Fossil",
+    "Notes": null
+  },
+  "588": {
+    "Name": "Palm Fossil",
+    "Description": "Palm Fossils are relatively common, but this happens to be a particularly well-preserved specimen.",
+    "DisplayName": "Palm Fossil",
+    "Notes": null
+  },
+  "589": {
+    "Name": "Trilobite",
+    "Description": "A long extinct relative of the crab.",
+    "DisplayName": "Trilobite",
+    "Notes": null
+  },
+  "590": {
+    "Name": "Artifact Spot",
+    "Description": "How did you get this in your inventory?",
+    "DisplayName": "Artifact Spot",
+    "Notes": null
+  },
+  "591": {
+    "Name": "Tulip",
+    "Description": "The most popular spring flower. Has a very faint sweet smell.",
+    "DisplayName": "Tulip",
+    "Notes": null
+  },
+  "593": {
+    "Name": "Summer Spangle",
+    "Description": "A tropical bloom that thrives in the humid summer air. Has a sweet, tangy aroma.",
+    "DisplayName": "Summer Spangle",
+    "Notes": null
+  },
+  "595": {
+    "Name": "Fairy Rose",
+    "Description": "An old folk legend suggests that the sweet smell of this flower attracts fairies.",
+    "DisplayName": "Fairy Rose",
+    "Notes": null
+  },
+  "597": {
+    "Name": "Blue Jazz",
+    "Description": "The flower grows in a sphere to invite as many butterflies as possible.",
+    "DisplayName": "Blue Jazz",
+    "Notes": null
+  },
+  "599": {
+    "Name": "Sprinkler",
+    "Description": "Waters the 4 adjacent tiles every morning.",
+    "DisplayName": "Sprinkler",
+    "Notes": null
+  },
+  "376": {
+    "Name": "Poppy",
+    "Description": "In addition to its colorful flower, the Poppy has culinary and medicinal uses.",
+    "DisplayName": "Poppy",
+    "Notes": null
+  },
+  "604": {
+    "Name": "Plum Pudding",
+    "Description": "A traditional holiday treat.",
+    "DisplayName": "Plum Pudding",
+    "Notes": null
+  },
+  "605": {
+    "Name": "Artichoke Dip",
+    "Description": "It\u0027s cool and refreshing.",
+    "DisplayName": "Artichoke Dip",
+    "Notes": null
+  },
+  "606": {
+    "Name": "Stir Fry",
+    "Description": "Julienned vegetables on a bed of rice.",
+    "DisplayName": "Stir Fry",
+    "Notes": null
+  },
+  "607": {
+    "Name": "Roasted Hazelnuts",
+    "Description": "The roasting process creates a rich forest flavor.",
+    "DisplayName": "Roasted Hazelnuts",
+    "Notes": null
+  },
+  "608": {
+    "Name": "Pumpkin Pie",
+    "Description": "Silky pumpkin cream in a flaky crust.",
+    "DisplayName": "Pumpkin Pie",
+    "Notes": null
+  },
+  "609": {
+    "Name": "Radish Salad",
+    "Description": "The radishes are so crisp!",
+    "DisplayName": "Radish Salad",
+    "Notes": null
+  },
+  "610": {
+    "Name": "Fruit Salad",
+    "Description": "A delicious combination of summer fruits.",
+    "DisplayName": "Fruit Salad",
+    "Notes": null
+  },
+  "611": {
+    "Name": "Blackberry Cobbler",
+    "Description": "There\u0027s nothing quite like it.",
+    "DisplayName": "Blackberry Cobbler",
+    "Notes": null
+  },
+  "612": {
+    "Name": "Cranberry Candy",
+    "Description": "It\u0027s sweet enough to mask the bitter fruit.",
+    "DisplayName": "Cranberry Candy",
+    "Notes": null
+  },
+  "613": {
+    "Name": "Apple",
+    "Description": "A crisp fruit used for juice and cider.",
+    "DisplayName": "Apple",
+    "Notes": null
+  },
+  "614": {
+    "Name": "Green Tea",
+    "Description": "A pleasant, energizing beverage made from lightly processed tea leaves.",
+    "DisplayName": "Green Tea",
+    "Notes": null
+  },
+  "618": {
+    "Name": "Bruschetta",
+    "Description": "Roasted tomatoes on a crisp white bread.",
+    "DisplayName": "Bruschetta",
+    "Notes": null
+  },
+  "621": {
+    "Name": "Quality Sprinkler",
+    "Description": "Waters the 8 adjacent tiles every morning.",
+    "DisplayName": "Quality Sprinkler",
+    "Notes": null
+  },
+  "645": {
+    "Name": "Iridium Sprinkler",
+    "Description": "Waters the 24 adjacent tiles every morning.",
+    "DisplayName": "Iridium Sprinkler",
+    "Notes": null
+  },
+  "648": {
+    "Name": "Coleslaw",
+    "Description": "It\u0027s light, fresh and very healthy.",
+    "DisplayName": "Coleslaw",
+    "Notes": null
+  },
+  "649": {
+    "Name": "Fiddlehead Risotto",
+    "Description": "A creamy rice dish served with sauteed fern heads. It\u0027s a little bland.",
+    "DisplayName": "Fiddlehead Risotto",
+    "Notes": null
+  },
+  "651": {
+    "Name": "Poppyseed Muffin",
+    "Description": "It has a soothing effect.",
+    "DisplayName": "Poppyseed Muffin",
+    "Notes": null
+  },
+  "628": {
+    "Name": "Cherry Sapling",
+    "Description": "Takes 28 days to produce a mature Cherry tree. Bears fruit in the spring. Only grows if the 8 surrounding \u0022tiles\u0022 are empty.",
+    "DisplayName": "Cherry Sapling",
+    "Notes": null
+  },
+  "629": {
+    "Name": "Apricot Sapling",
+    "Description": "Takes 28 days to produce a mature Apricot tree. Bears fruit in the spring. Only grows if the 8 surrounding \u0022tiles\u0022 are empty.",
+    "DisplayName": "Apricot Sapling",
+    "Notes": null
+  },
+  "630": {
+    "Name": "Orange Sapling",
+    "Description": "Takes 28 days to produce a mature Orange tree. Bears fruit in the summer. Only grows if the 8 surrounding \u0022tiles\u0022 are empty.",
+    "DisplayName": "Orange Sapling",
+    "Notes": null
+  },
+  "631": {
+    "Name": "Peach Sapling",
+    "Description": "Takes 28 days to produce a mature Peach tree. Bears fruit in the summer. Only grows if the 8 surrounding \u0022tiles\u0022 are empty.",
+    "DisplayName": "Peach Sapling",
+    "Notes": null
+  },
+  "632": {
+    "Name": "Pomegranate Sapling",
+    "Description": "Takes 28 days to produce a mature Pomegranate tree. Bears fruit in the fall. Only grows if the 8 surrounding \u0022tiles\u0022 are empty.",
+    "DisplayName": "Pomegranate Sapling",
+    "Notes": null
+  },
+  "633": {
+    "Name": "Apple Sapling",
+    "Description": "Takes 28 days to produce a mature Apple tree. Bears fruit in the fall. Only grows if the 8 surrounding \u0022tiles\u0022 are empty.",
+    "DisplayName": "Apple Sapling",
+    "Notes": null
+  },
+  "634": {
+    "Name": "Apricot",
+    "Description": "A tender little fruit with a rock-hard pit.",
+    "DisplayName": "Apricot",
+    "Notes": null
+  },
+  "635": {
+    "Name": "Orange",
+    "Description": "Juicy, tangy, and bursting with sweet summer aroma.",
+    "DisplayName": "Orange",
+    "Notes": null
+  },
+  "636": {
+    "Name": "Peach",
+    "Description": "It\u0027s almost fuzzy to the touch.",
+    "DisplayName": "Peach",
+    "Notes": null
+  },
+  "637": {
+    "Name": "Pomegranate",
+    "Description": "Within the fruit are clusters of juicy seeds.",
+    "DisplayName": "Pomegranate",
+    "Notes": null
+  },
+  "638": {
+    "Name": "Cherry",
+    "Description": "It\u0027s popular, and ripens sooner than most other fruits.",
+    "DisplayName": "Cherry",
+    "Notes": null
+  },
+  "668": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "670": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "674": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "675": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "676": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "677": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "678": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "679": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "680": {
+    "Name": "Green Slime Egg",
+    "Description": "Can be hatched in a slime incubator.",
+    "DisplayName": "Green Slime Egg",
+    "Notes": null
+  },
+  "681": {
+    "Name": "Rain Totem",
+    "Description": "Activate to greatly increase the chance for rain tomorrow. Consumed on use.",
+    "DisplayName": "Rain Totem",
+    "Notes": null
+  },
+  "682": {
+    "Name": "Mutant Carp",
+    "Description": "The strange waters of the sewer turned this carp into a monstrosity.",
+    "DisplayName": "Mutant Carp",
+    "Notes": null
+  },
+  "684": {
+    "Name": "Bug Meat",
+    "Description": "It\u0027s a juicy wad of bug flesh.",
+    "DisplayName": "Bug Meat",
+    "Notes": null
+  },
+  "685": {
+    "Name": "Bait",
+    "Description": "Causes fish to bite faster. Must first be attached to a fishing rod.",
+    "DisplayName": "Bait",
+    "Notes": null
+  },
+  "686": {
+    "Name": "Spinner",
+    "Description": "The shape makes it spin around in the water. Slightly increases the bite-rate when fishing.",
+    "DisplayName": "Spinner",
+    "Notes": null
+  },
+  "687": {
+    "Name": "Dressed Spinner",
+    "Description": "The metal tab and colorful streamers create an enticing spectacle for fish. Increases the bite-rate when fishing.",
+    "DisplayName": "Dressed Spinner",
+    "Notes": null
+  },
+  "688": {
+    "Name": "Warp Totem: Farm",
+    "Description": "Warp directly to your house. Consumed on use.",
+    "DisplayName": "Warp Totem: Farm",
+    "Notes": null
+  },
+  "689": {
+    "Name": "Warp Totem: Mountains",
+    "Description": "Warp directly to the mountains. Consumed on use.",
+    "DisplayName": "Warp Totem: Mountains",
+    "Notes": null
+  },
+  "690": {
+    "Name": "Warp Totem: Beach",
+    "Description": "Warp directly to the beach. Consumed on use.",
+    "DisplayName": "Warp Totem: Beach",
+    "Notes": null
+  },
+  "691": {
+    "Name": "Barbed Hook",
+    "Description": "Makes your catch more secure, causing the \u0022fishing bar\u0022 to cling to your catch. Works best on slow, weak fish.",
+    "DisplayName": "Barbed Hook",
+    "Notes": null
+  },
+  "692": {
+    "Name": "Lead Bobber",
+    "Description": "Adds weight to your \u0022fishing bar\u0022, preventing it from bouncing along the bottom.",
+    "DisplayName": "Lead Bobber",
+    "Notes": null
+  },
+  "693": {
+    "Name": "Treasure Hunter",
+    "Description": "Fish don\u0027t escape while collecting treasures. Also slightly increases the chance to find treasures.",
+    "DisplayName": "Treasure Hunter",
+    "Notes": null
+  },
+  "694": {
+    "Name": "Trap Bobber",
+    "Description": "Causes fish to escape slower when you aren\u0027t reeling them in.",
+    "DisplayName": "Trap Bobber",
+    "Notes": null
+  },
+  "695": {
+    "Name": "Cork Bobber",
+    "Description": "Slightly increases the size of your \u0022fishing bar\u0022.",
+    "DisplayName": "Cork Bobber",
+    "Notes": null
+  },
+  "698": {
+    "Name": "Sturgeon",
+    "Description": "An ancient bottom-feeder with a dwindling population. Females can live up to 150 years.",
+    "DisplayName": "Sturgeon",
+    "Notes": null
+  },
+  "699": {
+    "Name": "Tiger Trout",
+    "Description": "A rare hybrid trout that cannot bear offspring of its own.",
+    "DisplayName": "Tiger Trout",
+    "Notes": null
+  },
+  "700": {
+    "Name": "Bullhead",
+    "Description": "A relative of the catfish that eats a variety of foods off the lake bottom.",
+    "DisplayName": "Bullhead",
+    "Notes": null
+  },
+  "701": {
+    "Name": "Tilapia",
+    "Description": "A primarily vegetarian fish that prefers warm water.",
+    "DisplayName": "Tilapia",
+    "Notes": null
+  },
+  "702": {
+    "Name": "Chub",
+    "Description": "A common freshwater fish known for its voracious appetite.",
+    "DisplayName": "Chub",
+    "Notes": null
+  },
+  "703": {
+    "Name": "Magnet",
+    "Description": "Increases the chance of finding treasures when fishing. However, fish aren\u0027t crazy about the taste.",
+    "DisplayName": "Magnet",
+    "Notes": null
+  },
+  "704": {
+    "Name": "Dorado",
+    "Description": "A fierce carnivore with brilliant orange scales.",
+    "DisplayName": "Dorado",
+    "Notes": null
+  },
+  "705": {
+    "Name": "Albacore",
+    "Description": "Prefers temperature \u0022edges\u0022 where cool and warm water meet.",
+    "DisplayName": "Albacore",
+    "Notes": null
+  },
+  "706": {
+    "Name": "Shad",
+    "Description": "Lives in a school at sea, but returns to the rivers to spawn.",
+    "DisplayName": "Shad",
+    "Notes": null
+  },
+  "707": {
+    "Name": "Lingcod",
+    "Description": "A fearsome predator that will eat almost anything it can cram into its mouth.",
+    "DisplayName": "Lingcod",
+    "Notes": null
+  },
+  "708": {
+    "Name": "Halibut",
+    "Description": "A flat fish that lives on the ocean floor.",
+    "DisplayName": "Halibut",
+    "Notes": null
+  },
+  "709": {
+    "Name": "Hardwood",
+    "Description": "A special kind of wood with superior strength and beauty.",
+    "DisplayName": "Hardwood",
+    "Notes": null
+  },
+  "710": {
+    "Name": "Crab Pot",
+    "Description": "Place it in the water, load it with bait, and check the next day to see if you\u0027ve caught anything. Works in streams, lakes, and the ocean.",
+    "DisplayName": "Crab Pot",
+    "Notes": null
+  },
+  "715": {
+    "Name": "Lobster",
+    "Description": "A large ocean-dwelling crustacean with a strong tail.",
+    "DisplayName": "Lobster",
+    "Notes": null
+  },
+  "716": {
+    "Name": "Crayfish",
+    "Description": "A small freshwater relative of the lobster.",
+    "DisplayName": "Crayfish",
+    "Notes": null
+  },
+  "717": {
+    "Name": "Crab",
+    "Description": "A marine crustacean with two powerful pincers.",
+    "DisplayName": "Crab",
+    "Notes": null
+  },
+  "718": {
+    "Name": "Cockle",
+    "Description": "A common saltwater clam.",
+    "DisplayName": "Cockle",
+    "Notes": null
+  },
+  "719": {
+    "Name": "Mussel",
+    "Description": "A common bivalve that often lives in clusters.",
+    "DisplayName": "Mussel",
+    "Notes": null
+  },
+  "720": {
+    "Name": "Shrimp",
+    "Description": "A scavenger that feeds off the ocean floor. Widely prized for its meat.",
+    "DisplayName": "Shrimp",
+    "Notes": null
+  },
+  "721": {
+    "Name": "Snail",
+    "Description": "A wide-ranging mollusc that lives in a spiral shell.",
+    "DisplayName": "Snail",
+    "Notes": null
+  },
+  "722": {
+    "Name": "Periwinkle",
+    "Description": "A tiny freshwater snail that lives in a blue shell.",
+    "DisplayName": "Periwinkle",
+    "Notes": null
+  },
+  "723": {
+    "Name": "Oyster",
+    "Description": "Constantly filters water to find food. In the process, it removes dangerous toxins from the environment.",
+    "DisplayName": "Oyster",
+    "Notes": null
+  },
+  "724": {
+    "Name": "Maple Syrup",
+    "Description": "A sweet syrup with a unique flavor.",
+    "DisplayName": "Maple Syrup",
+    "Notes": null
+  },
+  "725": {
+    "Name": "Oak Resin",
+    "Description": "A sticky, fragrant substance derived from oak sap.",
+    "DisplayName": "Oak Resin",
+    "Notes": null
+  },
+  "726": {
+    "Name": "Pine Tar",
+    "Description": "A pungent substance derived from pine sap.",
+    "DisplayName": "Pine Tar",
+    "Notes": null
+  },
+  "727": {
+    "Name": "Chowder",
+    "Description": "A perfect way to warm yourself after a cold night at sea.",
+    "DisplayName": "Chowder",
+    "Notes": null
+  },
+  "730": {
+    "Name": "Lobster Bisque",
+    "Description": "This delicate soup is a secret family recipe of Willy\u0027s.",
+    "DisplayName": "Lobster Bisque",
+    "Notes": null
+  },
+  "728": {
+    "Name": "Fish Stew",
+    "Description": "It smells a lot like the sea. Tastes better, though.",
+    "DisplayName": "Fish Stew",
+    "Notes": null
+  },
+  "729": {
+    "Name": "Escargot",
+    "Description": "Butter-soaked snails cooked to perfection.",
+    "DisplayName": "Escargot",
+    "Notes": null
+  },
+  "731": {
+    "Name": "Maple Bar",
+    "Description": "It\u0027s a sweet doughnut topped with a rich maple glaze.",
+    "DisplayName": "Maple Bar",
+    "Notes": null
+  },
+  "732": {
+    "Name": "Crab Cakes",
+    "Description": "Crab, bread crumbs, and egg formed into patties then fried to a golden brown.",
+    "DisplayName": "Crab Cakes",
+    "Notes": null
+  },
+  "733": {
+    "Name": "Shrimp Cocktail",
+    "Description": "A sumptuous appetizer made with freshly-caught shrimp.",
+    "DisplayName": "Shrimp Cocktail",
+    "Notes": null
+  },
+  "734": {
+    "Name": "Woodskip",
+    "Description": "A very sensitive fish that can only live in pools deep in the forest.",
+    "DisplayName": "Woodskip",
+    "Notes": null
+  },
+  "742": {
+    "Name": "Haley\u0027s Lost Bracelet",
+    "Description": "A family heirloom.",
+    "DisplayName": "Haley\u0027s Lost Bracelet",
+    "Notes": null
+  },
+  "745": {
+    "Name": "Strawberry Seeds",
+    "Description": "Plant these in spring. Takes 8 days to mature, and keeps producing strawberries after that.",
+    "DisplayName": "Strawberry Seeds",
+    "Notes": null
+  },
+  "746": {
+    "Name": "Jack-O-Lantern",
+    "Description": "A whimsical fall decoration.",
+    "DisplayName": "Jack-O-Lantern",
+    "Notes": null
+  },
+  "747": {
+    "Name": "Rotten Plant",
+    "Description": "Decomposing organic material. It\u0027s slimy and unpleasant.",
+    "DisplayName": "Rotten Plant",
+    "Notes": null
+  },
+  "748": {
+    "Name": "Rotten Plant",
+    "Description": "Decomposing organic material. It\u0027s slimy and unpleasant.",
+    "DisplayName": "Rotten Plant",
+    "Notes": null
+  },
+  "749": {
+    "Name": "Omni Geode",
+    "Description": "A blacksmith can break this open for you. These geodes contain a wide variety of minerals.",
+    "DisplayName": "Omni Geode",
+    "Notes": null
+  },
+  "750": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "751": {
+    "Name": "Stone",
+    "Description": "There\u0027s copper ore in this stone.",
+    "DisplayName": "Copper Stone",
+    "Notes": null
+  },
+  "760": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "762": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone, ores, or geodes.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "764": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain gold ore.",
+    "DisplayName": "Gold Stone",
+    "Notes": null
+  },
+  "765": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain iridium ore.",
+    "DisplayName": "Iridium Stone",
+    "Notes": null
+  },
+  "766": {
+    "Name": "Slime",
+    "Description": "A shimmering, gelatinous glob with no smell.",
+    "DisplayName": "Slime",
+    "Notes": null
+  },
+  "767": {
+    "Name": "Bat Wing",
+    "Description": "The material is surprisingly delicate.",
+    "DisplayName": "Bat Wing",
+    "Notes": null
+  },
+  "768": {
+    "Name": "Solar Essence",
+    "Description": "The glowing face is warm to the touch.",
+    "DisplayName": "Solar Essence",
+    "Notes": null
+  },
+  "769": {
+    "Name": "Void Essence",
+    "Description": "It\u0027s quivering with dark energy.",
+    "DisplayName": "Void Essence",
+    "Notes": null
+  },
+  "770": {
+    "Name": "Mixed Seeds",
+    "Description": "There\u0027s a little bit of everything here. Plant them and see what grows!",
+    "DisplayName": "Mixed Seeds",
+    "Notes": null
+  },
+  "771": {
+    "Name": "Fiber",
+    "Description": "Raw material sourced from plants.",
+    "DisplayName": "Fiber",
+    "Notes": null
+  },
+  "772": {
+    "Name": "Oil of Garlic",
+    "Description": "Drink this and weaker monsters will avoid you.",
+    "DisplayName": "Oil of Garlic",
+    "Notes": null
+  },
+  "773": {
+    "Name": "Life Elixir",
+    "Description": "Restores health to full.",
+    "DisplayName": "Life Elixir",
+    "Notes": null
+  },
+  "774": {
+    "Name": "Wild Bait",
+    "Description": "A unique recipe from Linus that gives you a chance to catch two fish at once.",
+    "DisplayName": "Wild Bait",
+    "Notes": null
+  },
+  "775": {
+    "Name": "Glacierfish",
+    "Description": "Builds a nest on the underside of glaciers.",
+    "DisplayName": "Glacierfish",
+    "Notes": null
+  },
+  "784": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "785": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "786": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "787": {
+    "Name": "Battery Pack",
+    "Description": "It\u0027s fully charged with precious energy.",
+    "DisplayName": "Battery Pack",
+    "Notes": null
+  },
+  "788": {
+    "Name": "Lost Axe",
+    "Description": "Robin\u0027s been looking everywhere for it.",
+    "DisplayName": "Lost Axe",
+    "Notes": null
+  },
+  "789": {
+    "Name": "Lucky Purple Shorts",
+    "Description": "Better not inspect these too closely.",
+    "DisplayName": "Lucky Purple Shorts",
+    "Notes": null
+  },
+  "790": {
+    "Name": "Berry Basket",
+    "Description": "The fibers are stained with berry juice.",
+    "DisplayName": "Berry Basket",
+    "Notes": null
+  },
+  "792": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Cut to obtain wild seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "793": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Cut to obtain wild seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "794": {
+    "Name": "Weeds",
+    "Description": "Ugly weeds. Cut to obtain wild seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "795": {
+    "Name": "Void Salmon",
+    "Description": "A salmon, twisted by void energy. The fresh meat is jet black, but rapidly turns pink when exposed to air.",
+    "DisplayName": "Void Salmon",
+    "Notes": null
+  },
+  "796": {
+    "Name": "Slimejack",
+    "Description": "He\u0027s coated in a very thick layer of slime. He keeps slipping out of your hands!",
+    "DisplayName": "Slimejack",
+    "Notes": null
+  },
+  "797": {
+    "Name": "Pearl",
+    "Description": "A rare treasure from the sea.",
+    "DisplayName": "Pearl",
+    "Notes": null
+  },
+  "798": {
+    "Name": "Midnight Squid",
+    "Description": "A strange and mysterious denizen of the ocean\u0027s twilight depths.",
+    "DisplayName": "Midnight Squid",
+    "Notes": null
+  },
+  "799": {
+    "Name": "Spook Fish",
+    "Description": "The huge eyes can detect the faint silhouettes of prey.",
+    "DisplayName": "Spook Fish",
+    "Notes": null
+  },
+  "800": {
+    "Name": "Blobfish",
+    "Description": "This odd creature floats above the ocean floor, consuming any edible material in its path.",
+    "DisplayName": "Blobfish",
+    "Notes": null
+  },
+  "802": {
+    "Name": "Cactus Seeds",
+    "Description": "Can only be grown indoors. Takes 12 days to mature, and then produces fruit every 3 days.",
+    "DisplayName": "Cactus Seeds",
+    "Notes": null
+  },
+  "803": {
+    "Name": "Iridium Milk",
+    "Description": "A powerful \u0027milk\u0027 of unknown origin...",
+    "DisplayName": "Iridium Milk",
+    "Notes": null
+  },
+  "805": {
+    "Name": "Tree Fertilizer",
+    "Description": "Sprinkle on a wild tree to ensure rapid growth, even in winter. Doesn\u0027t work on fruit trees.",
+    "DisplayName": "Tree Fertilizer",
+    "Notes": null
+  },
+  "807": {
+    "Name": "Dinosaur Mayonnaise",
+    "Description": "It\u0027s thick and creamy, with a vivid green hue. It smells like grass and leather.",
+    "DisplayName": "Dinosaur Mayonnaise",
+    "Notes": null
+  },
+  "808": {
+    "Name": "Void Ghost Pendant",
+    "Description": "It\u0027s symbolic to the shadow people. As a gift, it signifies the desire to move in together as friends.",
+    "DisplayName": "Void Ghost Pendant",
+    "Notes": null
+  },
+  "809": {
+    "Name": "Movie Ticket",
+    "Description": "Admits one to the movie theater. Giving this to a friend invites them to the movies with you.",
+    "DisplayName": "Movie Ticket",
+    "Notes": null
+  },
+  "810": {
+    "Name": "Crabshell Ring",
+    "Description": "The top of the ring is made from enchanted crab shell.",
+    "DisplayName": "Crabshell Ring",
+    "Notes": null
+  },
+  "811": {
+    "Name": "Napalm Ring",
+    "Description": "When you defeat an enemy, they explode.",
+    "DisplayName": "Napalm Ring",
+    "Notes": null
+  },
+  "812": {
+    "Name": "Roe",
+    "Description": "Fresh fish eggs. These can be aged in a preserves jar to bring out more flavor.",
+    "DisplayName": "Roe",
+    "Notes": null
+  },
+  "445": {
+    "Name": "Caviar",
+    "Description": "The cured roe of a sturgeon fish. Considered to be a luxurious delicacy!",
+    "DisplayName": "Caviar",
+    "Notes": null
+  },
+  "814": {
+    "Name": "Squid Ink",
+    "Description": "Squid use this ink to confuse would-be predators.",
+    "DisplayName": "Squid Ink",
+    "Notes": null
+  },
+  "815": {
+    "Name": "Tea Leaves",
+    "Description": "The young leaves of the tea plant. Can be brewed into the popular, energizing beverage.",
+    "DisplayName": "Tea Leaves",
+    "Notes": null
+  },
+  "267": {
+    "Name": "Flounder",
+    "Description": "It lives on the bottom, so both eyes are on top of its head.",
+    "DisplayName": "Flounder",
+    "Notes": null
+  },
+  "265": {
+    "Name": "Seafoam Pudding",
+    "Description": "This briny pudding will really get you into the maritime mindset!",
+    "DisplayName": "Seafoam Pudding",
+    "Notes": null
+  },
+  "269": {
+    "Name": "Midnight Carp",
+    "Description": "This shy fish only feels comfortable at night.",
+    "DisplayName": "Midnight Carp",
+    "Notes": null
+  },
+  "292": {
+    "Name": "Mahogany Seed",
+    "Description": "This can be planted to grow a mahogany tree.",
+    "DisplayName": "Mahogany Seed",
+    "Notes": null
+  },
+  "289": {
+    "Name": "Ostrich Egg",
+    "Description": "It may be the world\u0027s largest egg.",
+    "DisplayName": "Ostrich Egg",
+    "Notes": null
+  },
+  "25": {
+    "Name": "Stone",
+    "Description": "There\u0027s mussels in this stone.",
+    "DisplayName": "Mussel Stone",
+    "Notes": null
+  },
+  "73": {
+    "Name": "Golden Walnut",
+    "Description": "To the parrots of Ginger Island, this nut is the finest delicacy.",
+    "DisplayName": "Golden Walnut",
+    "Notes": null
+  },
+  "69": {
+    "Name": "Banana Sapling",
+    "Description": "Takes 28 days to produce a mature Banana tree. Bears fruit in the summer, or all year round when planted on Ginger Island.",
+    "DisplayName": "Banana Sapling",
+    "Notes": null
+  },
+  "91": {
+    "Name": "Banana",
+    "Description": "A sweet, starchy tropical fruit.",
+    "DisplayName": "Banana",
+    "Notes": null
+  },
+  "791": {
+    "Name": "Golden Coconut",
+    "Description": "This is one tough nut to crack, but a professional might be able to break it open.",
+    "DisplayName": "Golden Coconut",
+    "Notes": null
+  },
+  "816": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain fossils and bones.",
+    "DisplayName": "Fossil Stone",
+    "Notes": null
+  },
+  "817": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain fossils and bones.",
+    "DisplayName": "Fossil Stone",
+    "Notes": null
+  },
+  "818": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain clay.",
+    "DisplayName": "Clay Stone",
+    "Notes": null
+  },
+  "819": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain omni geodes.",
+    "DisplayName": "Omni Geode Stone",
+    "Notes": null
+  },
+  "820": {
+    "Name": "Fossilized Skull",
+    "Description": "It\u0027s a perfect specimen!",
+    "DisplayName": "Fossilized Skull",
+    "Notes": null
+  },
+  "821": {
+    "Name": "Fossilized Spine",
+    "Description": "A column of interlocking vertebrae.",
+    "DisplayName": "Fossilized Spine",
+    "Notes": null
+  },
+  "822": {
+    "Name": "Fossilized Tail",
+    "Description": "This tail has a club-like feature at the tip.",
+    "DisplayName": "Fossilized Tail",
+    "Notes": null
+  },
+  "823": {
+    "Name": "Fossilized Leg",
+    "Description": "A thick and sturdy leg bone.",
+    "DisplayName": "Fossilized Leg",
+    "Notes": null
+  },
+  "824": {
+    "Name": "Fossilized Ribs",
+    "Description": "Long ago, these ribs protected the body of a large animal.",
+    "DisplayName": "Fossilized Ribs",
+    "Notes": null
+  },
+  "825": {
+    "Name": "Snake Skull",
+    "Description": "A preserved skull that once belonged to a snake.",
+    "DisplayName": "Snake Skull",
+    "Notes": null
+  },
+  "826": {
+    "Name": "Snake Vertebrae",
+    "Description": "It appears this serpent may have been extremely flexible.",
+    "DisplayName": "Snake Vertebrae",
+    "Notes": null
+  },
+  "827": {
+    "Name": "Mummified Bat",
+    "Description": "The delicate wings have been perfectly preserved.",
+    "DisplayName": "Mummified Bat",
+    "Notes": null
+  },
+  "828": {
+    "Name": "Mummified Frog",
+    "Description": "This ancient frog may have lived in the jungle canopy.",
+    "DisplayName": "Mummified Frog",
+    "Notes": null
+  },
+  "829": {
+    "Name": "Ginger",
+    "Description": "This sharp, spicy root is said to increase vitality.",
+    "DisplayName": "Ginger",
+    "Notes": null
+  },
+  "830": {
+    "Name": "Taro Root",
+    "Description": "This starchy root is one of the most ancient crops.",
+    "DisplayName": "Taro Root",
+    "Notes": null
+  },
+  "831": {
+    "Name": "Taro Tuber",
+    "Description": "Plant these in warm weather. Takes 10 days to mature. Grows faster if planted near a body of water.",
+    "DisplayName": "Taro Tuber",
+    "Notes": null
+  },
+  "832": {
+    "Name": "Pineapple",
+    "Description": "A sweet and tangy tropical treat.",
+    "DisplayName": "Pineapple",
+    "Notes": null
+  },
+  "833": {
+    "Name": "Pineapple Seeds",
+    "Description": "Plant these in warm weather. Takes 14 days to mature, and keeps producing fruit after that.",
+    "DisplayName": "Pineapple Seeds",
+    "Notes": null
+  },
+  "834": {
+    "Name": "Mango",
+    "Description": "A big, sweet tropical fruit with a unique flavor.",
+    "DisplayName": "Mango",
+    "Notes": null
+  },
+  "835": {
+    "Name": "Mango Sapling",
+    "Description": "Takes 28 days to produce a mature Mango tree. Bears fruit in the summer, or all year round when planted on Ginger Island.",
+    "DisplayName": "Mango Sapling",
+    "Notes": null
+  },
+  "836": {
+    "Name": "Stingray",
+    "Description": "Despite having a toxic stinger, these fish are shy and prefer to avoid humans.",
+    "DisplayName": "Stingray",
+    "Notes": null
+  },
+  "837": {
+    "Name": "Lionfish",
+    "Description": "An aggressive, predatory fish with venomous spines.",
+    "DisplayName": "Lionfish",
+    "Notes": null
+  },
+  "838": {
+    "Name": "Blue Discus",
+    "Description": "A brightly colored tropical fish that is popular in aquariums.",
+    "DisplayName": "Blue Discus",
+    "Notes": null
+  },
+  "839": {
+    "Name": "Thorns Ring",
+    "Description": "When enemies damage you, they will take damage themselves.",
+    "DisplayName": "Thorns Ring",
+    "Notes": null
+  },
+  "840": {
+    "Name": "Rustic Plank Floor",
+    "Description": "Place on the ground to create paths or to decorate your floors.",
+    "DisplayName": "Rustic Plank Floor",
+    "Notes": null
+  },
+  "841": {
+    "Name": "Stone Walkway Floor",
+    "Description": "Place on the ground to create paths or to decorate your floors.",
+    "DisplayName": "Stone Walkway Floor",
+    "Notes": null
+  },
+  "842": {
+    "Name": "Journal Scrap",
+    "Description": "A damp tattered page torn from an old journal...",
+    "DisplayName": "Journal Scrap",
+    "Notes": null
+  },
+  "843": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain cinder shards.",
+    "DisplayName": "Cinder Shard Stone",
+    "Notes": null
+  },
+  "844": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain cinder shards.",
+    "DisplayName": "Cinder Shard Stone",
+    "Notes": null
+  },
+  "845": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "846": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "847": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "848": {
+    "Name": "Cinder Shard",
+    "Description": "You can feel a warm glow from within this stone.",
+    "DisplayName": "Cinder Shard",
+    "Notes": null
+  },
+  "849": {
+    "Name": "Stone",
+    "Description": "There\u0027s copper ore in this stone.",
+    "DisplayName": "Copper Stone",
+    "Notes": null
+  },
+  "850": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain iron ore.",
+    "DisplayName": "Iron Stone",
+    "Notes": null
+  },
+  "851": {
+    "Name": "Magma Cap",
+    "Description": "A very rare mushroom that lives next to pools of lava.",
+    "DisplayName": "Magma Cap",
+    "Notes": null
+  },
+  "852": {
+    "Name": "Dragon Tooth",
+    "Description": "These are rumored to be the teeth of ancient serpents. The enamel is made of pure iridium!",
+    "DisplayName": "Dragon Tooth",
+    "Notes": null
+  },
+  "856": {
+    "Name": "Curiosity Lure",
+    "Description": "Increases your chance to catch rare fish.",
+    "DisplayName": "Curiosity Lure",
+    "Notes": null
+  },
+  "857": {
+    "Name": "Tiger Slime Egg",
+    "Description": "Can be hatched in a slime incubator. Use with extreme caution!",
+    "DisplayName": "Tiger Slime Egg",
+    "Notes": null
+  },
+  "858": {
+    "Name": "Qi Gem",
+    "Description": "A special currency honored by Mr. Qi.",
+    "DisplayName": "Qi Gem",
+    "Notes": null
+  },
+  "859": {
+    "Name": "Lucky Ring",
+    "Description": "The lunar emblem is said to bring good luck to whoever wears it.",
+    "DisplayName": "Lucky Ring",
+    "Notes": null
+  },
+  "860": {
+    "Name": "Hot Java Ring",
+    "Description": "Greatly increases your chance to find coffee drinks when slaying monsters.",
+    "DisplayName": "Hot Java Ring",
+    "Notes": null
+  },
+  "861": {
+    "Name": "Protection Ring",
+    "Description": "Stay invincible for a little while longer after taking damage.",
+    "DisplayName": "Protection Ring",
+    "Notes": null
+  },
+  "862": {
+    "Name": "Soul Sapper Ring",
+    "Description": "Gain a little bit of energy every time you slay a monster.",
+    "DisplayName": "Soul Sapper Ring",
+    "Notes": null
+  },
+  "863": {
+    "Name": "Phoenix Ring",
+    "Description": "Once a day, regain some health after being knocked out in combat.",
+    "DisplayName": "Phoenix Ring",
+    "Notes": null
+  },
+  "864": {
+    "Name": "War Memento",
+    "Description": "It\u0027s a faded photograph of a soldier...",
+    "DisplayName": "War Memento",
+    "Notes": null
+  },
+  "865": {
+    "Name": "Gourmet Tomato Salt",
+    "Description": "A rare, delicious and savory salt.",
+    "DisplayName": "Gourmet Tomato Salt",
+    "Notes": null
+  },
+  "866": {
+    "Name": "Stardew Valley Rose",
+    "Description": "A rose that reminds you of the valley. It smells heavenly.",
+    "DisplayName": "Stardew Valley Rose",
+    "Notes": null
+  },
+  "867": {
+    "Name": "Advanced TV Remote",
+    "Description": "It has more buttons than a regular remote. Perfect for the avid TV watcher!",
+    "DisplayName": "Advanced TV Remote",
+    "Notes": null
+  },
+  "868": {
+    "Name": "Arctic Shard",
+    "Description": "This shard glows with an otherworldly blue light.",
+    "DisplayName": "Arctic Shard",
+    "Notes": null
+  },
+  "869": {
+    "Name": "Wriggling Worm",
+    "Description": "It\u0027s a wriggling, wet worm.",
+    "DisplayName": "Wriggling Worm",
+    "Notes": null
+  },
+  "870": {
+    "Name": "Pirate\u0027s Locket",
+    "Description": "It\u0027s an old pirate\u0027s keepsake.",
+    "DisplayName": "Pirate\u0027s Locket",
+    "Notes": null
+  },
+  "872": {
+    "Name": "Fairy Dust",
+    "Description": "Sprinkle on kegs, furnaces, and other refining equipment to instantly receive their product.",
+    "DisplayName": "Fairy Dust",
+    "Notes": null
+  },
+  "873": {
+    "Name": "Pi\u00F1a Colada",
+    "Description": "Drink in moderation.",
+    "DisplayName": "Pi\u00F1a Colada",
+    "Notes": null
+  },
+  "874": {
+    "Name": "Bug Steak",
+    "Description": "The last resort of the hungry cave diver.",
+    "DisplayName": "Bug Steak",
+    "Notes": null
+  },
+  "875": {
+    "Name": "Ectoplasm",
+    "Description": "A thick, slimy goop that the Wizard wants for some reason.",
+    "DisplayName": "Ectoplasm",
+    "Notes": null
+  },
+  "876": {
+    "Name": "Prismatic Jelly",
+    "Description": "Harvested from the rare and elusive prismatic slime.",
+    "DisplayName": "Prismatic Jelly",
+    "Notes": null
+  },
+  "877": {
+    "Name": "Quality Bobber",
+    "Description": "Boosts the quality of fish that you catch.",
+    "DisplayName": "Quality Bobber",
+    "Notes": null
+  },
+  "879": {
+    "Name": "Monster Musk",
+    "Description": "Spray this on to draw more monsters out of hiding.",
+    "DisplayName": "Monster Musk",
+    "Notes": null
+  },
+  "880": {
+    "Name": "Combined Ring",
+    "Description": "...",
+    "DisplayName": "Combined Ring",
+    "Notes": null
+  },
+  "881": {
+    "Name": "Bone Fragment",
+    "Description": "A small piece of bone.",
+    "DisplayName": "Bone Fragment",
+    "Notes": null
+  },
+  "882": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "883": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "884": {
+    "Name": "Weeds",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Weeds",
+    "Notes": null
+  },
+  "885": {
+    "Name": "Fiber Seeds",
+    "Description": "Plant these in any season. Does not require watering. Harvest with the scythe. Takes 7 days to grow.",
+    "DisplayName": "Fiber Seeds",
+    "Notes": null
+  },
+  "886": {
+    "Name": "Warp Totem: Island",
+    "Description": "Warp directly to Ginger Island. Consumed on use.",
+    "DisplayName": "Warp Totem: Island",
+    "Notes": null
+  },
+  "887": {
+    "Name": "Immunity Band",
+    "Description": "The top of the ring is made from enchanted purple wool.",
+    "DisplayName": "Immunity Band",
+    "Notes": null
+  },
+  "888": {
+    "Name": "Glowstone Ring",
+    "Description": "Emits a constant light, and also increases your radius for collecting items.",
+    "DisplayName": "Glowstone Ring",
+    "Notes": null
+  },
+  "889": {
+    "Name": "Qi Fruit",
+    "Description": "Mr. Qi has challenged you to ship 500 of these strange melons.",
+    "DisplayName": "Qi Fruit",
+    "Notes": null
+  },
+  "890": {
+    "Name": "Qi Bean",
+    "Description": "Plant these in any season. Water every day to produce a Qi Fruit. Takes 4 days to mature.",
+    "DisplayName": "Qi Bean",
+    "Notes": null
+  },
+  "891": {
+    "Name": "Mushroom Tree Seed",
+    "Description": "Place this on your farm to plant a mushroom tree.",
+    "DisplayName": "Mushroom Tree Seed",
+    "Notes": null
+  },
+  "892": {
+    "Name": "Warp Totem: Qi\u0027s Arena",
+    "Description": "Warp to Qi\u0027s Arena. Be prepared for a challenge!.",
+    "DisplayName": "Warp Totem: Qi\u0027s Arena",
+    "Notes": null
+  },
+  "893": {
+    "Name": "Fireworks (Red)",
+    "Description": "An old tradition for celebrations and festivities. Handle with care!",
+    "DisplayName": "Fireworks (Red)",
+    "Notes": null
+  },
+  "894": {
+    "Name": "Fireworks (Purple)",
+    "Description": "An old tradition for celebrations and festivities. Handle with care!",
+    "DisplayName": "Fireworks (Purple)",
+    "Notes": null
+  },
+  "895": {
+    "Name": "Fireworks (Green)",
+    "Description": "An old tradition for celebrations and festivities. Handle with care!",
+    "DisplayName": "Fireworks (Green)",
+    "Notes": null
+  },
+  "896": {
+    "Name": "Galaxy Soul",
+    "Description": "Forge 3 of these into a Galaxy weapon to unleash its final form.",
+    "DisplayName": "Galaxy Soul",
+    "Notes": null
+  },
+  "898": {
+    "Name": "Son of Crimsonfish",
+    "Description": "He hatched in the warm summer water, and followed in the footsteps of his father.",
+    "DisplayName": "Son of Crimsonfish",
+    "Notes": null
+  },
+  "899": {
+    "Name": "Ms. Angler",
+    "Description": "Uses a bioluminescent dangler to attract prey.",
+    "DisplayName": "Ms. Angler",
+    "Notes": null
+  },
+  "900": {
+    "Name": "Legend II",
+    "Description": "The successor to the original Legend.",
+    "DisplayName": "Legend II",
+    "Notes": null
+  },
+  "901": {
+    "Name": "Radioactive Carp",
+    "Description": "A carp that spent one too many years in toxic sludge.",
+    "DisplayName": "Radioactive Carp",
+    "Notes": null
+  },
+  "902": {
+    "Name": "Glacierfish Jr.",
+    "Description": "The original Glacierfish had a son...",
+    "DisplayName": "Glacierfish Jr.",
+    "Notes": null
+  },
+  "903": {
+    "Name": "Ginger Ale",
+    "Description": "A zesty soda known for its soothing effect on the stomach.",
+    "DisplayName": "Ginger Ale",
+    "Notes": null
+  },
+  "904": {
+    "Name": "Banana Pudding",
+    "Description": "A creamy dessert with a wonderful tropical flavor.",
+    "DisplayName": "Banana Pudding",
+    "Notes": null
+  },
+  "905": {
+    "Name": "Mango Sticky Rice",
+    "Description": "Sweet mango and coconut transforms this rice into something very special.",
+    "DisplayName": "Mango Sticky Rice",
+    "Notes": null
+  },
+  "906": {
+    "Name": "Poi",
+    "Description": "A traditional food with a delicate, sweet flavor when eaten fresh.",
+    "DisplayName": "Poi",
+    "Notes": null
+  },
+  "907": {
+    "Name": "Tropical Curry",
+    "Description": "An exotic, fragrant curry served in a pineapple bowl.",
+    "DisplayName": "Tropical Curry",
+    "Notes": null
+  },
+  "908": {
+    "Name": "Magic Bait",
+    "Description": "Allows you to catch fish from any season, time, or weather, from whichever type of water you cast into.",
+    "DisplayName": "Magic Bait",
+    "Notes": null
+  },
+  "909": {
+    "Name": "Radioactive Ore",
+    "Description": "It\u0027s glowing with dangerous energy... Can be smelted into bars.",
+    "DisplayName": "Radioactive Ore",
+    "Notes": null
+  },
+  "910": {
+    "Name": "Radioactive Bar",
+    "Description": "Known by the Zuzu City Safety Commission to cause irreversible bodily harm.",
+    "DisplayName": "Radioactive Bar",
+    "Notes": null
+  },
+  "913": {
+    "Name": "Enricher",
+    "Description": "Place on a sprinkler and load with fertilizer to automatically apply it when planting seeds nearby.",
+    "DisplayName": "Enricher",
+    "Notes": null
+  },
+  "915": {
+    "Name": "Pressure Nozzle",
+    "Description": "Place on a sprinkler to increase its watering range.",
+    "DisplayName": "Pressure Nozzle",
+    "Notes": null
+  },
+  "917": {
+    "Name": "Qi Seasoning",
+    "Description": "Just a dash will elevate any dish to extraordinary heights. Automatically applied when cooking.",
+    "DisplayName": "Qi Seasoning",
+    "Notes": null
+  },
+  "918": {
+    "Name": "Hyper Speed-Gro",
+    "Description": "Greatly stimulates leaf production. Guaranteed to increase growth rate by at least 33%. Mix into tilled soil.",
+    "DisplayName": "Hyper Speed-Gro",
+    "Notes": null
+  },
+  "919": {
+    "Name": "Deluxe Fertilizer",
+    "Description": "Greatly improves soil quality, increasing your chance to grow quality crops. Mix into tilled soil.",
+    "DisplayName": "Deluxe Fertilizer",
+    "Notes": null
+  },
+  "920": {
+    "Name": "Deluxe Retaining Soil",
+    "Description": "This soil has a 100% chance of staying watered overnight. Mix into tilled soil.",
+    "DisplayName": "Deluxe Retaining Soil",
+    "Notes": null
+  },
+  "921": {
+    "Name": "Squid Ink Ravioli",
+    "Description": "Temporarily protects from debuffs.",
+    "DisplayName": "Squid Ink Ravioli",
+    "Notes": null
+  },
+  "922": {
+    "Name": "SupplyCrate",
+    "Description": "...",
+    "DisplayName": "SupplyCrate",
+    "Notes": null
+  },
+  "923": {
+    "Name": "SupplyCrate",
+    "Description": "...",
+    "DisplayName": "SupplyCrate",
+    "Notes": null
+  },
+  "924": {
+    "Name": "SupplyCrate",
+    "Description": "...",
+    "DisplayName": "SupplyCrate",
+    "Notes": null
+  },
+  "925": {
+    "Name": "Slime Crate",
+    "Description": "Use this to transport a domesticated slime to another location.",
+    "DisplayName": "Slime Crate",
+    "Notes": null
+  },
+  "926": {
+    "Name": "Cookout Kit",
+    "Description": "Use this to create a cooking campfire, allowing you to cook on-the-go!",
+    "DisplayName": "Cookout Kit",
+    "Notes": null
+  },
+  "927": {
+    "Name": "Camping Stove",
+    "Description": "This allows you to cook anywhere, and is not consumed on use.",
+    "DisplayName": "Camping Stove",
+    "Notes": null
+  },
+  "928": {
+    "Name": "Golden Egg",
+    "Description": "A very rare and special egg with a solid gold shell.",
+    "DisplayName": "Golden Egg",
+    "Notes": null
+  },
+  "929": {
+    "Name": "Hedge",
+    "Description": "A shaped bush that acts like a fence.",
+    "DisplayName": "Hedge",
+    "Notes": null
+  },
+  "930": {
+    "Name": "???",
+    "Description": "???",
+    "DisplayName": "???",
+    "Notes": null
+  },
+  "MixedFlowerSeeds": {
+    "Name": "Mixed Flower Seeds",
+    "Description": "An assortment of flower seeds. Plant them and see what grows!",
+    "DisplayName": "Mixed Flower Seeds",
+    "Notes": null
+  },
+  "GoldenBobber": {
+    "Name": "Golden Bobber",
+    "Description": "Willy is looking for this.",
+    "DisplayName": "Golden Bobber",
+    "Notes": null
+  },
+  "CalicoEggStone_0": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain Calico Eggs.",
+    "DisplayName": "Calico Egg Stone",
+    "Notes": null
+  },
+  "CalicoEggStone_1": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain Calico Eggs.",
+    "DisplayName": "Calico Egg Stone",
+    "Notes": null
+  },
+  "CalicoEggStone_2": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain Calico Eggs.",
+    "DisplayName": "Calico Egg Stone",
+    "Notes": null
+  },
+  "MysteryBox": {
+    "Name": "Mystery Box",
+    "Description": "A blacksmith can open this for you. Who knows what might be inside?",
+    "DisplayName": "Mystery Box",
+    "Notes": null
+  },
+  "TroutDerbyTag": {
+    "Name": "Golden Tag",
+    "Description": "Turn this in to the Trout Derby booth for a reward.",
+    "DisplayName": "Golden Tag",
+    "Notes": null
+  },
+  "DeluxeBait": {
+    "Name": "Deluxe Bait",
+    "Description": "Causes fish to bite even faster and increases size of the \u0022fishing bar\u0022.",
+    "DisplayName": "Deluxe Bait",
+    "Notes": null
+  },
+  "Moss": {
+    "Name": "Moss",
+    "Description": "A special type of plant that grows in shady areas.",
+    "DisplayName": "Moss",
+    "Notes": null
+  },
+  "MossySeed": {
+    "Name": "Mossy Seed",
+    "Description": "This can be planted to grow rare wild trees.",
+    "DisplayName": "Mossy Seed",
+    "Notes": null
+  },
+  "GreenRainWeeds0": {
+    "Name": "GreenRainWeeds0",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Green Rain Weeds",
+    "Notes": null
+  },
+  "GreenRainWeeds1": {
+    "Name": "GreenRainWeeds1",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Green Rain Weeds",
+    "Notes": null
+  },
+  "GreenRainWeeds2": {
+    "Name": "GreenRainWeeds2",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Green Rain Weeds",
+    "Notes": null
+  },
+  "GreenRainWeeds3": {
+    "Name": "GreenRainWeeds3",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Green Rain Weeds",
+    "Notes": null
+  },
+  "GreenRainWeeds4": {
+    "Name": "GreenRainWeeds4",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Green Rain Weeds",
+    "Notes": null
+  },
+  "GreenRainWeeds5": {
+    "Name": "GreenRainWeeds5",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Green Rain Weeds",
+    "Notes": null
+  },
+  "GreenRainWeeds6": {
+    "Name": "GreenRainWeeds6",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Green Rain Weeds",
+    "Notes": null
+  },
+  "GreenRainWeeds7": {
+    "Name": "GreenRainWeeds7",
+    "Description": "Might contain fibers or mixed seeds.",
+    "DisplayName": "Green Rain Weeds",
+    "Notes": null
+  },
+  "SonarBobber": {
+    "Name": "Sonar Bobber",
+    "Description": "Shows what fish is on the line before it\u0027s caught.",
+    "DisplayName": "Sonar Bobber",
+    "Notes": null
+  },
+  "SpecificBait": {
+    "Name": "Bait",
+    "Description": "Increases your chance to catch {0}.",
+    "DisplayName": "Bait",
+    "Notes": null
+  },
+  "TentKit": {
+    "Name": "Tent Kit",
+    "Description": "Use this to deploy a one-time-use tent for sleeping. Can only be used outdoors.",
+    "DisplayName": "Tent Kit",
+    "Notes": null
+  },
+  "VolcanoGoldNode": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain gold ore.",
+    "DisplayName": "Gold Stone",
+    "Notes": null
+  },
+  "MysticTreeSeed": {
+    "Name": "Mystic Tree Seed",
+    "Description": "This can be planted to grow a special tree.",
+    "DisplayName": "Mystic Tree Seed",
+    "Notes": null
+  },
+  "MysticSyrup": {
+    "Name": "Mystic Syrup",
+    "Description": "A very rare syrup that is said to have magic properties.",
+    "DisplayName": "Mystic Syrup",
+    "Notes": null
+  },
+  "Raisins": {
+    "Name": "Raisins",
+    "Description": "It\u0027s said to be the Junimos\u0027 favorite food.",
+    "DisplayName": "Raisins",
+    "Notes": null
+  },
+  "DriedFruit": {
+    "Name": "Dried",
+    "Description": "Chewy pieces of dried {0}.",
+    "DisplayName": "Dried",
+    "Notes": null
+  },
+  "DriedMushrooms": {
+    "Name": "Dried",
+    "Description": "A package of gourmet mushrooms.",
+    "DisplayName": "Dried",
+    "Notes": null
+  },
+  "StardropTea": {
+    "Name": "Stardrop Tea",
+    "Description": "A very special gift that would delight anyone.",
+    "DisplayName": "Stardrop Tea",
+    "Notes": null
+  },
+  "GoldCoin": {
+    "Name": "Gold Coin",
+    "Description": "1 Gold coin.",
+    "DisplayName": "Gold Coin",
+    "Notes": null
+  },
+  "TreasureTotem": {
+    "Name": "Treasure Totem",
+    "Description": "Use on diggable terrain to summon a ring of treasure spots.",
+    "DisplayName": "Treasure Totem",
+    "Notes": null
+  },
+  "ChallengeBait": {
+    "Name": "Challenge Bait",
+    "Description": "A \u0022perfect\u0022 catch yields triple the fish. However, each time a fish escapes the \u0022fishing bar\u0022, the catch is reduced.",
+    "DisplayName": "Challenge Bait",
+    "Notes": null
+  },
+  "CarrotSeeds": {
+    "Name": "Carrot Seeds",
+    "Description": "Plant in the spring. Takes 3 days to grow.",
+    "DisplayName": "Carrot Seeds",
+    "Notes": null
+  },
+  "Carrot": {
+    "Name": "Carrot",
+    "Description": "A fast-growing, colorful tuber that makes for a great snack.",
+    "DisplayName": "Carrot",
+    "Notes": null
+  },
+  "SummerSquashSeeds": {
+    "Name": "Summer Squash Seeds",
+    "Description": "Plant in the summer. Takes 6 days to grow, and continues to produce after first harvest.",
+    "DisplayName": "Summer Squash Seeds",
+    "Notes": null
+  },
+  "SummerSquash": {
+    "Name": "Summer Squash",
+    "Description": "A curved yellow squash that is harvested while immature, and still tender.",
+    "DisplayName": "Summer Squash",
+    "Notes": null
+  },
+  "BroccoliSeeds": {
+    "Name": "Broccoli Seeds",
+    "Description": "Plant in the fall. Takes 8 days to mature, and continues to produce after first harvest.",
+    "DisplayName": "Broccoli Seeds",
+    "Notes": null
+  },
+  "Broccoli": {
+    "Name": "Broccoli",
+    "Description": "The flowering head of a broccoli plant. The tiny buds give it a unique texture.",
+    "DisplayName": "Broccoli",
+    "Notes": null
+  },
+  "PowdermelonSeeds": {
+    "Name": "Powdermelon Seeds",
+    "Description": "This special melon grows in the winter. Takes 7 days to grow.",
+    "DisplayName": "Powdermelon Seeds",
+    "Notes": null
+  },
+  "Powdermelon": {
+    "Name": "Powdermelon",
+    "Description": "Named for the powdery coating that forms on the surface, this melon is crisp and sweet, with a delicate flavor.",
+    "DisplayName": "Powdermelon",
+    "Notes": null
+  },
+  "SeedSpot": {
+    "Name": "Seed Spot",
+    "Description": "How did you get this in your inventory?",
+    "DisplayName": "Artifact Spot",
+    "Notes": null
+  },
+  "SmokedFish": {
+    "Name": "Smoked",
+    "Description": "A whole {0}, smoked to perfection.",
+    "DisplayName": "Smoked",
+    "Notes": null
+  },
+  "PurpleBook": {
+    "Name": "Book Of Stars",
+    "Description": "Read this to gain some experience in all skills.",
+    "DisplayName": "Book Of Stars",
+    "Notes": null
+  },
+  "SkillBook_0": {
+    "Name": "Stardew Valley Almanac",
+    "Description": "Read this to gain some farming experience.",
+    "DisplayName": "Stardew Valley Almanac",
+    "Notes": null
+  },
+  "SkillBook_2": {
+    "Name": "Woodcutter\u0027s Weekly",
+    "Description": "Read this to gain some foraging experience.",
+    "DisplayName": "Woodcutter\u0027s Weekly",
+    "Notes": null
+  },
+  "SkillBook_1": {
+    "Name": "Bait And Bobber",
+    "Description": "Read this to gain some fishing experience.",
+    "DisplayName": "Bait And Bobber",
+    "Notes": null
+  },
+  "SkillBook_3": {
+    "Name": "Mining Monthly",
+    "Description": "Read this to gain some mining experience.",
+    "DisplayName": "Mining Monthly",
+    "Notes": null
+  },
+  "SkillBook_4": {
+    "Name": "Combat Quarterly",
+    "Description": "Read this to gain some combat experience.",
+    "DisplayName": "Combat Quarterly",
+    "Notes": null
+  },
+  "Book_Trash": {
+    "Name": "The Alleyway Buffet",
+    "Description": "You have a greater chance to find items in the trash.",
+    "DisplayName": "The Alleyway Buffet",
+    "Notes": null
+  },
+  "Book_Crabbing": {
+    "Name": "The Art O\u0027 Crabbing",
+    "Description": "Crab pots have a 25% chance to yield double.",
+    "DisplayName": "The Art O\u0027 Crabbing",
+    "Notes": null
+  },
+  "Book_Bombs": {
+    "Name": "Dwarvish Safety Manual",
+    "Description": "Bombs deal 25% less damage to you.",
+    "DisplayName": "Dwarvish Safety Manual",
+    "Notes": null
+  },
+  "Book_Roe": {
+    "Name": "Jewels Of The Sea",
+    "Description": "Fishing treasure chests have a chance to yield roe.",
+    "DisplayName": "Jewels Of The Sea",
+    "Notes": null
+  },
+  "Book_WildSeeds": {
+    "Name": "Ways Of The Wild",
+    "Description": "Weeds have a greater chance to yield mixed seeds.",
+    "DisplayName": "Raccoon Journal",
+    "Notes": null
+  },
+  "Book_Woodcutting": {
+    "Name": "Woody\u0027s Secret",
+    "Description": "Felled trees have a 5% chance to yield double the wood.",
+    "DisplayName": "Woody\u0027s Secret",
+    "Notes": null
+  },
+  "Book_Defense": {
+    "Name": "Jack Be Nimble, Jack Be Thick",
+    "Description": "Gain \u002B1 Defense.",
+    "DisplayName": "Jack Be Nimble, Jack Be Thick",
+    "Notes": null
+  },
+  "Book_Friendship": {
+    "Name": "Friendship 101",
+    "Description": "You become friends with people a little faster.",
+    "DisplayName": "Friendship 101",
+    "Notes": null
+  },
+  "Book_Void": {
+    "Name": "Monster Compendium",
+    "Description": "Monsters have a small chance to drop double loot.",
+    "DisplayName": "Monster Compendium",
+    "Notes": null
+  },
+  "Book_Speed": {
+    "Name": "Way Of The Wind pt. 1",
+    "Description": "You run a little bit faster.",
+    "DisplayName": "Way Of The Wind pt. 1",
+    "Notes": null
+  },
+  "Book_Marlon": {
+    "Name": "Mapping Cave Systems",
+    "Description": "You get a 50% discount on Marlon\u0027s item retrieval service.",
+    "DisplayName": "Mapping Cave Systems",
+    "Notes": null
+  },
+  "Book_PriceCatalogue": {
+    "Name": "Price Catalogue",
+    "Description": "You can now see the value of your items.",
+    "DisplayName": "Price Catalogue",
+    "Notes": null
+  },
+  "Book_QueenOfSauce": {
+    "Name": "Queen Of Sauce Cookbook",
+    "Description": "Learn any Queen Of Sauce recipes that you don\u0027t already know.",
+    "DisplayName": "Queen Of Sauce Cookbook",
+    "Notes": null
+  },
+  "Book_Diamonds": {
+    "Name": "The Diamond Hunter",
+    "Description": "All stones have a chance to drop a diamond when mined by hand.",
+    "DisplayName": "The Diamond Hunter",
+    "Notes": null
+  },
+  "Book_Mystery": {
+    "Name": "Book of Mysteries",
+    "Description": "You have a slightly greater chance to find Mystery Boxes.",
+    "DisplayName": "Book of Mysteries",
+    "Notes": null
+  },
+  "Book_AnimalCatalogue": {
+    "Name": "Animal Catalogue",
+    "Description": "You can access Marnie\u0027s shop when she\u0027s not around.",
+    "DisplayName": "Animal Catalogue",
+    "Notes": null
+  },
+  "Book_Speed2": {
+    "Name": "Way Of The Wind pt. 2",
+    "Description": "You run a little bit faster.",
+    "DisplayName": "Way Of The Wind pt. 2",
+    "Notes": null
+  },
+  "GoldenAnimalCracker": {
+    "Name": "Golden Animal Cracker",
+    "Description": "Give this to a farm animal to permanently double its produce yield. Doesn\u0027t work on pigs.",
+    "DisplayName": "Golden Animal Cracker",
+    "Notes": null
+  },
+  "GoldenMysteryBox": {
+    "Name": "Golden Mystery Box",
+    "Description": "A blacksmith can open this for you. Who knows what might be inside?",
+    "DisplayName": "Golden Mystery Box",
+    "Notes": null
+  },
+  "SeaJelly": {
+    "Name": "Sea Jelly",
+    "Description": "A rare jelly found in the ocean.",
+    "DisplayName": "Sea Jelly",
+    "Notes": null
+  },
+  "CaveJelly": {
+    "Name": "Cave Jelly",
+    "Description": "A rare jelly found in underground lakes.",
+    "DisplayName": "Cave Jelly",
+    "Notes": null
+  },
+  "RiverJelly": {
+    "Name": "River Jelly",
+    "Description": "A rare jelly found in freshwater.",
+    "DisplayName": "River Jelly",
+    "Notes": null
+  },
+  "Goby": {
+    "Name": "Goby",
+    "Description": "Some types of Gobies can climb up waterfalls.",
+    "DisplayName": "Goby",
+    "Notes": null
+  },
+  "VolcanoCoalNode0": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "VolcanoCoalNode1": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "PotOfGold": {
+    "Name": "PotOfGold",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "Book_Artifact": {
+    "Name": "Book_Artifact",
+    "Description": "You will fetch a better price when selling artifacts.",
+    "DisplayName": "Treasure Appraisal Guide",
+    "Notes": null
+  },
+  "Book_Horse": {
+    "Name": "Book_Horse",
+    "Description": "You gain a little extra speed when riding a horse.",
+    "DisplayName": "Horse: The Book",
+    "Notes": null
+  },
+  "ButterflyPowder": {
+    "Name": "Butterfly Powder",
+    "Description": "Sprinkle on a pet to remove them from your farm. The process is irreversible.",
+    "DisplayName": "Butterfly Powder",
+    "Notes": null
+  },
+  "PetLicense": {
+    "Name": "Pet License",
+    "Description": "Invite a new pet into your home. If you don\u0027t have enough outdoor pet bowls for your pets, they will become upset.",
+    "DisplayName": "Pet License",
+    "Notes": null
+  },
+  "BlueGrassStarter": {
+    "Name": "Blue Grass Starter",
+    "Description": "Place this on your farm to plant a clump of blue grass.",
+    "DisplayName": "Blue Grass Starter",
+    "Notes": null
+  },
+  "MossSoup": {
+    "Name": "Moss Soup",
+    "Description": "It\u0027s thick and slimy, but edible.",
+    "DisplayName": "Moss Soup",
+    "Notes": null
+  },
+  "Book_Grass": {
+    "Name": "Book_Grass",
+    "Description": "You will now run a lot faster through grass and crops.",
+    "DisplayName": "Ol\u0027 Slitherlegs",
+    "Notes": null
+  },
+  "BasicCoalNode0": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  },
+  "BasicCoalNode1": {
+    "Name": "Stone",
+    "Description": "Break apart to obtain stone with a chance of coal.",
+    "DisplayName": "Stone",
+    "Notes": null
+  }
+}

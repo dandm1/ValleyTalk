@@ -1,19 +1,14 @@
 ﻿using HarmonyLib;
+using StardewDialogue;
 using StardewModdingAPI;
 using StardewValley;
-using StardewValley.BellsAndWhistles;
-using StardewValley.Internal;
-using StardewValley.Locations;
-using StardewValley.Menus;
-using System;
-using System.Collections.Generic;
 
 namespace LlamaDialogue
 {
     public partial class ModEntry : Mod
     {
         private static IMonitor SMonitor;
-        private static IModHelper SHelper;
+        public static IModHelper SHelper { get; private set; }
         public static ModConfig Config;
 
 
@@ -21,25 +16,26 @@ namespace LlamaDialogue
         {
             Config = Helper.ReadConfig<ModConfig>();
 
-            DialogueGenerator.Instance.Config = Config;
+            if (!Config.EnableMod)
+            {
+                return;
+            }
+
+            if (Config.UseLocalhost)
+            {
+                Llm.SetLlm(LlmType.LlamaCpp, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
+            }
+            else
+            {
+                Llm.SetLlm(LlmType.Gemini15, apiKey: Config.ApiKey);
+            }
+            DialogueBuilder.Instance.Config = Config;
             
             SHelper = helper;
             SMonitor = Monitor;
             
             var harmony = new Harmony(ModManifest.UniqueID);
-
-            harmony.Patch(
-                original: AccessTools.Constructor(typeof(Dialogue), new Type[] { typeof(NPC), typeof(string), typeof(string) }),
-                postfix: new HarmonyMethod(typeof(ModEntry), nameof(Dialogue_Postfix))
-            );
-
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Dialogue), "prepareCurrentDialogueForDisplay"),
-                prefix: new HarmonyMethod(typeof(ModEntry), nameof(Dialogue_prepareCurrentDialogueForDisplay_Prefix))
-            );
-
-            helper.Events.Input.ButtonPressed += Input_ButtonPressed;
-            helper.Events.GameLoop.SaveLoaded += GameLoop_SaveLoaded;
+            harmony.PatchAll();
         }
 
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)
