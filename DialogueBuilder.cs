@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using StardewDialogue;
@@ -10,6 +11,7 @@ namespace LlamaDialogue
 {
     internal class DialogueBuilder
     {
+        private static int responseIndex = 10000;
         public static DialogueBuilder Instance
         {
             get
@@ -23,6 +25,7 @@ namespace LlamaDialogue
         }
 
         public ModConfig Config { get; internal set; }
+        public DialogueContext LastContext { get; private set; }
 
         private static DialogueBuilder _instance;
         private Dictionary<string, StardewDialogue.Character> _characters;
@@ -38,12 +41,24 @@ namespace LlamaDialogue
             {
                 var newCharacter = new StardewDialogue.Character(
                     instance.Name, 
-                    $"/home/david/Downloads/Canon Friendly Dialogue Expansion-2544-2-3-1-1717127684/[CP] Canon Friendly Dialogue Expansion/Data/NPCs/{instance.Name}.json",
+                    instance,
                     $"bio/{instance.Name}.txt");
-                newCharacter.StardewNpc = instance;
                 _characters.Add(instance.Name, newCharacter);
             }
             return _characters[instance.Name];
+        }
+
+        internal string GenerateResponse(NPC instance, string[] conversation)
+        {
+            var character = GetCharacter(instance);
+            DialogueContext context = LastContext;
+            var fullHistory = context.ChatHistory.ToList();
+            fullHistory.AddRange(conversation);
+            context.ChatHistory = fullHistory.ToArray();
+            LastContext = context;
+            var theLine = character.CreateBasicDialogue(context);
+            string formattedLine = FormatLine(theLine);
+            return "skip#"+formattedLine;
         }
 
         internal Dialogue GenerateGift(NPC instance, StardewValley.Object gift, int taste)
@@ -52,9 +67,11 @@ namespace LlamaDialogue
             DialogueContext context = GetBasicContext(instance);
             context.Accept = gift;
             context.GiftTaste = taste;
+            LastContext = context;
             var theLine = character.CreateBasicDialogue(context);
-
-            return new Dialogue(instance, $"Accept_{gift.ItemId}", theLine);
+            string formattedLine = FormatLine(theLine);
+            var newDialogue = new Dialogue(instance, $"Accept_{gift.Name}", formattedLine);
+            return newDialogue;
         }
 
         internal Dialogue Generate(NPC instance, string dialogueKey)
@@ -70,10 +87,29 @@ namespace LlamaDialogue
             {
                 context.SpouseAct = spouseAction;
             }
-
+            LastContext = context;
+            
             var theLine = character.CreateBasicDialogue(context);
+            string formattedLine = FormatLine(theLine);
+            return new Dialogue(instance, dialogueKey, formattedLine);
+        }
 
-            return new Dialogue(instance, dialogueKey, theLine);
+        private string FormatLine(string[] theLine)
+        {
+            if (theLine.Length == 1)
+            {
+                return theLine[0];
+            }
+            var sb = new StringBuilder();
+            sb.Append(theLine[0]);
+            sb.Append($"#$q {responseIndex++} {SldConstants.DialogueKeyPrefix}Default#Respond:");
+            sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#*Stay slient*");
+            for (int i = 1; i < theLine.Length; i++)
+            {
+                sb.Append($"#$r -999998 0 {SldConstants.DialogueKeyPrefix}Next#");
+                sb.Append(theLine[i]);
+            }
+            return sb.ToString();
         }
 
         private DialogueContext GetBasicContext(NPC instance)
@@ -101,10 +137,10 @@ namespace LlamaDialogue
             switch (Game1.timeOfDay)
             {
                 case <= 800:
-                    timeOfDay = $"early morning and both the farmer and {instance.Name} have just woken up";
+                    timeOfDay = $"early morning";
                     break;
                 case <= 1130:
-                    timeOfDay = "morning";
+                    timeOfDay = "late morning";
                     break;
                 case <= 1400:
                     timeOfDay = "midday";
@@ -197,6 +233,12 @@ namespace LlamaDialogue
         internal void AddDialogueLine(NPC instance, List<StardewValley.DialogueLine> dialogues)
         {
             var character = GetCharacter(instance);
+            if (character.MatchLastDialogue(dialogues))
+            {
+                return;
+            }
+            // Remove any lines just just contain Respond:
+            dialogues.RemoveAll(d => d.Text.StartsWith("Respond:"));
             character.AddDialogue(dialogues,Game1.year,Game1.season,Game1.dayOfMonth,Game1.timeOfDay);
         }
     }

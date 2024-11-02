@@ -7,7 +7,7 @@ public class BioData
     private bool? isMale;
 
     public string Biography { get; set; } = string.Empty;
-    // Only update gender if the value passed is male or female
+    //Only update gender if the value passed is male or female
     public string? Gender {
         get{ return isMale == null ? null : (isMale.Value ? "Male" : "Female"); }
         set
@@ -33,4 +33,8 @@ public class BioData
     public int BirthDay {get; set;} = 0;
     public Season BirthSeason {get; set;} = 0;
     public string Home {get; set;} = string.Empty;
+    public string GenderP2 => (isMale ?? false) ? "he" : "she";
+    
+    public string GenderPronoun => (isMale ?? false) ? "him" : "her";
+    public string GenderPossessive => (isMale ?? false) ? "his" : "her";
 }

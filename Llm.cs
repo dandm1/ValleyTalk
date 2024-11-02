@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using Netcode;
 
 namespace StardewDialogue;
 
@@ -30,6 +31,12 @@ internal abstract class Llm
             case LlmType.Gemini15:
                 Instance = new LlmGemini15(apiKey);
                 break;
+            case LlmType.Claude:
+                Instance = new LlmClaude(apiKey);
+                break;
+            case LlmType.OpenAi:
+                Instance = new LlmOpenAi(apiKey);
+                break;
             default:
                 throw new NotImplementedException();
                 break;
@@ -40,8 +47,12 @@ internal abstract class Llm
     private long _totalInference;
     private double _totalInferenceTime;
 
+    public abstract bool IsHighlySensoredModel { get; }
+
+    public abstract string ExtraInstructions { get; }
+
     public string TokenStats => $"Prompt: {_totalPrompts} tokens in {_totalPromptTime}ms, Inference: {_totalInference} tokens in {_totalInferenceTime}ms";
-    internal abstract string RunInference(string systemPromptString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="");
+    internal abstract string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="");
     
     internal abstract Dictionary<string,double>[] RunInferenceProbabilities(string fullPrompt,int n_predict = 1);
 

@@ -18,6 +18,9 @@ internal class LlmLlamaCpp : Llm
 
     public string Url { get; }
     public string PromptFormat { get; }
+    public override string ExtraInstructions => "Include only the new line and any responses in the output, no descriptions or explanations.";
+
+    public override bool IsHighlySensoredModel => false;
 
     internal string BuildPrompt(string systemPromptString, string promptString, string responseStart = "")
     {
@@ -27,8 +30,10 @@ internal class LlmLlamaCpp : Llm
             .Replace("{response_start}", responseStart);
     }
 
-    internal override string RunInference(string systemPromptString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
+
+        promptString = gameCacheString + npcCacheString + promptString;
         var fullPrompt = BuildPrompt(systemPromptString, promptString, responseStart);
         // Create a JSON object with the prompt and other parameters
         var json = new StringContent(

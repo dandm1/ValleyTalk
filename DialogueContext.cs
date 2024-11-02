@@ -34,7 +34,7 @@ public class DialogueContext
     public SpouseAction? SpouseAct { get; set; }
     public string? Spouse { get; init; }
     public string ChatID { get; init; }
-    public string[] ChatHistory { get; init; }
+    public string[] ChatHistory { get; set; } = Array.Empty<string>();
 
     private string[] elements = Array.Empty<string>();
     public bool Married { get; set; } = false;
@@ -157,11 +157,12 @@ public class DialogueContext
             elements = elements.Skip(1).ToArray();
         }
         // Check if the first element is a season.  If so, set the season and remove it from the list
-        if (Enum.TryParse<Season>(elements[0], true, out var season))
+        if (!int.TryParse(elements[0], out _) && Enum.TryParse<Season>(elements[0], true, out Season season))
         {
             Season = season;
             elements = elements.Skip(1).ToArray();
         }
+        if (elements.Length == 0) return;
         // Check if the first element is a valid GUID. If so, set the chat ID and remove it from the list
         if (Guid.TryParse(elements[0], out _))
         {
@@ -256,9 +257,9 @@ public class DialogueContext
             ChatID = value;
             elements = Array.Empty<string>();
         }
-        
+        if (elements.Length == 0) return;
         // If the first element is a number, set the year and remove it from the list
-        if (elements.Length > 0 && int.TryParse(elements[0], out var year))
+        if (int.TryParse(elements[0], out var year))
         {
             Year = year;
             elements = elements.Skip(1).ToArray();

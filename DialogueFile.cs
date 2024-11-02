@@ -10,9 +10,31 @@ namespace StardewDialogue;
 
 public class DialogueFile
 {
-    public List<Change> Changes { get; set; }
+    public DialogueFile()
+    {}
+
+    public DialogueFile(List<string> changeNames)
+    {
+        foreach (var changeName in changeNames)
+        {
+            Changes.Add(new Change { LogName = changeName, Entries = new Dictionary<DialogueContext, IDialogueValue>() });
+        }
+    }
+
+    public List<Change> Changes { get; set; } = new List<Change>();
     public Dictionary<DialogueContext,IDialogueValue> AllEntries => 
         Changes.SelectMany(c => c.Entries).ToDictionary(e => e.Key, e => e.Value);
+    
+    public void Add(string change, DialogueContext context, IDialogueValue value)
+    {
+        var changeEntry = Changes.FirstOrDefault(c => c.LogName == change);
+        if (changeEntry == null)
+        {
+            changeEntry = new Change { LogName = change, Entries = new Dictionary<DialogueContext, IDialogueValue>() };
+            Changes.Add(changeEntry);
+        }
+        changeEntry.Entries[context] = value;
+    }
 }
 
 public class Change

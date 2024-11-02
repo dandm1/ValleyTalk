@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.IO;
+using HarmonyLib;
 using StardewDialogue;
 using StardewModdingAPI;
 using StardewValley;
@@ -21,13 +22,20 @@ namespace LlamaDialogue
                 return;
             }
 
-            if (Config.UseLocalhost)
+            switch (Config.UseHost)
             {
-                Llm.SetLlm(LlmType.LlamaCpp, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
-            }
-            else
-            {
-                Llm.SetLlm(LlmType.Gemini15, apiKey: Config.ApiKey);
+                case "Local":
+                    Llm.SetLlm(LlmType.LlamaCpp, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
+                    break;
+                case "Gemini":
+                    Llm.SetLlm(LlmType.Gemini15, apiKey: Config.ApiKey);
+                    break;
+                case "Claude":
+                    Llm.SetLlm(LlmType.Claude, apiKey: Config.ApiKey);
+                    break;
+                case "OpenAI":
+                    Llm.SetLlm(LlmType.OpenAi, apiKey: Config.ApiKey);
+                    break;
             }
             DialogueBuilder.Instance.Config = Config;
             
@@ -36,6 +44,17 @@ namespace LlamaDialogue
             
             var harmony = new Harmony(ModManifest.UniqueID);
             harmony.PatchAll();
+
+            if (Config.Debug)
+            {
+                using (var log = new StreamWriter($"Generation.log", true))
+                {
+                    log.WriteLine($"###############################################");
+                    log.WriteLine($"###############################################");
+                    log.WriteLine($"###############################################");
+                    log.WriteLine($"[{System.DateTime.Now}] Mod loaded");
+                }
+            }
         }
 
         private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)

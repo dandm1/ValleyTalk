@@ -13,6 +13,7 @@ using System.Text.Json.Serialization;
 using LlamaDialogue;
 using Microsoft.Xna.Framework;
 using StardewValley;
+using StardewValley.GameData.Characters;
 
 namespace StardewDialogue;
 
@@ -29,14 +30,14 @@ public class Character
     private static readonly Dictionary<string,TimeSpan> filterTimes = new() { { "House", TimeSpan.Zero }, { "Action", TimeSpan.Zero }, { "Received Gift", TimeSpan.Zero }, { "Given Gift", TimeSpan.Zero }, { "Editorial", TimeSpan.Zero }, { "Gender", TimeSpan.Zero }, { "Question", TimeSpan.Zero } };
     private readonly List<Tuple<StardewTime,StardewValley.DialogueLine>> eventHistory = new();
 
-    public Character(string name, string dialogueFilePath, string bioFilePath)
+    public Character(string name, NPC stardewNpc, string bioFilePath)
     {
         Name = name;
-        DialogueFilePath = dialogueFilePath;
         BioFilePath = bioFilePath;
+        StardewNpc = stardewNpc;
 
         // Load and process the dialogue file
-        LoadDialogue(dialogueFilePath);
+        LoadDialogue();
         LoadStardewSummary();
         LoadEventHistory();
         ////Log.Information($"Loaded dialogue for {Name}");
@@ -45,41 +46,19 @@ public class Character
 
     private void LoadStardewSummary()
     {
-        StardewSummary = ModEntry.SHelper.Data.ReadJsonFile<string>("bio/Stardew.txt");
+        var gameSummaryDict = ModEntry.SHelper.Data.ReadJsonFile<Dictionary<string,string>>("bio/Stardew.txt");
+        StardewSummary = gameSummaryDict["Text"];
     }
 
-    private void LoadDialogue(string dialogueFilePath)
+    private void LoadDialogue()
     {
-        string dialogueFile;
-        if (!File.Exists(dialogueFilePath))
+        var canonDialogue = StardewNpc.Dialogue;
+        DialogueData = new();
+        foreach (var dialogue in canonDialogue)
         {
-            // Load the dialogue file
-            dialogueFile = File.ReadAllText(dialogueFilePath);
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                Converters = 
-                { 
-                    new DialogueContextJsonConverter(), 
-                    new DialogueValueJsonConverter(), 
-                    new RandomisedDialogueJsonConverter(), 
-                    new IDialogueValueJsonConverter() 
-                }
-            };
-            // Parse the JSON data
-            DialogueData = JsonSerializer.Deserialize<DialogueFile>(dialogueFile, options);
-            foreach(var changes in DialogueData.Changes.Where(x => x.Target.Contains("Marriage")))
-            {
-                foreach(var entry in changes.Entries.Where(x => x.Key.SpouseAct == null && x.Key.RandomAct == null))
-                {
-                    entry.Key.Married = true;
-                }
-            }
-        }
-        else
-        {
-            throw new FileNotFoundException($"Dialogue file not found at {dialogueFilePath}");
+            var context = new DialogueContext(dialogue.Key);
+            var value = new DialogueValue(dialogue.Value);
+            DialogueData.Add("Base",context, value);
         }
     }
 
@@ -92,11 +71,7 @@ public class Character
             bioData = ModEntry.SHelper.Data.ReadJsonFile<BioData>(BioFilePath);
         }
 
-        if (bioData == null || bioData.Biography.Length < 100 )
-        {
-            throw new InvalidDataException("Biography file could not be deserialized.");
-        }
-        _bioData = bioData;
+        _bioData = bioData ?? new BioData();
     }
 
     private void LoadEventHistory()
@@ -251,7 +226,7 @@ public class Character
     }*/
 
 
-    public string CreateBasicDialogue(DialogueContext context )
+    public string[] CreateBasicDialogue(DialogueContext context )
     {
         string[] results = Array.Empty<string>();
         bool retry = true;
@@ -261,16 +236,44 @@ public class Character
         {
             retry = false;
             
-            var resultString = Llm.Instance.RunInference(prompts.System, $"{prompts.Context}{prompts.Command}{prompts.Instructions}", prompts.ResponseStart);
+            var resultString = Llm.Instance.RunInference(prompts.System, prompts.GameConstantContext, prompts.NpcConstantContext, $"{prompts.Context}{prompts.Command}{prompts.Instructions}", prompts.ResponseStart);
             //resultString = resultString.Unidecode();
             // Clean out blank lines and any punctuation at the start of lines
             results = ProcessLines(resultString).ToArray();
-            if (results.Length != 1)
+            if (results.Length == 0)
             {
                 retry = true;
             }
         }
-        return results[0];
+        if (ModEntry.Config.Debug)
+        {
+            // Open 'generation.log' and append values to it
+            using (var log = new StreamWriter($"Generation.log", true))
+            {
+                log.WriteLine($"Context:");
+                log.WriteLine($"Name: {Name}");
+                log.WriteLine($"Marriage: {context.Married}");
+                log.WriteLine($"Birthday: {context.Birthday}");
+                log.WriteLine($"Location: {context.Location}");
+                log.WriteLine($"Weather: {string.Concat(context.Weather)}");
+                log.WriteLine($"Time of Day: {context.TimeOfDay}");
+                log.WriteLine($"Day of Season: {context.DayOfSeason}");
+                log.WriteLine($"Gift: {context.Accept}");
+                log.WriteLine($"Spouse Action: {context.SpouseAct}");
+                log.WriteLine($"Random Action: {context.RandomAct}");
+                log.WriteLine($"Prompts: {JsonSerializer.Serialize(prompts)}");
+                log.WriteLine($"Results: {results[0]}");
+                if (results.Length > 1)
+                {
+                    foreach (var result in results.Skip(1))
+                    {
+                        log.WriteLine($"Response: {result}");
+                    }
+                }
+                log.WriteLine("--------------------------------------------------");
+            }
+        }
+        return results;
     }
 
     /*private List<Tuple<DialogueContext, string>> ApplyAiFilters(IEnumerable<string> resultLines, DialogueContext context)
@@ -361,8 +364,18 @@ public class Character
         var resultLines = resultString.Split('\n').AsEnumerable();
         // Remove any line breaks
         resultLines = resultLines.Select(x => x.Replace("\n", "").Replace("\r", ""));
+        resultLines = resultLines.Where(x => !string.IsNullOrWhiteSpace(x));
+        // Check that the first line starts with '- '.  Omit any subsequent lines that don't start with '% '
+        var validLayout = (resultLines.FirstOrDefault()?? string.Empty ).StartsWith("- ");
+        if (!validLayout)
+        {
+            //log.WriteLine("Invalid layout detected in AI response.  Returning the full response.");
+            return Array.Empty<string>();
+        }
+        var responseLines = resultLines.Skip(1).Where(x => x.StartsWith("% "));
+        resultLines = resultLines.Take(1).Concat(responseLines);
         // Remove any leading punctuation
-        resultLines = resultLines.Select(x => x.Trim().TrimStart('-', ' ', '"'));
+        resultLines = resultLines.Select(x => x.Trim().TrimStart('-', ' ', '"', '%'));
         resultLines = resultLines.Select(x => x.Trim().TrimEnd('"'));
         // If the string starts or ends with #$b# remove it.
         resultLines = resultLines.Select(x => x.StartsWith("#$b#") ? x[4..] : x);
@@ -374,30 +387,45 @@ public class Character
         resultLines = resultLines.Select(x => x.Replace("\"", ""));
         // Remove any blank lines and trim the rest
         resultLines = resultLines.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).Where(x => x.Length > 2);
+        var firstElements = resultLines.FirstOrDefault().Split('#');
+        if (firstElements.Any(x => x.Length > 200))
+        {
+            //log.WriteLine("Long line detected in AI response.  Returning nothing.");
+            return Array.Empty<string>();
+        }
         return resultLines;
     }
 
     private Prompts CreatePrompts(DialogueContext context)
     {
+        var npcData = StardewNpc.GetData();
         var result = new Prompts();
+        var npcIsMale = npcData.Gender == Gender.Male;
         var dialogueSample = SelectDialogueSample(context);
         var exactLine = SelectExactDialogue(context);
         var systemPrompt = new StringBuilder();
         systemPrompt.AppendLine("You are an expert computer game writer that takes great pride in being able to create dialogue for any character in any game that exactly matches that character's situation and personality.");
         result.System = systemPrompt.ToString();
-        var prompt = new StringBuilder();
-        prompt.AppendLine($"You are creating dialogue to enhance the experience of players in the game Stardew Valley.");
-        prompt.AppendLine("While staying true to the characters you are writing for a mature audience looking for more adult and sexual content when appropriate.");
-        prompt.AppendLine("##Game Summary");
-        prompt.AppendLine(StardewSummary);
-        prompt.AppendLine($"You are working on dialogue for {Name}, who is talking to the player (referred to as 'the farmer')");
-        prompt.AppendLine($"##{Name} Biography:");
-        var bio = Bio.Biography;
-        while (bio.Contains("\n\n"))
+        var gameConstantPrompt = new StringBuilder();
+        gameConstantPrompt.AppendLine($"You are creating dialogue to enhance the experience of players in the game Stardew Valley.");
+        gameConstantPrompt.AppendLine("While staying true to the characters you are writing for a mature audience looking for more adult and sexual content when appropriate.");
+        gameConstantPrompt.AppendLine("##Game Summary");
+        gameConstantPrompt.AppendLine(StardewSummary);
+        result.GameConstantContext = gameConstantPrompt.ToString();
+        var npcConstantPrompt = new StringBuilder();
+        npcConstantPrompt.AppendLine($"You are working on dialogue for {Name}, who is talking to the player (referred to as 'the farmer')");
+        if ((Bio?.Biography ?? string.Empty).Length > 100)
         {
-            bio = bio.Replace("\n\n", "\n");
+            npcConstantPrompt.AppendLine($"##{Name} Biography:");
+            var bio = Bio.Biography;
+            while (bio.Contains("\n\n"))
+            {
+                bio = bio.Replace("\n\n", "\n");
+            }
+            npcConstantPrompt.AppendLine(bio);
         }
-        prompt.AppendLine(bio);
+        result.NpcConstantContext = npcConstantPrompt.ToString();
+        var prompt = new StringBuilder();
         if (dialogueSample.Any())
         {
             prompt.AppendLine($"##{Name} Sample Dialogue:");
@@ -407,6 +435,22 @@ public class Character
                 prompt.AppendLine($"- {dialogue.Value}");
             }
         }
+        var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+        var history = eventHistory.OrderBy(x => x.Item1.DaysSince(timeNow)).Where(x => x.Item1.DaysSince(timeNow) < 112).ToList();
+        if (history.Any())
+        {
+            prompt.AppendLine($"##Previous conversations with {Name}:");
+            prompt.AppendLine($"The farmer and {Name} have spoken previously, and the most recent 20 lines are shown below.");
+            prompt.AppendLine("These represent conversations at a different time and in contexts different to the current conversation.");
+            prompt.AppendLine("The new line is likely to reference previous conversations or events, as well as the current context.  It may also reference patterns in the previous conversation such as similar gifts or long gaps in the conversation.");
+            prompt.AppendLine($"You should avoid {Name} repeating lines or concepts close together, and call out repetition from the farmer. The more recent a previous event or interaction the more likely it will be referenced and the less likely it will be repeated.");
+            prompt.AppendLine("History:");
+            foreach (var eventHistory in history.Take(20))
+            {
+                prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {Name} speaking to farmer : {eventHistory.Item2.Text}");
+            }
+        }
+
         prompt.AppendLine("## Instructions:");
         prompt.AppendLine("### Context:");
         if (context.MaleFarmer)
@@ -424,6 +468,10 @@ public class Character
         if (context.TimeOfDay != null)
         {
             prompt.AppendLine($"It is {context.TimeOfDay}.");
+            if (context.TimeOfDay == "early morning")
+            {
+                prompt.AppendLine("This is a normal time for the farmer to be up and about.");
+            }
         }
         if (context.Weather != null && context.Weather.Any())
         {
@@ -457,7 +505,7 @@ public class Character
             }
             else
             {
-                prompt.AppendLine($"The farmer is married to {Name}. They live together at the farm inherited from the farmer's grandfather.  {Name} lived in Stardew Valley before meeting the farmer and moved from {(Bio.Gender == "Male" ? "his" : "her")} original house to the farm when they got married.");
+                prompt.AppendLine($"The farmer is married to {Name}. They live together at the farm inherited from the farmer's grandfather.  {Name} lived in Stardew Valley before meeting the farmer and moved from {(npcIsMale? "his" : "her")} original house to the farm when they got married.");
             }
             if (context.Children.Count() == 0)
             {
@@ -477,18 +525,26 @@ public class Character
                     prompt.AppendLine($"{Name} is feeling very positive about {(Name == "Krobus" ? "being roommates" : "the marriage")}.");
                     break;
                 case <10:
-                    prompt.AppendLine($"{Name} is feeling very negative about {(Name == "Krobus" ? "being roommates" : "the marriage")}.");
+                    prompt.AppendLine($"{Name} is feeling very negative about {(Name == "Krobus" ? "being roommates" : "the marriage")}. While {Name} should will still talk about the context of the conversation, they will be more likely to be negative or critical.");
                     break;
                 default:
                     prompt.AppendLine($"{Name} is generally content, but a little uncertain and conflicted about {(Name == "Krobus" ? "being roommates" : "the marriage")}.");
                     break;
             }
-        }   
+        }
         if (context.Location != null)
         {
-            if (context.Location == Bio.Home)
+            var bedTile = npcData.Home[0].Tile;
+            if (context.Location == npcData.Home[0].Location && context.Inlaw != Name)
             {
-                prompt.AppendLine($"The farmer and {Name} are talking inside {Name}'s home, which the farmer entered uninvited.");
+                if (StardewNpc.TilePoint == bedTile && Name != "Pam" && Name != "Lewis" && !Llm.Instance.IsHighlySensoredModel)
+                {
+                    prompt.AppendLine($"{Name} is in bed. The farmer has climbed into {Name}'s bed, and is talking to {Bio.GenderPronoun} there.");
+                }
+                else
+                {
+                    prompt.AppendLine($"The farmer and {Name} are talking in {Name}'s home, which the farmer entered uninvited.");
+                }
             }
             else
             {
@@ -499,13 +555,13 @@ public class Character
                 "Desert" => $"The farmer and {Name} are away from Stardew Valley visiting the desert.",
                 "BusStop" => $"The farmer and {Name} are at the bus stop.",
                 "Railroad" => $"The farmer and {Name} are at the railroad station, near the spa in the mountains.",
-                "Saloon" => $"The farmer and {Name} are at the Stardrop Saloon, relaxing at the end of a busy day. {( Bio.IsChild ? "" : "They are a little drunk.")}",
+                "Saloon" => $"The farmer and {Name} are at the Stardrop Saloon, relaxing at the end of a busy day. {(StardewNpc.GetData().Age == NpcAge.Child ? "" : "They are a little drunk.")}",
                 "SeedShop" => $"The farmer and {Name} are in Pierre's General Store.",
                 "JojaMart" => $"The farmer and {Name} are shopping at the JojaMart.",
                 "Resort_Chair" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is standing by a chair on the beach.",
                 "Resort_Towel" or "Resort_Towel_2" or "Resort_Towel_3" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is relaxing on a beach towel on the beach.",
                 "Resort_Umbrella" or "Resort_Umbrella_2" or "Resort_Umbrella_3" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is relaxing on a beach towel on the beach.",
-                "Resort_Bar" => $"The farmer and {Name} are at the Ginger Island tropical resort. They are at the bar run by Gus and it is day time. They are focussed on the bar{(Bio.IsChild ? "" : " and what they have been drinking. They are a little drunk")}.",
+                "Resort_Bar" => $"The farmer and {Name} are at the Ginger Island tropical resort. They are at the bar run by Gus and it is day time. They are focussed on the bar{(StardewNpc.GetData().Age == NpcAge.Child ? "" : " and what they have been drinking. They are a little drunk")}.",
                 "Resort_Entering" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is just arriving at the resort from Pelican Town.",
                 "Resort_Leaving" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is leaving the resort to return to Pelican Town.",
                 "Resort_Shore" => $"The farmer and {Name} are at the Ginger Island tropical resort. They are talking at the shore of the beach, with their feet in the water looking out to sea.",
@@ -515,7 +571,7 @@ public class Character
                 _ => $"The farmer and {Name} are at {context.Location}."
             });
             }
-            prompt.AppendLine("  The location where the conversation is taking place forms is significant context for the lines.");
+            prompt.AppendLine("The location where the conversation is taking place is significant context for the lines.");
         }
         if (DialogueContext.IsSpecialContext(context.ChatID))
         {
@@ -572,7 +628,13 @@ public class Character
                 (Season.Winter,28) => $"It is the last day of the year, and the last day of winter.",
                 _ => $""
             });
-            if (context.Season == _bioData.BirthSeason && context.DayOfSeason == _bioData.BirthDay)
+            var stardewBioData = StardewNpc.GetData();
+            if (
+                string.Equals(
+                    context.Season.Value.ToString(),
+                    stardewBioData.BirthSeason.ToString(),
+                    StringComparison.InvariantCultureIgnoreCase
+                ) && context.DayOfSeason == stardewBioData.BirthDay)
             {
                 prompt.AppendLine($"It is {Name}'s birthday.");
             }
@@ -637,8 +699,8 @@ public class Character
         
         if (context.Inlaw != Name)
         {
-            var isASingle = Bio.IsSingle;
-            var isChild = Bio.IsChild;
+            var isASingle = StardewNpc.GetData().CanBeRomanced;
+            var isChild = StardewNpc.GetData().Age == NpcAge.Child;
             if (isASingle || context.Hearts <= 6 || context.Hearts == null)
             {
                 prompt.AppendLine((context.Hearts ?? 0) switch
@@ -649,7 +711,7 @@ public class Character
                     <6 => $"{Name} and the farmer are becoming friends. They know something about eachother and a little about each other's lives. The dialogue should reflect a growing friendship, with some sharing of personal details and gossip and no particular desire to spend more time together.",
                     <8 => $"{Name} and the farmer are close friends. They know a lot about each other and share personal details, gossip and theories about the world. The dialogue should reflect a close friendship, with a desire to spend time together but no romantic interest.",
                     <10 => $"{Name} wants to date the farmer, but hasn't been asked yet. In context, the dialogue should reflect a close, intimate friendship and include occasional suggestive comments.",
-                    <=14 => $"{Name} and the farmer are dating seriously {(context.Inlaw == null ? "and publicly" : "but discretely")} as a {(Bio.Gender == "Male" ? "heterosexual" : "lesbian")} couple. They are fucking regularly.  They are keeping their sexual relationship a secret from the town but obsessing about it regularly when talking to each other.  {Name} does not live on the farm.",
+                    <=14 => $"{Name} and the farmer are dating seriously {(context.Inlaw == null ? "and publicly" : "but discretely")} as a {(context.MaleFarmer ? (npcIsMale ? "gay" : "heterosexual") : (npcIsMale ? "heterosexual" : "lesbian"))} couple. {(Llm.Instance.IsHighlySensoredModel ? "" : "They are keeping their sexual relationship a secret from the town but obsessing about it regularly when talking to each other.")} {Name} does not live on the farm.",
                     _ => throw new InvalidDataException("Invalid heart level.")
                 });
             }
@@ -665,7 +727,7 @@ public class Character
                 }
                 else
                 {
-                    prompt.AppendLine($"{Name} and the farmer are close friends. {Name} wishes the world had been different so they could pursue an intimate relationship with the farmer.  They know a lot about each other and confide initimate hopes dreams and fears to each other. {Name} sees the farmer as a confidant and openly share their frustrations and annoyances with others who are important in their life.");
+                    prompt.AppendLine($"{Name} and the farmer are close friends. {Name} wishes {(Llm.Instance.IsHighlySensoredModel ? "they could know the farmer better" : "the world had been different so they could pursue an intimate relationship with the farmer")}.  They know a lot about each other and confide initimate hopes dreams and fears to each other. {Name} sees the farmer as a confidant and openly share their frustrations and annoyances with others who are important in their life.");
                 }
             }
         
@@ -677,7 +739,7 @@ public class Character
                 }
                 else
                 {
-                    prompt.Append($"The farmer is married to {context.Inlaw}. {context.Inlaw} lives with the Farmer on the farm inherited from the Farmer's grandfather.  {Name} and {context.Inlaw} both lived in Stardew Valley and knew each other before the farmer met either of them.");
+                    prompt.AppendLine($"The farmer is married to {context.Inlaw}. {context.Inlaw} lives with the Farmer on the farm inherited from the Farmer's grandfather.  {Name} and {context.Inlaw} both lived in Stardew Valley and knew each other before the farmer met either of them.");
                 }
             }
         }
@@ -689,15 +751,14 @@ public class Character
         {
             prompt.AppendLine("The farmer is female and the dialogue may reflect this, for example by referring to her as a 'woman', 'girl' or 'wife' as appropriate in the context, referring to typical female clothing choices or activities.");
         }
-
-        var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
-        var history = eventHistory.OrderBy(x => x.Item1.DaysSince(timeNow)).Where(x => x.Item1.DaysSince(timeNow) < 112).ToList();
-        if (history.Any())
+        if (context.ChatHistory.Length > 0)
         {
-            prompt.AppendLine($"##The farmer and {Name} have had the following recent interactions.  These should be used as context for the new line:");
-            foreach (var eventHistory in history.Take(20))
+            prompt.AppendLine($"###Current Conversation:");
+            prompt.AppendLine($"The farmer and {Name} are in the middle of a conversation. The dialogue should be a continuation of the conversation, and should reference the previous lines in the conversation, which were:");
+            // Append each line from the chat history, labelling each one alternatively with the NPC's name or 'Farmer'
+            for (int i = 0; i < context.ChatHistory.Length; i++)
             {
-                prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {Name} speaking to farmer : {eventHistory.Item2.Text}");
+                prompt.AppendLine(i % 2 == 0 ? $"- {Name}: {context.ChatHistory[i]}" : $"- Farmer: {context.ChatHistory[i]}");
             }
         }
         
@@ -719,16 +780,28 @@ public class Character
         {
             instructions.AppendLine("The lines should be appropriate to be said repeatedly in conversation.  They should not contain any questions.");
         }*/
-        instructions.AppendLine("The should be a distinct conversation. If it should be presented with breaks, use #$b# as a screen divider or use #$e# as a divider for a more significant break. The line should contain at most 2 breaks. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines.");
+        instructions.AppendLine("If the line should be presented with breaks, use #$b# as a screen divider or use #$e# as a divider for a more significant break. The line should contain at most 2 breaks. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines.");
         instructions.AppendLine($"To express emotions, finish the section with one of these emotion tokens: $h for extremely happy, $0 for neutral, $s for sad, $l for in love, {(string.IsNullOrWhiteSpace(Bio.Unique) ? "" : "$u for " + Bio.Unique + ", ")}or $a for angry. Include the emotion token in the section to which it applies, do not put a # before it. Do not include emojis, actions surrounded by asterisks or other special characters to indicate emotion or actions.");
         instructions.AppendLine("Write the line as a single line of output preceded with a '-' but no other punctuation or numbering.");
-        instructions.AppendLine("For example:");
-        instructions.AppendLine("- Hello @, I'm in a terrible mood today.$a#$b#What do you want?");
-        instructions.AppendLine("- You really know how to rock a summer dress @.$l#$e#It's quite impressive.");
+        instructions.AppendLine("If the line doesn't call for the farmer to respond, just output the one line.");
+        instructions.AppendLine("If the line does invite a response from the farmer, please propose two, three or four possible responses that the farmer could make, covering the full range of possible reactions. Each response should be on a new line, preceded by a '%' and a space. Response lines should be in the voice of, and from the perspective of, the farmer.  They should not contain any special symbols, @s or emotion tokens.");
+        instructions.AppendLine("### Example 1:");
+        instructions.AppendLine("- \"It is such a lovely spring day today, amazing to meet you at the Jojamart.  How are you?\" $0");
+        instructions.AppendLine("% I'm doing well, thank you.");
+        instructions.AppendLine("% I'm not doing so well, actually.");
+        instructions.AppendLine("% I'm doing great, thanks for asking.");
+        instructions.AppendLine("### Example 2:");
+        instructions.AppendLine("- \"I'm so glad you came to visit me today.  I've been feeling a little lonely lately, but this rose really brightens my day.\" $s");
+        instructions.AppendLine("### Example 3:");
+        instructions.AppendLine("- \"Oh hi. I don't think I know you, and I'm rather busy. See you around.\"");
+        if (!string.IsNullOrWhiteSpace(Llm.Instance.ExtraInstructions))
+        {
+            instructions.AppendLine(Llm.Instance.ExtraInstructions);
+        }
         result.Instructions = instructions.ToString();
-        result.ResponseStart = $"Here is the requested line for {Name} which fit the situation and {Name}'s personality.\n- ";
+        result.ResponseStart = $"Here is the requested line for {Name} which fit the situation and {Name}'s personality.";
         result.Name = Name;
-        result.Gender = _bioData.Gender;
+        result.Gender = context.MaleFarmer ? "Male" : "Female";
         return result;
     }
 
@@ -761,6 +834,14 @@ public class Character
             eventHistory.Add(new Tuple<StardewTime, StardewValley.DialogueLine>(time, dialogue));
         }
         ModEntry.SHelper.Data.WriteSaveData($"EventHistory_{Name}", eventHistory);
+    }
+
+    internal bool MatchLastDialogue(List<StardewValley.DialogueLine> dialogues)
+    {
+        // Find the last dialogues in the event history
+        var tail = eventHistory.TakeLast(dialogues.Count);
+        // Check if the last dialogues match the given dialogues
+        return tail.Select(x => x.Item2.Text).SequenceEqual(dialogues.Select(x => x.Text));
     }
 
     public string Name { get; }

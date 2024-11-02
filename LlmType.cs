@@ -3,5 +3,7 @@ namespace StardewDialogue;
 internal enum LlmType
 {
     LlamaCpp,
-    Gemini15
+    Gemini15,
+    Claude,
+    OpenAi
 }

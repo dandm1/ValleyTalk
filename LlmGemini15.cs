@@ -20,7 +20,11 @@ internal class LlmGemini15 : Llm
 
     public Dictionary<string,string> CacheContexts { get; private set; } = new Dictionary<string, string>();
 
-    internal override string RunInference(string systemPromptString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    public override string ExtraInstructions => "";
+
+    public override bool IsHighlySensoredModel => false;
+
+    internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var useContext = string.Empty;
         /*if (!string.IsNullOrEmpty(cacheContext) && !CacheContexts.ContainsKey(cacheContext))
@@ -35,7 +39,7 @@ internal class LlmGemini15 : Llm
             "application/json"
             );
         }*/
-        
+        promptString = gameCacheString + npcCacheString + promptString;
         if (!string.IsNullOrEmpty(cacheContext))
         {
             useContext = CacheContexts[cacheContext];
