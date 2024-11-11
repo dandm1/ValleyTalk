@@ -10,9 +10,10 @@ namespace StardewDialogue;
 
 internal class LlmDummy : Llm
 {
+    Random rand;
     public LlmDummy()
     {
-        
+        rand = new Random();
     }
 
     public override string ExtraInstructions => "";
@@ -21,7 +22,14 @@ internal class LlmDummy : Llm
 
     internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
-        return "LLM generated string.";
+        if (rand.NextDouble()<0.5)
+        {
+            return "- LLM generated string.";
+        }
+        else
+        {
+            return "- LLM generated question\n% One answer\n% Another answer\n% A third answer";
+        }
     }
 
     internal override Dictionary<string, double>[] RunInferenceProbabilities(string fullPrompt, int n_predict = 1)

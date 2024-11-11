@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using HarmonyLib;
+using Microsoft.VisualBasic;
 using StardewDialogue;
 using StardewModdingAPI;
 using StardewValley;
@@ -22,21 +24,10 @@ namespace LlamaDialogue
                 return;
             }
 
-            switch (Config.UseHost)
-            {
-                case "Local":
-                    Llm.SetLlm(LlmType.LlamaCpp, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
-                    break;
-                case "Gemini":
-                    Llm.SetLlm(LlmType.Gemini15, apiKey: Config.ApiKey);
-                    break;
-                case "Claude":
-                    Llm.SetLlm(LlmType.Claude, apiKey: Config.ApiKey);
-                    break;
-                case "OpenAI":
-                    Llm.SetLlm(LlmType.OpenAi, apiKey: Config.ApiKey);
-                    break;
-            }
+            Enum.TryParse<LlmType>(Config.UseHost, ignoreCase: true, result: out LlmType llmType);
+
+            Llm.SetLlm(llmType, apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
+
             DialogueBuilder.Instance.Config = Config;
             
             SHelper = helper;
