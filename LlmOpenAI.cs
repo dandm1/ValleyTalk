@@ -69,7 +69,7 @@ internal class LlmOpenAi : Llm
             {
                 var request = new HttpRequestMessage(HttpMethod.Post, fullUrl);
                 request.Content = json;
-                request.Headers.Add("Authorization: Bearer", apiKey);
+                request.Headers.Add("Authorization", $"Bearer {apiKey}");
                 var response = client.SendAsync(request).Result;
                 // Return the 'content' element of the response json
                 var responseString = response.Content.ReadAsStringAsync().Result;

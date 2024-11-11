@@ -14,6 +14,9 @@ using LlamaDialogue;
 using Microsoft.Xna.Framework;
 using StardewValley;
 using StardewValley.GameData.Characters;
+using Polly;
+using Polly.Retry;
+using System.Threading.Tasks;
 
 namespace StardewDialogue;
 
@@ -29,6 +32,18 @@ public class Character
 
     private static readonly Dictionary<string,TimeSpan> filterTimes = new() { { "House", TimeSpan.Zero }, { "Action", TimeSpan.Zero }, { "Received Gift", TimeSpan.Zero }, { "Given Gift", TimeSpan.Zero }, { "Editorial", TimeSpan.Zero }, { "Gender", TimeSpan.Zero }, { "Question", TimeSpan.Zero } };
     private readonly List<Tuple<StardewTime,StardewValley.DialogueLine>> eventHistory = new();
+    private readonly Dictionary<string,string> HistoryEvents = new()
+    {
+        { "cc_Bus", "The bus to Calico Desert was repaired" },
+        { "cc_Boulder", "The glittering boulder was removed from the mountain lake" },
+        { "cc_Bridge", "The bridge to the quarry was repaired" },
+        { "cc_Complete", "The community center was restored" },
+        { "cc_Greenhouse", "The farmer's greenhouse was repaired" },
+        { "cc_Minecart", "The minecart system was repaired" },
+        { "wonIceFishing", "The farmer won the ice fishing competition" },
+        { "wonGrange", "The farmer won the Stardew Valley Fair Grange Display" },
+        { "wonEggHunt", "The farmer won the egg hunt" }
+    };
 
     public Character(string name, NPC stardewNpc, string bioFilePath)
     {
@@ -229,50 +244,64 @@ public class Character
     public string[] CreateBasicDialogue(DialogueContext context )
     {
         string[] results = Array.Empty<string>();
-        bool retry = true;
         var prompts = CreatePrompts(context);
 
-        while (retry)
+        var pipeline = new ResiliencePipelineBuilder()
+                    .AddRetry(
+                        new RetryStrategyOptions() 
+                        { 
+                            MaxRetryAttempts = 4,
+                            DelayGenerator = static args =>
+                            {
+                                var delay = args.AttemptNumber < 2 ? 0 : 5;
+                                return new ValueTask<TimeSpan?>(TimeSpan.FromSeconds(delay));
+                            }
+                        }
+                    )
+                    .AddTimeout(TimeSpan.FromSeconds(10))
+                    .Build();
+        int retryCount = 0;
+        pipeline.Execute(() =>
         {
-            retry = false;
-            
+            retryCount++;
             var resultString = Llm.Instance.RunInference(prompts.System, prompts.GameConstantContext, prompts.NpcConstantContext, $"{prompts.Context}{prompts.Command}{prompts.Instructions}", prompts.ResponseStart);
-            //resultString = resultString.Unidecode();
-            // Clean out blank lines and any punctuation at the start of lines
-            results = ProcessLines(resultString).ToArray();
+            // Apply relaxed validation if this is the second retry
+            
+            results = ProcessLines(resultString, retryCount > 2).ToArray();
             if (results.Length == 0)
             {
-                retry = true;
+                //Force a retry in the pipeline
+                throw new Exception("No valid lines returned from AI");
             }
-        }
-        if (ModEntry.Config.Debug)
-        {
-            // Open 'generation.log' and append values to it
-            using (var log = new StreamWriter($"Generation.log", true))
+            if (ModEntry.Config.Debug)
             {
-                log.WriteLine($"Context:");
-                log.WriteLine($"Name: {Name}");
-                log.WriteLine($"Marriage: {context.Married}");
-                log.WriteLine($"Birthday: {context.Birthday}");
-                log.WriteLine($"Location: {context.Location}");
-                log.WriteLine($"Weather: {string.Concat(context.Weather)}");
-                log.WriteLine($"Time of Day: {context.TimeOfDay}");
-                log.WriteLine($"Day of Season: {context.DayOfSeason}");
-                log.WriteLine($"Gift: {context.Accept}");
-                log.WriteLine($"Spouse Action: {context.SpouseAct}");
-                log.WriteLine($"Random Action: {context.RandomAct}");
-                log.WriteLine($"Prompts: {JsonSerializer.Serialize(prompts)}");
-                log.WriteLine($"Results: {results[0]}");
-                if (results.Length > 1)
+                // Open 'generation.log' and append values to it
+                using (var log = new StreamWriter($"Generation.log", true))
                 {
-                    foreach (var result in results.Skip(1))
+                    log.WriteLine($"Context:");
+                    log.WriteLine($"Name: {Name}");
+                    log.WriteLine($"Marriage: {context.Married}");
+                    log.WriteLine($"Birthday: {context.Birthday}");
+                    log.WriteLine($"Location: {context.Location}");
+                    log.WriteLine($"Weather: {string.Concat(context.Weather)}");
+                    log.WriteLine($"Time of Day: {context.TimeOfDay}");
+                    log.WriteLine($"Day of Season: {context.DayOfSeason}");
+                    log.WriteLine($"Gift: {context.Accept}");
+                    log.WriteLine($"Spouse Action: {context.SpouseAct}");
+                    log.WriteLine($"Random Action: {context.RandomAct}");
+                    log.WriteLine($"Prompts: {JsonSerializer.Serialize(prompts)}");
+                    log.WriteLine($"Results: {results[0]}");
+                    if (results.Length > 1)
                     {
-                        log.WriteLine($"Response: {result}");
+                        foreach (var result in results.Skip(1))
+                        {
+                            log.WriteLine($"Response: {result}");
+                        }
                     }
+                    log.WriteLine("--------------------------------------------------");
                 }
-                log.WriteLine("--------------------------------------------------");
             }
-        }
+        });
         return results;
     }
 
@@ -359,7 +388,7 @@ public class Character
         return lines;
     }*/
 
-    public static IEnumerable<string> ProcessLines(string resultString)
+    public static IEnumerable<string> ProcessLines(string resultString,bool relaxedValidation = false)
     {
         var resultLines = resultString.Split('\n').AsEnumerable();
         // Remove any line breaks
@@ -388,7 +417,7 @@ public class Character
         // Remove any blank lines and trim the rest
         resultLines = resultLines.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).Where(x => x.Length > 2);
         var firstElements = resultLines.FirstOrDefault().Split('#');
-        if (firstElements.Any(x => x.Length > 200))
+        if (firstElements.Any(x => x.Length > 200 && !relaxedValidation))
         {
             //log.WriteLine("Long line detected in AI response.  Returning nothing.");
             return Array.Empty<string>();
@@ -403,6 +432,9 @@ public class Character
         var npcIsMale = npcData.Gender == Gender.Male;
         var dialogueSample = SelectDialogueSample(context);
         var exactLine = SelectExactDialogue(context);
+        var allPreviousActivities = Game1.getPlayerOrEventFarmer().previousActiveDialogueEvents.First();
+        var previousActivites = allPreviousActivities.Where(x => HistoryEvents.ContainsKey(x.Key) && x.Value < 112).ToList();
+
         var systemPrompt = new StringBuilder();
         systemPrompt.AppendLine("You are an expert computer game writer that takes great pride in being able to create dialogue for any character in any game that exactly matches that character's situation and personality.");
         result.System = systemPrompt.ToString();
@@ -426,6 +458,56 @@ public class Character
         }
         result.NpcConstantContext = npcConstantPrompt.ToString();
         var prompt = new StringBuilder();
+        prompt.AppendLine("## Game State:");
+        if (allPreviousActivities.ContainsKey("cc_Complete"))
+        {
+            prompt.AppendLine("The community center has been restored.");
+        }
+        else
+        {
+            prompt.AppendLine("The community center remains rundown and inaccessible.");
+        }
+        if (allPreviousActivities.ContainsKey("cc_Bus"))
+        {
+            prompt.AppendLine("The bus to Calico Desert has been repaired and is driven by Pam.");
+        }
+        else
+        {
+            prompt.AppendLine("The bus to Calico Desert remains broken and Pam remains unemployed.");
+        }
+        if (allPreviousActivities.ContainsKey("cc_Bridge"))
+        {
+            prompt.AppendLine("The bridge to the quarry has been repaired.");
+        }
+        else
+        {
+            prompt.AppendLine("The bridge to the quarry has collapsed.");
+        }
+        if (allPreviousActivities.ContainsKey("cc_Minecart"))
+        {
+            prompt.AppendLine("The minecart system has been repaired and is operating across Stardew Valley.");
+        }
+        else
+        {
+            prompt.AppendLine("The minecart system remains broken.");
+        }
+        if (allPreviousActivities.ContainsKey("cc_Boulder"))
+        {
+            prompt.AppendLine("The glittering boulder has been removed from the mountain lake and ore released into the rivers.");
+        }
+        else
+        {
+            prompt.AppendLine("The glittering boulder remains in the mountain lake.");
+        }
+        if (Game1.year == 1)
+        {
+            prompt.AppendLine("Kent is away serving in the army, leaving Jodi, Vincent and Sam.  The farmer has not yet met Kent.");
+        }
+        else
+        {
+            prompt.AppendLine("Kent has returned from the army and is living with Jodi, Vincent and Sam.  He is adjusting to life back in Pelican Town.");
+        }
+
         if (dialogueSample.Any())
         {
             prompt.AppendLine($"##{Name} Sample Dialogue:");
@@ -436,18 +518,20 @@ public class Character
             }
         }
         var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
-        var history = eventHistory.OrderBy(x => x.Item1.DaysSince(timeNow)).Where(x => x.Item1.DaysSince(timeNow) < 112).ToList();
-        if (history.Any())
+        List<Tuple<double,string>> fullHistory = eventHistory.Select(x => new Tuple<double,string>(x.Item1.DaysSince(timeNow), $"- {x.Item1.SinceDescription(timeNow)}: {Name} speaking to farmer : {x.Item2.Text}")).ToList();
+        fullHistory.AddRange(previousActivites.Select(x => new Tuple<double,string>(x.Value, $"- {x.Key}: Event occurred : {HistoryEvents[x.Key]}")));
+
+        if (fullHistory.Any())
         {
-            prompt.AppendLine($"##Previous conversations with {Name}:");
+            prompt.AppendLine($"##Previous interactions with {Name}:");
             prompt.AppendLine($"The farmer and {Name} have spoken previously, and the most recent 20 lines are shown below.");
             prompt.AppendLine("These represent conversations at a different time and in contexts different to the current conversation.");
             prompt.AppendLine("The new line is likely to reference previous conversations or events, as well as the current context.  It may also reference patterns in the previous conversation such as similar gifts or long gaps in the conversation.");
             prompt.AppendLine($"You should avoid {Name} repeating lines or concepts close together, and call out repetition from the farmer. The more recent a previous event or interaction the more likely it will be referenced and the less likely it will be repeated.");
             prompt.AppendLine("History:");
-            foreach (var eventHistory in history.Take(20))
+            foreach (var eventHistory in fullHistory.OrderBy(x => x.Item1).Take(20))
             {
-                prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {Name} speaking to farmer : {eventHistory.Item2.Text}");
+                prompt.AppendLine(eventHistory.Item2);
             }
         }
 
@@ -497,27 +581,113 @@ public class Character
         {
             prompt.AppendLine("The farmer is new to Pelican Town this year.");
         }
-        if (Name == context.Inlaw)
+        Game1.getPlayerOrEventFarmer().friendshipData.TryGetValue(Name, out Friendship friendship);
+        if (friendship.IsMarried() || friendship.IsRoommate())
         {
-            if (Name == "Krobus")
+            if (friendship.IsRoommate())
             {
                 prompt.AppendLine($"The farmer and {Name} are roommates and close, non-romantic friends. They live together at the farm inherited from the farmer's grandfather. {Name} lived in the sewers before meeting the farmer and moved from there to the farm when they became roommates.");
             }
             else
             {
                 prompt.AppendLine($"The farmer is married to {Name}. They live together at the farm inherited from the farmer's grandfather.  {Name} lived in Stardew Valley before meeting the farmer and moved from {(npcIsMale? "his" : "her")} original house to the farm when they got married.");
+
+                if (context.Children.Count == 0)
+                {
+                    prompt.AppendLine($"The farmer and {Name} have no children.");
+                }
+                else
+                {
+                    prompt.AppendLine($"The farmer and {Name} have {context.Children.Count()} child{(context.Children.Count > 1 ? "ren":"")}:");
+                    foreach (var child in context.Children)
+                    {
+                        prompt.AppendLine($"- A {(child.IsMale ? "boy" : "girl")} named {child.Name} who is {child.Age} days old.");
+                    }
+                }
+                if (friendship.DaysUntilBirthing > 0)
+                {
+                    prompt.AppendLine($"The farmer and {Name} are expecting a child in {friendship.DaysUntilBirthing} days.");
+                }
             }
-            if (context.Children.Count() == 0)
+
+            var allBuildings = GetBuildings();
+            var allAnimals = GetAnimals();
+            var allCrops = GetCrops();
+            
+            if (allBuildings.Any())
             {
-                prompt.AppendLine($"The farmer and {Name} have no children.");
+                prompt.AppendLine($"The farm has the following buildings:");
+                var completedBuildings = allBuildings.Where(x => x.daysOfConstructionLeft.Value == 0 && x.buildingType.Value != "Greenhouse");
+                foreach (var building in completedBuildings.GroupBy(x => x.buildingType))
+                {
+                    prompt.AppendLine($"- {building.Count()} {building.Key} building{(building.Count() > 1 ? "s" : "")}");
+                }
+                var greenhouse = allBuildings.FirstOrDefault(x => x.buildingType.Value == "Greenhouse");
+                if (greenhouse != null)
+                {
+                    if (greenhouse.indoors.Value == null)
+                    {
+                        prompt.AppendLine("- A ruined greenhouse.");
+                    }
+                    else
+                    {
+                        prompt.AppendLine("- A repaired greenhouse.");
+                    }
+                }
+                if (allBuildings.Any(x => x.daysOfConstructionLeft.Value > 0))
+                {
+                    var underConstruction = allBuildings.First(x => x.daysOfConstructionLeft.Value > 0);
+                    prompt.AppendLine($"- A {underConstruction.buildingType.Value} which will complete construction in {underConstruction.daysOfConstructionLeft} days.");
+                }
             }
             else
             {
-                prompt.AppendLine($"The farmer and {Name} have {context.Children.Count()} child{(context.Children.Count > 1 ? "ren":"")}:");
-                foreach (var child in context.Children)
+                prompt.AppendLine("The farm has no buildings apart from the farmhouse and shipping bin.");
+            }
+            if (allAnimals.Any())
+            {
+                prompt.AppendLine($"The farm has the following animals:");
+                foreach (var animal in allAnimals.GroupBy(x => x.type))
                 {
-                    prompt.AppendLine($"- A {(child.IsMale ? "boy" : "girl")} named {child.Name} who is {child.Age} days old.");
+                    prompt.AppendLine($"- {animal.Count()} {animal.Key} animal{(animal.Count() > 1 ? "s" : "")}");
                 }
+            }
+            else
+            {
+                prompt.AppendLine("The farm has no animals.");
+            }
+            var cropData = Game1.objectData;
+            if (allCrops.Any())
+            {
+                prompt.AppendLine($"The following crops are growing on the farm:");
+                foreach (var crop in allCrops.GroupBy(x => x.indexOfHarvest.Value))
+                {
+                    var thisDetails = cropData[crop.Key];
+                    prompt.Append($"- {crop.Count()} {thisDetails.Name}");
+                    var ripe = crop.Count(x => x.fullyGrown.Value);
+                    if (ripe > 0)
+                    {
+                        prompt.Append($" (of which {ripe} are ready for harvest)");
+                    }
+                    else
+                    {
+                        prompt.Append(" (not ready for harvest)");
+                    }
+                    prompt.AppendLine(".");
+                }
+            }
+            else
+            {
+                prompt.AppendLine("The farm has no crops.");
+            }
+            var pet = Game1.getPlayerOrEventFarmer().getPet();
+            if (pet != null)
+            {
+                prompt.AppendLine($"The farm has a pet {pet.petType.Value} named {pet.Name}.");
+            }
+            else
+            {
+                prompt.AppendLine("The farm has no pets.");
             }
             switch (context.Hearts)
             {
@@ -537,13 +707,15 @@ public class Character
             var bedTile = npcData.Home[0].Tile;
             if (context.Location == npcData.Home[0].Location && context.Inlaw != Name)
             {
-                if (StardewNpc.TilePoint == bedTile && Name != "Pam" && Name != "Lewis" && !Llm.Instance.IsHighlySensoredModel)
+                if (StardewNpc.TilePoint == bedTile && Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel)
                 {
                     prompt.AppendLine($"{Name} is in bed. The farmer has climbed into {Name}'s bed, and is talking to {Bio.GenderPronoun} there.");
                 }
                 else
                 {
-                    prompt.AppendLine($"The farmer and {Name} are talking in {Name}'s home, which the farmer entered uninvited.");
+                    var mayBeInShop = context.Location.Contains("Shop", StringComparison.OrdinalIgnoreCase)
+                        || context.Location.Contains("Science", StringComparison.OrdinalIgnoreCase);
+                    prompt.AppendLine($"The farmer and {Name} are talking in {Name}'s home{(mayBeInShop ? " or the shop" : "")}.");
                 }
             }
             else
@@ -552,7 +724,7 @@ public class Character
             {
                 "Town" => $"The farmer and {Name} are talking outdoors in the center of Pelican Town.",
                 "Beach" => $"The farmer and {Name} are on the beach.",
-                "Desert" => $"The farmer and {Name} are away from Stardew Valley visiting the desert.",
+                "Desert" => $"The farmer and {Name} are away from Stardew Valley visiting the Calico desert.",
                 "BusStop" => $"The farmer and {Name} are at the bus stop.",
                 "Railroad" => $"The farmer and {Name} are at the railroad station, near the spa in the mountains.",
                 "Saloon" => $"The farmer and {Name} are at the Stardrop Saloon, relaxing at the end of a busy day. {(StardewNpc.GetData().Age == NpcAge.Child ? "" : "They are a little drunk.")}",
@@ -573,11 +745,10 @@ public class Character
             }
             prompt.AppendLine("The location where the conversation is taking place is significant context for the lines.");
         }
-        if (DialogueContext.IsSpecialContext(context.ChatID))
+        var eventSection = new StringBuilder();
+        foreach(var activity in allPreviousActivities.Where(x => x.Value < 7))
         {
-            prompt.AppendLine("The following special circumstance applies, which are important in the dialogue lines.");
-            //TODO: Multiple should be possible
-            prompt.AppendLine(context.ChatID switch
+            var theLine = activity.Key switch
             {
                 "cc_Boulder" => $"The glittering bounder has recently been removed from the mountain lake, filling the river with precious metal ores.",
                 "cc_Bridge" => $"The bridge to the quarry has recently been repaired, allowing the townsfolk to cross the river.",
@@ -589,26 +760,29 @@ public class Character
                 "pamHouseUpgrade" => $"Pam's house has recently been upgraded by the Farmer, allowing her and Penny to live in a more comfortable environment. The people of Pelican town including Pam and Penny are aware that the Farmer paid for the upgrade.",
                 "pamHouseUpgradeAnonymous" => $"Pam's house has recently been upgraded by the Farmer. The people of Pelican Town are not aware who paid for it and it is a great mystery, particularly for Pam and also for Penny whether or not she is married to the Farmer.",
                 "jojaMartStruckByLightning" => $"JojaMart has recently been struck by lightning, causing a fire that destroyed the building.",
-                "babyBoy" => $"The farmer and the farmer's spouse have recently had a baby boy.",
-                "babyGirl" => $"The farmer and the farmer's spouse have recently had a baby girl.",
-                "wedding" => $"The farmer has recently been married.",
-                "event_postweddingreception" => $"The farmer and the farmer's spouse have recently had a wedding reception.",
+                "babyBoy" => $"The farmer and {context.Inlaw} have recently had a baby boy.",
+                "babyGirl" => $"The farmer and {context.Inlaw} have recently had a baby girl.",
+                "wedding" => $"The farmer has recently gotten married to {context.Inlaw}.",
                 "luauBest" => $"The pot luck soup at the Luau was recently declared the best ever.",
                 "luauShorts" => $"Lewis's shorts were recently found in the pot luck soup at the Luau, causing a scandle.",
                 "luauPoisoned" => $"The pot luck soup at the Luau was recently poisoned, causing a mass illness.",
                 "Characters_MovieInvite_Invited" => $"The farmer has recently been invited to the movies by {Name}.",
                 "DumpsterDiveComment" => $"The farmer has recently been caught by {Name} going through someone else's trash can.",
-                "SpouseStardrop" => $"The farmer has recently been given a Stardrop by their spouse.",
-                "FlowerDance_Accept_Spouse" => $"The farmer is asking {Name}, their spouse, to dance at the Flower Dance. The dialogue must reflect {Name} accepting that invitation.",
-                "FlowerDance_Accept" => $"The farmer is asking {Name} to dance at the Flower Dance. The dialogue must reflect {Name} accepting that invitation.",
-                "FlowerDance_Decline" => $"The farmer is asking {Name} to dance at the Flower Dance, but {Name} does not feel close enough to the Farmer to be seen as a couple so publically. The dialogue must reflect this.",
-                "GreenRain" => $"Pelican Town is experiencing a strange green rain, causing the townsfolk to stay indoors and plants to grow wildly.",
                 "GreenRainFinished" => $"The green rain has stopped and the townsfolk are returning to their normal routines.",
-                "GreenRain_2" => $"The green rain has returned, causing the townsfolk to stay indoors and plants to grow wildly.",
-                "Rainy" => $"It is raining in Pelican Town, causing the townsfolk to stay indoors and the rivers to swell.",
-                _ => $"The farmer and {Name} are talking."
-            });
+                _ => $""
+            };
+            if (!string.IsNullOrWhiteSpace(theLine))
+            {
+                eventSection.AppendLine(theLine);
+            }
         }
+        if (eventSection.Length > 0)
+        {
+            prompt.AppendLine("## Recent Events:");
+            prompt.AppendLine("The following events have recently occured in town, which are important in the dialogue lines.");
+            prompt.AppendLine(eventSection.ToString());
+        }
+            
         if (context.DayOfSeason != null)
         {
             prompt.AppendLine((context.Season,context.DayOfSeason) switch
@@ -701,6 +875,7 @@ public class Character
         {
             var isASingle = StardewNpc.GetData().CanBeRomanced;
             var isChild = StardewNpc.GetData().Age == NpcAge.Child;
+            
             if (isASingle || context.Hearts <= 6 || context.Hearts == null)
             {
                 prompt.AppendLine((context.Hearts ?? 0) switch
@@ -711,7 +886,7 @@ public class Character
                     <6 => $"{Name} and the farmer are becoming friends. They know something about eachother and a little about each other's lives. The dialogue should reflect a growing friendship, with some sharing of personal details and gossip and no particular desire to spend more time together.",
                     <8 => $"{Name} and the farmer are close friends. They know a lot about each other and share personal details, gossip and theories about the world. The dialogue should reflect a close friendship, with a desire to spend time together but no romantic interest.",
                     <10 => $"{Name} wants to date the farmer, but hasn't been asked yet. In context, the dialogue should reflect a close, intimate friendship and include occasional suggestive comments.",
-                    <=14 => $"{Name} and the farmer are dating seriously {(context.Inlaw == null ? "and publicly" : "but discretely")} as a {(context.MaleFarmer ? (npcIsMale ? "gay" : "heterosexual") : (npcIsMale ? "heterosexual" : "lesbian"))} couple. {(Llm.Instance.IsHighlySensoredModel ? "" : "They are keeping their sexual relationship a secret from the town but obsessing about it regularly when talking to each other.")} {Name} does not live on the farm.",
+                    <=14 => $"{Name} and the farmer are very close and intimate.",
                     _ => throw new InvalidDataException("Invalid heart level.")
                 });
             }
@@ -741,6 +916,23 @@ public class Character
                 {
                     prompt.AppendLine($"The farmer is married to {context.Inlaw}. {context.Inlaw} lives with the Farmer on the farm inherited from the Farmer's grandfather.  {Name} and {context.Inlaw} both lived in Stardew Valley and knew each other before the farmer met either of them.");
                 }
+            }
+
+            if (friendship.IsDating())
+            {
+                prompt.AppendLine($"{Name} and the farmer are dating seriously {(context.Inlaw == null ? "and publicly" : "but discretely")} as a {RelationshipWord(context.MaleFarmer,npcIsMale)} couple. {(Llm.Instance.IsHighlySensoredModel ? "" : "They are keeping their sexual relationship a secret from the town but obsessing about it regularly when talking to each other.")} {Name} does not live on the farm.");
+            }
+            if (friendship.IsEngaged())
+            {
+                prompt.AppendLine($"{Name} and the farmer are engaged to be married. Their wedding is in {friendship.CountdownToWedding} days and they arelooking forward to their future together. {Name} does not live on the farm.");
+            }
+            if (friendship.IsDivorced())
+            {
+                prompt.AppendLine($"{Name} and the farmer are divorced. {Name} remains extremely angry and bitter about the divorce. {Name} does not live on the farm.");
+            }
+            if (friendship.ProposalRejected)
+            {
+                prompt.AppendLine($"{Name} has previously rejected the farmer's proposal of marriage. {Name} does not live on the farm.");
             }
         }
         if (context.MaleFarmer)
@@ -780,7 +972,7 @@ public class Character
         {
             instructions.AppendLine("The lines should be appropriate to be said repeatedly in conversation.  They should not contain any questions.");
         }*/
-        instructions.AppendLine("If the line should be presented with breaks, use #$b# as a screen divider or use #$e# as a divider for a more significant break. The line should contain at most 2 breaks. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines.");
+        instructions.AppendLine("If the line should be presented with breaks, use #$b# as a screen divider or use #$e# as a divider for a more significant break. There should not be more than 25 words between each break. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines.");
         instructions.AppendLine($"To express emotions, finish the section with one of these emotion tokens: $h for extremely happy, $0 for neutral, $s for sad, $l for in love, {(string.IsNullOrWhiteSpace(Bio.Unique) ? "" : "$u for " + Bio.Unique + ", ")}or $a for angry. Include the emotion token in the section to which it applies, do not put a # before it. Do not include emojis, actions surrounded by asterisks or other special characters to indicate emotion or actions.");
         instructions.AppendLine("Write the line as a single line of output preceded with a '-' but no other punctuation or numbering.");
         instructions.AppendLine("If the line doesn't call for the farmer to respond, just output the one line.");
@@ -805,6 +997,31 @@ public class Character
         return result;
     }
 
+private string RelationshipWord(bool maleFarmer, bool npcIsMale)
+    {
+        return maleFarmer ? (npcIsMale ? "gay" : "heterosexual") : (npcIsMale ? "heterosexual" : "lesbian");
+    }
+
+    private IEnumerable<Crop> GetCrops()
+    {
+        return Game1.getFarm().terrainFeatures.Values
+            .Where(x => x is StardewValley.TerrainFeatures.HoeDirt)
+            .Select(x => (x as StardewValley.TerrainFeatures.HoeDirt).crop)
+            .Where(x => x != null);
+    }
+
+    private IEnumerable<StardewValley.Buildings.Building> GetBuildings()
+    {
+        var excludeTypes = new string[] { "Shipping Bin", "Pet Bowl", "Farmhouse" };
+        return Game1.getFarm().buildings.Where(x => !excludeTypes.Contains(x.buildingType));
+    }
+
+    private IEnumerable<FarmAnimal> GetAnimals()
+    {
+        var animalsOnFarm = Game1.getFarm().getAllFarmAnimals();
+        return animalsOnFarm;
+    }
+
     private IEnumerable<DialogueValue> SelectDialogueSample(DialogueContext context)
     {
         // Pick 20 most relevant dialogue entries
@@ -826,7 +1043,7 @@ public class Character
                     
     }
 
-    internal void AddDialogue(List<StardewValley.DialogueLine> dialogues, int year, StardewValley.Season season, int dayOfMonth, int timeOfDay)
+    internal void AddDialogue(IEnumerable<StardewValley.DialogueLine> dialogues, int year, StardewValley.Season season, int dayOfMonth, int timeOfDay)
     {
         var time = new StardewTime(year,season, dayOfMonth, timeOfDay);
         foreach(var dialogue in dialogues)

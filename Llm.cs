@@ -25,6 +25,9 @@ internal abstract class Llm
     {
         switch (type)
         {
+            case LlmType.Dummy:
+                Instance = new LlmDummy();
+                break;
             case LlmType.LlamaCpp:
                 Instance = new LlmLlamaCpp(url, promptFormat);
                 break;
@@ -39,7 +42,6 @@ internal abstract class Llm
                 break;
             default:
                 throw new NotImplementedException();
-                break;
         }        
     }
     private long _totalPrompts;

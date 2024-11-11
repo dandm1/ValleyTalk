@@ -11,13 +11,15 @@ namespace StardewDialogue;
 internal class LlmClaude : Llm
 {
     private static string url = "https://api.anthropic.com/v1/messages";
-    private string apiKey;
+    private readonly string apiKey;
 
     class PromptElement
     {
+#pragma warning disable IDE1006 // Naming Styles
         public string type { get; set; }
         public string text { get; set; }
         public object? cache_control { get; set; }
+#pragma warning restore IDE1006 // Naming Styles
     }
     public LlmClaude(string apiKey)
     {
@@ -35,7 +37,7 @@ internal class LlmClaude : Llm
         var promptCached = gameCacheString;
         var inputString = JsonSerializer.Serialize(new
             {
-                model = "claude-3-5-sonnet-20241022",
+                model = "claude-3-5-haiku-latest",
                 max_tokens = n_predict,
                 system = new PromptElement[]
                 { 

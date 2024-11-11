@@ -5,6 +5,7 @@
     <GamePath>/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley</GamePath>
     <EnableHarmony>true</EnableHarmony>
     <Platforms>AnyCPU;x64</Platforms>
+    <BundleExtraAssemblies>All</BundleExtraAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <None Update="manifest.json">
@@ -13,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
+    <PackageReference Include="Polly.Core" Version="8.4.2" />
   </ItemGroup>
 </Project>

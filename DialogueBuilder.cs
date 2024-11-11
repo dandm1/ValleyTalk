@@ -11,7 +11,7 @@ namespace LlamaDialogue
 {
     internal class DialogueBuilder
     {
-        private static int responseIndex = 10000;
+        private static int responseIndex = 20000;
         public static DialogueBuilder Instance
         {
             get
@@ -58,6 +58,7 @@ namespace LlamaDialogue
             LastContext = context;
             var theLine = character.CreateBasicDialogue(context);
             string formattedLine = FormatLine(theLine);
+            //return formattedLine;
             return "skip#"+formattedLine;
         }
 
@@ -102,8 +103,9 @@ namespace LlamaDialogue
             }
             var sb = new StringBuilder();
             sb.Append(theLine[0]);
+            //sb.Append("#$b#Respond:");
             sb.Append($"#$q {responseIndex++} {SldConstants.DialogueKeyPrefix}Default#Respond:");
-            sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#*Stay slient*");
+            sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#*Stay silent*");
             for (int i = 1; i < theLine.Length; i++)
             {
                 sb.Append($"#$r -999998 0 {SldConstants.DialogueKeyPrefix}Next#");
@@ -238,8 +240,8 @@ namespace LlamaDialogue
                 return;
             }
             // Remove any lines just just contain Respond:
-            dialogues.RemoveAll(d => d.Text.StartsWith("Respond:"));
-            character.AddDialogue(dialogues,Game1.year,Game1.season,Game1.dayOfMonth,Game1.timeOfDay);
+            var filteredDialogues = dialogues.Where(d => !d.Text.StartsWith("Respond:")).ToList();
+            character.AddDialogue(filteredDialogues,Game1.year,Game1.season,Game1.dayOfMonth,Game1.timeOfDay);
         }
     }
 }

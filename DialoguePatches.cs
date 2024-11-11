@@ -4,10 +4,12 @@ using StardewValley;
 using StardewValley.Menus;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
+using xTile.Dimensions;
 
 namespace LlamaDialogue
 {
@@ -71,7 +73,7 @@ namespace LlamaDialogue
             )
             {
                 var nextLine = __result.Peek().dialogues.First();
-                if (nextLine.Text == "$$$%%%")
+                if (nextLine.Text == SldConstants.DialogueGenerationTag)
                 {
                     __result.Pop();
                     var newDialogue = DialogueBuilder.Instance.Generate(__instance, "default");
@@ -99,10 +101,25 @@ namespace LlamaDialogue
     {
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, string preface, int heartLevel, string appendToEnd)
         {
-            __result = new Dialogue(__instance, $"{preface}_{heartLevel}", "$$$%%%");
+            __result = new Dialogue(__instance, $"{preface}_{heartLevel}", SldConstants.DialogueGenerationTag);
             return false;
         }
         
+    }
+
+    [HarmonyPatch(typeof(GameLocation), nameof(GameLocation.GetLocationOverrideDialogue))]
+    public class GameLocation_GetLocationOverrideDialogue_Patch
+    {
+
+        public static bool Prefix(ref GameLocation __instance, ref string __result, NPC character)
+        {
+            if (character == null)
+            {
+                return true;
+            }
+            __result = SldConstants.DialogueGenerationTag;
+            return false;
+        }
     }
 
     [HarmonyPatch(typeof(Dialogue), nameof(Dialogue.chooseResponse))]
@@ -110,7 +127,6 @@ namespace LlamaDialogue
     {
         private static System.Reflection.FieldInfo isLastDialogueInteractiveField;
         private static System.Reflection.FieldInfo finishedLastDialogueField;
-        private static System.Reflection.FieldInfo isCurrentStringContinuedOnNextScreenField;
         private static System.Reflection.MethodInfo parseDialogueStringMethod;
 
         static Dialogue_ChooseResponse_Patch()
@@ -134,7 +150,7 @@ namespace LlamaDialogue
                 return false;
             }
             // Set the isLastDialogueInteractive flag to false using reflection
-            isLastDialogueInteractiveField.SetValue(__instance, true);
+            
             finishedLastDialogueField.SetValue(__instance, false);
 
             var key = __instance.speaker.LoadedDialogueKey;
@@ -158,8 +174,38 @@ namespace LlamaDialogue
             // Call parseDialogueString using reflection
             parseDialogueStringMethod.Invoke(__instance, new object[] { newDialogue, key });
             __instance.isCurrentStringContinuedOnNextScreen = true;
+            isLastDialogueInteractiveField.SetValue(__instance, newDialogue.Contains("$q"));
             __result = true;
             return false;
+        }
+    }
+
+    [HarmonyPatch(typeof(Dialogue), nameof(Dialogue.TryGetDialogue))]
+    public class Dialogue_TryGetDialogue_Patch
+    {
+        public static bool Prefix(ref Dialogue __instance, ref Dialogue __result, NPC speaker, string translationKey)
+        {
+            if (translationKey.StartsWith("Characters\\Dialogue\\rainy:"))
+            {
+                __result = new Dialogue(speaker, translationKey, SldConstants.DialogueGenerationTag);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(NPC), nameof(NPC.checkForNewCurrentDialogue))]
+    public class NPC_CheckForNewCurrentDialogue_Patch
+    {
+        public static bool Prefix(ref NPC __instance, ref bool __result, int heartLevel, bool noPreface)
+        {
+            if (Game1.player.currentLocation.Name == "Saloon" || Game1.player.currentLocation.Name == "IslandSouth")
+            {
+                var newDialogue = new Dialogue(__instance, Game1.player.currentLocation.Name, SldConstants.DialogueGenerationTag);
+                __instance.CurrentDialogue.Push(newDialogue);
+                __result = true;
+            }
+            return true;
         }
     }
 }
