@@ -63,10 +63,8 @@ namespace LlamaDialogue
         private static int minLine = int.MaxValue;
         public static void Postfix(ref NPC __instance, ref Stack<Dialogue> __result)
         {
-            if (__result.Count == 0)
-            {
-                return;
-            }
+            if (__result.Count == 0) return;
+
             var trace = new System.Diagnostics.StackTrace().GetFrame(2);
             if (
                 trace.GetMethod().Name == "drawDialogue" 
@@ -85,11 +83,21 @@ namespace LlamaDialogue
                 }
                 else
                 {
-                    var sourceLine = trace.GetILOffset();
-                    if (sourceLine <= minLine)
+                    var trace3 = new System.Diagnostics.StackTrace().GetFrame(2);
+                    if (trace3.GetMethod().Name == "Speak")
                     {
-                        DialogueBuilder.Instance.AddDialogueLine(__instance, __result.Peek().dialogues);
-                        minLine = sourceLine;
+                        var theEvent = Game1.currentLocation.currentEvent;
+                        var festivalName = theEvent.FestivalName;
+                        DialogueBuilder.Instance.AddEventLine(__instance, theEvent.actors, festivalName, __result.Peek().dialogues);
+                    }
+                    else
+                    { 
+                        var sourceLine = trace.GetILOffset();
+                        if (sourceLine <= minLine)
+                        {
+                            DialogueBuilder.Instance.AddDialogueLine(__instance, __result.Peek().dialogues);
+                            minLine = sourceLine;
+                        }
                     }
                 }
             }     

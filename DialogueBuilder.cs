@@ -235,13 +235,24 @@ namespace LlamaDialogue
         internal void AddDialogueLine(NPC instance, List<StardewValley.DialogueLine> dialogues)
         {
             var character = GetCharacter(instance);
+            var filteredDialogues = FilterForHistory(dialogues, character);
+            character.AddDialogue(filteredDialogues, Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+        }
+
+        private static List<StardewValley.DialogueLine> FilterForHistory(List<StardewValley.DialogueLine> dialogues, StardewDialogue.Character character)
+        {
             if (character.MatchLastDialogue(dialogues))
             {
-                return;
+                return new();
             }
             // Remove any lines just just contain Respond:
-            var filteredDialogues = dialogues.Where(d => !d.Text.StartsWith("Respond:")).ToList();
-            character.AddDialogue(filteredDialogues,Game1.year,Game1.season,Game1.dayOfMonth,Game1.timeOfDay);
+            return dialogues.Where(d => !d.Text.StartsWith("Respond:")).ToList();
         }
-    }
+
+        internal void AddEventLine(NPC instance, IEnumerable<NPC> actors, string festivalName, List<StardewValley.DialogueLine> dialogues)
+        {
+            var character = GetCharacter(instance);
+            var filteredDialogues = FilterForHistory(dialogues, character);
+            character.AddDialogue(filteredDialogues,Game1.year,Game1.season,Game1.dayOfMonth,Game1.timeOfDay);
+        }    }
 }
