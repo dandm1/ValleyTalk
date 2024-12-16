@@ -5,17 +5,21 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using Serilog;
 
 namespace StardewDialogue;
 
-internal class LlmGemini15 : Llm
+internal class LlmGemini : Llm
 {
-    private static string url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=";
     private string apiKey;
+    private string modelName;
 
-    public LlmGemini15(string apiKey)
+    public LlmGemini(string apiKey, string modelName = null)
     {
         this.apiKey = apiKey;
+        this.modelName = modelName ?? "gemini-1.5-flash";
+
+        url = $"https://generativelanguage.googleapis.com/v1beta/models/{this.modelName}:generateContent?key=";
     }
 
     public Dictionary<string,string> CacheContexts { get; private set; } = new Dictionary<string, string>();
@@ -27,18 +31,7 @@ internal class LlmGemini15 : Llm
     internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var useContext = string.Empty;
-        /*if (!string.IsNullOrEmpty(cacheContext) && !CacheContexts.ContainsKey(cacheContext))
-        {
-            var contextJson = new StringContent(
-                System.Text.Json.JsonSerializer.Serialize(new
-                {
-                system_instruction = new { parts = new { text = systemPromptString } },
-                contents = new { parts = new { text = promptString } },
-                }),
-            Encoding.UTF8,
-            "application/json"
-            );
-        }*/
+
         promptString = gameCacheString + npcCacheString + promptString;
         if (!string.IsNullOrEmpty(cacheContext))
         {
@@ -55,6 +48,7 @@ internal class LlmGemini15 : Llm
                 },
                 system_instruction = new { parts = new { text = systemPromptString } },
                 contents = new { parts = new { text = promptString } },
+                generationConfig = new { maxOutputTokens = n_predict, temperature = 1.5, topP = 0.9 },
                 //cachedContent= useContext
             }),
             Encoding.UTF8,
@@ -100,8 +94,8 @@ internal class LlmGemini15 : Llm
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Retrying...");
+                Log.Debug(ex.Message);
+                Log.Debug("Retrying...");
                 retry--;
                 Thread.Sleep(100);
             }

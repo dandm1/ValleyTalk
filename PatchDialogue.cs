@@ -13,35 +13,6 @@ using xTile.Dimensions;
 
 namespace LlamaDialogue
 {
-    [HarmonyPatch(typeof(NPC), nameof(NPC.GetGiftReaction))]
-    public class NPC_GetGiftReaction_Patch
-    {
-        public static bool Prefix(ref NPC __instance, ref Dialogue __result, Farmer giver, StardewValley.Object gift, int taste)
-        {
-            var dialogue = DialogueBuilder.Instance.GenerateGift(__instance, gift, taste);
-            if (dialogue != null)
-            {
-                __result = dialogue;
-                return false;
-            }
-            return true;
-        }
-    }
-    
-    [HarmonyPatch(typeof(NPC), nameof(NPC.tryToGetMarriageSpecificDialogue))]
-    public class NPC_TryToGetMarriageSpecificDialogue_Patch
-    {
-        public static bool Prefix(ref NPC __instance, ref Dialogue __result, string dialogueKey)
-        {
-            if (dialogueKey.StartsWith("funReturn_") || dialogueKey.StartsWith("jobReturn_"))
-            {
-                __result = DialogueBuilder.Instance.Generate(__instance, dialogueKey);
-                return false;
-            }
-            return true;
-        }
-    }
-
     [HarmonyPatch(typeof(MarriageDialogueReference), nameof(MarriageDialogueReference.GetDialogue))]
     public class MarriageDialogueReference_GetDialogue_Patch
     {
@@ -55,64 +26,6 @@ namespace LlamaDialogue
             }
             return true;
         }
-    }
-
-    [HarmonyPatch(typeof(NPC), nameof(NPC.CurrentDialogue), MethodType.Getter)]
-    public class NPC_CurrentDialogue_Patch
-    {
-        private static int minLine = int.MaxValue;
-        public static void Postfix(ref NPC __instance, ref Stack<Dialogue> __result)
-        {
-            if (__result.Count == 0) return;
-
-            var trace = new System.Diagnostics.StackTrace().GetFrame(2);
-            if (
-                trace.GetMethod().Name == "drawDialogue" 
-            )
-            {
-                var nextLine = __result.Peek().dialogues.First();
-                if (nextLine.Text == SldConstants.DialogueGenerationTag)
-                {
-                    __result.Pop();
-                    var newDialogue = DialogueBuilder.Instance.Generate(__instance, "default");
-                    if (newDialogue != null)
-                    {
-                        __result.Push(newDialogue);
-                    }
-                    DialogueBuilder.Instance.AddDialogueLine(__instance, newDialogue.dialogues);
-                }
-                else
-                {
-                    var trace3 = new System.Diagnostics.StackTrace().GetFrame(2);
-                    if (trace3.GetMethod().Name == "Speak")
-                    {
-                        var theEvent = Game1.currentLocation.currentEvent;
-                        var festivalName = theEvent.FestivalName;
-                        DialogueBuilder.Instance.AddEventLine(__instance, theEvent.actors, festivalName, __result.Peek().dialogues);
-                    }
-                    else
-                    { 
-                        var sourceLine = trace.GetILOffset();
-                        if (sourceLine <= minLine)
-                        {
-                            DialogueBuilder.Instance.AddDialogueLine(__instance, __result.Peek().dialogues);
-                            minLine = sourceLine;
-                        }
-                    }
-                }
-            }     
-        }
-    }
-
-    [HarmonyPatch(typeof(NPC), nameof(NPC.tryToRetrieveDialogue))]
-    public class NPC_TryToRetrieveDialogue_Patch
-    {
-        public static bool Prefix(ref NPC __instance, ref Dialogue __result, string preface, int heartLevel, string appendToEnd)
-        {
-            __result = new Dialogue(__instance, $"{preface}_{heartLevel}", SldConstants.DialogueGenerationTag);
-            return false;
-        }
-        
     }
 
     [HarmonyPatch(typeof(GameLocation), nameof(GameLocation.GetLocationOverrideDialogue))]
@@ -154,6 +67,7 @@ namespace LlamaDialogue
             }
             if (response.responseKey == $"{SldConstants.DialogueKeyPrefix}Silent")
             {
+                DialogueBuilder.Instance.AddConversation(__instance.speaker,"");
                 __result = true;
                 return false;
             }
@@ -176,9 +90,15 @@ namespace LlamaDialogue
                 // Remove all entries up to and including the last "Respond:"
             //    dialogueStrings.RemoveRange(0, responseIndex + 1);
            // }
-            var dialogueString = dialogueStrings.Last().Text; // string.Join("#", dialogueStrings.Select(x => x.Text));
-            var newDialogue = DialogueBuilder.Instance.GenerateResponse(__instance.speaker, new string[] { dialogueString, response.responseText });
+            var previous = DialogueBuilder.Instance.LastContext.ChatHistory;
+            var dialogueStringIEnum = dialogueStrings.Where(x => !previous.Any(y => y.Contains(x.Text)) && x.Text != "skip").Select(x => x.Text);
+            var dialogueStringConcat = string.Join(" ", dialogueStringIEnum);
+            var newDialogue = DialogueBuilder.Instance.GenerateResponse(__instance.speaker, new [] { dialogueStringConcat,response.responseText}.ToArray());
 
+            if (!newDialogue.Contains("$q"))
+            {
+                DialogueBuilder.Instance.AddConversation(__instance.speaker, newDialogue);
+            }
             // Call parseDialogueString using reflection
             parseDialogueStringMethod.Invoke(__instance, new object[] { newDialogue, key });
             __instance.isCurrentStringContinuedOnNextScreen = true;
@@ -197,21 +117,6 @@ namespace LlamaDialogue
             {
                 __result = new Dialogue(speaker, translationKey, SldConstants.DialogueGenerationTag);
                 return false;
-            }
-            return true;
-        }
-    }
-
-    [HarmonyPatch(typeof(NPC), nameof(NPC.checkForNewCurrentDialogue))]
-    public class NPC_CheckForNewCurrentDialogue_Patch
-    {
-        public static bool Prefix(ref NPC __instance, ref bool __result, int heartLevel, bool noPreface)
-        {
-            if (Game1.player.currentLocation.Name == "Saloon" || Game1.player.currentLocation.Name == "IslandSouth")
-            {
-                var newDialogue = new Dialogue(__instance, Game1.player.currentLocation.Name, SldConstants.DialogueGenerationTag);
-                __instance.CurrentDialogue.Push(newDialogue);
-                __result = true;
             }
             return true;
         }

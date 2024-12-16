@@ -21,7 +21,7 @@ internal abstract class Llm
         "[INST] {system}\n{prompt}[/INST]\n{response_start}"
         );
     
-    internal static void SetLlm(LlmType type, string url ="", string promptFormat="", string apiKey="")
+    internal static void SetLlm(LlmType type, string url ="", string promptFormat="", string apiKey="", string modelName = null)
     {
         switch (type)
         {
@@ -31,19 +31,25 @@ internal abstract class Llm
             case LlmType.LlamaCpp:
                 Instance = new LlmLlamaCpp(url, promptFormat);
                 break;
-            case LlmType.Gemini15:
-                Instance = new LlmGemini15(apiKey);
+            case LlmType.Gemini:
+                Instance = new LlmGemini(apiKey);
                 break;
             case LlmType.Claude:
-                Instance = new LlmClaude(apiKey);
+                Instance = new LlmClaude(apiKey,modelName);
                 break;
             case LlmType.OpenAi:
-                Instance = new LlmOpenAi(apiKey);
+                Instance = new LlmOpenAi(apiKey,modelName);
+                break;
+            case LlmType.Mistral:
+                Instance = new LlmMistral(apiKey,modelName);
                 break;
             default:
                 throw new NotImplementedException();
         }        
     }
+
+    protected string url;
+
     private long _totalPrompts;
     private double _totalPromptTime;
     private long _totalInference;

@@ -38,5 +38,5 @@ public class BioData
     public string GenderPronoun => (isMale ?? false) ? "him" : "her";
     public string GenderPossessive => (isMale ?? false) ? "his" : "her";
 
-    public bool HomeLocationBed { get; internal set; } = false;
+    public bool HomeLocationBed { get; set; } = false;
 }

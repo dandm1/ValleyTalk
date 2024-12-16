@@ -49,10 +49,11 @@ public class Prompts
 
     [JsonIgnore]
     static string _stardewSummary;
-
     private string _system;
+    [JsonIgnore]
     public string System { get => _system ??= GetSystemPrompt(); internal set => _system = value; }
     private string _gameConstantContext;
+    [JsonIgnore]
     public string GameConstantContext { get => _gameConstantContext ??= GetGameConstantContext(); internal set => _gameConstantContext = value; }
     private string _npcConstantContext;
     public string NpcConstantContext { get => _npcConstantContext ??= GetNpcConstantContext(); internal set => _npcConstantContext = value; }
@@ -76,9 +77,8 @@ public class Prompts
     public Character Character { get; internal set;}
     
     [JsonIgnore]
-    public DialogueContext Context { get; internal set; }
+    internal DialogueContext Context { private get; set; }
 
-    
     [JsonIgnore]
     CharacterData npcData;
     
@@ -167,6 +167,7 @@ public class Prompts
         }
         GetDateAndTime(prompt);
         GetWeather(prompt);
+        GetOtherNpcs(prompt);
         Game1.getPlayerOrEventFarmer().friendshipData.TryGetValue(Name, out Friendship friendship);
         if (friendship.IsMarried() || friendship.IsRoommate())
         {
@@ -209,12 +210,27 @@ public class Prompts
         return prompt.ToString();
     }
 
+    private void GetOtherNpcs(StringBuilder prompt)
+    {
+        var otherNpcs = Util.GetNearbyNpcs(Character.StardewNpc);
+        if (otherNpcs.Any())
+        {
+            prompt.AppendLine("### Other NPCs:");
+            prompt.AppendLine($"As well as the farmer and {Character.Name}, the following villagers are present:");
+            foreach (var npc in otherNpcs)
+            {
+                prompt.AppendLine($"- {npc.Name}");
+            }
+            prompt.AppendLine("The dialogue should account for the presence of these other villagers, and may reference them or be addressed to them as well as to the farmer.");
+        }
+    }
+
     private void GetCurrentConversation(StringBuilder prompt)
     {
         if (Context.ChatHistory.Length == 0) return;
 
         prompt.AppendLine($"###Current Conversation:");
-        prompt.AppendLine($"The farmer and {Name} are in the middle of a conversation. The dialogue should be a continuation of the conversation, and should reference the previous lines in the conversation, which were:");
+        prompt.AppendLine($"The farmer and {Name} are in the middle of a conversation. The dialogue should be a continuation of the conversation, and should build on the previous lines without repetition. The previous lines were:");
         // Append each line from the chat history, labelling each one alternatively with the NPC's name or 'Farmer'
         for (int i = 0; i < Context.ChatHistory.Length; i++)
         {
@@ -268,11 +284,11 @@ public class Prompts
             prompt.AppendLine((Context.Hearts ?? 0) switch
             {
                 -1 => $"This is the first time {Name} has spoken to the farmer, though {Name} had heard rumours of the farmer's arrival in town.",
-                < 2 => $"{Name} and the farmer are complete strangers. {Name} is not yet sure if the farmer is someone they want to get to know.",
+                < 2 => $"{Name} and the farmer are strangers, though they have spoken before. {Name} is not yet sure if the farmer is someone they want to get to know.",
                 < 4 => $"{Name} and the farmer know each other by sight, but treat each other as strangers. The dialogue should reflect two people just getting to know each other, no sharing of personal details or gossip or suggesting activities together.",
                 < 6 => $"{Name} and the farmer are becoming friends. They know something about eachother and a little about each other's lives. The dialogue should reflect a growing friendship, with some sharing of personal details and gossip and no particular desire to spend more time together.",
                 < 8 => $"{Name} and the farmer are close friends. They know a lot about each other and share personal details, gossip and theories about the world. The dialogue should reflect a close friendship, with a desire to spend time together but no romantic interest.",
-                < 10 => $"{Name} wants to date the farmer, but hasn't been asked yet. In Context, the dialogue should reflect a close, intimate friendship and include occasional suggestive comments.",
+                < 10 => $"{Name} wants to date the farmer, but hasn't been asked yet. In context, the dialogue should reflect a close, intimate friendship and include occasional suggestive comments.",
                 <= 14 => $"{Name} and the farmer are very close and intimate.",
                 _ => throw new InvalidDataException("Invalid heart level.")
             });
@@ -354,6 +370,7 @@ public class Prompts
             (Season.Summer, 1) => $"It is the first day of summer.",
             (Season.Summer, 10) => $"It is the day before the luau.",
             (Season.Summer, 27) => $"It is the day before the dance of the moonlight jellies, and almost the end of summer.",
+            (Season.Summer, 28) => $"It is the day of the dance of the moonlight jellies, and the last day of summer.",
             (Season.Fall, 1) => $"It is the first day of fall.",
             (Season.Fall, 15) => $"It is the day before the Stardew Valley fair.",
             (Season.Fall, 26) => $"It is the day before Spirit's Eve.",
@@ -418,7 +435,7 @@ public class Prompts
 
     private void GetLocation(StringBuilder prompt)
     {
-        if (Context.Location == null) return;
+        if (Context.Location == null && Character.StardewNpc.DirectionsToNewLocation == null) return;
         
         var bedTile = npcData.Home[0].Tile;
         if (Context.Location == npcData.Home[0].Location && Context.Inlaw != Name)
@@ -434,7 +451,7 @@ public class Prompts
                 prompt.AppendLine($"The farmer and {Name} are talking in {Name}'s home{(mayBeInShop ? " or the shop" : "")}.");
             }
         }
-        else
+        else if (Context.Location != null)
         {
             prompt.Append(Context.Location switch
             {
@@ -458,8 +475,13 @@ public class Prompts
                 "Resort" or "Resort_2" => $"The farmer and {Name} are at the Ginger Island tropical resort. The dialogue should be appropriate wherever in the resort they are.",
                 _ => $"The farmer and {Name} are at {Context.Location}."
             });
+            prompt.AppendLine("The location where the conversation is taking place may be significant for the lines.");
         }
-        prompt.AppendLine("The location where the conversation is taking place is significant Context for the lines.");
+
+        if (Character.StardewNpc.DirectionsToNewLocation != null && Context.Location != Character.StardewNpc.DirectionsToNewLocation.targetLocationName)
+        {
+            prompt.AppendLine($"{Name} is going to {Character.StardewNpc.DirectionsToNewLocation}.");
+        }
     }
 
     private void GetMarriageFeelings(StringBuilder prompt)
@@ -588,7 +610,7 @@ public class Prompts
             prompt.AppendLine($"The farmer and {Name} have {Context.Children.Count()} child{(Context.Children.Count > 1 ? "ren" : "")}:");
             foreach (var child in Context.Children)
             {
-                prompt.AppendLine($"- A {(child.IsMale ? "boy" : "girl")} named {child.Name} who is {child.Age} days old.");
+                prompt.AppendLine($"- A {(child.IsMale ? "boy" : "girl")} named {child.Name} who is {child.Age} years old.");
             }
         }
         if (friendship.DaysUntilBirthing > 0)
@@ -643,22 +665,28 @@ public class Prompts
     private void GetEventHistory(StringBuilder prompt)
     {
         var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
-        List<Tuple<double, string>> fullHistory = Character.EventHistory.Select(x => new Tuple<double, string>(x.Item1.DaysSince(timeNow), $"- {x.Item1.SinceDescription(timeNow)}: {Name} speaking to farmer : {x.Item2.Text}")).ToList();
-        fullHistory.AddRange(previousActivites.Select(x => new Tuple<double, string>(x.Value, $"- {x.Key}: Event occurred : {HistoryEvents[x.Key]}")));
+        var fullHistory = Character.EventHistory.Concat(previousActivites.Select(x => MakeActivityHistory(x)));
 
         if (fullHistory.Any())
         {
-            prompt.AppendLine($"##Previous interactions with {Name}:");
-            prompt.AppendLine($"The farmer and {Name} have spoken previously, and the most recent 20 lines are shown below.");
-            prompt.AppendLine("These represent conversations at a different time and in Contexts different to the current conversation.");
-            prompt.AppendLine("The new line is likely to reference previous conversations or events, as well as the current Context.  It may also reference patterns in the previous conversation such as similar gifts or long gaps in the conversation.");
-            prompt.AppendLine($"You should avoid {Name} repeating lines or concepts close together, and call out repetition from the farmer. The more recent a previous event or interaction the more likely it will be referenced and the less likely it will be repeated.");
+            prompt.AppendLine($"##Event history:");
+            prompt.AppendLine($"{Name} is aware of the following recent events and conversations with the farmer.");
+            prompt.AppendLine("Conversations happened at the times indicated, possibly in contexts different to the current conversation.");
+            prompt.AppendLine("The new line may be based on previous conversations and events as well as the current context.  The line should reference any events that happened just now. It may reference patterns in the previous conversation such as similar gifts or long gaps in the conversation.");
+            prompt.AppendLine($"You should avoid {Name} repeating lines or concepts from previous lines. The more recent a previous event or interaction the more likely it will be referenced and the less likely it will be repeated.");
             prompt.AppendLine("History:");
-            foreach (var eventHistory in fullHistory.OrderBy(x => x.Item1).Take(20))
+            foreach (var eventHistory in fullHistory.OrderBy(x => x.Item1).Take(30))
             {
-                prompt.AppendLine(eventHistory.Item2);
+                prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {eventHistory.Item2.Format(Name)}");
             }
         }
+    }
+
+    private Tuple<StardewTime, IHistory> MakeActivityHistory(KeyValuePair<string, int> x)
+    {
+        var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+        var targetDate = timeNow.AddDays(-x.Value);
+        return new(targetDate, new ActivityHistory(x.Key));
     }
 
     private void GetSampleDialogue(StringBuilder prompt)
@@ -728,7 +756,13 @@ public class Prompts
 
     private string GetCommand()
     {
-        return $"##Command:\nWrite a single line of dialogue for {Name} to fit the situation and {Name}'s personality.";
+        var commandPrompt = new StringBuilder();
+        commandPrompt.AppendLine($"##Command:\nWrite a single line of dialogue for {Name} to fit the situation and {Name}'s personality.");
+        if (!string.IsNullOrWhiteSpace(Context.ScheduleLine) && Context.ChatHistory.Length == 0)
+        {
+            commandPrompt.AppendLine($"\nThe line will be used to replace a piece of situational dialogue and should communicate similar themes while being different.  The original line was:{Context.ScheduleLine}");
+        }
+        return commandPrompt.ToString();
     }
 
     private string GetInstructions()
@@ -738,14 +772,14 @@ public class Prompts
         instructions.AppendLine($"The line should be written in the style of the game and reflect the level of familiarity {Name} has with the farmer.");
         if (dialogueSample.Any())
         {
-            instructions.AppendLine("Use the supplied sample dialogue to help you match the tone and style of {Name}'s interactions with the farmer at the current friendship level.");
+            instructions.AppendLine($"Use the supplied sample dialogue to help you match the tone and style of {Name}'s interactions with the farmer at the current friendship level.");
         }
         instructions.AppendLine("To include the farmer's name use the @ symbol.");
-        instructions.AppendLine("If the line should be presented with breaks, use #$b# as a screen divider or use #$e# as a divider for a more significant break. There should not be more than 25 words between each break. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines.");
+        instructions.AppendLine("If the line should be presented with breaks, use #$b# as a screen divider or use #$e# as a divider for a more significant break. There should not be more than 24 words between each break. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines.");
         instructions.AppendLine($"To express emotions, finish the section with one of these emotion tokens: $h for extremely happy, $0 for neutral, $s for sad, $l for in love, {(string.IsNullOrWhiteSpace(Character.Bio.Unique) ? "" : "$u for " + Character.Bio.Unique + ", ")}or $a for angry. Include the emotion token in the section to which it applies, do not put a # before it. Do not include emojis, actions surrounded by asterisks or other special characters to indicate emotion or actions.");
-        instructions.AppendLine("Write the line as a single line of output preceded with a '-' but no other punctuation or numbering.");
+        instructions.AppendLine("Write the line as a single line of output preceded with a '-' only. The line should be properly punctuated and capitalised.");
         instructions.AppendLine("If the line doesn't call for the farmer to respond, just output the one line.");
-        instructions.AppendLine("If the line does invite a response from the farmer, please propose two, three or four possible responses that the farmer could make, covering the full range of possible reactions. Each response should be on a new line, preceded by a '%' and a space. Response lines should be in the voice of, and from the perspective of, the farmer.  They should not contain any special symbols, @s or emotion tokens.");
+        instructions.AppendLine($"If the line does invite a response from the farmer, please propose two, three or four possible responses that the farmer could make, covering the full range of possible reactions. As the farmer gets more friendly with {Name} responses should be available more often. Each response should be on a new line, no more than 12 words, preceded by a '%' and a space. Response lines should be in the voice of, and from the perspective of, the farmer.  They should not contain any special symbols, @s or emotion tokens.");
         instructions.AppendLine("### Example 1:");
         instructions.AppendLine("- \"It is such a lovely spring day today, amazing to meet you at the Jojamart.  How are you?\" $0");
         instructions.AppendLine("% I'm doing well, thank you.");
@@ -799,9 +833,9 @@ public class Prompts
                     ?.AllEntries
                    .OrderBy(x => Context.CompareTo(x.Key));
         return orderedDialogue
-                    ?.Take(20)
                     ?.Where(x => x.Value != null)
-                    .SelectMany(x => x.Value.AllValues) 
+                    .SelectMany(x => x.Value.AllValues)
+                    .Take(20)
                     ?? Array.Empty<DialogueValue>();
     }
 

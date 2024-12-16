@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
+using GenericModConfigMenu;
 using HarmonyLib;
 using Microsoft.VisualBasic;
+using Serilog;
 using StardewDialogue;
 using StardewModdingAPI;
+using StardewModdingAPI.Events;
 using StardewValley;
 
 namespace LlamaDialogue
@@ -17,6 +20,8 @@ namespace LlamaDialogue
 
         public override void Entry(IModHelper helper)
         {
+            Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
+
             Config = Helper.ReadConfig<ModConfig>();
 
             if (!Config.EnableMod)
@@ -24,9 +29,13 @@ namespace LlamaDialogue
                 return;
             }
 
-            Enum.TryParse<LlmType>(Config.UseHost, ignoreCase: true, result: out LlmType llmType);
+            if ( !Enum.TryParse<LlmType>(Config.UseHost, ignoreCase: true, result: out LlmType llmType))
+            {
+                Log.Error($"Invalid LLM type: {Config.UseHost}");
+                return;
+            }
 
-            Llm.SetLlm(llmType, apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
+            Llm.SetLlm(llmType, modelName:Config.ModelName ,apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
 
             DialogueBuilder.Instance.Config = Config;
             
@@ -38,43 +47,88 @@ namespace LlamaDialogue
 
             if (Config.Debug)
             {
-                using (var log = new StreamWriter($"Generation.log", true))
-                {
-                    log.WriteLine($"###############################################");
-                    log.WriteLine($"###############################################");
-                    log.WriteLine($"###############################################");
-                    log.WriteLine($"[{System.DateTime.Now}] Mod loaded");
-                }
+
+                Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .WriteTo.File("Generation.log", rollingInterval: RollingInterval.Day)
+                    .MinimumLevel.Debug()
+                    .CreateLogger();
             }
-        }
-
-        private void GameLoop_SaveLoaded(object sender, StardewModdingAPI.Events.SaveLoadedEventArgs e)
-        {
-        }
-
-        private void Input_ButtonPressed(object sender, StardewModdingAPI.Events.ButtonPressedEventArgs e)
-        {
-            if (!Config.Debug)
-                return;
-            if (e.Button == SButton.NumLock)
-			{
-				var person = Game1.getCharacterFromName("Emily");
-                var ds = person.CurrentDialogue;
-                //Game1.warpCharacter(person, Game1.player.currentLocation, Game1.player.currentLocation. + new Microsoft.Xna.Framework.Vector2(0, 1));
-                person.CurrentDialogue.Clear();
-                person.addMarriageDialogue("Strings\\StringsFromCSFiles", "NPC.cs.4486", false, new string[]
-                {
-                    "%endearmentlower"
-                });
-
-                return;
-            }
-            if (e.Button == SButton.F3)
+            else
             {
-                var person = Game1.getCharacterFromName("Marnie");
-                person.sayHiTo(Game1.getCharacterFromName("Lewis"));
-                return;
+                Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .CreateLogger();
             }
+            Log.Debug($"###############################################");
+            Log.Debug($"###############################################");
+            Log.Debug($"###############################################");
+            Log.Debug($"[{DateTime.Now}] Mod loaded");
+
+        }
+
+        private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
+        {
+            // get Generic Mod Config Menu's API (if it's installed)
+            var configMenu = this.Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
+            if (configMenu is null)
+                return;
+
+            // register mod
+            configMenu.Register(
+                mod: this.ModManifest,
+                reset: () => ModEntry.Config = new ModConfig(),
+                save: () => this.Helper.WriteConfig(ModEntry.Config)
+            );
+
+            // add some config options
+            configMenu.AddBoolOption(
+                mod: this.ModManifest,
+                name: () => "Enable mod",
+                tooltip: () => "Enable or disable the mod",
+                getValue: () => Config.EnableMod,
+                setValue: value => Config.EnableMod = value
+            );
+            configMenu.AddBoolOption(
+                mod: this.ModManifest,
+                name: () => "Debug logging",
+                tooltip: () => "Enable or disable debug logging",
+                getValue: () => Config.Debug,
+                setValue: value => Config.Debug = value
+            );
+            // Create a string array of the options in the LlmType enum
+            var llmTypes = Enum.GetNames(typeof(LlmType));
+            configMenu.AddTextOption(
+                mod: this.ModManifest,
+                name: () => "Model provider",
+                getValue: () => Config.UseHost,
+                setValue: value => Config.UseHost = value,
+                allowedValues: llmTypes
+            );
+            configMenu.AddTextOption(
+                mod: this.ModManifest,
+                name: () => "Model name",
+                getValue: () => Config.ModelName,
+                setValue: value => Config.ModelName = value
+            );
+            configMenu.AddTextOption(
+                mod: this.ModManifest,
+                name: () => "API Key",
+                getValue: () => Config.ApiKey,
+                setValue: value => Config.ApiKey = value
+            );
+            configMenu.AddTextOption(
+                mod: this.ModManifest,
+                name: () => "Server address",
+                getValue: () => Config.ServerAddress,
+                setValue: value => Config.ServerAddress = value
+            );
+            configMenu.AddTextOption(
+                mod: this.ModManifest,
+                name: () => "Prompt format",
+                getValue: () => Config.PromptFormat,
+                setValue: value => Config.PromptFormat = value
+            );
         }
     }
 }

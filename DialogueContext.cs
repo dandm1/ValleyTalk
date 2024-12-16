@@ -328,20 +328,19 @@ public class DialogueContext
     public List<ChildDescription> Children { get; internal set; }
     public int GiftTaste { get; internal set; }
     public List<string> Weather { get; internal set; }
+    public string ScheduleLine { get; internal set; }
 
     // Add a method to return a value representing how different two contexts are - this will be used to find the most similar context to the current context
     public int CompareTo(DialogueContext other)
     {
         var difference = 0;
+        // If all elements of other are null, they are very different
+        if (other == null || (other.Hearts == null && other.Season == null && other.Year == null && other.Day == null && other.DayOfSeason == null && other.Inlaw == null && other.Accept == null && other.TimeOfDay == null && other.RandomAct == null && other.SpouseAct == null && other.ChatID == null && other.Married == false && other.Location == null && other.Birthday == false))
+        {
+            return 10000;
+        }
         // If they are both hearts based, favour hearts that are similar.  If only one is hearts based, they are very different.
-        if (Hearts != null && other.Hearts != null)
-        {
-            difference += Math.Abs(Hearts.Value - other.Hearts.Value) * 100;
-        }
-        else if (Hearts == null ^ other.Hearts == null)
-        {
-            difference += 2000;
-        }
+        difference += Math.Abs(Hearts ?? 0 - other.Hearts ?? 0) * 100;
 
         if (Season != other.Season)
         {

@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using Serilog;
 
 namespace StardewDialogue;
 
@@ -12,11 +13,10 @@ internal class LlmLlamaCpp : Llm
 {
     internal LlmLlamaCpp(string url, string promptFormat)
     {
-        Url = url;
+        this.url = url;
         PromptFormat = promptFormat;
     }
 
-    public string Url { get; }
     public string PromptFormat { get; }
     public override string ExtraInstructions => "Include only the new line and any responses in the output, no descriptions or explanations.";
 
@@ -46,8 +46,6 @@ internal class LlmLlamaCpp : Llm
                 top_p = 0.88,
                 min_p = 0.05,
                 repeat_penalty = 1.05,
-                presence_penalty = 0.0,
-                cache_prompt = true
             }),
             Encoding.UTF8,
             "application/json"
@@ -64,7 +62,7 @@ internal class LlmLlamaCpp : Llm
             try
             {
                 retry=false;
-                var response = client.PostAsync(Url, json).Result;
+                var response = client.PostAsync(url, json).Result;
                 // Return the 'content' element of the response json
                 var responseString = response.Content.ReadAsStringAsync().Result;
                 var responseJson = JsonDocument.Parse(responseString);
@@ -83,8 +81,8 @@ internal class LlmLlamaCpp : Llm
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Retrying...");
+                Log.Debug(ex.Message);
+                Log.Debug("Retrying...");
                 retry=true;
                 Thread.Sleep(1000);
             }
@@ -124,7 +122,7 @@ internal class LlmLlamaCpp : Llm
             try
             {
                 retry=false;
-                var response = client.PostAsync(Url, json).Result;
+                var response = client.PostAsync(url, json).Result;
                 // Return the 'content' element of the response json
                 var responseString = response.Content.ReadAsStringAsync().Result;
                 var responseJson = System.Text.Json.JsonDocument.Parse(responseString);
@@ -156,8 +154,8 @@ internal class LlmLlamaCpp : Llm
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Retrying...");
+                Log.Debug(ex.Message);
+                Log.Debug("Retrying...");
                 retry=true;
                 Thread.Sleep(1000);
             }

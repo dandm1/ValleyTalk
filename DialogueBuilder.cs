@@ -35,7 +35,7 @@ namespace LlamaDialogue
             _characters = new Dictionary<string, StardewDialogue.Character>();
         }
 
-        private StardewDialogue.Character GetCharacter(NPC instance)
+        public StardewDialogue.Character GetCharacter(NPC instance)
         {
             if (!_characters.ContainsKey(instance.Name))
             {
@@ -75,7 +75,7 @@ namespace LlamaDialogue
             return newDialogue;
         }
 
-        internal Dialogue Generate(NPC instance, string dialogueKey)
+        internal Dialogue Generate(NPC instance, string dialogueKey, string originalLine = "")
         {
             var character = GetCharacter(instance);
             DialogueContext context = GetBasicContext(instance);
@@ -89,7 +89,7 @@ namespace LlamaDialogue
                 context.SpouseAct = spouseAction;
             }
             LastContext = context;
-            
+            context.ScheduleLine = originalLine;
             var theLine = character.CreateBasicDialogue(context);
             string formattedLine = FormatLine(theLine);
             return new Dialogue(instance, dialogueKey, formattedLine);
@@ -232,11 +232,16 @@ namespace LlamaDialogue
             return result;
         }
 
-        internal void AddDialogueLine(NPC instance, List<StardewValley.DialogueLine> dialogues)
+        internal bool AddDialogueLine(NPC instance, List<StardewValley.DialogueLine> dialogues)
         {
             var character = GetCharacter(instance);
             var filteredDialogues = FilterForHistory(dialogues, character);
+            if (!filteredDialogues.Any())
+            {
+                return false;
+            }
             character.AddDialogue(filteredDialogues, Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+            return true;
         }
 
         private static List<StardewValley.DialogueLine> FilterForHistory(List<StardewValley.DialogueLine> dialogues, StardewDialogue.Character character)
@@ -253,6 +258,27 @@ namespace LlamaDialogue
         {
             var character = GetCharacter(instance);
             var filteredDialogues = FilterForHistory(dialogues, character);
-            character.AddDialogue(filteredDialogues,Game1.year,Game1.season,Game1.dayOfMonth,Game1.timeOfDay);
-        }    }
+            if (!filteredDialogues.Any()) return;
+            character.AddEventDialogue(filteredDialogues,actors,festivalName,Game1.year,Game1.season,Game1.dayOfMonth,Game1.timeOfDay);
+        }
+
+        internal void AddOverheardLine(NPC otherNpc, NPC instance, List<StardewValley.DialogueLine> theLine)
+        {
+            var character = GetCharacter(otherNpc);
+            var filteredDialogues = FilterForHistory(theLine, character);
+            character.AddOverheardDialogue(instance, filteredDialogues, Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+        }
+
+        internal void AddConversation(NPC otherNpc, string newDialogue)
+        {
+            var character = GetCharacter(otherNpc);
+            DialogueContext context = LastContext;
+            var fullHistory = context.ChatHistory.ToList();
+            if (!string.IsNullOrEmpty(newDialogue))
+            {
+                fullHistory.Add(newDialogue);
+            }
+            character.AddConversation(fullHistory.ToArray(), Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+        }
+    }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -9,60 +8,34 @@ using Serilog;
 
 namespace StardewDialogue;
 
-internal class LlmClaude : Llm
+internal abstract class LlmOpenAiCompatible : Llm
 {
-    private readonly string apiKey;
-    private readonly string modelName;
+    protected string apiKey;
+    protected string modelName;
 
-    class PromptElement
+    record PromptElement
     {
-#pragma warning disable IDE1006 // Naming Styles
-        public string type { get; set; }
-        public string text { get; set; }
-        public object cache_control { get; set; }
-#pragma warning restore IDE1006 // Naming Styles
+        public string role { get; set; }
+        public string content { get; set; }
     }
-    public LlmClaude(string apiKey, string modelName = null)
-    {
-        url = "https://api.anthropic.com/v1/messages";
-        
-        this.apiKey = apiKey;
-        this.modelName = modelName ?? "claude-3-5-haiku-latest";
-    }
-
-    public Dictionary<string,string> CacheContexts { get; private set; } = new Dictionary<string, string>();
-
-    public override string ExtraInstructions => "";
-
-    public override bool IsHighlySensoredModel => true;
-
+    
     internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
-        var promptCached = gameCacheString;
         var inputString = JsonSerializer.Serialize(new
             {
-                model = this.modelName,
+                model = modelName,
                 max_tokens = n_predict,
-                system = new PromptElement[]
+                messages = new PromptElement[]
                 { 
                     new()
                     {
-                        type = "text",
-                        text = systemPromptString
+                        role = "system",
+                        content = systemPromptString
                     },
                     new()
                     {
-                        type = "text",
-                        cache_control = new { type = "ephemeral" },
-                        text = promptCached
-                    }
-                },
-                messages = new[] 
-                { 
-                    new 
-                    {
                         role = "user",
-                        content = npcCacheString + promptString
+                        content = gameCacheString + npcCacheString + promptString
                     }
                 }
             });
@@ -86,9 +59,7 @@ internal class LlmClaude : Llm
             {
                 var request = new HttpRequestMessage(HttpMethod.Post, fullUrl);
                 request.Content = json;
-                request.Headers.Add("x-api-key", apiKey);
-                request.Headers.Add("anthropic-version", "2023-06-01");
-                request.Headers.Add("anthropic-beta", "prompt-caching-2024-07-31");
+                request.Headers.Add("Authorization", $"Bearer {apiKey}");
                 var response = client.SendAsync(request).Result;
                 // Return the 'content' element of the response json
                 var responseString = response.Content.ReadAsStringAsync().Result;
@@ -101,12 +72,13 @@ internal class LlmClaude : Llm
                 else
                 {
                     
-                    if (!responseJson.RootElement.TryGetProperty("content", out var content)) { retry--; continue; }
+                    if (!responseJson.RootElement.TryGetProperty("choices", out var content)) { retry--; continue; }
                     var completionArray = content.EnumerateArray();
                     var completion = completionArray.MoveNext();
                     if (completion == false) { retry--; continue; }
 
-                    var text = completionArray.Current.GetProperty("text").GetString();
+                    var message = completionArray.Current.GetProperty("message");
+                    var text = message.GetProperty("content").GetString();
                     return text ?? string.Empty;
                 }
             }
@@ -123,6 +95,6 @@ internal class LlmClaude : Llm
 
     internal override Dictionary<string, double>[] RunInferenceProbabilities(string fullPrompt, int n_predict = 1)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

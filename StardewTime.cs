@@ -2,7 +2,7 @@ using System;
 
 namespace StardewDialogue;
 
-internal class StardewTime
+internal class StardewTime : IComparable<StardewTime>
 {
     public StardewValley.Season season { get; set; }
     public int dayOfMonth { get; set; }
@@ -46,12 +46,12 @@ internal class StardewTime
             < 1 => other.dayOfMonth == dayOfMonth ? "earlier today" : "yesterday",
             < 14 => $"{(int)days} days ago",
             < 56 => $"{(int)days} days ago on {other.dayOfMonth} {other.season.ToString().ToLower()}",
-            < 112 => other.year == year ? "earlier this year on {other.dayOfMonth} {other.season.ToString().ToLower()}" : "last year on {other.dayOfMonth} {other.season.ToString().ToLower()}",
-            _ => "a long time ago on {other.dayOfMonth} {other.season.ToString().ToLower()}"
+            < 112 => other.year == year ? $"earlier this year on {other.dayOfMonth} {other.season.ToString().ToLower()}" : $"last year on {other.dayOfMonth} {other.season.ToString().ToLower()}",
+            _ => $"a long time ago on {other.dayOfMonth} {other.season.ToString().ToLower()}"
         };
     }
 
-    private int SeasonToInt(StardewValley.Season season)
+    private static int SeasonToInt(StardewValley.Season season)
     {
         return season switch
         {
@@ -61,5 +61,66 @@ internal class StardewTime
             StardewValley.Season.Winter => 3,
             _ => throw new Exception("Invalid season")
         };
+    }
+
+    private static StardewValley.Season IntToSeason(int season)
+    {
+        return season switch
+        {
+            0 => StardewValley.Season.Spring,
+            1 => StardewValley.Season.Summer,
+            2 => StardewValley.Season.Fall,
+            3 => StardewValley.Season.Winter,
+            _ => throw new Exception("Invalid season")
+        };
+    }
+
+    internal StardewTime AddDays(int offset)
+    {
+        int targetYear = year;
+        int targetSeason = SeasonToInt(season);
+        int targetDay = dayOfMonth + offset;
+        while (targetDay > 28)
+        {
+            targetSeason++;
+            targetDay -= 28;
+            if (targetSeason == 4)
+            {
+                targetYear++;
+                targetSeason = 0;
+            }
+        }
+        while (targetDay < 1)
+        {
+            targetSeason--;
+            targetDay += 28;
+            if (targetSeason == -1)
+            {
+                if (targetYear == 0)
+                {
+                    return new StardewTime(0,0,0,600);
+                }
+                targetYear--;
+                targetSeason = 3;
+            }
+        }
+        return new StardewTime(targetYear,IntToSeason(targetSeason),targetDay,600);
+    }
+
+    public int CompareTo(StardewTime other)
+    {
+        if (year != other.year)
+        {
+            return year - other.year;
+        }
+        if (SeasonToInt(season) != SeasonToInt(other.season))
+        {
+            return SeasonToInt(season) - SeasonToInt(other.season);
+        }
+        if (dayOfMonth != other.dayOfMonth)
+        {
+            return dayOfMonth - other.dayOfMonth;
+        }
+        return timeOfDay - other.timeOfDay;
     }
 }
