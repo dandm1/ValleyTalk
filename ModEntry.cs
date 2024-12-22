@@ -3,12 +3,11 @@ using System.IO;
 using GenericModConfigMenu;
 using HarmonyLib;
 using Microsoft.VisualBasic;
-using Serilog;
 using StardewDialogue;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
-
+using Serilog;
 namespace LlamaDialogue
 {
     public partial class ModEntry : Mod
@@ -17,12 +16,31 @@ namespace LlamaDialogue
         public static IModHelper SHelper { get; private set; }
         public static ModConfig Config;
 
-
         public override void Entry(IModHelper helper)
         {
             Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
 
             Config = Helper.ReadConfig<ModConfig>();
+
+            SMonitor = Monitor;
+            if (Config.Debug)
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .WriteTo.File("Generation.log", rollingInterval: RollingInterval.Day)
+                    .MinimumLevel.Debug()
+                    .CreateLogger();
+            }
+            else
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .CreateLogger();
+            }
+            Log.Debug($"###############################################");
+            Log.Debug($"###############################################");
+            Log.Debug($"###############################################");
+
 
             if (!Config.EnableMod)
             {
@@ -40,29 +58,10 @@ namespace LlamaDialogue
             DialogueBuilder.Instance.Config = Config;
             
             SHelper = helper;
-            SMonitor = Monitor;
             
             var harmony = new Harmony(ModManifest.UniqueID);
             harmony.PatchAll();
 
-            if (Config.Debug)
-            {
-
-                Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Console()
-                    .WriteTo.File("Generation.log", rollingInterval: RollingInterval.Day)
-                    .MinimumLevel.Debug()
-                    .CreateLogger();
-            }
-            else
-            {
-                Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Console()
-                    .CreateLogger();
-            }
-            Log.Debug($"###############################################");
-            Log.Debug($"###############################################");
-            Log.Debug($"###############################################");
             Log.Debug($"[{DateTime.Now}] Mod loaded");
 
         }

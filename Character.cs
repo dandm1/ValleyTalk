@@ -22,10 +22,10 @@ public class Character
     private StardewEventHistory eventHistory = new();
     internal IEnumerable<Tuple<StardewTime,IHistory>> EventHistory => eventHistory.AllTypes;
 
-    public Character(string name, NPC stardewNpc, string bioFilePath)
+    public Character(string name, NPC stardewNpc)
     {
         Name = name;
-        BioFilePath = bioFilePath;
+        BioFilePath = $"assets/bio/{Name}.txt";
         StardewNpc = stardewNpc;
 
         // Load and process the dialogue file
@@ -53,11 +53,8 @@ public class Character
     private void LoadBio()
     {
         BioData bioData = null;
-        if (File.Exists(BioFilePath))
-        {
-        // Process the JSON data
-            bioData = ModEntry.SHelper.Data.ReadJsonFile<BioData>(BioFilePath);
-        }
+        
+        bioData = ModEntry.SHelper.Data.ReadJsonFile<BioData>(BioFilePath);
 
         _bioData = bioData ?? new BioData();
     }
@@ -116,32 +113,32 @@ public class Character
             if (ModEntry.Config.Debug)
             {
                 // Open 'generation.log' and append values to it
-                    Log.Debug($"Context:");
-                    Log.Debug($"Name: {Name}");
-                    Log.Debug($"Marriage: {context.Married}");
-                    Log.Debug($"Birthday: {context.Birthday}");
-                    Log.Debug($"Location: {context.Location}");
-                    Log.Debug($"Weather: {string.Concat(context.Weather)}");
-                    Log.Debug($"Time of Day: {context.TimeOfDay}");
-                    Log.Debug($"Day of Season: {context.DayOfSeason}");
-                    Log.Debug($"Gift: {context.Accept}");
-                    Log.Debug($"Spouse Action: {context.SpouseAct}");
-                    Log.Debug($"Random Action: {context.RandomAct}");
-                    Log.Debug($"Prompts: {JsonSerializer.Serialize(prompts)}");
-                    if (context.ScheduleLine != "")
-                    {
-                        Log.Debug($"Original Line: {context.ScheduleLine}");
-                    }
-                    Log.Debug($"Results: {results[0]}");
-                    if (results.Length > 1)
-                    {
-                        foreach (var result in results.Skip(1))
-                        {
-                            Log.Debug($"Response: {result}");
-                        }
-                    }
-                    Log.Debug("--------------------------------------------------");
+                Log.Debug($"Context:");
+                Log.Debug($"Name: {Name}");
+                Log.Debug($"Marriage: {context.Married}");
+                Log.Debug($"Birthday: {context.Birthday}");
+                Log.Debug($"Location: {context.Location}");
+                Log.Debug($"Weather: {string.Concat(context.Weather)}");
+                Log.Debug($"Time of Day: {context.TimeOfDay}");
+                Log.Debug($"Day of Season: {context.DayOfSeason}");
+                Log.Debug($"Gift: {context.Accept}");
+                Log.Debug($"Spouse Action: {context.SpouseAct}");
+                Log.Debug($"Random Action: {context.RandomAct}");
+                Log.Debug($"Prompts: {JsonSerializer.Serialize(prompts)}");
+                if (context.ScheduleLine != "")
+                {
+                    Log.Debug($"Original Line: {context.ScheduleLine}");
                 }
+                Log.Debug($"Results: {results[0]}");
+                if (results.Length > 1)
+                {
+                    foreach (var result in results.Skip(1))
+                    {
+                        Log.Debug($"Response: {result}");
+                    }
+                }
+                Log.Debug("--------------------------------------------------");
+            }
         });
         return results;
     }

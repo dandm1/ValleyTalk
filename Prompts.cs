@@ -42,7 +42,7 @@ public class Prompts
 
     private static void LoadStardewSummary()
     {
-        var gameSummaryDict = ModEntry.SHelper.Data.ReadJsonFile<Dictionary<string,string>>("bio/Stardew.txt");
+        var gameSummaryDict = ModEntry.SHelper.Data.ReadJsonFile<Dictionary<string,string>>("assets/bio/Stardew.txt");
         _stardewSummary = gameSummaryDict["Text"];
     }
 

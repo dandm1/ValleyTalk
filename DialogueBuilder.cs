@@ -41,8 +41,7 @@ namespace LlamaDialogue
             {
                 var newCharacter = new StardewDialogue.Character(
                     instance.Name, 
-                    instance,
-                    $"bio/{instance.Name}.txt");
+                    instance);
                 _characters.Add(instance.Name, newCharacter);
             }
             return _characters[instance.Name];
