@@ -2,7 +2,7 @@ using StardewValley;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LlamaDialogue
+namespace ValleyTalk
 {
     public class Util
     {

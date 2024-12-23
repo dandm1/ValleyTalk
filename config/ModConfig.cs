@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 
-namespace LlamaDialogue
+namespace ValleyTalk
 {
     public class ModConfig
     {

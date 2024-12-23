@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using xTile.Dimensions;
 
-namespace LlamaDialogue
+namespace ValleyTalk
 {
     [HarmonyPatch(typeof(MarriageDialogueReference), nameof(MarriageDialogueReference.GetDialogue))]
     public class MarriageDialogueReference_GetDialogue_Patch

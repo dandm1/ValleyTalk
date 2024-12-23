@@ -9,7 +9,7 @@
             "name": "Run Stardew",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "dotnet: build LlamaDialogue",
+            "preLaunchTask": "dotnet: build ValleyTalk",
             "program": "/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley/StardewModdingAPI.dll",
             "args": [],
             "cwd": "/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley/",

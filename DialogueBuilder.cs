@@ -7,7 +7,7 @@ using StardewDialogue;
 using StardewValley;
 using StardewValley.Characters;
 
-namespace LlamaDialogue
+namespace ValleyTalk
 {
     internal class DialogueBuilder
     {

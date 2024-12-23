@@ -8,7 +8,7 @@ using StardewModdingAPI.Events;
 using StardewValley;
 using Serilog;
 using System.Collections.Generic;
-namespace LlamaDialogue
+namespace ValleyTalk
 {
     public partial class ModEntry : Mod
     {

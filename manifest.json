@@ -3,8 +3,8 @@
   "Author": "david",
   "Version": "1.0.0",
   "Description": "Llama dialogue.",
-  "UniqueID": "david.LlamaDialogue",
-  "EntryDll": "LlamaDialogue.dll",
+  "UniqueID": "david.ValleyTalk",
+  "EntryDll": "ValleyTalk.dll",
   "MinimumApiVersion": "3.13.0",
   "UpdateKeys": [ "Nexus:1234" ]
 }

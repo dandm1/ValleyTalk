@@ -1,4 +1,4 @@
-namespace LlamaDialogue;
+namespace ValleyTalk;
 
 public class PromptFormatter
 {

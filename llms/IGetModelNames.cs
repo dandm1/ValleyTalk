@@ -1,4 +1,4 @@
-namespace LlamaDialogue
+namespace ValleyTalk
 {
     internal interface IGetModelNames
     {

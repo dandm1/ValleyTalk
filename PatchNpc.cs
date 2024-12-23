@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using xTile.Dimensions;
 
-namespace LlamaDialogue
+namespace ValleyTalk
 {
     [HarmonyPatch(typeof(NPC), nameof(NPC.GetGiftReaction))]
     public class NPC_GetGiftReaction_Patch

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using GenericModConfigMenu;
 using StardewDialogue;
 using StardewModdingAPI;
-namespace LlamaDialogue
+namespace ValleyTalk
 {
     internal static class ModConfigMenu
     {

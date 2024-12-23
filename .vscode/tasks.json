@@ -6,10 +6,10 @@
 			"task": "build",
 			"group": "build",
             "options": {
-                "cwd": "${workspaceFolder}/LlamaDialogue"
+                "cwd": "${workspaceFolder}/ValleyTalk"
             },
 			"problemMatcher": [],
-            "label": "dotnet: build LlamaDialogue"
+            "label": "dotnet: build ValleyTalk"
 		}
 	]
 }

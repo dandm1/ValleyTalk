@@ -1,4 +1,4 @@
-using LlamaDialogue;
+using ValleyTalk;
 
 namespace StardewDialogue;
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using LlamaDialogue;
+using ValleyTalk;
 using StardewValley;
 using Polly;
 using Polly.Retry;

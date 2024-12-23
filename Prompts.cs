@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
-using LlamaDialogue;
+using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
 
