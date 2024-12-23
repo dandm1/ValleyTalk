@@ -1,16 +1,8 @@
 ﻿using HarmonyLib;
-using StardewModdingAPI;
 using StardewValley;
-using StardewValley.Logging;
-using StardewValley.Menus;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using System.Threading;
-using xTile.Dimensions;
 
 namespace ValleyTalk
 {
