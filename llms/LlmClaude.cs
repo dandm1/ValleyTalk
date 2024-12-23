@@ -5,11 +5,12 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using LlamaDialogue;
 using Serilog;
 
 namespace StardewDialogue;
 
-internal class LlmClaude : Llm
+internal class LlmClaude : Llm, IGetModelNames
 {
     private readonly string apiKey;
     private readonly string modelName;
@@ -123,6 +124,35 @@ internal class LlmClaude : Llm
 
     internal override Dictionary<string, double>[] RunInferenceProbabilities(string fullPrompt, int n_predict = 1)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
+    }
+
+    public string[] GetModelNames()
+    {
+        try 
+        {
+        var client = new HttpClient
+        {
+            Timeout = TimeSpan.FromMinutes(1)
+        };
+        var request = new HttpRequestMessage(HttpMethod.Get, "https://api.anthropic.com/v1/models");
+        request.Headers.Add("x-api-key", apiKey);
+        request.Headers.Add("anthropic-version", "2023-06-01");
+        var response = client.SendAsync(request).Result;
+        var responseString = response.Content.ReadAsStringAsync().Result;
+        var responseJson = JsonDocument.Parse(responseString);
+        var models = responseJson.RootElement.GetProperty("data").EnumerateArray();
+        var modelNames = new List<string>();
+        foreach (var model in models)
+        {
+            modelNames.Add(model.GetProperty("id").GetString());
+        }
+        return modelNames.ToArray();
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex.Message);
+            return new string[] { };
+        }
     }
 }

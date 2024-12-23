@@ -2,11 +2,11 @@ using LlamaDialogue;
 
 namespace StardewDialogue;
 
-internal class LlmMistral : LlmOpenAiBase, IGetModelNames
+internal class LlmOAICompatible : LlmOpenAiBase, IGetModelNames
 {
-    public LlmMistral(string apiKey, string modelName = null)
+    public LlmOAICompatible(string apiKey, string url, string modelName = null)
     {
-        url = "https://api.mistral.ai";
+        this.url = url;
 
         this.apiKey = apiKey;
         this.modelName = modelName ?? "mistral-large-latest";

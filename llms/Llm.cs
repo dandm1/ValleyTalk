@@ -21,31 +21,34 @@ internal abstract class Llm
         "[INST] {system}\n{prompt}[/INST]\n{response_start}"
         );
     
-    internal static void SetLlm(LlmType type, string url ="", string promptFormat="", string apiKey="", string modelName = null)
+    internal static void SetLlm(Type llmType, string url ="", string promptFormat="", string apiKey="", string modelName = null)
     {
-        switch (type)
+        var paramsDict = new Dictionary<string, string>
         {
-            case LlmType.Dummy:
-                Instance = new LlmDummy();
-                break;
-            case LlmType.LlamaCpp:
-                Instance = new LlmLlamaCpp(url, promptFormat);
-                break;
-            case LlmType.Gemini:
-                Instance = new LlmGemini(apiKey);
-                break;
-            case LlmType.Claude:
-                Instance = new LlmClaude(apiKey,modelName);
-                break;
-            case LlmType.OpenAi:
-                Instance = new LlmOpenAi(apiKey,modelName);
-                break;
-            case LlmType.Mistral:
-                Instance = new LlmMistral(apiKey,modelName);
-                break;
-            default:
-                throw new NotImplementedException();
-        }        
+            {"url", url},
+            {"promptFormat", promptFormat},
+            {"apiKey", apiKey},
+            {"modelName", modelName}
+        };
+        Llm instance = CreateInstance(llmType, paramsDict);
+        Instance = instance;
+    }
+
+    public static Llm CreateInstance(Type llmType, Dictionary<string, string> paramsDict)
+    {
+        // Find the best constructor
+        var constructor = llmType.GetConstructors().OrderByDescending(x => x.GetParameters().Length).First();
+        // Construct an array of parameters by name matching
+        var parameters = constructor.GetParameters().Select(x =>
+        {
+            if (paramsDict.TryGetValue(x.Name, out var value))
+            {
+                return Convert.ChangeType(value, x.ParameterType);
+            }
+            return x.HasDefaultValue ? x.DefaultValue : null;
+        }).ToArray();
+        var instance = (Llm)Activator.CreateInstance(llmType, parameters);
+        return instance;
     }
 
     protected string url;

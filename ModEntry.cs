@@ -7,6 +7,7 @@ using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using Serilog;
+using System.Collections.Generic;
 namespace LlamaDialogue
 {
     public partial class ModEntry : Mod
@@ -14,6 +15,12 @@ namespace LlamaDialogue
         private static IMonitor SMonitor;
         public static IModHelper SHelper { get; private set; }
         public static ModConfig Config;
+        public static Dictionary<string, Type> LlmMap;
+
+        public override object GetApi()
+        {
+            return new ModConfig();
+        }
 
         public override void Entry(IModHelper helper)
         {
@@ -46,9 +53,22 @@ namespace LlamaDialogue
                 return;
             }
 
-            if ( !Enum.TryParse<LlmType>(Config.UseHost, ignoreCase: true, result: out LlmType llmType))
+            // Build dictionary of LLM types (things that inherit from the LLM class)
+            LlmMap = new Dictionary<string, Type>
             {
-                Log.Error($"Invalid LLM type: {Config.UseHost}");
+#if DEBUG
+                {"Dummy", typeof(LlmDummy)},
+#endif
+                {"LlamaCpp", typeof(LlmLlamaCpp)},
+                {"Google", typeof(LlmGemini)},
+                {"Anthropic", typeof(LlmClaude)},
+                {"OpenAI", typeof(LlmOpenAi)},
+                {"Mistral", typeof(LlmMistral)},
+                {"OpenAiCompatible", typeof(LlmOAICompatible)}
+            };
+            if (!LlmMap.TryGetValue(Config.Provider, out var llmType))
+            {
+                Log.Error($"Invalid LLM type: {Config.Provider}");
                 return;
             }
 

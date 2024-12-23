@@ -8,7 +8,7 @@ using Serilog;
 
 namespace StardewDialogue;
 
-internal abstract class LlmOpenAiCompatible : Llm
+internal abstract class LlmOpenAiBase : Llm
 {
     protected string apiKey;
     protected string modelName;
@@ -18,7 +18,7 @@ internal abstract class LlmOpenAiCompatible : Llm
         public string role { get; set; }
         public string content { get; set; }
     }
-    
+
     internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var inputString = JsonSerializer.Serialize(new
@@ -52,7 +52,7 @@ internal abstract class LlmOpenAiCompatible : Llm
         };
 
         int retry=3;
-        var fullUrl = url;
+        var fullUrl = $"{url}/v1/chat/completions";
         while (retry > 0)
         {
             try
@@ -96,5 +96,42 @@ internal abstract class LlmOpenAiCompatible : Llm
     internal override Dictionary<string, double>[] RunInferenceProbabilities(string fullPrompt, int n_predict = 1)
     {
         throw new NotImplementedException();
+    }
+
+    public string[] CoreGetModelNames(Dictionary<string, string> extraHeaders = null)
+    {
+        if (extraHeaders == null)
+        {
+            extraHeaders = new Dictionary<string, string>();
+        }
+        try 
+        {
+        var client = new HttpClient
+        {
+            Timeout = TimeSpan.FromMinutes(1)
+        };
+        var fullUrl = $"{url}/v1/models";
+        var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
+        request.Headers.Add("Authorization", $"Bearer {apiKey}");
+        foreach (var header in extraHeaders)
+        {
+            request.Headers.Add(header.Key, header.Value);
+        }
+        var response = client.SendAsync(request).Result;
+        var responseString = response.Content.ReadAsStringAsync().Result;
+        var responseJson = JsonDocument.Parse(responseString);
+        var models = responseJson.RootElement.GetProperty("data").EnumerateArray();
+        var modelNames = new List<string>();
+        foreach (var model in models)
+        {
+            modelNames.Add(model.GetProperty("id").GetString());
+        }
+        return modelNames.ToArray();
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex.Message);
+            return new string[] { };
+        }
     }
 }

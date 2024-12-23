@@ -4,15 +4,16 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using LlamaDialogue;
 using Serilog;
 
 namespace StardewDialogue;
 
-internal class LlmOpenAi : LlmOpenAiCompatible
+internal class LlmOpenAi : LlmOpenAiBase, IGetModelNames
 {
     public LlmOpenAi(string apiKey, string modelName = null)
     {
-        url = "https://api.openai.com/v1/chat/completions";
+        url = "https://api.openai.com";
         this.apiKey = apiKey;
         this.modelName = modelName ?? "gpt-4o";
     }
@@ -21,4 +22,8 @@ internal class LlmOpenAi : LlmOpenAiCompatible
 
     public override bool IsHighlySensoredModel => false;
 
+    public string[] GetModelNames()
+    {
+        return CoreGetModelNames();
+    }
 }
