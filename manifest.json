@@ -1,9 +1,9 @@
 ﻿{
-  "Name": "Llama Dialogue",
-  "Author": "david",
-  "Version": "1.0.0",
-  "Description": "Llama dialogue.",
-  "UniqueID": "david.ValleyTalk",
+  "Name": "ValleyTalk",
+  "Author": "David33",
+  "Version": "0.5.0",
+  "Description": "Infinite dialogue for Stardew Valley",
+  "UniqueID": "David33.ValleyTalk",
   "EntryDll": "ValleyTalk.dll",
   "MinimumApiVersion": "3.13.0",
   "UpdateKeys": [ "Nexus:1234" ]
