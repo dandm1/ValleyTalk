@@ -12,14 +12,7 @@ namespace StardewDialogue;
 internal abstract class Llm
 {
     internal static Llm Instance {get; private set;}
-    = new LlmLlamaCpp(
-        "http://mlpc:8080/completion",
-        //"<start_of_turn>user\n{system}\n{prompt}<end_of_turn>\n<start_of_turn>model\n{response_start}" //Gemma
-        //"<BOS_TOKEN><|START_OF_TURN_TOKEN|><|USER_TOKEN|>{system}\n{prompt}<|END_OF_TURN_TOKEN|><|START_OF_TURN_TOKEN|><|CHATBOT_TOKEN|>{response_start}"
-        //"<|im_start|>user\n{system}\n{prompt}<|im_end|>\n<|im_start|>assistant\n{response_start}" // Magnum / Qwen
-        //"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n{system}<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n{response_start}"
-        "[INST] {system}\n{prompt}[/INST]\n{response_start}"
-        );
+    = new LlmDummy();
     
     internal static void SetLlm(Type llmType, string url ="", string promptFormat="", string apiKey="", string modelName = null)
     {
@@ -52,7 +45,6 @@ internal abstract class Llm
     }
 
     protected string url;
-
     private long _totalPrompts;
     private double _totalPromptTime;
     private long _totalInference;
