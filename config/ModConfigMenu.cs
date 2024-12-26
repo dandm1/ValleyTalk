@@ -78,20 +78,23 @@ namespace ValleyTalk
                     fieldId: "ApiKey"
                 );
             }
-            var modelNames = GetModelNames();
-            var defaultModelName = Config.ModelName;
-            if (!modelNames.Contains(Config.ModelName) && modelNames.Any())
-            {
-                defaultModelName = modelNames.First();
-            }
-            Config.ModelName = defaultModelName;
+
             if (constructorParameters.Contains("modelName", StringComparer.OrdinalIgnoreCase))
             {
                 ConfigMenu.AddTextOption(
                     mod: ModManifest,
                     name: () => "Model name",
-                    getValue: () => (modelNames.Contains(Config.ModelName) || !modelNames.Any()) ? Config.ModelName : "",
-                    setValue: (value) =>{ Config.ModelName = value; SetLlm(); },
+                    getValue: () => Config.ModelName,
+                    setValue: (value) =>
+                    { 
+                        var modelNames = GetModelNames();
+                        var defaultModelName = Config.ModelName;
+                        if ((!modelNames.Contains(value) || string.IsNullOrWhiteSpace(value)) && modelNames.Any())
+                        {
+                            defaultModelName = modelNames.First();
+                        }
+                        Config.ModelName = defaultModelName;    
+                    },
                     allowedValues: GetModelNames(),
                     fieldId: "ModelName"
                 );

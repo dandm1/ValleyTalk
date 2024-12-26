@@ -23,7 +23,7 @@ internal abstract class Llm
         };
         Llm instance = CreateInstance(llmType, paramsDict);
         Instance = instance;
-        var response = instance.RunInference("Connection testing", "", "", "Please just respond with 'Connection successful'");
+        var response = instance.RunInference("You are performing LLM connection testing", "Please just ", "respond with ", "'Connection successful'");
         if (response.Length < 5)
         {
             ModEntry.SMonitor.Log($"Failed to connect to the model. Please check the server address and details.", StardewModdingAPI.LogLevel.Error);
