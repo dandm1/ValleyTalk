@@ -74,7 +74,7 @@ namespace ValleyTalk
                     mod: ModManifest,
                     name: () => "API Key",
                     getValue: () => Config.ApiKey,
-                    setValue: value => Config.ApiKey = value,
+                    setValue: (value) =>{ Config.ApiKey = value; SetLlm(); },
                     fieldId: "ApiKey"
                 );
             }
@@ -90,8 +90,8 @@ namespace ValleyTalk
                 ConfigMenu.AddTextOption(
                     mod: ModManifest,
                     name: () => "Model name",
-                    getValue: () => modelNames.Contains(Config.ModelName) || !modelNames.Any() ? Config.ModelName : "",
-                    setValue: value => Config.ModelName = value,
+                    getValue: () => (modelNames.Contains(Config.ModelName) || !modelNames.Any()) ? Config.ModelName : "",
+                    setValue: (value) =>{ Config.ModelName = value; SetLlm(); },
                     allowedValues: GetModelNames(),
                     fieldId: "ModelName"
                 );
@@ -102,7 +102,7 @@ namespace ValleyTalk
                     mod: ModManifest,
                     name: () => "Server address",
                     getValue: () => Config.ServerAddress,
-                    setValue: value => Config.ServerAddress = value
+                    setValue: (value) =>{ Config.ServerAddress = value; SetLlm(); }
                 );
             }
             if (constructorParameters.Contains("promptFormat", StringComparer.OrdinalIgnoreCase))
@@ -111,12 +111,9 @@ namespace ValleyTalk
                     mod: ModManifest,
                     name: () => "Prompt format",
                     getValue: () => Config.PromptFormat,
-                    setValue: value => Config.PromptFormat = value
+                    setValue: (value) =>{ Config.PromptFormat = value; SetLlm(); }
                 );
             }
-            ConfigMenu.OnFieldChanged(
-                mod: ModManifest, onChange: OnChange
-            );
         }
 
         private static string[] GetModelNames()
@@ -146,21 +143,9 @@ namespace ValleyTalk
             return modEntry.Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu"); 
         }
 
-        private static void OnChange(string arg1, object arg2)
+        private static void SetLlm()
         {
-            switch (arg1)
-            {
-                case "Provider":
-                    //ConfigMenu.Unregister(ModManifest);
-                    //Register(_modEntry);
-                    //break;
-                case "ApiKey":
-                case "PromptFormat":
-                case "ServerAddress":
-                case "ModelName":
-                    Llm.SetLlm(ModEntry.LlmMap[ModEntry.Config.Provider], apiKey: ModEntry.Config.ApiKey, modelName: ModEntry.Config.ModelName, url: ModEntry.Config.ServerAddress, promptFormat: ModEntry.Config.PromptFormat);
-                    break;
-            }
+            Llm.SetLlm(ModEntry.LlmMap[ModEntry.Config.Provider], apiKey: ModEntry.Config.ApiKey, modelName: ModEntry.Config.ModelName, url: ModEntry.Config.ServerAddress, promptFormat: ModEntry.Config.PromptFormat);
         }
     }
 }

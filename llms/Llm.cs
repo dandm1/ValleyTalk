@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -21,6 +23,17 @@ internal abstract class Llm
         };
         Llm instance = CreateInstance(llmType, paramsDict);
         Instance = instance;
+        var response = instance.RunInference("Connection testing", "", "", "Please just respond with 'Connection successful'");
+        if (response.Length < 5)
+        {
+            ModEntry.SMonitor.Log($"Failed to connect to the model. Please check the server address and details.", StardewModdingAPI.LogLevel.Error);
+            DialogueBuilder.Instance.LlmDisabled = true;
+        }
+        else
+        {
+            ModEntry.SMonitor.Log($"Connected to the model successfully.", StardewModdingAPI.LogLevel.Info);
+            DialogueBuilder.Instance.LlmDisabled = false;
+        }
     }
 
     public static Llm CreateInstance(Type llmType, Dictionary<string, string> paramsDict)

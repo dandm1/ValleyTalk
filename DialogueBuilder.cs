@@ -27,6 +27,7 @@ namespace ValleyTalk
 
         public ModConfig Config { get; internal set; }
         public DialogueContext LastContext { get; private set; }
+        public bool LlmDisabled { get; set; } = false;
 
         private static DialogueBuilder _instance;
         private Dictionary<string, StardewDialogue.Character> _characters;
@@ -299,6 +300,10 @@ namespace ValleyTalk
 
         internal bool PatchNpc(NPC n)
         {
+            if (LlmDisabled)
+            {
+                return false;
+            }
             if (ModEntry.BlockModdedContent)
             {
                 if (_characters.Count == 0)
