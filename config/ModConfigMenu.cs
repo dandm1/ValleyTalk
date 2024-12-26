@@ -10,13 +10,20 @@ namespace ValleyTalk
     {
         private static IGenericModConfigMenuApi ConfigMenu;
         private static IManifest ModManifest;
+        private static ModEntry _modEntry;
         internal static void Register(ModEntry modEntry)
         {
+            _modEntry = modEntry;
             var Config = ModEntry.Config;
 
             ModManifest = modEntry.ModManifest;
 
             ConfigMenu = GetConfigMenu(modEntry);
+            if (ConfigMenu == null)
+            {
+                modEntry.Monitor.Log("Generic Mod Config Menu is not installed. Skipping config menu registration.", LogLevel.Warn);
+                return;
+            }
 
             // register mod
             ConfigMenu.Register(
@@ -33,6 +40,7 @@ namespace ValleyTalk
                 getValue: () => Config.EnableMod,
                 setValue: value => Config.EnableMod = value
             );
+#if DEBUG
             ConfigMenu.AddBoolOption(
                 mod: ModManifest,
                 name: () => "Debug logging",
@@ -40,6 +48,7 @@ namespace ValleyTalk
                 getValue: () => Config.Debug,
                 setValue: value => Config.Debug = value
             );
+#endif
             // Create a string array of the options in the LlmType enum
             var llmTypes = ModEntry.LlmMap.Keys.ToArray();
             ConfigMenu.AddTextOption(
@@ -47,12 +56,15 @@ namespace ValleyTalk
                 name: () => "Model provider",
                 getValue: () => Config.Provider,
                 setValue: value => 
-                { 
+                {
+                    if (value == Config.Provider) return;
+                    Config.ApiKey = "";
                     Config.Provider = value; 
                     ConfigMenu.Unregister(ModManifest);
-                    Register(modEntry);
+                    Register(_modEntry);
                 },
-                allowedValues: llmTypes
+                allowedValues: llmTypes,
+                fieldId: "Provider"
             );
             var llmType = ModEntry.LlmMap[Config.Provider];
             var constructorParameters = llmType.GetConstructors().First().GetParameters().Select(x => x.Name).ToArray();
@@ -62,17 +74,26 @@ namespace ValleyTalk
                     mod: ModManifest,
                     name: () => "API Key",
                     getValue: () => Config.ApiKey,
-                    setValue: value => Config.ApiKey = value
+                    setValue: value => Config.ApiKey = value,
+                    fieldId: "ApiKey"
                 );
             }
+            var modelNames = GetModelNames();
+            var defaultModelName = Config.ModelName;
+            if (!modelNames.Contains(Config.ModelName) && modelNames.Any())
+            {
+                defaultModelName = modelNames.First();
+            }
+            Config.ModelName = defaultModelName;
             if (constructorParameters.Contains("modelName", StringComparer.OrdinalIgnoreCase))
             {
                 ConfigMenu.AddTextOption(
                     mod: ModManifest,
                     name: () => "Model name",
-                    getValue: () => Config.ModelName,
+                    getValue: () => modelNames.Contains(Config.ModelName) || !modelNames.Any() ? Config.ModelName : "",
                     setValue: value => Config.ModelName = value,
-                    allowedValues: GetModelNames()
+                    allowedValues: GetModelNames(),
+                    fieldId: "ModelName"
                 );
             }
             if (constructorParameters.Contains("url", StringComparer.OrdinalIgnoreCase))
@@ -127,9 +148,19 @@ namespace ValleyTalk
 
         private static void OnChange(string arg1, object arg2)
         {
-            var changeTest = "A string";
-
-            //throw new NotImplementedException();
+            switch (arg1)
+            {
+                case "Provider":
+                    //ConfigMenu.Unregister(ModManifest);
+                    //Register(_modEntry);
+                    //break;
+                case "ApiKey":
+                case "PromptFormat":
+                case "ServerAddress":
+                case "ModelName":
+                    Llm.SetLlm(ModEntry.LlmMap[ModEntry.Config.Provider], apiKey: ModEntry.Config.ApiKey, modelName: ModEntry.Config.ModelName, url: ModEntry.Config.ServerAddress, promptFormat: ModEntry.Config.PromptFormat);
+                    break;
+            }
         }
     }
 }

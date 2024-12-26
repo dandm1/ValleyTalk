@@ -10,6 +10,21 @@
             },
 			"problemMatcher": [],
             "label": "dotnet: build ValleyTalk"
+		},			
+		{
+			"type": "dotnet",
+			"task": "build",
+			"group": "build",
+			
+			"options": {
+				"cwd": "${workspaceFolder}/ValleyTalk",
+				"shell": {
+					"executable": "/bin/bash",
+					"args": ["--configuration Release"]
+				}
+			},
+			"problemMatcher": [],
+			"label": "dotnet: build ValleyTalk Prod"
 		}
 	]
 }

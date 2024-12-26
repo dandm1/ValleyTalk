@@ -11,6 +11,10 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, Farmer giver, StardewValley.Object gift, int taste)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(__instance))
+            {
+                return true;
+            }
             var dialogue = DialogueBuilder.Instance.GenerateGift(__instance, gift, taste);
             if (dialogue != null)
             {
@@ -26,6 +30,10 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, string dialogueKey)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(__instance))
+            {
+                return true;
+            }
             if (dialogueKey.StartsWith("funReturn_") || dialogueKey.StartsWith("jobReturn_"))
             {
                 __result = DialogueBuilder.Instance.Generate(__instance, dialogueKey);
@@ -41,6 +49,10 @@ namespace ValleyTalk
         private static int minLine = int.MaxValue;
         public static void Postfix(ref NPC __instance, ref Stack<Dialogue> __result)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(__instance))
+            {
+                return;
+            }
             if (__result.Count == 0) return;
 
             var trace = new System.Diagnostics.StackTrace().GetFrame(2);
@@ -102,6 +114,10 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, string preface, int heartLevel, string appendToEnd)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(__instance))
+            {
+                return true;
+            }
             __result = new Dialogue(__instance, $"{preface}_{heartLevel}", SldConstants.DialogueGenerationTag);
             return false;
         }
@@ -113,6 +129,10 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref NPC __instance, ref bool __result, int heartLevel, bool noPreface)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(__instance))
+            {
+                return true;
+            }
             if (Game1.player.currentLocation.Name == "Saloon" || Game1.player.currentLocation.Name == "IslandSouth")
             {
                 var newDialogue = new Dialogue(__instance, Game1.player.currentLocation.Name, SldConstants.DialogueGenerationTag);
@@ -128,6 +148,10 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref NPC __instance, string translationKey)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(__instance))
+            {
+                return true;
+            }
             try
             {
                 if (translationKey.StartsWith("Resort"))

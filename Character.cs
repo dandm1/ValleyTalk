@@ -10,6 +10,8 @@ using Polly;
 using Polly.Retry;
 using System.Threading.Tasks;
 using Serilog;
+using Microsoft.Xna.Framework.Content;
+using StardewModdingAPI.Events;
 
 namespace StardewDialogue;
 
@@ -17,9 +19,10 @@ public class Character
 {
     private BioData _bioData;
 
-    
     private static readonly Dictionary<string,TimeSpan> filterTimes = new() { { "House", TimeSpan.Zero }, { "Action", TimeSpan.Zero }, { "Received Gift", TimeSpan.Zero }, { "Given Gift", TimeSpan.Zero }, { "Editorial", TimeSpan.Zero }, { "Gender", TimeSpan.Zero }, { "Question", TimeSpan.Zero } };
     private StardewEventHistory eventHistory = new();
+    private DialogueFile dialogueData;
+
     internal IEnumerable<Tuple<StardewTime,IHistory>> EventHistory => eventHistory.AllTypes;
 
     public Character(string name, NPC stardewNpc)
@@ -29,7 +32,8 @@ public class Character
         StardewNpc = stardewNpc;
 
         // Load and process the dialogue file
-        LoadDialogue();
+        LoadBio();
+        //LoadDialogue();
         LoadEventHistory();
         ////Log.Information($"Loaded dialogue for {Name}");
     }
@@ -37,7 +41,34 @@ public class Character
 
     private void LoadDialogue()
     {
-        var canonDialogue = StardewNpc.Dialogue;
+        Dictionary<string, string> canonDialogue = new();
+        if (ModEntry.BlockModdedContent)
+        {
+            var manager = new ContentManager(Game1.content.ServiceProvider, Game1.content.RootDirectory);
+            try
+            {
+                string assetName = $"Characters\\Dialogue\\{Name}";
+                var unmarriedDialogue = manager.Load<Dictionary<string, string>>(assetName);
+                canonDialogue = unmarriedDialogue;
+            }
+            catch (Exception _)
+            {
+                // If it fails, just continue
+            }
+            try
+            {
+                string assetName = $"Characters\\Dialogue\\MarriageDialogue{Name}";
+                var marriedDialogue = manager.Load<Dictionary<string, string>>(assetName);
+                canonDialogue = canonDialogue.Concat(marriedDialogue).ToDictionary(x => x.Key, x => x.Value);
+            }
+            catch (Exception _)
+            {
+            }
+        }
+        else
+        {
+            canonDialogue = StardewNpc.Dialogue;
+        }
         DialogueData = new();
         foreach (var dialogue in canonDialogue)
         {
@@ -55,8 +86,12 @@ public class Character
         BioData bioData = null;
         
         bioData = ModEntry.SHelper.Data.ReadJsonFile<BioData>(BioFilePath);
-
-        _bioData = bioData ?? new BioData();
+        if (bioData == null)
+        {
+            bioData = new BioData();
+            ModEntry.SMonitor.Log($"No bio file found for {Name}.", StardewModdingAPI.LogLevel.Warn);
+        }
+        _bioData = bioData;
     }
 
     private void LoadEventHistory()
@@ -64,11 +99,11 @@ public class Character
         var eventKey = $"EventHistory_{Name}";
         try
         {
-        var history = ModEntry.SHelper.Data.ReadSaveData<StardewEventHistory>(eventKey);
-        if (history != null)
-        {
-            eventHistory = history;
-        }
+            var history = ModEntry.SHelper.Data.ReadSaveData<StardewEventHistory>(eventKey);
+            if (history != null)
+            {
+                eventHistory = history;
+            }
         }
         catch (Exception ex)
         {
@@ -247,18 +282,22 @@ public class Character
     public string Name { get; }
     public string DialogueFilePath { get; }
     public string BioFilePath { get; }
-    public DialogueFile? DialogueData { get; private set; }
+    public DialogueFile? DialogueData 
+    { 
+        get 
+        {
+            if (dialogueData == null)
+            {
+                LoadDialogue();
+            }
+            return dialogueData;  
+        }
+        private set => dialogueData = value; 
+    }
     public ConcurrentBag<Tuple<DialogueContext,DialogueValue>> CreatedDialogue { get; private set; } = new ();
     internal BioData Bio
     {
-        get
-        {
-            if (_bioData == null)
-            {
-                LoadBio();
-            }
-            return _bioData;
-        }
+        get => _bioData;
     }
 
     public NPC StardewNpc { get; internal set; }

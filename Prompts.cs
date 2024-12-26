@@ -554,7 +554,7 @@ public class Prompts
             prompt.AppendLine($"The farm has the following animals:");
             foreach (var animal in allAnimals.GroupBy(x => x.type))
             {
-                prompt.AppendLine($"- {animal.Count()} {animal.Key} animal{(animal.Count() > 1 ? "s" : "")}");
+                prompt.AppendLine($"- {animal.Count()} {animal.Key}{(animal.Count() > 1 ? "s" : "")}");
             }
         }
         else
@@ -573,7 +573,7 @@ public class Prompts
             var completedBuildings = allBuildings.Where(x => x.daysOfConstructionLeft.Value == 0 && x.buildingType.Value != "Greenhouse");
             foreach (var building in completedBuildings.GroupBy(x => x.buildingType))
             {
-                prompt.AppendLine($"- {building.Count()} {building.Key} building{(building.Count() > 1 ? "s" : "")}");
+                prompt.AppendLine($"- {building.Count()} {building.Key}{(building.Count() > 1 ? "s" : "")}");
             }
             var greenhouse = allBuildings.FirstOrDefault(x => x.buildingType.Value == "Greenhouse");
             if (greenhouse != null)

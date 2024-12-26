@@ -5,6 +5,7 @@
     "version": "0.2.0",
     "configurations": [
 
+
         {
             "name": "Run Stardew",
             "type": "coreclr",
@@ -14,6 +15,16 @@
             "args": [],
             "cwd": "/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley/",
             "stopAtEntry": false,
+        },
+        {
+            "name": "Run Stardew Prod",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "dotnet: build ValleyTalk Prod",
+            "program": "/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley/StardewModdingAPI.dll",
+            "args": [],
+            "cwd": "/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley/",
+            "stopAtEntry": false
         }
 
     ]

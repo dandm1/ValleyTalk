@@ -24,6 +24,10 @@ internal class LlmOpenAi : LlmOpenAiBase, IGetModelNames
 
     public string[] GetModelNames()
     {
+        if (string.IsNullOrEmpty(apiKey))
+        {
+            return new string[] { };
+        }
         return CoreGetModelNames();
     }
 }

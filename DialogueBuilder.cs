@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using StardewDialogue;
+using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Characters;
 
@@ -35,8 +36,24 @@ namespace ValleyTalk
             _characters = new Dictionary<string, StardewDialogue.Character>();
         }
 
+        private void PopulateCharacters()
+        {
+            foreach (var npc in Game1.characterData.Keys)
+            {
+                if (!_characters.ContainsKey(npc))
+                {
+                    var npcObject = Game1.getCharacterFromName(npc);
+                    GetCharacter(npcObject);
+                }
+            }
+        }
+
         public StardewDialogue.Character GetCharacter(NPC instance)
         {
+            if (instance == null)
+            {
+                return null;
+            }
             if (!_characters.ContainsKey(instance.Name))
             {
                 var newCharacter = new StardewDialogue.Character(
@@ -278,6 +295,23 @@ namespace ValleyTalk
                 fullHistory.Add(newDialogue);
             }
             character.AddConversation(fullHistory.ToArray(), Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+        }
+
+        internal bool PatchNpc(NPC n)
+        {
+            if (ModEntry.BlockModdedContent)
+            {
+                if (_characters.Count == 0)
+                {
+                    PopulateCharacters();
+                }
+                var character = GetCharacter(n);
+                return !string.IsNullOrWhiteSpace(character?.Bio?.Biography ?? "");
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -18,6 +18,10 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref MarriageDialogueReference __instance, ref Dialogue __result, NPC n)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(n))
+            {
+                return true;
+            }
             var result = DialogueBuilder.Instance.Generate(n, __instance.DialogueKey);
             if (result != null)
             {
@@ -31,10 +35,13 @@ namespace ValleyTalk
     [HarmonyPatch(typeof(GameLocation), nameof(GameLocation.GetLocationOverrideDialogue))]
     public class GameLocation_GetLocationOverrideDialogue_Patch
     {
-
         public static bool Prefix(ref GameLocation __instance, ref string __result, NPC character)
         {
             if (character == null)
+            {
+                return true;
+            }
+            if (!DialogueBuilder.Instance.PatchNpc(character))
             {
                 return true;
             }
@@ -61,6 +68,10 @@ namespace ValleyTalk
 
         public static bool Prefix(ref Dialogue __instance, ref bool __result, Response response)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(__instance.speaker))
+            {
+                return true;
+            }
             if (__instance.getResponseOptions().Any(r => !r.responseKey.StartsWith(SldConstants.DialogueKeyPrefix)))
             {
                 return true;
@@ -113,6 +124,10 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref Dialogue __instance, ref Dialogue __result, NPC speaker, string translationKey)
         {
+            if (!DialogueBuilder.Instance.PatchNpc(speaker))
+            {
+                return true;
+            }
             if (translationKey.StartsWith("Characters\\Dialogue\\rainy:"))
             {
                 __result = new Dialogue(speaker, translationKey, SldConstants.DialogueGenerationTag);

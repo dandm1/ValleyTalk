@@ -129,6 +129,10 @@ internal class LlmClaude : Llm, IGetModelNames
 
     public string[] GetModelNames()
     {
+        if (string.IsNullOrEmpty(apiKey))
+        {
+            return new string[] { };
+        }
         try 
         {
         var client = new HttpClient

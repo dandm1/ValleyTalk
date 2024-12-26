@@ -8,14 +8,16 @@ using StardewModdingAPI.Events;
 using StardewValley;
 using Serilog;
 using System.Collections.Generic;
+using System.Linq;
 namespace ValleyTalk
 {
     public partial class ModEntry : Mod
     {
-        private static IMonitor SMonitor;
+        public static IMonitor SMonitor;
         public static IModHelper SHelper { get; private set; }
         public static ModConfig Config;
         public static Dictionary<string, Type> LlmMap;
+        public static bool BlockModdedContent { get; private set; } = false;
 
         public override object GetApi()
         {
@@ -29,6 +31,13 @@ namespace ValleyTalk
             Config = Helper.ReadConfig<ModConfig>();
 
             SMonitor = Monitor;
+ 
+            if (!Config.EnableMod)
+            {
+                return;
+            }
+
+#if DEBUG
             if (Config.Debug)
             {
                 Log.Logger = new LoggerConfiguration()
@@ -39,20 +48,16 @@ namespace ValleyTalk
             }
             else
             {
+#endif
                 Log.Logger = new LoggerConfiguration()
                     .WriteTo.Console()
                     .CreateLogger();
+#if DEBUG
             }
             Log.Debug($"###############################################");
             Log.Debug($"###############################################");
             Log.Debug($"###############################################");
-
-
-            if (!Config.EnableMod)
-            {
-                return;
-            }
-
+#endif
             // Build dictionary of LLM types (things that inherit from the LLM class)
             LlmMap = new Dictionary<string, Type>
             {
@@ -77,7 +82,17 @@ namespace ValleyTalk
             DialogueBuilder.Instance.Config = Config;
             
             SHelper = helper;
-            
+
+            var contentPacks = SHelper.ModRegistry.GetAll().Where(p => p.IsContentPack).ToList();
+            var blockedContentPacks = contentPacks.Where(p => !SldConstants.PermitListContentPacks.Contains(p.Manifest.UniqueID));
+            if (blockedContentPacks.Any())
+            {
+                Monitor.Log("ValleyTalk: Unapproved content packs found.  Using canon dialogue and blocking non standard NPCs.", LogLevel.Warn);
+                Monitor.Log($"Unapproved content packs: {string.Join(", ", blockedContentPacks.Select(p => p.Manifest.Name))}", LogLevel.Warn);
+                Monitor.Log("If you are the mod author and wish to unblock your content pack, please raise a bug.", LogLevel.Warn);
+                BlockModdedContent = true;
+            }
+
             var harmony = new Harmony(ModManifest.UniqueID);
             harmony.PatchAll();
 

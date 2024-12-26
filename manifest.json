@@ -1,10 +1,10 @@
 ﻿{
   "Name": "ValleyTalk",
-  "Author": "David33",
-  "Version": "0.5.0",
+  "Author": "dandm1",
+  "Version": "0.6.1",
   "Description": "Infinite dialogue for Stardew Valley",
-  "UniqueID": "David33.ValleyTalk",
+  "UniqueID": "dandm1.ValleyTalk",
   "EntryDll": "ValleyTalk.dll",
-  "MinimumApiVersion": "3.13.0",
-  "UpdateKeys": [ "Nexus:1234" ]
+  "MinimumApiVersion": "4.1.0",
+  "UpdateKeys": [ "Nexus:30319" ]
 }
