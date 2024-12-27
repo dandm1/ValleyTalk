@@ -87,15 +87,8 @@ namespace ValleyTalk
                     getValue: () => Config.ModelName,
                     setValue: (value) =>
                     { 
-                        var modelNames = GetModelNames();
-                        var defaultModelName = Config.ModelName;
-                        if ((!modelNames.Contains(value) || string.IsNullOrWhiteSpace(value)) && modelNames.Any())
-                        {
-                            defaultModelName = modelNames.First();
-                        }
-                        Config.ModelName = defaultModelName;    
+                        Config.ModelName = value; SetLlm(); 
                     },
-                    allowedValues: GetModelNames(),
                     fieldId: "ModelName"
                 );
             }
@@ -123,6 +116,15 @@ namespace ValleyTalk
                 tooltip: () => "Apply experimental instructions to the AI to translate responses into the game language",
                 getValue: () => Config.ApplyTranslation,
                 setValue: (value) =>{ Config.ApplyTranslation = value; }
+            );
+            ConfigMenu.AddParagraph(
+                mod: ModManifest,
+                text: () => {
+                    var names = GetModelNames();
+                    if (names.Length == 0) return $"Unable to get model names for {Config.Provider} (maybe the API key wasn't set when this menu was opened?)";
+                    return $"The models available on provider {Config.Provider} are: {string.Join(", ", GetModelNames())}"; 
+                }
+                    
             );
         }
 
