@@ -244,7 +244,7 @@ public class Prompts
         
         if (friendship.IsDating())
         {
-            prompt.AppendLine($"{Name} and the farmer are dating seriously {(Context.Inlaw == null ? "and publicly" : "but discretely")} as a {RelationshipWord(Context.MaleFarmer, npcIsMale)} couple. {(Llm.Instance.IsHighlySensoredModel ? "" : "They are keeping their sexual relationship a secret from the town but obsessing about it regularly when talking to each other.")} {Name} does not live on the farm.");
+            prompt.AppendLine($"{Name} and the farmer are dating seriously {(Context.Inlaw == null ? "and publicly" : "but discretely")} as a {RelationshipWord(Context.MaleFarmer, npcIsMale)} couple. {Name} does not live on the farm.");
         }
         if (friendship.IsEngaged())
         {
@@ -288,24 +288,24 @@ public class Prompts
                 < 4 => $"{Name} and the farmer know each other by sight, but treat each other as strangers. The dialogue should reflect two people just getting to know each other, no sharing of personal details or gossip or suggesting activities together.",
                 < 6 => $"{Name} and the farmer are becoming friends. They know something about eachother and a little about each other's lives. The dialogue should reflect a growing friendship, with some sharing of personal details and gossip and no particular desire to spend more time together.",
                 < 8 => $"{Name} and the farmer are close friends. They know a lot about each other and share personal details, gossip and theories about the world. The dialogue should reflect a close friendship, with a desire to spend time together but no romantic interest.",
-                < 10 => $"{Name} wants to date the farmer, but hasn't been asked yet. In context, the dialogue should reflect a close, intimate friendship and include occasional suggestive comments.",
-                <= 14 => $"{Name} and the farmer are very close and intimate.",
+                <= 10 => $"{Name} wants to date the farmer. In context, the dialogue should reflect a close, intimate friendship and share personal details, gossip and theories about the world. The dialogue should reflect a desire to spend time together and growing romantic interest.",
+                <= 14 => $"{Name} and the farmer are very close and intimate.", // Backup = should never be called
                 _ => throw new InvalidDataException("Invalid heart level.")
             });
         }
         else
         {
-            if (Context.Hearts == 8 && !isChild)
+            if (Context.Hearts <= 8 && !isChild)
             {
                 prompt.AppendLine($"{Name} and the farmer are close friends. They know a lot about each other and share personal details and gossip as well as their hopes and dreams. The dialogue should reflect a close friendship, with a desire to spend time together but no romantic interest.");
             }
             else if (isChild)
             {
-                prompt.AppendLine($"{Name} looks to the farmer like a parent, idolising the farmers actions and beliving that the farmer is mostly infallible.");
+                prompt.AppendLine($"{Name} looks to the farmer like a parent, idolising the farmer's actions and believing that the farmer is mostly infallible.");
             }
             else
             {
-                prompt.AppendLine($"{Name} and the farmer are close friends. {Name} wishes {(Llm.Instance.IsHighlySensoredModel ? "they could know the farmer better" : "the world had been different so they could pursue an intimate relationship with the farmer")}.  They know a lot about each other and confide initimate hopes dreams and fears to each other. {Name} sees the farmer as a confidant and openly share their frustrations and annoyances with others who are important in their life.");
+                prompt.AppendLine($"{Name} and the farmer are close friends. They know a lot about each other and confide initimate hopes dreams and fears to each other. {Name} sees the farmer as a confidant and openly share their frustrations and annoyances with others who are important in their life.");
             }
         }
     }
