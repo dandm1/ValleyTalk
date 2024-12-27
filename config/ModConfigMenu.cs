@@ -117,6 +117,13 @@ namespace ValleyTalk
                     setValue: (value) =>{ Config.PromptFormat = value; SetLlm(); }
                 );
             }
+            ConfigMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Apply translation (experimental)",
+                tooltip: () => "Apply experimental instructions to the AI to translate responses into the game language",
+                getValue: () => Config.ApplyTranslation,
+                setValue: (value) =>{ Config.ApplyTranslation = value; }
+            );
         }
 
         private static string[] GetModelNames()

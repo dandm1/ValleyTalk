@@ -9,5 +9,6 @@
         public string ServerAddress { get; set; } = "http://localhost:8080";
         public string PromptFormat { get; set; } = "[INST] {system}\n{prompt}[/INST]\n{response_start}";
         public string ApiKey { get; set; } = string.Empty;
+        public bool ApplyTranslation { get; set; } = false;
     }
 }

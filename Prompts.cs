@@ -118,6 +118,10 @@ public class Prompts
     {
         var systemPrompt = new StringBuilder();
         systemPrompt.AppendLine("You are an expert computer game writer that takes great pride in being able to create dialogue for any character in any game that exactly matches that character's situation and personality.");
+        if (ModEntry.Config.ApplyTranslation)
+        {
+            systemPrompt.AppendLine($"You are an expert at writing dialogue in {ModEntry.Language} based on instructions given mostly in English, while keeping the responses in character.  All responses you write must be in {ModEntry.Language}.");
+        }
         return systemPrompt.ToString();
     }
 
@@ -789,6 +793,10 @@ public class Prompts
         instructions.AppendLine("- \"I'm so glad you came to visit me today.  I've been feeling a little lonely lately, but this rose really brightens my day.\" $s");
         instructions.AppendLine("### Example 3:");
         instructions.AppendLine("- \"Oh hi. I don't think I know you, and I'm rather busy. See you around.\"");
+        if (ModEntry.Config.ApplyTranslation)
+        {
+            instructions.AppendLine($"Please express the line and any responses in {ModEntry.Language}.  Keep the responses natural and in character, but always use {ModEntry.Language} despite the fact this prompt is in English.");
+        }
         if (!string.IsNullOrWhiteSpace(Llm.Instance.ExtraInstructions))
         {
             instructions.AppendLine(Llm.Instance.ExtraInstructions);

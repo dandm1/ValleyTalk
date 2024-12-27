@@ -18,6 +18,20 @@ namespace ValleyTalk
         public static ModConfig Config;
         public static Dictionary<string, Type> LlmMap;
         public static bool BlockModdedContent { get; private set; } = false;
+        public static string Language 
+        { 
+            get
+            {
+                if (SldConstants.Languages.ContainsKey(SHelper.Translation.LocaleEnum))
+                {
+                    return SldConstants.Languages[SHelper.Translation.LocaleEnum];
+                }
+                else
+                {
+                    return "English";
+                }
+            }
+        }
 
         public override object GetApi()
         {
