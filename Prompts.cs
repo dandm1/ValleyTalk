@@ -129,7 +129,7 @@ public class Prompts
     {
         var gameConstantPrompt = new StringBuilder();
         gameConstantPrompt.AppendLine($"You are creating dialogue to enhance the experience of players in the game Stardew Valley.");
-        gameConstantPrompt.AppendLine("While staying true to the characters you are writing for a mature audience looking for more adult and sexual content when appropriate.");
+        gameConstantPrompt.AppendLine("While staying true to the characters you are writing for a mature audience and looking to add variety and depth when appropriate.");
         gameConstantPrompt.AppendLine("##Game Summary");
         gameConstantPrompt.AppendLine(_stardewSummary);
         return gameConstantPrompt.ToString();
@@ -266,15 +266,78 @@ public class Prompts
 
     private void GetSpouse(StringBuilder prompt)
     {
-        if (Context.Inlaw == null) return;
-        
-        if (Context.Inlaw == "Krobus")
+        var spouses = Game1
+                    .getPlayerOrEventFarmer()
+                    .friendshipData
+                    .FieldDict
+                    .Where(x => x.Value.Value.IsMarried() || !x.Value.Value.IsRoommate())
+                    .Select(x => x.Key);
+        bool talkingToSpouse = spouses.Any(x => x == Name);
+        spouses = spouses.Where(x => x != Name);
+                    
+        if (spouses.Any())
         {
-            prompt.AppendLine($"The farmer is roommates with {Context.Inlaw}. {Context.Inlaw} lives together at the farm inherited from the farmer's grandfather in a platonic freindship.  {Context.Inlaw} lived in the Stardew Valley sewers before becoming the farmer's roommate and is unknown to the townsfolk.");
+            bool multipleOthers = spouses.Count() > 1;
+            if (talkingToSpouse)
+            {
+                prompt.AppendLine($"As well as {Name} the Farmer is also married to {(multipleOthers ? $"{spouses.Count()} other people: {string.Join(", ", spouses)}":spouses.First())}. {Name}, the Farmer and {(multipleOthers ? "all the other spouses" : spouses.First())} live together at the farm inherited from the farmer's grandfather. The spouses lived in Stardew Valley before the Farmer arrived and knew each other before the farmer met any of them.");
+            }
+            else
+            {
+                if (multipleOthers)
+                {
+                    prompt.AppendLine($"The farmer is married to {spouses.Count()} people: {string.Join(", ", spouses)}. The Farmer's spouses all live with the farmer on the farm inherited from the farmer's grandfather.  {string.Join(", ", spouses)} and {Name} all lived in Stardew Valley and knew each other before the farmer met any of them.");
+                }
+                else
+                {
+                    prompt.AppendLine($"The farmer is married to {spouses.First()}. {spouses.First()} lives with the farmer on the farm inherited from the farmer's grandfather.  {Name} and {spouses.First()} both lived in Stardew Valley and knew each other before the farmer met either of them.");
+                }
+            }
         }
-        else
+        var roommates = Game1
+                    .getPlayerOrEventFarmer()
+                    .friendshipData
+                    .FieldDict
+                    .Where(x => x.Value.Value.IsMarried() && x.Value.Value.IsRoommate())
+                    .Select(x => x.Key);
+        bool talkingToRoommate = roommates.Any(x => x == Name);
+        roommates = roommates.Where(x => x != Name);
+        
+        if (roommates.Any())
         {
-            prompt.AppendLine($"The farmer is married to {Context.Inlaw}. {Context.Inlaw} lives with the Farmer on the farm inherited from the Farmer's grandfather.  {Name} and {Context.Inlaw} both lived in Stardew Valley and knew each other before the farmer met either of them.");
+            bool multipleOthers = roommates.Count() > 1;
+            if (talkingToRoommate)
+            {
+                prompt.AppendLine($"As well as {Name} the Farmer is a roommate with {(multipleOthers ? $"{roommates.Count()} other people: {string.Join(", ", roommates)}":roommates.First())}. {Name}, the Farmer and {(multipleOthers ? "all the other roommates" : roommates.First())} live together at the farm inherited from the farmer's grandfather in a platonic friendship.");
+            }
+            else
+            {
+                if (multipleOthers)
+                {
+                    prompt.AppendLine($"The farmer has {roommates.Count()} roommates: {string.Join(", ", roommates)}. The Farmer's roommates all live with the farmer on the farm inherited from the farmer's grandfather.");
+                }
+                else
+                {
+                    prompt.AppendLine($"The farmer has {roommates.First()} as a roommate. {roommates.First()} lives with the farmer on the farm inherited from the farmer's grandfather.");
+                }
+            }
+        }
+
+        var engaged = Game1
+                    .getPlayerOrEventFarmer()
+                    .friendshipData
+                    .FieldDict
+                    .Where(x => x.Value.Value.IsEngaged())
+                    .Select(x => x.Key);
+        if (engaged.Any(x => x != Name))
+        {
+            var firstEngaged = engaged.First();
+            prompt.AppendLine($"The farmer is engaged to {firstEngaged}. The wedding is in {Game1.getPlayerOrEventFarmer().friendshipData[firstEngaged].CountdownToWedding} days and the farmer is looking forward to their future together. {firstEngaged} does not live on the farm.");
+        }
+        var total = spouses.Count() + engaged.Count();
+        if (total > 1 && !talkingToSpouse && !talkingToRoommate)
+        {
+            prompt.AppendLine($"{Name} is aware that the farmer has a polyamorous lifestyle and accepts this.");
         }
     }
 
@@ -413,9 +476,9 @@ public class Prompts
                 "pamHouseUpgrade" => $"Pam's house has recently been upgraded by the Farmer, allowing her and Penny to live in a more comfortable environment. The people of Pelican town including Pam and Penny are aware that the Farmer paid for the upgrade.",
                 "pamHouseUpgradeAnonymous" => $"Pam's house has recently been upgraded by the Farmer. The people of Pelican Town are not aware who paid for it and it is a great mystery, particularly for Pam and also for Penny whether or not she is married to the Farmer.",
                 "jojaMartStruckByLightning" => $"JojaMart has recently been struck by lightning, causing a fire that destroyed the building.",
-                "babyBoy" => $"The farmer and {Context.Inlaw} have recently had a baby boy.",
-                "babyGirl" => $"The farmer and {Context.Inlaw} have recently had a baby girl.",
-                "wedding" => $"The farmer has recently gotten married to {Context.Inlaw}.",
+                "babyBoy" => $"The farmer and the farmer's spouse have recently had a baby boy.",
+                "babyGirl" => $"The farmer and the farmer's spouse have recently had a baby girl.",
+                "wedding" => $"The farmer has recently gotten married.",
                 "luauBest" => $"The pot luck soup at the Luau was recently declared the best ever.",
                 "luauShorts" => $"Lewis's shorts were recently found in the pot luck soup at the Luau, causing a scandle.",
                 "luauPoisoned" => $"The pot luck soup at the Luau was recently poisoned, causing a mass illness.",
@@ -484,22 +547,23 @@ public class Prompts
 
         if (Character.StardewNpc.DirectionsToNewLocation != null && Context.Location != Character.StardewNpc.DirectionsToNewLocation.targetLocationName)
         {
-            prompt.AppendLine($"{Name} is going to {Character.StardewNpc.DirectionsToNewLocation}.");
+            prompt.AppendLine($"{Name} is going to {Character.StardewNpc.DirectionsToNewLocation.targetLocationName}.");
         }
     }
 
     private void GetMarriageFeelings(StringBuilder prompt)
     {
+        var IsRoommate = Game1.getPlayerOrEventFarmer().friendshipData[Name].IsRoommate();
         switch (Context.Hearts)
         {
             case > 12:
-                prompt.AppendLine($"{Name} is feeling very positive about {(Name == "Krobus" ? "being roommates" : "the marriage")}.");
+                prompt.AppendLine($"{Name} is feeling very positive about {(IsRoommate ? "being roommates" : "the marriage")}.");
                 break;
             case < 10:
-                prompt.AppendLine($"{Name} is feeling very negative about {(Name == "Krobus" ? "being roommates" : "the marriage")}. While {Name} should will still talk about the Context of the conversation, they will be more likely to be negative or critical.");
+                prompt.AppendLine($"{Name} is feeling very negative about {(IsRoommate ? "being roommates" : "the marriage")}. While {Name} should will still talk about the Context of the conversation, they will be more likely to be negative or critical.");
                 break;
             default:
-                prompt.AppendLine($"{Name} is generally content, but a little uncertain and conflicted about {(Name == "Krobus" ? "being roommates" : "the marriage")}.");
+                prompt.AppendLine($"{Name} is generally content, but a little uncertain and conflicted about {(IsRoommate ? "being roommates" : "the marriage")}.");
                 break;
         }
     }
