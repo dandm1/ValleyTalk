@@ -3,7 +3,8 @@
   "Debug": false,
   "Provider": "Google",
   "ModelName": "gemini-1.5-flash",
-  "ServerAddress": "http://mlpc:8080",
+  "ServerAddress": "http://loclhost:8080",
   "PromptFormat": "[INST] {system}\n{prompt}[/INST]\n{response_start}",
-  "ApiKey": ""
+  "ApiKey": "",
+  "ApplyTranslation": false
 }
