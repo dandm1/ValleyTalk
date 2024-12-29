@@ -217,10 +217,21 @@ public class Prompts
 
     private void GetPreoccupation(StringBuilder prompt)
     {
-        if (Game1.random.NextDouble() < 0.5) return;
+        if (Game1.random.NextDouble() < 0.5 || Context.ChatHistory.Length > 0 ) return;
 
         var nPreoccupations = Character.PossiblePreoccupations.Count;
-        var preoccupation = Character.PossiblePreoccupations[Game1.random.Next(nPreoccupations)];
+        string preoccupation;
+        if (Game1.Date == Character.PreoccupationDate)
+        {
+            preoccupation = Character.Preoccupation;
+        }
+        else
+        {
+            preoccupation = Character.PossiblePreoccupations[Game1.random.Next(nPreoccupations)];
+            Character.Preoccupation = preoccupation;
+            Character.PreoccupationDate = Game1.Date;
+        }
+        
         prompt.AppendLine($"Before the farmer arrived, {Name} was thinking about {preoccupation}.");
     }
 
