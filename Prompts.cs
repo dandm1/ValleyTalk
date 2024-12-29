@@ -232,7 +232,7 @@ public class Prompts
             Character.PreoccupationDate = Game1.Date;
         }
         
-        prompt.AppendLine($"Before the farmer arrived, {Name} was thinking about {preoccupation}.");
+        prompt.AppendLine($"Before the farmer arrived, {Name} was thinking about {preoccupation}. {Name} may talk about this, if there is nothing more pressing to discuss.");
     }
 
     private void GetOtherNpcs(StringBuilder prompt)
