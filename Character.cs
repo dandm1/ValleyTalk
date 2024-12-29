@@ -110,7 +110,11 @@ public class Character
         }
         if (Bio.Dialogue != null)
         {
-            canonDialogue = canonDialogue.Concat(Bio.Dialogue).ToDictionary(x => x.Key, x => x.Value);
+            foreach (var dialogue in Bio.Dialogue)
+            {
+                canonDialogue[dialogue.Key] = dialogue.Value;
+            }
+            
         }
         DialogueData = new();
         foreach (var dialogue in canonDialogue)
