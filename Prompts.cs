@@ -844,7 +844,12 @@ public class Prompts
         }
         instructions.AppendLine("To include the farmer's name use the @ symbol.");
         instructions.AppendLine("If the line should be presented with breaks, use #$b# as a screen divider or use #$e# as a divider for a more significant break. There should not be more than 24 words between each break. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines.");
-        instructions.AppendLine($"To express emotions, finish the section with one of these emotion tokens: $h for extremely happy, $0 for neutral, $s for sad, $l for in love, {(string.IsNullOrWhiteSpace(Character.Bio.Unique) ? "" : "$u for " + Character.Bio.Unique + ", ")}or $a for angry. Include the emotion token in the section to which it applies, do not put a # before it. Do not include emojis, actions surrounded by asterisks or other special characters to indicate emotion or actions.");
+        var extraPortraits = new StringBuilder();
+        foreach (var portrait in Character.Bio.ExtraPortraits)
+        {
+            extraPortraits.Append($"${portrait.Key} for {portrait.Value}, ");
+        }
+        instructions.AppendLine($"To express emotions, finish the section with one of these emotion tokens: $h for extremely happy, $0 for neutral, $s for sad, $l for in love, {extraPortraits.ToString()}or $a for angry. Include the emotion token in the section to which it applies, do not put a # before it. Do not include emojis, actions surrounded by asterisks or other special characters to indicate emotion or actions.");
         instructions.AppendLine("Write the line as a single line of output preceded with a '-' only. The line should be properly punctuated and capitalised.");
         instructions.AppendLine("If the line doesn't call for the farmer to respond, just output the one line.");
         instructions.AppendLine($"If the line does invite a response from the farmer, please propose two, three or four possible responses that the farmer could make, covering the full range of possible reactions. As the farmer gets more friendly with {Name} responses should be available more often. Each response should be on a new line, no more than 12 words, preceded by a '%' and a space. Response lines should be in the voice of, and from the perspective of, the farmer.  They should not contain any special symbols, @s or emotion tokens.");

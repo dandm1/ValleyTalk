@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 namespace StardewDialogue;
 
 public class BioData
 {
     private bool? isMale;
+    private string unique;
 
     public string Biography { get; set; } = string.Empty;
     //Only update gender if the value passed is male or female
@@ -25,18 +27,26 @@ public class BioData
             isMale = null;
         }
     }
-    public string? Unique { get; set; }
-    public bool IsChild { get; set; } = false;
-    public bool IsSingle { get; set; } = false;
-    public string[] Locations { get; set; } = Array.Empty<string>();
-    public string[] ResortTags { get; set; } = Array.Empty<string>();
-    public int BirthDay {get; set;} = 0;
-    public Season BirthSeason {get; set;} = 0;
-    public string Home {get; set;} = string.Empty;
+    public string Unique 
+    { 
+        get => unique; 
+        set 
+        {
+            unique = value; 
+            if (!ExtraPortraits.ContainsKey('u') && !string.IsNullOrWhiteSpace(value))
+            {
+                ExtraPortraits.Add('u', value);
+            }
+        }
+    }
+    public Dictionary<char,string> ExtraPortraits { get; set; } = new Dictionary<char, string>();
+    public List<string> Preoccupations { get; set; } = new List<string>();
+    public Dictionary<string,string> Dialogue { get; set; } = new Dictionary<string, string>();
+    public bool HomeLocationBed { get; set; } = false;
+
     public string GenderP2 => (isMale ?? false) ? "he" : "she";
     
     public string GenderPronoun => (isMale ?? false) ? "him" : "her";
     public string GenderPossessive => (isMale ?? false) ? "his" : "her";
 
-    public bool HomeLocationBed { get; set; } = false;
 }

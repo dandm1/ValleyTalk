@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Serilog;
 using Microsoft.Xna.Framework.Content;
 using StardewModdingAPI.Events;
+using System.Text;
 
 namespace StardewDialogue;
 
@@ -25,6 +26,9 @@ public class Character
 
     internal IEnumerable<Tuple<StardewTime,IHistory>> EventHistory => eventHistory.AllTypes;
 
+    public NPC StardewNpc { get; internal set; }
+    public List<char> ValidPortraits { get; }
+
     public Character(string name, NPC stardewNpc)
     {
         Name = name;
@@ -35,7 +39,8 @@ public class Character
         LoadBio();
         //LoadDialogue();
         LoadEventHistory();
-        ////Log.Information($"Loaded dialogue for {Name}");
+        ValidPortraits = new List<char>() { '0', 'h', 's', 'l', 'a' };
+        ValidPortraits.AddRange(_bioData.ExtraPortraits.Keys);
     }
 
 
@@ -178,7 +183,7 @@ public class Character
         return results;
     }
 
-    public static IEnumerable<string> ProcessLines(string resultString,bool relaxedValidation = false)
+    public IEnumerable<string> ProcessLines(string resultString,bool relaxedValidation = false)
     {
         var resultLines = resultString.Split('\n').AsEnumerable();
         // Remove any line breaks
@@ -186,38 +191,122 @@ public class Character
         resultLines = resultLines.Where(x => !string.IsNullOrWhiteSpace(x));
         // Find the first line that starts with '- ' and remove any lines before it
         resultLines = resultLines.SkipWhile(x => !x.StartsWith("- "));
-        // Check that the first line starts with '- '.  Omit any subsequent lines that don't start with '% '
-        var validLayout = (resultLines.FirstOrDefault()?? string.Empty ).StartsWith("- ");
-        if (!validLayout)
+        var dialogueLine = resultLines.FirstOrDefault();
+        if (!dialogueLine.StartsWith("- "))
         {
             //Log.Debug("Invalid layout detected in AI response.  Returning the full response.");
             return Array.Empty<string>();
         }
-        var responseLines = resultLines.Skip(1).Where(x => x.StartsWith("% "));
-        resultLines = resultLines.Take(1).Concat(responseLines);
-        // Remove any leading punctuation
-        resultLines = resultLines.Select(x => x.Trim().TrimStart('-', ' ', '"', '%'));
-        resultLines = resultLines.Select(x => x.Trim().TrimEnd('"'));
-        // If the string starts or ends with #$b# remove it.
-        resultLines = resultLines.Select(x => x.StartsWith("#$b#") ? x[4..] : x);
-        resultLines = resultLines.Select(x => x.EndsWith("#$b#") ? x[..^4] : x);
-        // If the string contains $e or $b without a # before them, add a #
-        resultLines = resultLines.Select(x => x.Replace("$e", "#$e").Replace("$b", "#$b"));
-        resultLines = resultLines.Select(x => x.Replace("##$e", "#$e").Replace("##$b", "#$b"));
-        resultLines = resultLines.Select(x => x.Replace("#$c .5#",""));
-        // If the string contains any emotion indicators ($0, $s, $l, $a or $h) with a # before them, remove the #
-        resultLines = resultLines.Select(x => x.Replace("#$0", "$0").Replace("#$s", "$s").Replace("#$l", "$l").Replace("#$a", "$a").Replace("#$h", "$h"));
-        // Remove any quotation marks
-        resultLines = resultLines.Select(x => x.Replace("\"", ""));
-        // Remove any blank lines and trim the rest
-        resultLines = resultLines.Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => x.Trim()).Where(x => x.Length > 2);
-        var firstElements = resultLines.FirstOrDefault().Split('#');
-        if (firstElements.Any(x => x.Length > 200 && !relaxedValidation))
+        dialogueLine = CommonCleanup(dialogueLine);
+        dialogueLine = DialogueLineCleanup(dialogueLine, relaxedValidation);
+        if (string.IsNullOrWhiteSpace(dialogueLine))
         {
-            //Log.Debug("Long line detected in AI response.  Returning nothing.");
+            //Log.Debug("Empty dialogue line detected in AI response.  Returning nothing.");
             return Array.Empty<string>();
         }
+        var responseLines = resultLines.Skip(1).Where(x => x.StartsWith("% "));
+        if (responseLines.Any())
+        {
+            responseLines = responseLines.Select(x => CommonCleanup(x));
+            responseLines = responseLines.Select(x => ResponseLineCleanup(x));
+            responseLines = responseLines.Where(x => !string.IsNullOrWhiteSpace(x));
+            if (responseLines.Count() < 2)
+            {
+                responseLines = Array.Empty<string>();
+            }
+        }
+        resultLines = new List<string>(){dialogueLine}.Concat(responseLines);
         return resultLines;
+    }
+
+    private string CommonCleanup(string line)
+    {
+        // Remove any leading punctuation and trailing quotation marks
+        line = line.Trim().TrimStart('-', ' ', '"', '%');
+        line = line.TrimEnd('"');
+        // If the string starts or ends with #$b# ot #$e# remove it.
+        line = line.StartsWith("#$b#") ? line[4..] : line;
+        line = line.EndsWith("#$b#") ? line[..^4] : line;
+        line = line.StartsWith("#$e#") ? line[4..] : line;
+        line = line.EndsWith("#$e#") ? line[..^4] : line;
+        // Remove any quotation marks
+        line = line.Replace("\"", "");
+        return line;
+    }
+
+    private string DialogueLineCleanup(string line,bool relaxedValidation = false)
+    {
+        // If the string contains $e or $b without a # before them, add a #
+        line = line.Replace("$e", "#$e").Replace("$b", "#$b");
+        line = line.Replace("##$e", "#$e").Replace("##$b", "#$b");
+        line = line.Replace("#$c .5#","");
+        // If the string contains any emotion indicators ($0, $s, $l, $a or $h) with a # before them, remove the #
+        foreach (var indicator in ValidPortraits)
+        {
+            line = line.Replace($"#${indicator}", $"${indicator}");
+        }
+
+        for (int i = 0; i < line.Length; i++)
+        {
+            if (line[i] == '$')
+            {
+                if (i + 1 < line.Length)
+                {
+                    var nextChar = line[i + 1];
+                    if (!ValidPortraits.Contains(nextChar) && nextChar != 'e' && nextChar != 'c' && nextChar != 'b')
+                    {
+                        line.Remove(i, 2);
+                        i--; // Adjust index after removal
+                    }
+                    else
+                    {
+                        i++; // Skip the next character
+                    }
+                }
+            }
+        }
+        
+        line = line.Trim();
+        var elements = line.Split('#');
+        if (elements.Any(x => x.Length > 200 && !relaxedValidation))
+        {
+            //Log.Debug("Long line detected in AI response.  Returning nothing.");
+            return string.Empty;
+        }
+        return line;
+    }
+
+    private string ResponseLineCleanup(string line)
+    {
+        // Remove any hashes
+        line = line.Replace("#", "");
+        // If the string contains any commands preceded by a $, remove them
+        for (int i = 0; i < line.Length; i++)
+        {
+            if (line[i] == '$')
+            {
+                if (i + 1 < line.Length)
+                {
+                    line = line.Remove(i, 2);
+                }
+                else
+                {
+                    line = line.Remove(i, 1);
+                }
+            }
+        }
+        if (line.Contains('@'))
+        {
+            var farmerName = Game1.player.Name;
+            line = line.Replace("@", farmerName);
+        }
+        line = line.Trim();
+        if (line.Length > 90)
+        {
+            //Log.Debug("Long line detected in AI response.  Returning nothing.");
+            return string.Empty;
+        }
+        return line;
     }
 
     internal void AddDialogue(IEnumerable<StardewValley.DialogueLine> dialogues, int year, StardewValley.Season season, int dayOfMonth, int timeOfDay)
@@ -300,5 +389,4 @@ public class Character
         get => _bioData;
     }
 
-    public NPC StardewNpc { get; internal set; }
 }
