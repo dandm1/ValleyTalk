@@ -300,7 +300,7 @@ namespace ValleyTalk
 
         internal bool PatchNpc(NPC n)
         {
-            if (LlmDisabled)
+            if (LlmDisabled || !ModEntry.Config.EnableMod)
             {
                 return false;
             }
