@@ -13,6 +13,7 @@ using Serilog;
 using Microsoft.Xna.Framework.Content;
 using StardewModdingAPI.Events;
 using System.Text;
+using Microsoft.VisualBasic;
 
 namespace StardewDialogue;
 
@@ -41,8 +42,32 @@ public class Character
         LoadEventHistory();
         ValidPortraits = new List<char>() { '0', 'h', 's', 'l', 'a' };
         ValidPortraits.AddRange(_bioData.ExtraPortraits.Keys);
+        PossiblePreoccupations = new List<string>(_bioData.Preoccupations);
+        PossiblePreoccupations.AddRange(GetLovedAndHatedGiftNames());
     }
 
+    private IEnumerable<string> GetLovedAndHatedGiftNames()
+    {
+        if (!Game1.NPCGiftTastes.TryGetValue(Name, out var npcGiftTastes))
+        {
+            return Array.Empty<string>();
+        }
+
+        string[] tasteLevels = npcGiftTastes.Split('/');
+        var lovedGifts = ArgUtility.SplitBySpace(tasteLevels[1]);
+        var hatedGifts = ArgUtility.SplitBySpace(tasteLevels[7]);
+
+        List<string> returnList = new();
+        foreach (var gift in lovedGifts)
+        {
+            returnList.Add(Game1.objectData[gift].Name);
+        }
+        foreach (var gift in hatedGifts)
+        {
+            returnList.Add(Game1.objectData[gift].Name);
+        }
+        return returnList;
+    }
 
     private void LoadDialogue()
     {
@@ -388,5 +413,5 @@ public class Character
     {
         get => _bioData;
     }
-
+    public List<string> PossiblePreoccupations { get; }
 }

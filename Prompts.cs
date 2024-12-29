@@ -209,9 +209,19 @@ public class Prompts
         {
             prompt.AppendLine("The farmer is female and the dialogue may reflect this, for example by referring to her as a 'woman', 'girl' or 'wife' as appropriate in the Context, referring to typical female clothing choices or activities.");
         }
+        GetPreoccupation(prompt);
         GetCurrentConversation(prompt);
 
         return prompt.ToString();
+    }
+
+    private void GetPreoccupation(StringBuilder prompt)
+    {
+        if (Game1.random.NextDouble() < 0.5) return;
+
+        var nPreoccupations = Character.PossiblePreoccupations.Count;
+        var preoccupation = Character.PossiblePreoccupations[Game1.random.Next(nPreoccupations)];
+        prompt.AppendLine($"Before the farmer arrived, {Name} was thinking about {preoccupation}.");
     }
 
     private void GetOtherNpcs(StringBuilder prompt)
