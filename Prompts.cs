@@ -291,7 +291,7 @@ public class Prompts
                     .getPlayerOrEventFarmer()
                     .friendshipData
                     .FieldDict
-                    .Where(x => x.Value.Value.IsMarried() || !x.Value.Value.IsRoommate())
+                    .Where(x => x.Value.Value.IsMarried() && !x.Value.Value.IsRoommate())
                     .Select(x => x.Key);
         bool talkingToSpouse = spouses.Any(x => x == Name);
         spouses = spouses.Where(x => x != Name);
@@ -374,7 +374,7 @@ public class Prompts
                 -1 => $"This is the first time {Name} has spoken to the farmer, though {Name} had heard rumours of the farmer's arrival in town.",
                 < 2 => $"{Name} and the farmer are strangers, though they have spoken before. {Name} is not yet sure if the farmer is someone they want to get to know.",
                 < 4 => $"{Name} and the farmer know each other by sight, but treat each other as strangers. The dialogue should reflect two people just getting to know each other, no sharing of personal details or gossip or suggesting activities together.",
-                < 6 => $"{Name} and the farmer are becoming friends. They know something about eachother and a little about each other's lives. The dialogue should reflect a growing friendship, with some sharing of personal details and gossip and no particular desire to spend more time together.",
+                < 6 => $"{Name} and the farmer are becoming friends. They know something about each other and a little about each other's lives. The dialogue should reflect a growing friendship, with some sharing of personal details and gossip but no particular desire to spend more time together.",
                 < 8 => $"{Name} and the farmer are close friends. They know a lot about each other and share personal details, gossip and theories about the world. The dialogue should reflect a close friendship, with a desire to spend time together but no romantic interest.",
                 <= 10 => $"{Name} wants to date the farmer. In context, the dialogue should reflect a close, intimate friendship and share personal details, gossip and theories about the world. The dialogue should reflect a desire to spend time together and growing romantic interest.",
                 <= 14 => $"{Name} and the farmer are very close and intimate.", // Backup = should never be called
@@ -409,7 +409,7 @@ public class Prompts
             SpouseAction.patio => $"{Name} is standing on the patio to the rear of the farmhouse.  {Name} is engaging in their favourite hobby, and focussing intently.\n",
             SpouseAction.funReturn => $"{Name} is returning to the farmhouse after a fun day out.\n",
             SpouseAction.jobReturn => $"{Name} is returning to the farmhouse after a day at work.\n",
-            SpouseAction.spouseRoom => $"{Name} is engaging in their personal hobbies and interests in a special room in the farmhouse dedicates to that.\n",
+            SpouseAction.spouseRoom => $"{Name} is engaging in {Character.Bio.GenderPossessive} personal hobbies and interests in a special room in the farmhouse dedicates to that.\n",
             _ => $""
         });
     }

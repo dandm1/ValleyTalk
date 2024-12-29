@@ -60,11 +60,20 @@ public class Character
         List<string> returnList = new();
         foreach (var gift in lovedGifts)
         {
-            returnList.Add(Game1.objectData[gift].Name);
+            Game1.objectData.TryGetValue(gift, out var data);
+            if (data != null)
+            {
+                returnList.Add(data.Name);
+            }
+            
         }
         foreach (var gift in hatedGifts)
         {
-            returnList.Add(Game1.objectData[gift].Name);
+            Game1.objectData.TryGetValue(gift, out var data);
+            if (data != null)
+            {
+                returnList.Add(data.Name);
+            }
         }
         return returnList;
     }
@@ -284,7 +293,7 @@ public class Character
                     var nextChar = line[i + 1];
                     if (!ValidPortraits.Contains(nextChar) && nextChar != 'e' && nextChar != 'c' && nextChar != 'b')
                     {
-                        line.Remove(i, 2);
+                        line = line.Remove(i, 2);
                         i--; // Adjust index after removal
                     }
                     else
