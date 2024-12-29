@@ -99,6 +99,10 @@ public class Character
         {
             canonDialogue = StardewNpc.Dialogue;
         }
+        if (Bio.Dialogue != null)
+        {
+            canonDialogue = canonDialogue.Concat(Bio.Dialogue).ToDictionary(x => x.Key, x => x.Value);
+        }
         DialogueData = new();
         foreach (var dialogue in canonDialogue)
         {
@@ -414,4 +418,6 @@ public class Character
         get => _bioData;
     }
     public List<string> PossiblePreoccupations { get; }
+    public string Preoccupation { get; internal set; }
+    public WorldDate PreoccupationDate { get; internal set; }
 }
