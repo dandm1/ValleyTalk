@@ -6,10 +6,11 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using Serilog;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
-internal class LlmGemini : Llm
+internal class LlmGemini : Llm, IGetModelNames
 {
     private string apiKey;
     private string modelName;
@@ -27,6 +28,22 @@ internal class LlmGemini : Llm
     public override string ExtraInstructions => "";
 
     public override bool IsHighlySensoredModel => false;
+
+    public string[] GetModelNames()
+    {
+        var modelsUrl = $"https://generativelanguage.googleapis.com/v1beta/models?key="+apiKey;
+        var client = new HttpClient();
+        var response = client.GetAsync(modelsUrl).Result;
+        var responseString = response.Content.ReadAsStringAsync().Result;
+        var responseJson = JsonDocument.Parse(responseString);
+        var models = responseJson.RootElement.GetProperty("models");
+        var modelNames = new List<string>();
+        foreach (var model in models.EnumerateArray())
+        {
+            modelNames.Add(model.GetProperty("name").GetString());
+        }
+        return modelNames.ToArray();
+    }
 
     internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
