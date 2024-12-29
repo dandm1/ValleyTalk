@@ -120,9 +120,10 @@ namespace ValleyTalk
             ConfigMenu.AddParagraph(
                 mod: ModManifest,
                 text: () => {
-                    var names = GetModelNames();
-                    if (names.Length == 0) return $"Unable to get model names for {Config.Provider} (maybe the API key wasn't set when this menu was opened?)";
-                    return $"The models available on provider {Config.Provider} are: {string.Join(", ", GetModelNames())}"; 
+                    var names = GetModelNames().ToList();
+                    names.Sort();
+                    if (names.Count() == 0) return $"Unable to get model names for {Config.Provider} (maybe the API key wasn't set when this menu was opened?)";
+                    return $"The models available on provider {Config.Provider} are: {string.Join("\n", GetModelNames())}"; 
                 }
                     
             );

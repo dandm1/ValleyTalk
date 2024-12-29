@@ -31,6 +31,7 @@ internal class LlmGemini : Llm, IGetModelNames
 
     public string[] GetModelNames()
     {
+        try{
         var modelsUrl = $"https://generativelanguage.googleapis.com/v1beta/models?key="+apiKey;
         var client = new HttpClient();
         var response = client.GetAsync(modelsUrl).Result;
@@ -40,9 +41,20 @@ internal class LlmGemini : Llm, IGetModelNames
         var modelNames = new List<string>();
         foreach (var model in models.EnumerateArray())
         {
-            modelNames.Add(model.GetProperty("name").GetString());
+            var name = model.GetProperty("name").GetString();
+            if (name.StartsWith("models/"))
+            {
+                name = name.Substring(7);
+            }
+            modelNames.Add(name);
         }
         return modelNames.ToArray();
+        }
+        catch(Exception ex)
+        {
+            Log.Debug(ex.Message);
+            return new string[] { };
+        }
     }
 
     internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
