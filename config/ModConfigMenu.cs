@@ -75,7 +75,9 @@ namespace ValleyTalk
                     name: () => "API Key",
                     getValue: () => Config.ApiKey,
                     setValue: (value) =>{ Config.ApiKey = value; SetLlm(); },
-                    fieldId: "ApiKey"
+                    fieldId: "ApiKey",
+                    width: 500,
+                    height: 48
                 );
             }
 
@@ -89,7 +91,9 @@ namespace ValleyTalk
                     { 
                         Config.ModelName = value; SetLlm(); 
                     },
-                    fieldId: "ModelName"
+                    fieldId: "ModelName",
+                    width: 400,
+                    height: 48
                 );
             }
             if (constructorParameters.Contains("url", StringComparer.OrdinalIgnoreCase))
@@ -98,7 +102,9 @@ namespace ValleyTalk
                     mod: ModManifest,
                     name: () => "Server address",
                     getValue: () => Config.ServerAddress,
-                    setValue: (value) =>{ Config.ServerAddress = value; SetLlm(); }
+                    setValue: (value) =>{ Config.ServerAddress = value; SetLlm(); },
+                    width: 500,
+                    height: 48
                 );
             }
             if (constructorParameters.Contains("promptFormat", StringComparer.OrdinalIgnoreCase))
@@ -107,7 +113,9 @@ namespace ValleyTalk
                     mod: ModManifest,
                     name: () => "Prompt format",
                     getValue: () => Config.PromptFormat,
-                    setValue: (value) =>{ Config.PromptFormat = value; SetLlm(); }
+                    setValue: (value) =>{ Config.PromptFormat = value; SetLlm(); },
+                    width: 500,
+                    height: 48
                 );
             }
             ConfigMenu.AddBoolOption(
