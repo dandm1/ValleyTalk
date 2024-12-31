@@ -98,12 +98,17 @@ namespace ValleyTalk
             SHelper = helper;
 
             var contentPacks = SHelper.ModRegistry.GetAll().Where(p => p.IsContentPack).ToList();
-            var blockedContentPacks = contentPacks.Where(p => !SldConstants.PermitListContentPacks.Contains(p.Manifest.UniqueID));
+            var blockedContentPacks = contentPacks
+                .Where(p => !SldConstants.PermitListContentPacks.Contains(p.Manifest.UniqueID))
+                .Where(p => 
+                        !p.Manifest.ExtraFields.ContainsKey("PermitAiUse") || 
+                        !(p.Manifest.ExtraFields["PermitAiUse"] as bool? ?? false)
+                );
             if (blockedContentPacks.Any())
             {
-                Monitor.Log("ValleyTalk: Unapproved content packs found.  Using canon dialogue and blocking non standard NPCs.", LogLevel.Warn);
-                Monitor.Log($"Unapproved content packs: {string.Join(", ", blockedContentPacks.Select(p => p.Manifest.Name))}", LogLevel.Warn);
-                Monitor.Log("If you are the mod author and wish to unblock your content pack, please raise a bug.", LogLevel.Warn);
+                Monitor.Log("ValleyTalk Warning: Content packs found that don't have author approval for use with AI.  ValleyTalk will use canon dialogue for generation and block non standard NPCs.", LogLevel.Warn);
+                Monitor.Log($"Content packs without approval: {string.Join(", ", blockedContentPacks.Select(p => p.Manifest.Name))}", LogLevel.Warn);
+                Monitor.Log("If you are the mod author and wish to unblock your content pack, please raise a bug on the Nexus page or add \"permtAiUse\":true to the manifest.", LogLevel.Warn);
                 BlockModdedContent = true;
             }
 
