@@ -152,7 +152,7 @@ namespace ValleyTalk
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
                 name: () => "Disable characters",
-                tooltip: () => "Comma-separated list of villagers to disable the mod for",
+                tooltip: () => "Comma-separated list of villagers to disable the mod for, e.g. (\"Abigail,Leah,Sam\")",
                 getValue: () => Config.DisableCharacters,
                 setValue: (value) =>{ Config.DisableCharacters = value; }
             );

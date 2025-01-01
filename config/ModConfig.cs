@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json.Serialization;
+using StardewValley.Network;
 
 namespace ValleyTalk
 {
@@ -24,7 +26,11 @@ namespace ValleyTalk
             set
             {
                 disableCharacters = value;
-                DisabledCharactersList = new List<string>(value.Split(','));
+                DisabledCharactersList = value
+                            .Split(new[] {',',' ' })
+                            .Select(s => s.Trim().ToTitleCase())
+                            .Where(s => !string.IsNullOrWhiteSpace(s))
+                            .ToList();
             }
         }
         [JsonIgnore]
