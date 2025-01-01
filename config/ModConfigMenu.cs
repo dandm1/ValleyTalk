@@ -8,6 +8,14 @@ namespace ValleyTalk
 {
     internal static class ModConfigMenu
     {
+        private static Dictionary<int,string> FrequencyOptions = new Dictionary<int, string>()
+        {
+            { 0, "Never" },
+            { 1, "Rarely" },
+            { 2, "Occasionally" },
+            { 3, "Mostly" },
+            { 4, "Always" }
+        };
         private static IGenericModConfigMenuApi ConfigMenu;
         private static IManifest ModManifest;
         private static ModEntry _modEntry;
@@ -116,6 +124,37 @@ namespace ValleyTalk
                 tooltip: () => "Apply experimental instructions to the AI to translate responses into the game language",
                 getValue: () => Config.ApplyTranslation,
                 setValue: (value) =>{ Config.ApplyTranslation = value; }
+            );
+            ConfigMenu.AddTextOption(
+                mod: ModManifest,
+                name: () => "General frequency",
+                tooltip: () => "How often the mod will generate dialogue for general interactions",
+                getValue: () => FrequencyOptions[Config.GeneralFrequency],
+                setValue: (value) =>{ Config.GeneralFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
+                allowedValues: FrequencyOptions.Values.ToArray()
+            );
+            ConfigMenu.AddTextOption(
+                mod: ModManifest,
+                name: () => "Gift frequency",
+                tooltip: () => "How often the mod will generate dialogue when a gift is given",
+                getValue: () => FrequencyOptions[Config.GiftFrequency],
+                setValue: (value) =>{ Config.GiftFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
+                allowedValues: FrequencyOptions.Values.ToArray()
+            );
+            ConfigMenu.AddTextOption(
+                mod: ModManifest,
+                name: () => "Marriage frequency",
+                tooltip: () => "How often the mod will generate dialogue for marriage interactions",
+                getValue: () => FrequencyOptions[Config.MarriageFrequency],
+                setValue: (value) =>{ Config.MarriageFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
+                allowedValues: FrequencyOptions.Values.ToArray()
+            );
+            ConfigMenu.AddTextOption(
+                mod: ModManifest,
+                name: () => "Disable characters",
+                tooltip: () => "Comma-separated list of villagers to disable the mod for",
+                getValue: () => Config.DisableCharacters,
+                setValue: (value) =>{ Config.DisableCharacters = value; }
             );
             ConfigMenu.AddParagraph(
                 mod: ModManifest,

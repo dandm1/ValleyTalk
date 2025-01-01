@@ -18,7 +18,7 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref MarriageDialogueReference __instance, ref Dialogue __result, NPC n)
         {
-            if (!DialogueBuilder.Instance.PatchNpc(n))
+            if (!DialogueBuilder.Instance.PatchNpc(n, ModEntry.Config.MarriageFrequency))
             {
                 return true;
             }
@@ -41,7 +41,7 @@ namespace ValleyTalk
             {
                 return true;
             }
-            if (!DialogueBuilder.Instance.PatchNpc(character))
+            if (!DialogueBuilder.Instance.PatchNpc(character, ModEntry.Config.GeneralFrequency, true))
             {
                 return true;
             }
@@ -68,7 +68,7 @@ namespace ValleyTalk
 
         public static bool Prefix(ref Dialogue __instance, ref bool __result, Response response)
         {
-            if (!DialogueBuilder.Instance.PatchNpc(__instance.speaker))
+            if (!DialogueBuilder.Instance.PatchNpc(__instance.speaker) && !DialogueBuilder.Instance.LastContext.ChatHistory.Any())
             {
                 return true;
             }
@@ -124,7 +124,7 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref Dialogue __instance, ref Dialogue __result, NPC speaker, string translationKey)
         {
-            if (!DialogueBuilder.Instance.PatchNpc(speaker))
+            if (!DialogueBuilder.Instance.PatchNpc(speaker, ModEntry.Config.GeneralFrequency, true))
             {
                 return true;
             }

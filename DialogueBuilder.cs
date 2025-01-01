@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Runtime;
 using System.Text;
 using StardewDialogue;
 using StardewModdingAPI;
@@ -31,10 +32,14 @@ namespace ValleyTalk
 
         private static DialogueBuilder _instance;
         private Dictionary<string, StardewDialogue.Character> _characters;
+        private Random _random;
+        private int _patchDate;
+        private Dictionary<string, bool> _patchCharacters;
 
         private DialogueBuilder()
         {
             _characters = new Dictionary<string, StardewDialogue.Character>();
+            _random = new Random();
         }
 
         private void PopulateCharacters()
@@ -298,11 +303,46 @@ namespace ValleyTalk
             character.AddConversation(fullHistory.ToArray(), Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
         }
 
-        internal bool PatchNpc(NPC n)
+        internal bool PatchNpc(NPC n,int probability=4,bool retainResult=false)
         {
-            if (LlmDisabled || !ModEntry.Config.EnableMod)
+            if (LlmDisabled || !ModEntry.Config.EnableMod || probability == 0)
             {
                 return false;
+            }
+            if (ModEntry.Config.DisabledCharactersList.Contains(n.Name))
+            {
+                return false;
+            }
+            if (probability < 4)
+            {
+                if (retainResult)
+                {
+                    if (_patchDate != Game1.Date.TotalDays)
+                    {
+                        _patchDate = Game1.Date.TotalDays;
+                        _patchCharacters = new Dictionary<string, bool>();
+                    }
+                    if (_patchCharacters.ContainsKey(n.Name))
+                    {
+                        return _patchCharacters[n.Name];
+                    }
+                }
+                if (probability == -1)
+                {
+                    // To do - ask for interaction type
+                }
+                else if (_random.Next(4) >= probability)
+                {
+                    if (retainResult)
+                    {
+                        _patchCharacters.Add(n.Name, false);
+                    }
+                    return false;
+                }
+                else if (retainResult)
+                {
+                    _patchCharacters.Add(n.Name, true);
+                }
             }
             if (ModEntry.BlockModdedContent)
             {
