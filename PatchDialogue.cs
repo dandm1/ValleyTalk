@@ -68,7 +68,7 @@ namespace ValleyTalk
 
         public static bool Prefix(ref Dialogue __instance, ref bool __result, Response response)
         {
-            if (!DialogueBuilder.Instance.PatchNpc(__instance.speaker) && !DialogueBuilder.Instance.LastContext.ChatHistory.Any())
+            if (!DialogueBuilder.Instance.PatchNpc(__instance.speaker))
             {
                 return true;
             }

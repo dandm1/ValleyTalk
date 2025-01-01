@@ -313,6 +313,15 @@ namespace ValleyTalk
             {
                 return false;
             }
+            if (ModEntry.BlockModdedContent)
+            {
+                if (_characters.Count == 0)
+                {
+                    PopulateCharacters();
+                }
+                var character = GetCharacter(n);
+                return !string.IsNullOrWhiteSpace(character?.Bio?.Biography ?? "");
+            }
             if (probability < 4)
             {
                 if (retainResult)
@@ -344,19 +353,8 @@ namespace ValleyTalk
                     _patchCharacters.Add(n.Name, true);
                 }
             }
-            if (ModEntry.BlockModdedContent)
-            {
-                if (_characters.Count == 0)
-                {
-                    PopulateCharacters();
-                }
-                var character = GetCharacter(n);
-                return !string.IsNullOrWhiteSpace(character?.Bio?.Biography ?? "");
-            }
-            else
-            {
-                return true;
-            }
+
+            return true;
         }
     }
 }

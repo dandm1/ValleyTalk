@@ -234,7 +234,7 @@ public class Character
         // Find the first line that starts with '- ' and remove any lines before it
         resultLines = resultLines.SkipWhile(x => !x.StartsWith("- "));
         var dialogueLine = resultLines.FirstOrDefault();
-        if (!dialogueLine.StartsWith("- "))
+        if (dialogueLine == null || !dialogueLine.StartsWith("- "))
         {
             //Log.Debug("Invalid layout detected in AI response.  Returning the full response.");
             return Array.Empty<string>();

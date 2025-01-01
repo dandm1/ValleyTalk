@@ -106,9 +106,10 @@ namespace ValleyTalk
                 );
             if (blockedContentPacks.Any())
             {
-                Monitor.Log("ValleyTalk Warning: Content packs found that don't have author approval for use with AI.  ValleyTalk will use canon dialogue for generation and won't be applied to non standard NPCs.", LogLevel.Warn);
-                Monitor.Log($"Content packs without author approval: {string.Join(", ", blockedContentPacks.Select(p => p.Manifest.Name))}", LogLevel.Warn);
-                Monitor.Log("If you are the mod author and wish to unblock your content pack, please raise a bug on the Nexus page or add \"permtAiUse\":true to the manifest.", LogLevel.Warn);
+                Monitor.Log("Note: Content packs have been found that don't have mod author approval for use with AI.", LogLevel.Warn);
+                Monitor.Log("Content from content packs will be displayed in-game, but will not be use for AI dialogue generation.", LogLevel.Warn);
+                Monitor.Log($"Content packs without author approval: {string.Join(", ", blockedContentPacks.Select(p => p.Manifest.Name))}", LogLevel.Info);
+                Monitor.Log("Mod authors can allow their content to be used in dialogue generation by adding \"permtAiUse\":true to their mod's manifest.", LogLevel.Warn);
                 BlockModdedContent = true;
             }
 
