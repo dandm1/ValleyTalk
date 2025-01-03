@@ -23,7 +23,7 @@ internal abstract class Llm
         };
         Llm instance = CreateInstance(llmType, paramsDict);
         Instance = instance;
-        DialogueBuilder.Instance.LlmDisabled = !CheckConnection(apiKey, modelName);
+        DialogueBuilder.Instance.LlmDisabled = CheckConnection(apiKey, modelName);
     }
 
     private static bool CheckConnection(string apiKey, string modelName)
