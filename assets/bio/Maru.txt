@@ -5,5 +5,5 @@
 "Unique": "pointing out a fact",
 "Preoccupations": [  ],
 "Dialogue" : {},
-"HomeLocationBed": false
+"HomeLocationBed": true
 }

@@ -5,5 +5,5 @@
 "Unique": "holding football",
 "Preoccupations": [  ],
 "Dialogue" : {},
-"HomeLocationBed": false
+"HomeLocationBed": true
 }

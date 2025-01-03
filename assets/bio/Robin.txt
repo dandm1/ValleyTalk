@@ -5,5 +5,5 @@
 "Unique": "",
 "Preoccupations": [  ],
 "Dialogue" : {},
-"HomeLocationBed": false
+"HomeLocationBed": true
 }

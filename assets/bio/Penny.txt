@@ -5,5 +5,5 @@
 "Unique": "disappointed",
 "Preoccupations": [  ],
 "Dialogue" : {},
-"HomeLocationBed": false
+"HomeLocationBed": true
 }

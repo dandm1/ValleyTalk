@@ -5,5 +5,5 @@
 "Unique": "contented with his eyes closed",
 "Preoccupations": [  ],
 "Dialogue" : {},
-"HomeLocationBed": false
+"HomeLocationBed": true
 }
