@@ -320,7 +320,10 @@ namespace ValleyTalk
                     PopulateCharacters();
                 }
                 var character = GetCharacter(n);
-                return !string.IsNullOrWhiteSpace(character?.Bio?.Biography ?? "");
+                if (string.IsNullOrWhiteSpace(character?.Bio?.Biography ?? ""))
+                {
+                    return false;
+                }
             }
             if (probability < 4)
             {
