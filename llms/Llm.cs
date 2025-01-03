@@ -23,16 +23,52 @@ internal abstract class Llm
         };
         Llm instance = CreateInstance(llmType, paramsDict);
         Instance = instance;
-        var response = instance.RunInference("You are performing LLM connection testing", "Please just ", "respond with ", "'Connection successful'");
+        DialogueBuilder.Instance.LlmDisabled = !CheckConnection(apiKey, modelName);
+    }
+
+    private static bool CheckConnection(string apiKey, string modelName)
+    {
+        var response = Instance.RunInference("You are performing LLM connection testing", "Please just ", "respond with ", "'Connection successful'");
         if (response.Length < 5)
         {
-            ModEntry.SMonitor.Log($"Failed to connect to the model. Please check the server address and details.", StardewModdingAPI.LogLevel.Error);
-            DialogueBuilder.Instance.LlmDisabled = true;
+            ModEntry.SMonitor.Log($"Failed to connect to the model. ", StardewModdingAPI.LogLevel.Error);
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                ModEntry.SMonitor.Log($"API key is not provided. Please check the configuration.", StardewModdingAPI.LogLevel.Error);
+            }
+            else
+            {
+                var getList = Llm.Instance as IGetModelNames;
+                if (getList != null)
+                {
+                    if (string.IsNullOrWhiteSpace(modelName))
+                    {
+                        ModEntry.SMonitor.Log($"Model name is not provided. Usually this is required.", StardewModdingAPI.LogLevel.Error);
+                    }
+                    if (getList.GetModelNames().Any())
+                    {
+                        ModEntry.SMonitor.Log($"Can retreive model names but not generate dialogue. Check the model name is correctly configured.", StardewModdingAPI.LogLevel.Error);
+                        if ((Llm.Instance is LlmOAICompatible || Llm.Instance is LlmLlamaCpp) && !Llm.Instance.url.Contains("https"))
+                        {
+                            ModEntry.SMonitor.Log($"The server address specified does not use a secure connection. Check this isn't blocking text generation.", StardewModdingAPI.LogLevel.Error);
+                        }
+                    }
+                    else
+                    {
+                        ModEntry.SMonitor.Log($"Unable to get model names or generate dialogue.  Please check the API Key is correctly entered.", StardewModdingAPI.LogLevel.Error);
+                    }
+                }
+                else
+                {
+                    ModEntry.SMonitor.Log($"Please check the server address and details.", StardewModdingAPI.LogLevel.Error);
+                }
+            }
+            return true;
         }
         else
         {
             ModEntry.SMonitor.Log($"Connected to the model successfully.", StardewModdingAPI.LogLevel.Info);
-            DialogueBuilder.Instance.LlmDisabled = false;
+            return false;
         }
     }
 

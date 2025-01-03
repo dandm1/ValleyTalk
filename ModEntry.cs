@@ -45,7 +45,7 @@ namespace ValleyTalk
             Config = Helper.ReadConfig<ModConfig>();
 
             SMonitor = Monitor;
- 
+
             if (!Config.EnableMod)
             {
                 return;
@@ -91,17 +91,28 @@ namespace ValleyTalk
                 return;
             }
 
-            Llm.SetLlm(llmType, modelName:Config.ModelName ,apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
+            Llm.SetLlm(llmType, modelName: Config.ModelName, apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
 
             DialogueBuilder.Instance.Config = Config;
-            
+
             SHelper = helper;
 
+            CheckContentPacks();
+
+            var harmony = new Harmony(ModManifest.UniqueID);
+            harmony.PatchAll();
+
+            Log.Debug($"[{DateTime.Now}] Mod loaded");
+
+        }
+
+        private void CheckContentPacks()
+        {
             var contentPacks = SHelper.ModRegistry.GetAll().Where(p => p.IsContentPack).ToList();
             var blockedContentPacks = contentPacks
                 .Where(p => !SldConstants.PermitListContentPacks.Contains(p.Manifest.UniqueID))
-                .Where(p => 
-                        !p.Manifest.ExtraFields.ContainsKey("PermitAiUse") || 
+                .Where(p =>
+                        !p.Manifest.ExtraFields.ContainsKey("PermitAiUse") ||
                         !(p.Manifest.ExtraFields["PermitAiUse"] as bool? ?? false)
                 );
             if (blockedContentPacks.Any())
@@ -109,15 +120,9 @@ namespace ValleyTalk
                 Monitor.Log("Note: Content packs have been found that don't have mod author approval for use with AI.", LogLevel.Warn);
                 Monitor.Log("Content from content packs will be displayed in-game, but will not be use for AI dialogue generation.", LogLevel.Warn);
                 Monitor.Log($"Content packs without author approval: {string.Join(", ", blockedContentPacks.Select(p => p.Manifest.Name))}", LogLevel.Info);
-                Monitor.Log("Mod authors can allow their content to be used in dialogue generation by adding \"permtAiUse\":true to their mod's manifest.", LogLevel.Warn);
+                Monitor.Log("Mod authors can allow their content to be used in dialogue generation by adding \"permitAiUse\":true to their mod's manifest.", LogLevel.Warn);
                 BlockModdedContent = true;
             }
-
-            var harmony = new Harmony(ModManifest.UniqueID);
-            harmony.PatchAll();
-
-            Log.Debug($"[{DateTime.Now}] Mod loaded");
-
         }
 
         private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
