@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -17,9 +18,9 @@ internal class ConversationHistory : IHistory
         var builder = new StringBuilder();
         for (int i = 0; i < chatHistory.Length; i++)
         {
-            builder.Append(i % 2 == 0 ? $"- {npcName}: {chatHistory[i]}" : $"- Farmer: {chatHistory[i]}");
+            builder.Append(i % 2 == 0 ? $"- {npcName}: {chatHistory[i]}" : $"- {ModEntry.SHelper.Translation.Get("generalFarmer")}: {chatHistory[i]}");
             builder.Append(" --- ");
         }
-        return $"Had a conversation with the farmer : {builder.ToString()}";
+        return ModEntry.SHelper.Translation.Get("historyConversationFormat", new { builder= builder });
     }
 }

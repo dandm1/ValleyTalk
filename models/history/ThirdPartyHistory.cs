@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -19,7 +20,8 @@ internal class ThirdPartyHistory : IHistory
     public string Format(string npcName)
     {
         var totalDialogue = string.Join(" : ", filteredDialogues.Select(x => x.Text));
-        return $"{npcName} overhead {character.Name} speaking to the farmer{(string.IsNullOrWhiteSpace(festivalName) ? "" : $" at {festivalName}")} : {totalDialogue}";
+        var festivalNameString = string.IsNullOrWhiteSpace(festivalName) ? "" : ModEntry.SHelper.Translation.Get("historyThirdPartyFestival", new { festivalName= festivalName });
+        return ModEntry.SHelper.Translation.Get("historyThirdPartyFormat", new { npcName= npcName, Name= character.Name, festivalNameString= festivalNameString, totalDialogue= totalDialogue });
 
     }
 }

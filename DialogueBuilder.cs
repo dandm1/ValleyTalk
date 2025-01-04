@@ -126,8 +126,8 @@ namespace ValleyTalk
             var sb = new StringBuilder();
             sb.Append(theLine[0]);
             //sb.Append("#$b#Respond:");
-            sb.Append($"#$q {responseIndex++} {SldConstants.DialogueKeyPrefix}Default#Respond:");
-            sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#*Stay silent*");
+            sb.Append($"#$q {responseIndex++} {SldConstants.DialogueKeyPrefix}Default#{ModEntry.SHelper.Translation.Get("outputRespond")}");
+            sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#{ModEntry.SHelper.Translation.Get("outputStaySilent")}");
             for (int i = 1; i < theLine.Length; i++)
             {
                 sb.Append($"#$r -999998 0 {SldConstants.DialogueKeyPrefix}Next#");
@@ -161,22 +161,22 @@ namespace ValleyTalk
             switch (Game1.timeOfDay)
             {
                 case <= 800:
-                    timeOfDay = $"early morning";
+                    timeOfDay = ModEntry.SHelper.Translation.Get("generalEarlyMorning");
                     break;
                 case <= 1130:
-                    timeOfDay = "late morning";
+                    timeOfDay = ModEntry.SHelper.Translation.Get("generalLateMorning");
                     break;
                 case <= 1400:
-                    timeOfDay = "midday";
+                    timeOfDay = ModEntry.SHelper.Translation.Get("generalMidday");
                     break;
                 case <= 1700:
-                    timeOfDay = "afternoon";
+                    timeOfDay = ModEntry.SHelper.Translation.Get("generalAfternoon");
                     break;
                 case <= 2200:
-                    timeOfDay = "evening";
+                    timeOfDay = ModEntry.SHelper.Translation.Get("generalEvening");
                     break;
                 default:
-                    timeOfDay = "late at night";
+                    timeOfDay = ModEntry.SHelper.Translation.Get("generalLateNight");
                     break;
             }
             timeOfDay += $" ({(Game1.timeOfDay / 100) % 24}:{Game1.timeOfDay % 100:00})";

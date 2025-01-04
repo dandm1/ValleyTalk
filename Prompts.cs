@@ -15,15 +15,15 @@ public class Prompts
     [JsonIgnore]
     private readonly Dictionary<string,string> HistoryEvents = new()
     {
-        { "cc_Bus", "The bus to Calico Desert was repaired" },
-        { "cc_Boulder", "The glittering boulder was removed from the mountain lake" },
-        { "cc_Bridge", "The bridge to the quarry was repaired" },
-        { "cc_Complete", "The community center was restored" },
-        { "cc_Greenhouse", "The farmer's greenhouse was repaired" },
-        { "cc_Minecart", "The minecart system was repaired" },
-        { "wonIceFishing", "The farmer won the ice fishing competition" },
-        { "wonGrange", "The farmer won the Stardew Valley Fair Grange Display" },
-        { "wonEggHunt", "The farmer won the egg hunt" }
+        { "cc_Bus", _translationHelper.Get("cc_Bus_Repaired") },
+        { "cc_Boulder", _translationHelper.Get("cc_Boulder_Removed") },
+        { "cc_Bridge", _translationHelper.Get("cc_Bridge") },
+        { "cc_Complete", _translationHelper.Get("cc_Complete") },
+        { "cc_Greenhouse", _translationHelper.Get("cc_Greenhouse") },
+        { "cc_Minecart", _translationHelper.Get("cc_Minecart") },
+        { "wonIceFishing", _translationHelper.Get("wonIceFishing") },
+        { "wonGrange", _translationHelper.Get("wonGrange") },
+        { "wonEggHunt", _translationHelper.Get("wonEggHunt") }
     };
 
     public Prompts()
@@ -46,7 +46,7 @@ public class Prompts
         _stardewSummary = gameSummaryDict["Text"];
     }
 
-
+    private static StardewModdingAPI.ITranslationHelper _translationHelper = ModEntry.SHelper.Translation;
     [JsonIgnore]
     static string _stardewSummary;
     private string _system;
@@ -110,17 +110,17 @@ public class Prompts
         allPreviousActivities = Game1.getPlayerOrEventFarmer().previousActiveDialogueEvents.First();
         previousActivites = allPreviousActivities.Where(x => HistoryEvents.ContainsKey(x.Key) && x.Value < 112).ToList();
 
-        Name = character.Name;
-        Gender = Context.MaleFarmer ? "Male" : "Female";
+        Name = character.StardewNpc.displayName;
+        Gender = character.Bio.Gender;
     }
 
     private string GetSystemPrompt()
     {
         var systemPrompt = new StringBuilder();
-        systemPrompt.AppendLine("You are an expert computer game writer that takes great pride in being able to create dialogue for any character in any game that exactly matches that character's situation and personality.");
+        systemPrompt.AppendLine(_translationHelper.Get("systemPrompt"));
         if (ModEntry.Config.ApplyTranslation)
         {
-            systemPrompt.AppendLine($"You are an expert at writing dialogue in {ModEntry.Language} based on instructions given mostly in English, while keeping the responses in character.  All responses you write must be in {ModEntry.Language}.");
+            systemPrompt.AppendLine(_translationHelper.Get("systemPromptTranslation", new { Language = ModEntry.Language }));
         }
         return systemPrompt.ToString();
     }
@@ -128,9 +128,8 @@ public class Prompts
     private string GetGameConstantContext()
     {
         var gameConstantPrompt = new StringBuilder();
-        gameConstantPrompt.AppendLine($"You are creating dialogue to enhance the experience of players in the game Stardew Valley.");
-        gameConstantPrompt.AppendLine("While staying true to the characters you are writing for a mature audience and looking to add variety and depth when appropriate.");
-        gameConstantPrompt.AppendLine("##Game Summary");
+        gameConstantPrompt.AppendLine(_translationHelper.Get("gameContext"));
+        gameConstantPrompt.AppendLine($"##{_translationHelper.Get("gameSummaryHeading")}");
         gameConstantPrompt.AppendLine(_stardewSummary);
         return gameConstantPrompt.ToString();
     }
@@ -138,10 +137,10 @@ public class Prompts
     private string GetNpcConstantContext()
     {
         var npcConstantPrompt = new StringBuilder();
-        npcConstantPrompt.AppendLine($"You are working on dialogue for {Name}, who is talking to the player (referred to as 'the farmer')");
+        npcConstantPrompt.AppendLine(_translationHelper.Get("npcContextIntro", new { Name = Name }));
         if ((Character.Bio?.Biography ?? string.Empty).Length > 100)
         {
-            npcConstantPrompt.AppendLine($"##{Name} Biography:");
+            npcConstantPrompt.AppendLine($"##{_translationHelper.Get("npcContextBiographyHeading", new { Name = Name })}");
             var bio = Character.Bio.Biography;
             while (bio.Contains("\n\n"))
             {
@@ -159,15 +158,15 @@ public class Prompts
         GetSampleDialogue(prompt);
         GetEventHistory(prompt);
 
-        prompt.AppendLine("## Instructions:");
-        prompt.AppendLine("### Context:");
+        prompt.AppendLine($"## {_translationHelper.Get("coreInstructionHeading")}");
+        prompt.AppendLine($"### {_translationHelper.Get("coreContextHeading")}");
         if (Context.MaleFarmer)
         {
-            prompt.AppendLine("The farmer is male. As well as running the farm, he is an adventurer and also has interests and habits that are typically male.");
+            prompt.AppendLine(_translationHelper.Get("coreMaleFarmer"));
         }
         else
         {
-            prompt.AppendLine("The farmer is female. As well as running the farm, the farmer is an adventurer and also has interests and habits that are typically female.");
+            prompt.AppendLine(_translationHelper.Get("coreFemaleFarmer"));
         }
         GetDateAndTime(prompt);
         GetWeather(prompt);
@@ -177,11 +176,11 @@ public class Prompts
         {
             if (friendship.IsRoommate())
             {
-                prompt.AppendLine($"The farmer and {Name} are roommates and close, non-romantic friends. They live together at the farm inherited from the farmer's grandfather. {Name} lived in the sewers before meeting the farmer and moved from there to the farm when they became roommates.");
+                prompt.AppendLine(_translationHelper.Get("coreRoommates", new { Name= Name }));
             }
             else
             {
-                prompt.AppendLine($"The farmer is married to {Name}. They live together at the farm inherited from the farmer's grandfather.  {Name} lived in Stardew Valley before meeting the farmer and moved from {(npcIsMale ? "his" : "her")} original house to the farm when they got married.");
+                prompt.AppendLine(_translationHelper.Get("coreMarried", new { Name= Name, Pronoun = npcIsMale ? "his" : "her" }));
 
                 GetChildren(prompt, friendship);
             }
@@ -203,11 +202,11 @@ public class Prompts
         }
         if (Context.MaleFarmer)
         {
-            prompt.AppendLine("The farmer is male and the dialogue may reflect this, for example by referring to him as a 'man', 'boy' or 'husband' as appropriate in the Context, referring to typical male clothing choices or activities.");
+            prompt.AppendLine(_translationHelper.Get("coreMaleReferences"));
         }
         else
         {
-            prompt.AppendLine("The farmer is female and the dialogue may reflect this, for example by referring to her as a 'woman', 'girl' or 'wife' as appropriate in the Context, referring to typical female clothing choices or activities.");
+            prompt.AppendLine(_translationHelper.Get("coreFemaleReferences"));
         }
         GetPreoccupation(prompt);
         GetCurrentConversation(prompt);
@@ -232,7 +231,7 @@ public class Prompts
             Character.PreoccupationDate = Game1.Date;
         }
         
-        prompt.AppendLine($"Before the farmer arrived, {Name} was thinking about {preoccupation}. {Name} may talk about this, if there is nothing more pressing to discuss.");
+        prompt.AppendLine(_translationHelper.Get("preoccupation", new { Name= Name, preoccupation= preoccupation }));
     }
 
     private void GetOtherNpcs(StringBuilder prompt)
@@ -240,13 +239,13 @@ public class Prompts
         var otherNpcs = Util.GetNearbyNpcs(Character.StardewNpc);
         if (otherNpcs.Any())
         {
-            prompt.AppendLine("### Other NPCs:");
-            prompt.AppendLine($"As well as the farmer and {Character.Name}, the following villagers are present:");
+            prompt.AppendLine($"### {_translationHelper.Get("openNpcsHeading")}");
+            prompt.AppendLine(_translationHelper.Get("otherNpcsIntro", new { Name= Name }));
             foreach (var npc in otherNpcs)
             {
-                prompt.AppendLine($"- {npc.Name}");
+                prompt.AppendLine($"- {npc.displayName}");
             }
-            prompt.AppendLine("The dialogue should account for the presence of these other villagers, and may reference them or be addressed to them as well as to the farmer.");
+            prompt.AppendLine(_translationHelper.Get("otherNpcsOutro"));
         }
     }
 
@@ -254,12 +253,12 @@ public class Prompts
     {
         if (Context.ChatHistory.Length == 0) return;
 
-        prompt.AppendLine($"###Current Conversation:");
-        prompt.AppendLine($"The farmer and {Name} are in the middle of a conversation. The dialogue should be a continuation of the conversation, and should build on the previous lines without repetition. The previous lines were:");
+        prompt.AppendLine($"###{_translationHelper.Get("currentConversationHeading")}");
+        prompt.AppendLine(_translationHelper.Get("currentConversationIntro", new { Name= Name }));
         // Append each line from the chat history, labelling each one alternatively with the NPC's name or 'Farmer'
         for (int i = 0; i < Context.ChatHistory.Length; i++)
         {
-            prompt.AppendLine(i % 2 == 0 ? $"- {Name}: {Context.ChatHistory[i]}" : $"- Farmer: {Context.ChatHistory[i]}");
+            prompt.AppendLine(i % 2 == 0 ? $"- {Name}: {Context.ChatHistory[i]}" : $"- {_translationHelper.Get("generalFarmerLabel")}: {Context.ChatHistory[i]}");
         }
     }
 
@@ -269,19 +268,22 @@ public class Prompts
         
         if (friendship.IsDating())
         {
-            prompt.AppendLine($"{Name} and the farmer are dating seriously {(Context.Inlaw == null ? "and publicly" : "but discretely")} as a {RelationshipWord(Context.MaleFarmer, npcIsMale)} couple. {Name} does not live on the farm.");
+            var relationshipPublic = Context.Inlaw == null ? _translationHelper.Get("specialRelationshipDatingPublic") : _translationHelper.Get("specialRelationshipDatingDiscrete");
+            var relationshipWord = RelationshipWord(Context.MaleFarmer, npcIsMale);
+            prompt.AppendLine(_translationHelper.Get("specialRelationshipDating", new { Name= Name, relationshipPublic= relationshipPublic, relationshipWord= relationshipWord }));
         }
         if (friendship.IsEngaged())
         {
-            prompt.AppendLine($"{Name} and the farmer are engaged to be married. Their wedding is in {friendship.CountdownToWedding} days and they arelooking forward to their future together. {Name} does not live on the farm.");
+            var daysToWedding = friendship.CountdownToWedding;
+            prompt.AppendLine(_translationHelper.Get("specialRelationshipEngaged", new { Name= Name, daysToWedding= daysToWedding }));
         }
         if (friendship.IsDivorced())
         {
-            prompt.AppendLine($"{Name} and the farmer are divorced. {Name} remains extremely angry and bitter about the divorce. {Name} does not live on the farm.");
+            prompt.AppendLine(_translationHelper.Get("specialRelationshipDivorced", new { Name= Name }));
         }
         if (friendship.ProposalRejected)
         {
-            prompt.AppendLine($"{Name} has previously rejected the farmer's proposal of marriage. {Name} does not live on the farm.");
+            prompt.AppendLine(_translationHelper.Get("specialRelationshipProposalRejected", new { Name= Name }));
         }
     }
 
@@ -299,19 +301,23 @@ public class Prompts
         if (spouses.Any())
         {
             bool multipleOthers = spouses.Count() > 1;
+            var spouseList = string.Join(", ", spouses);
+            var nSpouses = spouses.Count();
             if (talkingToSpouse)
             {
-                prompt.AppendLine($"As well as {Name} the Farmer is also married to {(multipleOthers ? $"{spouses.Count()} other people: {string.Join(", ", spouses)}":spouses.First())}. {Name}, the Farmer and {(multipleOthers ? "all the other spouses" : spouses.First())} live together at the farm inherited from the farmer's grandfather. The spouses lived in Stardew Valley before the Farmer arrived and knew each other before the farmer met any of them.");
+                var otherSpousesList = multipleOthers ? $"{_translationHelper.Get("spousesNOtherPeople", new { nSpouses= nSpouses })} {spouseList}":spouses.First();
+                var otherSpousesReference = multipleOthers ? _translationHelper.Get("spousesAllTheOthers") : spouses.First();
+                prompt.AppendLine(_translationHelper.Get("spousesMarriedToOthers", new { Name= Name, otherSpousesList= otherSpousesList, otherSpousesReference= otherSpousesReference }));
             }
             else
             {
                 if (multipleOthers)
                 {
-                    prompt.AppendLine($"The farmer is married to {spouses.Count()} people: {string.Join(", ", spouses)}. The Farmer's spouses all live with the farmer on the farm inherited from the farmer's grandfather.  {string.Join(", ", spouses)} and {Name} all lived in Stardew Valley and knew each other before the farmer met any of them.");
+                    prompt.AppendLine(_translationHelper.Get("spousesMarriedToMany", new { nSpouses= nSpouses, spouseList= spouseList, Name= Name }));
                 }
                 else
                 {
-                    prompt.AppendLine($"The farmer is married to {spouses.First()}. {spouses.First()} lives with the farmer on the farm inherited from the farmer's grandfather.  {Name} and {spouses.First()} both lived in Stardew Valley and knew each other before the farmer met either of them.");
+                    prompt.AppendLine(_translationHelper.Get("spousesMarriedToOne", new { spouseList= spouseList, Name= Name }));
                 }
             }
         }
@@ -327,19 +333,21 @@ public class Prompts
         if (roommates.Any())
         {
             bool multipleOthers = roommates.Count() > 1;
+            var roommateList = multipleOthers ? $"{_translationHelper.Get("spousesNOtherPeople", new { nSpouses= roommates.Count() })} {string.Join(", ", roommates)}":roommates.First();
+            var roommateReference = multipleOthers ? _translationHelper.Get("spouseRoommatesAllTheOthers") : roommates.First();
             if (talkingToRoommate)
             {
-                prompt.AppendLine($"As well as {Name} the Farmer is a roommate with {(multipleOthers ? $"{roommates.Count()} other people: {string.Join(", ", roommates)}":roommates.First())}. {Name}, the Farmer and {(multipleOthers ? "all the other roommates" : roommates.First())} live together at the farm inherited from the farmer's grandfather in a platonic friendship.");
+                prompt.AppendLine(_translationHelper.Get("spouseRoommatesWithOthers", new { Name= Name, roommateList= roommateList, roommateReference= roommateReference }));
             }
             else
             {
                 if (multipleOthers)
                 {
-                    prompt.AppendLine($"The farmer has {roommates.Count()} roommates: {string.Join(", ", roommates)}. The Farmer's roommates all live with the farmer on the farm inherited from the farmer's grandfather.");
+                    prompt.AppendLine(_translationHelper.Get("spouseRoommateWithMany", new { roommateList= roommateList }));
                 }
                 else
                 {
-                    prompt.AppendLine($"The farmer has {roommates.First()} as a roommate. {roommates.First()} lives with the farmer on the farm inherited from the farmer's grandfather.");
+                    prompt.AppendLine(_translationHelper.Get("spouseRoommateWithOne", new { roommateList= roommateList }));
                 }
             }
         }
@@ -348,17 +356,18 @@ public class Prompts
                     .getPlayerOrEventFarmer()
                     .friendshipData
                     .FieldDict
-                    .Where(x => x.Value.Value.IsEngaged())
-                    .Select(x => x.Key);
-        if (engaged.Any(x => x != Name))
+                    .Where(x => x.Value.Value.IsEngaged());
+        if (engaged.Any(x => x.Key != Name))
         {
-            var firstEngaged = engaged.First();
-            prompt.AppendLine($"The farmer is engaged to {firstEngaged}. The wedding is in {Game1.getPlayerOrEventFarmer().friendshipData[firstEngaged].CountdownToWedding} days and the farmer is looking forward to their future together. {firstEngaged} does not live on the farm.");
+            var engagedFirst = engaged.First();
+            var engagedTo = Game1.characterData[engagedFirst.Key].DisplayName;
+            var weddingDays = engagedFirst.Value.Value.CountdownToWedding;
+            prompt.AppendLine(_translationHelper.Get("spouseEngaged", new { engagedTo= engagedTo, weddingDays= weddingDays }));
         }
         var total = spouses.Count() + engaged.Count();
         if (total > 1 && !talkingToSpouse && !talkingToRoommate)
         {
-            prompt.AppendLine($"{Name} is aware that the farmer has a polyamorous lifestyle and accepts this.");
+            prompt.AppendLine(_translationHelper.Get("spousePoly", new { Name= Name }));
         }
     }
 
@@ -371,13 +380,13 @@ public class Prompts
         {
             prompt.AppendLine((Context.Hearts ?? 0) switch
             {
-                -1 => $"This is the first time {Name} has spoken to the farmer, though {Name} had heard rumours of the farmer's arrival in town.",
-                < 2 => $"{Name} and the farmer are strangers, though they have spoken before. {Name} is not yet sure if the farmer is someone they want to get to know.",
-                < 4 => $"{Name} and the farmer know each other by sight, but treat each other as strangers. The dialogue should reflect two people just getting to know each other, no sharing of personal details or gossip or suggesting activities together.",
-                < 6 => $"{Name} and the farmer are becoming friends. They know something about each other and a little about each other's lives. The dialogue should reflect a growing friendship, with some sharing of personal details and gossip but no particular desire to spend more time together.",
-                < 8 => $"{Name} and the farmer are close friends. They know a lot about each other and share personal details, gossip and theories about the world. The dialogue should reflect a close friendship, with a desire to spend time together but no romantic interest.",
-                <= 10 => $"{Name} wants to date the farmer. In context, the dialogue should reflect a close, intimate friendship and share personal details, gossip and theories about the world. The dialogue should reflect a desire to spend time together and growing romantic interest.",
-                <= 14 => $"{Name} and the farmer are very close and intimate.", // Backup = should never be called
+                -1 => _translationHelper.Get("nonSpouseFriendshipFirstConversation", new { Name= Name }),
+                < 2 => _translationHelper.Get("nonSpouseFreindshipStrangers", new { Name= Name }),
+                < 4 => _translationHelper.Get("nonSpouseFriendshipAcquaintances", new { Name= Name }),
+                < 6 => _translationHelper.Get("nonSpouseFriendshipFriends", new { Name= Name }),
+                < 8 => _translationHelper.Get("nonSpouseFriendshipCloseFriends", new { Name= Name }),
+                <= 10 => _translationHelper.Get("nonSpouseFriendshipWantToDate", new { Name= Name }),
+                <= 14 => _translationHelper.Get("nonSpouseFriendshipIntimate", new { Name= Name }), // Backup = should never be called
                 _ => throw new InvalidDataException("Invalid heart level.")
             });
         }
@@ -385,15 +394,15 @@ public class Prompts
         {
             if (Context.Hearts <= 8 && !isChild)
             {
-                prompt.AppendLine($"{Name} and the farmer are close friends. They know a lot about each other and share personal details and gossip as well as their hopes and dreams. The dialogue should reflect a close friendship, with a desire to spend time together but no romantic interest.");
+                prompt.AppendLine(_translationHelper.Get("nonSpouseFriendshipNonSingleAdult8", new { Name= Name }));
             }
             else if (isChild)
             {
-                prompt.AppendLine($"{Name} looks to the farmer like a parent, idolising the farmer's actions and believing that the farmer is mostly infallible.");
+                prompt.AppendLine(_translationHelper.Get("nonSpouseFriendshipChild8Plus", new { Name= Name }));
             }
             else
             {
-                prompt.AppendLine($"{Name} and the farmer are close friends. They know a lot about each other and confide initimate hopes dreams and fears to each other. {Name} sees the farmer as a confidant and openly share their frustrations and annoyances with others who are important in their life.");
+                prompt.AppendLine(_translationHelper.Get("nonSpouseFriendshipNonSingleAdult10", new { Name= Name }));
             }
         }
     }
@@ -402,14 +411,14 @@ public class Prompts
     {
         if (Context.SpouseAct == null) return;
 
-        prompt.Append(Context.SpouseAct switch
+        prompt.AppendLine(Context.SpouseAct switch
         {
-            SpouseAction.funLeave => $"{Name} is leaving for the day to have fun without the farmer.\n",
-            SpouseAction.jobLeave => $"{Name} is leaving for the day to go to work.\n",
-            SpouseAction.patio => $"{Name} is standing on the patio to the rear of the farmhouse.  {Name} is engaging in their favourite hobby, and focussing intently.\n",
-            SpouseAction.funReturn => $"{Name} is returning to the farmhouse after a fun day out.\n",
-            SpouseAction.jobReturn => $"{Name} is returning to the farmhouse after a day at work.\n",
-            SpouseAction.spouseRoom => $"{Name} is engaging in {Character.Bio.GenderPossessive} personal hobbies and interests in a special room in the farmhouse dedicates to that.\n",
+            SpouseAction.funLeave => _translationHelper.Get("spouseActionFunLeave", new { Name= Name }),
+            SpouseAction.jobLeave => _translationHelper.Get("spouseActionJobLeave", new { Name= Name }),
+            SpouseAction.patio => _translationHelper.Get("spouseActionPatio", new { Name= Name }),
+            SpouseAction.funReturn => _translationHelper.Get("spouseActionFunReturn", new { Name= Name }),
+            SpouseAction.jobReturn => _translationHelper.Get("spouseActionJobReturn", new { Name= Name }),
+            SpouseAction.spouseRoom => _translationHelper.Get("spouseActionSpouseRoom", new { Name= Name, GenderPossessive= Character.Bio.GenderPossessive }),
             _ => $""
         });
     }
@@ -418,32 +427,33 @@ public class Prompts
     {
         if (Context.Accept == null) return;
 
-        prompt.AppendLine($"The farmer has given {Name} a {Context.Accept.Name} as an unexpected gift.");
+        var giftName = Context.Accept.DisplayName;
+        prompt.AppendLine(_translationHelper.Get("giftIntro", new { Name= Name, giftName= giftName }));
         switch (Context.GiftTaste)
         {
             //TODO: Correct the cases
             case 0:
-                prompt.AppendLine($"This gift is one of {Name}'s favourite things in the world.");
+                prompt.AppendLine(_translationHelper.Get("giftLoved", new { Name= Name }));
                 break;
             case 2:
-                prompt.AppendLine($"This gift is something that {Name} likes.");
+                prompt.AppendLine(_translationHelper.Get("giftLiked", new { Name= Name }));
                 break;
             case 4:
-                prompt.AppendLine($"This gift is something that {Name} dislikes and {Name} feels that it shows poor taste as a gift.");
+                prompt.AppendLine(_translationHelper.Get("giftDislike", new { Name= Name }));
                 break;
             case 6:
-                prompt.AppendLine($"This gift is something that {Name} truly hates and wants nothing to do with. {Name} may even be offended by the gift.");
+                prompt.AppendLine(_translationHelper.Get("giftHate", new { Name= Name }));
                 break;
             default:
-                prompt.AppendLine($"This gift is something that {Name} really doesn't care about, and doesn't really want as a gift.");
+                prompt.AppendLine(_translationHelper.Get("giftNeutral", new { Name= Name }));
                 break;
         }
-        prompt.AppendLine($"The dialogue should include {Name}'s reaction to the gift.");
+        prompt.AppendLine(_translationHelper.Get("giftMustIncludeReaction", new { Name= Name }));
         if (Context.Birthday)
         {
-            prompt.AppendLine($"As it is {Name}'s birthday, {Name} takes the gift to be a birthday present and evidence that the farmer remembered. The birthday should be mentioned in the reactions and lead to stronger feelings about gifts that {Name} loves or hates.");
+            prompt.AppendLine(_translationHelper.Get("giftBirthday", new { Name= Name }));
         }
-        prompt.AppendLine("The dialogue should be brief, and not ask questions that expect a response from the farmer.");
+        prompt.AppendLine(_translationHelper.Get("giftOutro"));
     }
 
     private void GetSpecialDatesAndBirthday(StringBuilder prompt)
@@ -452,20 +462,20 @@ public class Prompts
 
         prompt.AppendLine((Context.Season, Context.DayOfSeason) switch
         {
-            (Season.Spring, 1) => $"It is the first day of the year, which is also the first day of spring.",
-            (Season.Spring, 12) => $"It is the day before the egg festival.",
-            (Season.Spring, 23) => $"It is the day before the flower dance.",
-            (Season.Summer, 1) => $"It is the first day of summer.",
-            (Season.Summer, 10) => $"It is the day before the luau.",
-            (Season.Summer, 27) => $"It is the day before the dance of the moonlight jellies, and almost the end of summer.",
-            (Season.Summer, 28) => $"It is the day of the dance of the moonlight jellies, and the last day of summer.",
-            (Season.Fall, 1) => $"It is the first day of fall.",
-            (Season.Fall, 15) => $"It is the day before the Stardew Valley fair.",
-            (Season.Fall, 26) => $"It is the day before Spirit's Eve.",
-            (Season.Winter, 1) => $"It is the first day of winter.",
-            (Season.Winter, 7) => $"It is the day before the ice festival and ice fishing competition.",
-            (Season.Winter, 24) => $"It is the day before the feast of the winter star.",
-            (Season.Winter, 28) => $"It is the last day of the year, and the last day of winter.",
+            (Season.Spring, 1) => _translationHelper.Get("specialDatesSpring1"),
+            (Season.Spring, 12) => _translationHelper.Get("specialDatesSpring12"),
+            (Season.Spring, 23) => _translationHelper.Get("specialDatesSpring23"),
+            (Season.Summer, 1) => _translationHelper.Get("specialDatesSummer1"),
+            (Season.Summer, 10) => _translationHelper.Get("specialDatesSummer10"),
+            (Season.Summer, 27) => _translationHelper.Get("specialDatesSummer27"),
+            (Season.Summer, 28) => _translationHelper.Get("specialDatesSummer28"),
+            (Season.Fall, 1) => _translationHelper.Get("specialDatesFall1"),
+            (Season.Fall, 15) => _translationHelper.Get("specialDatesFall15"),
+            (Season.Fall, 26) => _translationHelper.Get("specialDatesFall26"),
+            (Season.Winter, 1) => _translationHelper.Get("specialDatesWInter1"),
+            (Season.Winter, 7) => _translationHelper.Get("specialDatesWinter7"),
+            (Season.Winter, 24) => _translationHelper.Get("specialDatesWinter24"),
+            (Season.Winter, 28) => _translationHelper.Get("specialDatesWinter28"),
             _ => $""
         });
         var stardewBioData = Character.StardewNpc.GetData();
@@ -476,7 +486,7 @@ public class Prompts
                 StringComparison.InvariantCultureIgnoreCase
             ) && Context.DayOfSeason == stardewBioData.BirthDay)
         {
-            prompt.AppendLine($"It is {Name}'s birthday.");
+            prompt.AppendLine(_translationHelper.Get("specialDatesBirthday", new { Name= Name }));
         }
     }
 
@@ -487,25 +497,25 @@ public class Prompts
         {
             var theLine = activity.Key switch
             {
-                "cc_Boulder" => $"The glittering bounder has recently been removed from the mountain lake, filling the river with precious metal ores.",
-                "cc_Bridge" => $"The bridge to the quarry has recently been repaired, allowing the townsfolk to cross the river.",
-                "cc_Bus" => $"The bus to Calico Desert has recently been repaired, allowing the townsfolk to visit the desert. This also means that Pam can return to her job as a bus driver, which is a big change in circumstances for both her and Penny.",
-                "cc_Greenhouse" => $"The farmer's greenhouse has recently been repaired, allowing the farmer to grow crops all year round.",
-                "cc_Minecart" => $"The old minecart system has recently been repaired, allowing the townsfolk to travel between the mines, the town and the bus stop instantly.",
-                "cc_Complete" => $"The community center has recently been restored, bringing the town together and revitalising the valley.",
-                "movieTheater" => $"The movie theater has recently opened in the former JojaMart building, showing classic films and new releases.",
-                "pamHouseUpgrade" => $"Pam's house has recently been upgraded by the Farmer, allowing her and Penny to live in a more comfortable environment. The people of Pelican town including Pam and Penny are aware that the Farmer paid for the upgrade.",
-                "pamHouseUpgradeAnonymous" => $"Pam's house has recently been upgraded by the Farmer. The people of Pelican Town are not aware who paid for it and it is a great mystery, particularly for Pam and also for Penny whether or not she is married to the Farmer.",
-                "jojaMartStruckByLightning" => $"JojaMart has recently been struck by lightning, causing a fire that destroyed the building.",
-                "babyBoy" => $"The farmer and the farmer's spouse have recently had a baby boy.",
-                "babyGirl" => $"The farmer and the farmer's spouse have recently had a baby girl.",
-                "wedding" => $"The farmer has recently gotten married.",
-                "luauBest" => $"The pot luck soup at the Luau was recently declared the best ever.",
-                "luauShorts" => $"Lewis's shorts were recently found in the pot luck soup at the Luau, causing a scandle.",
-                "luauPoisoned" => $"The pot luck soup at the Luau was recently poisoned, causing a mass illness.",
-                "Characters_MovieInvite_Invited" => $"The farmer has recently been invited to the movies by {Name}.",
-                "DumpsterDiveComment" => $"The farmer has recently been caught by {Name} going through someone else's trash can.",
-                "GreenRainFinished" => $"The green rain has stopped and the townsfolk are returning to their normal routines.",
+                "cc_Boulder" => _translationHelper.Get("recentEventsBoulder"),
+                "cc_Bridge" => _translationHelper.Get("recentEventsQuarryBridge"),
+                "cc_Bus" => _translationHelper.Get("recentEventsBus"),
+                "cc_Greenhouse" => _translationHelper.Get("recentEventsGreenhouse"),
+                "cc_Minecart" => _translationHelper.Get("recentEventsMinecarts"),
+                "cc_Complete" => _translationHelper.Get("recentEventsCommunityCenter"),
+                "movieTheater" => _translationHelper.Get("recentEventsMovieTheatre"),
+                "pamHouseUpgrade" => _translationHelper.Get("recentEventsPamHouse"),
+                "pamHouseUpgradeAnonymous" => _translationHelper.Get("recentEventsPamHouseAnonymous"),
+                "jojaMartStruckByLightning" => _translationHelper.Get("recentEventsJojaLightning"),
+                "babyBoy" => _translationHelper.Get("recentEventsBabyBoy"),
+                "babyGirl" => _translationHelper.Get("recentEventsBabyGirl"),
+                "wedding" => _translationHelper.Get("recentEventsMarried"),
+                "luauBest" => _translationHelper.Get("recentEventsLuauBest"),
+                "luauShorts" => _translationHelper.Get("recentEventsLuauShorts"),
+                "luauPoisoned" => _translationHelper.Get("recentEventsLuauPoisoned"),
+                "Characters_MovieInvite_Invited" => _translationHelper.Get("recentEventsMovieInvited", new { Name= Name }),
+                "DumpsterDiveComment" => _translationHelper.Get("recentEventsDumpsterDive", new { Name= Name }),
+                "GreenRainFinished" => _translationHelper.Get("recentEventsGreenRain"),
                 _ => $""
             };
             if (!string.IsNullOrWhiteSpace(theLine))
@@ -515,8 +525,8 @@ public class Prompts
         }
         if (eventSection.Length > 0)
         {
-            prompt.AppendLine("## Recent Events:");
-            prompt.AppendLine("The following events have recently occured in town, which are important in the dialogue lines.");
+            prompt.AppendLine($"## {_translationHelper.Get("recentEventsHeading")}");
+            prompt.AppendLine(_translationHelper.Get("recentEventsIntro"));
             prompt.AppendLine(eventSection.ToString());
         }
     }
@@ -530,61 +540,63 @@ public class Prompts
         {
             if (Character.StardewNpc.TilePoint == bedTile && Character.Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel)
             {
-                prompt.AppendLine($"{Name} is in bed. The farmer has climbed into {Name}'s bed, and is talking to {Character.Bio.GenderPronoun} there.");
+                prompt.AppendLine(_translationHelper.Get("locationBed", new { Name= Name, GenderPronoun= Character.Bio.GenderPronoun }));
             }
             else
             {
                 var mayBeInShop = Context.Location.Contains("Shop", StringComparison.OrdinalIgnoreCase)
                     || Context.Location.Contains("Science", StringComparison.OrdinalIgnoreCase);
-                prompt.AppendLine($"The farmer and {Name} are talking in {Name}'s home{(mayBeInShop ? " or the shop" : "")}.");
+                var inShopString = mayBeInShop ? _translationHelper.Get("locationAtHomeOrShop") : "";
+                prompt.AppendLine(_translationHelper.Get("locationAtHome", new { Name= Name, inShopString= inShopString }));
             }
         }
         else if (Context.Location != null)
         {
             prompt.Append(Context.Location switch
             {
-                "Town" => $"The farmer and {Name} are talking outdoors in the center of Pelican Town.",
-                "Beach" => $"The farmer and {Name} are on the beach.",
-                "Desert" => $"The farmer and {Name} are away from Stardew Valley visiting the Calico desert.",
-                "BusStop" => $"The farmer and {Name} are at the bus stop.",
-                "Railroad" => $"The farmer and {Name} are at the railroad station, near the spa in the mountains.",
-                "Saloon" => $"The farmer and {Name} are at the Stardrop Saloon, relaxing at the end of a busy day. {(npcData.Age == NpcAge.Child ? "" : "They are a little drunk.")}",
-                "SeedShop" => $"The farmer and {Name} are in Pierre's General Store.",
-                "JojaMart" => $"The farmer and {Name} are shopping at the JojaMart.",
-                "Resort_Chair" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is standing by a chair on the beach.",
-                "Resort_Towel" or "Resort_Towel_2" or "Resort_Towel_3" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is relaxing on a beach towel on the beach.",
-                "Resort_Umbrella" or "Resort_Umbrella_2" or "Resort_Umbrella_3" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is relaxing on a beach towel on the beach.",
-                "Resort_Bar" => $"The farmer and {Name} are at the Ginger Island tropical resort. They are at the bar run by Gus and it is day time. They are focussed on the bar{(npcData.Age == NpcAge.Child ? "" : " and what they have been drinking. They are a little drunk")}.",
-                "Resort_Entering" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is just arriving at the resort from Pelican Town.",
-                "Resort_Leaving" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is leaving the resort to return to Pelican Town.",
-                "Resort_Shore" => $"The farmer and {Name} are at the Ginger Island tropical resort. They are talking at the shore of the beach, with their feet in the water looking out to sea.",
-                "Resort_Shore_2" => $"The farmer and {Name} are at the Ginger Island tropical resort. They are talking at the shore of the beach, with their feet in the water contemplating the waves.",
-                "Resort_Wander" => $"The farmer and {Name} are at the Ginger Island tropical resort. {Name} is walking around behind the beach huts, close to the jungle and considering exploring the island away from the resort.",
-                "Resort" or "Resort_2" => $"The farmer and {Name} are at the Ginger Island tropical resort. The dialogue should be appropriate wherever in the resort they are.",
+                "Town" => _translationHelper.Get("locationTown", new { Name= Name }),
+                "Beach" => _translationHelper.Get("locationBeach", new { Name= Name }),
+                "Desert" => _translationHelper.Get("locationDesert", new { Name= Name }),
+                "BusStop" => _translationHelper.Get("locationBusStop", new { Name= Name }),
+                "Railroad" => _translationHelper.Get("locationRailroad", new { Name= Name }),
+                "Saloon" => $"{_translationHelper.Get("locationSaloon", new { Name= Name })}{((npcData.Age == NpcAge.Child || Character.Name == "Emily") ? "" : _translationHelper.Get("locationSaloonDrunk"))}",
+                "SeedShop" => _translationHelper.Get("locationPierres", new { Name= Name }),
+                "JojaMart" => _translationHelper.Get("locationJojaMart", new { Name= Name }),
+                "Resort_Chair" => _translationHelper.Get("locationResortChair", new { Name= Name }),
+                "Resort_Towel" or "Resort_Towel_2" or "Resort_Towel_3" => _translationHelper.Get("locationResortTowel", new { Name= Name }),
+                "Resort_Umbrella" or "Resort_Umbrella_2" or "Resort_Umbrella_3" => _translationHelper.Get("locationResortUmbrella", new { Name= Name }),
+                "Resort_Bar" => $"{_translationHelper.Get("locationResortBar", new { Name= Name })}{((npcData.Age == NpcAge.Child) ? "" : _translationHelper.Get("locationSaloonDrunk"))}.",
+                "Resort_Entering" => _translationHelper.Get("locationResortEntering", new { Name= Name }),
+                "Resort_Leaving" => _translationHelper.Get("locationResortLeaving", new { Name= Name }),
+                "Resort_Shore" or "Resort_Shore_2" => _translationHelper.Get("locationResortShore", new { Name= Name }),
+                "Resort_Wander" => _translationHelper.Get("locationResortWander", new { Name= Name }),
+                "Resort" or "Resort_2" => _translationHelper.Get("locationResort", new { Name= Name }),
                 _ => $"The farmer and {Name} are at {Context.Location}."
             });
-            prompt.AppendLine("The location where the conversation is taking place may be significant for the lines.");
+            prompt.AppendLine(_translationHelper.Get("locationOutro"));
         }
 
         if (Character.StardewNpc.DirectionsToNewLocation != null && Context.Location != Character.StardewNpc.DirectionsToNewLocation.targetLocationName)
         {
-            prompt.AppendLine($"{Name} is going to {Character.StardewNpc.DirectionsToNewLocation.targetLocationName}.");
+            var destination = Character.StardewNpc.DirectionsToNewLocation.targetLocationName;
+            prompt.AppendLine(_translationHelper.Get("locationTravelling", new { Name= Name, destination= destination }));
         }
     }
 
     private void GetMarriageFeelings(StringBuilder prompt)
     {
         var IsRoommate = Game1.getPlayerOrEventFarmer().friendshipData[Name].IsRoommate();
+        var marriageOrRoommate = IsRoommate ? _translationHelper.Get("generalBeingRoommates") : _translationHelper.Get("generalTheMarriage");
         switch (Context.Hearts)
         {
             case > 12:
-                prompt.AppendLine($"{Name} is feeling very positive about {(IsRoommate ? "being roommates" : "the marriage")}.");
+                prompt.AppendLine(_translationHelper.Get("marriageSentimentGood", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
                 break;
             case < 10:
-                prompt.AppendLine($"{Name} is feeling very negative about {(IsRoommate ? "being roommates" : "the marriage")}. While {Name} should will still talk about the Context of the conversation, they will be more likely to be negative or critical.");
+                prompt.AppendLine(_translationHelper.Get("marriageSentimentBad", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
                 break;
             default:
-                prompt.AppendLine($"{Name} is generally content, but a little uncertain and conflicted about {(IsRoommate ? "being roommates" : "the marriage")}.");
+                prompt.AppendLine(_translationHelper.Get("marriageSentimentNeutral", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
                 break;
         }
     }
@@ -597,11 +609,12 @@ public class Prompts
         var pet = Game1.getPlayerOrEventFarmer().getPet();
         if (pet != null)
         {
-            prompt.AppendLine($"The farm has a pet {pet.petType.Value} named {pet.Name}.");
+            var petType = pet.petType.Value;
+            prompt.AppendLine(_translationHelper.Get("farmContentsPet", new { petType= petType, Name= pet.Name }));
         }
         else
         {
-            prompt.AppendLine("The farm has no pets.");
+            prompt.AppendLine(_translationHelper.Get("farmContentsNoPets"));
         }
     }
 
@@ -611,7 +624,7 @@ public class Prompts
         var allCrops = GetCrops();
         if (allCrops.Any())
         {
-            prompt.AppendLine($"The following crops are growing on the farm:");
+            prompt.AppendLine(_translationHelper.Get("farmCropsIntro"));
             foreach (var crop in allCrops.GroupBy(x => x.indexOfHarvest.Value))
             {
                 var thisDetails = cropData[crop.Key];
@@ -619,18 +632,17 @@ public class Prompts
                 var ripe = crop.Count(x => x.fullyGrown.Value);
                 if (ripe > 0)
                 {
-                    prompt.Append($" (of which {ripe} are ready for harvest)");
+                    prompt.AppendLine(_translationHelper.Get("farmCropsReadyForHarvest", new { ripe= ripe }));
                 }
                 else
                 {
-                    prompt.Append(" (not ready for harvest)");
+                    prompt.AppendLine(_translationHelper.Get("farmCropsNotReady"));
                 }
-                prompt.AppendLine(".");
             }
         }
         else
         {
-            prompt.AppendLine("The farm has no crops.");
+            prompt.AppendLine(_translationHelper.Get("farmCropsNone"));
         }
     }
 
@@ -640,7 +652,7 @@ public class Prompts
 
         if (allAnimals.Any())
         {
-            prompt.AppendLine($"The farm has the following animals:");
+            prompt.AppendLine(_translationHelper.Get("farmAnimalsIntro"));
             foreach (var animal in allAnimals.GroupBy(x => x.type))
             {
                 prompt.AppendLine($"- {animal.Count()} {animal.Key}{(animal.Count() > 1 ? "s" : "")}");
@@ -648,7 +660,7 @@ public class Prompts
         }
         else
         {
-            prompt.AppendLine("The farm has no animals.");
+            prompt.AppendLine(_translationHelper.Get("farmAnimalsNone"));
         }
     }
 
@@ -658,7 +670,7 @@ public class Prompts
 
         if (allBuildings.Any())
         {
-            prompt.AppendLine($"The farm has the following buildings:");
+            prompt.AppendLine(_translationHelper.Get("farmBuildingsIntro"));
             var completedBuildings = allBuildings.Where(x => x.daysOfConstructionLeft.Value == 0 && x.buildingType.Value != "Greenhouse");
             foreach (var building in completedBuildings.GroupBy(x => x.buildingType))
             {
@@ -669,22 +681,22 @@ public class Prompts
             {
                 if (greenhouse.indoors.Value == null)
                 {
-                    prompt.AppendLine("- A ruined greenhouse.");
+                    prompt.AppendLine($"- {_translationHelper.Get("farmBuildingsRuinedGreenhouse")}");
                 }
                 else
                 {
-                    prompt.AppendLine("- A repaired greenhouse.");
+                    prompt.AppendLine($"- {_translationHelper.Get("farmBuildingsRepairedGreenhouse")}");
                 }
             }
             if (allBuildings.Any(x => x.daysOfConstructionLeft.Value > 0))
             {
                 var underConstruction = allBuildings.First(x => x.daysOfConstructionLeft.Value > 0);
-                prompt.AppendLine($"- A {underConstruction.buildingType.Value} which will complete construction in {underConstruction.daysOfConstructionLeft} days.");
+                prompt.AppendLine($"- {_translationHelper.Get("farmBuildingsConstruction", new { buildingType= underConstruction.buildingType.Value, daysOfConstructionLeft= underConstruction.daysOfConstructionLeft })}");
             }
         }
         else
         {
-            prompt.AppendLine("The farm has no buildings apart from the farmhouse and shipping bin.");
+            prompt.AppendLine(_translationHelper.Get("farmBuildingsNone"));
         }
     }
 
@@ -692,19 +704,30 @@ public class Prompts
     {
         if (Context.Children.Count == 0)
         {
-            prompt.AppendLine($"The farmer and {Name} have no children.");
+            prompt.AppendLine(_translationHelper.Get("childrenNone", new { Name= Name }));
         }
         else
         {
-            prompt.AppendLine($"The farmer and {Name} have {Context.Children.Count()} child{(Context.Children.Count > 1 ? "ren" : "")}:");
+            if (Context.Children.Count > 1)
+            {
+                var count = Context.Children.Count;
+                prompt.AppendLine(_translationHelper.Get("childrenMultiple", new { Name= Name, count= count }));
+            }
+            else
+            {
+                prompt.AppendLine(_translationHelper.Get("childrenSingle", new { Name= Name }));
+            }
+            prompt.AppendLine();
             foreach (var child in Context.Children)
             {
-                prompt.AppendLine($"- A {(child.IsMale ? "boy" : "girl")} named {child.Name} who is {child.Age} years old.");
+                var childGender = child.IsMale ? _translationHelper.Get("generalBoy") : _translationHelper.Get("generalGirl");
+                prompt.AppendLine($"- {_translationHelper.Get("childrenDescription", new { Gender = childGender, Name= child.Name, Age= child.Age })}");
             }
         }
         if (friendship.DaysUntilBirthing > 0)
         {
-            prompt.AppendLine($"The farmer and {Name} are expecting a child in {friendship.DaysUntilBirthing} days.");
+            var daysUntilBirth = friendship.DaysUntilBirthing;
+            prompt.AppendLine(_translationHelper.Get("childrenPregnant", new { Name= Name, daysUntilBirth= daysUntilBirth }));
         }
     }
 
@@ -714,19 +737,19 @@ public class Prompts
 
         if (Context.Weather.Contains("lightning"))
         {
-            prompt.AppendLine("There is a storm with rain and lightning.");
+            prompt.AppendLine(_translationHelper.Get("weatherLightning"));
         }
         else if (Context.Weather.Contains("green rain"))
         {
-            prompt.AppendLine("There is a strange green rain causing the plants to grow wildly.");
+            prompt.AppendLine(_translationHelper.Get("weatherGreenRain"));
         }
         else if (Context.Weather.Contains("snow"))
         {
-            prompt.AppendLine("It is snowing.");
+            prompt.AppendLine(_translationHelper.Get("weatherSnow"));
         }
         else if (Context.Weather.Contains("rain"))
         {
-            prompt.AppendLine("It is raining heavily.");
+            prompt.AppendLine(_translationHelper.Get("weatherRain"));
         }
     }
 
@@ -734,19 +757,19 @@ public class Prompts
     {
         if (Context.DayOfSeason != null && Context.Season != null)
         {
-            prompt.AppendLine($"It is day {Context.DayOfSeason} of {Context.Season}.");
+            prompt.AppendLine(_translationHelper.Get("dateTimeDayOfSeason", new { DayOfSeason= Context.DayOfSeason, Season= Context.Season }));
         }
         if (Context.TimeOfDay != null)
         {
-            prompt.AppendLine($"It is {Context.TimeOfDay}.");
+            prompt.AppendLine(_translationHelper.Get("dateTimeTimeOfDay", new { TimeOfDay= Context.TimeOfDay }));
             if (Context.TimeOfDay == "early morning")
             {
-                prompt.AppendLine("This is a normal time for the farmer to be up and about.");
+                prompt.AppendLine(_translationHelper.Get("dateTimeEarlyMorningNormal"));
             }
         }
         if (Context.Year == 1)
         {
-            prompt.AppendLine("The farmer is new to Pelican Town this year.");
+            prompt.AppendLine(_translationHelper.Get("dateTimeNewThisYear"));
         }
 
     }
@@ -758,12 +781,9 @@ public class Prompts
 
         if (fullHistory.Any())
         {
-            prompt.AppendLine($"##Event history:");
-            prompt.AppendLine($"{Name} is aware of the following recent events and conversations with the farmer.");
-            prompt.AppendLine("Conversations happened at the times indicated, possibly in contexts different to the current conversation.");
-            prompt.AppendLine("The new line may be based on previous conversations and events as well as the current context.  The line should reference any events that happened just now. It may reference patterns in the previous conversation such as similar gifts or long gaps in the conversation.");
-            prompt.AppendLine($"You should avoid {Name} repeating lines or concepts from previous lines. The more recent a previous event or interaction the more likely it will be referenced and the less likely it will be repeated.");
-            prompt.AppendLine("History:");
+            prompt.AppendLine($"##{_translationHelper.Get("eventHistoryHeading")}");
+            prompt.AppendLine(_translationHelper.Get("eventHistoryIntro", new { Name= Name }));
+            prompt.AppendLine(_translationHelper.Get("eventHistorySubheading"));
             foreach (var eventHistory in fullHistory.OrderBy(x => x.Item1).Take(30))
             {
                 prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {eventHistory.Item2.Format(Name)}");
@@ -782,8 +802,8 @@ public class Prompts
     {
         if (!dialogueSample.Any()) return;
 
-        prompt.AppendLine($"##{Name} Sample Dialogue:");
-        prompt.AppendLine($"You have a sample of {Name}'s dialogue as follows:");
+        prompt.AppendLine($"##{_translationHelper.Get("sampleDialogueHeading", new { Name= Name })}");
+        prompt.AppendLine(_translationHelper.Get("sampleDialogueIntro", new { Name= Name }));
         foreach (var dialogue in dialogueSample)
         {
             prompt.AppendLine($"- {dialogue.Value}");
@@ -792,64 +812,66 @@ public class Prompts
 
     private void GetGameState(StringBuilder prompt)
     {
-        prompt.AppendLine("## Game State:");
+        prompt.AppendLine($"## {_translationHelper.Get("gameStateHeading")}");
         if (allPreviousActivities.ContainsKey("cc_Complete"))
         {
-            prompt.AppendLine("The community center has been restored.");
+            prompt.AppendLine(_translationHelper.Get("gameStateCommunityCenterYes"));
         }
         else
         {
-            prompt.AppendLine("The community center remains rundown and inaccessible.");
+            prompt.AppendLine(_translationHelper.Get("gameStateCommunityCenterNo"));
         }
         if (allPreviousActivities.ContainsKey("cc_Bus"))
         {
-            prompt.AppendLine("The bus to Calico Desert has been repaired and is driven by Pam.");
+            prompt.AppendLine(_translationHelper.Get("gameStateBusYes"));
         }
         else
         {
-            prompt.AppendLine("The bus to Calico Desert remains broken and Pam remains unemployed.");
+            prompt.AppendLine(_translationHelper.Get("gameStateBusNo"));
         }
         if (allPreviousActivities.ContainsKey("cc_Bridge"))
         {
-            prompt.AppendLine("The bridge to the quarry has been repaired.");
+            prompt.AppendLine(_translationHelper.Get("gameStateQuarryBridgeYes"));
         }
         else
         {
-            prompt.AppendLine("The bridge to the quarry has collapsed.");
+            prompt.AppendLine(_translationHelper.Get("gameStateQuarryBridgeNo"));
         }
         if (allPreviousActivities.ContainsKey("cc_Minecart"))
         {
-            prompt.AppendLine("The minecart system has been repaired and is operating across Stardew Valley.");
+            prompt.AppendLine(_translationHelper.Get("gameStateMinecartYes"));
         }
         else
         {
-            prompt.AppendLine("The minecart system remains broken.");
+            prompt.AppendLine(_translationHelper.Get("gameStateMinecartNo"));
         }
         if (allPreviousActivities.ContainsKey("cc_Boulder"))
         {
-            prompt.AppendLine("The glittering boulder has been removed from the mountain lake and ore released into the rivers.");
+            prompt.AppendLine(_translationHelper.Get("gameStateBoulderYes"));
         }
         else
         {
-            prompt.AppendLine("The glittering boulder remains in the mountain lake.");
+            prompt.AppendLine(_translationHelper.Get("gameStateBoulderNo"));
         }
         if (Game1.year == 1)
         {
-            prompt.AppendLine("Kent is away serving in the army, leaving Jodi, Vincent and Sam.  The farmer has not yet met Kent.");
+            prompt.AppendLine(_translationHelper.Get("gameStateKentNo"));
         }
         else
         {
-            prompt.AppendLine("Kent has returned from the army and is living with Jodi, Vincent and Sam.  He is adjusting to life back in Pelican Town.");
+            prompt.AppendLine(_translationHelper.Get("gameStateKentYes"));
         }
     }
 
     private string GetCommand()
     {
         var commandPrompt = new StringBuilder();
-        commandPrompt.AppendLine($"##Command:\nWrite a single line of dialogue for {Name} to fit the situation and {Name}'s personality.");
+        commandPrompt.AppendLine($"##{_translationHelper.Get("commandHeading")}");
+        commandPrompt.AppendLine(_translationHelper.Get("commandIntro", new { Name= Name }));
         if (!string.IsNullOrWhiteSpace(Context.ScheduleLine) && Context.ChatHistory.Length == 0)
         {
-            commandPrompt.AppendLine($"\nThe line will be used to replace a piece of situational dialogue and should communicate similar themes while being different.  The original line was:{Context.ScheduleLine}");
+            commandPrompt.AppendLine();
+            commandPrompt.AppendLine(_translationHelper.Get("commandReplaceSchedule", new { ScheduleLine= Context.ScheduleLine }));
         }
         return commandPrompt.ToString();
     }
@@ -857,35 +879,25 @@ public class Prompts
     private string GetInstructions()
     {
         var instructions = new StringBuilder();
-        instructions.AppendLine("##Output Format:");
-        instructions.AppendLine($"The line should be written in the style of the game and reflect the level of familiarity {Name} has with the farmer.");
+        instructions.AppendLine($"##{_translationHelper.Get("instructionsHeading")}");
+        instructions.AppendLine(_translationHelper.Get("instructionsIntro", new { Name= Name }));
         if (dialogueSample.Any())
         {
-            instructions.AppendLine($"Use the supplied sample dialogue to help you match the tone and style of {Name}'s interactions with the farmer at the current friendship level.");
+            instructions.AppendLine(_translationHelper.Get("instructionsSampleDialogue", new { Name= Name }));
         }
-        instructions.AppendLine("To include the farmer's name use the @ symbol.");
-        instructions.AppendLine("If the line should be presented with breaks, use #$b# as a screen divider or use #$e# as a divider for a more significant break. There should not be more than 24 words between each break. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines.");
+        instructions.AppendLine(_translationHelper.Get("instructionsFarmersName"));
+        instructions.AppendLine(_translationHelper.Get("instructionsBreaks"));
         var extraPortraits = new StringBuilder();
         foreach (var portrait in Character.Bio.ExtraPortraits)
         {
-            extraPortraits.Append($"${portrait.Key} for {portrait.Value}, ");
+            extraPortraits.Append(_translationHelper.Get("instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
         }
-        instructions.AppendLine($"To express emotions, finish the section with one of these emotion tokens: $h for extremely happy, $0 for neutral, $s for sad, $l for in love, {extraPortraits.ToString()}or $a for angry. Include the emotion token in the section to which it applies, do not put a # before it. Do not include emojis, actions surrounded by asterisks or other special characters to indicate emotion or actions.");
-        instructions.AppendLine("Write the line as a single line of output preceded with a '-' only. The line should be properly punctuated and capitalised.");
-        instructions.AppendLine("If the line doesn't call for the farmer to respond, just output the one line.");
-        instructions.AppendLine($"If the line does invite a response from the farmer, please propose two, three or four possible responses that the farmer could make, covering the full range of possible reactions. As the farmer gets more friendly with {Name} responses should be available more often. Each response should be on a new line, no more than 12 words, preceded by a '%' and a space. Response lines should be in the voice of, and from the perspective of, the farmer.  They should not contain any special symbols, @s or emotion tokens.");
-        instructions.AppendLine("### Example 1:");
-        instructions.AppendLine("- \"It is such a lovely spring day today, amazing to meet you at the Jojamart.  How are you?\" $0");
-        instructions.AppendLine("% I'm doing well, thank you.");
-        instructions.AppendLine("% I'm not doing so well, actually.");
-        instructions.AppendLine("% I'm doing great, thanks for asking.");
-        instructions.AppendLine("### Example 2:");
-        instructions.AppendLine("- \"I'm so glad you came to visit me today.  I've been feeling a little lonely lately, but this rose really brightens my day.\" $s");
-        instructions.AppendLine("### Example 3:");
-        instructions.AppendLine("- \"Oh hi. I don't think I know you, and I'm rather busy. See you around.\"");
+        instructions.AppendLine(_translationHelper.Get("instructionsEmotion", new { extraPortraits= extraPortraits }));
+        instructions.AppendLine(_translationHelper.Get("instructionsSingleLine"));
+        instructions.AppendLine(_translationHelper.Get("instructionsResponses", new { Name= Name }));
         if (ModEntry.Config.ApplyTranslation)
         {
-            instructions.AppendLine($"Please express the line and any responses in {ModEntry.Language}.  Keep the responses natural and in character, but always use {ModEntry.Language} despite the fact this prompt is in English.");
+            instructions.AppendLine(_translationHelper.Get("instructionsTranslate", new { Language= ModEntry.Language }));
         }
         if (!string.IsNullOrWhiteSpace(Llm.Instance.ExtraInstructions))
         {
@@ -896,12 +908,12 @@ public class Prompts
 
     private string GetResponseStart()
     {
-        return $"Here is the requested line for {Name} which fit the situation and {Name}'s personality and voice.";
+        return _translationHelper.Get("responseStart", new { Name= Name });
     }
 
     private string RelationshipWord(bool maleFarmer, bool npcIsMale)
     {
-        return maleFarmer ? (npcIsMale ? "gay" : "heterosexual") : (npcIsMale ? "heterosexual" : "lesbian");
+        return maleFarmer ? (npcIsMale ? _translationHelper.Get("generalGayMale") : _translationHelper.Get("generalHeterosexual")) : (npcIsMale ? _translationHelper.Get("generalHeterosexual") : _translationHelper.Get("generalLesbian"));
     }
 
     private IEnumerable<Crop> GetCrops()

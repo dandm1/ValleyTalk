@@ -1,17 +1,39 @@
 using System;
 using System.Collections.Generic;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
 public class BioData
 {
+    private static string male;
+    private static string female;
+    private static string he;
+    private static string she;
+    private static string him;
+    private static string her;
+    private static string his;
+    private static string hers;
+
+    static BioData()
+    {
+        var translation = ModEntry.SHelper.Translation;
+        male = translation.Get("generalMale");
+        female = translation.Get("generalFemale");
+        he = translation.Get("generalHe");
+        she = translation.Get("generalShe");
+        him = translation.Get("generalHim");
+        her = translation.Get("generalHer");
+        his = translation.Get("generalHis");
+        hers = translation.Get("generalHers");
+    }
     private bool? isMale;
     private string unique;
 
     public string Biography { get; set; } = string.Empty;
     //Only update gender if the value passed is male or female
     public string? Gender {
-        get{ return isMale == null ? null : (isMale.Value ? "Male" : "Female"); }
+        get{ return isMale == null ? null : (isMale.Value ? male : female); }
         set
         {
             if (value == null)
@@ -19,9 +41,9 @@ public class BioData
                 isMale = null; 
                 return;
             }
-            if (value.Equals("male", StringComparison.OrdinalIgnoreCase) || value.Equals("female", StringComparison.OrdinalIgnoreCase))
+            if (value.Equals(male, StringComparison.OrdinalIgnoreCase) || value.Equals(female, StringComparison.OrdinalIgnoreCase))
             {
-                isMale = value.Equals("male", StringComparison.OrdinalIgnoreCase);
+                isMale = value.Equals(male, StringComparison.OrdinalIgnoreCase);
                 return;
             }
             isMale = null;
@@ -44,9 +66,9 @@ public class BioData
     public Dictionary<string,string> Dialogue { get; set; } = new Dictionary<string, string>();
     public bool HomeLocationBed { get; set; } = false;
 
-    public string GenderP2 => (isMale ?? false) ? "he" : "she";
+    public string GenderP2 => (isMale ?? false) ? he : she;
     
-    public string GenderPronoun => (isMale ?? false) ? "him" : "her";
-    public string GenderPossessive => (isMale ?? false) ? "his" : "her";
+    public string GenderPronoun => (isMale ?? false) ? him : her;
+    public string GenderPossessive => (isMale ?? false) ? his : hers;
 
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -18,6 +19,6 @@ internal class DialogueEventOverheard : IHistory
     public string Format(string npcName)
     {
         var totalDialogue = string.Join(" : ", dialogues?.Select(x => x.Text) ?? new List<string>());
-        return $"Overheard {name} speaking to the farmer : {totalDialogue}";
+        return ModEntry.SHelper.Translation.Get("historyOverheardFormat", new { name= name, totalDialogue= totalDialogue });
     }
 }
