@@ -42,7 +42,7 @@ public class Prompts
 
     private static void LoadStardewSummary()
     {
-        var gameSummaryDict = ModEntry.SHelper.Data.ReadJsonFile<Dictionary<string,string>>("assets/bio/Stardew.txt");
+        var gameSummaryDict = Util.ReadLocalisedJson<Dictionary<string,string>>("assets/bio/Stardew","txt");
         _stardewSummary = gameSummaryDict["Text"];
     }
 
@@ -609,8 +609,17 @@ public class Prompts
         var pet = Game1.getPlayerOrEventFarmer().getPet();
         if (pet != null)
         {
-            var petType = pet.petType.Value;
-            prompt.AppendLine(_translationHelper.Get("farmContentsPet", new { petType= petType, Name= pet.Name }));
+            if (Game1.petData.TryGetValue(pet?.petType.Value, out StardewValley.GameData.Pets.PetData petData))
+            {
+                var petType = petData.DisplayName;
+                petType = LoadLocalised(petType);
+                prompt.AppendLine(_translationHelper.Get("farmContentsPet", new { petType= petType, Name= pet.Name }));
+            }
+            else
+            {
+                var petType = pet.petType.Value;
+                prompt.AppendLine(_translationHelper.Get("farmContentsPet", new { petType= petType, Name= pet.Name }));
+            }
         }
         else
         {
@@ -628,11 +637,14 @@ public class Prompts
             foreach (var crop in allCrops.GroupBy(x => x.indexOfHarvest.Value))
             {
                 var thisDetails = cropData[crop.Key];
-                prompt.Append($"- {crop.Count()} {thisDetails.Name}");
+                var thisName = thisDetails.DisplayName;
+                thisName = LoadLocalised(thisName);
+
+                prompt.Append($"- {crop.Count()} {thisName}");
                 var ripe = crop.Count(x => x.fullyGrown.Value);
                 if (ripe > 0)
                 {
-                    prompt.AppendLine(_translationHelper.Get("farmCropsReadyForHarvest", new { ripe= ripe }));
+                    prompt.AppendLine(_translationHelper.Get("farmCropsReadyForHarvest", new { ripe = ripe }));
                 }
                 else
                 {
@@ -646,6 +658,22 @@ public class Prompts
         }
     }
 
+    private static string LoadLocalised(string thisName)
+    {
+        if (thisName.StartsWith("[LocalizedText ", StringComparison.InvariantCultureIgnoreCase))
+        {
+            thisName = thisName.Substring(15, thisName.Length - 16);
+            var translation = Game1.content.LoadString(thisName);
+
+            if (translation != null)
+            {
+                thisName = translation;
+            }
+        }
+
+        return thisName;
+    }
+
     private void GetFarmAnimals(StringBuilder prompt)
     {
         var allAnimals = GetAnimals();
@@ -655,7 +683,7 @@ public class Prompts
             prompt.AppendLine(_translationHelper.Get("farmAnimalsIntro"));
             foreach (var animal in allAnimals.GroupBy(x => x.type))
             {
-                prompt.AppendLine($"- {animal.Count()} {animal.Key}{(animal.Count() > 1 ? "s" : "")}");
+                prompt.AppendLine($"- {animal.Count()} {animal.First().displayType}{(animal.Count() > 1 ? "s" : "")}");
             }
         }
         else
@@ -674,7 +702,9 @@ public class Prompts
             var completedBuildings = allBuildings.Where(x => x.daysOfConstructionLeft.Value == 0 && x.buildingType.Value != "Greenhouse");
             foreach (var building in completedBuildings.GroupBy(x => x.buildingType))
             {
-                prompt.AppendLine($"- {building.Count()} {building.Key}{(building.Count() > 1 ? "s" : "")}");
+                var thisName = building.First().buildingType.Value;
+                var translation = Game1.content.LoadString($"Strings//Buildings:{thisName}_Name");
+                prompt.AppendLine($"- {building.Count()} {translation}");
             }
             var greenhouse = allBuildings.FirstOrDefault(x => x.buildingType.Value == "Greenhouse");
             if (greenhouse != null)

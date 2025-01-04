@@ -1,4 +1,5 @@
 using StardewValley;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,5 +25,19 @@ namespace ValleyTalk
             return nearbyNpcs;
         }
 
+        internal static T ReadLocalisedJson<T>(string basePath, string extension = "json") where T : class
+        {
+            foreach(var langSuffix in ModEntry.LanguageFileSuffixes)
+            {
+                var path = $"{basePath}{langSuffix}.{extension}";
+                var result = ModEntry.SHelper.Data.ReadJsonFile<T>(path);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return default;
+        }
     }
 }

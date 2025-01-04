@@ -9,6 +9,7 @@ using StardewValley;
 using Serilog;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 namespace ValleyTalk
 {
     public partial class ModEntry : Mod
@@ -18,19 +19,50 @@ namespace ValleyTalk
         public static ModConfig Config;
         public static Dictionary<string, Type> LlmMap;
         public static bool BlockModdedContent { get; private set; } = false;
+        private static CultureInfo _locale;
         public static string Language 
         { 
             get
             {
-                if (SldConstants.Languages.ContainsKey(SHelper.Translation.LocaleEnum))
-                {
-                    return SldConstants.Languages[SHelper.Translation.LocaleEnum];
-                }
-                else
-                {
-                    return "English";
-                }
+                GetLocale();
+                return _locale.DisplayName;
             }
+        }
+
+        public static IEnumerable<string> LanguageFileSuffixes
+        {
+            get
+            {
+                GetLocale();
+                if (_locale != null && _locale.Name != "en-US")
+                {
+                    var workingLocal = _locale;
+                    while (!string.IsNullOrEmpty(workingLocal?.Name))
+                    {
+                        yield return $".{workingLocal.Name}";
+                        workingLocal = workingLocal.Parent;
+                    }
+                }
+                yield return string.Empty;
+            }
+        }
+
+        private static void GetLocale()
+        {
+            if (_locale != null) return;
+            
+            try
+            {
+                _locale = CultureInfo.GetCultureInfo(SHelper.Translation.Locale);
+            }
+            catch (Exception _)
+            {
+                _locale = null;
+            }
+            if (_locale == null)
+            {
+                _locale = CultureInfo.GetCultureInfo("en-US");
+            }   
         }
 
         public override object GetApi()

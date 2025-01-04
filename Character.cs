@@ -33,7 +33,7 @@ public class Character
     public Character(string name, NPC stardewNpc)
     {
         Name = name;
-        BioFilePath = $"assets/bio/{Name}.txt";
+        BioFilePath = $"assets/bio/{Name}";
         StardewNpc = stardewNpc;
 
         // Load and process the dialogue file
@@ -87,8 +87,16 @@ public class Character
             try
             {
                 string assetName = $"Characters\\Dialogue\\{Name}";
-                var unmarriedDialogue = manager.Load<Dictionary<string, string>>(assetName);
-                canonDialogue = unmarriedDialogue;
+                foreach(var langSuffix in ModEntry.LanguageFileSuffixes)
+                {
+                    var path = $"{assetName}{langSuffix}";
+                    var unmarriedDialogue = manager.Load<Dictionary<string, string>>(path);
+                    if (unmarriedDialogue != null)
+                    {
+                        canonDialogue = unmarriedDialogue;
+                        break;
+                    }
+                }
             }
             catch (Exception _)
             {
@@ -97,11 +105,20 @@ public class Character
             try
             {
                 string assetName = $"Characters\\Dialogue\\MarriageDialogue{Name}";
-                var marriedDialogue = manager.Load<Dictionary<string, string>>(assetName);
-                canonDialogue = canonDialogue.Concat(marriedDialogue).ToDictionary(x => x.Key, x => x.Value);
+                foreach(var langSuffix in ModEntry.LanguageFileSuffixes)
+                {
+                    var path = $"{assetName}{langSuffix}";
+                    var marriedDialogue = manager.Load<Dictionary<string, string>>(path);
+                    if (marriedDialogue != null)
+                    {
+                        canonDialogue = canonDialogue.Concat(marriedDialogue).ToDictionary(x => x.Key, x => x.Value);
+                        break;
+                    }
+                }
             }
             catch (Exception _)
             {
+                // If it fails, just continue
             }
         }
         else
@@ -132,7 +149,7 @@ public class Character
     {
         BioData bioData = null;
         
-        bioData = ModEntry.SHelper.Data.ReadJsonFile<BioData>(BioFilePath);
+        bioData = Util.ReadLocalisedJson<BioData>(BioFilePath,"txt");
         if (bioData == null)
         {
             bioData = new BioData();
