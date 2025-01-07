@@ -63,7 +63,7 @@ public class Character
             Game1.objectData.TryGetValue(gift, out var data);
             if (data != null)
             {
-                returnList.Add(data.Name);
+                returnList.Add(data.DisplayName);
             }
             
         }
@@ -72,7 +72,7 @@ public class Character
             Game1.objectData.TryGetValue(gift, out var data);
             if (data != null)
             {
-                returnList.Add(data.Name);
+                returnList.Add(data.DisplayName);
             }
         }
         return returnList;
@@ -155,6 +155,7 @@ public class Character
             bioData = new BioData();
             ModEntry.SMonitor.Log($"No bio file found for {Name}.", StardewModdingAPI.LogLevel.Warn);
         }
+        bioData.Name = Name;
         _bioData = bioData;
     }
 

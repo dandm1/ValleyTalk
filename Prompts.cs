@@ -15,15 +15,15 @@ public class Prompts
     [JsonIgnore]
     private readonly Dictionary<string,string> HistoryEvents = new()
     {
-        { "cc_Bus", _translationHelper.Get("cc_Bus_Repaired") },
-        { "cc_Boulder", _translationHelper.Get("cc_Boulder_Removed") },
-        { "cc_Bridge", _translationHelper.Get("cc_Bridge") },
-        { "cc_Complete", _translationHelper.Get("cc_Complete") },
-        { "cc_Greenhouse", _translationHelper.Get("cc_Greenhouse") },
-        { "cc_Minecart", _translationHelper.Get("cc_Minecart") },
-        { "wonIceFishing", _translationHelper.Get("wonIceFishing") },
-        { "wonGrange", _translationHelper.Get("wonGrange") },
-        { "wonEggHunt", _translationHelper.Get("wonEggHunt") }
+        { "cc_Bus", Util.GetString("cc_Bus_Repaired") },
+        { "cc_Boulder", Util.GetString("cc_Boulder_Removed") },
+        { "cc_Bridge", Util.GetString("cc_Bridge") },
+        { "cc_Complete", Util.GetString("cc_Complete") },
+        { "cc_Greenhouse", Util.GetString("cc_Greenhouse") },
+        { "cc_Minecart", Util.GetString("cc_Minecart") },
+        { "wonIceFishing", Util.GetString("wonIceFishing") },
+        { "wonGrange", Util.GetString("wonGrange") },
+        { "wonEggHunt", Util.GetString("wonEggHunt") }
     };
 
     public Prompts()
@@ -46,7 +46,7 @@ public class Prompts
         _stardewSummary = gameSummaryDict["Text"];
     }
 
-    private static StardewModdingAPI.ITranslationHelper _translationHelper = ModEntry.SHelper.Translation;
+
     [JsonIgnore]
     static string _stardewSummary;
     private string _system;
@@ -117,10 +117,10 @@ public class Prompts
     private string GetSystemPrompt()
     {
         var systemPrompt = new StringBuilder();
-        systemPrompt.AppendLine(_translationHelper.Get("systemPrompt"));
+        systemPrompt.AppendLine(Util.GetString(Character,"systemPrompt"));
         if (ModEntry.Config.ApplyTranslation)
         {
-            systemPrompt.AppendLine(_translationHelper.Get("systemPromptTranslation", new { Language = ModEntry.Language }));
+            systemPrompt.AppendLine(Util.GetString(Character,"systemPromptTranslation", new { Language = ModEntry.Language }));
         }
         return systemPrompt.ToString();
     }
@@ -128,8 +128,8 @@ public class Prompts
     private string GetGameConstantContext()
     {
         var gameConstantPrompt = new StringBuilder();
-        gameConstantPrompt.AppendLine(_translationHelper.Get("gameContext"));
-        gameConstantPrompt.AppendLine($"##{_translationHelper.Get("gameSummaryHeading")}");
+        gameConstantPrompt.AppendLine(Util.GetString(Character,"gameContext"));
+        gameConstantPrompt.AppendLine($"##{Util.GetString(Character,"gameSummaryHeading")}");
         gameConstantPrompt.AppendLine(_stardewSummary);
         return gameConstantPrompt.ToString();
     }
@@ -137,10 +137,11 @@ public class Prompts
     private string GetNpcConstantContext()
     {
         var npcConstantPrompt = new StringBuilder();
-        npcConstantPrompt.AppendLine(_translationHelper.Get("npcContextIntro", new { Name = Name }));
+        var intro = Util.GetString(Character,"npcContextIntro", new { Name = Name });
+        npcConstantPrompt.AppendLine(intro);
         if ((Character.Bio?.Biography ?? string.Empty).Length > 100)
         {
-            npcConstantPrompt.AppendLine($"##{_translationHelper.Get("npcContextBiographyHeading", new { Name = Name })}");
+            npcConstantPrompt.AppendLine($"##{Util.GetString(Character,"npcContextBiographyHeading", new { Name = Name })}");
             var bio = Character.Bio.Biography;
             while (bio.Contains("\n\n"))
             {
@@ -158,29 +159,29 @@ public class Prompts
         GetSampleDialogue(prompt);
         GetEventHistory(prompt);
 
-        prompt.AppendLine($"## {_translationHelper.Get("coreInstructionHeading")}");
-        prompt.AppendLine($"### {_translationHelper.Get("coreContextHeading")}");
+        prompt.AppendLine($"## {Util.GetString(Character,"coreInstructionHeading")}");
+        prompt.AppendLine($"### {Util.GetString(Character,"coreContextHeading")}");
         if (Context.MaleFarmer)
         {
-            prompt.AppendLine(_translationHelper.Get("coreMaleFarmer"));
+            prompt.AppendLine(Util.GetString(Character,"coreMaleFarmer"));
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("coreFemaleFarmer"));
+            prompt.AppendLine(Util.GetString(Character,"coreFemaleFarmer"));
         }
         GetDateAndTime(prompt);
         GetWeather(prompt);
         GetOtherNpcs(prompt);
-        Game1.getPlayerOrEventFarmer().friendshipData.TryGetValue(Name, out Friendship friendship);
+        Game1.getPlayerOrEventFarmer().friendshipData.TryGetValue(Character.Name, out Friendship friendship);
         if (friendship.IsMarried() || friendship.IsRoommate())
         {
             if (friendship.IsRoommate())
             {
-                prompt.AppendLine(_translationHelper.Get("coreRoommates", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"coreRoommates", new { Name= Name }));
             }
             else
             {
-                prompt.AppendLine(_translationHelper.Get("coreMarried", new { Name= Name, Pronoun = npcIsMale ? "his" : "her" }));
+                prompt.AppendLine(Util.GetString(Character,"coreMarried", new { Name= Name, Pronoun = npcIsMale ? "his" : "her" }));
 
                 GetChildren(prompt, friendship);
             }
@@ -202,11 +203,11 @@ public class Prompts
         }
         if (Context.MaleFarmer)
         {
-            prompt.AppendLine(_translationHelper.Get("coreMaleReferences"));
+            prompt.AppendLine(Util.GetString(Character,"coreMaleReferences"));
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("coreFemaleReferences"));
+            prompt.AppendLine(Util.GetString(Character,"coreFemaleReferences"));
         }
         GetPreoccupation(prompt);
         GetCurrentConversation(prompt);
@@ -231,7 +232,7 @@ public class Prompts
             Character.PreoccupationDate = Game1.Date;
         }
         
-        prompt.AppendLine(_translationHelper.Get("preoccupation", new { Name= Name, preoccupation= preoccupation }));
+        prompt.AppendLine(Util.GetString(Character,"preoccupation", new { Name= Name, preoccupation= preoccupation }));
     }
 
     private void GetOtherNpcs(StringBuilder prompt)
@@ -239,13 +240,13 @@ public class Prompts
         var otherNpcs = Util.GetNearbyNpcs(Character.StardewNpc);
         if (otherNpcs.Any())
         {
-            prompt.AppendLine($"### {_translationHelper.Get("openNpcsHeading")}");
-            prompt.AppendLine(_translationHelper.Get("otherNpcsIntro", new { Name= Name }));
+            prompt.AppendLine($"### {Util.GetString(Character,"openNpcsHeading")}");
+            prompt.AppendLine(Util.GetString(Character,"otherNpcsIntro", new { Name= Name }));
             foreach (var npc in otherNpcs)
             {
                 prompt.AppendLine($"- {npc.displayName}");
             }
-            prompt.AppendLine(_translationHelper.Get("otherNpcsOutro"));
+            prompt.AppendLine(Util.GetString(Character,"otherNpcsOutro"));
         }
     }
 
@@ -253,12 +254,12 @@ public class Prompts
     {
         if (Context.ChatHistory.Length == 0) return;
 
-        prompt.AppendLine($"###{_translationHelper.Get("currentConversationHeading")}");
-        prompt.AppendLine(_translationHelper.Get("currentConversationIntro", new { Name= Name }));
+        prompt.AppendLine($"###{Util.GetString(Character,"currentConversationHeading")}");
+        prompt.AppendLine(Util.GetString(Character,"currentConversationIntro", new { Name= Name }));
         // Append each line from the chat history, labelling each one alternatively with the NPC's name or 'Farmer'
         for (int i = 0; i < Context.ChatHistory.Length; i++)
         {
-            prompt.AppendLine(i % 2 == 0 ? $"- {Name}: {Context.ChatHistory[i]}" : $"- {_translationHelper.Get("generalFarmerLabel")}: {Context.ChatHistory[i]}");
+            prompt.AppendLine(i % 2 == 0 ? $"- {Name}: {Context.ChatHistory[i]}" : $"- {Util.GetString(Character,"generalFarmerLabel")}: {Context.ChatHistory[i]}");
         }
     }
 
@@ -268,22 +269,22 @@ public class Prompts
         
         if (friendship.IsDating())
         {
-            var relationshipPublic = Context.Inlaw == null ? _translationHelper.Get("specialRelationshipDatingPublic") : _translationHelper.Get("specialRelationshipDatingDiscrete");
+            var relationshipPublic = Context.Inlaw == null ? Util.GetString(Character,"specialRelationshipDatingPublic") : Util.GetString(Character,"specialRelationshipDatingDiscrete");
             var relationshipWord = RelationshipWord(Context.MaleFarmer, npcIsMale);
-            prompt.AppendLine(_translationHelper.Get("specialRelationshipDating", new { Name= Name, relationshipPublic= relationshipPublic, relationshipWord= relationshipWord }));
+            prompt.AppendLine(Util.GetString(Character,"specialRelationshipDating", new { Name= Name, relationshipPublic= relationshipPublic, relationshipWord= relationshipWord }));
         }
         if (friendship.IsEngaged())
         {
             var daysToWedding = friendship.CountdownToWedding;
-            prompt.AppendLine(_translationHelper.Get("specialRelationshipEngaged", new { Name= Name, daysToWedding= daysToWedding }));
+            prompt.AppendLine(Util.GetString(Character,"specialRelationshipEngaged", new { Name= Name, daysToWedding= daysToWedding }));
         }
         if (friendship.IsDivorced())
         {
-            prompt.AppendLine(_translationHelper.Get("specialRelationshipDivorced", new { Name= Name }));
+            prompt.AppendLine(Util.GetString(Character,"specialRelationshipDivorced", new { Name= Name }));
         }
         if (friendship.ProposalRejected)
         {
-            prompt.AppendLine(_translationHelper.Get("specialRelationshipProposalRejected", new { Name= Name }));
+            prompt.AppendLine(Util.GetString(Character,"specialRelationshipProposalRejected", new { Name= Name }));
         }
     }
 
@@ -305,19 +306,19 @@ public class Prompts
             var nSpouses = spouses.Count();
             if (talkingToSpouse)
             {
-                var otherSpousesList = multipleOthers ? $"{_translationHelper.Get("spousesNOtherPeople", new { nSpouses= nSpouses })} {spouseList}":spouses.First();
-                var otherSpousesReference = multipleOthers ? _translationHelper.Get("spousesAllTheOthers") : spouses.First();
-                prompt.AppendLine(_translationHelper.Get("spousesMarriedToOthers", new { Name= Name, otherSpousesList= otherSpousesList, otherSpousesReference= otherSpousesReference }));
+                var otherSpousesList = multipleOthers ? $"{Util.GetString(Character,"spousesNOtherPeople", new { nSpouses= nSpouses })} {spouseList}":spouses.First();
+                var otherSpousesReference = multipleOthers ? Util.GetString(Character,"spousesAllTheOthers") : spouses.First();
+                prompt.AppendLine(Util.GetString(Character,"spousesMarriedToOthers", new { Name= Name, otherSpousesList= otherSpousesList, otherSpousesReference= otherSpousesReference }));
             }
             else
             {
                 if (multipleOthers)
                 {
-                    prompt.AppendLine(_translationHelper.Get("spousesMarriedToMany", new { nSpouses= nSpouses, spouseList= spouseList, Name= Name }));
+                    prompt.AppendLine(Util.GetString(Character,"spousesMarriedToMany", new { nSpouses= nSpouses, spouseList= spouseList, Name= Name }));
                 }
                 else
                 {
-                    prompt.AppendLine(_translationHelper.Get("spousesMarriedToOne", new { spouseList= spouseList, Name= Name }));
+                    prompt.AppendLine(Util.GetString(Character,"spousesMarriedToOne", new { spouseList= spouseList, Name= Name }));
                 }
             }
         }
@@ -333,21 +334,21 @@ public class Prompts
         if (roommates.Any())
         {
             bool multipleOthers = roommates.Count() > 1;
-            var roommateList = multipleOthers ? $"{_translationHelper.Get("spousesNOtherPeople", new { nSpouses= roommates.Count() })} {string.Join(", ", roommates)}":roommates.First();
-            var roommateReference = multipleOthers ? _translationHelper.Get("spouseRoommatesAllTheOthers") : roommates.First();
+            var roommateList = multipleOthers ? $"{Util.GetString(Character,"spousesNOtherPeople", new { nSpouses= roommates.Count() })} {string.Join(", ", roommates)}":roommates.First();
+            var roommateReference = multipleOthers ? Util.GetString(Character,"spouseRoommatesAllTheOthers") : roommates.First();
             if (talkingToRoommate)
             {
-                prompt.AppendLine(_translationHelper.Get("spouseRoommatesWithOthers", new { Name= Name, roommateList= roommateList, roommateReference= roommateReference }));
+                prompt.AppendLine(Util.GetString(Character,"spouseRoommatesWithOthers", new { Name= Name, roommateList= roommateList, roommateReference= roommateReference }));
             }
             else
             {
                 if (multipleOthers)
                 {
-                    prompt.AppendLine(_translationHelper.Get("spouseRoommateWithMany", new { roommateList= roommateList }));
+                    prompt.AppendLine(Util.GetString(Character,"spouseRoommateWithMany", new { roommateList= roommateList }));
                 }
                 else
                 {
-                    prompt.AppendLine(_translationHelper.Get("spouseRoommateWithOne", new { roommateList= roommateList }));
+                    prompt.AppendLine(Util.GetString(Character,"spouseRoommateWithOne", new { roommateList= roommateList }));
                 }
             }
         }
@@ -362,12 +363,12 @@ public class Prompts
             var engagedFirst = engaged.First();
             var engagedTo = Game1.characterData[engagedFirst.Key].DisplayName;
             var weddingDays = engagedFirst.Value.Value.CountdownToWedding;
-            prompt.AppendLine(_translationHelper.Get("spouseEngaged", new { engagedTo= engagedTo, weddingDays= weddingDays }));
+            prompt.AppendLine(Util.GetString(Character,"spouseEngaged", new { engagedTo= engagedTo, weddingDays= weddingDays }));
         }
         var total = spouses.Count() + engaged.Count();
         if (total > 1 && !talkingToSpouse && !talkingToRoommate)
         {
-            prompt.AppendLine(_translationHelper.Get("spousePoly", new { Name= Name }));
+            prompt.AppendLine(Util.GetString(Character,"spousePoly", new { Name= Name }));
         }
     }
 
@@ -380,13 +381,13 @@ public class Prompts
         {
             prompt.AppendLine((Context.Hearts ?? 0) switch
             {
-                -1 => _translationHelper.Get("nonSpouseFriendshipFirstConversation", new { Name= Name }),
-                < 2 => _translationHelper.Get("nonSpouseFreindshipStrangers", new { Name= Name }),
-                < 4 => _translationHelper.Get("nonSpouseFriendshipAcquaintances", new { Name= Name }),
-                < 6 => _translationHelper.Get("nonSpouseFriendshipFriends", new { Name= Name }),
-                < 8 => _translationHelper.Get("nonSpouseFriendshipCloseFriends", new { Name= Name }),
-                <= 10 => _translationHelper.Get("nonSpouseFriendshipWantToDate", new { Name= Name }),
-                <= 14 => _translationHelper.Get("nonSpouseFriendshipIntimate", new { Name= Name }), // Backup = should never be called
+                -1 => Util.GetString(Character,"nonSpouseFriendshipFirstConversation", new { Name= Name }),
+                < 2 => Util.GetString(Character,"nonSpouseFreindshipStrangers", new { Name= Name }),
+                < 4 => Util.GetString(Character,"nonSpouseFriendshipAcquaintances", new { Name= Name }),
+                < 6 => Util.GetString(Character,"nonSpouseFriendshipFriends", new { Name= Name }),
+                < 8 => Util.GetString(Character,"nonSpouseFriendshipCloseFriends", new { Name= Name }),
+                <= 10 => Util.GetString(Character,"nonSpouseFriendshipWantToDate", new { Name= Name }),
+                <= 14 => Util.GetString(Character,"nonSpouseFriendshipIntimate", new { Name= Name }), // Backup = should never be called
                 _ => throw new InvalidDataException("Invalid heart level.")
             });
         }
@@ -394,15 +395,15 @@ public class Prompts
         {
             if (Context.Hearts <= 8 && !isChild)
             {
-                prompt.AppendLine(_translationHelper.Get("nonSpouseFriendshipNonSingleAdult8", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipNonSingleAdult8", new { Name= Name }));
             }
             else if (isChild)
             {
-                prompt.AppendLine(_translationHelper.Get("nonSpouseFriendshipChild8Plus", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipChild8Plus", new { Name= Name }));
             }
             else
             {
-                prompt.AppendLine(_translationHelper.Get("nonSpouseFriendshipNonSingleAdult10", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipNonSingleAdult10", new { Name= Name }));
             }
         }
     }
@@ -413,12 +414,12 @@ public class Prompts
 
         prompt.AppendLine(Context.SpouseAct switch
         {
-            SpouseAction.funLeave => _translationHelper.Get("spouseActionFunLeave", new { Name= Name }),
-            SpouseAction.jobLeave => _translationHelper.Get("spouseActionJobLeave", new { Name= Name }),
-            SpouseAction.patio => _translationHelper.Get("spouseActionPatio", new { Name= Name }),
-            SpouseAction.funReturn => _translationHelper.Get("spouseActionFunReturn", new { Name= Name }),
-            SpouseAction.jobReturn => _translationHelper.Get("spouseActionJobReturn", new { Name= Name }),
-            SpouseAction.spouseRoom => _translationHelper.Get("spouseActionSpouseRoom", new { Name= Name, GenderPossessive= Character.Bio.GenderPossessive }),
+            SpouseAction.funLeave => Util.GetString(Character,"spouseActionFunLeave", new { Name= Name }),
+            SpouseAction.jobLeave => Util.GetString(Character,"spouseActionJobLeave", new { Name= Name }),
+            SpouseAction.patio => Util.GetString(Character,"spouseActionPatio", new { Name= Name }),
+            SpouseAction.funReturn => Util.GetString(Character,"spouseActionFunReturn", new { Name= Name }),
+            SpouseAction.jobReturn => Util.GetString(Character,"spouseActionJobReturn", new { Name= Name }),
+            SpouseAction.spouseRoom => Util.GetString(Character,"spouseActionSpouseRoom", new { Name= Name }),
             _ => $""
         });
     }
@@ -428,32 +429,32 @@ public class Prompts
         if (Context.Accept == null) return;
 
         var giftName = Context.Accept.DisplayName;
-        prompt.AppendLine(_translationHelper.Get("giftIntro", new { Name= Name, giftName= giftName }));
+        prompt.AppendLine(Util.GetString(Character,"giftIntro", new { Name= Name, giftName= giftName }));
         switch (Context.GiftTaste)
         {
             //TODO: Correct the cases
             case 0:
-                prompt.AppendLine(_translationHelper.Get("giftLoved", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"giftLoved", new { Name= Name }));
                 break;
             case 2:
-                prompt.AppendLine(_translationHelper.Get("giftLiked", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"giftLiked", new { Name= Name }));
                 break;
             case 4:
-                prompt.AppendLine(_translationHelper.Get("giftDislike", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"giftDislike", new { Name= Name }));
                 break;
             case 6:
-                prompt.AppendLine(_translationHelper.Get("giftHate", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"giftHate", new { Name= Name }));
                 break;
             default:
-                prompt.AppendLine(_translationHelper.Get("giftNeutral", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"giftNeutral", new { Name= Name }));
                 break;
         }
-        prompt.AppendLine(_translationHelper.Get("giftMustIncludeReaction", new { Name= Name }));
+        prompt.AppendLine(Util.GetString(Character,"giftMustIncludeReaction", new { Name= Name }));
         if (Context.Birthday)
         {
-            prompt.AppendLine(_translationHelper.Get("giftBirthday", new { Name= Name }));
+            prompt.AppendLine(Util.GetString(Character,"giftBirthday", new { Name= Name }));
         }
-        prompt.AppendLine(_translationHelper.Get("giftOutro"));
+        prompt.AppendLine(Util.GetString(Character,"giftOutro"));
     }
 
     private void GetSpecialDatesAndBirthday(StringBuilder prompt)
@@ -462,20 +463,20 @@ public class Prompts
 
         prompt.AppendLine((Context.Season, Context.DayOfSeason) switch
         {
-            (Season.Spring, 1) => _translationHelper.Get("specialDatesSpring1"),
-            (Season.Spring, 12) => _translationHelper.Get("specialDatesSpring12"),
-            (Season.Spring, 23) => _translationHelper.Get("specialDatesSpring23"),
-            (Season.Summer, 1) => _translationHelper.Get("specialDatesSummer1"),
-            (Season.Summer, 10) => _translationHelper.Get("specialDatesSummer10"),
-            (Season.Summer, 27) => _translationHelper.Get("specialDatesSummer27"),
-            (Season.Summer, 28) => _translationHelper.Get("specialDatesSummer28"),
-            (Season.Fall, 1) => _translationHelper.Get("specialDatesFall1"),
-            (Season.Fall, 15) => _translationHelper.Get("specialDatesFall15"),
-            (Season.Fall, 26) => _translationHelper.Get("specialDatesFall26"),
-            (Season.Winter, 1) => _translationHelper.Get("specialDatesWInter1"),
-            (Season.Winter, 7) => _translationHelper.Get("specialDatesWinter7"),
-            (Season.Winter, 24) => _translationHelper.Get("specialDatesWinter24"),
-            (Season.Winter, 28) => _translationHelper.Get("specialDatesWinter28"),
+            (Season.Spring, 1) => Util.GetString(Character,"specialDatesSpring1"),
+            (Season.Spring, 12) => Util.GetString(Character,"specialDatesSpring12"),
+            (Season.Spring, 23) => Util.GetString(Character,"specialDatesSpring23"),
+            (Season.Summer, 1) => Util.GetString(Character,"specialDatesSummer1"),
+            (Season.Summer, 10) => Util.GetString(Character,"specialDatesSummer10"),
+            (Season.Summer, 27) => Util.GetString(Character,"specialDatesSummer27"),
+            (Season.Summer, 28) => Util.GetString(Character,"specialDatesSummer28"),
+            (Season.Fall, 1) => Util.GetString(Character,"specialDatesFall1"),
+            (Season.Fall, 15) => Util.GetString(Character,"specialDatesFall15"),
+            (Season.Fall, 26) => Util.GetString(Character,"specialDatesFall26"),
+            (Season.Winter, 1) => Util.GetString(Character,"specialDatesWInter1"),
+            (Season.Winter, 7) => Util.GetString(Character,"specialDatesWinter7"),
+            (Season.Winter, 24) => Util.GetString(Character,"specialDatesWinter24"),
+            (Season.Winter, 28) => Util.GetString(Character,"specialDatesWinter28"),
             _ => $""
         });
         var stardewBioData = Character.StardewNpc.GetData();
@@ -486,7 +487,7 @@ public class Prompts
                 StringComparison.InvariantCultureIgnoreCase
             ) && Context.DayOfSeason == stardewBioData.BirthDay)
         {
-            prompt.AppendLine(_translationHelper.Get("specialDatesBirthday", new { Name= Name }));
+            prompt.AppendLine(Util.GetString(Character,"specialDatesBirthday", new { Name= Name }));
         }
     }
 
@@ -497,25 +498,25 @@ public class Prompts
         {
             var theLine = activity.Key switch
             {
-                "cc_Boulder" => _translationHelper.Get("recentEventsBoulder"),
-                "cc_Bridge" => _translationHelper.Get("recentEventsQuarryBridge"),
-                "cc_Bus" => _translationHelper.Get("recentEventsBus"),
-                "cc_Greenhouse" => _translationHelper.Get("recentEventsGreenhouse"),
-                "cc_Minecart" => _translationHelper.Get("recentEventsMinecarts"),
-                "cc_Complete" => _translationHelper.Get("recentEventsCommunityCenter"),
-                "movieTheater" => _translationHelper.Get("recentEventsMovieTheatre"),
-                "pamHouseUpgrade" => _translationHelper.Get("recentEventsPamHouse"),
-                "pamHouseUpgradeAnonymous" => _translationHelper.Get("recentEventsPamHouseAnonymous"),
-                "jojaMartStruckByLightning" => _translationHelper.Get("recentEventsJojaLightning"),
-                "babyBoy" => _translationHelper.Get("recentEventsBabyBoy"),
-                "babyGirl" => _translationHelper.Get("recentEventsBabyGirl"),
-                "wedding" => _translationHelper.Get("recentEventsMarried"),
-                "luauBest" => _translationHelper.Get("recentEventsLuauBest"),
-                "luauShorts" => _translationHelper.Get("recentEventsLuauShorts"),
-                "luauPoisoned" => _translationHelper.Get("recentEventsLuauPoisoned"),
-                "Characters_MovieInvite_Invited" => _translationHelper.Get("recentEventsMovieInvited", new { Name= Name }),
-                "DumpsterDiveComment" => _translationHelper.Get("recentEventsDumpsterDive", new { Name= Name }),
-                "GreenRainFinished" => _translationHelper.Get("recentEventsGreenRain"),
+                "cc_Boulder" => Util.GetString(Character,"recentEventsBoulder"),
+                "cc_Bridge" => Util.GetString(Character,"recentEventsQuarryBridge"),
+                "cc_Bus" => Util.GetString(Character,"recentEventsBus"),
+                "cc_Greenhouse" => Util.GetString(Character,"recentEventsGreenhouse"),
+                "cc_Minecart" => Util.GetString(Character,"recentEventsMinecarts"),
+                "cc_Complete" => Util.GetString(Character,"recentEventsCommunityCenter"),
+                "movieTheater" => Util.GetString(Character,"recentEventsMovieTheatre"),
+                "pamHouseUpgrade" => Util.GetString(Character,"recentEventsPamHouse"),
+                "pamHouseUpgradeAnonymous" => Util.GetString(Character,"recentEventsPamHouseAnonymous"),
+                "jojaMartStruckByLightning" => Util.GetString(Character,"recentEventsJojaLightning"),
+                "babyBoy" => Util.GetString(Character,"recentEventsBabyBoy"),
+                "babyGirl" => Util.GetString(Character,"recentEventsBabyGirl"),
+                "wedding" => Util.GetString(Character,"recentEventsMarried"),
+                "luauBest" => Util.GetString(Character,"recentEventsLuauBest"),
+                "luauShorts" => Util.GetString(Character,"recentEventsLuauShorts"),
+                "luauPoisoned" => Util.GetString(Character,"recentEventsLuauPoisoned"),
+                "Characters_MovieInvite_Invited" => Util.GetString(Character,"recentEventsMovieInvited", new { Name= Name }),
+                "DumpsterDiveComment" => Util.GetString(Character,"recentEventsDumpsterDive", new { Name= Name }),
+                "GreenRainFinished" => Util.GetString(Character,"recentEventsGreenRain"),
                 _ => $""
             };
             if (!string.IsNullOrWhiteSpace(theLine))
@@ -525,8 +526,8 @@ public class Prompts
         }
         if (eventSection.Length > 0)
         {
-            prompt.AppendLine($"## {_translationHelper.Get("recentEventsHeading")}");
-            prompt.AppendLine(_translationHelper.Get("recentEventsIntro"));
+            prompt.AppendLine($"## {Util.GetString(Character,"recentEventsHeading")}");
+            prompt.AppendLine(Util.GetString(Character,"recentEventsIntro"));
             prompt.AppendLine(eventSection.ToString());
         }
     }
@@ -540,63 +541,65 @@ public class Prompts
         {
             if (Character.StardewNpc.TilePoint == bedTile && Character.Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel)
             {
-                prompt.AppendLine(_translationHelper.Get("locationBed", new { Name= Name, GenderPronoun= Character.Bio.GenderPronoun }));
+                prompt.AppendLine(Util.GetString(Character,"locationBed", new { Name= Name }));
             }
             else
             {
+                
                 var mayBeInShop = Context.Location.Contains("Shop", StringComparison.OrdinalIgnoreCase)
                     || Context.Location.Contains("Science", StringComparison.OrdinalIgnoreCase);
-                var inShopString = mayBeInShop ? _translationHelper.Get("locationAtHomeOrShop") : "";
-                prompt.AppendLine(_translationHelper.Get("locationAtHome", new { Name= Name, inShopString= inShopString }));
+                var inShopString = mayBeInShop ? Util.GetString(Character,"locationAtHomeOrShop") : "";
+                prompt.AppendLine(Util.GetString(Character,"locationAtHome", new { Name= Name, inShopString= inShopString }));
             }
         }
         else if (Context.Location != null)
         {
+            var locationName = Game1.locationData[Context.Location].DisplayName;
             prompt.Append(Context.Location switch
             {
-                "Town" => _translationHelper.Get("locationTown", new { Name= Name }),
-                "Beach" => _translationHelper.Get("locationBeach", new { Name= Name }),
-                "Desert" => _translationHelper.Get("locationDesert", new { Name= Name }),
-                "BusStop" => _translationHelper.Get("locationBusStop", new { Name= Name }),
-                "Railroad" => _translationHelper.Get("locationRailroad", new { Name= Name }),
-                "Saloon" => $"{_translationHelper.Get("locationSaloon", new { Name= Name })}{((npcData.Age == NpcAge.Child || Character.Name == "Emily") ? "" : _translationHelper.Get("locationSaloonDrunk"))}",
-                "SeedShop" => _translationHelper.Get("locationPierres", new { Name= Name }),
-                "JojaMart" => _translationHelper.Get("locationJojaMart", new { Name= Name }),
-                "Resort_Chair" => _translationHelper.Get("locationResortChair", new { Name= Name }),
-                "Resort_Towel" or "Resort_Towel_2" or "Resort_Towel_3" => _translationHelper.Get("locationResortTowel", new { Name= Name }),
-                "Resort_Umbrella" or "Resort_Umbrella_2" or "Resort_Umbrella_3" => _translationHelper.Get("locationResortUmbrella", new { Name= Name }),
-                "Resort_Bar" => $"{_translationHelper.Get("locationResortBar", new { Name= Name })}{((npcData.Age == NpcAge.Child) ? "" : _translationHelper.Get("locationSaloonDrunk"))}.",
-                "Resort_Entering" => _translationHelper.Get("locationResortEntering", new { Name= Name }),
-                "Resort_Leaving" => _translationHelper.Get("locationResortLeaving", new { Name= Name }),
-                "Resort_Shore" or "Resort_Shore_2" => _translationHelper.Get("locationResortShore", new { Name= Name }),
-                "Resort_Wander" => _translationHelper.Get("locationResortWander", new { Name= Name }),
-                "Resort" or "Resort_2" => _translationHelper.Get("locationResort", new { Name= Name }),
-                _ => $"The farmer and {Name} are at {Context.Location}."
+                "Town" => Util.GetString(Character,"locationTown", new { Name= Name }),
+                "Beach" => Util.GetString(Character,"locationBeach", new { Name= Name }),
+                "Desert" => Util.GetString(Character,"locationDesert", new { Name= Name }),
+                "BusStop" => Util.GetString(Character,"locationBusStop", new { Name= Name }),
+                "Railroad" => Util.GetString(Character,"locationRailroad", new { Name= Name }),
+                "Saloon" => $"{Util.GetString(Character,"locationSaloon", new { Name= Name })}{((npcData.Age == NpcAge.Child || Character.Name == "Emily") ? "" : Util.GetString(Character,"locationSaloonDrunk"))}",
+                "SeedShop" => Util.GetString(Character,"locationPierres", new { Name= Name }),
+                "JojaMart" => Util.GetString(Character,"locationJojaMart", new { Name= Name }),
+                "Resort_Chair" => Util.GetString(Character,"locationResortChair", new { Name= Name }),
+                "Resort_Towel" or "Resort_Towel_2" or "Resort_Towel_3" => Util.GetString(Character,"locationResortTowel", new { Name= Name }),
+                "Resort_Umbrella" or "Resort_Umbrella_2" or "Resort_Umbrella_3" => Util.GetString(Character,"locationResortUmbrella", new { Name= Name }),
+                "Resort_Bar" => $"{Util.GetString(Character,"locationResortBar", new { Name= Name })}{((npcData.Age == NpcAge.Child) ? "" : Util.GetString(Character,"locationSaloonDrunk"))}.",
+                "Resort_Entering" => Util.GetString(Character,"locationResortEntering", new { Name= Name }),
+                "Resort_Leaving" => Util.GetString(Character,"locationResortLeaving", new { Name= Name }),
+                "Resort_Shore" or "Resort_Shore_2" => Util.GetString(Character,"locationResortShore", new { Name= Name }),
+                "Resort_Wander" => Util.GetString(Character,"locationResortWander", new { Name= Name }),
+                "Resort" or "Resort_2" => Util.GetString(Character,"locationResort", new { Name= Name }),
+                _ => Util.GetString("locationGeneric", new {Name = Name, Location = locationName})
             });
-            prompt.AppendLine(_translationHelper.Get("locationOutro"));
+            prompt.AppendLine(Util.GetString(Character,"locationOutro"));
         }
 
         if (Character.StardewNpc.DirectionsToNewLocation != null && Context.Location != Character.StardewNpc.DirectionsToNewLocation.targetLocationName)
         {
             var destination = Character.StardewNpc.DirectionsToNewLocation.targetLocationName;
-            prompt.AppendLine(_translationHelper.Get("locationTravelling", new { Name= Name, destination= destination }));
+            prompt.AppendLine(Util.GetString(Character,"locationTravelling", new { Name= Name, destination= destination }));
         }
     }
 
     private void GetMarriageFeelings(StringBuilder prompt)
     {
-        var IsRoommate = Game1.getPlayerOrEventFarmer().friendshipData[Name].IsRoommate();
-        var marriageOrRoommate = IsRoommate ? _translationHelper.Get("generalBeingRoommates") : _translationHelper.Get("generalTheMarriage");
+        var IsRoommate = Game1.getPlayerOrEventFarmer().friendshipData[Character.Name].IsRoommate();
+        var marriageOrRoommate = IsRoommate ? Util.GetString(Character,"generalBeingRoommates") : Util.GetString(Character,"generalTheMarriage");
         switch (Context.Hearts)
         {
             case > 12:
-                prompt.AppendLine(_translationHelper.Get("marriageSentimentGood", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
+                prompt.AppendLine(Util.GetString(Character,"marriageSentimentGood", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
                 break;
             case < 10:
-                prompt.AppendLine(_translationHelper.Get("marriageSentimentBad", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
+                prompt.AppendLine(Util.GetString(Character,"marriageSentimentBad", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
                 break;
             default:
-                prompt.AppendLine(_translationHelper.Get("marriageSentimentNeutral", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
+                prompt.AppendLine(Util.GetString(Character,"marriageSentimentNeutral", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
                 break;
         }
     }
@@ -613,17 +616,17 @@ public class Prompts
             {
                 var petType = petData.DisplayName;
                 petType = LoadLocalised(petType);
-                prompt.AppendLine(_translationHelper.Get("farmContentsPet", new { petType= petType, Name= pet.Name }));
+                prompt.AppendLine(Util.GetString(Character,"farmContentsPet", new { petType= petType, Name= pet.Name }));
             }
             else
             {
                 var petType = pet.petType.Value;
-                prompt.AppendLine(_translationHelper.Get("farmContentsPet", new { petType= petType, Name= pet.Name }));
+                prompt.AppendLine(Util.GetString(Character,"farmContentsPet", new { petType= petType, Name= pet.Name }));
             }
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("farmContentsNoPets"));
+            prompt.AppendLine(Util.GetString(Character,"farmContentsNoPets"));
         }
     }
 
@@ -633,7 +636,7 @@ public class Prompts
         var allCrops = GetCrops();
         if (allCrops.Any())
         {
-            prompt.AppendLine(_translationHelper.Get("farmCropsIntro"));
+            prompt.AppendLine(Util.GetString(Character,"farmCropsIntro"));
             foreach (var crop in allCrops.GroupBy(x => x.indexOfHarvest.Value))
             {
                 var thisDetails = cropData[crop.Key];
@@ -644,17 +647,17 @@ public class Prompts
                 var ripe = crop.Count(x => x.fullyGrown.Value);
                 if (ripe > 0)
                 {
-                    prompt.AppendLine(_translationHelper.Get("farmCropsReadyForHarvest", new { ripe = ripe }));
+                    prompt.AppendLine(Util.GetString(Character,"farmCropsReadyForHarvest", new { ripe = ripe }));
                 }
                 else
                 {
-                    prompt.AppendLine(_translationHelper.Get("farmCropsNotReady"));
+                    prompt.AppendLine(Util.GetString(Character,"farmCropsNotReady"));
                 }
             }
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("farmCropsNone"));
+            prompt.AppendLine(Util.GetString(Character,"farmCropsNone"));
         }
     }
 
@@ -680,7 +683,7 @@ public class Prompts
 
         if (allAnimals.Any())
         {
-            prompt.AppendLine(_translationHelper.Get("farmAnimalsIntro"));
+            prompt.AppendLine(Util.GetString(Character,"farmAnimalsIntro"));
             foreach (var animal in allAnimals.GroupBy(x => x.type))
             {
                 prompt.AppendLine($"- {animal.Count()} {animal.First().displayType}{(animal.Count() > 1 ? "s" : "")}");
@@ -688,7 +691,7 @@ public class Prompts
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("farmAnimalsNone"));
+            prompt.AppendLine(Util.GetString(Character,"farmAnimalsNone"));
         }
     }
 
@@ -698,7 +701,7 @@ public class Prompts
 
         if (allBuildings.Any())
         {
-            prompt.AppendLine(_translationHelper.Get("farmBuildingsIntro"));
+            prompt.AppendLine(Util.GetString(Character,"farmBuildingsIntro"));
             var completedBuildings = allBuildings.Where(x => x.daysOfConstructionLeft.Value == 0 && x.buildingType.Value != "Greenhouse");
             foreach (var building in completedBuildings.GroupBy(x => x.buildingType))
             {
@@ -711,22 +714,22 @@ public class Prompts
             {
                 if (greenhouse.indoors.Value == null)
                 {
-                    prompt.AppendLine($"- {_translationHelper.Get("farmBuildingsRuinedGreenhouse")}");
+                    prompt.AppendLine($"- {Util.GetString(Character,"farmBuildingsRuinedGreenhouse")}");
                 }
                 else
                 {
-                    prompt.AppendLine($"- {_translationHelper.Get("farmBuildingsRepairedGreenhouse")}");
+                    prompt.AppendLine($"- {Util.GetString(Character,"farmBuildingsRepairedGreenhouse")}");
                 }
             }
             if (allBuildings.Any(x => x.daysOfConstructionLeft.Value > 0))
             {
                 var underConstruction = allBuildings.First(x => x.daysOfConstructionLeft.Value > 0);
-                prompt.AppendLine($"- {_translationHelper.Get("farmBuildingsConstruction", new { buildingType= underConstruction.buildingType.Value, daysOfConstructionLeft= underConstruction.daysOfConstructionLeft })}");
+                prompt.AppendLine($"- {Util.GetString(Character,"farmBuildingsConstruction", new { buildingType= underConstruction.buildingType.Value, daysOfConstructionLeft= underConstruction.daysOfConstructionLeft })}");
             }
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("farmBuildingsNone"));
+            prompt.AppendLine(Util.GetString(Character,"farmBuildingsNone"));
         }
     }
 
@@ -734,30 +737,29 @@ public class Prompts
     {
         if (Context.Children.Count == 0)
         {
-            prompt.AppendLine(_translationHelper.Get("childrenNone", new { Name= Name }));
+            prompt.AppendLine(Util.GetString(Character,"childrenNone", new { Name= Name }));
         }
         else
         {
             if (Context.Children.Count > 1)
             {
                 var count = Context.Children.Count;
-                prompt.AppendLine(_translationHelper.Get("childrenMultiple", new { Name= Name, count= count }));
+                prompt.AppendLine(Util.GetString(Character,"childrenMultiple", new { Name= Name, count= count }));
             }
             else
             {
-                prompt.AppendLine(_translationHelper.Get("childrenSingle", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character,"childrenSingle", new { Name= Name }));
             }
             prompt.AppendLine();
             foreach (var child in Context.Children)
             {
-                var childGender = child.IsMale ? _translationHelper.Get("generalBoy") : _translationHelper.Get("generalGirl");
-                prompt.AppendLine($"- {_translationHelper.Get("childrenDescription", new { Gender = childGender, Name= child.Name, Age= child.Age })}");
+                prompt.AppendLine($"- {Util.GetString(Character,child.IsMale ? "childrenDescriptionBoy" : "childDescriptionGirl", new { Name= child.Name, Age= child.Age })}");
             }
         }
         if (friendship.DaysUntilBirthing > 0)
         {
             var daysUntilBirth = friendship.DaysUntilBirthing;
-            prompt.AppendLine(_translationHelper.Get("childrenPregnant", new { Name= Name, daysUntilBirth= daysUntilBirth }));
+            prompt.AppendLine(Util.GetString(Character,"childrenPregnant", new { Name= Name, daysUntilBirth= daysUntilBirth }));
         }
     }
 
@@ -767,19 +769,19 @@ public class Prompts
 
         if (Context.Weather.Contains("lightning"))
         {
-            prompt.AppendLine(_translationHelper.Get("weatherLightning"));
+            prompt.AppendLine(Util.GetString(Character,"weatherLightning"));
         }
         else if (Context.Weather.Contains("green rain"))
         {
-            prompt.AppendLine(_translationHelper.Get("weatherGreenRain"));
+            prompt.AppendLine(Util.GetString(Character,"weatherGreenRain"));
         }
         else if (Context.Weather.Contains("snow"))
         {
-            prompt.AppendLine(_translationHelper.Get("weatherSnow"));
+            prompt.AppendLine(Util.GetString(Character,"weatherSnow"));
         }
         else if (Context.Weather.Contains("rain"))
         {
-            prompt.AppendLine(_translationHelper.Get("weatherRain"));
+            prompt.AppendLine(Util.GetString(Character,"weatherRain"));
         }
     }
 
@@ -787,19 +789,19 @@ public class Prompts
     {
         if (Context.DayOfSeason != null && Context.Season != null)
         {
-            prompt.AppendLine(_translationHelper.Get("dateTimeDayOfSeason", new { DayOfSeason= Context.DayOfSeason, Season= Context.Season }));
+            prompt.AppendLine(Util.GetString(Character,"dateTimeDayOfSeason", new { DayOfSeason= Context.DayOfSeason, Season= Game1.CurrentSeasonDisplayName }));
         }
         if (Context.TimeOfDay != null)
         {
-            prompt.AppendLine(_translationHelper.Get("dateTimeTimeOfDay", new { TimeOfDay= Context.TimeOfDay }));
+            prompt.AppendLine(Util.GetString(Character,"dateTimeTimeOfDay", new { TimeOfDay= Context.TimeOfDay }));
             if (Context.TimeOfDay == "early morning")
             {
-                prompt.AppendLine(_translationHelper.Get("dateTimeEarlyMorningNormal"));
+                prompt.AppendLine(Util.GetString(Character,"dateTimeEarlyMorningNormal"));
             }
         }
         if (Context.Year == 1)
         {
-            prompt.AppendLine(_translationHelper.Get("dateTimeNewThisYear"));
+            prompt.AppendLine(Util.GetString(Character,"dateTimeNewThisYear"));
         }
 
     }
@@ -811,9 +813,9 @@ public class Prompts
 
         if (fullHistory.Any())
         {
-            prompt.AppendLine($"##{_translationHelper.Get("eventHistoryHeading")}");
-            prompt.AppendLine(_translationHelper.Get("eventHistoryIntro", new { Name= Name }));
-            prompt.AppendLine(_translationHelper.Get("eventHistorySubheading"));
+            prompt.AppendLine($"##{Util.GetString(Character,"eventHistoryHeading")}");
+            prompt.AppendLine(Util.GetString(Character,"eventHistoryIntro", new { Name= Name }));
+            prompt.AppendLine(Util.GetString(Character,"eventHistorySubheading"));
             foreach (var eventHistory in fullHistory.OrderBy(x => x.Item1).Take(30))
             {
                 prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {eventHistory.Item2.Format(Name)}");
@@ -832,8 +834,8 @@ public class Prompts
     {
         if (!dialogueSample.Any()) return;
 
-        prompt.AppendLine($"##{_translationHelper.Get("sampleDialogueHeading", new { Name= Name })}");
-        prompt.AppendLine(_translationHelper.Get("sampleDialogueIntro", new { Name= Name }));
+        prompt.AppendLine($"##{Util.GetString(Character,"sampleDialogueHeading", new { Name= Name })}");
+        prompt.AppendLine(Util.GetString(Character,"sampleDialogueIntro", new { Name= Name }));
         foreach (var dialogue in dialogueSample)
         {
             prompt.AppendLine($"- {dialogue.Value}");
@@ -842,66 +844,66 @@ public class Prompts
 
     private void GetGameState(StringBuilder prompt)
     {
-        prompt.AppendLine($"## {_translationHelper.Get("gameStateHeading")}");
+        prompt.AppendLine($"## {Util.GetString(Character,"gameStateHeading")}");
         if (allPreviousActivities.ContainsKey("cc_Complete"))
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateCommunityCenterYes"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateCommunityCenterYes"));
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateCommunityCenterNo"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateCommunityCenterNo"));
         }
         if (allPreviousActivities.ContainsKey("cc_Bus"))
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateBusYes"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateBusYes"));
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateBusNo"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateBusNo"));
         }
         if (allPreviousActivities.ContainsKey("cc_Bridge"))
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateQuarryBridgeYes"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateQuarryBridgeYes"));
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateQuarryBridgeNo"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateQuarryBridgeNo"));
         }
         if (allPreviousActivities.ContainsKey("cc_Minecart"))
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateMinecartYes"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateMinecartYes"));
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateMinecartNo"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateMinecartNo"));
         }
         if (allPreviousActivities.ContainsKey("cc_Boulder"))
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateBoulderYes"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateBoulderYes"));
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateBoulderNo"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateBoulderNo"));
         }
         if (Game1.year == 1)
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateKentNo"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateKentNo"));
         }
         else
         {
-            prompt.AppendLine(_translationHelper.Get("gameStateKentYes"));
+            prompt.AppendLine(Util.GetString(Character,"gameStateKentYes"));
         }
     }
 
     private string GetCommand()
     {
         var commandPrompt = new StringBuilder();
-        commandPrompt.AppendLine($"##{_translationHelper.Get("commandHeading")}");
-        commandPrompt.AppendLine(_translationHelper.Get("commandIntro", new { Name= Name }));
+        commandPrompt.AppendLine($"##{Util.GetString(Character,"commandHeading")}");
+        commandPrompt.AppendLine(Util.GetString(Character,"commandIntro", new { Name= Name }));
         if (!string.IsNullOrWhiteSpace(Context.ScheduleLine) && Context.ChatHistory.Length == 0)
         {
             commandPrompt.AppendLine();
-            commandPrompt.AppendLine(_translationHelper.Get("commandReplaceSchedule", new { ScheduleLine= Context.ScheduleLine }));
+            commandPrompt.AppendLine(Util.GetString(Character,"commandReplaceSchedule", new { ScheduleLine= Context.ScheduleLine }));
         }
         return commandPrompt.ToString();
     }
@@ -909,25 +911,25 @@ public class Prompts
     private string GetInstructions()
     {
         var instructions = new StringBuilder();
-        instructions.AppendLine($"##{_translationHelper.Get("instructionsHeading")}");
-        instructions.AppendLine(_translationHelper.Get("instructionsIntro", new { Name= Name }));
+        instructions.AppendLine($"##{Util.GetString(Character,"instructionsHeading")}");
+        instructions.AppendLine(Util.GetString(Character,"instructionsIntro", new { Name= Name }));
         if (dialogueSample.Any())
         {
-            instructions.AppendLine(_translationHelper.Get("instructionsSampleDialogue", new { Name= Name }));
+            instructions.AppendLine(Util.GetString(Character,"instructionsSampleDialogue", new { Name= Name }));
         }
-        instructions.AppendLine(_translationHelper.Get("instructionsFarmersName"));
-        instructions.AppendLine(_translationHelper.Get("instructionsBreaks"));
+        instructions.AppendLine(Util.GetString(Character,"instructionsFarmersName"));
+        instructions.AppendLine(Util.GetString(Character,"instructionsBreaks"));
         var extraPortraits = new StringBuilder();
         foreach (var portrait in Character.Bio.ExtraPortraits)
         {
-            extraPortraits.Append(_translationHelper.Get("instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
+            extraPortraits.Append(Util.GetString(Character,"instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
         }
-        instructions.AppendLine(_translationHelper.Get("instructionsEmotion", new { extraPortraits= extraPortraits }));
-        instructions.AppendLine(_translationHelper.Get("instructionsSingleLine"));
-        instructions.AppendLine(_translationHelper.Get("instructionsResponses", new { Name= Name }));
+        instructions.AppendLine(Util.GetString(Character,"instructionsEmotion", new { extraPortraits= extraPortraits }));
+        instructions.AppendLine(Util.GetString(Character,"instructionsSingleLine"));
+        instructions.AppendLine(Util.GetString(Character,"instructionsResponses", new { Name= Name }));
         if (ModEntry.Config.ApplyTranslation)
         {
-            instructions.AppendLine(_translationHelper.Get("instructionsTranslate", new { Language= ModEntry.Language }));
+            instructions.AppendLine(Util.GetString(Character,"instructionsTranslate", new { Language= ModEntry.Language }));
         }
         if (!string.IsNullOrWhiteSpace(Llm.Instance.ExtraInstructions))
         {
@@ -938,12 +940,12 @@ public class Prompts
 
     private string GetResponseStart()
     {
-        return _translationHelper.Get("responseStart", new { Name= Name });
+        return Util.GetString(Character,"responseStart", new { Name= Name });
     }
 
     private string RelationshipWord(bool maleFarmer, bool npcIsMale)
     {
-        return maleFarmer ? (npcIsMale ? _translationHelper.Get("generalGayMale") : _translationHelper.Get("generalHeterosexual")) : (npcIsMale ? _translationHelper.Get("generalHeterosexual") : _translationHelper.Get("generalLesbian"));
+        return maleFarmer ? (npcIsMale ? Util.GetString(Character,"generalGayMale") : Util.GetString(Character,"generalHeterosexual")) : (npcIsMale ? Util.GetString(Character,"generalHeterosexual") : Util.GetString(Character,"generalLesbian"));
     }
 
     private IEnumerable<Crop> GetCrops()

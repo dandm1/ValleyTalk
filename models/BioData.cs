@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using StardewValley;
 using ValleyTalk;
 
 namespace StardewDialogue;
@@ -28,7 +29,19 @@ public class BioData
         hers = translation.Get("generalHers");
     }
     private bool? isMale;
+    public bool? IsMale => isMale ?? null;
     private string unique;
+    private string name = string.Empty;
+
+    public string Name 
+    { 
+        get => name; 
+        set
+        {
+            name = value;
+            isMale = Game1.getCharacterFromName(name).Gender == StardewValley.Gender.Male;
+        } 
+    }
 
     public string Biography { get; set; } = string.Empty;
     //Only update gender if the value passed is male or female

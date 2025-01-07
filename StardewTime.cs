@@ -1,4 +1,6 @@
 using System;
+using StardewValley;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -38,16 +40,20 @@ internal class StardewTime : IComparable<StardewTime>
     public string SinceDescription(StardewTime other)
     {
         double days = DaysSince(other);
+        var otherSeasonKey = Utility.getSeasonKey(other.season);
+        var seasonDisplay = Game1.content.LoadString("Strings\\StringsFromCSFiles:" + otherSeasonKey);
         return days switch
         {
-            < 0 => "In the future",
-            < (double)1/120 => "just now",
-            < (double)1/24 => "in the last hour",
-            < 1 => other.dayOfMonth == dayOfMonth ? "earlier today" : "yesterday",
-            < 14 => $"{(int)days} days ago",
-            < 56 => $"{(int)days} days ago on {other.dayOfMonth} {other.season.ToString().ToLower()}",
-            < 112 => other.year == year ? $"earlier this year on {other.dayOfMonth} {other.season.ToString().ToLower()}" : $"last year on {other.dayOfMonth} {other.season.ToString().ToLower()}",
-            _ => $"a long time ago on {other.dayOfMonth} {other.season.ToString().ToLower()}"
+            < 0 => Util.GetString("timeInTheFuture"),
+            < (double)1/120 => Util.GetString("timeJustNow"),
+            < (double)1/24 => Util.GetString("timeInTheLastHour"),
+            < 1 => other.dayOfMonth == dayOfMonth ? Util.GetString("timeEarlierToday") : Util.GetString("timeYesterday"),
+            < 14 => Util.GetString("timeDaysAgo", new {days = (int)days}),
+            < 56 => Util.GetString("timeDaysAgoSeasonDay", new {days = (int)days, day = other.dayOfMonth, season = seasonDisplay}),
+            < 112 => other.year == year ? 
+                        Util.GetString("timeEarlierThisYear", new {day = other.dayOfMonth, season = seasonDisplay})
+                      : Util.GetString("timeLastYear", new {day = other.dayOfMonth, season = seasonDisplay}),
+            _ => Util.GetString("timeALongTimeAgo", new {day = other.dayOfMonth, season = seasonDisplay, year = other.year})
         };
     }
 

@@ -7,6 +7,8 @@ namespace ValleyTalk
 {
     public class Util
     {
+        private static StardewModdingAPI.ITranslationHelper _translationHelper = ModEntry.SHelper.Translation;
+
         public static IEnumerable<NPC> GetNearbyNpcs(NPC npc)
         {
             // Check for any other NPCs within 3 squares
@@ -23,6 +25,35 @@ namespace ValleyTalk
                 }
             }
             return nearbyNpcs;
+        }
+
+        internal static string GetString(StardewDialogue.Character npc,string key,object? tokens = null)
+        {
+            if (npc == null) return string.Empty;
+
+            if (npc.Bio.IsMale ?? false)
+            {
+                var result = _translationHelper.Get(key+".MaleNpc", tokens);
+                if (result.HasValue())
+                {
+                    return result;
+                }
+            }
+            else if (!(npc.Bio.IsMale ?? true))
+            {
+                var result = _translationHelper.Get(key+".FemaleNpc", tokens);
+                if (result.HasValue())
+                {
+                    return result;
+                }
+            }
+            var resultNG = _translationHelper.Get(key, tokens);
+            return resultNG;
+        }
+
+        internal static string GetString(string key,object? tokens = null)
+        {
+            return _translationHelper.Get(key, tokens);
         }
 
         internal static T ReadLocalisedJson<T>(string basePath, string extension = "json") where T : class
