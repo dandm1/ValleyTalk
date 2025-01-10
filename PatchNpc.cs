@@ -49,18 +49,8 @@ namespace ValleyTalk
         private static int minLine = int.MaxValue;
         public static void Postfix(ref NPC __instance, ref Stack<Dialogue> __result)
         {
-#if DEBUG
-            ModEntry.SMonitor.Log($"Entering CurrentDialogue: {__instance.Name} {__result.Count}", StardewModdingAPI.LogLevel.Debug);
-#endif
             if (__result.Count == 0) return;
 
-#if DEBUG
-            for(int i = 1; i < 10; i++)
-            {
-                var traceInt = new System.Diagnostics.StackTrace().GetFrame(i);
-                ModEntry.SMonitor.Log($"Trace: {i}: {traceInt.GetMethod().Name} {traceInt.GetFileLineNumber()}", StardewModdingAPI.LogLevel.Debug);
-            }
-#endif
             var trace = new System.Diagnostics.StackTrace().GetFrame(2);
             if (
                 trace.GetMethod().Name == "drawDialogue" 
@@ -69,9 +59,7 @@ namespace ValleyTalk
                 List<DialogueLine> theLine;
                 var allLines = __result.Peek().dialogues;
                 var nextLine = allLines.First();
-#if DEBUG
-                ModEntry.SMonitor.Log($"NextLine: {nextLine.Text}", StardewModdingAPI.LogLevel.Debug);
-#endif
+
                 string originalLine = string.Empty;
                 if (nextLine.Text == SldConstants.DialogueGenerationTag)
                 {
