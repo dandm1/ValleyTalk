@@ -1,15 +1,6 @@
 ﻿using HarmonyLib;
-using StardewModdingAPI;
 using StardewValley;
-using StardewValley.Menus;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using System.Threading;
-using xTile.Dimensions;
 
 namespace ValleyTalk
 {
@@ -56,6 +47,7 @@ namespace ValleyTalk
         private static System.Reflection.FieldInfo isLastDialogueInteractiveField;
         private static System.Reflection.FieldInfo finishedLastDialogueField;
         private static System.Reflection.MethodInfo parseDialogueStringMethod;
+        private static string respondString;
 
         static Dialogue_ChooseResponse_Patch()
         {
@@ -64,6 +56,7 @@ namespace ValleyTalk
             finishedLastDialogueField = typeof(Dialogue).GetField("finishedLastDialogue", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             //isCurrentStringContinuedOnNextScreenField = typeof(Dialogue).GetField("isCurrentStringContinuedOnNextScreen", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             parseDialogueStringMethod = typeof(Dialogue).GetMethod("parseDialogueString", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            respondString = Util.GetString("outputRespond");
         }
 
         public static bool Prefix(ref Dialogue __instance, ref bool __result, Response response)
@@ -90,7 +83,7 @@ namespace ValleyTalk
             // Get the current dialogue string from __instance
             // If the last entry is "Respond:", remove it
             var dialogueStrings = __instance.dialogues;
-            if (dialogueStrings.Last().Text == "Respond:")
+            if (dialogueStrings.Last().Text == respondString)
             {
                 dialogueStrings.RemoveAt(dialogueStrings.Count - 1);
             }
