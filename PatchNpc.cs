@@ -36,7 +36,7 @@ namespace ValleyTalk
             }
             if (dialogueKey.StartsWith("funReturn_") || dialogueKey.StartsWith("jobReturn_"))
             {
-                __result = DialogueBuilder.Instance.Generate(__instance, dialogueKey);
+                __result = new Dialogue(__instance, dialogueKey, SldConstants.DialogueGenerationTag);
                 return false;
             }
             return true;
