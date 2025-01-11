@@ -919,12 +919,15 @@ public class Prompts
         }
         instructions.AppendLine(Util.GetString(Character,"instructionsFarmersName"));
         instructions.AppendLine(Util.GetString(Character,"instructionsBreaks"));
-        var extraPortraits = new StringBuilder();
-        foreach (var portrait in Character.Bio.ExtraPortraits)
+        if (!Character.Bio.ExtraPortraits.ContainsKey('!'))
         {
-            extraPortraits.Append(Util.GetString(Character,"instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
+            var extraPortraits = new StringBuilder();
+            foreach (var portrait in Character.Bio.ExtraPortraits)
+            {
+                extraPortraits.Append(Util.GetString(Character,"instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
+            }
+            instructions.AppendLine(Util.GetString(Character,"instructionsEmotion", new { extraPortraits= extraPortraits }));
         }
-        instructions.AppendLine(Util.GetString(Character,"instructionsEmotion", new { extraPortraits= extraPortraits }));
         instructions.AppendLine(Util.GetString(Character,"instructionsSingleLine"));
         instructions.AppendLine(Util.GetString(Character,"instructionsResponses", new { Name= Name }));
         if (ModEntry.Config.ApplyTranslation)
