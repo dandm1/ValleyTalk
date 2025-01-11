@@ -39,7 +39,7 @@ public class BioData
         set
         {
             name = value;
-            isMale = Game1.getCharacterFromName(name).Gender == StardewValley.Gender.Male;
+            isMale = Game1.getCharacterFromName(name)?.Gender == StardewValley.Gender.Male;
         } 
     }
 
