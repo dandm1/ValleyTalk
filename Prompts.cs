@@ -161,14 +161,7 @@ public class Prompts
 
         prompt.AppendLine($"## {Util.GetString(Character,"coreInstructionHeading")}");
         prompt.AppendLine($"### {Util.GetString(Character,"coreContextHeading")}");
-        if (Context.MaleFarmer)
-        {
-            prompt.AppendLine(Util.GetString(Character,"coreMaleFarmer"));
-        }
-        else
-        {
-            prompt.AppendLine(Util.GetString(Character,"coreFemaleFarmer"));
-        }
+        prompt.AppendLine(Util.GetString(Character,"coreFarmerGender"));
         GetDateAndTime(prompt);
         GetWeather(prompt);
         GetOtherNpcs(prompt);
