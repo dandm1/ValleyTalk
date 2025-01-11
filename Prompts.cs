@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
+using System.ComponentModel;
 
 namespace StardewDialogue;
 
@@ -180,6 +181,7 @@ public class Prompts
             }
 
             GetFarmContents(prompt);
+            GetWealth(prompt);
             GetMarriageFeelings(prompt);
         }
         GetLocation(prompt);
@@ -194,14 +196,7 @@ public class Prompts
             GetSpouse(prompt);
             GetSpecialRelationshipStatus(prompt, friendship);
         }
-        if (Context.MaleFarmer)
-        {
-            prompt.AppendLine(Util.GetString(Character,"coreMaleReferences"));
-        }
-        else
-        {
-            prompt.AppendLine(Util.GetString(Character,"coreFemaleReferences"));
-        }
+        prompt.AppendLine(Util.GetString(Character,"coreGenderReferences"));
         GetPreoccupation(prompt);
         GetCurrentConversation(prompt);
 
@@ -547,7 +542,8 @@ public class Prompts
         }
         else if (Context.Location != null)
         {
-            var locationName = Game1.locationData[Context.Location].DisplayName;
+            Game1.locationData.TryGetValue(Context.Location, out StardewValley.GameData.Locations.LocationData locationData);
+            var locationName = locationData?.DisplayName ?? string.Empty;
             prompt.Append(Context.Location switch
             {
                 "Town" => Util.GetString(Character,"locationTown", new { Name= Name }),
@@ -567,7 +563,9 @@ public class Prompts
                 "Resort_Shore" or "Resort_Shore_2" => Util.GetString(Character,"locationResortShore", new { Name= Name }),
                 "Resort_Wander" => Util.GetString(Character,"locationResortWander", new { Name= Name }),
                 "Resort" or "Resort_2" => Util.GetString(Character,"locationResort", new { Name= Name }),
-                _ => Util.GetString("locationGeneric", new {Name = Name, Location = locationName})
+                "FarmHouse" => Util.GetString(Character,"locationFarmHouse", new { Name= Name }),
+                "Farm" => Util.GetString(Character,"locationFarm", new { Name= Name }),
+                _ => locationName.Length > 2 ? Util.GetString("locationGeneric", new {Name = Name, Location = locationName}) : string.Empty
             });
             prompt.AppendLine(Util.GetString(Character,"locationOutro"));
         }
@@ -593,6 +591,26 @@ public class Prompts
                 break;
             default:
                 prompt.AppendLine(Util.GetString(Character,"marriageSentimentNeutral", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
+                break;
+        }
+    }
+
+    private void GetWealth(StringBuilder prompt)
+    {
+        var wealth = Game1.getPlayerOrEventFarmer()._money;
+        switch (wealth)
+        {
+            case < 1000:
+                prompt.AppendLine(Util.GetString(Character,"wealthPoor", new { wealth= wealth }));
+                break;
+            case < 10000:
+                prompt.AppendLine(Util.GetString(Character,"wealthMiddle", new { wealth= wealth }));
+                break;
+            case < 100000:
+                prompt.AppendLine(Util.GetString(Character,"wealthRich", new { wealth= wealth }));
+                break;
+            default:
+                prompt.AppendLine(Util.GetString(Character,"wealthVeryRich", new { wealth= wealth }));
                 break;
         }
     }
