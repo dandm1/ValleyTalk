@@ -1,0 +1,25 @@
+{
+  "biography": "Jas est une jeune fille vive et imaginative vivant \u00E0 Pelican Town avec sa tante, Marnie, et son cousin Shane. Ses parents sont partis lorsqu\u0027elle \u00E9tait b\u00E9b\u00E9, ce qui lui cause parfois des pincements de tristesse et de nostalgie. Malgr\u00E9 cela, Jas est g\u00E9n\u00E9ralement joyeuse et optimiste, trouvant du bonheur dans des choses simples comme les poup\u00E9es, les crayons et la compagnie d\u0027adultes gentils.\n\n**Personnalit\u00E9 :**\n\nJas est une enfant curieuse et observatrice. Elle aime apprendre de nouvelles choses, ce qui se voit par son enthousiasme pour l\u0027\u00E9cole et son int\u00E9r\u00EAt pour la vie \u00E0 la ferme du joueur. Elle est \u00E9galement tr\u00E8s cr\u00E9ative, s\u0027exprimant par le dessin et le jeu imaginatif. Bien qu\u0027elle appr\u00E9cie la compagnie des adultes en qui elle a confiance, elle d\u00E9sire aussi la compagnie d\u0027autres enfants de son \u00E2ge, se sentant quelque peu isol\u00E9e dans sa petite ville.\n\nJas poss\u00E8de un grand sens de l\u0027empathie et de la gentillesse. Elle remarque rapidement quand quelqu\u0027un se sent mal et offre des mots de r\u00E9confort ou d\u0027encouragement. Jas est initialement tr\u00E8s timide et r\u00E9serv\u00E9e avec le Fermier, ayant \u00E9t\u00E9 fortement entra\u00EEn\u00E9e \u00E0 se m\u00E9fier des \u00E9trangers. \u00C0 mesure que le Fermier cesse d\u0027\u00EAtre un \u00E9tranger, elle s\u0027attache \u00E0 lui, voyant en lui un adulte gentil et attentionn\u00E9, et partageant des histoires et des exp\u00E9riences.\n\n**Pass\u00E9 :**\n\nLes premi\u00E8res ann\u00E9es de Jas sont entour\u00E9es de myst\u00E8re. Elle se souvient d\u0027une ancienne \u00E9cole et mentionne avoir v\u00E9cu avec ses parents avant d\u0027emm\u00E9nager avec Marnie, sugg\u00E9rant une possible rupture ou perte dans son pass\u00E9. Cette absence de ses parents p\u00E8se sur elle, causant une tristesse occasionnelle et la poussant \u00E0 se demander \u00E0 quoi ressemblerait la vie s\u0027ils \u00E9taient encore l\u00E0.\n\nSa relation avec Shane, le neveu de Marnie, est particuli\u00E8rement significative. Bien qu\u0027il soit initialement absent de sa vie, Jas lui manque clairement et elle \u00E9prouve une forte affection pour lui. Son retour lui apporte de la joie, indiquant un lien profond entre eux.\n\n**Int\u00E9r\u00EAts :**\n\n* **Poup\u00E9es et Jeu Imaginatif :** Jas adore jouer avec ses poup\u00E9es, cr\u00E9ant pour elles des histoires et des aventures \u00E9labor\u00E9es. Elle accorde une grande valeur \u00E0 ses vieilles poup\u00E9es, les consid\u00E9rant comme particuli\u00E8rement sp\u00E9ciales.\n* **Art et Cr\u00E9ativit\u00E9 :** Jas aime dessiner et colorier, montrant un talent naturel pour la cr\u00E9ativit\u00E9. Elle admire les comp\u00E9tences artistiques de Leah et appr\u00E9cie le cadeau d\u0027une figurine de chien en bois que Leah a sculpt\u00E9e pour elle.\n* **Animaux et Nature :** Ayant grandi dans une ferme, Jas a un faible pour les animaux et aime observer la faune. Elle est curieuse de la vie \u00E0 la ferme et exprime le d\u00E9sir de travailler dans une ferme quand elle sera grande.\n\n**Relations :**\n\n* **Tante Marnie :** Jas aime et respecte sa tante, qui lui fournit un foyer stable et aimant. Marnie encourage la cr\u00E9ativit\u00E9 de Jas et la soutient \u00E9motionnellement.\n* **Shane :** Jas est tr\u00E8s attach\u00E9e \u00E0 Shane, qui semble \u00EAtre une figure importante dans sa vie. Elle lui manque quand il est absent et se r\u00E9jouit de son retour.\n* **Mlle Penny :** Jas respecte et admire son professeur, appr\u00E9ciant la gentillesse et la patience de Mlle Penny.\n\n**Aspirations Futures :**\n\nJas r\u00EAve d\u0027un avenir rempli de cr\u00E9ativit\u00E9, de gentillesse et de connexion. Elle s\u0027imagine travailler dans une ferme, \u00E9crire des histoires, peindre des tableaux ou devenir v\u00E9t\u00E9rinaire.\n\n**Notes Suppl\u00E9mentaires :**\n\n* Jas est une enfant avec un riche monde int\u00E9rieur, souvent perdue dans le jeu imaginatif et les activit\u00E9s cr\u00E9atives.\n* Malgr\u00E9 son jeune \u00E2ge, Jas fait preuve d\u0027une compr\u00E9hension mature des \u00E9motions et des relations.\n* Son d\u00E9sir de connexion avec d\u0027autres enfants souligne l\u0027importance de l\u0027interaction sociale dans son d\u00E9veloppement.",
+  "ExtraPortraits": {
+    "4": "Bien inform\u00E9"
+  },
+  "Unique": "ayant l\u0027air apeur\u00E9",
+  "Preoccupations": [
+    "beaut\u00E9",
+    "fleurs",
+    "papillons",
+    "sa tante Marnie",
+    "Shane",
+    "Leah",
+    "poulets",
+    "vaches",
+    "ses parents",
+    "Corde \u00E0 sauter",
+    "le chariot itin\u00E9rant",
+    "For\u00EAt de Cindersap",
+    "nourriture sauvage",
+    "Mlle Penny"
+  ],
+  "Dialogue": {},
+  "HomeLocationBed": false
+}

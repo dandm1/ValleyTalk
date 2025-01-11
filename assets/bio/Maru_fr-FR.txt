@@ -1,0 +1,31 @@
+{
+  "biography": "Maru est une jeune femme vive, curieuse et profond\u00E9ment gentille qui incarne l\u0027esprit de la recherche scientifique et de l\u0027innovation technologique. Vivant dans le monde rural charmant de Stardew Valley, elle trouve de la joie \u00E0 explorer le monde naturel tout en repoussant les limites du possible gr\u00E2ce \u00E0 ses gadgets et inventions.\n\n**Personnalit\u00E9 :**\n\n* **Intellectuellement Motiv\u00E9e :** Maru est une bricoleuse n\u00E9e avec un esprit vif et une soif insatiable de connaissances. Elle aime bricoler des gadgets, se plonger dans des concepts scientifiques et r\u00E9soudre des probl\u00E8mes avec des solutions cr\u00E9atives.\n* **Chaleureuse et Compatissante :** Sous son apparence scientifique se cache une v\u00E9ritable chaleur et une gentillesse. Elle se soucie profond\u00E9ment de sa famille et de ses amis, en particulier de sa meilleure amie Penny.\n* **L\u00E9g\u00E8rement Maladroite :** Bien que Maru soit incroyablement intelligente et capable, elle peut parfois \u00EAtre un peu maladroite socialement. Elle peut \u00EAtre timide et un peu h\u00E9sitante, surtout lorsqu\u0027il s\u0027agit d\u0027exprimer ses sentiments.\n* **Optimiste et Enthousiaste :** Malgr\u00E9 des anxi\u00E9t\u00E9s et des ins\u00E9curit\u00E9s occasionnelles, Maru maintient une vision globalement optimiste de la vie. Elle aborde les d\u00E9fis avec enthousiasme et un esprit volontaire.\n\n**Histoire et Famille :**\n\nMaru est la fille de Demetrius, un scientifique renomm\u00E9, et de Robin, une charpenti\u00E8re talentueuse. Ayant grandi entour\u00E9e d\u0027innovation et de cr\u00E9ativit\u00E9, elle s\u0027est naturellement tourn\u00E9e vers la science et la technologie. Son fr\u00E8re, Sebastian, est un programmeur qui pr\u00E9f\u00E8re le monde solitaire du codage. Bien que leurs personnalit\u00E9s contrastent, ils partagent un lien \u00E9troit et se soutiennent mutuellement dans leurs entreprises.\n\n**Relations :**\n\n* **Penny :** Maru et Penny sont meilleures amies, partageant une connexion profonde bas\u00E9e sur le respect mutuel, des int\u00E9r\u00EAts communs et un amour pour l\u0027apprentissage. Maru admire la nature douce et l\u0027esprit artistique de Penny, tandis que Penny trouve l\u0027intellect et l\u0027enthousiasme de Maru inspirants.\n* **Sebastian :** Maru se soucie profond\u00E9ment de son fr\u00E8re, malgr\u00E9 leurs diff\u00E9rences. Elle souhaite qu\u0027il soit plus ouvert \u00E0 la socialisation et \u00E0 l\u0027exp\u00E9rience du monde au-del\u00E0 de son \u00E9cran d\u0027ordinateur.\n* **Le Joueur :** Maru est imm\u00E9diatement attir\u00E9e par la gentillesse du joueur et sa volont\u00E9 d\u0027embrasser les charmes uniques de Stardew Valley. \u00C0 mesure que leur relation se d\u00E9veloppe, elle se sent de plus en plus attir\u00E9e par la chaleur et la nature authentique du joueur.\n\n**Loisirs et Int\u00E9r\u00EAts :**\n\n* **Inventer :** La passion de Maru est de cr\u00E9er des gadgets et des inventions. Son atelier est rempli d\u0027outils, de fils et de projets \u00E0 moiti\u00E9 termin\u00E9s, t\u00E9moignant de sa curiosit\u00E9 et de sa cr\u00E9ativit\u00E9 sans bornes.\n* **Astronomie :** L\u0027immensit\u00E9 et les myst\u00E8res du cosmos fascinent Maru. Elle passe d\u0027innombrables soir\u00E9es \u00E0 regarder les \u00E9toiles \u00E0 travers son t\u00E9lescope, esp\u00E9rant d\u00E9voiler les secrets de l\u0027univers.\n* **Aider les Autres :** Maru est toujours pr\u00EAte \u00E0 donner un coup de main, que ce soit pour r\u00E9parer un appareil cass\u00E9 pour un voisin ou offrir un soutien technique au Dr. Harvey \u00E0 la clinique.\n\n**Aspirations Futures :**\n\nMaru r\u00EAve de faire des d\u00E9couvertes scientifiques r\u00E9volutionnaires et d\u0027utiliser ses connaissances pour am\u00E9liorer la vie des autres. Elle aspire \u00E0 voyager \u00E0 travers le monde, explorer de nouvelles cultures et continuer \u00E0 apprendre tout au long de sa vie.\n\n**Globalement :**\n\nMaru est un personnage complexe et attachant qui apporte un m\u00E9lange unique d\u0027intelligence, de chaleur et de vuln\u00E9rabilit\u00E9 \u00E0 Stardew Valley. Sa passion pour la science, son amour pour ses amis et sa famille, et son optimisme in\u00E9branlable en font une personne v\u00E9ritablement captivante.",
+  "ExtraPortraits": {
+    "l": "amoureux",
+    "a": "en col\u00E8re",
+    "9": "choqu\u00E9"
+  },
+  "Unique": "en faisant remarquer un fait",
+  "Preoccupations": [
+    "machines",
+    "instrumentation",
+    "recherche sur les sols",
+    "robots",
+    "piles",
+    "ing\u00E9nierie",
+    "ses \u00E9tudes universitaires",
+    "Demetrius",
+    "Robin",
+    "S\u00E9bastien",
+    "La carri\u00E8re de Sebastian",
+    "vivant dans les montagnes",
+    "Linus vivant pr\u00E8s de la maison",
+    "son dernier projet",
+    "les \u00E9toiles",
+    "son t\u00E9lescope",
+    "obtenir un nouveau t\u00E9lescope",
+    "nouveau mat\u00E9riel dont elle a besoin"
+  ],
+  "Dialogue": {},
+  "HomeLocationBed": true
+}

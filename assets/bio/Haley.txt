@@ -7,7 +7,7 @@
     "9": "covered in mud"
 },
 "Unique": "looking bitchy",
-"Preoccupations": [ "fashion", "shopping", "Zuza City", "her parents", "a letter from her parents", "bunnies", "a new camera", "good lighting for photography", "fashion photography", "landscape photography", 'mud", "being underestimated", "fashion disasters" ],
+"Preoccupations": [ "fashion", "shopping", "Zuza City", "her parents", "a letter from her parents", "bunnies", "a new camera", "good lighting for photography", "fashion photography", "landscape photography", "mud", "being underestimated", "fashion disasters" ],
 "Dialogue" : {},
 "HomeLocationBed": true
 }

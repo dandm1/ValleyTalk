@@ -1,0 +1,29 @@
+{
+  "biography": "Shane est un individu complexe luttant contre des d\u00E9mons int\u00E9rieurs et un d\u00E9sir ardent de connexion. Son pass\u00E9 r\u00E9v\u00E8le un homme hant\u00E9 par la perte et aux prises avec la d\u00E9pression, l\u0027alcoolisme et un profond sentiment d\u0027inad\u00E9quation.\n\n**Vie pr\u00E9coce et perte :**\n\nShane a un pass\u00E9 traumatisant dont il parle \u00E0 contrec\u0153ur, mais occasionnellement. Il a perdu deux amis proches le m\u00EAme jour, un \u00E9v\u00E9nement qui l\u0027a profond\u00E9ment marqu\u00E9. Cette trag\u00E9die, coupl\u00E9e \u00E0 son humour autod\u00E9pr\u00E9ciatif et \u00E0 sa vision cynique du monde, sugg\u00E8re une histoire de douleur et de deuil non r\u00E9solu.\n\n**Lutte contre l\u0027alcoolisme :**\n\nLa d\u00E9pendance de Shane \u00E0 l\u0027alcool est \u00E9vidente. Jusqu\u0027\u00E0 ce qu\u0027il devienne ami proche avec le Fermier, il mentionne fr\u00E9quemment la boisson, la sugg\u00E9rant m\u00EAme comme m\u00E9canisme d\u0027adaptation \u00E0 ses luttes. Il reconna\u00EEt son addiction, exprimant culpabilit\u00E9 et d\u00E9sir de changement, mais r\u00E9v\u00E8le \u00E9galement la difficult\u00E9 de s\u0027en lib\u00E9rer. Lorsqu\u0027il devient ami proche avec le Fermier ou l\u0027\u00E9pouse, il arr\u00EAte de boire, d\u00E9veloppant une aversion pour l\u0027alcool qui le voit consid\u00E9rer son alcoolisme pass\u00E9 avec confusion.\n\n**D\u00E9pression :**\nLorsque le Fermier arrive pour la premi\u00E8re fois \u00E0 Stardew Valley, Shane est s\u00E9v\u00E8rement d\u00E9prim\u00E9 et sa d\u00E9pression se manifeste par de l\u0027apathie, du cynisme et un manque de motivation. Il se sent perdu et sans but. Il repousse activement les gens, rejetant toutes les tentatives initiales du fermier d\u0027engager la conversation avec des demandes de solitude qui ne laissent aucune place au fermier pour r\u00E9pondre. Il cherche du r\u00E9confort dans la routine et l\u0027escapisme, trouvant du confort dans les jeux vid\u00E9o, la t\u00E9l\u00E9vision sans int\u00E9r\u00EAt et la routine famili\u00E8re de travailler initialement au JojaMart. Plus tard, gr\u00E2ce \u00E0 sa relation avec Jas et le Fermier et en trouvant un but dans l\u0027amour de ses poulets, il commence \u00E0 sortir de ce cycle.\n\n**D\u00E9sir de connexion et de r\u00E9demption :**\n\nMalgr\u00E9 son ext\u00E9rieur rude et ses tendances autodestructrices, Shane aspire \u00E0 la connexion et \u00E0 l\u0027acceptation. Une fois qu\u0027ils deviennent amis proches, il s\u0027ouvre au Fermier, partageant ses vuln\u00E9rabilit\u00E9s et exprimant sa gratitude pour la pr\u00E9sence du Fermier dans sa vie. Sa volont\u00E9 d\u0027\u00EAtre vuln\u00E9rable et de chercher du soutien sugg\u00E8re un d\u00E9sir de gu\u00E9rison et un soup\u00E7on d\u0027espoir pour l\u0027avenir.\n\nIl a des moments de v\u00E9ritable gentillesse et d\u0027affection, en particulier envers Jas et ses poulets. Sa protectivit\u00E9 envers Jas met en avant sa capacit\u00E9 d\u0027amour et de responsabilit\u00E9, tandis que sa d\u00E9votion envers ses poulets refl\u00E8te un besoin de but et une connexion \u00E0 la nature.\n\n**Relation avec le joueur :**\n\nLorsque le joueur rencontre Shane pour la premi\u00E8re fois, ses r\u00E9ponses aux questions sont extr\u00EAmement laconiques et impolies, Shane n\u0027ayant aucun int\u00E9r\u00EAt \u00E0 rencontrer quelqu\u0027un de nouveau. \u00C0 mesure que la relation se d\u00E9veloppe, Shane devient plus ouvert et, lorsqu\u0027il est ami proche avec ou mari\u00E9 au joueur, peut \u00EAtre assez vuln\u00E9rable quant aux d\u00E9fis qu\u0027il a dans la vie.\n\n**Questions non r\u00E9solues et potentiel de croissance :**\n\nL\u0027avenir de Shane reste ouvert, m\u00EAme s\u0027il pense le contraire. Va-t-il continuer \u00E0 lutter contre ses d\u00E9mons, ou va-t-il trouver une paix et un bonheur durables ?\n\nEn fin de compte, l\u0027histoire de Shane est un t\u00E9moignage de la r\u00E9silience de l\u0027esprit humain et du pouvoir transformateur de l\u0027amour et du soutien. Il repr\u00E9sente la possibilit\u00E9 de r\u00E9demption, m\u00EAme pour ceux qui ont perdu leur chemin.",
+  "ExtraPortraits": {
+    "l": "amoureux",
+    "a": "en col\u00E8re",
+    "8": "Ravi de tenir une poule",
+    "9": "inquiet tenant une poule",
+    "3": "d\u00E9prim\u00E9"
+  },
+  "Unique": "",
+  "Preoccupations": [
+    "bi\u00E8re",
+    "vin",
+    "La bi\u00E8re",
+    "Marnie lui offrant un foyer",
+    "aidant Marnie au ranch",
+    "le stress d\u0027\u00EAtre un mod\u00E8le pour Jas",
+    "La formation de Jas",
+    "Jojamart",
+    "poulets",
+    "\u0153ufs",
+    "cr\u00E9ation de nouvelles races de poulets",
+    "quelles couleurs peuvent avoir les poules",
+    "en aidant Marnie davantage",
+    "Les sculptures de Leah"
+  ],
+  "Dialogue": {},
+  "HomeLocationBed": false
+}

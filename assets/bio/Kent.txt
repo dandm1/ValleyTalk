@@ -4,7 +4,7 @@
     "5": "tired"
 },
 "Unique": "angry",
-"Preoccupations": [ "the war", "fallen comrades", "post traumatic stress", "his wife Jodi", "Sam", 'Vincent", "readjustment", "how much Sam has grown", "not knowing Vincent well", "hard days in battle", "incredible boredom at the front", "life before the war" ],
+"Preoccupations": [ "the war", "fallen comrades", "post traumatic stress", "his wife Jodi", "Sam", "Vincent", "readjustment", "how much Sam has grown", "not knowing Vincent well", "hard days in battle", "incredible boredom at the front", "life before the war" ],
 "Dialogue" : {},
 "HomeLocationBed": false
 }

@@ -2,7 +2,7 @@
 "ExtraPortraits": {
     "l": "in love",
     "a": "angry",
-    "7": "tired"
+    "7": "tired",
     "6": "scheming"
 },
 "Unique": "",

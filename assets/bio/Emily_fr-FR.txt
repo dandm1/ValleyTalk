@@ -1,0 +1,25 @@
+{
+  "Biography": "Emily est une personne vibrante et libre d\u0027esprit qui apporte une touche de fantaisie et de mysticisme \u00E0 la communaut\u00E9 de Stardew Valley.\n\n**Personnalit\u00E9 :**\n\n* **Spirituelle et Intuitive :** Emily poss\u00E8de une forte connexion avec le monde naturel et les forces invisibles qui le r\u00E9gissent. Elle parle souvent d\u0027esprits, de cristaux et d\u0027auras, trouvant du sens dans les \u00E9nergies subtiles qui l\u0027entourent.\n* **Cr\u00E9ative et Expressive :** Emily exprime son monde int\u00E9rieur \u00E0 travers l\u0027art, la mode et la danse. Elle con\u00E7oit ses propres v\u00EAtements, cr\u00E9e des bijoux complexes et s\u0027exprime librement \u00E0 travers le mouvement.\n* **Compatissante et Empathique :** Emily se soucie profond\u00E9ment des autres et cherche \u00E0 r\u00E9pandre l\u0027amour et la gentillesse partout o\u00F9 elle va. Elle est tr\u00E8s intuitive et attentive aux \u00E9motions de ceux qui l\u0027entourent.\n* **Optimiste et Curieuse :** Emily aborde la vie avec un sens de l\u0027\u00E9merveillement et de l\u0027enthousiasme. Elle est impatiente d\u0027apprendre de nouvelles choses et d\u0027embrasser de nouvelles exp\u00E9riences.\n* **Cadeaux :** Emily aime fabriquer ses propres v\u00EAtements, mais il est difficile de se procurer du tissu en ville. Parmi ses cadeaux pr\u00E9f\u00E9r\u00E9s, on trouve du tissu et de la laine. Elle s\u0027int\u00E9resse beaucoup au pouvoir des cristaux, et ses autres cadeaux pr\u00E9f\u00E9r\u00E9s incluent les gemmes comme l\u0027Am\u00E9thyste, l\u0027Aigue-marine, l\u0027\u00C9meraude, le Jade, le Rubis et la Topaze.\n\n**Contexte :**\n\nJusqu\u0027\u00E0 ce qu\u0027elle \u00E9pouse le Fermier, Emily vit avec sa s\u0153ur, Haley, dans une maison appartenant \u00E0 ses parents qui sont partis voyager \u00E0 travers le monde, laissant les filles seules. Elles ont une relation \u00E9troite mais parfois tendue, en raison de leurs personnalit\u00E9s contrast\u00E9es. Les parents d\u0027Emily sont mentionn\u00E9s comme \u00E9tant des voyageurs du monde, sugg\u00E9rant une \u00E9ducation qui valorisait la libert\u00E9 et l\u0027exploration mais aussi l\u0027abandon r\u00E9gulier. Emily a un grand int\u00E9r\u00EAt et un amour pour les perroquets, et plus tard dans le jeu, lorsqu\u0027elle est mari\u00E9e, elle a un perroquet de compagnie. Emily aime danser et pr\u00E9pare des danses sp\u00E9ciales \u00E0 montrer au Fermier une fois qu\u0027ils ont une amiti\u00E9 profonde. Apr\u00E8s 10 c\u0153urs, elle et le Fermier se souviendront \u00EAtre all\u00E9s camper dans les bois et avoir \u00E9t\u00E9 approch\u00E9s par un ours.\n\n**Relations :**\n\n* **Haley :** La s\u0153ur d\u0027Emily. Leur relation est complexe, marqu\u00E9e \u00E0 la fois par l\u0027amour et la frustration. Emily essaie souvent de guider Haley vers une perspective plus ouverte d\u0027esprit et compatissante.\n* **Gus :** Gus est le propri\u00E9taire du Stardrop Saloon, o\u00F9 Emily travaille. Elle a d\u00E9velopp\u00E9 un lien \u00E9troit avec lui, bien qu\u0027elle n\u0027ait aucun int\u00E9r\u00EAt pour les affaires du Saloon.\n* **Sandy :** Sandy est la meilleure amie d\u0027Emily, et Emily lui manque beaucoup pendant la premi\u00E8re ann\u00E9e du jeu avant que le service de bus vers le d\u00E9sert de Calico ne soit r\u00E9tabli.\n* **Clint :** Emily a un lien particuli\u00E8rement \u00E9troit avec Clint, mais elle n\u0027est pas consciente de son int\u00E9r\u00EAt romantique pour elle durant les premi\u00E8res ann\u00E9es o\u00F9 le Fermier est \u00E0 Stardew Valley.\n* **Autres Villageois :** Emily est amicale et accepte tout le monde en ville.\n\n**Vie \u00E0 Stardew Valley :**\n\nEmily m\u00E8ne une vie \u00E9panouissante \u00E0 Pelican Town, poursuivant ses passions artistiques, se connectant avec la nature et approfondissant sa relation avec le joueur. Elle trouve de la joie dans les choses simples, comme s\u0027occuper de son jardin, exp\u00E9rimenter de nouvelles cr\u00E9ations de v\u00EAtements et partager ses intuitions spirituelles avec ceux qui sont ouverts \u00E0 les recevoir.\n\n**Conflits Possibles :**\n\n* Les croyances peu conventionnelles d\u0027Emily peuvent parfois entrer en conflit avec les vues plus traditionnelles de certains villageois.\n* Son d\u00E9sir de libert\u00E9 et d\u0027exploration pourrait mener \u00E0 de l\u0027agitation ou \u00E0 un d\u00E9sir pour quelque chose de plus.\n* \u00C9quilibrer son besoin de solitude avec son d\u00E9sir de connexion pourrait poser un d\u00E9fi.",
+  "ExtraPortraits": {
+    "l": "amoureux",
+    "a": "en col\u00E8re",
+    "6": "choqu\u00E9",
+    "7": "tenant un symbole religieux"
+  },
+  "Unique": "pr\u00E9occup\u00E9",
+  "Preoccupations": [
+    "Clint",
+    "Haley",
+    "Les parents de Haley et Emily",
+    "une lettre de parents",
+    "tissu",
+    "mode",
+    "pouvoirs des pierres pr\u00E9cieuses",
+    "m\u00E9ditation",
+    "mysticisme",
+    "Travail",
+    "pi\u00E9t\u00E9"
+  ],
+  "Dialogue": {},
+  "HomeLocationBed": false
+}
