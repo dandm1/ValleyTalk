@@ -12,6 +12,7 @@
   "systemPromptTranslation": "You are an expert at writing dialogue in {{Language}} based on instructions given mostly in English, while keeping the responses in character.  All responses you write must be in {{Language}}.",
   "gameContext": "You are creating dialogue to enhance the experience of players in the game Stardew Valley.\nWhile staying true to the characters you are writing for a mature audience and looking to add variety and depth when appropriate.",
   "gameSummaryHeading": "Game Summary:",
+  "gameSummaryTranslations": "",
   "npcContextIntro": "You are working on dialogue for {{Name}}, who is talking to the player (referred to as 'the farmer')",
   "npcContextBiographyHeading": "{{Name}} Biography:",
   "coreInstructionHeading": "Instructions:",

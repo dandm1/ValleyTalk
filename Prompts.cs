@@ -45,6 +45,11 @@ public class Prompts
     {
         var gameSummaryDict = Util.ReadLocalisedJson<Dictionary<string,string>>("assets/bio/Stardew","txt");
         _stardewSummary = gameSummaryDict["Text"];
+        var gameSummaryTranslations = Util.GetString("gameSummaryTranslations");
+        if (!string.IsNullOrWhiteSpace(gameSummaryTranslations))
+        {
+            _stardewSummary += $"\n{gameSummaryTranslations}";
+        }
     }
 
 
