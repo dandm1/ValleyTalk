@@ -300,6 +300,7 @@ public class Character
         line = line.Replace("$e", "#$e").Replace("$b", "#$b");
         line = line.Replace("##$e", "#$e").Replace("##$b", "#$b");
         line = line.Replace("#$c .5#","");
+        line = line.Replace("@@","@");
         // If the string contains any emotion indicators ($0, $s, $l, $a or $h) with a # before them, remove the #
         foreach (var indicator in ValidPortraits)
         {
