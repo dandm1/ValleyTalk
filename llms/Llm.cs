@@ -34,7 +34,7 @@ internal abstract class Llm
             ModEntry.SMonitor.Log($"Failed to connect to the model. ", StardewModdingAPI.LogLevel.Error);
             if (string.IsNullOrWhiteSpace(apiKey))
             {
-                ModEntry.SMonitor.Log($"API key is not provided. Please check the configuration.", StardewModdingAPI.LogLevel.Error);
+                ModEntry.SMonitor.Log(Util.GetString("modelCheckApiKey"), StardewModdingAPI.LogLevel.Error);
             }
             else
             {
@@ -43,31 +43,31 @@ internal abstract class Llm
                 {
                     if (string.IsNullOrWhiteSpace(modelName))
                     {
-                        ModEntry.SMonitor.Log($"Model name is not provided. Usually this is required.", StardewModdingAPI.LogLevel.Error);
+                        ModEntry.SMonitor.Log(Util.GetString("modelCheckModelName"), StardewModdingAPI.LogLevel.Error);
                     }
                     if (getList.GetModelNames().Any())
                     {
-                        ModEntry.SMonitor.Log($"Can retreive model names but not generate dialogue. Check the model name is correctly configured.", StardewModdingAPI.LogLevel.Error);
+                        ModEntry.SMonitor.Log(Util.GetString("modelCheckCantGenerate"), StardewModdingAPI.LogLevel.Error);
                         if ((Llm.Instance is LlmOAICompatible || Llm.Instance is LlmLlamaCpp) && !Llm.Instance.url.Contains("https"))
                         {
-                            ModEntry.SMonitor.Log($"The server address specified does not use a secure connection. Check this isn't blocking text generation.", StardewModdingAPI.LogLevel.Error);
+                            ModEntry.SMonitor.Log(Util.GetString("modelCheckInsecure"), StardewModdingAPI.LogLevel.Error);
                         }
                     }
                     else
                     {
-                        ModEntry.SMonitor.Log($"Unable to get model names or generate dialogue.  Please check the API Key is correctly entered.", StardewModdingAPI.LogLevel.Error);
+                        ModEntry.SMonitor.Log(Util.GetString("modelCheckGetNames"), StardewModdingAPI.LogLevel.Error);
                     }
                 }
                 else
                 {
-                    ModEntry.SMonitor.Log($"Please check the server address and details.", StardewModdingAPI.LogLevel.Error);
+                    ModEntry.SMonitor.Log(Util.GetString("modelCheckGenericError"), StardewModdingAPI.LogLevel.Error);
                 }
             }
             return true;
         }
         else
         {
-            ModEntry.SMonitor.Log($"Connected to the model successfully.", StardewModdingAPI.LogLevel.Info);
+            ModEntry.SMonitor.Log(Util.GetString("modelCheckSuccess"), StardewModdingAPI.LogLevel.Info);
             return false;
         }
     }

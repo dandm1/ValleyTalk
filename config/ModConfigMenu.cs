@@ -10,11 +10,11 @@ namespace ValleyTalk
     {
         private static Dictionary<int,string> FrequencyOptions = new Dictionary<int, string>()
         {
-            { 0, "Never" },
-            { 1, "Rarely" },
-            { 2, "Occasionally" },
-            { 3, "Mostly" },
-            { 4, "Always" }
+            { 0, Util.GetString("configNever") },
+            { 1, Util.GetString("configRarely") },
+            { 2, Util.GetString("configOccasionally") },
+            { 3, Util.GetString("configMostly") },
+            { 4, Util.GetString("configAlways") }
         };
         private static IGenericModConfigMenuApi ConfigMenu;
         private static IManifest ModManifest;
@@ -29,7 +29,7 @@ namespace ValleyTalk
             ConfigMenu = GetConfigMenu(modEntry);
             if (ConfigMenu == null)
             {
-                modEntry.Monitor.Log("Generic Mod Config Menu is not installed. Skipping config menu registration.", LogLevel.Warn);
+                modEntry.Monitor.Log(Util.GetString("configGmcmNotInstalled"), LogLevel.Warn);
                 return;
             }
 
@@ -43,16 +43,16 @@ namespace ValleyTalk
             // add some config options
             ConfigMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Enable mod",
-                tooltip: () => "Enable or disable the mod",
+                name: () => Util.GetString("configEnable"),
+                tooltip: () => Util.GetString("configEnableTooltip"),
                 getValue: () => Config.EnableMod,
                 setValue: value => Config.EnableMod = value
             );
 #if DEBUG
             ConfigMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Debug logging",
-                tooltip: () => "Enable or disable detailed logging of prompts and responses",
+                name: () => Util.GetString("configLogging"),
+                tooltip: () => Util.GetString("configLoggingTooltip"),
                 getValue: () => Config.Debug,
                 setValue: value => Config.Debug = value
             );
@@ -61,7 +61,7 @@ namespace ValleyTalk
             var llmTypes = ModEntry.LlmMap.Keys.ToArray();
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
-                name: () => "Model provider",
+                name: () => Util.GetString("configProvider"),
                 getValue: () => Config.Provider,
                 setValue: value => 
                 {
@@ -80,7 +80,8 @@ namespace ValleyTalk
             {
                 ConfigMenu.AddTextOption(
                     mod: ModManifest,
-                    name: () => "API Key",
+                    name: () => Util.GetString("configApiKey"),
+                    tooltip: () => Util.GetString("configApiKeyTooltip"),
                     getValue: () => Config.ApiKey,
                     setValue: (value) =>{ Config.ApiKey = value; SetLlm(); },
                     fieldId: "ApiKey"
@@ -91,7 +92,8 @@ namespace ValleyTalk
             {
                 ConfigMenu.AddTextOption(
                     mod: ModManifest,
-                    name: () => "Model name",
+                    name: () => Util.GetString("configModelName"),
+                    tooltip: () => Util.GetString("configModelNameTooltip"),
                     getValue: () => Config.ModelName,
                     setValue: (value) =>
                     { 
@@ -104,7 +106,8 @@ namespace ValleyTalk
             {
                 ConfigMenu.AddTextOption(
                     mod: ModManifest,
-                    name: () => "Server address",
+                    name: () => Util.GetString("configServerAddress"),
+                    tooltip: () => Util.GetString("configServerAddressTooltip"),
                     getValue: () => Config.ServerAddress,
                     setValue: (value) =>{ Config.ServerAddress = value; SetLlm(); }
                 );
@@ -113,46 +116,47 @@ namespace ValleyTalk
             {
                 ConfigMenu.AddTextOption(
                     mod: ModManifest,
-                    name: () => "Prompt format",
+                    name: () => Util.GetString("configPromptFormat"),
+                    tooltip: () => Util.GetString("configPromptFormatTooltip"),
                     getValue: () => Config.PromptFormat,
                     setValue: (value) =>{ Config.PromptFormat = value; SetLlm(); }
                 );
             }
             ConfigMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Apply translation (experimental)",
-                tooltip: () => "Apply experimental instructions to the AI to translate responses into the game language",
+                name: () => Util.GetString("configTranslation"),
+                tooltip: () => Util.GetString("configTranslationTooltip"),
                 getValue: () => Config.ApplyTranslation,
                 setValue: (value) =>{ Config.ApplyTranslation = value; }
             );
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
-                name: () => "General frequency",
-                tooltip: () => "How often the mod will generate dialogue for general interactions",
+                name: () => Util.GetString("configFrequencyGeneral"),
+                tooltip: () => Util.GetString("configFrequencyGeneralTooltip"),
                 getValue: () => FrequencyOptions[Config.GeneralFrequency],
                 setValue: (value) =>{ Config.GeneralFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
                 allowedValues: FrequencyOptions.Values.ToArray()
             );
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
-                name: () => "Gift frequency",
-                tooltip: () => "How often the mod will generate dialogue when a gift is given",
+                name: () => Util.GetString("configFrequencyGift"),
+                tooltip: () => Util.GetString("configFrequencyGiftTooltip"),
                 getValue: () => FrequencyOptions[Config.GiftFrequency],
                 setValue: (value) =>{ Config.GiftFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
                 allowedValues: FrequencyOptions.Values.ToArray()
             );
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
-                name: () => "Marriage frequency",
-                tooltip: () => "How often the mod will generate dialogue for marriage interactions",
+                name: () => Util.GetString("configFrequencyMarriage"),
+                tooltip: () => Util.GetString("configFrequencyMarriageTooltip"),
                 getValue: () => FrequencyOptions[Config.MarriageFrequency],
                 setValue: (value) =>{ Config.MarriageFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
                 allowedValues: FrequencyOptions.Values.ToArray()
             );
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
-                name: () => "Disable characters",
-                tooltip: () => "Comma-separated list of villagers to disable the mod for, e.g. (\"Abigail,Leah,Sam\")",
+                name: () => Util.GetString("configDiableForCharacters"),
+                tooltip: () => Util.GetString("configDiableForCharactersTooltip"),
                 getValue: () => Config.DisableCharacters,
                 setValue: (value) =>{ Config.DisableCharacters = value; }
             );
@@ -161,8 +165,8 @@ namespace ValleyTalk
                 text: () => {
                     var names = GetModelNames().ToList();
                     names.Sort();
-                    if (names.Count() == 0) return $"Unable to get model names for {Config.Provider} (maybe the API key wasn't set when this menu was opened?)";
-                    return $"The models available on provider {Config.Provider} are: {string.Join("\n", GetModelNames())}"; 
+                    if (names.Count() == 0) return Util.GetString("configNoModels", new { Provider = Config.Provider });
+                    return Util.GetString("configModels", new { Provider = Config.Provider, Models = string.Join(", ", names) });
                 }
                     
             );
