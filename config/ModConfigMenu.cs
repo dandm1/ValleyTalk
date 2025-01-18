@@ -8,17 +8,18 @@ namespace ValleyTalk
 {
     internal static class ModConfigMenu
     {
-        private static Dictionary<int,string> FrequencyOptions = new Dictionary<int, string>()
-        {
-            { 0, Util.GetString("configNever") },
-            { 1, Util.GetString("configRarely") },
-            { 2, Util.GetString("configOccasionally") },
-            { 3, Util.GetString("configMostly") },
-            { 4, Util.GetString("configAlways") }
-        };
         private static IGenericModConfigMenuApi ConfigMenu;
         private static IManifest ModManifest;
         private static ModEntry _modEntry;
+
+        private static Dictionary<int,string> freqs = new Dictionary<int, string>()
+                    {
+                        { 0, "Never (0%)" },
+                        { 1, "Rarely (25%)" },
+                        { 2, "Occasionally (50%)" },
+                        { 3, "Mostly (75%)" },
+                        { 4, "Always (100%)" }
+                    };
         internal static void Register(ModEntry modEntry)
         {
             _modEntry = modEntry;
@@ -133,25 +134,25 @@ namespace ValleyTalk
                 mod: ModManifest,
                 name: () => Util.GetString("configFrequencyGeneral"),
                 tooltip: () => Util.GetString("configFrequencyGeneralTooltip"),
-                getValue: () => FrequencyOptions[Config.GeneralFrequency],
-                setValue: (value) =>{ Config.GeneralFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
-                allowedValues: FrequencyOptions.Values.ToArray()
+                getValue: () => freqs[Config.GeneralFrequency],
+                setValue: (value) =>{ Config.GeneralFrequency = freqs.First(x => x.Value == value).Key; },
+                allowedValues: freqs.Values.ToArray()
             );
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
                 name: () => Util.GetString("configFrequencyGift"),
                 tooltip: () => Util.GetString("configFrequencyGiftTooltip"),
-                getValue: () => FrequencyOptions[Config.GiftFrequency],
-                setValue: (value) =>{ Config.GiftFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
-                allowedValues: FrequencyOptions.Values.ToArray()
+                getValue: () => freqs[Config.GiftFrequency],
+                setValue: (value) =>{ Config.GiftFrequency = freqs.First(x => x.Value == value).Key; },
+                allowedValues: freqs.Values.ToArray()
             );
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
                 name: () => Util.GetString("configFrequencyMarriage"),
                 tooltip: () => Util.GetString("configFrequencyMarriageTooltip"),
-                getValue: () => FrequencyOptions[Config.MarriageFrequency],
-                setValue: (value) =>{ Config.MarriageFrequency = FrequencyOptions.First(x => x.Value == value).Key; },
-                allowedValues: FrequencyOptions.Values.ToArray()
+                getValue: () => freqs[Config.MarriageFrequency],
+                setValue: (value) =>{ Config.MarriageFrequency = freqs.First(x => x.Value == value).Key; },
+                allowedValues: freqs.Values.ToArray()
             );
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
@@ -168,7 +169,6 @@ namespace ValleyTalk
                     if (names.Count() == 0) return Util.GetString("configNoModels", new { Provider = Config.Provider });
                     return Util.GetString("configModels", new { Provider = Config.Provider, Models = string.Join(", \n", names) });
                 }
-                    
             );
         }
 
