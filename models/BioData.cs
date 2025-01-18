@@ -68,13 +68,13 @@ public class BioData
         set 
         {
             unique = value; 
-            if (!ExtraPortraits.ContainsKey('u') && !string.IsNullOrWhiteSpace(value))
+            if (!ExtraPortraits.ContainsKey("u") && !string.IsNullOrWhiteSpace(value))
             {
-                ExtraPortraits.Add('u', value);
+                ExtraPortraits.Add("u", value);
             }
         }
     }
-    public Dictionary<char,string> ExtraPortraits { get; set; } = new Dictionary<char, string>();
+    public Dictionary<string,string> ExtraPortraits { get; set; } = new Dictionary<string, string>();
     public List<string> Preoccupations { get; set; } = new List<string>();
     public Dictionary<string,string> Dialogue { get; set; } = new Dictionary<string, string>();
     public bool HomeLocationBed { get; set; } = false;

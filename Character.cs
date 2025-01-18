@@ -28,7 +28,7 @@ public class Character
     internal IEnumerable<Tuple<StardewTime,IHistory>> EventHistory => eventHistory.AllTypes;
 
     public NPC StardewNpc { get; internal set; }
-    public List<char> ValidPortraits { get; }
+    public List<string> ValidPortraits { get; }
 
     public Character(string name, NPC stardewNpc)
     {
@@ -40,7 +40,7 @@ public class Character
         LoadBio();
         //LoadDialogue();
         LoadEventHistory();
-        ValidPortraits = new List<char>() { '0', 'h', 's', 'l', 'a' };
+        ValidPortraits = new List<string>() { "h", "s", "l", "a" };
         ValidPortraits.AddRange(_bioData.ExtraPortraits.Keys);
         PossiblePreoccupations = new List<string>(_bioData.Preoccupations);
         PossiblePreoccupations.AddRange(GetLovedAndHatedGiftNames());
@@ -314,15 +314,30 @@ public class Character
                 if (i + 1 < line.Length)
                 {
                     var nextChar = line[i + 1];
-                    if (!ValidPortraits.Contains(nextChar) && nextChar != 'e' && nextChar != 'c' && nextChar != 'b')
-                    {
-                        line = line.Remove(i, 2);
-                        i--; // Adjust index after removal
-                    }
-                    else
+                    if (nextChar == 'e' || nextChar == 'c' || nextChar == 'b')
                     {
                         i++; // Skip the next character
                     }
+                    else
+                    {
+                        // Collect the string up to the next # or the end of the line
+                        var end = line.IndexOf('#', i);
+                        if (end == -1)
+                        {
+                            end = line.Length;
+                        }
+                        var remainder = line.Substring(i+1, end - i - 1);
+                        if (!ValidPortraits.Contains(remainder))
+                        {
+                            line = line.Remove(i, 1 + remainder.Length);
+                            i--; // Adjust index after removal
+                        }
+                    }
+                }
+                else
+                {
+                    line = line.Remove(i, 1);
+                    i--; // Adjust index after removal
                 }
             }
         }

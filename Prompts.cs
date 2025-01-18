@@ -935,7 +935,7 @@ public class Prompts
         }
         instructions.AppendLine(Util.GetString(Character,"instructionsFarmersName"));
         instructions.AppendLine(Util.GetString(Character,"instructionsBreaks"));
-        if (!Character.Bio.ExtraPortraits.ContainsKey('!'))
+        if (!Character.Bio.ExtraPortraits.ContainsKey("!"))
         {
             var extraPortraits = new StringBuilder();
             foreach (var portrait in Character.Bio.ExtraPortraits)
