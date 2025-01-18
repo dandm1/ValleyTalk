@@ -330,5 +330,13 @@
   "timeDaysAgoSeasonDay": "il y a {{days}} jours, le jour {{day}} de {{season}}",
   "timeEarlierThisYear": "plus t\u00F4t cette ann\u00E9e, le jour {{day}} de {{season}}",
   "timeLastYear": "l\u0027ann\u00E9e derni\u00E8re, le jour {{day}} de {{season}}",
-  "timeALongTimeAgo": "il y a longtemps, le jour {{day}} de {{season}} de l\u0027ann\u00E9e {{year}}"
+  "timeALongTimeAgo": "il y a longtemps, le jour {{day}} de {{season}} de l\u0027ann\u00E9e {{year}}",
+  "configAlways": "Toujours",
+  "configMostly": "La plupart du temps",
+  "configOccasionally": "Occasionnellement",
+  "configRarely": "Rarement",
+  "configNever": "Jamais",
+  "configGmcmNotInstalled": "Generic Mod Config Menu n\u0027est pas install\u00E9.",
+  "configEnable": "Activer le mod.",
+  "configEnableTooltip": "Activez ou d\u00E9sactivez le mod."
 }
