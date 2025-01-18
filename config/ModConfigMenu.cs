@@ -166,7 +166,7 @@ namespace ValleyTalk
                     var names = GetModelNames().ToList();
                     names.Sort();
                     if (names.Count() == 0) return Util.GetString("configNoModels", new { Provider = Config.Provider });
-                    return Util.GetString("configModels", new { Provider = Config.Provider, Models = string.Join(", ", names) });
+                    return Util.GetString("configModels", new { Provider = Config.Provider, Models = string.Join(", \n", names) });
                 }
                     
             );

@@ -65,6 +65,11 @@ namespace ValleyTalk
             }   
         }
 
+        public ModEntry()
+        {
+            SHelper = Helper;
+        }
+
         public override object GetApi()
         {
             return new ModConfig();
@@ -72,6 +77,8 @@ namespace ValleyTalk
 
         public override void Entry(IModHelper helper)
         {
+            SHelper = Helper;
+            
             Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
 
             Config = Helper.ReadConfig<ModConfig>();
@@ -126,8 +133,6 @@ namespace ValleyTalk
             Llm.SetLlm(llmType, modelName: Config.ModelName, apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
 
             DialogueBuilder.Instance.Config = Config;
-
-            SHelper = helper;
 
             CheckContentPacks();
 

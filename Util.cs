@@ -7,7 +7,7 @@ namespace ValleyTalk
 {
     public class Util
     {
-        private static StardewModdingAPI.ITranslationHelper _translationHelper = ModEntry.SHelper.Translation;
+        private static StardewModdingAPI.ITranslationHelper _translationHelper => ModEntry.SHelper?.Translation;
 
         public static IEnumerable<NPC> GetNearbyNpcs(NPC npc)
         {
@@ -53,7 +53,7 @@ namespace ValleyTalk
 
         internal static string GetString(string key,object? tokens = null)
         {
-            return _translationHelper.Get(key, tokens);
+            return _translationHelper?.Get(key, tokens);
         }
 
         internal static T ReadLocalisedJson<T>(string basePath, string extension = "json") where T : class
