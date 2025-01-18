@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Version>1.0.0</Version>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <GamePath>/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley</GamePath>
     <EnableHarmony>true</EnableHarmony>
     <Platforms>AnyCPU;x64</Platforms>
