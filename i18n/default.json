@@ -272,6 +272,7 @@
   "configModels": "The models available on provider {{Provider}} are:\n{{models}}",
   "modelCheckApiKey": "API key is not provided. Please check the configuration.",
   "modelCheckModelName": "Model name is not provided. Usually this is requires, please check the configuration.",
+  "modelCheckValidModelName": "Can retreive model names and model name is a valid option.  Possible causes - model is not a text generation model, insecure endpoint specified or incorrect API key (some providers).",
   "modelCheckCantGenerate": "Can retreive model names but not generate dialogue. Check the model name is correctly configured.",
   "modelCheckInsecure": "The server address specified does not use a secure connection (https). This can block text generation.",
   "modelCheckGetNames": "Unable to get model names or generate dialogue.  Please check the API Key is correctly entered.",

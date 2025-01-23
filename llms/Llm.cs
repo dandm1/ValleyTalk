@@ -45,9 +45,17 @@ internal abstract class Llm
                     {
                         ModEntry.SMonitor.Log(Util.GetString("modelCheckModelName") ?? "Model name is not provided. Usually this is requires, please check the configuration.", StardewModdingAPI.LogLevel.Error);
                     }
-                    if (getList.GetModelNames().Any())
+                    var modelNames = getList.GetModelNames();
+                    if (modelNames.Any())
                     {
-                        ModEntry.SMonitor.Log(Util.GetString("modelCheckCantGenerate") ?? "Can retreive model names but not generate dialogue. Check the model name is correctly configured.", StardewModdingAPI.LogLevel.Error);
+                        if (modelName.Contains(modelName))
+                        {
+                            ModEntry.SMonitor.Log(Util.GetString("modelCheckValidModelName") ?? "Can retreive model names and model name is a valid option.  Possible causes - model is not a text generation model, insecure endpoint specified or incorrect API key (some providers).", StardewModdingAPI.LogLevel.Error);
+                        }
+                        else
+                        {
+                            ModEntry.SMonitor.Log(Util.GetString("modelCheckCantGenerate") ?? "Can retreive model names but not generate dialogue. Check the model name is correctly configured.", StardewModdingAPI.LogLevel.Error);
+                        }
                         if ((Llm.Instance is LlmOAICompatible || Llm.Instance is LlmLlamaCpp) && !Llm.Instance.url.Contains("https"))
                         {
                             ModEntry.SMonitor.Log(Util.GetString("modelCheckInsecure") ?? "The server address specified does not use a secure connection (https). This can block text generation.", StardewModdingAPI.LogLevel.Error);
