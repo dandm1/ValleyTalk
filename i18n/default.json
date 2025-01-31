@@ -138,6 +138,7 @@
   "locationGeneric": "The farmer and {{Name}} are at {{Location}}.",
   "locationOutro": "The location where the conversation is taking place may be significant for the lines.",
   "locationTravelling": "{{Name}} is going to {{destination}}.",
+  "locationFuturePlans": "Later today, {{Name}} is planning to go to: {{Locations}}.",
   "generalBeingRoommates": "being roommates",
   "generalTheMarriage": "the marriage",
   "marriageSentimentGood": "{{Name}} is feeling very positive about {{marriageOrRoommate}}.",

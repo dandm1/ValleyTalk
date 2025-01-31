@@ -188,7 +188,7 @@ public class Prompts
             }
 
             GetSpouse(prompt);
-            
+
             GetFarmContents(prompt);
             GetWealth(prompt);
             GetMarriageFeelings(prompt);
@@ -583,6 +583,21 @@ public class Prompts
         {
             var destination = Character.StardewNpc.DirectionsToNewLocation.targetLocationName;
             prompt.AppendLine(Util.GetString(Character,"locationTravelling", new { Name= Name, destination= destination }));
+        }
+
+        var schedule = Character.StardewNpc.Schedule;
+        if (schedule != null)
+        {
+            var remainderOfSchedule = schedule.Where(x => x.Key > Game1.timeOfDay);
+            var remainingLocations = remainderOfSchedule
+                    .Select(x => x.Value.targetLocationName)
+                    .Distinct()
+                    .Where(x => x != Context.Location && x!= "Town" && x != Character.StardewNpc.DefaultMap);
+            if (remainingLocations.Any())
+            {
+                var displayNames = remainingLocations.Select(x => Game1.locationData[x].DisplayName);
+                prompt.AppendLine(Util.GetString(Character,"locationFuturePlans", new { Name= Name, Locations= string.Join(", ", displayNames) }));
+            }
         }
     }
 
