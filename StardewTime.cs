@@ -60,11 +60,15 @@ internal class StardewTime : IComparable<StardewTime>
         return days;
     }
 
-    public string SinceDescription(StardewTime other)
+    public string SinceDescription(StardewTime other = null)
     {
+        if (other == null)
+        {
+            other = new StardewTime(Game1.Date, Game1.timeOfDay);
+        }
         double days = DaysSince(other);
-        var otherSeasonKey = Utility.getSeasonKey(other.season);
-        var seasonDisplay = Game1.content.LoadString("Strings\\StringsFromCSFiles:" + otherSeasonKey);
+        var thisSeasonKey = Utility.getSeasonKey(this.season);
+        var seasonDisplay = Game1.content.LoadString("Strings\\StringsFromCSFiles:" + thisSeasonKey);
         return days switch
         {
             < 0 => Util.GetString("timeInTheFuture"),
@@ -72,11 +76,11 @@ internal class StardewTime : IComparable<StardewTime>
             < (double)1/24 => Util.GetString("timeInTheLastHour"),
             < 1 => other.dayOfMonth == dayOfMonth ? Util.GetString("timeEarlierToday") : Util.GetString("timeYesterday"),
             < 14 => Util.GetString("timeDaysAgo", new {days = (int)days}),
-            < 56 => Util.GetString("timeDaysAgoSeasonDay", new {days = (int)days, day = other.dayOfMonth, season = seasonDisplay}),
+            < 56 => Util.GetString("timeDaysAgoSeasonDay", new {days = (int)days, day = this.dayOfMonth, season = seasonDisplay}),
             < 112 => other.year == year ? 
-                        Util.GetString("timeEarlierThisYear", new {day = other.dayOfMonth, season = seasonDisplay})
-                      : Util.GetString("timeLastYear", new {day = other.dayOfMonth, season = seasonDisplay}),
-            _ => Util.GetString("timeALongTimeAgo", new {day = other.dayOfMonth, season = seasonDisplay, year = other.year})
+                        Util.GetString("timeEarlierThisYear", new {day = this.dayOfMonth, season = seasonDisplay})
+                      : Util.GetString("timeLastYear", new {day = this.dayOfMonth, season = seasonDisplay}),
+            _ => Util.GetString("timeALongTimeAgo", new {day = this.dayOfMonth, season = seasonDisplay, year = this.year})
         };
     }
 

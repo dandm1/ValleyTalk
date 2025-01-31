@@ -579,10 +579,12 @@ public class Prompts
             prompt.AppendLine(Util.GetString(Character,"locationOutro"));
         }
 
+        string destination = string.Empty;
         if (Character.StardewNpc.DirectionsToNewLocation != null && Context.Location != Character.StardewNpc.DirectionsToNewLocation.targetLocationName)
         {
-            var destination = Character.StardewNpc.DirectionsToNewLocation.targetLocationName;
-            prompt.AppendLine(Util.GetString(Character,"locationTravelling", new { Name= Name, destination= destination }));
+            destination = Character.StardewNpc.DirectionsToNewLocation.targetLocationName;
+            var destinationName = LoadLocalised(Game1.locationData[destination].DisplayName);
+            prompt.AppendLine(Util.GetString(Character,"locationTravelling", new { Name= Name, destination= destinationName }));
         }
 
         var schedule = Character.StardewNpc.Schedule;
@@ -592,10 +594,10 @@ public class Prompts
             var remainingLocations = remainderOfSchedule
                     .Select(x => x.Value.targetLocationName)
                     .Distinct()
-                    .Where(x => x != Context.Location && x!= "Town" && x != Character.StardewNpc.DefaultMap);
+                    .Where(x => x != Context.Location && x!= "Town" && x != Character.StardewNpc.DefaultMap && x != destination);
             if (remainingLocations.Any())
             {
-                var displayNames = remainingLocations.Select(x => Game1.locationData[x].DisplayName);
+                var displayNames = remainingLocations.Select(x => LoadLocalised(Game1.locationData[x].DisplayName));
                 prompt.AppendLine(Util.GetString(Character,"locationFuturePlans", new { Name= Name, Locations= string.Join(", ", displayNames) }));
             }
         }
