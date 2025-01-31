@@ -12,7 +12,20 @@ internal class StardewTime : IComparable<StardewTime>
     public int year { get; set; }
 
     public StardewTime()
-    {}
+    {
+        year = 0;
+        season = StardewValley.Season.Spring;
+        dayOfMonth = 0;
+        timeOfDay = 600;
+    }
+
+    public StardewTime(WorldDate date,int time)
+    {
+        year = date.Year;
+        season = date.Season;
+        dayOfMonth = date.DayOfMonth;
+        timeOfDay = time;
+    }
 
     public StardewTime(int year, StardewValley.Season season, int dayOfMonth, int timeOfDay)
     {
@@ -21,7 +34,17 @@ internal class StardewTime : IComparable<StardewTime>
         this.dayOfMonth = dayOfMonth;
         this.timeOfDay = timeOfDay;
     }
-    
+
+    public StardewTime(int addDays)
+    {
+        var worldDate = Game1.Date;
+        year = worldDate.Year;
+        season = worldDate.Season;
+        dayOfMonth = worldDate.DayOfMonth;
+        timeOfDay = 600;
+        AddDays(addDays);
+    }
+
     public double DaysSince(int year, StardewValley.Season season, int dayOfMonth, int timeOfDay)
     {
         return DaysSince(new StardewTime(year, season, dayOfMonth, timeOfDay));

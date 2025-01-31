@@ -181,10 +181,14 @@ public class Prompts
             else
             {
                 prompt.AppendLine(Util.GetString(Character,"coreMarried", new { Name= Name, Pronoun = npcIsMale ? "his" : "her" }));
-
+                var dateNow = new StardewTime(Game1.Date,600);
+                var whenMarried = dateNow.AddDays(-friendship.DaysMarried);
+                prompt.AppendLine(Util.GetString(Character,"coreMarriedSince", new { Name= Name, RelativeDate = whenMarried.SinceDescription(dateNow) }));
                 GetChildren(prompt, friendship);
             }
 
+            GetSpouse(prompt);
+            
             GetFarmContents(prompt);
             GetWealth(prompt);
             GetMarriageFeelings(prompt);
@@ -824,7 +828,7 @@ public class Prompts
 
     private void GetEventHistory(StringBuilder prompt)
     {
-        var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+        var timeNow = new StardewTime(Game1.Date, Game1.timeOfDay);
         var fullHistory = Character.EventHistory.Concat(previousActivites.Select(x => MakeActivityHistory(x)));
 
         if (fullHistory.Any())

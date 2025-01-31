@@ -20,6 +20,7 @@
   "coreFarmerGender": "The farmer is ${male^female}$. As well as running the farm, ${he^she}$ is an adventurer and also has interests and habits that are typically ${male^female}$.",
   "coreRoommates": "The farmer and {{Name}} are roommates and close, non-romantic friends. They live together at the farm inherited from the farmer's grandfather. {{Name}} lived in the sewers before meeting the farmer and moved from there to the farm when they became roommates.",
   "coreMarried": "The farmer is married to {{Name}}. They live together at the farm inherited from the farmer's grandfather.  {{Name}} lived in Stardew Valley before meeting the farmer and moved from {{Pronoun}} original house to the farm when they got married.",
+  "coreMarriedSince": "{{Name}} and the farmer were married {{RelativeDate}}.",
   "coreGenderReferences": "${The farmer is male and the dialogue may reflect this, for example by referring to him as a 'man', 'boy' or 'husband' as appropriate in the Context, referring to typical male clothing choices or activities.^The farmer is female and the dialogue may reflect this, for example by referring to her as a 'woman', 'girl' or 'wife' as appropriate in the Context, referring to typical female clothing choices or activities.}$",
   "preoccupation": "Before the farmer arrived, {{Name}} was thinking about {{preoccupation}}. {{Name}} may talk about this, if there is nothing more pressing to discuss.",
   "openNpcsHeading": "Other NPCs:",
