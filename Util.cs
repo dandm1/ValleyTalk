@@ -27,7 +27,7 @@ namespace ValleyTalk
             return nearbyNpcs;
         }
 
-        internal static string GetString(StardewDialogue.Character npc,string key,object? tokens = null)
+        internal static string GetString(StardewDialogue.Character npc,string key,object? tokens = null,bool returnNull = false)
         {
             if (npc == null) return string.Empty;
 
@@ -48,12 +48,21 @@ namespace ValleyTalk
                 }
             }
             var resultNG = _translationHelper.Get(key, tokens);
+            if (returnNull && !resultNG.HasValue())
+            {
+                return null;
+            }
             return resultNG;
         }
 
-        internal static string GetString(string key,object? tokens = null)
+        internal static string GetString(string key,object? tokens = null,bool returnNull = false)
         {
-            return _translationHelper?.Get(key, tokens);
+            var result = _translationHelper.Get(key, tokens);
+            if (returnNull && !result.HasValue())
+            {
+                return null;
+            }
+            return result;
         }
 
         internal static T ReadLocalisedJson<T>(string basePath, string extension = "json") where T : class
