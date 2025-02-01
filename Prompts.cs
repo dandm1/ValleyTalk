@@ -114,7 +114,7 @@ public class Prompts
         dialogueSample = SelectDialogueSample();
         exactLine = SelectExactDialogue();
         allPreviousActivities = Game1.getPlayerOrEventFarmer().previousActiveDialogueEvents.First();
-        previousActivites = allPreviousActivities.Where(x => HistoryEvents.ContainsKey(x.Key) && x.Value < 112).ToList();
+        previousActivites = allPreviousActivities.Where(x => HistoryEvents.ContainsKey(x.Key) && (x.Value < 112 || x.Value % 112 == 0)).ToList();
 
         Name = character.StardewNpc.displayName;
         Gender = character.Bio.Gender;
@@ -366,6 +366,9 @@ public class Prompts
         if (total > 1 && !talkingToSpouse && !talkingToRoommate)
         {
             prompt.AppendLine(Util.GetString(Character,"spousePoly", new { Name= Name }));
+        } else if (total >= 1 && (talkingToSpouse || talkingToRoommate))
+        {
+            prompt.AppendLine(Util.GetString(Character,"spousePolyView", new { Name= Name }));
         }
     }
 
@@ -627,16 +630,16 @@ public class Prompts
         switch (wealth)
         {
             case < 1000:
-                prompt.AppendLine(Util.GetString(Character,"wealthPoor", new { wealth= wealth }));
+                prompt.AppendLine(Util.GetString(Character,"wealthPoor", new { wealth= wealth, Name = Name }));
                 break;
             case < 10000:
-                prompt.AppendLine(Util.GetString(Character,"wealthMiddle", new { wealth= wealth }));
+                prompt.AppendLine(Util.GetString(Character,"wealthMiddle", new { wealth= wealth, Name = Name }));
                 break;
             case < 100000:
-                prompt.AppendLine(Util.GetString(Character,"wealthRich", new { wealth= wealth }));
+                prompt.AppendLine(Util.GetString(Character,"wealthRich", new { wealth= wealth, Name = Name }));
                 break;
             default:
-                prompt.AppendLine(Util.GetString(Character,"wealthVeryRich", new { wealth= wealth }));
+                prompt.AppendLine(Util.GetString(Character,"wealthVeryRich", new { wealth= wealth, Name = Name }));
                 break;
         }
     }
@@ -853,7 +856,9 @@ public class Prompts
             prompt.AppendLine($"##{Util.GetString(Character,"eventHistoryHeading")}");
             prompt.AppendLine(Util.GetString(Character,"eventHistoryIntro", new { Name= Name }));
             prompt.AppendLine(Util.GetString(Character,"eventHistorySubheading"));
-            foreach (var eventHistory in fullHistory.OrderBy(x => x.Item1).Take(30))
+            var historySample = fullHistory.OrderBy(x => x.Item1).TakeLast(30);
+            
+            foreach (var eventHistory in historySample)
             {
                 prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {eventHistory.Item2.Format(Name)}");
             }
