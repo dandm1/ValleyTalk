@@ -291,11 +291,6 @@ public class Character
         line = line.EndsWith("#$e#") ? line[..^4] : line;
         // Remove any quotation marks
         line = line.Replace("\"", "");
-        // If the line doesn't end with a sentence end punctuation, add a period
-        if (!line.EndsWith(".") && !line.EndsWith("!") && !line.EndsWith("?"))
-        {
-            line += ".";
-        }
         return line;
     }
 
@@ -354,6 +349,22 @@ public class Character
             //Log.Debug("Long line detected in AI response.  Returning nothing.");
             return string.Empty;
         }
+        if (ModEntry.FixPunctuation)
+        {
+            // For each element, check if the last character before a $ (if any) is a punctuation mark and add a period if not
+            for (int i = 0; i < elements.Length; i++)
+            {
+                var element = elements[i];
+                var dollarIndex = element.IndexOf('$');
+                var upToDollar = dollarIndex == -1 ? element : element[..dollarIndex];
+                upToDollar = upToDollar.Trim();
+                if (upToDollar.Length > 0 && !upToDollar.EndsWith(".") && !upToDollar.EndsWith("!") && !upToDollar.EndsWith("?"))
+                {
+                    elements[i] = upToDollar + "." + (element.Length > upToDollar.Length ? element[dollarIndex..] : "");
+                }
+            }
+            line = string.Join("#", elements);
+        }
         return line;
     }
 
@@ -382,6 +393,11 @@ public class Character
             line = line.Replace("@", farmerName);
         }
         line = line.Trim();
+        // If the line doesn't end with a sentence end punctuation, add a period
+        if (ModEntry.FixPunctuation && !line.EndsWith(".") && !line.EndsWith("!") && !line.EndsWith("?"))
+        {
+            line += ".";
+        }
         if (line.Length > 90)
         {
             //Log.Debug("Long line detected in AI response.  Returning nothing.");

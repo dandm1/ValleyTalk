@@ -10,6 +10,7 @@ using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using System.Net;
 namespace ValleyTalk
 {
     public partial class ModEntry : Mod
@@ -47,22 +48,42 @@ namespace ValleyTalk
             }
         }
 
+        private static string _localeCache = string.Empty;
         private static void GetLocale()
         {
-            if (_locale != null) return;
+            if (_locale != null && SHelper.Translation.Locale == _localeCache) return;
             
             try
             {
                 _locale = CultureInfo.GetCultureInfo(SHelper.Translation.Locale);
+                _localeCache = SHelper.Translation.Locale;
             }
             catch (Exception _)
             {
                 _locale = null;
+                _localeCache = string.Empty;
             }
             if (_locale == null)
             {
                 _locale = CultureInfo.GetCultureInfo("en-US");
+                _localeCache = SHelper.Translation.Locale;
             }   
+        }
+
+        private static bool? _fixPunctuation = null;
+        private static string _localeCacheFixPunctuation = string.Empty;
+        public static bool FixPunctuation
+        {
+            get
+            {
+                if (_fixPunctuation == null || _localeCacheFixPunctuation != SHelper.Translation.Locale)
+                {
+                    var suffixes = LanguageFileSuffixes.ToList();
+                    _fixPunctuation = suffixes.Count == 1 || suffixes.Any(x => x == ".en" || x == ".fr" || x == ".de" || x == ".es" || x == ".tr" || x == ".pt" || x == ".it" || x == ".nl" || x == ".pl" || x == ".id");
+                    _localeCacheFixPunctuation = SHelper.Translation.Locale;
+                }
+                return _fixPunctuation.Value;
+            }
         }
 
         public ModEntry()
