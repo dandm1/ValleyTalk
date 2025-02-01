@@ -291,6 +291,11 @@ public class Character
         line = line.EndsWith("#$e#") ? line[..^4] : line;
         // Remove any quotation marks
         line = line.Replace("\"", "");
+        // If the line doesn't end with a sentence end punctuation, add a period
+        if (!line.EndsWith(".") && !line.EndsWith("!") && !line.EndsWith("?"))
+        {
+            line += ".";
+        }
         return line;
     }
 
