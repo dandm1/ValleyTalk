@@ -597,7 +597,7 @@ public class Prompts
             var remainingLocations = remainderOfSchedule
                     .Select(x => x.Value.targetLocationName)
                     .Distinct()
-                    .Where(x => x != Context.Location && x!= "Town" && x != Character.StardewNpc.DefaultMap && x != destination);
+                    .Where(x => x != Context.Location && x!= "Town" && x != Character.StardewNpc.DefaultMap && x != destination && !string.IsNullOrWhiteSpace(x));
             if (remainingLocations.Any())
             {
                 var displayNames = remainingLocations.Select(x => LoadLocalised(Game1.locationData[x].DisplayName));
@@ -703,6 +703,7 @@ public class Prompts
 
     private static string LoadLocalised(string thisName)
     {
+        if (string.IsNullOrWhiteSpace(thisName)) return string.Empty;
         if (thisName.StartsWith("[LocalizedText ", StringComparison.InvariantCultureIgnoreCase))
         {
             thisName = thisName.Substring(15, thisName.Length - 16);
