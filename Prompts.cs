@@ -8,6 +8,7 @@ using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
 using System.ComponentModel;
+using StardewValley.Network;
 
 namespace StardewDialogue;
 
@@ -43,15 +44,10 @@ public class Prompts
 
     private static void LoadStardewSummary()
     {
-        var gameSummaryDict = Util.ReadLocalisedJson<Dictionary<string,string>>("assets/bio/Stardew","txt");
-        _stardewSummary = gameSummaryDict["Text"];
-        var gameSummaryTranslations = Util.GetString("gameSummaryTranslations");
-        if (!string.IsNullOrWhiteSpace(gameSummaryTranslations))
-        {
-            _stardewSummary += $"\n{gameSummaryTranslations}";
-        }
-    }
+        var gameSummaryBuilder = new GameSummaryBuilder();
+        _stardewSummary = gameSummaryBuilder.Build();
 
+    }
 
     [JsonIgnore]
     static string _stardewSummary;
@@ -1048,7 +1044,7 @@ public class Prompts
 
         return thisName;
     }
-    
+
     private IEnumerable<DialogueValue> SelectDialogueSample()
     {
         // Pick 20 most relevant dialogue entries
