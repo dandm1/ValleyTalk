@@ -11,9 +11,6 @@ using Polly.Retry;
 using System.Threading.Tasks;
 using Serilog;
 using Microsoft.Xna.Framework.Content;
-using StardewModdingAPI.Events;
-using System.Text;
-using Microsoft.VisualBasic;
 
 namespace StardewDialogue;
 
@@ -240,6 +237,10 @@ public class Character
                 Log.Debug("--------------------------------------------------");
             }
         });
+        if (!string.IsNullOrWhiteSpace(prompts.GiveGift) && results.Length > 0)
+        {
+            results[0] += $"[prompts.GiveGift]";
+        }
         return results;
     }
 

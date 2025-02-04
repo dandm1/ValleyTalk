@@ -129,7 +129,10 @@ public interface IDialogueValue
     IEnumerable<DialogueValue> AllValues { get; }
 }
 
-public interface IDialogueElement{}
+public interface IDialogueElement
+{
+    IEnumerable<string> GiftOptions { get; }
+}
 
 public class RandomisedDialogue : IDialogueValue
 {
@@ -167,6 +170,7 @@ public class RandomisedDialogue : IDialogueValue
 
 public class DialogueLine : IDialogueElement
 {
+    public IEnumerable<string> GiftOptions { get; private set; } = new List<string>();
     public DialogueLine(string element)
     {
         if (element.Contains('$'))
@@ -179,7 +183,7 @@ public class DialogueLine : IDialogueElement
                 return;
             }
             var command = element.Substring(index, 1);
-            var remainderOfElement =  element.Substring(0, index - 1) + element.Substring(index+1);
+            var remainderOfElement = element.Substring(0, index - 1) + element.Substring(index + 1);
             Value = remainderOfElement;
             Command = command;
         }
@@ -188,12 +192,30 @@ public class DialogueLine : IDialogueElement
             Value = element;
             Command = string.Empty;
         }
+        GetGifts();
+    }
+
+    private void GetGifts()
+    {
+        // Check for any gift options (denoted in square brackets split by spaces)
+        var giftIndex = Value.IndexOf('[');
+        if (giftIndex != -1)
+        {
+            var endGiftIndex = Value.IndexOf(']');
+            if (endGiftIndex != -1)
+            {
+                var giftOptions = Value.Substring(giftIndex + 1, endGiftIndex - giftIndex - 1).Split(' ');
+                GiftOptions = giftOptions;
+                Value = Value.Substring(0, giftIndex) + Value.Substring(endGiftIndex + 1);
+            }
+        }
     }
 
     public DialogueLine(string command, string value)
     {
         Command = command;
         Value = value;
+        GetGifts();
     }
 
     public string Command { get; set; }
@@ -208,6 +230,7 @@ public class DialogueLineGender : IDialogueElement
         Female = new DialogueLine(female);
     }
 
+    public IEnumerable<string> GiftOptions => Male.GiftOptions.Concat(Female.GiftOptions).Distinct();
     public DialogueLine Male { get; }
     public DialogueLine Female { get; }
 }
@@ -220,6 +243,8 @@ public class DialogueCommand : IDialogueElement
     }
 
     public string Value { get; set; }
+
+    public IEnumerable<string> GiftOptions => new List<string>();
 }
 
 public sealed class DialogueValueJsonConverter : JsonConverter<DialogueValue>

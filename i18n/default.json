@@ -76,6 +76,7 @@
   "giftMustIncludeReaction": "The dialogue should include {{Name}}'s reaction to the gift.",
   "giftBirthday": "As it is {{Name}}'s birthday, {{Name}} takes the gift to be a birthday present and evidence that the farmer remembered. The birthday should be mentioned in the reactions and lead to stronger feelings about gifts that {{Name}} loves or hates.",
   "giftOutro": "The dialogue should be brief, and not ask questions that expect a response from the farmer.",
+  "giftGiving": "{{Name}} is giving the farmer a {{GiftName}} as an unexpected gift. The dialogue must give context that explains why {{Name}} is giving the gift.",
   "specialDatesSpring1": "It is the first day of the year, which is also the first day of spring.",
   "specialDatesSpring12": "It is the day before the egg festival.",
   "specialDatesSpring23": "It is the day before the flower dance.",

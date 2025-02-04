@@ -102,6 +102,10 @@ public class Prompts
     
     [JsonIgnore]
     List<KeyValuePair<string,int>> previousActivites;
+    [JsonIgnore]
+    string giveGift;
+    [JsonIgnore]
+    public string GiveGift => giveGift;
 
     public Prompts(DialogueContext context, Character character)
     {
@@ -113,11 +117,32 @@ public class Prompts
 
         dialogueSample = SelectDialogueSample();
         exactLine = SelectExactDialogue();
+        giveGift = SelectGiftGiven();
         allPreviousActivities = Game1.getPlayerOrEventFarmer().previousActiveDialogueEvents.First();
         previousActivites = allPreviousActivities.Where(x => HistoryEvents.ContainsKey(x.Key) && (x.Value < 112 || x.Value % 112 == 0)).ToList();
 
         Name = character.StardewNpc.displayName;
         Gender = character.Bio.Gender;
+    }
+
+    private string SelectGiftGiven()
+    {
+        // Check if Character is the players spouse.  If not, return null.  If so, still 80% chance return null.
+        if (!Game1.getPlayerOrEventFarmer().friendshipData.TryGetValue(Character.Name, out Friendship friendship) || !friendship.IsMarried())
+        {
+            return null;
+        }
+        if (Game1.random.NextDouble() < 0.8)
+        {
+            return null;
+        }
+        // Get the gift the spouse is giving the Farmer
+        var options = Character.DialogueData.AllEntries.SelectMany(x => x.Value.AllValues).SelectMany(x => x.Elements).SelectMany(x => x.GiftOptions).ToList();
+        if (options.Count == 0)
+        {
+            return null;
+        }
+        return options[Game1.random.Next(options.Count)];
     }
 
     private string GetSystemPrompt()
@@ -426,8 +451,8 @@ public class Prompts
 
     private void GetGift(StringBuilder prompt)
     {
-        if (Context.Accept == null) return;
-
+        if (Context.Accept != null)
+        {
         var giftName = Context.Accept.DisplayName;
         prompt.AppendLine(Util.GetString(Character,"giftIntro", new { Name= Name, giftName= giftName }));
         switch (Context.GiftTaste)
@@ -455,6 +480,14 @@ public class Prompts
             prompt.AppendLine(Util.GetString(Character,"giftBirthday", new { Name= Name }));
         }
         prompt.AppendLine(Util.GetString(Character,"giftOutro"));
+        }
+        else if (giveGift != null)
+        {
+            var giftDetails = Game1.objectData[giveGift];
+            var giftName = giftDetails.DisplayName;
+            giftName = LoadLocalised(giftName);
+            prompt.AppendLine(Util.GetString(Character,"giftGiving", new { Name= Name, GiftName= giftName }));
+        }
     }
 
     private void GetSpecialDatesAndBirthday(StringBuilder prompt)
