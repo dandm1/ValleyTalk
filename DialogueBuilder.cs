@@ -329,7 +329,7 @@ namespace ValleyTalk
             {
                 if (retainResult)
                 {
-                    if (_patchDate != Game1.Date.TotalDays)
+                    if (_patchDate != Game1.Date.TotalDays || _patchCharacters == null)
                     {
                         _patchDate = Game1.Date.TotalDays;
                         _patchCharacters = new Dictionary<string, bool>();
