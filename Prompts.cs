@@ -734,22 +734,7 @@ public class Prompts
         }
     }
 
-    private static string LoadLocalised(string thisName)
-    {
-        if (string.IsNullOrWhiteSpace(thisName)) return string.Empty;
-        if (thisName.StartsWith("[LocalizedText ", StringComparison.InvariantCultureIgnoreCase))
-        {
-            thisName = thisName.Substring(15, thisName.Length - 16);
-            var translation = Game1.content.LoadString(thisName);
 
-            if (translation != null)
-            {
-                thisName = translation;
-            }
-        }
-
-        return thisName;
-    }
 
     private void GetFarmAnimals(StringBuilder prompt)
     {
@@ -1047,6 +1032,23 @@ public class Prompts
         return animalsOnFarm;
     }
 
+    private static string LoadLocalised(string thisName)
+    {
+        if (string.IsNullOrWhiteSpace(thisName)) return string.Empty;
+        if (thisName.StartsWith("[LocalizedText ", StringComparison.InvariantCultureIgnoreCase))
+        {
+            thisName = thisName.Substring(15, thisName.Length - 16);
+            var translation = Game1.content.LoadString(thisName);
+
+            if (translation != null)
+            {
+                thisName = translation;
+            }
+        }
+
+        return thisName;
+    }
+    
     private IEnumerable<DialogueValue> SelectDialogueSample()
     {
         // Pick 20 most relevant dialogue entries

@@ -1,5 +1,4 @@
 using StardewValley;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,9 +30,14 @@ namespace ValleyTalk
         {
             if (npc == null) return string.Empty;
 
+            if (npc.Bio.PromptOverrides.ContainsKey(key))
+            {
+                return npc.Bio.PromptOverrides[key];
+            }
             if (npc.Bio.IsMale ?? false)
             {
                 var result = _translationHelper.Get(key+".MaleNpc", tokens);
+                
                 if (result.HasValue())
                 {
                     return result;

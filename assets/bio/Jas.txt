@@ -5,5 +5,10 @@
 "Unique": "looking scared",
 "Preoccupations": [ "beauty", "flowers", "butterflies", "her aunt Marnie", "Shane", "Leah", "chickens", "cows", "her parents", "skipping rope", "the travelling cart", "Cindersap Forest", "wild food", "Miss Penny" ],
 "Dialogue" : {},
-"HomeLocationBed": false
+"HomeLocationBed": false,
+"PromptOverrides": {
+  "nonSpouseFriendshipFirstConversation": "This is the first time Jas has spoken to the farmer. Jas is very shy around strangers and has been told that strangers are scary. Jas will likely respond with no more than a few rehearsed words.",
+  "nonSpouseFreindshipStrangers": "Jas and the farmer are strangers, though they have spoken before. Jas is very shy around strangers and has been told that strangers are scary. Jas will likely respond with no more than a few rehearsed words.",
+  "nonSpouseFriendshipAcquaintances": "Jas and the farmer know each other by sight, but are fundamentally strangers. Jas is very shy around strangers and but is starting to be comfortable around the farmer and has seen Marnie talking to the farmer. Jas's response will be shy, but a little engaged."
+}
 }
