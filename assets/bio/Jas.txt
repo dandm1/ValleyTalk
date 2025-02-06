@@ -7,8 +7,9 @@
 "Dialogue" : {},
 "HomeLocationBed": false,
 "PromptOverrides": {
-  "nonSpouseFriendshipFirstConversation": "This is the first time Jas has spoken to the farmer. Jas is very shy around strangers and has been told that strangers are scary. Jas will likely respond with no more than a few rehearsed words.",
-  "nonSpouseFreindshipStrangers": "Jas and the farmer are strangers, though they have spoken before. Jas is very shy around strangers and has been told that strangers are scary. Jas will likely respond with no more than a few rehearsed words.",
-  "nonSpouseFriendshipAcquaintances": "Jas and the farmer know each other by sight, but are fundamentally strangers. Jas is very shy around strangers and but is starting to be comfortable around the farmer and has seen Marnie talking to the farmer. Jas's response will be shy, but a little engaged."
+  "nonSpouseFriendshipFirstConversation": "This is the first time Jas has spoken to the farmer. Jas is very shy around strangers and has been told that strangers are scary. Jas must only respond with a few words, which sound nervous.",
+  "nonSpouseFreindshipStrangers": "Jas and the farmer are strangers, though they have spoken before. Jas is very shy around strangers and has been told that strangers are scary. Jas must only respond with a few words, which sound nervous.",
+  "nonSpouseFriendshipAcquaintances": "Jas and the farmer know each other by sight, but are fundamentally strangers. Jas is very shy around strangers and but is starting to be comfortable around the farmer and has seen Marnie talking to the farmer. Jas's response will be shy, but a little engaged.",
+  "instructionsBreaks": "If the farmer is not friends with Jas, the line should be terse and shy, consisting of just a few words. If Jas is more comfortable with the farmer, the line may be presented with breaks, using #$b# as a screen divider or using #$e# as a divider for a more significant break. When Jas is friendly with the farmer there may be up to 24 words between each break, but when she is timid there should be less than 10 words total. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines."
 }
 }

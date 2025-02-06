@@ -11,8 +11,9 @@
 "Dialogue" : {},
 "HomeLocationBed": false,
 "PromptOverrides": {
-  "nonSpouseFriendshipFirstConversation": "This is the first time Shane has spoken to the farmer. Shane is depressed and has no interest in meeting anyoen new.  Shane does not care about being rude and just wants the conversation to end.",
-  "nonSpouseFreindshipStrangers": "Shane and the farmer are strangers, though they have spoken before. Shane does not want to get to know the farmer and will respond rudely and tersely to end the conversation.",
-  "nonSpouseFriendshipAcquaintances": "Shane and the farmer know each other by sight, but are fundamentally strangers. Shane is beginning to realise that the farmer won't ignore him just because his responses are terse and rude, but still doesn't want to talk to the farmer."
+  "nonSpouseFriendshipFirstConversation": "This is the first time Shane has spoken to the farmer. Shane is depressed and has no interest in meeting anyone new. Shane does not care about being rude and just wants the conversation to end. The dialogue should be extremely terse and consist of only a few words, even if that makes it rude, and should not invite a response from the farmer..",
+  "nonSpouseFreindshipStrangers": "Shane and the farmer are strangers, though they have spoken before. Shane does not want to get to know the farmer and will respond rudely and tersely to end the conversation. The dialogue should be extremely terse and short, even if that makes it rude,  and should not invite a response from the farmer..",
+  "nonSpouseFriendshipAcquaintances": "Shane and the farmer know each other by sight, but are fundamentally strangers. Shane is beginning to realise that the farmer won't ignore him just because his responses are terse and rude, but still doesn't want to talk to the farmer. The dialogue should be terse and reluctant and should not invite a response from the farmer.",
+  "instructionsBreaks": "If the farmer is not friends with Shane, the line should be terse and unfriendly, consisting of just a few words. If the player is more familiar with Shane, the line may be presented with breaks, using #$b# as a screen divider or using #$e# as a divider for a more significant break. When Shane is friendly with the farmer there may be up to 24 words between each break, but when not friendly there should be less than 10 words total. Do not put break signifiers on the start or end of the line. Do not signify breaks by starting new lines."
 }
 }

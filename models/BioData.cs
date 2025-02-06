@@ -84,5 +84,5 @@ public class BioData
     public string GenderPronoun => (isMale ?? false) ? him : her;
     public string GenderPossessive => (isMale ?? false) ? his : hers;
 
-    public Dictionary<string,string> PromptOverrides { get; internal set; } = new Dictionary<string, string>();
+    public Dictionary<string,string> PromptOverrides { get; set; } = new Dictionary<string, string>();
 }

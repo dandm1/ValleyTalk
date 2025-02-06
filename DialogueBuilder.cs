@@ -75,6 +75,7 @@ namespace ValleyTalk
         {
             var character = GetCharacter(instance);
             DialogueContext context = LastContext;
+            context.CanGiveGift = false;
             var fullHistory = context.ChatHistory.ToList();
             fullHistory.AddRange(conversation);
             context.ChatHistory = fullHistory.ToArray();

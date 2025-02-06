@@ -478,7 +478,7 @@ public class Prompts
         }
         prompt.AppendLine(Util.GetString(Character,"giftOutro"));
         }
-        else if (giveGift != null)
+        else if (!string.IsNullOrEmpty(giveGift))
         {
             var giftDetails = Game1.objectData[giveGift];
             var giftName = giftDetails.DisplayName;
@@ -584,8 +584,7 @@ public class Prompts
         }
         else if (Context.Location != null)
         {
-            Game1.locationData.TryGetValue(Context.Location, out StardewValley.GameData.Locations.LocationData locationData);
-            var locationName = locationData?.DisplayName ?? string.Empty;
+            var locationName = GetLocationDisplayNameIfAvailable(Context.Location);
             prompt.Append(Context.Location switch
             {
                 "Town" => Util.GetString(Character,"locationTown", new { Name= Name }),
@@ -616,7 +615,7 @@ public class Prompts
         if (Character.StardewNpc.DirectionsToNewLocation != null && Context.Location != Character.StardewNpc.DirectionsToNewLocation.targetLocationName)
         {
             destination = Character.StardewNpc.DirectionsToNewLocation.targetLocationName;
-            var destinationName = LoadLocalised(Game1.locationData[destination].DisplayName);
+            var destinationName = GetLocationDisplayNameIfAvailable(destination);
             prompt.AppendLine(Util.GetString(Character,"locationTravelling", new { Name= Name, destination= destinationName }));
         }
 
@@ -630,10 +629,19 @@ public class Prompts
                     .Where(x => x != Context.Location && x!= "Town" && x != Character.StardewNpc.DefaultMap && x != destination && !string.IsNullOrWhiteSpace(x));
             if (remainingLocations.Any())
             {
-                var displayNames = remainingLocations.Select(x => LoadLocalised(Game1.locationData[x].DisplayName));
+                var displayNames = remainingLocations.Select(x => GetLocationDisplayNameIfAvailable(x));
                 prompt.AppendLine(Util.GetString(Character,"locationFuturePlans", new { Name= Name, Locations= string.Join(", ", displayNames) }));
             }
         }
+    }
+
+    private string GetLocationDisplayNameIfAvailable(string location)
+    {
+        if (Game1.locationData.TryGetValue(location, out StardewValley.GameData.Locations.LocationData locationData))
+        {
+            return LoadLocalised(locationData.DisplayName);
+        }
+        return location;
     }
 
     private void GetMarriageFeelings(StringBuilder prompt)
