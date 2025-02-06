@@ -480,9 +480,12 @@ public class Prompts
         }
         else if (!string.IsNullOrEmpty(giveGift))
         {
-            var giftDetails = Game1.objectData[giveGift];
-            var giftName = giftDetails.DisplayName;
-            giftName = LoadLocalised(giftName);
+            string giftName = giveGift;
+            if (Game1.objectData.ContainsKey(giveGift))
+            {
+                giftName = Game1.objectData[giveGift].DisplayName;
+                giftName = LoadLocalised(giftName);
+            }
             prompt.AppendLine(Util.GetString(Character,"giftGiving", new { Name= Name, GiftName= giftName }));
         }
     }
@@ -717,11 +720,14 @@ public class Prompts
             prompt.AppendLine(Util.GetString(Character,"farmCropsIntro"));
             foreach (var crop in allCrops.GroupBy(x => x.indexOfHarvest.Value))
             {
-                var thisDetails = cropData[crop.Key];
-                var thisName = thisDetails.DisplayName;
-                thisName = LoadLocalised(thisName);
-
-                prompt.Append($"- {crop.Count()} {thisName}");
+                string thisName = crop.Key;
+                if (cropData.TryGetValue(crop.Key, out var thisDetails))
+                {
+                    thisName = thisDetails.DisplayName;
+                    thisName = LoadLocalised(thisName);
+                }
+                prompt.AppendLine($"- {crop.Count()} {thisName}");
+                
                 var ripe = crop.Count(x => x.fullyGrown.Value);
                 if (ripe > 0)
                 {
