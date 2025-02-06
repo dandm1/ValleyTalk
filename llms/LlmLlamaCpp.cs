@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Serilog;
 
 namespace StardewDialogue;
@@ -30,7 +31,7 @@ internal class LlmLlamaCpp : Llm
             .Replace("{response_start}", responseStart);
     }
 
-    internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
 
         promptString = gameCacheString + npcCacheString + promptString;
@@ -62,9 +63,9 @@ internal class LlmLlamaCpp : Llm
             try
             {
                 retry=false;
-                var response = client.PostAsync(url, json).Result;
+                var response = await client.PostAsync(url, json);
                 // Return the 'content' element of the response json
-                var responseString = response.Content.ReadAsStringAsync().Result;
+                var responseString = await response.Content.ReadAsStringAsync();
                 var responseJson = JsonDocument.Parse(responseString);
                 
                 var token_stats = responseJson.RootElement.GetProperty("timings");

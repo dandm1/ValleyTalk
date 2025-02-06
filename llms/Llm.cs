@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading;
+using System.Threading.Tasks;
 using ValleyTalk;
 
 namespace StardewDialogue;
@@ -23,12 +23,12 @@ internal abstract class Llm
         };
         Llm instance = CreateInstance(llmType, paramsDict);
         Instance = instance;
-        DialogueBuilder.Instance.LlmDisabled = CheckConnection(apiKey, modelName);
+        DialogueBuilder.Instance.LlmDisabled = CheckConnection(apiKey, modelName).Result;
     }
 
-    private static bool CheckConnection(string apiKey, string modelName)
+    private static async Task<bool> CheckConnection(string apiKey, string modelName)
     {
-        var response = Instance.RunInference("You are performing LLM connection testing", "Please just ", "respond with ", "'Connection successful'");
+        var response = await Instance.RunInference("You are performing LLM connection testing", "Please just ", "respond with ", "'Connection successful'");
         if (response.Length < 5)
         {
             ModEntry.SMonitor.Log($"Failed to connect to the model. ", StardewModdingAPI.LogLevel.Error);
@@ -108,7 +108,7 @@ internal abstract class Llm
     public abstract string ExtraInstructions { get; }
 
     public string TokenStats => $"Prompt: {_totalPrompts} tokens in {_totalPromptTime}ms, Inference: {_totalInference} tokens in {_totalInferenceTime}ms";
-    internal abstract string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="");
+    internal abstract Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="");
     
     internal abstract Dictionary<string,double>[] RunInferenceProbabilities(string fullPrompt,int n_predict = 1);
 

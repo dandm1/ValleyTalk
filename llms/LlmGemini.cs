@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Serilog;
 using ValleyTalk;
 
@@ -57,7 +58,7 @@ internal class LlmGemini : Llm, IGetModelNames
         }
     }
 
-    internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var useContext = string.Empty;
 
@@ -95,9 +96,9 @@ internal class LlmGemini : Llm, IGetModelNames
         {
             try
             {
-                var response = client.PostAsync(fullUrl, json).Result;
+                var response = await client.PostAsync(fullUrl, json);
                 // Return the 'content' element of the response json
-                var responseString = response.Content.ReadAsStringAsync().Result;
+                var responseString = await response.Content.ReadAsStringAsync();
                 var responseJson = JsonDocument.Parse(responseString);
                 
                 if (responseJson == null)

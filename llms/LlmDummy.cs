@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StardewDialogue;
 
@@ -15,7 +16,7 @@ internal class LlmDummy : Llm
 
     public override bool IsHighlySensoredModel => true;
 
-    internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         if (rand.NextDouble()<0.5)
         {

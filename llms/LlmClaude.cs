@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading;
 using ValleyTalk;
 using Serilog;
+using System.Threading.Tasks;
 
 namespace StardewDialogue;
 
@@ -37,7 +38,7 @@ internal class LlmClaude : Llm, IGetModelNames
 
     public override bool IsHighlySensoredModel => true;
 
-    internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var promptCached = gameCacheString;
         var inputString = JsonSerializer.Serialize(new
@@ -90,9 +91,9 @@ internal class LlmClaude : Llm, IGetModelNames
                 request.Headers.Add("x-api-key", apiKey);
                 request.Headers.Add("anthropic-version", "2023-06-01");
                 request.Headers.Add("anthropic-beta", "prompt-caching-2024-07-31");
-                var response = client.SendAsync(request).Result;
+                var response = await client.SendAsync(request);
                 // Return the 'content' element of the response json
-                var responseString = response.Content.ReadAsStringAsync().Result;
+                var responseString = await response.Content.ReadAsStringAsync();
                 var responseJson = JsonDocument.Parse(responseString);
                 
                 if (responseJson == null)

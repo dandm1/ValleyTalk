@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Serilog;
 
 namespace StardewDialogue;
@@ -19,7 +20,7 @@ internal abstract class LlmOpenAiBase : Llm
         public string content { get; set; }
     }
 
-    internal override string RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var inputString = JsonSerializer.Serialize(new
             {
@@ -60,7 +61,7 @@ internal abstract class LlmOpenAiBase : Llm
                 var request = new HttpRequestMessage(HttpMethod.Post, fullUrl);
                 request.Content = json;
                 request.Headers.Add("Authorization", $"Bearer {apiKey}");
-                var response = client.SendAsync(request).Result;
+                var response = await client.SendAsync(request);
                 // Return the 'content' element of the response json
                 var responseString = response.Content.ReadAsStringAsync().Result;
                 var responseJson = JsonDocument.Parse(responseString);

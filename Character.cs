@@ -198,14 +198,14 @@ public class Character
         // Acquire a ResilienceContext from the pool
         var rc = ResilienceContextPool.Shared.Get();
 
-        var outcome = await pipeline.ExecuteOutcomeAsync<string[],string>((rc,state) =>
+        var outcome = await pipeline.ExecuteOutcomeAsync<string[],string>(async (rc,state) =>
         {
             retryCount++;
             string[] resultsInternal;
             string resultString = string.Empty;
             try
             {
-                resultString = Llm.Instance.RunInference
+                resultString = await Llm.Instance.RunInference
                         (
                             prompts.System, 
                             prompts.GameConstantContext, 
@@ -220,12 +220,12 @@ public class Character
             catch (Exception ex)
             {
                 Log.Error(ex, $"Error generating AI response for {Name}");
-                return new ValueTask<Outcome<string[]>>(Outcome.FromException<string[]>(ex));
+                return Outcome.FromException<string[]>(ex);
             }
             if (resultsInternal.Length == 0)
             {
                 //Force a retry in the pipeline
-                return new ValueTask<Outcome<string[]>>(Outcome.FromException<string[]>(new Exception($"No valid results returned from AI. AI returned \"{resultString}\".")));
+                return Outcome.FromException<string[]>(new Exception($"No valid results returned from AI. AI returned \"{resultString}\"."));
             }
             if (ModEntry.Config.Debug)
             {
@@ -256,7 +256,7 @@ public class Character
                 }
                 Log.Debug("--------------------------------------------------");
             }
-            return new ValueTask<Outcome<string[]>>(Outcome.FromResult(resultsInternal));
+            return Outcome.FromResult(resultsInternal);
         },rc,"basic-state");
         if (outcome.Exception != null)
         {
