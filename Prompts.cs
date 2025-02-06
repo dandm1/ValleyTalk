@@ -114,7 +114,7 @@ public class Prompts
 
         dialogueSample = SelectDialogueSample();
         exactLine = SelectExactDialogue();
-        giveGift = SelectGiftGiven();
+        giveGift = context.CanGiveGift ? SelectGiftGiven() : string.Empty;
         allPreviousActivities = Game1.getPlayerOrEventFarmer().previousActiveDialogueEvents.First();
         previousActivites = allPreviousActivities.Where(x => HistoryEvents.ContainsKey(x.Key) && (x.Value < 112 || x.Value % 112 == 0)).ToList();
 

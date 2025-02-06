@@ -111,6 +111,7 @@ namespace ValleyTalk
             {
                 context.SpouseAct = spouseAction;
             }
+            context.CanGiveGift = string.IsNullOrWhiteSpace(originalLine);
             LastContext = context;
             context.ScheduleLine = originalLine;
             var theLine = await character.CreateBasicDialogue(context);

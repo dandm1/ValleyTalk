@@ -108,7 +108,10 @@ public class Character
                     var marriedDialogue = manager.Load<Dictionary<string, string>>(path);
                     if (marriedDialogue != null)
                     {
-                        canonDialogue = canonDialogue.Concat(marriedDialogue).ToDictionary(x => x.Key, x => x.Value);
+                        foreach (var dialogue in marriedDialogue)
+                        {
+                            canonDialogue.Add($"M_{dialogue.Key}", dialogue.Value);
+                        }
                         break;
                     }
                 }
@@ -198,7 +201,7 @@ public class Character
         // Acquire a ResilienceContext from the pool
         var rc = ResilienceContextPool.Shared.Get();
 
-        var outcome = await pipeline.ExecuteOutcomeAsync<string[],string>(async (rc,state) =>
+        var outcome = await pipeline.ExecuteOutcomeAsync(async (rc,state) =>
         {
             retryCount++;
             string[] resultsInternal;
@@ -269,7 +272,7 @@ public class Character
         }
         if (!string.IsNullOrWhiteSpace(prompts.GiveGift) && results.Length > 0)
         {
-            results[0] += $"[prompts.GiveGift]";
+            results[0] += $"[{prompts.GiveGift}]";
         }
         return results;
     }
