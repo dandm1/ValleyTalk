@@ -173,7 +173,7 @@ public class Character
         }
     }
 
-    public string[] CreateBasicDialogue(DialogueContext context)
+    public async Task<string[]> CreateBasicDialogue(DialogueContext context)
     {
         string[] results = Array.Empty<string>();
         var prompts = new Prompts(context,this);
@@ -195,17 +195,37 @@ public class Character
         int retryCount = 0;
         var commandPrompt = prompts.Command;
 
-        pipeline.Execute(() =>
+        // Acquire a ResilienceContext from the pool
+        var rc = ResilienceContextPool.Shared.Get();
+
+        var outcome = await pipeline.ExecuteOutcomeAsync<string[],string>((rc,state) =>
         {
             retryCount++;
-            var resultString = Llm.Instance.RunInference(prompts.System, prompts.GameConstantContext, prompts.NpcConstantContext, $"{prompts.CorePrompt}{commandPrompt}{prompts.Instructions}", prompts.ResponseStart);
-            // Apply relaxed validation if this is the second retry
-            
-            results = ProcessLines(resultString, retryCount > 2).ToArray();
-            if (results.Length == 0)
+            string[] resultsInternal;
+            string resultString = string.Empty;
+            try
+            {
+                resultString = Llm.Instance.RunInference
+                        (
+                            prompts.System, 
+                            prompts.GameConstantContext, 
+                            prompts.NpcConstantContext, 
+                            $"{prompts.CorePrompt}{commandPrompt}{prompts.Instructions}", 
+                            prompts.ResponseStart
+                        );
+
+                // Apply relaxed validation if this is the second retry
+                resultsInternal = ProcessLines(resultString, retryCount > 2).ToArray();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, $"Error generating AI response for {Name}");
+                return new ValueTask<Outcome<string[]>>(Outcome.FromException<string[]>(ex));
+            }
+            if (resultsInternal.Length == 0)
             {
                 //Force a retry in the pipeline
-                throw new InvalidDataException("No valid lines returned from AI");
+                return new ValueTask<Outcome<string[]>>(Outcome.FromException<string[]>(new Exception($"No valid results returned from AI. AI returned \"{resultString}\".")));
             }
             if (ModEntry.Config.Debug)
             {
@@ -226,17 +246,27 @@ public class Character
                 {
                     Log.Debug($"Original Line: {context.ScheduleLine}");
                 }
-                Log.Debug($"Results: {results[0]}");
-                if (results.Length > 1)
+                Log.Debug($"Results: {resultsInternal[0]}");
+                if (resultsInternal.Length > 1)
                 {
-                    foreach (var result in results.Skip(1))
+                    foreach (var result in resultsInternal.Skip(1))
                     {
                         Log.Debug($"Response: {result}");
                     }
                 }
                 Log.Debug("--------------------------------------------------");
             }
-        });
+            return new ValueTask<Outcome<string[]>>(Outcome.FromResult(resultsInternal));
+        },rc,"basic-state");
+        if (outcome.Exception != null)
+        {
+            ModEntry.SMonitor.Log($"Error generating AI response for {Name}: {outcome.Exception}",StardewModdingAPI.LogLevel.Error);
+            results = new string[] { "..." };
+        }
+        else
+        {
+            results = outcome.Result;
+        }
         if (!string.IsNullOrWhiteSpace(prompts.GiveGift) && results.Length > 0)
         {
             results[0] += $"[prompts.GiveGift]";

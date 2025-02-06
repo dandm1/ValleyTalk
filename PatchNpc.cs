@@ -15,7 +15,10 @@ namespace ValleyTalk
             {
                 return true;
             }
-            var dialogue = DialogueBuilder.Instance.GenerateGift(__instance, gift, taste);
+            var dialogueTask = DialogueBuilder.Instance.GenerateGift(__instance, gift, taste);
+
+            var dialogue = dialogueTask.Result;
+
             if (dialogue != null)
             {
                 __result = dialogue;
@@ -69,7 +72,8 @@ namespace ValleyTalk
                         allLines = allLines.Skip(1).ToList();
                         originalLine = string.Join(" ", allLines.Select(x => x.Text));
                     }
-                    var newDialogue = DialogueBuilder.Instance.Generate(__instance, "default", originalLine);
+                    var newDialogueTask = DialogueBuilder.Instance.Generate(__instance, "default", originalLine);
+                    var newDialogue = newDialogueTask.Result;
                     if (newDialogue != null)
                     {
                         __result.Push(newDialogue);

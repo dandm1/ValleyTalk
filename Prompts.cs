@@ -9,6 +9,7 @@ using StardewValley;
 using StardewValley.GameData.Characters;
 using System.ComponentModel;
 using StardewValley.Network;
+using StardewValley.Objects;
 
 namespace StardewDialogue;
 
@@ -1019,6 +1020,7 @@ public class Prompts
     private IEnumerable<StardewValley.Buildings.Building> GetBuildings()
     {
         var excludeTypes = new string[] { "Shipping Bin", "Pet Bowl", "Farmhouse" };
+        
         return Game1.getFarm().buildings.Where(x => !excludeTypes.Contains(x.buildingType.Value));
     }
 

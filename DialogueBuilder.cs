@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Runtime;
 using System.Text;
+using System.Threading.Tasks;
 using StardewDialogue;
 using StardewModdingAPI;
 using StardewValley;
@@ -70,7 +71,7 @@ namespace ValleyTalk
             return _characters[instance.Name];
         }
 
-        internal string GenerateResponse(NPC instance, string[] conversation)
+        internal async Task<string> GenerateResponse(NPC instance, string[] conversation)
         {
             var character = GetCharacter(instance);
             DialogueContext context = LastContext;
@@ -78,26 +79,26 @@ namespace ValleyTalk
             fullHistory.AddRange(conversation);
             context.ChatHistory = fullHistory.ToArray();
             LastContext = context;
-            var theLine = character.CreateBasicDialogue(context);
+            var theLine = await character.CreateBasicDialogue(context);
             string formattedLine = FormatLine(theLine);
             //return formattedLine;
             return "skip#"+formattedLine;
         }
 
-        internal Dialogue GenerateGift(NPC instance, StardewValley.Object gift, int taste)
+        internal async Task<Dialogue> GenerateGift(NPC instance, StardewValley.Object gift, int taste)
         {
             var character = GetCharacter(instance);
             DialogueContext context = GetBasicContext(instance);
             context.Accept = gift;
             context.GiftTaste = taste;
             LastContext = context;
-            var theLine = character.CreateBasicDialogue(context);
+            var theLine = await character.CreateBasicDialogue(context);
             string formattedLine = FormatLine(theLine);
             var newDialogue = new Dialogue(instance, $"Accept_{gift.Name}", formattedLine);
             return newDialogue;
         }
 
-        internal Dialogue Generate(NPC instance, string dialogueKey, string originalLine = "")
+        internal async Task<Dialogue> Generate(NPC instance, string dialogueKey, string originalLine = "")
         {
             var character = GetCharacter(instance);
             DialogueContext context = GetBasicContext(instance);
@@ -112,7 +113,7 @@ namespace ValleyTalk
             }
             LastContext = context;
             context.ScheduleLine = originalLine;
-            var theLine = character.CreateBasicDialogue(context);
+            var theLine = await character.CreateBasicDialogue(context);
             string formattedLine = FormatLine(theLine);
             return new Dialogue(instance, dialogueKey, formattedLine);
         }

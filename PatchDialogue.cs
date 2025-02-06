@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using StardewValley;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ValleyTalk
 {
@@ -13,7 +14,10 @@ namespace ValleyTalk
             {
                 return true;
             }
-            var result = DialogueBuilder.Instance.Generate(n, __instance.DialogueKey);
+            var resultTask = DialogueBuilder.Instance.Generate(n, __instance.DialogueKey);
+
+            var result = resultTask.Result;
+            
             if (result != null)
             {
                 __result = result;
@@ -97,7 +101,9 @@ namespace ValleyTalk
             var previous = DialogueBuilder.Instance.LastContext.ChatHistory;
             var dialogueStringIEnum = dialogueStrings.Where(x => !previous.Any(y => y.Contains(x.Text)) && x.Text != "skip").Select(x => x.Text);
             var dialogueStringConcat = string.Join(" ", dialogueStringIEnum);
-            var newDialogue = DialogueBuilder.Instance.GenerateResponse(__instance.speaker, new [] { dialogueStringConcat,response.responseText}.ToArray());
+            var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(__instance.speaker, new [] { dialogueStringConcat,response.responseText}.ToArray());
+
+            var newDialogue = newDialogueTask.Result;
 
             if (!newDialogue.Contains("$q"))
             {
