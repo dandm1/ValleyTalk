@@ -34,29 +34,34 @@ namespace ValleyTalk
             {
                 return npc.Bio.PromptOverrides[key];
             }
+            string result = null;
             if (npc.Bio.IsMale ?? false)
             {
-                var result = _translationHelper.Get(key+".MaleNpc", tokens);
-                
-                if (result.HasValue())
-                {
-                    return result;
-                }
+                result = Game1.content.LoadLocalized<string>("ValleyTalk/Prompts/"+key+".MaleNpc");
             }
             else if (!(npc.Bio.IsMale ?? true))
             {
-                var result = _translationHelper.Get(key+".FemaleNpc", tokens);
-                if (result.HasValue())
-                {
-                    return result;
-                }
+                result = Game1.content.LoadLocalized<string>("ValleyTalk/Prompts/"+key+".FemaleNpc");
             }
-            var resultNG = _translationHelper.Get(key, tokens);
-            if (returnNull && !resultNG.HasValue())
+            if (result == null)
+            {
+                result = Game1.content.LoadLocalized<string>("ValleyTalk/Prompts/"+key);
+            }
+            
+            if (returnNull && result == null)
             {
                 return null;
             }
-            return resultNG;
+
+            // Replace tokens
+            if (tokens != null)
+            {
+                foreach (var token in tokens.GetType().GetProperties())
+                {
+                    result = result.Replace($"{{{token.Name}}}", token.GetValue(tokens).ToString());
+                }
+            }
+            return result;
         }
 
         internal static string GetString(string key,object? tokens = null,bool returnNull = false)

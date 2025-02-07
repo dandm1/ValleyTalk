@@ -1,0 +1,408 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "ValleyTalk/GameSummary",
+      "Priority": "Early",
+      "Entries": {
+        "Intro":"Stardew Valley is a game that focusses on simulating farming, relationships, mining, fishing and community development in a small town in the US Pacific Northwest named Pelican Town.",
+        "FarmerBackground":"The player, known as the farmer, gets fed up with city life and moves to Pelican Town to take over a rundown farm inherited from the farmer's grandfather. Prior to moving to Stardew Valley the farmer worked for Joja corporation, which he hated but gives the farmer some existing relationship with Jojamart. Write dialogue assuming that the farmer is female, if the farmer is actually male this will be changed later. The farmer did not know any of the people in Stardew Valley or Pelican Town before moving there. The farmer did not grow up with any of the characters, and did not move to Stardew Valley with any of the characters even if the farmer later marries one of them.  The farmer has a living mother from who occasional letters and gifts are received, but no other living relatives.",
+        "SeasonsIntro":"The year in Stardew Valley is divided into 4 seasons each 28 days long. The seasons are:",
+        "Seasons": [
+          {
+            "id": "Spring",
+            "Name": "Spring",
+            "Description": "Mild weather with occasional rain.",
+            "Crops": [
+              "Cauliflower", "Potatoes", "Parsnips", "Green Beans", "Strawberries"
+            ],
+            "Forage": [
+              "Wild Horseradish", "Daffodil", "Leek", "Dandelion"
+            ]
+          },
+          {
+            "id": "Summer",
+            "Name": "Summer",
+            "Description": "Warm and sunny weather with occasional thunderstorms.",
+            "Crops": [
+              "Blueberries", "Melons", "Tomatoes", "Corn", "Hops"
+            ],
+            "Forage": [
+              "Spice Berry", "Grape", "Sweet Pea"
+            ]
+          },
+          {
+            "id": "Fall",
+            "Name": "Fall",
+            "Description": "Cool and crisp weather with sporadic rain.",
+            "Crops": [
+              "Pumpkins", "Cranberries", "Eggplants", "Artichokes", "Bok Choy"
+            ],
+            "Forage": [
+              "Common Mushroom", "Wild Plum", "Hazelnut", "Blackberry"
+            ]
+          },
+          {
+            "id": "Winter",
+            "Name": "Winter",
+            "Description": "Cold and snowy weather.",
+            "Forage": [
+              "Winter Root", "Crystal Fruit", "Snow Yam", "Crocus"
+            ]
+          }
+        ],
+        "LocationsIntro": "The action in Stardew Valley includes the following buildings and places:",
+        "Locations:":
+        [
+          {
+            "id": "TheFarm",
+            "Region": "The Farm",
+            "Name": "The Farm",
+            "Description": "The Farmer's home and the main center of action.  The farmhouse is initially dilapidated and the farm overgown. The farmhouse can be upgraded to add a kitchen and other rooms including a room for the player's spouse to use after marriage. The house is initially single story, though one of the later upgrades adds a cellar. The other farm buildings that may be referred to are: *Barn*: Used for housing cows and goats and providing a large storage space; *Coop*: Used for housing chickens, ducks, and rabbits; *Greenhouse*: A building where crops can be grown year-round; *Silo*: Stores hay for feeding animals; *Stable*: Houses a horse for faster travel; *Shed*: Can be used for storage or as a workshop space and *Fish Pond*: Allows breeding of fish and production of roe."
+          },
+          {
+            "id": "PelicanTown/SeedShop",
+            "Region": "Pelican Town",
+            "Name": "Pierre's General Store",
+            "Description": "Sells seeds, saplings, and vegetables. Owned by Pierre who lives there with his wife Caroline and their daughter Abigail, all of whom regard it as a shared family business. Pierre has a stall at most special events and festivals."
+          },
+          {
+            "id": "PelicanTown/JojaMart",
+            "Region": "Pelican Town",
+            "Name": "JojaMart",
+            "Description": "Offers a similar range of goods as Pierre's but at slightly different prices. Recently opened in Pelican Town and employs anti-competitive practices towards local businesses. Offers a membership program which the player can join."
+          },
+          {
+            "id": "PelicanTown/StardropSaloon",
+            "Region": "Pelican Town",
+            "Name": "Stardrop Saloon",
+            "Description": "A social hub where villagers gather. Offers food, drinks, pool, and arcade games. Owned by Gus. Food options rotate, but the standard offerings are pizza, salad, spaghetti, bread, coffee and beer."
+          },
+          {
+            "id": "PelicanTown/HarveysClinic",
+            "Region": "Pelican Town",
+            "Name": "Harvey's Clinic",
+            "Description": "Open during weekdays for health-related services and selling health items."
+          },
+          {
+            "id": "PelicanTown/Blacksmith",
+            "Region": "Pelican Town",
+            "Name": "Blacksmith",
+            "Description": "Owned by Clint.  Allows the Farmer to upgrade tools, process geodes, or buy ores and coal."
+          },
+          {
+            "id": "PelicanTown/LibraryMuseum",
+            "Region": "Pelican Town",
+            "Name": "Library & Museum",
+            "Description": "Donated artifacts and minerals are displayed here. Run by Gunther, who rewards players for donations."
+          },
+          {
+            "id": "PelicanTown/CommunityCenter",
+            "Region": "Pelican Town",
+            "Name": "Community Center",
+            "Description": "Formerly the social heart of Pelican Town. When the Farmer arrives it is dilapidated but unless the player chooses to buy a Jojamart membership can be restored later in the game.  If the player does buy a Jojamart membership it is converted into a Joja Warehouse."
+          },
+          {
+            "id": "CindersapForest",
+            "Region": "Cindersap Forest",
+            "Name": "Cindersap Forest",
+            "Description": "Contains Leah's Cottage, Marnie's Ranch and the Wizard's Tower.  It is visted on Fridays and Sundays by a traveling cart which sells rare items."
+          },
+          {
+            "id": "CindersapForest/MarniesRanch",
+            "Region": "Cindersap Forest",
+            "Name": "Marnie's Ranch",
+            "Description": "Sells animals and animal supplies. Marnie lives here with her pre-teen granddaughter Jas and her nephew Shane."
+          },
+          {
+            "id": "CindersapForest/WizardsTower",
+            "Region": "Cindersap Forest",
+            "Name": "Wizard's Tower",
+            "Description": "Home to the Wizard. Is regarded with great suspicion by the other villagers.  Center of many magical activities in the game."
+          },
+          {
+            "id": "Mountain",
+            "Region": "Mountain",
+            "Name": "Mountain",
+            "Description": "North of Pelican Town, contains the Carpenter's Shop, the Tent where Linus lives, the Mines and the Adventurer's Guild."
+          },
+          {
+            "id": "Mountain/AdventurersGuild",
+            "Region": "Mountain",
+            "Name": "Adventurer's Guild",
+            "Description": "Favored hang-out of mine explorers and other adventurers in Pelican Town.  Not visited and rarely mentioned by other villagers other than Abigail and Sebastian who hold it in awe."
+          },
+          {
+            "id": "Mountain/TheMines",
+            "Region": "Mountain",
+            "Name": "The Mines",
+            "Description": "Generally regarded as spooky and dangerous by the townsfolk. Villagers other than the Farmer, Clint, Abigail, Linus and Sebastian are too afraid to ever enter them. Full of monsters, ore, gems and other collectible items."
+          },
+          {
+            "id": "Mountain/Spa",
+            "Region": "Mountain",
+            "Name": "Spa",
+            "Description": "Contains a swimming pool and gym. The gym is popular for sports training and the pool restores energy and health."
+          },
+          {
+            "id": "Mountain/TrainStation",
+            "Region": "Mountain",
+            "Name": "Train Station",
+            "Description": "North of the mountain, next to the Spa. Occasionally, trains pass through, often dropping items."
+          },
+          {
+            "id": "Mountain/Quarry",
+            "Region": "Mountain",
+            "Name": "Quarry",
+            "Description": "Not accessible in the first year or so of the game. Just past the adventurers guild. Contains various rocks and ores to mine."
+          },
+          {
+            "id": "Beach/FishShop",
+            "Region": "Beach",
+            "Name": "Fish Shop",
+            "Description": "Run by and home to Willy, sells fishing supplies and fish-related items as well as buying fish. Once the ferry to Ginger Island is repaired it leaves from here."
+          },
+          {
+            "id": "GingerIsland",
+            "Region": "Ginger Island",
+            "Name": "Ginger Island",
+            "Description": "An island off the coast of Pelican Town which is popular as a day trip destination for the villagers.  Contains a resort, a farm and many tropical birds and animals. The island has a year round tropical climate and the contrast of this to Stardew Valley makes it a risk for sunburn and heatstroke for the villagers. Tends to be busy, particularly on the beach."
+          },
+          {
+            "id": "Beach/TidePools",
+            "Region": "Beach",
+            "Name": "Tide Pools",
+            "Description": "A series of rock pools that can be made accessible by a bridge on the beach.  A great place for forraging coral and sea urchins as well as shells from the beach."
+          },
+          {
+            "id": "Desert",
+            "Region": "Desert",
+            "Name": "Desert",
+            "Description": "Not accessible until the Bus is repaired - typically late in year 1.  Contains the Oasis as well as the Skull Cavern and regular markets and merchants."
+          },
+          {
+            "id": "Desert/Oasis",
+            "Region": "Desert",
+            "Name": "Oasis",
+            "Description": "A shop run by Sandy, who also lives there. The shop sells unique seeds and items such as cactus, starfruit and beet seeds."
+          },
+          {
+            "id": "Desert/SkullCavern",
+            "Region": "Desert",
+            "Name": "Skull Cavern",
+            "Description": "A more dangerous mine that is inaccessible until the town mine is completed and the bus repaired.  Most town residents have no knowledge of this mine."
+          }
+        ],
+        "FestivalIntro":"The year in Pelican Town features a number of important festivals. These are:",
+        "Festivals": 
+        [ 
+          { 
+            "id": "spring13",
+            "Name": "Egg Festival",
+            "Description": "**Spring 13** - Features an egg hunt where players compete to find the most hidden eggs."
+          },
+          { 
+            "id": "spring24",
+            "Name": "Flower Dance",
+            "Description": "**Spring 24** - A dance festival where players can ask an eligible bachelor or bachelorette to be their dance partner."
+          },
+          { 
+            "id": "summer11",
+            "Name": "Luau",
+            "Description": "**Summer 11** - A beach festival with a communal potluck soup to which players can contribute. Usually attended by the Governor."
+          },
+          { 
+            "id": "summer28",
+            "Name": "Dance of the Moonlight Jellies",
+            "Description": "**Summer 28** - An evening event where villagers watch the migration of glowing jellyfish."
+          },
+          { 
+            "id": "fall16",
+            "Name": "Stardew Valley Fair",
+            "Description": "**Fall 16** - A fair with mini-games, contests, and a Grange Display competition where residents showcase their best produce and goods."
+          },
+          { 
+            "id": "fall27",
+            "Name": "Spirit's Eve",
+            "Description": "**Fall 27** - A Halloween-like festival with a haunted maze and festive decorations."
+          },
+          { 
+            "id": "winter8",
+            "Name": "Festival of Ice",
+            "Description": "**Winter 8** - An ice fishing competition held on the river in Cindersap Forest."
+          },
+          { 
+            "id": "winter25",
+            "Name": "Feast of the Winter Star",
+            "Description": "**Winter 25** - A gift-giving celebration similar to Christmas, where villagers give and receive gifts from a randomly assigned secret gift givers."
+          }
+        ],
+        "VillagersIntro":"All of the villagers lived in Stardew Valley before the farmer arrives and knew each other already. The key characters are:",
+        "Villagers": 
+        [ 
+          { 
+            "id": "Abigail",
+            "Name": "Abigail",
+            "Description": "The daughter of Pierre and Caroline, Abigail has a rebellious streak and loves the outdoors. She enjoys exploring the mines and has an adventurous spirit."
+          },
+          { 
+            "id": "Alex",
+            "Name": "Alex",
+            "Description": "A former high school football star with dreams of becoming a professional athlete. He lives with his grandparents, Evelyn and George."
+          },
+          { 
+            "id": "Caroline",
+            "Name": "Caroline",
+            "Description": "Married to Pierre, Caroline is a kind and caring mother though she has a fractious relationship with her daughter Abigail. She sees herself as co-owner of the General Store and enjoys spending time in her garden. She has a tea room at the back of the General Store."
+          },
+          { 
+            "id": "Clint",
+            "Name": "Clint",
+            "Description": "The local blacksmith, Clint is shy and has a crush on Emily. He spends most of his days in the blacksmith shop, and evenings at the Stardrop Saloon."
+          },
+          { 
+            "id": "Demetrius",
+            "Name": "Demetrius",
+            "Description": "A scientist and father, Demetrius is married to Robin and father to Sebastian and Maru. Demetrius is often found working on experiments in his home. He is passionate about nature and ecology."
+          },
+          { 
+            "id": "Elliott",
+            "Name": "Elliott",
+            "Description": "A writer who lives in a cabin on the beach, Elliott is elegant and well-read. He dreams of writing a great novel."
+          },
+          { 
+            "id": "Emily",
+            "Name": "Emily",
+            "Description": "Known for her colorful personality and vibrant clothing, Emily works part-time at the Stardrop Saloon. She enjoys sewing and meditation."
+          },
+          { 
+            "id": "Evelyn",
+            "Name": "Evelyn",
+            "Description": "A sweet, elderly woman who loves gardening and baking. She is married to George and is often seen tending to her flowers."
+          },
+          { 
+            "id": "George",
+            "Name": "George",
+            "Description": "An elderly man with a gruff exterior, George uses a wheelchair. He is married to Evelyn and spends most of his time watching TV."
+          },
+          { 
+            "id": "Gus",
+            "Name": "Gus",
+            "Description": "The owner of the Stardrop Saloon, Gus is friendly and enjoys cooking. His saloon is a popular hangout for the townspeople."
+          },
+          { 
+            "id": "Haley",
+            "Name": "Haley",
+            "Description": "A fashionable young woman who loves photography and socializing. She can initially seem shallow but has a deeper, caring side."
+          },
+          { 
+            "id": "Harvey",
+            "Name": "Harvey",
+            "Description": "The town doctor, Harvey is dedicated to his work and has a gentle demeanor. He is passionate about healthcare and aviation."
+          },
+          { 
+            "id": "Jas",
+            "Name": "Jas",
+            "Description": "A young girl living with her aunt Marnie after her parents' passing. She is friends with Vincent and enjoys playing outside."
+          },
+          { 
+            "id": "Jodi",
+            "Name": "Jodi",
+            "Description": "A devoted mother and wife, Jodi takes care of her sons Sam and Vincent. She manages the household while her husband Kent is away in the military."
+          },
+          { 
+            "id": "Kent",
+            "Name": "Kent",
+            "Description": "A soldier who returns home in year 2 after being deployed, Kent struggles with adjusting back to civilian life. He is married to Jodi and is the father of Sam and Vincent."
+          },
+          { 
+            "id": "Krobus",
+            "Name": "Krobus",
+            "Description": "A shadow creature who lives in the sewers. He is a friend of the player, but is not known to the other townsfolk. He is the only friendly monster in the valley."
+          },
+          { 
+            "id": "Leah",
+            "Name": "Leah",
+            "Description": "An artist who lives in a cabin in Cindersap Forest, Leah enjoys sculpting and foraging. She moved to Stardew Valley recently to pursue her passion for art, so doesn't know the other townsfolk well."
+          },
+          { 
+            "id": "Lewis",
+            "Name": "Lewis",
+            "Description": "The mayor of Pelican Town, Lewis has been in office for many years. He is dedicated to the town and its prospering. He is single, but has a longstanding, secret relationship with Marnie."
+          },
+          { 
+            "id": "Linus",
+            "Name": "Linus",
+            "Description": "A solitary man who lives in a tent near the mountains. He prefers living off the land and values his independence."
+          },
+          { 
+            "id": "Marnie",
+            "Name": "Marnie",
+            "Description": "The owner of the local ranch. She is caring and raising Jas and Shane. She has a secret relationship with Mayor Lewis."
+          },
+          { 
+            "id": "Maru",
+            "Name": "Maru",
+            "Description": "The daughter of Demetrius and Robin, Maru is intelligent and enjoys working with electronics and gadgets. She works part-time at Harvey's Clinic."
+          },
+          { 
+            "id": "Pam",
+            "Name": "Pam",
+            "Description": "A bus driver who loves a drink, Pam lives with her daughter Penny in a trailer. She drives bus to the desert once it is repaired."
+          },
+          { 
+            "id": "Penny",
+            "Name": "Penny",
+            "Description": "A kind-hearted young woman who lives with her mother Pam in their trailer. She is gentle, loving and charitable - expressing a positive attitude towards all townsfolk.  She tutors Jas and Vincent and dreams of a better life."
+          },
+          { 
+            "id": "Pierre",
+            "Name": "Pierre",
+            "Description": "The owner of the General Store, Pierre is dedicated to his business and very stressed by the competition from JojaMart. He is married to Caroline and father to Abigail."
+          },
+          { 
+            "id": "Robin",
+            "Name": "Robin",
+            "Description": "The local carpenter, Robin is married to Demetrius and mother to Maru and Sebastian. She builds and upgrades farm buildings for the player."
+          },
+          { 
+            "id": "Sam",
+            "Name": "Sam",
+            "Description": "A laid-back, music-loving young man who dreams of becoming a rock star. He lives with his mother Jodi and brother Vincent. Enjoys skateboarding."
+          },
+          { 
+            "id": "Sandy",
+            "Name": "Sandy",
+            "Description": "The owner of the Oasis shop in the desert, Sandy is cheerful and friendly. She is best friend to Emily, communicating by post until the bus is repaired."
+          },
+          { 
+            "id": "Sebastian",
+            "Name": "Sebastian",
+            "Description": "A programmer and the son of Robin, Sebastian is introverted and enjoys gaming and working on his motorcycle. He lives in the basement of his family’s house. He grew up best friends with Abigail - who shares his goth outlook on life."
+          },
+          { 
+            "id": "Shane",
+            "Name": "Shane",
+            "Description": "Initially gruff and unfriendly, Shane works at JojaMart and struggles with depression. At higher heart levels he opens up to the player and has a fondness for chickens."
+          },
+          { 
+            "id": "Vincent",
+            "Name": "Vincent",
+            "Description": "A young boy with a lot of energy, Vincent is Jodi and Kent's son and is friends with Jas. He is curious and loves playing outside."
+          },
+          { 
+            "id": "Willy",
+            "Name": "Willy",
+            "Description": "The local fisherman, Willy runs the Fish Shop by the beach. He loves the sea and is often seen around town fishing, as well as spending his evenings in the Stardrop Saloon. He has a run-down boat which can be repaired to open up access to Ginger Island."
+          },
+          { 
+            "id": "Wizard",
+            "Name": "Wizard",
+            "Description": "Proper name is Magnus Rasmodius. A mysterious figure who lives in the Wizard's Tower. He is knowledgeable about magic and the supernatural elements of Stardew Valley."
+          }
+        ],
+        "Outro": "Note that in the context of the game Stardew Valley is a reasonably static place. New stores don't open, new people don't arrive and the stores don't significantly change what they sell."
+      }
+    }
+  ]
+}

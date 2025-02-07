@@ -1,0 +1,22 @@
+{
+    "Format": "2.3.0",
+    "Changes": [
+        {
+            "Action": "Load",
+            "Target": "ValleyTalk/Prompts,ValleyTalk/GameSummary,ValleyTalk/Bios/Abigail",
+            "FromFile": "assets/Empty.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/Prompts.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/GameSummary.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Abigail.json"
+        }
+    ]
+}
