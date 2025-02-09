@@ -3,7 +3,7 @@
     "Changes": [
         {
             "Action": "Load",
-            "Target": "ValleyTalk/Prompts,ValleyTalk/GameSummary,ValleyTalk/Bios/Abigail",
+            "Target": "ValleyTalk/Prompts,ValleyTalk/GameSummary,ValleyTalk/Bios/Abigail,ValleyTalk/Bios/Alex,ValleyTalk/Bios/Caroline,ValleyTalk/Bios/Clint,ValleyTalk/Bios/Demetrius,ValleyTalk/Bios/Dwarf,ValleyTalk/Bios/Elliott,ValleyTalk/Bios/Emily,ValleyTalk/Bios/Evelyn,ValleyTalk/Bios/George,ValleyTalk/Bios/Gus,ValleyTalk/Bios/Haley,ValleyTalk/Bios/Harvey,ValleyTalk/Bios/Jas,ValleyTalk/Bios/Jodi,ValleyTalk/Bios/Kent,ValleyTalk/Bios/Krobus,ValleyTalk/Bios/Leah,ValleyTalk/Bios/Lewis,ValleyTalk/Bios/Linus,ValleyTalk/Bios/Marnie,ValleyTalk/Bios/Maru,ValleyTalk/Bios/Pam,ValleyTalk/Bios/Penny,ValleyTalk/Bios/Pierre,ValleyTalk/Bios/Robin,ValleyTalk/Bios/Sam,ValleyTalk/Bios/Sandy,ValleyTalk/Bios/Sebastian,ValleyTalk/Bios/Shane,ValleyTalk/Bios/Vincent,ValleyTalk/Bios/Willy,ValleyTalk/Bios/Wizard",
             "FromFile": "assets/Empty.json"
         },
         {
@@ -17,6 +17,134 @@
         {
             "Action": "Include",
             "FromFile": "assets/bio/Abigail.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Alex.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Caroline.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Clint.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Demetrius.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Dwarf.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Elliott.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Emily.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Evelyn.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/George.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Gus.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Haley.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Harvey.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Jas.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Jodi.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Kent.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Krobus.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Leah.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Lewis.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Linus.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Marnie.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Maru.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Pam.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Penny.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Pierre.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Robin.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Sam.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Sandy.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Sebastian.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Shane.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Vincent.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Willy.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Wizard.json"
         }
     ]
 }
