@@ -64,7 +64,7 @@ public class Prompts
             {
                 if (entry.Value is string && !entry.Value.ToString().StartsWith("(no translation"))
                 {
-                    _promptCache.Add(entry.Key, entry.Value.ToString());
+                    _promptCache.Add(entry.Key, Game1.content.PreprocessString(entry.Value.ToString()));
                 }
             }
         }

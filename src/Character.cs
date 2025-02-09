@@ -147,14 +147,17 @@ public class Character
 
     private void LoadBio()
     {
-        BioData bioData = null;
-        
-        bioData = Game1.content.LoadLocalized<BioData>(BioFilePath);
-        if (bioData == null)
+        BioData bioData;
+        try
+        {
+            bioData = Game1.content.LoadLocalized<BioData>(BioFilePath);
+        }
+        catch (Exception)
         {
             bioData = new BioData();
             ModEntry.SMonitor.Log($"No bio file found for {Name}.", StardewModdingAPI.LogLevel.Warn);
         }
+
         bioData.Name = Name;
         _bioData = bioData;
     }

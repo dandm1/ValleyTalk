@@ -86,7 +86,8 @@ namespace ValleyTalk
             {
                 foreach (var token in tokens.GetType().GetProperties())
                 {
-                    result = result.Replace($"{{{token.Name}}}", token.GetValue(tokens).ToString());
+                    var tokenName = "{{" + token.Name + "}}";
+                    result = result.Replace(tokenName, token.GetValue(tokens).ToString());
                 }
             }
             return result;
@@ -94,11 +95,22 @@ namespace ValleyTalk
 
         internal static string GetString(string key,object? tokens = null,bool returnNull = false)
         {
-            var result = _translationHelper.Get(key, tokens);
-            if (returnNull && !result.HasValue())
+            string result = string.Empty;
+            if (returnNull && !Prompts.PromptCache.TryGetValue(key, out result))
             {
                 return null;
             }
+            
+            // Replace tokens
+            if (tokens != null && result != null)
+            {
+                foreach (var token in tokens.GetType().GetProperties())
+                {
+                    var tokenName = "{{" + token.Name + "}}";
+                    result = result.Replace(tokenName, token.GetValue(tokens).ToString());
+                }
+            }
+
             return result;
         }
 
