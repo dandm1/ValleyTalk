@@ -129,8 +129,8 @@ namespace ValleyTalk
             var sb = new StringBuilder();
             sb.Append(theLine[0]);
             //sb.Append("#$b#Respond:");
-            sb.Append($"#$q {responseIndex++} {SldConstants.DialogueKeyPrefix}Default#{ModEntry.SHelper.Translation.Get("outputRespond")}");
-            sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#{ModEntry.SHelper.Translation.Get("outputStaySilent")}");
+            sb.Append($"#$q {responseIndex++} {SldConstants.DialogueKeyPrefix}Default#{Util.GetString("outputRespond")}");
+            sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#{Util.GetString("outputStaySilent")}");
             for (int i = 1; i < theLine.Length; i++)
             {
                 sb.Append($"#$r -999998 0 {SldConstants.DialogueKeyPrefix}Next#");
@@ -164,22 +164,22 @@ namespace ValleyTalk
             switch (Game1.timeOfDay)
             {
                 case <= 800:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalEarlyMorning");
+                    timeOfDay = Util.GetString("generalEarlyMorning");
                     break;
                 case <= 1130:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalLateMorning");
+                    timeOfDay = Util.GetString("generalLateMorning");
                     break;
                 case <= 1400:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalMidday");
+                    timeOfDay = Util.GetString("generalMidday");
                     break;
                 case <= 1700:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalAfternoon");
+                    timeOfDay = Util.GetString("generalAfternoon");
                     break;
                 case <= 2200:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalEvening");
+                    timeOfDay = Util.GetString("generalEvening");
                     break;
                 default:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalLateNight");
+                    timeOfDay = Util.GetString("generalLateNight");
                     break;
             }
             timeOfDay += $" ({(Game1.timeOfDay / 100) % 24}:{Game1.timeOfDay % 100:00})";

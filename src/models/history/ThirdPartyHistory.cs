@@ -20,8 +20,8 @@ internal class ThirdPartyHistory : IHistory
     public string Format(string npcName)
     {
         var totalDialogue = string.Join(" : ", filteredDialogues.Select(x => x.Text));
-        var festivalNameString = string.IsNullOrWhiteSpace(festivalName) ? "" : ModEntry.SHelper.Translation.Get("historyThirdPartyFestival", new { festivalName= festivalName });
-        return ModEntry.SHelper.Translation.Get("historyThirdPartyFormat", new { npcName= npcName, Name= character.Name, festivalNameString= festivalNameString, totalDialogue= totalDialogue });
+        var festivalNameString = string.IsNullOrWhiteSpace(festivalName) ? "" : Util.GetString("historyThirdPartyFestival", new { festivalName= festivalName });
+        return Util.GetString("historyThirdPartyFormat", new { npcName= npcName, Name= character.Name, festivalNameString= festivalNameString, totalDialogue= totalDialogue });
 
     }
 }

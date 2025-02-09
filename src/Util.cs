@@ -65,15 +65,15 @@ namespace ValleyTalk
             string result = null;
             if (npc.Bio.IsMale ?? false)
             {
-                Prompts.PromptCache.TryGetValue($"{key}.MaleNpc", out result);
+                PromptCache.Instance.Cache.TryGetValue($"{key}.MaleNpc", out result);
             }
             else if (!(npc.Bio.IsMale ?? true))
             {
-                Prompts.PromptCache.TryGetValue($"{key}.FemaleNpc", out result);
+                PromptCache.Instance.Cache.TryGetValue($"{key}.FemaleNpc", out result);
             }
             if (result == null)
             {
-                Prompts.PromptCache.TryGetValue(key, out result);
+                PromptCache.Instance.Cache.TryGetValue(key, out result);
             }
             
             if (returnNull && result == null)
@@ -96,7 +96,7 @@ namespace ValleyTalk
         internal static string GetString(string key,object? tokens = null,bool returnNull = false)
         {
             string result = string.Empty;
-            if (returnNull && !Prompts.PromptCache.TryGetValue(key, out result))
+            if (!PromptCache.Instance.Cache.TryGetValue(key, out result) && returnNull)
             {
                 return null;
             }

@@ -50,27 +50,6 @@ public class Prompts
 
     }
 
-    private static string _promptLocaleCache = string.Empty;
-    private static Dictionary<string,string> _promptCache = null;
-    public static Dictionary<string,string> PromptCache => RefreshPromptCache();
-    private static Dictionary<string,string> RefreshPromptCache()
-    {
-        if (_promptLocaleCache != ModEntry.Language || _promptCache != null )
-        {
-            _promptLocaleCache = ModEntry.Language;
-            _promptCache = new Dictionary<string,string>();
-            var promptDict = Game1.content.LoadLocalized<Dictionary<string,object>>("ValleyTalk/Prompts");
-            foreach (var entry in promptDict)
-            {
-                if (entry.Value is string && !entry.Value.ToString().StartsWith("(no translation"))
-                {
-                    _promptCache.Add(entry.Key, Game1.content.PreprocessString(entry.Value.ToString()));
-                }
-            }
-        }
-        return _promptCache;
-    }
-
     [JsonIgnore]
     static string _stardewSummary;
     private string _system;
@@ -202,7 +181,7 @@ public class Prompts
                 npcConstantPrompt.AppendLine($"## {Util.GetString("biographyRelationships")}:");
                 foreach (var relationship in Character.Bio.Relationships)
                 {
-                    npcConstantPrompt.AppendLine($"* **{relationship.Name}**: {relationship.Description}");
+                    npcConstantPrompt.AppendLine($"* **{relationship.Heading}**: {relationship.Description}");
                 }
             }
             if (Character.Bio.Traits.Any())
@@ -210,7 +189,7 @@ public class Prompts
                 npcConstantPrompt.AppendLine($"## {Util.GetString("biographyPersonality")}:");
                 foreach (var trait in Character.Bio.Traits)
                 {
-                    npcConstantPrompt.AppendLine($"* **{trait.Name}**: {trait.Description}");
+                    npcConstantPrompt.AppendLine($"* **{trait.Heading}**: {trait.Description}");
                 }
             }
             npcConstantPrompt.AppendLine(Character.Bio.BiographyEnd);

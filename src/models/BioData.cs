@@ -94,7 +94,7 @@ public class BioData
     public class ListEntry
     {
         public string id { get; set; }
-        public string Name { get; set; }
+        public string Heading { get; set; }
         public string Description { get; set; }
     }
 

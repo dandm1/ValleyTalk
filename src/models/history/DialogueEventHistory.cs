@@ -17,8 +17,8 @@ internal class DialogueEventHistory : IHistory
     {
         var totalDialogue = string.Join(" : ", Dialogues.Select(x => x.Text));
         var allListeners = string.Join(", ", Listeners.Select(x => x.Name));
-        var festivalNameString = string.IsNullOrWhiteSpace(EventName) ? "" : ModEntry.SHelper.Translation.Get("historyThirdPartyFestival", new { festivalName= EventName });
-        return ModEntry.SHelper.Translation.Get("historyDialogueFormat", new { npcName= npcName, allListeners= allListeners, festivalNameString= festivalNameString, totalDialogue= totalDialogue });
+        var festivalNameString = string.IsNullOrWhiteSpace(EventName) ? "" : Util.GetString("historyThirdPartyFestival", new { festivalName= EventName });
+        return Util.GetString("historyDialogueFormat", new { npcName= npcName, allListeners= allListeners, festivalNameString= festivalNameString, totalDialogue= totalDialogue });
     }
 
     public IEnumerable<DialogueLine> Dialogues { get; }

@@ -14,7 +14,7 @@ internal class DialogueHistory : IHistory
     public string Format(string npcName)
     {
         var totalDialogue = string.Join(" : ", Dialogues.Select(x => x.Text));
-        return ModEntry.SHelper.Translation.Get("dialogueHistoryFormat", new { npcName= npcName, totalDialogue= totalDialogue });
+        return Util.GetString("dialogueHistoryFormat", new { npcName= npcName, totalDialogue= totalDialogue });
     }
 
     public IEnumerable<DialogueLine> Dialogues { get; }

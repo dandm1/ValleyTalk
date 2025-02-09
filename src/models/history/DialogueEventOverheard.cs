@@ -19,6 +19,6 @@ internal class DialogueEventOverheard : IHistory
     public string Format(string npcName)
     {
         var totalDialogue = string.Join(" : ", dialogues?.Select(x => x.Text) ?? new List<string>());
-        return ModEntry.SHelper.Translation.Get("historyOverheardFormat", new { name= name, totalDialogue= totalDialogue });
+        return Util.GetString("historyOverheardFormat", new { name= name, totalDialogue= totalDialogue });
     }
 }
