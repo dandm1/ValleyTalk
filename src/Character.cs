@@ -30,7 +30,7 @@ public class Character
     public Character(string name, NPC stardewNpc)
     {
         Name = name;
-        BioFilePath = $"assets/bio/{Name}";
+        BioFilePath = $"ValleyTalk/Bios/{Name}";
         StardewNpc = stardewNpc;
 
         // Load and process the dialogue file
@@ -149,7 +149,7 @@ public class Character
     {
         BioData bioData = null;
         
-        bioData = Util.ReadLocalisedJson<BioData>(BioFilePath,"txt");
+        bioData = Game1.content.LoadLocalized<BioData>(BioFilePath);
         if (bioData == null)
         {
             bioData = new BioData();

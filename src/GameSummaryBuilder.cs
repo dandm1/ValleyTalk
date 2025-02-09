@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using StardewValley;
 using ValleyTalk;
 
 namespace StardewDialogue;
 
 internal class GameSummaryBuilder
 {
-    private Dictionary<string,string> gameSummaryDict;
+    private Dictionary<string,object> gameSummaryDict;
     public GameSummaryBuilder()
     {
-        gameSummaryDict = Util.ReadLocalisedJson<Dictionary<string,string>>("assets/bio/Stardew","txt");
+        gameSummaryDict = Game1.content.LoadLocalized<Dictionary<string,object>>("ValleyTalk/GameSummary");
     }
 
     private Dictionary<string,bool> sections = new Dictionary<string,bool>
@@ -31,18 +32,20 @@ internal class GameSummaryBuilder
             if (section.Value)
             {
                 builder.AppendLine($"### {section.Key} :");
+                AppendLineIfKeyExists(builder, gameSummaryDict, section.Key);
             }
-
-            AppendLineIfKeyExists(builder, gameSummaryDict, section.Key);
-            var subKeys = gameSummaryDict.Keys.Where(k => k.StartsWith($"{section.Key}/"));
-            var subHeadings = subKeys.Select(k => k.Split('/')[1]).Distinct();
-            foreach(var subHeading in subHeadings.OrderBy(s => s))
+            else
             {
-                AppendLineIfKeyExists(builder, gameSummaryDict, $"{section.Key}/{subHeading}", $"- **{GetDisplay(subHeading)}** : ");
-                foreach(var subKey in subKeys.Where(k => k.StartsWith($"{section.Key}/{subHeading}/")).OrderBy(k => k))
+                var subKeys = gameSummaryDict.Keys.Where(k => k.StartsWith($"{section.Key}/"));
+                var subHeadings = subKeys.Select(k => k.Split('/')[1]).Distinct();
+                foreach(var subHeading in subHeadings.OrderBy(s => s))
                 {
-                    var key = subKey.Split('/')[2];
-                    AppendLineIfKeyExists(builder, gameSummaryDict, $"{section.Key}/{subHeading}/{key}", $"  - **{GetDisplay(key)}** : ");
+                    AppendLineIfKeyExists(builder, gameSummaryDict, $"{section.Key}/{subHeading}", $"- **{GetDisplay(subHeading)}** : ");
+                    foreach(var subKey in subKeys.Where(k => k.StartsWith($"{section.Key}/{subHeading}/")).OrderBy(k => k))
+                    {
+                        var key = subKey.Split('/')[2];
+                        AppendLineIfKeyExists(builder, gameSummaryDict, $"{section.Key}/{subHeading}/{key}", $"  - **{GetDisplay(key)}** : ");
+                    }
                 }
             }
         }
@@ -66,11 +69,11 @@ internal class GameSummaryBuilder
         return displayKey;
     }
 
-    private static void AppendLineIfKeyExists(StringBuilder builder, Dictionary<string, string> gameSummaryDict, string key, string prefix = "")
+    private static void AppendLineIfKeyExists(StringBuilder builder, Dictionary<string, object> gameSummaryDict, string key, string prefix = "")
     {
         if (gameSummaryDict.ContainsKey(key))
         {
-            builder.AppendLine(prefix + gameSummaryDict[key]);
+            builder.AppendLine(prefix + gameSummaryDict[key].ToString());
         }
     }
 }

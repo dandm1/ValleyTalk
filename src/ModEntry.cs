@@ -179,7 +179,7 @@ namespace ValleyTalk
                 Monitor.Log("While content from content packs will be displayed in-game, it will not be use for AI dialogue generation.", LogLevel.Warn);
                 Monitor.Log($"Content packs without author approval: {string.Join(", ", blockedContentPacks.Select(p => p.Manifest.Name))}", LogLevel.Info);
                 Monitor.Log("Mod authors can permit their content to be used in dialogue generation by adding \"permitAiUse\":true to their mod's manifest.", LogLevel.Warn);
-                BlockModdedContent = true;
+                BlockModdedContent = false; // ToDO : revert
             }
         }
 
