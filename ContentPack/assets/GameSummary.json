@@ -5,15 +5,15 @@
       "Target": "ValleyTalk/GameSummary",
       "Priority": "Early",
       "Entries": {
-        "SectionOrder": [
-          {"Intro":false},
-          {"FarmerBackground":false},
-          {"Seasons": true},
-          {"Locations": true},
-          {"Festivals": true},
-          {"Villagers": true},
-          {"Outro": false}
-        ],
+        "SectionOrder": {
+          "Intro":false,
+          "FarmerBackground":false,
+          "Seasons": true,
+          "Locations": true,
+          "Festivals": true,
+          "Villagers": true,
+          "Outro": false
+        },
         "Intro":"Stardew Valley is a game that focusses on simulating farming, relationships, mining, fishing and community development in a small town in the US Pacific Northwest named Pelican Town.",
         "FarmerBackground":"The player, known as the farmer, gets fed up with city life and moves to Pelican Town to take over a rundown farm inherited from the farmer's grandfather. Prior to moving to Stardew Valley the farmer worked for Joja corporation, which he hated but gives the farmer some existing relationship with Jojamart. Write dialogue assuming that the farmer is female, if the farmer is actually male this will be changed later. The farmer did not know any of the people in Stardew Valley or Pelican Town before moving there. The farmer did not grow up with any of the characters, and did not move to Stardew Valley with any of the characters even if the farmer later marries one of them.  The farmer has a living mother from who occasional letters and gifts are received, but no other living relatives.",
         "SeasonsIntro":"The year in Stardew Valley is divided into 4 seasons each 28 days long. The seasons are:",

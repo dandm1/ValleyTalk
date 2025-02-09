@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 using StardewValley;
 using StardewValley.Network;
 using ValleyTalk;
+using Newtonsoft.Json.Linq;
 
 namespace StardewDialogue;
 
@@ -18,7 +20,9 @@ internal class GameSummaryBuilder
     internal string Build()
     {
         var builder = new StringBuilder();
-        var sections = gameSummaryDict["SectionOrder"] as Dictionary<string,bool>;
+        // Load newtonsoft JArray object from SectionOrder key as dictionary
+        var sectionsObject = gameSummaryDict["SectionOrder"] as JObject;
+        var sections = sectionsObject.ToObject<Dictionary<string, bool>>();
         if (sections == null)
         {
             ModEntry.SMonitor.Log("GameSummary is missing SectionOrder", StardewModdingAPI.LogLevel.Error);
@@ -26,7 +30,7 @@ internal class GameSummaryBuilder
         }
         foreach(var section in sections)
         {
-            if (gameSummaryDict.Any(x => x.Key.StartsWith($"{section.Key}/")))
+            if (gameSummaryDict.Any(x => x.Key.StartsWith($"{section.Key}")))
             {
                 if (section.Value)
                 {
@@ -45,24 +49,27 @@ internal class GameSummaryBuilder
                 {
                     builder.AppendLine(entry.Value.ToString());
                 }
-                else if (entry.Value is List<object> subDict)
+                else if (entry.Value is JArray subDict)
                 {
                     switch(section.Key)
                     {
                         case "Seasons":
-                            var seasons = subDict.Select(x => x as SeasonObject);
+                            var seasons = subDict.ToObject<List<SeasonObject>>();
                             foreach(var season in seasons)
                             {
                                 builder.Append($"- **{season.Name}** - {season.Description} ");
-                                if (season.Crops.Any())
+                                if (season.Crops != null && season.Crops.Any())
                                 {
                                     builder.Append($"{Util.GetString("seasonCrops")} {Util.ConcatAnd(season.Crops)}. ");
                                 }
-                                builder.AppendLine($"{Util.GetString("seasonForage")} {Util.ConcatAnd(season.Forage)}.");
+                                if (season.Forage != null && season.Forage.Any())
+                                {
+                                    builder.AppendLine($"{Util.GetString("seasonForage")} {Util.ConcatAnd(season.Forage)}.");
+                                }
                             }
                             break;
                         case "Locations":
-                            var locations = subDict.Select(x => x as LocationObject);
+                            var locations = subDict.ToObject<List<LocationObject>>();
                             var regions = locations.GroupBy(x => x.Region);
                             foreach(var region in regions)
                             {
@@ -73,7 +80,7 @@ internal class GameSummaryBuilder
                             }
                             break;
                         default:
-                            var items = subDict.Select(x => x as GeneralObject);
+                            var items = subDict.ToObject<List<GeneralObject>>();
                             foreach(var item in items)
                             {
                                 builder.AppendLine($"- **{item.Name}** - {item.Description}");
