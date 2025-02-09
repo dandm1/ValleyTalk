@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using StardewValley;
+using StardewValley.Network;
 using ValleyTalk;
 
 namespace StardewDialogue;
@@ -14,37 +15,70 @@ internal class GameSummaryBuilder
         gameSummaryDict = Game1.content.LoadLocalized<Dictionary<string,object>>("ValleyTalk/GameSummary");
     }
 
-    private Dictionary<string,bool> sections = new Dictionary<string,bool>
-    {
-        {"Intro",false},
-        {"FarmerBackground",false},
-        {"Locations", true},
-        {"Festivals", true},
-        {"Villagers", true},
-        {"Outro", false}
-    };
-
     internal string Build()
     {
         var builder = new StringBuilder();
+        var sections = gameSummaryDict["SectionOrder"] as Dictionary<string,bool>;
+        if (sections == null)
+        {
+            ModEntry.SMonitor.Log("GameSummary is missing SectionOrder", StardewModdingAPI.LogLevel.Error);
+            return string.Empty;
+        }
         foreach(var section in sections)
         {
-            if (section.Value)
+            if (gameSummaryDict.Any(x => x.Key.StartsWith($"{section.Key}/")))
             {
-                builder.AppendLine($"### {section.Key} :");
-                AppendLineIfKeyExists(builder, gameSummaryDict, section.Key);
-            }
-            else
-            {
-                var subKeys = gameSummaryDict.Keys.Where(k => k.StartsWith($"{section.Key}/"));
-                var subHeadings = subKeys.Select(k => k.Split('/')[1]).Distinct();
-                foreach(var subHeading in subHeadings.OrderBy(s => s))
+                if (section.Value)
                 {
-                    AppendLineIfKeyExists(builder, gameSummaryDict, $"{section.Key}/{subHeading}", $"- **{GetDisplay(subHeading)}** : ");
-                    foreach(var subKey in subKeys.Where(k => k.StartsWith($"{section.Key}/{subHeading}/")).OrderBy(k => k))
+                    builder.AppendLine($"### {section.Key} :");
+                }
+                if (gameSummaryDict.ContainsKey($"{section.Key}Intro"))
+                {
+                    builder.AppendLine(gameSummaryDict[$"{section.Key}Intro"].ToString());
+                }
+                var entry = gameSummaryDict.FirstOrDefault(x => x.Key == section.Key);
+                if (entry.Value == null)
+                {
+                    continue;
+                }
+                if (entry.Value is string)
+                {
+                    builder.AppendLine(entry.Value.ToString());
+                }
+                else if (entry.Value is List<object> subDict)
+                {
+                    switch(section.Key)
                     {
-                        var key = subKey.Split('/')[2];
-                        AppendLineIfKeyExists(builder, gameSummaryDict, $"{section.Key}/{subHeading}/{key}", $"  - **{GetDisplay(key)}** : ");
+                        case "Seasons":
+                            var seasons = subDict.Select(x => x as SeasonObject);
+                            foreach(var season in seasons)
+                            {
+                                builder.Append($"- **{season.Name}** - {season.Description} ");
+                                if (season.Crops.Any())
+                                {
+                                    builder.Append($"{Util.GetString("seasonCrops")} {Util.ConcatAnd(season.Crops)}. ");
+                                }
+                                builder.AppendLine($"{Util.GetString("seasonForage")} {Util.ConcatAnd(season.Forage)}.");
+                            }
+                            break;
+                        case "Locations":
+                            var locations = subDict.Select(x => x as LocationObject);
+                            var regions = locations.GroupBy(x => x.Region);
+                            foreach(var region in regions)
+                            {
+                                foreach(var location in region)
+                                {
+                                    builder.AppendLine($"- **{location.Name}** - {location.Description}");
+                                }
+                            }
+                            break;
+                        default:
+                            var items = subDict.Select(x => x as GeneralObject);
+                            foreach(var item in items)
+                            {
+                                builder.AppendLine($"- **{item.Name}** - {item.Description}");
+                            }
+                            break;
                     }
                 }
             }
@@ -75,5 +109,23 @@ internal class GameSummaryBuilder
         {
             builder.AppendLine(prefix + gameSummaryDict[key].ToString());
         }
+    }
+
+    private class GeneralObject
+    {
+        public string id;
+        public string Name;
+        public string Description;
+    }
+
+    private class LocationObject : GeneralObject
+    {
+        public string Region;
+    }
+
+    private class SeasonObject : GeneralObject
+    {
+        public List<string> Crops;
+        public List<string> Forage;
     }
 }

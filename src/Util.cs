@@ -1,4 +1,5 @@
 using StardewValley;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,6 +25,32 @@ namespace ValleyTalk
                 }
             }
             return nearbyNpcs;
+        }
+
+        internal static string ConcatAnd(List<string> strings)
+        {
+            if (strings.Count == 0)
+            {
+                return string.Empty;
+            }
+            if (strings.Count == 1)
+            {
+                return strings[0];
+            }
+            var builder = new System.Text.StringBuilder();
+            for (int i = 0; i < strings.Count; i++)
+            {
+                if (i == strings.Count - 1)
+                {
+                    builder.Append($" {GetString("generalAnd")} ");
+                }
+                else if (i > 0)
+                {
+                    builder.Append(", ");
+                }
+                builder.Append(strings[i]);
+            }
+            return builder.ToString();
         }
 
         internal static string GetString(StardewDialogue.Character npc,string key,object? tokens = null,bool returnNull = false)

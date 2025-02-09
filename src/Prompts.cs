@@ -167,7 +167,7 @@ public class Prompts
         var npcConstantPrompt = new StringBuilder();
         var intro = Util.GetString(Character,"npcContextIntro", new { Name = Name });
         npcConstantPrompt.AppendLine(intro);
-        if ((Character.Bio?.Biography ?? string.Empty).Length > 100)
+        if ((Character.Bio?.Biography ?? string.Empty).Length > 10)
         {
             npcConstantPrompt.AppendLine($"##{Util.GetString(Character,"npcContextBiographyHeading", new { Name = Name })}");
             var bio = Character.Bio.Biography;
@@ -178,7 +178,7 @@ public class Prompts
             npcConstantPrompt.AppendLine(bio);
             if (Character.Bio.Relationships.Any())
             {
-                npcConstantPrompt.AppendLine($"## Relationships:");
+                npcConstantPrompt.AppendLine($"## {Util.GetString("biographyRelationships")}:");
                 foreach (var relationship in Character.Bio.Relationships)
                 {
                     npcConstantPrompt.AppendLine($"* **{relationship.Name}**: {relationship.Description}");
@@ -186,7 +186,7 @@ public class Prompts
             }
             if (Character.Bio.Traits.Any())
             {
-                npcConstantPrompt.AppendLine($"## Character Traits:");
+                npcConstantPrompt.AppendLine($"## {Util.GetString("biographyPersonality")}:");
                 foreach (var trait in Character.Bio.Traits)
                 {
                     npcConstantPrompt.AppendLine($"* **{trait.Name}**: {trait.Description}");

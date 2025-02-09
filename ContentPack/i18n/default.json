@@ -234,6 +234,7 @@
   "generalAfternoon": "afternoon",
   "generalEvening": "evening",
   "generalLateNight": "late at night",
+  "generalAnd": "and",
   "timeInTheFuture": "in the future",
   "timeJustNow": "just now",
   "timeInTheLastHour": "in the last hour",
@@ -282,5 +283,9 @@
   "modelCheckInsecure": "The server address specified does not use a secure connection (https). This can block text generation.",
   "modelCheckGetNames": "Unable to get model names or generate dialogue.  Please check the API Key is correctly entered.",
   "modelCheckGenericError": "Please check the server address and details.",
-  "modelCheckSuccess": "Connected to the model successfully."
+  "modelCheckSuccess": "Connected to the model successfully.",
+  "seasonCrops": "Important crops are",
+  "seasonForage": "Forage items are",
+  "biographyRelationships": "Relationships",
+  "biographyPersonality": "Personality"
 }
