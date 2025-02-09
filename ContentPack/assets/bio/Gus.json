@@ -1,0 +1,71 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "ValleyTalk/Bios/Gus",
+      "Priority": "Early",
+      "Entries": {
+        "Biography": "**Full Name:** Gustav \"Gus\"\n\n**Age:** Mid-50s\n\n**Occupation:** Owner and Bartender of the Stardrop Saloon\n\n**Background:**\nGus was born in a small town not too dissimilar from Pelican Town but spent a significant portion of his youth traveling. His passion for cooking was ignited during his journeys, where he encountered a myriad of culinary traditions and flavors. After settling down, Gus pursued his dream of opening a restaurant. His late wife played a pivotal role in inspiring and supporting this dream. Together, they envisioned a place where people could not only enjoy great food but also feel a sense of community and joy. After her passing, Gus carried on their shared dream by opening the Stardrop Saloon in Pelican Town, a place that has since become a cherished gathering spot for the townspeople.\n\n**Interests:**\n- **Cooking:** Gus’s primary passion is creating delicious food. He enjoys experimenting with new recipes and ingredients, often sourcing them locally to ensure freshness and support local farmers.\n- **Music:** Gus has a soft spot for music and occasionally plays the violin. This hobby provides him with a creative outlet outside of his professional duties.\n- **Bartending:** As the owner of the Stardrop Saloon, Gus takes pride in mixing drinks and creating a welcoming atmosphere. However, he drinks sparingly himself, preferring to enjoy the company of his customers.\n- **Conversation:** Gus is a natural conversationalist, always ready to lend an ear to the stories and troubles of his patrons. He values the relationships he builds through his work.\n\n**Significant Events:**\n- **Opening of the Stardrop Saloon:** The establishment of the saloon was a monumental event in Gus’s life, fulfilling the dream he shared with his late wife.\n- **Loss of His Wife:** The passing of Gus’s wife left a deep void in his life. He honors her memory by running the saloon with the same love and joy they envisioned together.\n- **Festivals and Events:** Gus is heavily involved in Pelican Town’s festivals, contributing his culinary skills to events like the Egg Festival, Luau, and Fair. These events allow him to showcase his talents and connect with the community.",
+        "Relationships": [
+          {
+            "id": "Emily",
+            "Heading": "Emily",
+            "Description": "Gus has a strong bond with Emily, who works at the saloon. He appreciates her hard work and sees her as an essential part of the saloon’s success."
+          },
+          {
+            "id": "Sam and Sebastian",
+            "Heading": "Sam and Sebastian",
+            "Description": "Gus observes the friendly rivalry between Sam and Sebastian at billiards, finding amusement in their weekly games."
+          },
+          {
+            "id": "Pam",
+            "Heading": "Pam",
+            "Description": "Gus struggles with how to manage Pam’s drinking habits, often limiting her drinks but acknowledging that she sometimes finds ways around this."
+          },
+          {
+            "id": "The Player",
+            "Heading": "The Player",
+            "Description": "Gus is friendly and supportive of the player, offering advice, encouragement, and occasional free drinks. He enjoys hearing about the player’s experiences and challenges."
+          }
+        ],
+        "Traits":[
+          {
+            "id": "Empathetic",
+            "Heading": "Empathetic",
+            "Description": "Gus is deeply empathetic, always ready to offer a kind word or a listening ear. He understands the struggles of his customers and does his best to support them."
+          },
+          {
+            "id": "Jovial",
+            "Heading": "Jovial",
+            "Description": "Despite his occasional serious moments, Gus has a light-hearted and jovial nature. He enjoys making people laugh and creating a pleasant atmosphere."
+          },
+          {
+            "id": "Responsible",
+            "Heading": "Responsible",
+            "Description": "Gus takes his responsibilities seriously, whether it’s running the saloon or managing the well-being of his customers."
+          },
+          {
+            "id": "Philosophical",
+            "Heading": "Philosophical",
+            "Description": "Gus often reflects on deeper questions of life, such as the impact of his work on his customers and the balance between personal freedom and responsibility."
+          }
+        ],
+        "BiographyEnd": "**Future Aspirations:**\nGus aims to continue running the Stardrop Saloon, making it a place where people can find joy, comfort, and community. He hopes to maintain the spirit of his late wife’s dream and spread happiness through his culinary and social contributions to Pelican Town.\n\nGus is a multifaceted character with a deep love for his work, a strong sense of community, and a complex emotional landscape shaped by his past experiences. His presence in Stardew Valley adds depth and warmth to the town, making him a beloved figure among the residents.",
+        "ExtraPortraits": {},
+        "Unique": "",
+        "Preoccupations": [
+          "business at the Saloon",
+          "new unique recipes",
+          "his wife",
+          "Emily working for him",
+          "Pam's alcoholism",
+          "Shane's depression",
+          "the Pelican Town community",
+          "his famous omlette"
+        ],
+        "Dialogue": {},
+        "HomeLocationBed": false
+      }
+    }
+  ]
+}

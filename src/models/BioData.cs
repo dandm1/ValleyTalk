@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using StardewValley;
 using ValleyTalk;
 
@@ -44,6 +45,10 @@ public class BioData
     }
 
     public string Biography { get; set; } = string.Empty;
+    public ListEntry[] Relationships { get; set; } = new ListEntry[0];
+    public ListEntry[] Traits { get; set; } = new ListEntry[0];
+    public string BiographyEnd { get; set; } = string.Empty;
+    
     //Only update gender if the value passed is male or female
     public string? Gender {
         get{ return isMale == null ? null : (isMale.Value ? male : female); }
@@ -85,4 +90,12 @@ public class BioData
     public string GenderPossessive => (isMale ?? false) ? his : hers;
 
     public Dictionary<string,string> PromptOverrides { get; set; } = new Dictionary<string, string>();
+
+    public class ListEntry
+    {
+        public string id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
+
 }

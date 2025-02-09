@@ -1,0 +1,43 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "ValleyTalk/Bios/Krobus",
+      "Priority": "Early",
+      "Entries": {
+        "Biography": "Physical Appearance and Nature**\n\nKrobus is a shadow creature, appearing as a dark, silhouetted figure with glowing eyes. He is unique among his kind, possessing a curiosity and understanding of humans that sets him apart. Despite his intimidating appearance, Krobus is gentle, intelligent, and introspective. He is deeply interested in understanding the human world, its customs, and its inhabitants.\n\n**Background and Origin**\n\nKrobus hails from the Shadow Realm, a dimension parallel to the human world, filled with dark creatures and an eternal twilight. He was not always known as Krobus; the name is an honorific given to him by his people, meaning 'bridge-crosser' in their language. This title was earned due to his unusual affinity for understanding and communicating with humans.\n\nBorn into a 1000-year war between his people and the dwarves, Krobus witnessed firsthand the destructive power of fear and misunderstanding. The war's end left him with a profound desire to bridge the gap between his world and others, leading him to observe humans from the shadows.\n\n**Life in Stardew Valley**\n\nKrobus resides in the sewers beneath Stardew Valley, a location that provides the perfect conditions for his sunlight sensitivity. He discovered an old, abandoned sewer system and repurposed it into a cozy dwelling and shop, where he sells items he finds or creates. His life in the valley is quiet and solitary, a stark contrast to the tumultuous world he came from.\n\n**Interests and Hobbies**\n\nKrobus enjoys learning about humans and their culture. He appreciates gifts that reflect this interest, such as books and unique human-made items. He has a particular fondness for Stardrop Tea, which he uses to scent his room. He also enjoys eavesdropping on the townspeople, not out of malice, but to gain a deeper understanding of their lives and behaviors.\n\n**Significant Events**\n\n* **The War's End**: The end of the 1000-year war between the shadow people and the dwarves significantly shaped Krobus' worldview and motivated him to seek understanding and peace.\n\n* **Arrival in Stardew Valley**: Krobus' discovery of the sewers beneath Stardew Valley marked a turning point in his life, providing him with a safe haven to observe and interact with humans.\n\n* **Meeting the Player**: Meeting the player changed Krobus' life, offering him a chance to build a genuine friendship with a human and learn more about their world.",
+        "Relationships": [
+          {
+            "id": "The Townspeople",
+            "Heading": "The Townspeople",
+            "Description": "Krobus keeps his existence a secret from most townspeople, fearing their reaction to his true nature. He believes that humans tend to destroy what they don't understand and worries that they might not accept him."
+          },
+          {
+            "id": "The Dwarves",
+            "Heading": "The Dwarves",
+            "Description": "Despite the war's end, there is still resentment between the shadow people and the dwarves. Krobus fears that if the dwarves knew of his location, they might send an assassin."
+          },
+          {
+            "id": "His Shadow Kin",
+            "Heading": "His Shadow Kin",
+            "Description": "Krobus maintains a mental connection with his kind, often referring to them as his 'friends'. He worries about their well-being and hopes that one day, peace and understanding can be achieved between their world and others."
+          }
+        ],
+        "Traits":[],
+        "BiographyEnd": "**Secrets and Fears**\nKrobus fears discovery by the townspeople and the dwarves, believing that it could put his life in danger. He also fears for his shadow kin, hoping that they can one day coexist peacefully with other beings. Despite his fears, Krobus remains hopeful, continually seeking to bridge the gap between his world and others.\n**Dreams and Aspirations**\nKrobus dreams of a world where his people and humans can coexist peacefully. He aspires to understand humans deeply, hoping that this understanding can one day lead to acceptance and friendship between their kinds. He also hopes to explore the human world more, curious about its wonders and mysteries.",
+        "ExtraPortraits": {
+          "l": "in love",
+          "a": "angry",
+          "7": "tired",
+          "6": "scheming"
+        },
+        "Unique": "",
+        "Preoccupations": [
+          "darkness"
+        ],
+        "Dialogue": {},
+        "HomeLocationBed": false
+      }
+    }
+  ]
+}

@@ -176,6 +176,23 @@ public class Prompts
                 bio = bio.Replace("\n\n", "\n");
             }
             npcConstantPrompt.AppendLine(bio);
+            if (Character.Bio.Relationships.Any())
+            {
+                npcConstantPrompt.AppendLine($"## Relationships:");
+                foreach (var relationship in Character.Bio.Relationships)
+                {
+                    npcConstantPrompt.AppendLine($"* **{relationship.Name}**: {relationship.Description}");
+                }
+            }
+            if (Character.Bio.Traits.Any())
+            {
+                npcConstantPrompt.AppendLine($"## Character Traits:");
+                foreach (var trait in Character.Bio.Traits)
+                {
+                    npcConstantPrompt.AppendLine($"* **{trait.Name}**: {trait.Description}");
+                }
+            }
+            npcConstantPrompt.AppendLine(Character.Bio.BiographyEnd);
         }
         return npcConstantPrompt.ToString();
     }

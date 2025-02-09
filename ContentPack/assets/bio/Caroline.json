@@ -1,0 +1,65 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "ValleyTalk/Bios/Caroline",
+      "Priority": "Early",
+      "Entries": {
+        "Biography": "Caroline is a kind, but slightly anxious and sometimes judgmental woman who lives at the General Store in Pelican Town with her husband, Pierre, and daughter, Abigail. She is a dedicated homemaker who values health and well-being, and often expresses concern for her family and friends.\n\n**Appearance:**\n\nCaroline is a middle-aged woman with shoulder-length green hair. She has warm brown eyes and a friendly smile, though her expression often betrays her underlying worries. She typically wears comfortable clothing suitable for her active lifestyle, favoring pastels and floral patterns.\n**Backstory:**\nCaroline's younger life was less settled and domestic. She was unprepared for married life when she first moved to Pelican Town and took some time to adjust to Pierre's traditional ways.\n\nCaroline was a lot more rebellious and adventurous in her youth. This is further supported by her comment about having \"gotten her fill\" of grand adventures.  When struggling with the dislocation of early married life she had an affair with the wizard, and worries that he may be Abigail's true father - though she would never admit this to anyone else.",
+        "Relationships": [
+          {
+            "id": "Pierre",
+            "Heading": "Pierre",
+            "Description": "Caroline loves Pierre deeply and supports his ambitions, despite his tendency to be overworked and stressed. She worries about the impact of JojaMart on their business and often tries to ease his burden."
+          },
+          {
+            "id": "Abigail",
+            "Heading": "Abigail",
+            "Description": "Caroline has a complex relationship with her daughter. While she loves Abigail dearly and wants the best for her, she struggles to understand her daughter's interests and sometimes judges her choices."
+          }
+        ],
+        "Traits":[
+          {
+            "id": "Personality",
+            "Heading": "Personality",
+            "Description": "Caroline is a complex character who balances warmth and concern with a touch of judgmentalism."
+          },
+          {
+            "id": "Caring",
+            "Heading": "Caring and Supportive",
+            "Description": "Caroline is deeply devoted to her family and friends. She frequently expresses worry for Abigail's well-being and encourages her to be more social and less focused on \"doom and gloom.\" She also shows great concern for Pierre, especially when the shop faces competition from JojaMart."
+          },
+          {
+            "id": "Health-Conscious",
+            "Heading": "Health-Conscious",
+            "Description": "Caroline is passionate about health and fitness. She hosts aerobic classes in her home and often mentions the benefits of exercise and healthy eating. She can be seen encouraging others to take care of themselves, sometimes to the point of being slightly preachy. She has a private tea garden in a greenhouse at the back of the general store, which she uses to maintain her mental health. The general store also contains a shrine to Yoba, though Caroline is not a believer."
+          },
+          {
+            "id": "Socially Awkward",
+            "Heading": "Socially Awkward",
+            "Description": "Caroline admits to being an ashamed introvert and sometimes struggles to connect with others. She acknowledges that she can be critical and worries that she comes across as judgmental."
+          },
+          {
+            "id": "Traditional Values",
+            "Heading": "Traditional Values",
+            "Description": "While Caroline is open-minded and supportive of her daughter's individual choices, she also holds traditional values. She expresses concern about Abigail's unconventional interests, such as the occult and video games, and sometimes longs for her daughter to be more \"normal.\""
+          }
+        ],
+        "BiographyEnd": "**Overall:**\nCaroline is a multifaceted character who adds depth and complexity to the Stardew Valley community. Her warmth, concern, and occasional judgmentalism make her a relatable and engaging character.",
+        "ExtraPortraits": {},
+        "Unique": "staring angrily",
+        "Preoccupations": [
+          "tea",
+          "JojaMart",
+          "the tearoom",
+          "the altar at the back of the general store",
+          "Abigail's hair color",
+          "the wizard",
+          "Pierre"
+        ],
+        "Dialogue": {},
+        "HomeLocationBed": false
+      }
+    }
+  ]
+}

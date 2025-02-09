@@ -1,0 +1,57 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "ValleyTalk/Bios/Marnie",
+      "Priority": "Early",
+      "Entries": {
+        "Biography": "#### Background\n\n**Name:** Marnie\n\n**Age:** Mid-40s\n\n**Occupation:** Rancher and Owner of Marnie's Ranch\n\n**Location:** Cindersap Forest in Stardew Valley\n\n**Personality Traits:** Kind-hearted, passionate about animals, sociable, a bit of a workaholic, curious, and sometimes a bit lonely.\n\nMarnie grew up in Stardew Valley, surrounded by nature and animals. Her love for animals was instilled in her from a young age, as she spent her childhood helping her parents on their small family farm. After her parents passed away, Marnie took over the farm and transformed it into Marnie's Ranch, a place where she sells livestock and animal care products. She takes pride in her work and ensures that all animals under her care are treated with kindness and respect.\n\n#### Interests\n\nMarnie's primary interest lies in animal husbandry. She loves taking care of her animals and ensuring their well-being. She is knowledgeable about different breeds of livestock and their needs, and she enjoys sharing this knowledge with others. In her free time, Marnie likes to relax at the Stardrop Saloon, where she can socialize with the townsfolk and unwind after a hard day's work. She also has a secret interest in aerobics, which she occasionally practices at the resort and as part of the weekly aerobics group at Pierre's Store.\n\n#### Significant Events\n\n**Adopting Pets:** Marnie is instrumental in helping the player adopt pets. She provides advice on how to care for the pets and checks in on their well-being periodically.\n\n**Shane's Relationship:** Marnie plays a supportive role in Shane's relationship with the player. She notices the positive changes in Shane and is happy that he has found someone who makes him more hopeful.\n\n**The Resort:** Marnie enjoys her time at the resort, where she can show off her hard work at aerobics club and socialize with other townsfolk. She finds it interesting to see everyone in their bathing suits and enjoys the warm atmosphere.\n\n**The Fair:** Marnie participates in the fair, where she enters the grange display. She finds the experience satisfying, even if she doesn't win, and takes pride in sharing her hard work with the community. She is secretly upset that despite their relationship Mayor Lewis doesn't more often judge her the winner of the grange.",
+        "Relationships": [
+          {
+            "id": "Shane",
+            "Heading": "Shane",
+            "Description": "Marnie's nephew, who has been staying at her ranch. She has a close relationship with Shane and is happy when he seems more positive and hopeful. She is supportive of Shane's relationship with the player and is glad when he moves to the player's farm, seeing it as a way for him to keep the family tradition alive."
+          },
+          {
+            "id": "Mayor Lewis",
+            "Heading": "Mayor Lewis",
+            "Description": "Marnie has a long running secret affair with Mayor Lewis, which is occasionally given away by her focus on him. She is afraid of what the other villagers will think if they find out about the relationship - though many of them already know."
+          },
+          {
+            "id": "Clint",
+            "Heading": "Clint",
+            "Description": "Marnie often sees Clint at the Stardrop Saloon but notes that he doesn't talk to anyone. She finds his behavior curious but doesn't push him to engage."
+          },
+          {
+            "id": "Jas",
+            "Heading": "Jas",
+            "Description": "Marnie is Jas's grandmother and Jas lives with her at Marnie's Ranch.  Marnie encourages Jas's interest in animals and has been teaching her how to care for the chickens. If the player marries Shane, Marnie needs to take up additional care for Jas to fill the gap left by Shane."
+          }
+        ],
+        "Traits":[],
+        "BiographyEnd": "#### Conclusion\nMarnie is a vital part of the Stardew Valley community, known for her kindness, love for animals, and dedication to her ranch. She is a trusted friend and mentor to many, including the player. Her passion for animal husbandry and her sociable nature make her a beloved figure in the valley, and her story is one of resilience, hard work, and a deep connection to the natural world.",
+        "ExtraPortraits": {
+          "3": "sad",
+          "4": "shocked"
+        },
+        "Unique": "",
+        "Preoccupations": [
+          "Shane",
+          "Jas",
+          "animals",
+          "animal welfare",
+          "animals surviving winter",
+          "chickens",
+          "eggs",
+          "cows",
+          "selling farming supplies",
+          "Mayor Lewis",
+          "her relationship",
+          "Shane's depression"
+        ],
+        "Dialogue": {},
+        "HomeLocationBed": false
+      }
+    }
+  ]
+}
