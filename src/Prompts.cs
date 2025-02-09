@@ -50,6 +50,27 @@ public class Prompts
 
     }
 
+    private static string _promptLocaleCache = string.Empty;
+    private static Dictionary<string,string> _promptCache = null;
+    public static Dictionary<string,string> PromptCache => RefreshPromptCache();
+    private static Dictionary<string,string> RefreshPromptCache()
+    {
+        if (_promptLocaleCache != ModEntry.Language || _promptCache != null )
+        {
+            _promptLocaleCache = ModEntry.Language;
+            _promptCache = new Dictionary<string,string>();
+            var promptDict = Game1.content.LoadLocalized<Dictionary<string,object>>("ValleyTalk/Prompts");
+            foreach (var entry in promptDict)
+            {
+                if (entry.Value is string && !entry.Value.ToString().StartsWith("(no translation"))
+                {
+                    _promptCache.Add(entry.Key, entry.Value.ToString());
+                }
+            }
+        }
+        return _promptCache;
+    }
+
     [JsonIgnore]
     static string _stardewSummary;
     private string _system;

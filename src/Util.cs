@@ -1,3 +1,4 @@
+using StardewDialogue;
 using StardewValley;
 using System;
 using System.Collections.Generic;
@@ -64,15 +65,15 @@ namespace ValleyTalk
             string result = null;
             if (npc.Bio.IsMale ?? false)
             {
-                result = Game1.content.LoadLocalized<string>("ValleyTalk/Prompts/"+key+".MaleNpc");
+                Prompts.PromptCache.TryGetValue($"{key}.MaleNpc", out result);
             }
             else if (!(npc.Bio.IsMale ?? true))
             {
-                result = Game1.content.LoadLocalized<string>("ValleyTalk/Prompts/"+key+".FemaleNpc");
+                Prompts.PromptCache.TryGetValue($"{key}.FemaleNpc", out result);
             }
             if (result == null)
             {
-                result = Game1.content.LoadLocalized<string>("ValleyTalk/Prompts/"+key);
+                Prompts.PromptCache.TryGetValue(key, out result);
             }
             
             if (returnNull && result == null)
@@ -81,7 +82,7 @@ namespace ValleyTalk
             }
 
             // Replace tokens
-            if (tokens != null)
+            if (tokens != null && result != null)
             {
                 foreach (var token in tokens.GetType().GetProperties())
                 {
