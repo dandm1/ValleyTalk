@@ -3,7 +3,7 @@
     "Author": "dandm1",
     "Version": "0.13.0",
     "Description": "Infinite dialogue for Stardew Valley",
-    "UniqueID": "dandm1.[CP]ValleyTalk",
+    "UniqueID": "dandm1.ValleyTalkCP",
     "MinimumApiVersion": "4.1.0",
     "UpdateKeys": [ "Nexus:30319" ],
     "ContentPackFor": {
