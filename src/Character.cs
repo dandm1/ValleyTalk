@@ -78,7 +78,7 @@ public class Character
     private void LoadDialogue()
     {
         Dictionary<string, string> canonDialogue = new();
-        if (ModEntry.BlockModdedContent)
+        if (ModEntry.BlockModdedContent && !Bio.UsePatchedDialogue)
         {
             var manager = new ContentManager(Game1.content.ServiceProvider, Game1.content.RootDirectory);
             try

@@ -90,6 +90,7 @@ public class BioData
     public string GenderPossessive => (isMale ?? false) ? his : hers;
 
     public Dictionary<string,string> PromptOverrides { get; set; } = new Dictionary<string, string>();
+    public bool UsePatchedDialogue { get; set; } = false;
 
     public class ListEntry
     {
