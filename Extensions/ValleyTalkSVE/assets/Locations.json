@@ -1,0 +1,23 @@
+{
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/GameSummary",
+        "TargetField": [ "Locations" ],
+        "Entries": {
+            "BlueMoonVineyard": {
+            "id": "BlueMoonVineyard",
+            "Region": "Cindersap Forest",
+            "Name": "Blue Moon Vineyard",
+            "Description": "The Blue Moon Vineyard is a farm that specializes in the production of wine. Run by Sophia since the death of her parents."
+          },
+          "CindersapForest": {
+            "id": "CindersapForest",
+            "Region": "Cindersap Forest",
+            "Name": "Cindersap Forest",
+            "Description": "Contains Leah's Cottage, Marnie's Ranch, the Wizard's Tower, the Blue Moon Vineyard and Fairhaven Farm.  It is visted on Fridays and Sundays by a traveling cart which sells rare items."
+          }
+          }
+       }
+    ]
+}

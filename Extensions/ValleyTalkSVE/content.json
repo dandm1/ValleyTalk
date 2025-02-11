@@ -1,0 +1,110 @@
+{
+    "Format": "2.3.0",
+    "Changes": [
+        {
+            "Action": "Load",
+            "Target": "ValleyTalk/Bios/Sophia,ValleyTalk/Bios/Alesia,ValleyTalk/Bios/Camilla,ValleyTalk/Bios/Claire,ValleyTalk/Bios/Gunther,ValleyTalk/Bios/Hank,ValleyTalk/Bios/Henchman,ValleyTalk/Bios/Issac,ValleyTalk/Bios/Jadu,ValleyTalk/Bios/Jolyne,ValleyTalk/Bios/Marlon,ValleyTalk/Bios/Martin,ValleyTalk/Bios/Morgan,ValleyTalk/Bios/Olivia,ValleyTalk/Bios/Peaches,ValleyTalk/Bios/Scarlett,ValleyTalk/Bios/Treyvon,ValleyTalk/Bios/Victor,ValleyTalk/Bios/Susan,ValleyTalk/Bios/Apples,ValleyTalk/Bios/Morris,ValleyTalk/Bios/Lance,ValleyTalk/Bios/Andy",
+            "FromFile": "assets/Empty.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/Locations.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/GameSummary.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Sophia.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Alesia.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Camilla.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Claire.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Gunther.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Hank.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Henchman.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Issac.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Jadu.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Jolyne.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Marlon.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Martin.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Morgan.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Olivia.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Peaches.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Scarlett.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Treyvon.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Victor.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Susan.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Apples.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Morris.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Lance.json"
+        },
+        {
+            "Action": "Include",
+            "FromFile": "assets/bio/Andy.json"
+        }
+    ]
+}

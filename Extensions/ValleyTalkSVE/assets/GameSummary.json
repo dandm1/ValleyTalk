@@ -1,0 +1,21 @@
+{
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/GameSummary",
+        "TargetField": [ "Villagers" ],
+        "Entries": {
+          "Alesia": { 
+            "Id": "Alesia",
+            "Name": "Alesia",
+            "Description": "TBC."
+          },
+          "Camilla": { 
+            "Id": "Camilla",
+            "Name": "Camilla",
+            "Description": "TBC."
+          }
+          }
+       }
+    ]
+}
