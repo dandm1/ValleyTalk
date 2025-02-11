@@ -161,19 +161,8 @@ public class Character
 
     private void LoadEventHistory()
     {
-        var eventKey = $"EventHistory_{Name}";
-        try
-        {
-            var history = ModEntry.SHelper.Data.ReadSaveData<StardewEventHistory>(eventKey);
-            if (history != null)
-            {
-                eventHistory = history;
-            }
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, $"Error loading event history for {Name}");
-        }
+        eventHistory = EventHistoryReader.Instance.GetEventHistory(Name);
+
     }
 
     public async Task<string[]> CreateBasicDialogue(DialogueContext context)
@@ -450,7 +439,7 @@ public class Character
     internal void AddHistory(IHistory theEvent, StardewTime time)
     {
         eventHistory.Add(time,theEvent);
-        ModEntry.SHelper.Data.WriteSaveData($"EventHistory_{Name}", eventHistory);
+        EventHistoryReader.Instance.UpdateEventHistory(Name, eventHistory);
     }
 
     internal bool MatchLastDialogue(List<StardewValley.DialogueLine> dialogues)
