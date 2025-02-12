@@ -202,7 +202,13 @@ namespace ValleyTalk
 
         private static void SetLlm()
         {
-            Llm.SetLlm(ModEntry.LlmMap[ModEntry.Config.Provider], apiKey: ModEntry.Config.ApiKey, modelName: ModEntry.Config.ModelName, url: ModEntry.Config.ServerAddress, promptFormat: ModEntry.Config.PromptFormat);
+            if (!ModEntry.LlmMap.TryGetValue(ModEntry.Config.Provider, out var llmType))
+            {
+                ModEntry.SMonitor.Log($"Invalid LLM provider: {ModEntry.Config.Provider}", LogLevel.Error);
+                return;
+            }
+
+            Llm.SetLlm(llmType, apiKey: ModEntry.Config.ApiKey, modelName: ModEntry.Config.ModelName, url: ModEntry.Config.ServerAddress, promptFormat: ModEntry.Config.PromptFormat);
         }
     }
 }
