@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 using System.Net;
+using System.Collections;
 namespace ValleyTalk
 {
     public partial class ModEntry : Mod
@@ -133,7 +134,7 @@ namespace ValleyTalk
             Log.Debug($"###############################################");
 #endif
             // Build dictionary of LLM types (things that inherit from the LLM class)
-            LlmMap = new Dictionary<string, Type>
+            LlmMap = new Dictionary<string, Type>(StringComparer.InvariantCultureIgnoreCase)
             {
 #if DEBUG
                 {"Dummy", typeof(LlmDummy)},
