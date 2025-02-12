@@ -8,6 +8,7 @@ using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
 using System.ComponentModel;
+using StardewModdingAPI;
 
 namespace StardewDialogue;
 
@@ -575,7 +576,7 @@ public class Prompts
         var bedTile = npcData.Home[0].Tile;
         if (Context.Location == npcData.Home[0].Location && Context.Inlaw != Name)
         {
-            if (Character.StardewNpc.TilePoint == bedTile && Character.Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel)
+            if (Character.StardewNpc.TilePoint == bedTile && Character.Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel && StardewModdingAPI.Context.IsMainPlayer)
             {
                 prompt.AppendLine(Util.GetString(Character,"locationBed", new { Name= Name }));
             }
