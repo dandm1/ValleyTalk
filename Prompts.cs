@@ -7,8 +7,6 @@ using System.Text.Json.Serialization;
 using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
-using System.ComponentModel;
-using StardewModdingAPI;
 
 namespace StardewDialogue;
 
@@ -582,7 +580,6 @@ public class Prompts
             }
             else
             {
-                
                 var mayBeInShop = Context.Location.Contains("Shop", StringComparison.OrdinalIgnoreCase)
                     || Context.Location.Contains("Science", StringComparison.OrdinalIgnoreCase);
                 var inShopString = mayBeInShop ? Util.GetString(Character,"locationAtHomeOrShop") : "";
