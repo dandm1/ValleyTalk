@@ -12,6 +12,11 @@ using System.Linq;
 using System.Globalization;
 using System.Net;
 using System.Collections;
+using Serilog.Events;
+using Serilog.Core;
+#if ANDROID
+using StardewValley.Menus;
+#endif
 namespace ValleyTalk
 {
     public partial class ModEntry : Mod
@@ -116,7 +121,7 @@ namespace ValleyTalk
             if (Config.Debug)
             {
                 Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Console()
+                    .WriteTo.Sink(new StardewLogger(Monitor))
                     .WriteTo.File("Generation.log", rollingInterval: RollingInterval.Day)
                     .MinimumLevel.Debug()
                     .CreateLogger();
@@ -125,7 +130,7 @@ namespace ValleyTalk
             {
 #endif
                 Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Console()
+                    .WriteTo.Sink(new StardewLogger(Monitor))
                     .CreateLogger();
 #if DEBUG
             }
@@ -187,6 +192,43 @@ namespace ValleyTalk
         private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
         {
             ModConfigMenu.Register(this);
+        }
+    }
+
+    internal class StardewLogger : ILogEventSink
+    {
+        private readonly IMonitor sMonitor;
+
+        public StardewLogger(IMonitor sMonitor)
+        {
+            this.sMonitor = sMonitor;
+        }
+
+        public void Emit(LogEvent logEvent)
+        {
+            LogLevel stardewLevel;
+            switch (logEvent.Level)
+            {
+                case LogEventLevel.Debug:
+                    stardewLevel = LogLevel.Debug;
+                    break;
+                case LogEventLevel.Information:
+                    stardewLevel = LogLevel.Info;
+                    break;
+                case LogEventLevel.Warning:
+                    stardewLevel = LogLevel.Warn;
+                    break;
+                case LogEventLevel.Error:
+                    stardewLevel = LogLevel.Error;
+                    break;
+                case LogEventLevel.Fatal:
+                    stardewLevel = LogLevel.Error;
+                    break;
+                default:
+                    stardewLevel = LogLevel.Trace;
+                    break;
+            }
+            sMonitor.Log(logEvent.RenderMessage(), stardewLevel);
         }
     }
 }
