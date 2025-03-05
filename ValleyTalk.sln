@@ -5,8 +5,6 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValleyTalk", "src/ValleyTalk.csproj", "{2FBFEBE4-CB53-46D7-94F9-DFEEAF974860}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValleyTalkCP", "ContentPack/ValleyTalkCP.csproj", "{BA64331F-A9AF-4F9F-99F4-6642AA25B557}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

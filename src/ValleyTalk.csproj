@@ -16,6 +16,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ContentPacks Include="ContentPack" Version="$(Version)" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="newtonsoft.json" Version="13.0.3" />
     <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
     <PackageReference Include="Polly.Core" Version="8.4.2" />
