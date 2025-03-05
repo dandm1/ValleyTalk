@@ -1,4 +1,5 @@
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public enum Weekday
 {
@@ -10,4 +11,5 @@ public enum Weekday
     Sat,
     Sun,
     Generic
+}
 }

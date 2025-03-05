@@ -1,4 +1,5 @@
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public enum RandomAction
 {
@@ -10,4 +11,5 @@ public enum RandomAction
     Good,
     Neutral,
     Bad
+}
 }

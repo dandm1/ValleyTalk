@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class LlmLlamaCpp : Llm
 {
@@ -38,7 +40,7 @@ internal class LlmLlamaCpp : Llm
         var fullPrompt = BuildPrompt(systemPromptString, promptString, responseStart);
         // Create a JSON object with the prompt and other parameters
         var json = new StringContent(
-            System.Text.Json.JsonSerializer.Serialize(new
+            JsonConvert.SerializeObject(new
             {
                 prompt = fullPrompt,
                 n_predict = n_predict,
@@ -66,9 +68,9 @@ internal class LlmLlamaCpp : Llm
                 var response = await client.PostAsync(url, json);
                 // Return the 'content' element of the response json
                 var responseString = await response.Content.ReadAsStringAsync();
-                var responseJson = JsonDocument.Parse(responseString);
+                var responseJson = JObject.Parse(responseString);
                 
-                var token_stats = responseJson.RootElement.GetProperty("timings");
+                var token_stats = responseJson["timings"];
                 AddToStats(token_stats);
                 
                 if (responseJson == null)
@@ -77,7 +79,7 @@ internal class LlmLlamaCpp : Llm
                 }
                 else
                 {
-                    return responseJson.RootElement.GetProperty("content").GetString() ?? string.Empty;
+                    return responseJson["content"]?.ToString() ?? string.Empty;
                 }
             }
             catch(Exception ex)
@@ -95,7 +97,7 @@ internal class LlmLlamaCpp : Llm
     {
       // Create a JSON object with the prompt and other parameters
         var json = new StringContent(
-            System.Text.Json.JsonSerializer.Serialize(new
+            JsonConvert.SerializeObject(new
             {
                 prompt = fullPrompt,
                 n_predict = n_predict,
@@ -126,9 +128,9 @@ internal class LlmLlamaCpp : Llm
                 var response = client.PostAsync(url, json).Result;
                 // Return the 'content' element of the response json
                 var responseString = response.Content.ReadAsStringAsync().Result;
-                var responseJson = System.Text.Json.JsonDocument.Parse(responseString);
+                var responseJson = JObject.Parse(responseString);
                 
-                var token_stats = responseJson.RootElement.GetProperty("timings");
+                var token_stats = responseJson["timings"];
                 AddToStats(token_stats);
                 if (responseJson == null)
                 {
@@ -137,18 +139,27 @@ internal class LlmLlamaCpp : Llm
                 else
                 {
                     var result = new List<Dictionary<string, double>>();
-                    var probs = responseJson.RootElement.GetProperty("completion_probabilities");
-                    foreach (var prob in probs.EnumerateArray())
+                    var probs = responseJson["completion_probabilities"] as JArray;
+                    if (probs != null)
                     {
-                        var probDict = new Dictionary<string,double>();
-                        foreach (var prop in prob.GetProperty("probs").EnumerateArray())
+                        foreach (var prob in probs)
                         {
-                            if (prop.TryGetProperty("tok_str", out var token) && prop.TryGetProperty("prob", out var probability))
+                            var probDict = new Dictionary<string,double>();
+                            var probsArray = prob["probs"] as JArray;
+                            if (probsArray != null)
                             {
-                                probDict[token.GetString() ?? string.Empty] = probability.GetDouble();
+                                foreach (var prop in probsArray)
+                                {
+                                    var token = prop["tok_str"]?.ToString();
+                                    var probability = prop["prob"]?.Value<double>() ?? 0;
+                                    if (!string.IsNullOrEmpty(token))
+                                    {
+                                        probDict[token] = probability;
+                                    }
+                                }
                             }
+                            result.Add(probDict);
                         }
-                        result.Add(probDict);
                     }
                     return result.ToArray();
                 }
@@ -164,4 +175,5 @@ internal class LlmLlamaCpp : Llm
         return Array.Empty<Dictionary<string, double>>();
     }
 
+}
 }

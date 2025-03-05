@@ -1,6 +1,7 @@
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class LlmMistral : LlmOpenAiBase, IGetModelNames
 {
@@ -24,4 +25,5 @@ internal class LlmMistral : LlmOpenAiBase, IGetModelNames
         }
         return CoreGetModelNames();
     }
+}
 }

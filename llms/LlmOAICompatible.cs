@@ -1,6 +1,7 @@
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class LlmOAICompatible : LlmOpenAiBase, IGetModelNames
 {
@@ -24,4 +25,5 @@ internal class LlmOAICompatible : LlmOpenAiBase, IGetModelNames
     {
         return CoreGetModelNames();
     }
+}
 }

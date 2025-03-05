@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal abstract class Llm
 {
@@ -112,12 +114,12 @@ internal abstract class Llm
     
     internal abstract Dictionary<string,double>[] RunInferenceProbabilities(string fullPrompt,int n_predict = 1);
 
-    protected void AddToStats(JsonElement token_stats)
+    protected void AddToStats(JToken token_stats)
     {
-        _totalPrompts += token_stats.GetProperty("prompt_n").GetInt32();
-        _totalPromptTime += token_stats.GetProperty("prompt_ms").GetDouble();
-        _totalInference += token_stats.GetProperty("predicted_n").GetInt32();
-        _totalInferenceTime += token_stats.GetProperty("predicted_ms").GetDouble();
+        _totalPrompts += token_stats["prompt_n"].Value<int>();
+        _totalPromptTime += token_stats["prompt_ms"].Value<double>();
+        _totalInference += token_stats["predicted_n"].Value<int>();
+        _totalInferenceTime += token_stats["predicted_ms"].Value<double>();
     }
 
     internal double[] GetProbabilities(string prompt, string[][] options)
@@ -168,4 +170,5 @@ internal abstract class Llm
         }
         return result;
     }
+}
 }

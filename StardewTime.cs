@@ -2,7 +2,8 @@ using System;
 using StardewValley;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class StardewTime : IComparable<StardewTime>
 {
@@ -69,43 +70,69 @@ internal class StardewTime : IComparable<StardewTime>
         double days = DaysSince(other);
         var thisSeasonKey = Utility.getSeasonKey(this.season);
         var seasonDisplay = Game1.content.LoadString("Strings\\StringsFromCSFiles:" + thisSeasonKey);
-        return days switch
+        
+        if (days < 0)
         {
-            < 0 => Util.GetString("timeInTheFuture"),
-            < (double)1/120 => Util.GetString("timeJustNow"),
-            < (double)1/24 => Util.GetString("timeInTheLastHour"),
-            < 1 => other.dayOfMonth == dayOfMonth ? Util.GetString("timeEarlierToday") : Util.GetString("timeYesterday"),
-            < 14 => Util.GetString("timeDaysAgo", new {days = (int)days}),
-            < 56 => Util.GetString("timeDaysAgoSeasonDay", new {days = (int)days, day = this.dayOfMonth, season = seasonDisplay}),
-            < 112 => other.year == year ? 
-                        Util.GetString("timeEarlierThisYear", new {day = this.dayOfMonth, season = seasonDisplay})
-                      : Util.GetString("timeLastYear", new {day = this.dayOfMonth, season = seasonDisplay}),
-            _ => Util.GetString("timeALongTimeAgo", new {day = this.dayOfMonth, season = seasonDisplay, year = this.year})
-        };
+            return Util.GetString("timeInTheFuture");
+        }
+        else if (days < (double)1/120)
+        {
+            return Util.GetString("timeJustNow");
+        }
+        else if (days < (double)1/24)
+        {
+            return Util.GetString("timeInTheLastHour");
+        }
+        else if (days < 1)
+        {
+            return other.dayOfMonth == dayOfMonth ? Util.GetString("timeEarlierToday") : Util.GetString("timeYesterday");
+        }
+        else if (days < 14)
+        {
+            return Util.GetString("timeDaysAgo", new {days = (int)days});
+        }
+        else if (days < 56)
+        {
+            return Util.GetString("timeDaysAgoSeasonDay", new {days = (int)days, day = this.dayOfMonth, season = seasonDisplay});
+        }
+        else if (days < 112)
+        {
+            return other.year == year ? 
+                   Util.GetString("timeEarlierThisYear", new {day = this.dayOfMonth, season = seasonDisplay})
+                 : Util.GetString("timeLastYear", new {day = this.dayOfMonth, season = seasonDisplay});
+        }
+        else
+        {
+            return Util.GetString("timeALongTimeAgo", new {day = this.dayOfMonth, season = seasonDisplay, year = this.year});
+        }
     }
 
     private static int SeasonToInt(StardewValley.Season season)
     {
-        return season switch
-        {
-            StardewValley.Season.Spring => 0,
-            StardewValley.Season.Summer => 1,
-            StardewValley.Season.Fall => 2,
-            StardewValley.Season.Winter => 3,
-            _ => throw new Exception("Invalid season")
-        };
+        if (season == StardewValley.Season.Spring)
+            return 0;
+        else if (season == StardewValley.Season.Summer)
+            return 1;
+        else if (season == StardewValley.Season.Fall)
+            return 2;
+        else if (season == StardewValley.Season.Winter)
+            return 3;
+        else
+            throw new Exception("Invalid season");
     }
 
     private static StardewValley.Season IntToSeason(int season)
     {
-        return season switch
-        {
-            0 => StardewValley.Season.Spring,
-            1 => StardewValley.Season.Summer,
-            2 => StardewValley.Season.Fall,
-            3 => StardewValley.Season.Winter,
-            _ => throw new Exception("Invalid season")
-        };
+        if (season == 0)
+            return StardewValley.Season.Spring;
+        else if (season == 1)
+            return StardewValley.Season.Summer;
+        else if (season == 2)
+            return StardewValley.Season.Fall;
+        else if (season == 3)
+            return StardewValley.Season.Winter;
+        else
+            throw new Exception("Invalid season");
     }
 
     internal StardewTime AddDays(int offset)
@@ -156,4 +183,5 @@ internal class StardewTime : IComparable<StardewTime>
         }
         return timeOfDay - other.timeOfDay;
     }
+}
 }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using static StardewValley.LocalizedContentManager;
+using StardewValley;
 
 namespace ValleyTalk
 {
@@ -10,21 +10,21 @@ namespace ValleyTalk
         internal static readonly string[] PermitListContentPacks = 
         new string[] {};
 
-        public static Dictionary<LanguageCode,string> Languages = new Dictionary<LanguageCode, string>
+        public static Dictionary<LocalizedContentManager.LanguageCode,string> Languages = new Dictionary<LocalizedContentManager.LanguageCode, string>
         {
-            { LanguageCode.en, "US English" },
-            { LanguageCode.de, "German" },
-            { LanguageCode.es, "Spanish" },
-            { LanguageCode.fr, "French" },
-            { LanguageCode.it, "Italian" },
-            { LanguageCode.ja, "Japanese" },
-            { LanguageCode.ko, "Korean" },
-            { LanguageCode.pt, "Brazilian Portuguese" },
-            { LanguageCode.ru, "Russian" },
-            { LanguageCode.tr, "Turkish" },
-            { LanguageCode.zh, "Simplified Chinese" },
-            { LanguageCode.hu, "Hungarian"},
-            { LanguageCode.th, "Thai"}
+            { LocalizedContentManager.LanguageCode.en, "US English" },
+            { LocalizedContentManager.LanguageCode.de, "German" },
+            { LocalizedContentManager.LanguageCode.es, "Spanish" },
+            { LocalizedContentManager.LanguageCode.fr, "French" },
+            { LocalizedContentManager.LanguageCode.it, "Italian" },
+            { LocalizedContentManager.LanguageCode.ja, "Japanese" },
+            { LocalizedContentManager.LanguageCode.ko, "Korean" },
+            { LocalizedContentManager.LanguageCode.pt, "Brazilian Portuguese" },
+            { LocalizedContentManager.LanguageCode.ru, "Russian" },
+            { LocalizedContentManager.LanguageCode.tr, "Turkish" },
+            { LocalizedContentManager.LanguageCode.zh, "Simplified Chinese" },
+            { LocalizedContentManager.LanguageCode.hu, "Hungarian"},
+            { LocalizedContentManager.LanguageCode.th, "Thai"}
         };
     }
 }

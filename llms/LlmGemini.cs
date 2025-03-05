@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class LlmGemini : Llm, IGetModelNames
 {
@@ -37,17 +39,23 @@ internal class LlmGemini : Llm, IGetModelNames
         var client = new HttpClient();
         var response = client.GetAsync(modelsUrl).Result;
         var responseString = response.Content.ReadAsStringAsync().Result;
-        var responseJson = JsonDocument.Parse(responseString);
-        var models = responseJson.RootElement.GetProperty("models");
+        var responseJson = JObject.Parse(responseString);
+        var models = responseJson["models"] as JArray;
         var modelNames = new List<string>();
-        foreach (var model in models.EnumerateArray())
+        if (models != null)
         {
-            var name = model.GetProperty("name").GetString();
-            if (name.StartsWith("models/"))
+            foreach (var model in models)
             {
-                name = name.Substring(7);
+                var name = model["name"]?.ToString();
+                if (name != null && name.StartsWith("models/"))
+                {
+                    name = name.Substring(7);
+                }
+                if (!string.IsNullOrEmpty(name))
+                {
+                    modelNames.Add(name);
+                }
             }
-            modelNames.Add(name);
         }
         return modelNames.ToArray();
         }
@@ -69,7 +77,7 @@ internal class LlmGemini : Llm, IGetModelNames
         }
 
         var json = new StringContent(
-            System.Text.Json.JsonSerializer.Serialize(new
+            JsonConvert.SerializeObject(new
             {
                 safetySettings = new[] 
                 { 
@@ -99,7 +107,7 @@ internal class LlmGemini : Llm, IGetModelNames
                 var response = await client.PostAsync(fullUrl, json);
                 // Return the 'content' element of the response json
                 var responseString = await response.Content.ReadAsStringAsync();
-                var responseJson = JsonDocument.Parse(responseString);
+                var responseJson = JObject.Parse(responseString);
                 
                 if (responseJson == null)
                 {
@@ -107,18 +115,18 @@ internal class LlmGemini : Llm, IGetModelNames
                 }
                 else
                 {
-                    
-                    if (!responseJson.RootElement.TryGetProperty("candidates", out var candidates)) { retry--; continue; }
-                    var candidateEnumerator = candidates.EnumerateArray();
-                    if (!candidateEnumerator.MoveNext()) { retry--; continue; }
-                    var candidate = candidateEnumerator.Current;
-                    if (!candidate.TryGetProperty("finishReason", out var finishReason)) { retry--; continue; }
-                    if (finishReason.GetString() != "STOP") { retry--; continue; }
-                    if (!candidate.TryGetProperty("content", out var content)) { retry--; continue; }
-                    var parts = content.GetProperty("parts").EnumerateArray();
-                    if (!parts.MoveNext()) { retry--; continue; }
-                    var firstPart = parts.Current;
-                    var text = firstPart.GetProperty("text").GetString();
+                    if (responseJson["candidates"] == null) { retry--; continue; }
+                    var candidates = responseJson["candidates"] as JArray;
+                    if (candidates == null || candidates.Count == 0) { retry--; continue; }
+                    var candidate = candidates[0];
+                    if (candidate["finishReason"] == null) { retry--; continue; }
+                    if (candidate["finishReason"].ToString() != "STOP") { retry--; continue; }
+                    if (candidate["content"] == null) { retry--; continue; }
+                    var content = candidate["content"];
+                    var parts = content["parts"] as JArray;
+                    if (parts == null || parts.Count == 0) { retry--; continue; }
+                    var firstPart = parts[0];
+                    var text = firstPart["text"]?.ToString();
                     return text ?? string.Empty;
                 }
             }
@@ -137,4 +145,5 @@ internal class LlmGemini : Llm, IGetModelNames
     {
         throw new System.NotImplementedException();
     }
+}
 }

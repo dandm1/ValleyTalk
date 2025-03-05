@@ -1,4 +1,5 @@
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public enum SpouseAction
 {
@@ -8,4 +9,5 @@ public enum SpouseAction
     funReturn,
     jobReturn,
     spouseRoom
+}
 }

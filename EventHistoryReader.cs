@@ -5,7 +5,8 @@ using StardewModdingAPI.Events;
 using StardewValley;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public class EventHistoryReader
 {
@@ -16,7 +17,7 @@ public class EventHistoryReader
         if (!Context.IsMainPlayer)
         {
             _multiplayerFilename = $"multiplayer/{Constants.SaveFolderName},json";
-            _fileEventHistories = ModEntry.SHelper.Data.ReadJsonFile<Dictionary<string, StardewEventHistory>>(_multiplayerFilename) ?? new();
+            _fileEventHistories = ModEntry.SHelper.Data.ReadJsonFile<Dictionary<string, StardewEventHistory>>(_multiplayerFilename) ?? new Dictionary<string, StardewEventHistory>();
             ModEntry.SHelper.Events.GameLoop.Saving += OnSaving;
         }
     }
@@ -26,7 +27,7 @@ public class EventHistoryReader
         ModEntry.SHelper.Data.WriteJsonFile(_multiplayerFilename, _fileEventHistories);
     }
 
-    private Dictionary<string, StardewEventHistory> _fileEventHistories = new();
+    private Dictionary<string, StardewEventHistory> _fileEventHistories = new Dictionary<string, StardewEventHistory>();
     private readonly string _multiplayerFilename;
 
     internal StardewEventHistory GetEventHistory(string name)
@@ -78,4 +79,5 @@ public class EventHistoryReader
             _fileEventHistories[name] = eventHistory;
         }
     }
+}
 }

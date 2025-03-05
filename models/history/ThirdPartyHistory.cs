@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class ThirdPartyHistory : IHistory
 {
@@ -24,4 +25,5 @@ internal class ThirdPartyHistory : IHistory
         return ModEntry.SHelper.Translation.Get("historyThirdPartyFormat", new { npcName= npcName, Name= character.Name, festivalNameString= festivalNameString, totalDialogue= totalDialogue });
 
     }
+}
 }

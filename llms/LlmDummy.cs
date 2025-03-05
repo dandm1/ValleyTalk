@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class LlmDummy : Llm
 {
@@ -32,4 +33,5 @@ internal class LlmDummy : Llm
     {
         throw new System.NotImplementedException();
     }
+}
 }

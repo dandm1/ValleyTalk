@@ -1,4 +1,5 @@
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class ActivityHistory : IHistory
 {
@@ -13,4 +14,5 @@ internal class ActivityHistory : IHistory
     {
         return activity;
     }
+}
 }

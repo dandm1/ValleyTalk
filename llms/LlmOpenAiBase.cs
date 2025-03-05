@@ -2,19 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal abstract class LlmOpenAiBase : Llm
 {
     protected string apiKey;
     protected string modelName;
 
-    record PromptElement
+    class PromptElement
     {
         public string role { get; set; }
         public string content { get; set; }
@@ -22,24 +24,26 @@ internal abstract class LlmOpenAiBase : Llm
 
     internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
-        var inputString = JsonSerializer.Serialize(new
-            {
-                model = modelName,
-                max_tokens = n_predict,
-                messages = new PromptElement[]
-                { 
-                    new()
-                    {
-                        role = "system",
-                        content = systemPromptString
-                    },
-                    new()
-                    {
-                        role = "user",
-                        content = gameCacheString + npcCacheString + promptString
-                    }
+        var payload = new
+        {
+            model = modelName,
+            max_tokens = n_predict,
+            messages = new PromptElement[]
+            { 
+                new PromptElement
+                {
+                    role = "system",
+                    content = systemPromptString
+                },
+                new PromptElement
+                {
+                    role = "user",
+                    content = gameCacheString + npcCacheString + promptString
                 }
-            });
+            }
+        };
+        
+        var inputString = JsonConvert.SerializeObject(payload);
         var json = new StringContent(
             inputString,
             Encoding.UTF8,
@@ -64,7 +68,7 @@ internal abstract class LlmOpenAiBase : Llm
                 var response = await client.SendAsync(request);
                 // Return the 'content' element of the response json
                 var responseString = response.Content.ReadAsStringAsync().Result;
-                var responseJson = JsonDocument.Parse(responseString);
+                var responseJson = JObject.Parse(responseString);
                 
                 if (responseJson == null)
                 {
@@ -72,14 +76,12 @@ internal abstract class LlmOpenAiBase : Llm
                 }
                 else
                 {
-                    
-                    if (!responseJson.RootElement.TryGetProperty("choices", out var content)) { retry--; continue; }
-                    var completionArray = content.EnumerateArray();
-                    var completion = completionArray.MoveNext();
-                    if (completion == false) { retry--; continue; }
+                    if (responseJson["choices"] == null) { retry--; continue; }
+                    var choices = responseJson["choices"] as JArray;
+                    if (choices == null || choices.Count == 0) { retry--; continue; }
 
-                    var message = completionArray.Current.GetProperty("message");
-                    var text = message.GetProperty("content").GetString();
+                    var message = choices[0]["message"];
+                    var text = message["content"]?.ToString();
                     return text ?? string.Empty;
                 }
             }
@@ -107,27 +109,34 @@ internal abstract class LlmOpenAiBase : Llm
         }
         try 
         {
-        var client = new HttpClient
-        {
-            Timeout = TimeSpan.FromMinutes(1)
-        };
-        var fullUrl = $"{url}/v1/models";
-        var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
-        request.Headers.Add("Authorization", $"Bearer {apiKey}");
-        foreach (var header in extraHeaders)
-        {
-            request.Headers.Add(header.Key, header.Value);
-        }
-        var response = client.SendAsync(request).Result;
-        var responseString = response.Content.ReadAsStringAsync().Result;
-        var responseJson = JsonDocument.Parse(responseString);
-        var models = responseJson.RootElement.GetProperty("data").EnumerateArray();
-        var modelNames = new List<string>();
-        foreach (var model in models)
-        {
-            modelNames.Add(model.GetProperty("id").GetString());
-        }
-        return modelNames.ToArray();
+            var client = new HttpClient
+            {
+                Timeout = TimeSpan.FromMinutes(1)
+            };
+            var fullUrl = $"{url}/v1/models";
+            var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
+            request.Headers.Add("Authorization", $"Bearer {apiKey}");
+            foreach (var header in extraHeaders)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+            var response = client.SendAsync(request).Result;
+            var responseString = response.Content.ReadAsStringAsync().Result;
+            var responseJson = JObject.Parse(responseString);
+            var models = responseJson["data"] as JArray;
+            var modelNames = new List<string>();
+            if (models != null)
+            {
+                foreach (var model in models)
+                {
+                    var id = model["id"]?.ToString();
+                    if (!string.IsNullOrEmpty(id))
+                    {
+                        modelNames.Add(id);
+                    }
+                }
+            }
+            return modelNames.ToArray();
         }
         catch (Exception ex)
         {
@@ -135,4 +144,5 @@ internal abstract class LlmOpenAiBase : Llm
             return new string[] { };
         }
     }
+}
 }

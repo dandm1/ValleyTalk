@@ -161,26 +161,30 @@ namespace ValleyTalk
                     throw new Exception("Invalid season");
             }
             string timeOfDay;
-            switch (Game1.timeOfDay)
+            int time = Game1.timeOfDay;
+            if (time <= 800)
             {
-                case <= 800:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalEarlyMorning");
-                    break;
-                case <= 1130:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalLateMorning");
-                    break;
-                case <= 1400:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalMidday");
-                    break;
-                case <= 1700:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalAfternoon");
-                    break;
-                case <= 2200:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalEvening");
-                    break;
-                default:
-                    timeOfDay = ModEntry.SHelper.Translation.Get("generalLateNight");
-                    break;
+                timeOfDay = ModEntry.SHelper.Translation.Get("generalEarlyMorning");
+            }
+            else if (time <= 1130)
+            {
+                timeOfDay = ModEntry.SHelper.Translation.Get("generalLateMorning");
+            }
+            else if (time <= 1400)
+            {
+                timeOfDay = ModEntry.SHelper.Translation.Get("generalMidday");
+            }
+            else if (time <= 1700)
+            {
+                timeOfDay = ModEntry.SHelper.Translation.Get("generalAfternoon");
+            }
+            else if (time <= 2200)
+            {
+                timeOfDay = ModEntry.SHelper.Translation.Get("generalEvening");
+            }
+            else
+            {
+                timeOfDay = ModEntry.SHelper.Translation.Get("generalLateNight");
             }
             timeOfDay += $" ({(Game1.timeOfDay / 100) % 24}:{Game1.timeOfDay % 100:00})";
             StardewDialogue.Weekday day;
@@ -224,22 +228,20 @@ namespace ValleyTalk
                                 farmer.friendshipData[instance.Name].Points / 250
                     ) 
                     : -1;
-            var context = new StardewDialogue.DialogueContext()
-            {
-                Season = season,
-                DayOfSeason = Game1.dayOfMonth,
-                TimeOfDay = timeOfDay,
-                Hearts = hearts,
-                Location = instance.currentLocation.Name,
-                Year = Game1.year,
-                Day = day,
-                MaleFarmer = farmer.IsMale,
-                Inlaw = farmer.getSpouse()?.Name,
-                Children = children,
-                Married = farmer.getSpouse() != null,
-                Spouse = farmer.getSpouse()?.Name,
-                Weather = weather
-            };
+            var context = new StardewDialogue.DialogueContext();
+            context.Season = season;
+            context.DayOfSeason = Game1.dayOfMonth;
+            context.TimeOfDay = timeOfDay;
+            context.Hearts = hearts;
+            context.Location = instance.currentLocation.Name;
+            context.Year = Game1.year;
+            context.Day = day;
+            context.MaleFarmer = farmer.IsMale;
+            context.Inlaw = farmer.getSpouse()?.Name;
+            context.Children = children;
+            context.Married = farmer.getSpouse() != null;
+            context.Spouse = farmer.getSpouse()?.Name;
+            context.Weather = weather;
             return context;
         }
 
@@ -273,7 +275,7 @@ namespace ValleyTalk
         {
             if (character.MatchLastDialogue(dialogues))
             {
-                return new();
+                return new List<StardewValley.DialogueLine>();
             }
             // Remove any lines just just contain Respond:
             return dialogues.Where(d => !d.Text.StartsWith("Respond:")).ToList();

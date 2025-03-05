@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public class Prompts
 {
     [JsonIgnore]
-    private readonly Dictionary<string,string> HistoryEvents = new()
+    private readonly Dictionary<string,string> HistoryEvents = new Dictionary<string,string>()
     {
         { "cc_Bus", Util.GetString("cc_Bus_Repaired") },
         { "cc_Boulder", Util.GetString("cc_Boulder_Removed") },
@@ -56,20 +57,97 @@ public class Prompts
     static string _stardewSummary;
     private string _system;
     [JsonIgnore]
-    public string System { get => _system ??= GetSystemPrompt(); internal set => _system = value; }
+    public string System
+    { 
+        get 
+        { 
+            if (_system == null)
+            {
+                _system = GetSystemPrompt();
+            }
+            return _system;
+        }
+        internal set => _system = value;
+    }
     private string _gameConstantContext;
     [JsonIgnore]
-    public string GameConstantContext { get => _gameConstantContext ??= GetGameConstantContext(); internal set => _gameConstantContext = value; }
+    public string GameConstantContext 
+    { 
+        get 
+        { 
+            if (_gameConstantContext == null)
+            {
+                _gameConstantContext = GetGameConstantContext();
+            }
+            return _gameConstantContext;
+        }
+        internal set => _gameConstantContext = value; 
+    }
     private string _npcConstantContext;
-    public string NpcConstantContext { get => _npcConstantContext ??= GetNpcConstantContext(); internal set => _npcConstantContext = value; }
+    public string NpcConstantContext 
+    { 
+        get 
+        { 
+            if (_npcConstantContext == null)
+            {
+                _npcConstantContext = GetNpcConstantContext();
+            }
+            return _npcConstantContext;
+        }
+        internal set => _npcConstantContext = value; 
+    }
     private string _corePrompt;
-    public string CorePrompt { get => _corePrompt ??= GetCorePrompt(); internal set => _corePrompt = value; }
+    public string CorePrompt 
+    { 
+        get 
+        { 
+            if (_corePrompt == null)
+            {
+                _corePrompt = GetCorePrompt();
+            }
+            return _corePrompt;
+        }
+        internal set => _corePrompt = value; 
+    }
     private string _command;
-    public string Command { get => _command ??= GetCommand(); internal set => _command = value; }
+    public string Command 
+    { 
+        get 
+        { 
+            if (_command == null)
+            {
+                _command = GetCommand();
+            }
+            return _command;
+        }
+        internal set => _command = value;
+    }
     private string _responseStart;
-    public string ResponseStart { get => _responseStart ??= GetResponseStart(); internal set => _responseStart = value; }
+    public string ResponseStart 
+    { 
+        get 
+        { 
+            if (_responseStart == null)
+            {
+                _responseStart = GetResponseStart();
+            }
+            return _responseStart;
+        }
+        internal set => _responseStart = value; 
+    }
     private string _instructions;
-    public string Instructions { get => _instructions ??= GetInstructions(); internal set => _instructions = value; }
+    public string Instructions 
+    { 
+        get 
+        { 
+            if (_instructions == null)
+            {
+                _instructions = GetInstructions();
+            }
+            return _instructions;
+        }
+        internal set => _instructions = value; 
+    }
 
     [JsonIgnore]
     public string Name { get; internal set; }
@@ -403,17 +481,23 @@ public class Prompts
 
         if (isASingle || Context.Hearts <= 6 || Context.Hearts == null)
         {
-            prompt.AppendLine((Context.Hearts ?? 0) switch
-            {
-                -1 => Util.GetString(Character,"nonSpouseFriendshipFirstConversation", new { Name= Name }),
-                < 2 => Util.GetString(Character,"nonSpouseFreindshipStrangers", new { Name= Name }),
-                < 4 => Util.GetString(Character,"nonSpouseFriendshipAcquaintances", new { Name= Name }),
-                < 6 => Util.GetString(Character,"nonSpouseFriendshipFriends", new { Name= Name }),
-                < 8 => Util.GetString(Character,"nonSpouseFriendshipCloseFriends", new { Name= Name }),
-                <= 10 => Util.GetString(Character,"nonSpouseFriendshipWantToDate", new { Name= Name }),
-                <= 14 => Util.GetString(Character,"nonSpouseFriendshipIntimate", new { Name= Name }), // Backup = should never be called
-                _ => throw new InvalidDataException("Invalid heart level.")
-            });
+            int hearts = Context.Hearts ?? 0;
+            if (hearts == -1)
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipFirstConversation", new { Name= Name }));
+            else if (hearts < 2) 
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFreindshipStrangers", new { Name= Name }));
+            else if (hearts < 4)
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipAcquaintances", new { Name= Name }));
+            else if (hearts < 6)
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipFriends", new { Name= Name }));
+            else if (hearts < 8)
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipCloseFriends", new { Name= Name }));
+            else if (hearts <= 10)
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipWantToDate", new { Name= Name }));
+            else if (hearts <= 14)
+                prompt.AppendLine(Util.GetString(Character,"nonSpouseFriendshipIntimate", new { Name= Name })); // Backup = should never be called
+            else
+                throw new InvalidDataException("Invalid heart level.");
         }
         else
         {
@@ -436,23 +520,27 @@ public class Prompts
     {
         if (Context.SpouseAct == null) return;
 
-        prompt.AppendLine(Context.SpouseAct switch
-        {
-            SpouseAction.funLeave => Util.GetString(Character,"spouseActionFunLeave", new { Name= Name }),
-            SpouseAction.jobLeave => Util.GetString(Character,"spouseActionJobLeave", new { Name= Name }),
-            SpouseAction.patio => Util.GetString(Character,"spouseActionPatio", new { Name= Name }),
-            SpouseAction.funReturn => Util.GetString(Character,"spouseActionFunReturn", new { Name= Name }),
-            SpouseAction.jobReturn => Util.GetString(Character,"spouseActionJobReturn", new { Name= Name }),
-            SpouseAction.spouseRoom => Util.GetString(Character,"spouseActionSpouseRoom", new { Name= Name }),
-            _ => $""
-        });
+        if (Context.SpouseAct == SpouseAction.funLeave)
+            prompt.AppendLine(Util.GetString(Character,"spouseActionFunLeave", new { Name= Name }));
+        else if (Context.SpouseAct == SpouseAction.jobLeave)
+            prompt.AppendLine(Util.GetString(Character,"spouseActionJobLeave", new { Name= Name }));
+        else if (Context.SpouseAct == SpouseAction.patio)
+            prompt.AppendLine(Util.GetString(Character,"spouseActionPatio", new { Name= Name }));
+        else if (Context.SpouseAct == SpouseAction.funReturn)
+            prompt.AppendLine(Util.GetString(Character,"spouseActionFunReturn", new { Name= Name }));
+        else if (Context.SpouseAct == SpouseAction.jobReturn)
+            prompt.AppendLine(Util.GetString(Character,"spouseActionJobReturn", new { Name= Name }));
+        else if (Context.SpouseAct == SpouseAction.spouseRoom)
+            prompt.AppendLine(Util.GetString(Character,"spouseActionSpouseRoom", new { Name= Name }));
+        else
+            prompt.AppendLine("");
     }
 
     private void GetGift(StringBuilder prompt)
     {
         if (Context.Accept != null)
         {
-        var giftName = Context.Accept.DisplayName;
+        string giftName = Context.Accept.DisplayName;
         prompt.AppendLine(Util.GetString(Character,"giftIntro", new { Name= Name, giftName= giftName }));
         switch (Context.GiftTaste)
         {
@@ -496,24 +584,34 @@ public class Prompts
     {
         if (Context.DayOfSeason == null) return;
 
-        prompt.AppendLine((Context.Season, Context.DayOfSeason) switch
-        {
-            (Season.Spring, 1) => Util.GetString(Character,"specialDatesSpring1"),
-            (Season.Spring, 12) => Util.GetString(Character,"specialDatesSpring12"),
-            (Season.Spring, 23) => Util.GetString(Character,"specialDatesSpring23"),
-            (Season.Summer, 1) => Util.GetString(Character,"specialDatesSummer1"),
-            (Season.Summer, 10) => Util.GetString(Character,"specialDatesSummer10"),
-            (Season.Summer, 27) => Util.GetString(Character,"specialDatesSummer27"),
-            (Season.Summer, 28) => Util.GetString(Character,"specialDatesSummer28"),
-            (Season.Fall, 1) => Util.GetString(Character,"specialDatesFall1"),
-            (Season.Fall, 15) => Util.GetString(Character,"specialDatesFall15"),
-            (Season.Fall, 26) => Util.GetString(Character,"specialDatesFall26"),
-            (Season.Winter, 1) => Util.GetString(Character,"specialDatesWInter1"),
-            (Season.Winter, 7) => Util.GetString(Character,"specialDatesWinter7"),
-            (Season.Winter, 24) => Util.GetString(Character,"specialDatesWinter24"),
-            (Season.Winter, 28) => Util.GetString(Character,"specialDatesWinter28"),
-            _ => $""
-        });
+        if (Context.Season == Season.Spring && Context.DayOfSeason == 1)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesSpring1"));
+        else if (Context.Season == Season.Spring && Context.DayOfSeason == 12)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesSpring12"));
+        else if (Context.Season == Season.Spring && Context.DayOfSeason == 23)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesSpring23"));
+        else if (Context.Season == Season.Summer && Context.DayOfSeason == 1)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesSummer1"));
+        else if (Context.Season == Season.Summer && Context.DayOfSeason == 10)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesSummer10"));
+        else if (Context.Season == Season.Summer && Context.DayOfSeason == 27)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesSummer27"));
+        else if (Context.Season == Season.Summer && Context.DayOfSeason == 28)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesSummer28"));
+        else if (Context.Season == Season.Fall && Context.DayOfSeason == 1)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesFall1"));
+        else if (Context.Season == Season.Fall && Context.DayOfSeason == 15)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesFall15"));
+        else if (Context.Season == Season.Fall && Context.DayOfSeason == 26)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesFall26"));
+        else if (Context.Season == Season.Winter && Context.DayOfSeason == 1)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesWInter1"));
+        else if (Context.Season == Season.Winter && Context.DayOfSeason == 7)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesWinter7"));
+        else if (Context.Season == Season.Winter && Context.DayOfSeason == 24)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesWinter24"));
+        else if (Context.Season == Season.Winter && Context.DayOfSeason == 28)
+            prompt.AppendLine(Util.GetString(Character,"specialDatesWinter28"));
         var stardewBioData = Character.StardewNpc.GetData();
         if (
             string.Equals(
@@ -531,29 +629,47 @@ public class Prompts
         var eventSection = new StringBuilder();
         foreach (var activity in allPreviousActivities.Where(x => x.Value < 7))
         {
-            var theLine = activity.Key switch
-            {
-                "cc_Boulder" => Util.GetString(Character,"recentEventsBoulder"),
-                "cc_Bridge" => Util.GetString(Character,"recentEventsQuarryBridge"),
-                "cc_Bus" => Util.GetString(Character,"recentEventsBus"),
-                "cc_Greenhouse" => Util.GetString(Character,"recentEventsGreenhouse"),
-                "cc_Minecart" => Util.GetString(Character,"recentEventsMinecarts"),
-                "cc_Complete" => Util.GetString(Character,"recentEventsCommunityCenter"),
-                "movieTheater" => Util.GetString(Character,"recentEventsMovieTheatre"),
-                "pamHouseUpgrade" => Util.GetString(Character,"recentEventsPamHouse"),
-                "pamHouseUpgradeAnonymous" => Util.GetString(Character,"recentEventsPamHouseAnonymous"),
-                "jojaMartStruckByLightning" => Util.GetString(Character,"recentEventsJojaLightning"),
-                "babyBoy" => Util.GetString(Character,"recentEventsBabyBoy"),
-                "babyGirl" => Util.GetString(Character,"recentEventsBabyGirl"),
-                "wedding" => Util.GetString(Character,"recentEventsMarried"),
-                "luauBest" => Util.GetString(Character,"recentEventsLuauBest"),
-                "luauShorts" => Util.GetString(Character,"recentEventsLuauShorts"),
-                "luauPoisoned" => Util.GetString(Character,"recentEventsLuauPoisoned"),
-                "Characters_MovieInvite_Invited" => Util.GetString(Character,"recentEventsMovieInvited", new { Name= Name }),
-                "DumpsterDiveComment" => Util.GetString(Character,"recentEventsDumpsterDive", new { Name= Name }),
-                "GreenRainFinished" => Util.GetString(Character,"recentEventsGreenRain"),
-                _ => $""
-            };
+            string theLine = "";
+            if (activity.Key == "cc_Boulder")
+                theLine = Util.GetString(Character,"recentEventsBoulder");
+            else if (activity.Key == "cc_Bridge")
+                theLine = Util.GetString(Character,"recentEventsQuarryBridge");
+            else if (activity.Key == "cc_Bus")
+                theLine = Util.GetString(Character,"recentEventsBus");
+            else if (activity.Key == "cc_Greenhouse")
+                theLine = Util.GetString(Character,"recentEventsGreenhouse");
+            else if (activity.Key == "cc_Minecart")
+                theLine = Util.GetString(Character,"recentEventsMinecarts");
+            else if (activity.Key == "cc_Complete")
+                theLine = Util.GetString(Character,"recentEventsCommunityCenter");
+            else if (activity.Key == "movieTheater")
+                theLine = Util.GetString(Character,"recentEventsMovieTheatre");
+            else if (activity.Key == "pamHouseUpgrade")
+                theLine = Util.GetString(Character,"recentEventsPamHouse");
+            else if (activity.Key == "pamHouseUpgradeAnonymous")
+                theLine = Util.GetString(Character,"recentEventsPamHouseAnonymous");
+            else if (activity.Key == "jojaMartStruckByLightning")
+                theLine = Util.GetString(Character,"recentEventsJojaLightning");
+            else if (activity.Key == "babyBoy")
+                theLine = Util.GetString(Character,"recentEventsBabyBoy");
+            else if (activity.Key == "babyGirl")
+                theLine = Util.GetString(Character,"recentEventsBabyGirl");
+            else if (activity.Key == "wedding")
+                theLine = Util.GetString(Character,"recentEventsMarried");
+            else if (activity.Key == "luauBest")
+                theLine = Util.GetString(Character,"recentEventsLuauBest");
+            else if (activity.Key == "luauShorts")
+                theLine = Util.GetString(Character,"recentEventsLuauShorts");
+            else if (activity.Key == "luauPoisoned")
+                theLine = Util.GetString(Character,"recentEventsLuauPoisoned");
+            else if (activity.Key == "Characters_MovieInvite_Invited")
+                theLine = Util.GetString(Character,"recentEventsMovieInvited", new { Name= Name });
+            else if (activity.Key == "DumpsterDiveComment")
+                theLine = Util.GetString(Character,"recentEventsDumpsterDive", new { Name= Name });
+            else if (activity.Key == "GreenRainFinished")
+                theLine = Util.GetString(Character,"recentEventsGreenRain");
+            else
+                theLine = "";
             if (!string.IsNullOrWhiteSpace(theLine))
             {
                 eventSection.AppendLine(theLine);
@@ -580,8 +696,8 @@ public class Prompts
             }
             else
             {
-                var mayBeInShop = Context.Location.Contains("Shop", StringComparison.OrdinalIgnoreCase)
-                    || Context.Location.Contains("Science", StringComparison.OrdinalIgnoreCase);
+                var mayBeInShop = Context.Location.IndexOf("Shop", StringComparison.OrdinalIgnoreCase) >= 0
+                    || Context.Location.IndexOf("Science", StringComparison.OrdinalIgnoreCase) >= 0;
                 var inShopString = mayBeInShop ? Util.GetString(Character,"locationAtHomeOrShop") : "";
                 prompt.AppendLine(Util.GetString(Character,"locationAtHome", new { Name= Name, inShopString= inShopString }));
             }
@@ -589,29 +705,48 @@ public class Prompts
         else if (Context.Location != null)
         {
             var locationName = GetLocationDisplayNameIfAvailable(Context.Location);
-            prompt.Append(Context.Location switch
-            {
-                "Town" => Util.GetString(Character,"locationTown", new { Name= Name }),
-                "Beach" => Util.GetString(Character,"locationBeach", new { Name= Name }),
-                "Desert" => Util.GetString(Character,"locationDesert", new { Name= Name }),
-                "BusStop" => Util.GetString(Character,"locationBusStop", new { Name= Name }),
-                "Railroad" => Util.GetString(Character,"locationRailroad", new { Name= Name }),
-                "Saloon" => $"{Util.GetString(Character,"locationSaloon", new { Name= Name })}{((npcData.Age == NpcAge.Child || Character.Name == "Emily") ? "" : Util.GetString(Character,"locationSaloonDrunk"))}",
-                "SeedShop" => Util.GetString(Character,"locationPierres", new { Name= Name }),
-                "JojaMart" => Util.GetString(Character,"locationJojaMart", new { Name= Name }),
-                "Resort_Chair" => Util.GetString(Character,"locationResortChair", new { Name= Name }),
-                "Resort_Towel" or "Resort_Towel_2" or "Resort_Towel_3" => Util.GetString(Character,"locationResortTowel", new { Name= Name }),
-                "Resort_Umbrella" or "Resort_Umbrella_2" or "Resort_Umbrella_3" => Util.GetString(Character,"locationResortUmbrella", new { Name= Name }),
-                "Resort_Bar" => $"{Util.GetString(Character,"locationResortBar", new { Name= Name })}{((npcData.Age == NpcAge.Child) ? "" : Util.GetString(Character,"locationSaloonDrunk"))}.",
-                "Resort_Entering" => Util.GetString(Character,"locationResortEntering", new { Name= Name }),
-                "Resort_Leaving" => Util.GetString(Character,"locationResortLeaving", new { Name= Name }),
-                "Resort_Shore" or "Resort_Shore_2" => Util.GetString(Character,"locationResortShore", new { Name= Name }),
-                "Resort_Wander" => Util.GetString(Character,"locationResortWander", new { Name= Name }),
-                "Resort" or "Resort_2" => Util.GetString(Character,"locationResort", new { Name= Name }),
-                "FarmHouse" => Util.GetString(Character,"locationFarmHouse", new { Name= Name }),
-                "Farm" => Util.GetString(Character,"locationFarm", new { Name= Name }),
-                _ => locationName.Length > 2 ? Util.GetString("locationGeneric", new {Name = Name, Location = locationName}) : string.Empty
-            });
+            if (Context.Location == "Town")
+                prompt.Append(Util.GetString(Character,"locationTown", new { Name= Name }));
+            else if (Context.Location == "Beach")
+                prompt.Append(Util.GetString(Character,"locationBeach", new { Name= Name }));
+            else if (Context.Location == "Desert")
+                prompt.Append(Util.GetString(Character,"locationDesert", new { Name= Name }));
+            else if (Context.Location == "BusStop")
+                prompt.Append(Util.GetString(Character,"locationBusStop", new { Name= Name }));
+            else if (Context.Location == "Railroad")
+                prompt.Append(Util.GetString(Character,"locationRailroad", new { Name= Name }));
+            else if (Context.Location == "Saloon")
+                prompt.Append($"{Util.GetString(Character,"locationSaloon", new { Name= Name })}{((npcData.Age == NpcAge.Child || Character.Name == "Emily") ? "" : Util.GetString(Character,"locationSaloonDrunk"))}");
+            else if (Context.Location == "SeedShop")
+                prompt.Append(Util.GetString(Character,"locationPierres", new { Name= Name }));
+            else if (Context.Location == "JojaMart")
+                prompt.Append(Util.GetString(Character,"locationJojaMart", new { Name= Name }));
+            else if (Context.Location == "Resort_Chair")
+                prompt.Append(Util.GetString(Character,"locationResortChair", new { Name= Name }));
+            else if (Context.Location == "Resort_Towel" || Context.Location == "Resort_Towel_2" || Context.Location == "Resort_Towel_3")
+                prompt.Append(Util.GetString(Character,"locationResortTowel", new { Name= Name }));
+            else if (Context.Location == "Resort_Umbrella" || Context.Location == "Resort_Umbrella_2" || Context.Location == "Resort_Umbrella_3")
+                prompt.Append(Util.GetString(Character,"locationResortUmbrella", new { Name= Name }));
+            else if (Context.Location == "Resort_Bar")
+                prompt.Append($"{Util.GetString(Character,"locationResortBar", new { Name= Name })}{((npcData.Age == NpcAge.Child) ? "" : Util.GetString(Character,"locationSaloonDrunk"))}.");
+            else if (Context.Location == "Resort_Entering")
+                prompt.Append(Util.GetString(Character,"locationResortEntering", new { Name= Name }));
+            else if (Context.Location == "Resort_Leaving")
+                prompt.Append(Util.GetString(Character,"locationResortLeaving", new { Name= Name }));
+            else if (Context.Location == "Resort_Shore" || Context.Location == "Resort_Shore_2")
+                prompt.Append(Util.GetString(Character,"locationResortShore", new { Name= Name }));
+            else if (Context.Location == "Resort_Wander")
+                prompt.Append(Util.GetString(Character,"locationResortWander", new { Name= Name }));
+            else if (Context.Location == "Resort" || Context.Location == "Resort_2")
+                prompt.Append(Util.GetString(Character,"locationResort", new { Name= Name }));
+            else if (Context.Location == "FarmHouse")
+                prompt.Append(Util.GetString(Character,"locationFarmHouse", new { Name= Name }));
+            else if (Context.Location == "Farm")
+                prompt.Append(Util.GetString(Character,"locationFarm", new { Name= Name }));
+            else if (locationName.Length > 2)
+                prompt.Append(Util.GetString("locationGeneric", new {Name = Name, Location = locationName}));
+            else
+                prompt.Append(string.Empty);
             prompt.AppendLine(Util.GetString(Character,"locationOutro"));
         }
 
@@ -652,37 +787,38 @@ public class Prompts
     {
         var IsRoommate = Game1.getPlayerOrEventFarmer().friendshipData[Character.Name].IsRoommate();
         var marriageOrRoommate = IsRoommate ? Util.GetString(Character,"generalBeingRoommates") : Util.GetString(Character,"generalTheMarriage");
-        switch (Context.Hearts)
+        if (Context.Hearts > 12)
         {
-            case > 12:
-                prompt.AppendLine(Util.GetString(Character,"marriageSentimentGood", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
-                break;
-            case < 10:
-                prompt.AppendLine(Util.GetString(Character,"marriageSentimentBad", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
-                break;
-            default:
-                prompt.AppendLine(Util.GetString(Character,"marriageSentimentNeutral", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
-                break;
+            prompt.AppendLine(Util.GetString(Character,"marriageSentimentGood", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
+        }
+        else if (Context.Hearts < 10)
+        {
+            prompt.AppendLine(Util.GetString(Character,"marriageSentimentBad", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
+        }
+        else
+        {
+            prompt.AppendLine(Util.GetString(Character,"marriageSentimentNeutral", new { Name= Name, marriageOrRoommate= marriageOrRoommate }));
         }
     }
 
     private void GetWealth(StringBuilder prompt)
     {
         var wealth = Game1.getPlayerOrEventFarmer()._money;
-        switch (wealth)
+        if (wealth < 1000)
         {
-            case < 1000:
-                prompt.AppendLine(Util.GetString(Character,"wealthPoor", new { wealth= wealth, Name = Name }));
-                break;
-            case < 10000:
-                prompt.AppendLine(Util.GetString(Character,"wealthMiddle", new { wealth= wealth, Name = Name }));
-                break;
-            case < 100000:
-                prompt.AppendLine(Util.GetString(Character,"wealthRich", new { wealth= wealth, Name = Name }));
-                break;
-            default:
-                prompt.AppendLine(Util.GetString(Character,"wealthVeryRich", new { wealth= wealth, Name = Name }));
-                break;
+            prompt.AppendLine(Util.GetString(Character,"wealthPoor", new { wealth= wealth, Name = Name }));
+        }
+        else if (wealth < 10000)
+        {
+            prompt.AppendLine(Util.GetString(Character,"wealthMiddle", new { wealth= wealth, Name = Name }));
+        }
+        else if (wealth < 100000)
+        {
+            prompt.AppendLine(Util.GetString(Character,"wealthRich", new { wealth= wealth, Name = Name }));
+        }
+        else
+        {
+            prompt.AppendLine(Util.GetString(Character,"wealthVeryRich", new { wealth= wealth, Name = Name }));
         }
     }
 
@@ -887,7 +1023,8 @@ public class Prompts
             prompt.AppendLine($"##{Util.GetString(Character,"eventHistoryHeading")}");
             prompt.AppendLine(Util.GetString(Character,"eventHistoryIntro", new { Name= Name }));
             prompt.AppendLine(Util.GetString(Character,"eventHistorySubheading"));
-            var historySample = fullHistory.OrderBy(x => x.Item1).TakeLast(30);
+            var orderedFullHistory = fullHistory.OrderBy(x => x.Item1).ToList();
+            var historySample = orderedFullHistory.Skip(Math.Max(0, orderedFullHistory.Count - 30));
             
             foreach (var eventHistory in historySample)
             {
@@ -900,7 +1037,7 @@ public class Prompts
     {
         var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
         var targetDate = timeNow.AddDays(-x.Value);
-        return new(targetDate, new ActivityHistory(x.Key));
+        return new Tuple<StardewTime, IHistory>(targetDate, new ActivityHistory(x.Key));
     }
 
     private void GetSampleDialogue(StringBuilder prompt)
@@ -1075,7 +1212,7 @@ public class Prompts
                     ?? Array.Empty<DialogueValue>();
     }
 
-    private IDialogueValue? SelectExactDialogue()
+    private IDialogueValue SelectExactDialogue()
     {
         return (Character.DialogueData
                     ?.AllEntries
@@ -1084,4 +1221,5 @@ public class Prompts
     }
 
 
+}
 }

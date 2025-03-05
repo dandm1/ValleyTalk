@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
+using Newtonsoft.Json;
 using ValleyTalk;
 using StardewValley;
 using Polly;
@@ -12,14 +12,26 @@ using System.Threading.Tasks;
 using Serilog;
 using Microsoft.Xna.Framework.Content;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public class Character
 {
     private BioData _bioData;
 
-    private static readonly Dictionary<string,TimeSpan> filterTimes = new() { { "House", TimeSpan.Zero }, { "Action", TimeSpan.Zero }, { "Received Gift", TimeSpan.Zero }, { "Given Gift", TimeSpan.Zero }, { "Editorial", TimeSpan.Zero }, { "Gender", TimeSpan.Zero }, { "Question", TimeSpan.Zero } };
-    private StardewEventHistory eventHistory = new();
+    private static readonly Dictionary<string,TimeSpan> filterTimes = new Dictionary<string,TimeSpan>(); 
+    // Initialize the dictionary in constructor to maintain compatibility with C# 7.3
+    static Character()
+    {
+        filterTimes.Add("House", TimeSpan.Zero);
+        filterTimes.Add("Action", TimeSpan.Zero);
+        filterTimes.Add("Received Gift", TimeSpan.Zero);
+        filterTimes.Add("Given Gift", TimeSpan.Zero);
+        filterTimes.Add("Editorial", TimeSpan.Zero);
+        filterTimes.Add("Gender", TimeSpan.Zero);
+        filterTimes.Add("Question", TimeSpan.Zero);
+    }
+    private StardewEventHistory eventHistory = new StardewEventHistory();
     private DialogueFile dialogueData;
 
     internal IEnumerable<Tuple<StardewTime,IHistory>> EventHistory => eventHistory.AllTypes;
@@ -37,9 +49,18 @@ public class Character
         LoadBio();
         //LoadDialogue();
         LoadEventHistory();
-        ValidPortraits = new List<string>() { "h", "s", "l", "a" };
+        ValidPortraits = new List<string>();
+        ValidPortraits.Add("h");
+        ValidPortraits.Add("s");
+        ValidPortraits.Add("l");
+        ValidPortraits.Add("a");
         ValidPortraits.AddRange(_bioData.ExtraPortraits.Keys);
-        PossiblePreoccupations = new List<string>(_bioData.Preoccupations);
+        
+        PossiblePreoccupations = new List<string>();
+        foreach (var preoccupation in _bioData.Preoccupations)
+        {
+            PossiblePreoccupations.Add(preoccupation);
+        }
         PossiblePreoccupations.AddRange(GetLovedAndHatedGiftNames());
     }
 
@@ -54,7 +75,7 @@ public class Character
         var lovedGifts = ArgUtility.SplitBySpace(tasteLevels[1]);
         var hatedGifts = ArgUtility.SplitBySpace(tasteLevels[7]);
 
-        List<string> returnList = new();
+        List<string> returnList = new List<string>();
         foreach (var gift in lovedGifts)
         {
             Game1.objectData.TryGetValue(gift, out var data);
@@ -77,7 +98,7 @@ public class Character
 
     private void LoadDialogue()
     {
-        Dictionary<string, string> canonDialogue = new();
+        Dictionary<string, string> canonDialogue = new Dictionary<string, string>();
         if (ModEntry.BlockModdedContent)
         {
             var manager = new ContentManager(Game1.content.ServiceProvider, Game1.content.RootDirectory);
@@ -123,7 +144,7 @@ public class Character
         }
         else
         {
-            canonDialogue = StardewNpc.Dialogue;
+            canonDialogue = new Dictionary<string, string>(StardewNpc.Dialogue);
         }
         if (Bio.Dialogue != null)
         {
@@ -133,7 +154,7 @@ public class Character
             }
             
         }
-        DialogueData = new();
+        DialogueData = new DialogueFile();
         foreach (var dialogue in canonDialogue)
         {
             var context = new DialogueContext(dialogue.Key);
@@ -170,31 +191,18 @@ public class Character
         string[] results = Array.Empty<string>();
         var prompts = new Prompts(context,this);
 
-        var pipeline = new ResiliencePipelineBuilder()
-                    .AddRetry(
-                        new RetryStrategyOptions() 
-                        { 
-                            MaxRetryAttempts = 4,
-                            DelayGenerator = static args =>
-                            {
-                                var delay = args.AttemptNumber < 2 ? 0 : 5;
-                                return new ValueTask<TimeSpan?>(TimeSpan.FromSeconds(delay));
-                            }
-                        }
-                    )
-                    .AddTimeout(TimeSpan.FromSeconds(10))
-                    .Build();
+        // Remove resilience pipeline and use a simpler retry mechanism
+        int maxRetries = 4;
         int retryCount = 0;
         var commandPrompt = prompts.Command;
 
-        // Acquire a ResilienceContext from the pool
-        var rc = ResilienceContextPool.Shared.Get();
-
-        var outcome = await pipeline.ExecuteOutcomeAsync(async (rc,state) =>
+        string[] resultsInternal = Array.Empty<string>();
+        string resultString = string.Empty;
+        Exception lastException = null;
+        
+        while (retryCount < maxRetries && resultsInternal.Length == 0)
         {
             retryCount++;
-            string[] resultsInternal;
-            string resultString = string.Empty;
             try
             {
                 resultString = await Llm.Instance.RunInference
@@ -208,56 +216,75 @@ public class Character
 
                 // Apply relaxed validation if this is the second retry
                 resultsInternal = ProcessLines(resultString, retryCount > 2).ToArray();
+                
+                if (resultsInternal.Length == 0 && retryCount < maxRetries)
+                {
+                    // Wait a bit before retrying if past the first attempt
+                    if (retryCount >= 2)
+                    {
+                        await Task.Delay(TimeSpan.FromSeconds(5));
+                    }
+                    continue;
+                }
             }
             catch (Exception ex)
             {
                 Log.Error(ex, $"Error generating AI response for {Name}");
-                return Outcome.FromException<string[]>(ex);
-            }
-            if (resultsInternal.Length == 0)
-            {
-                //Force a retry in the pipeline
-                return Outcome.FromException<string[]>(new Exception($"No valid results returned from AI. AI returned \"{resultString}\"."));
-            }
-            if (ModEntry.Config.Debug)
-            {
-                // Open 'generation.log' and append values to it
-                Log.Debug($"Context:");
-                Log.Debug($"Name: {Name}");
-                Log.Debug($"Marriage: {context.Married}");
-                Log.Debug($"Birthday: {context.Birthday}");
-                Log.Debug($"Location: {context.Location}");
-                Log.Debug($"Weather: {string.Concat(context.Weather)}");
-                Log.Debug($"Time of Day: {context.TimeOfDay}");
-                Log.Debug($"Day of Season: {context.DayOfSeason}");
-                Log.Debug($"Gift: {context.Accept}");
-                Log.Debug($"Spouse Action: {context.SpouseAct}");
-                Log.Debug($"Random Action: {context.RandomAct}");
-                Log.Debug($"Prompts: {JsonSerializer.Serialize(prompts)}");
-                if (context.ScheduleLine != "")
+                lastException = ex;
+                
+                if (retryCount < maxRetries)
                 {
-                    Log.Debug($"Original Line: {context.ScheduleLine}");
-                }
-                Log.Debug($"Results: {resultsInternal[0]}");
-                if (resultsInternal.Length > 1)
-                {
-                    foreach (var result in resultsInternal.Skip(1))
+                    // Wait a bit before retrying if past the first attempt
+                    if (retryCount >= 2)
                     {
-                        Log.Debug($"Response: {result}");
+                        await Task.Delay(TimeSpan.FromSeconds(5));
                     }
+                    continue;
                 }
-                Log.Debug("--------------------------------------------------");
             }
-            return Outcome.FromResult(resultsInternal);
-        },rc,"basic-state");
-        if (outcome.Exception != null)
+        }
+        
+        if (ModEntry.Config.Debug && resultsInternal.Length > 0)
         {
-            ModEntry.SMonitor.Log($"Error generating AI response for {Name}: {outcome.Exception}",StardewModdingAPI.LogLevel.Error);
+            // Open 'generation.log' and append values to it
+            Log.Debug($"Context:");
+            Log.Debug($"Name: {Name}");
+            Log.Debug($"Marriage: {context.Married}");
+            Log.Debug($"Birthday: {context.Birthday}");
+            Log.Debug($"Location: {context.Location}");
+            Log.Debug($"Weather: {string.Concat(context.Weather)}");
+            Log.Debug($"Time of Day: {context.TimeOfDay}");
+            Log.Debug($"Day of Season: {context.DayOfSeason}");
+            Log.Debug($"Gift: {context.Accept}");
+            Log.Debug($"Spouse Action: {context.SpouseAct}");
+            Log.Debug($"Random Action: {context.RandomAct}");
+            Log.Debug($"Prompts: {JsonConvert.SerializeObject(prompts)}");
+            if (context.ScheduleLine != "")
+            {
+                Log.Debug($"Original Line: {context.ScheduleLine}");
+            }
+            Log.Debug($"Results: {resultsInternal[0]}");
+            if (resultsInternal.Length > 1)
+            {
+                foreach (var result in resultsInternal.Skip(1))
+                {
+                    Log.Debug($"Response: {result}");
+                }
+            }
+            Log.Debug("--------------------------------------------------");
+        }
+        if (resultsInternal.Length == 0)
+        {
+            string errorMsg = lastException != null 
+                ? $"Error generating AI response for {Name}: {lastException}" 
+                : $"No valid results returned from AI for {Name}. AI returned \"{resultString}\".";
+                
+            ModEntry.SMonitor.Log(errorMsg, StardewModdingAPI.LogLevel.Error);
             results = new string[] { "..." };
         }
         else
         {
-            results = outcome.Result;
+            results = resultsInternal;
         }
         if (!string.IsNullOrWhiteSpace(prompts.GiveGift) && results.Length > 0)
         {
@@ -308,10 +335,10 @@ public class Character
         line = line.Trim().TrimStart('-', ' ', '"', '%');
         line = line.TrimEnd('"');
         // If the string starts or ends with #$b# ot #$e# remove it.
-        line = line.StartsWith("#$b#") ? line[4..] : line;
-        line = line.EndsWith("#$b#") ? line[..^4] : line;
-        line = line.StartsWith("#$e#") ? line[4..] : line;
-        line = line.EndsWith("#$e#") ? line[..^4] : line;
+        line = line.StartsWith("#$b#") ? line.Substring(4) : line;
+        line = line.EndsWith("#$b#") ? line.Substring(0, line.Length - 4) : line;
+        line = line.StartsWith("#$e#") ? line.Substring(4) : line;
+        line = line.EndsWith("#$e#") ? line.Substring(0, line.Length - 4) : line;
         // Remove any quotation marks
         line = line.Replace("\"", "");
         return line;
@@ -379,11 +406,11 @@ public class Character
             {
                 var element = elements[i];
                 var dollarIndex = element.IndexOf('$');
-                var upToDollar = dollarIndex == -1 ? element : element[..dollarIndex];
+                var upToDollar = dollarIndex == -1 ? element : element.Substring(0, dollarIndex);
                 upToDollar = upToDollar.Trim();
                 if (upToDollar.Length > 0 && !upToDollar.EndsWith(".") && !upToDollar.EndsWith("!") && !upToDollar.EndsWith("?"))
                 {
-                    elements[i] = upToDollar + "." + (element.Length > upToDollar.Length ? element[dollarIndex..] : "");
+                    elements[i] = upToDollar + "." + (element.Length > upToDollar.Length ? element.Substring(dollarIndex) : "");
                 }
             }
             line = string.Join("#", elements);
@@ -491,7 +518,7 @@ public class Character
     public string Name { get; }
     public string DialogueFilePath { get; }
     public string BioFilePath { get; }
-    public DialogueFile? DialogueData 
+    public DialogueFile DialogueData 
     { 
         get 
         {
@@ -503,7 +530,7 @@ public class Character
         }
         private set => dialogueData = value; 
     }
-    public ConcurrentBag<Tuple<DialogueContext,DialogueValue>> CreatedDialogue { get; private set; } = new ();
+    public ConcurrentBag<Tuple<DialogueContext,DialogueValue>> CreatedDialogue { get; private set; } = new ConcurrentBag<Tuple<DialogueContext,DialogueValue>>();
     internal BioData Bio
     {
         get => _bioData;
@@ -511,4 +538,5 @@ public class Character
     public List<string> PossiblePreoccupations { get; }
     public string Preoccupation { get; internal set; }
     public WorldDate PreoccupationDate { get; internal set; }
+}
 }

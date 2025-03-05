@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Text;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class ConversationHistory : IHistory
 {
@@ -23,4 +24,5 @@ internal class ConversationHistory : IHistory
         }
         return ModEntry.SHelper.Translation.Get("historyConversationFormat", new { builder= builder });
     }
+}
 }

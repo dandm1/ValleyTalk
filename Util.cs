@@ -26,7 +26,7 @@ namespace ValleyTalk
             return nearbyNpcs;
         }
 
-        internal static string GetString(StardewDialogue.Character npc,string key,object? tokens = null,bool returnNull = false)
+        internal static string GetString(StardewDialogue.Character npc,string key,object tokens = null,bool returnNull = false)
         {
             if (npc == null) return string.Empty;
 
@@ -59,7 +59,7 @@ namespace ValleyTalk
             return resultNG;
         }
 
-        internal static string GetString(string key,object? tokens = null,bool returnNull = false)
+        internal static string GetString(string key,object tokens = null,bool returnNull = false)
         {
             var result = _translationHelper.Get(key, tokens);
             if (returnNull && !result.HasValue())

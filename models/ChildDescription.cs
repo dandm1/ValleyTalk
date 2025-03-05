@@ -1,4 +1,5 @@
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public class ChildDescription
 {
@@ -12,4 +13,5 @@ public class ChildDescription
     public string Name { get; internal set; }
     public bool IsMale { get; internal set; }
     public int Age { get; internal set; }
+}
 }

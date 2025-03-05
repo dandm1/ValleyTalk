@@ -156,7 +156,7 @@ namespace ValleyTalk
             {
                 if (translationKey.StartsWith("Resort"))
                 {
-                    string path = $"Resort_Marriage{translationKey[6..]}";
+                    string path = $"Resort_Marriage{translationKey.Substring(6)}";
                     if (Game1.content.LoadStringReturnNullIfNotFound(path) != null)
                     {
                         translationKey = path;

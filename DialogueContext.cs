@@ -8,7 +8,8 @@ using System.Data.SqlTypes;
 using System.Linq;
 using StardewValley.Characters;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public class DialogueContext
 {
@@ -21,19 +22,19 @@ public class DialogueContext
     private static readonly int[] yearOptions = new int[] {1, 2};
     public static string[] specialContexts = new string[] {"cc_Boulder", "cc_Bridge", "cc_Bus", "cc_Greenhouse", "cc_Minecart", "cc_Complete", "movieTheater", "pamHouseUpgrade", "pamHouseUpgradeAnonymous", "jojaMartStruckByLightning", "babyBoy", "babyGirl", "wedding", "event_postweddingreception", "luauBest", "luauShorts", "luauPoisoned", "Characters_MovieInvite_Invited", "DumpsterDiveComment", "SpouseStardrop", "FlowerDance_Accept_Spouse", "FlowerDance_Accept", "FlowerDance_Decline", "GreenRain", "GreenRainFinished", "GreenRain_2", "Rainy"};
    
-    public int? Hearts { get; init; }
-    public Season? Season { get; init; }
-    public int? Year { get; init; }
+    public int? Hearts { get; set; }
+    public Season? Season { get; set; }
+    public int? Year { get; set; }
     public Weekday? Day {get; set; }
-    public int? DayOfSeason { get; init; }
-    public string? Inlaw { get; init; }
+    public int? DayOfSeason { get; set; }
+    public string Inlaw { get; set; }
     public StardewValley.Object Accept { get; set; }
-    public string? TimeOfDay { get; init; }
+    public string TimeOfDay { get; set; }
     public RandomAction? RandomAct { get; set; }
-    public int? RandomValue { get; init; }
+    public int? RandomValue { get; set; }
     public SpouseAction? SpouseAct { get; set; }
-    public string? Spouse { get; init; }
-    public string ChatID { get; init; }
+    public string Spouse { get; set; }
+    public string ChatID { get; set; }
     public string[] ChatHistory { get; set; } = Array.Empty<string>();
 
     private string[] elements = Array.Empty<string>();
@@ -300,7 +301,7 @@ public class DialogueContext
         get
         {
             BuildElements();
-            _value = string.Join('_', elements);
+            _value = string.Join("_", elements);
             return _value;
         }
         private set
@@ -321,7 +322,7 @@ public class DialogueContext
         }
     }
 
-    public string? Gender { get; internal set; }
+    public string Gender { get; internal set; }
     public string Location { get; internal set; }
     public bool Birthday { get; internal set; } = false;
     public bool MaleFarmer { get; internal set; }
@@ -449,4 +450,5 @@ public class DialogueContext
         }
         return false;
     }
+}
 }

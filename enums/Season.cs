@@ -1,4 +1,5 @@
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 public enum Season
 {
@@ -6,4 +7,5 @@ public enum Season
     Summer,
     Fall,
     Winter
+}
 }

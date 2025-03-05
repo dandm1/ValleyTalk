@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class StardewEventHistory
 {
-    private List<Tuple<StardewTime,IHistory>> _eventHistory = new();
-    private List<Tuple<StardewTime,IHistory>> _overheardHistory = new();
-    private List<Tuple<StardewTime,IHistory>> _dialogueHistory = new();
-    private List<Tuple<StardewTime,IHistory>> _conversationHistory = new();
+    private List<Tuple<StardewTime,IHistory>> _eventHistory = new List<Tuple<StardewTime,IHistory>>();
+    private List<Tuple<StardewTime,IHistory>> _overheardHistory = new List<Tuple<StardewTime,IHistory>>();
+    private List<Tuple<StardewTime,IHistory>> _dialogueHistory = new List<Tuple<StardewTime,IHistory>>();
+    private List<Tuple<StardewTime,IHistory>> _conversationHistory = new List<Tuple<StardewTime,IHistory>>();
 
     public List<Tuple<StardewTime, DialogueEventHistory>> EventHistory
     {
@@ -72,16 +73,16 @@ internal class StardewEventHistory
         switch(theEvent.GetType().Name)
         {
             case "DialogueEventHistory":
-                _eventHistory.Add(new(time,(DialogueEventHistory)theEvent));
+                _eventHistory.Add(new Tuple<StardewTime, IHistory>(time,(DialogueEventHistory)theEvent));
                 break;
             case "DialogueEventOverheard":
-                _overheardHistory.Add(new(time,(DialogueEventOverheard)theEvent));
+                _overheardHistory.Add(new Tuple<StardewTime, IHistory>(time,(DialogueEventOverheard)theEvent));
                 break;
             case "DialogueHistory":
-                _dialogueHistory.Add(new(time,(DialogueHistory)theEvent));
+                _dialogueHistory.Add(new Tuple<StardewTime, IHistory>(time,(DialogueHistory)theEvent));
                 break;
             case "ConversationHistory":
-                _conversationHistory.Add(new(time,(ConversationHistory)theEvent));
+                _conversationHistory.Add(new Tuple<StardewTime, IHistory>(time,(ConversationHistory)theEvent));
                 break;
             default:
                 throw new NotImplementedException();
@@ -114,4 +115,5 @@ internal class StardewEventHistory
             return lastOverheardTime.CompareTo(lastDlg.Item2) > 0 ? lastOverheard : lastDlg.Item1;
         }
     }
+}
 }

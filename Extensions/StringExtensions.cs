@@ -8,6 +8,6 @@ public static class StringExtensions
         {
             return aText;
         }
-        return char.ToUpper(aText[0]) + aText[1..].ToLower();
+        return char.ToUpper(aText[0]) + aText.Substring(1).ToLower();
     }
 }

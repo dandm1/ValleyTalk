@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading;
 using ValleyTalk;
 using Serilog;
 using System.Threading.Tasks;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class LlmClaude : Llm, IGetModelNames
 {
@@ -41,18 +43,18 @@ internal class LlmClaude : Llm, IGetModelNames
     internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var promptCached = gameCacheString;
-        var inputString = JsonSerializer.Serialize(new
+        var inputString = JsonConvert.SerializeObject(new
             {
                 model = this.modelName,
                 max_tokens = n_predict,
                 system = new PromptElement[]
                 { 
-                    new()
+                    new PromptElement()
                     {
                         type = "text",
                         text = systemPromptString
                     },
-                    new()
+                    new PromptElement()
                     {
                         type = "text",
                         cache_control = new { type = "ephemeral" },
@@ -94,7 +96,7 @@ internal class LlmClaude : Llm, IGetModelNames
                 var response = await client.SendAsync(request);
                 // Return the 'content' element of the response json
                 var responseString = await response.Content.ReadAsStringAsync();
-                var responseJson = JsonDocument.Parse(responseString);
+                var responseJson = JObject.Parse(responseString);
                 
                 if (responseJson == null)
                 {
@@ -103,12 +105,11 @@ internal class LlmClaude : Llm, IGetModelNames
                 else
                 {
                     
-                    if (!responseJson.RootElement.TryGetProperty("content", out var content)) { retry--; continue; }
-                    var completionArray = content.EnumerateArray();
-                    var completion = completionArray.MoveNext();
-                    if (completion == false) { retry--; continue; }
+                    if (responseJson["content"] == null) { retry--; continue; }
+                    var contentArray = responseJson["content"] as JArray;
+                    if (contentArray == null || contentArray.Count == 0) { retry--; continue; }
 
-                    var text = completionArray.Current.GetProperty("text").GetString();
+                    var text = contentArray[0]["text"]?.ToString();
                     return text ?? string.Empty;
                 }
             }
@@ -145,12 +146,19 @@ internal class LlmClaude : Llm, IGetModelNames
         request.Headers.Add("anthropic-version", "2023-06-01");
         var response = client.SendAsync(request).Result;
         var responseString = response.Content.ReadAsStringAsync().Result;
-        var responseJson = JsonDocument.Parse(responseString);
-        var models = responseJson.RootElement.GetProperty("data").EnumerateArray();
+        var responseJson = JObject.Parse(responseString);
+        var models = responseJson["data"] as JArray;
         var modelNames = new List<string>();
-        foreach (var model in models)
+        if (models != null)
         {
-            modelNames.Add(model.GetProperty("id").GetString());
+            foreach (var model in models)
+            {
+                var id = model["id"]?.ToString();
+                if (!string.IsNullOrEmpty(id))
+                {
+                    modelNames.Add(id);
+                }
+            }
         }
         return modelNames.ToArray();
         }
@@ -160,4 +168,5 @@ internal class LlmClaude : Llm, IGetModelNames
             return new string[] { };
         }
     }
+}
 }

@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading;
 using ValleyTalk;
 using Serilog;
 
-namespace StardewDialogue;
+namespace StardewDialogue
+{
 
 internal class LlmOpenAi : LlmOpenAiBase, IGetModelNames
 {
@@ -30,4 +32,5 @@ internal class LlmOpenAi : LlmOpenAiBase, IGetModelNames
         }
         return CoreGetModelNames();
     }
+}
 }
