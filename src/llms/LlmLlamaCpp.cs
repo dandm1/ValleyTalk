@@ -12,7 +12,7 @@ namespace StardewDialogue;
 
 internal class LlmLlamaCpp : Llm
 {
-    internal LlmLlamaCpp(string url, string promptFormat)
+    public LlmLlamaCpp(string url, string promptFormat)
     {
         this.url = url;
         PromptFormat = promptFormat;

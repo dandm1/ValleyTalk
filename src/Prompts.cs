@@ -7,9 +7,6 @@ using System.Text.Json.Serialization;
 using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
-using System.ComponentModel;
-using StardewValley.Network;
-using StardewValley.Objects;
 
 namespace StardewDialogue;
 
@@ -45,10 +42,15 @@ public class Prompts
 
     private static void LoadStardewSummary()
     {
-        var gameSummaryBuilder = new GameSummaryBuilder();
-        _stardewSummary = gameSummaryBuilder.Build();
-
+        var gameSummaryDict = Util.ReadLocalisedJson<Dictionary<string,string>>("assets/bio/Stardew","txt");
+        _stardewSummary = gameSummaryDict["Text"];
+        var gameSummaryTranslations = Util.GetString("gameSummaryTranslations");
+        if (!string.IsNullOrWhiteSpace(gameSummaryTranslations))
+        {
+            _stardewSummary += $"\n{gameSummaryTranslations}";
+        }
     }
+
 
     [JsonIgnore]
     static string _stardewSummary;
@@ -589,13 +591,12 @@ public class Prompts
         var bedTile = npcData.Home[0].Tile;
         if (Context.Location == npcData.Home[0].Location && Context.Inlaw != Name)
         {
-            if (Character.StardewNpc.TilePoint == bedTile && Character.Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel)
+            if (Character.StardewNpc.TilePoint == bedTile && Character.Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel && StardewModdingAPI.Context.IsMainPlayer)
             {
                 prompt.AppendLine(Util.GetString(Character,"locationBed", new { Name= Name }));
             }
             else
             {
-                
                 var mayBeInShop = Context.Location.Contains("Shop", StringComparison.OrdinalIgnoreCase)
                     || Context.Location.Contains("Science", StringComparison.OrdinalIgnoreCase);
                 var inShopString = mayBeInShop ? Util.GetString(Character,"locationAtHomeOrShop") : "";
@@ -1077,7 +1078,7 @@ public class Prompts
 
         return thisName;
     }
-
+    
     private IEnumerable<DialogueValue> SelectDialogueSample()
     {
         // Pick 20 most relevant dialogue entries
