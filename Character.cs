@@ -30,7 +30,7 @@ public class Character
     public Character(string name, NPC stardewNpc)
     {
         Name = name;
-        BioFilePath = $"assets/bio/{Name}";
+        BioFilePath = $"assets/bio/{RemoveDotSuffixes(Name)}";
         StardewNpc = stardewNpc;
 
         // Load and process the dialogue file
@@ -41,6 +41,13 @@ public class Character
         ValidPortraits.AddRange(_bioData.ExtraPortraits.Keys);
         PossiblePreoccupations = new List<string>(_bioData.Preoccupations);
         PossiblePreoccupations.AddRange(GetLovedAndHatedGiftNames());
+    }
+
+    private string RemoveDotSuffixes(string name)
+    {
+        var suffixCharacters = new char[] {'·', '•' ,'-' };
+        var result = name.TrimEnd(suffixCharacters);
+        return result;
     }
 
     private IEnumerable<string> GetLovedAndHatedGiftNames()
@@ -150,7 +157,7 @@ public class Character
         BioData bioData = null;
         
         bioData = Util.ReadLocalisedJson<BioData>(BioFilePath,"txt");
-        if (bioData == null)
+                if (bioData == null)
         {
             bioData = new BioData();
             ModEntry.SMonitor.Log($"No bio file found for {Name}.", StardewModdingAPI.LogLevel.Warn);
