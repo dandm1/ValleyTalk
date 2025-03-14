@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using StardewModdingAPI;
 using StardewValley;
 
 namespace ValleyTalk;
@@ -28,9 +29,11 @@ public class PromptCache
             {
                 promptDict = Game1.content.LoadLocalized<Dictionary<string,object>>("ValleyTalk/Prompts");
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                ModEntry.SMonitor.Log("Failed to load prompts", StardewModdingAPI.LogLevel.Error);
+                ModEntry.SMonitor.Log("Failed to load prompts - disabling mod.", StardewModdingAPI.LogLevel.Error);
+                ModEntry.SMonitor.Log("Exception: " + ex.Message, StardewModdingAPI.LogLevel.Error);
+                ModEntry.Config.EnableMod = false;
                 return _promptCache;
             }
             foreach (var entry in promptDict)

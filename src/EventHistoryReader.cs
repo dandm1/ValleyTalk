@@ -52,7 +52,7 @@ public class EventHistoryReader
     {
         {
             var saveName = GetSaveName(name);
-            var eventKey = $"EventHistory_{name}";
+            var eventKey = $"EventHistory_{saveName}";
             try
             {
                 var history = ModEntry.SHelper.Data.ReadSaveData<StardewEventHistory>(eventKey);
@@ -75,7 +75,7 @@ public class EventHistoryReader
         if (Context.IsMainPlayer)
         {
             var saveName = GetSaveName(name);
-            var eventKey = $"EventHistory_{name}";
+            var eventKey = $"EventHistory_{saveName}";
             ModEntry.SHelper.Data.WriteSaveData(eventKey, eventHistory);
         }
         else

@@ -30,7 +30,7 @@ public class Character
     public Character(string name, NPC stardewNpc)
     {
         Name = name;
-        BioFilePath = $"assets/bio/{RemoveDotSuffixes(Name)}";
+        BioFilePath = $"ValleyTalk/Bios/{RemoveDotSuffixes(Name)}";
         StardewNpc = stardewNpc;
 
         // Load and process the dialogue file
