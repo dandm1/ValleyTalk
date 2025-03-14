@@ -11,6 +11,8 @@ public class EventHistoryReader
 {
     public static EventHistoryReader Instance { get; } = new EventHistoryReader();
 
+    private static readonly Dictionary<string, string> _conversionCache = new();
+    
     private EventHistoryReader() 
     { 
         if (!Context.IsMainPlayer)
@@ -49,6 +51,7 @@ public class EventHistoryReader
     private static StardewEventHistory LoadFromSaveFile(string name)
     {
         {
+            var saveName = GetSaveName(name);
             var eventKey = $"EventHistory_{name}";
             try
             {
@@ -71,11 +74,33 @@ public class EventHistoryReader
     {
         if (Context.IsMainPlayer)
         {
-            ModEntry.SHelper.Data.WriteSaveData($"EventHistory_{name}", eventHistory);
+            var saveName = GetSaveName(name);
+            var eventKey = $"EventHistory_{name}";
+            ModEntry.SHelper.Data.WriteSaveData(eventKey, eventHistory);
         }
         else
         {
             _fileEventHistories[name] = eventHistory;
         }
+    }
+
+    private static string GetSaveName(string name)
+    {
+        string saveName;
+        if (_conversionCache.TryGetValue(name, out saveName))
+        {
+            return saveName;
+        }
+        // Define a constant list of punctionation characters to strip out
+        const string punctuation = "!\"#$%&'()*+,/:;<=>?@[\\]^`{|}~ ";
+        saveName = name;
+        // Strip out any punctuation
+        foreach (var ch in punctuation)
+        {
+            saveName = saveName.Replace(ch.ToString(), string.Empty);
+        }
+        
+        _conversionCache[name] = saveName;
+        return saveName;
     }
 }
