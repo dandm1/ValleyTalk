@@ -144,6 +144,8 @@ namespace ValleyTalk
                 {"Anthropic", typeof(LlmClaude)},
                 {"OpenAI", typeof(LlmOpenAi)},
                 {"Mistral", typeof(LlmMistral)},
+                {"DeepSeek", typeof(LlmDeepSeek)},
+                {"VolcEngine", typeof(LlmVolcEngine)},
                 {"OpenAiCompatible", typeof(LlmOAICompatible)}
             };
             if (!LlmMap.TryGetValue(Config.Provider, out var llmType))
