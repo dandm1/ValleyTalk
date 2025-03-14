@@ -44,7 +44,7 @@
         },
         {
             "Action": "Include",
-            "FromFile": "assets/bio/Issac.json"
+            "FromFile": "assets/bio/Isaac.json"
         },
         {
             "Action": "Include",
