@@ -15,7 +15,7 @@ public class EventHistoryReader
     { 
         if (!Context.IsMainPlayer)
         {
-            _multiplayerFilename = $"multiplayer/{Constants.SaveFolderName},json";
+            _multiplayerFilename = $"multiplayer/{Constants.SaveFolderName}.json";
             _fileEventHistories = ModEntry.SHelper.Data.ReadJsonFile<Dictionary<string, StardewEventHistory>>(_multiplayerFilename) ?? new();
             ModEntry.SHelper.Events.GameLoop.Saving += OnSaving;
         }
