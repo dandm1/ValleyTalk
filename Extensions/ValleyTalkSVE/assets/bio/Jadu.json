@@ -1,12 +1,62 @@
 {
-  "Biography": "Jadu is a mysterious adventurer who can be found guarding the entrance to the Calico Desert. He has an enigmatic and aloof demeanor, preferring to observe from afar rather than engage directly. Despite his detached nature, Jadu is reliable and dedicated to his duties as a sentry for the Adventurer\u0027s Guild.\n* A skilled adventurer who alternates between sentry duty and active field missions\n* Of medium build with weather-worn clothing suited to desert conditions\n* Carries traditional adventuring gear including weapons and survival equipment\n\n**Interests**\n* Adventuring and exploring uncharted territories \n* Observing the world from a distance and appreciating its wonders\n* Fulfilling his responsibilities as a sentry for the Adventurer\u0027s Guild\n* Engaging in battle and testing his combat skills\n\n**Background**\nJadu\u0027s background is shrouded in mystery, with little known about his past. He is a skilled adventurer who has earned a reputation within the Guild for his reliability and dedication. Jadu\u0027s sentry duties often involve guarding remote locations and observing from afar, which suits his solitary nature.\n\n**Significant Game Events**\n* Jadu can be found guarding the entrance to the Calico Desert, where he offers unique wares not found elsewhere.\n* During the Desert Festival, Camilla mentions tasking Jadu with errands, highlighting his role as a reliable adventurer within the Guild.\n* Marlon acknowledges Jadu\u0027s presence during an order event, indicating that Jadu is well-known and respected among his peers.",
-  "Relationships": n\n**Relationships with Other Characters**\n* Camilla: Camilla trusts Jadu enough to task him with errands, suggesting a working relationship between the two.\n* Marlon: Marlon acknowledges Jadu during an order event, hinting at a professional rapport between them as fellow adventurers.\n* The Player: Jadu has heard of the player\u0027s reputation within the Guild, indicating a level of awareness and respect for their accomplishments.\n\n{},
-  "Traits": \**Key Personality Traits**\n* Observant and inquisitive, with an appreciation for the wonders of the world\n* Solitary and detached, preferring to watch from afar rather than engage directly\n* Reliable and dedicated to his duties as a sentry for the Adventurer\u0027s Guild\n* Combat-oriented, with a desire to test his skills in battle\n* Appreciative of the simple things in life, such as fresh air after exploring dank caves\n\n{},
-  "BiographyEnd": "**Summary**\nJadu is an enigmatic and reliable adventurer who serves as a sentry for the Adventurer\u0027s Guild. His solitary nature and keen observational skills make him well-suited for guarding remote locations and watching from afar. Despite his detached demeanor, Jadu is dedicated to his responsibilities and eager to engage in combat when the opportunity arises. His unique perspective and appreciation for the world\u0027s wonders add depth to his character, making him a fascinating figure within the realm of Stardew Valley Expanded.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Jadu",
+        "Entries": {
+            "Biography": "Jadu is a mysterious adventurer who can be found guarding the entrance to the Calico Desert. He has an enigmatic and aloof demeanor, preferring to observe from afar rather than engage directly. Despite his detached nature, Jadu is reliable and dedicated to his duties as a sentry for the Adventurer\u0027s Guild.\n* A skilled adventurer who alternates between sentry duty and active field missions\n* Of medium build with weather-worn clothing suited to desert conditions\n* Carries traditional adventuring gear including weapons and survival equipment\n\n**Interests**\n* Adventuring and exploring uncharted territories \n* Observing the world from a distance and appreciating its wonders\n* Fulfilling his responsibilities as a sentry for the Adventurer\u0027s Guild\n* Engaging in battle and testing his combat skills\n\n**Background**\nJadu\u0027s background is shrouded in mystery, with little known about his past. He is a skilled adventurer who has earned a reputation within the Guild for his reliability and dedication. Jadu\u0027s sentry duties often involve guarding remote locations and observing from afar, which suits his solitary nature.\n\n**Significant Game Events**\n* Jadu can be found guarding the entrance to the Calico Desert, where he offers unique wares not found elsewhere.\n* During the Desert Festival, Camilla mentions tasking Jadu with errands, highlighting his role as a reliable adventurer within the Guild.\n* Marlon acknowledges Jadu\u0027s presence during an order event, indicating that Jadu is well-known and respected among his peers.",
+            "Relationships": [
+              {
+                "id": "Camilla",
+                "Heading": "Camilla",
+                "Description": "Camilla trusts Jadu enough to task him with errands, suggesting a working relationship between the two."
+              },
+              {
+                "id": "Marlon",
+                "Heading": "Marlon",
+                "Description": "Marlon acknowledges Jadu during an order event, hinting at a professional rapport between them as fellow adventurers."
+              },
+              {
+                "id": "Player",
+                "Heading": "Player",
+                "Description": "Jadu has heard of the player\u0027s reputation within the Guild, indicating a level of awareness and respect for their accomplishments."
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Observant",
+                "Heading": "Observant",
+                "Description": "Observant and inquisitive, with an appreciation for the wonders of the world"
+              },
+              {
+                "id": "Solitary",
+                "Heading": "Solitary",
+                "Description": "Solitary and detached, preferring to watch from afar rather than engage directly"
+              },
+              {
+                "id": "Reliable",
+                "Heading": "Reliable",
+                "Description": "Reliable and dedicated to his duties as a sentry for the Adventurer\u0027s Guild"
+              },
+              {
+                "id": "Combat-oriented",
+                "Heading": "Combat-oriented",
+                "Description": "Combat-oriented, with a desire to test his skills in battle"
+              },
+              {
+                "id": "Appreciative",
+                "Heading": "Appreciative",
+                "Description": "Appreciative of the simple things in life, such as fresh air after exploring dank caves"
+              }
+            ],
+            "BiographyEnd": "**Summary**\nJadu is an enigmatic and reliable adventurer who serves as a sentry for the Adventurer\u0027s Guild. His solitary nature and keen observational skills make him well-suited for guarding remote locations and watching from afar. Despite his detached demeanor, Jadu is dedicated to his responsibilities and eager to engage in combat when the opportunity arises. His unique perspective and appreciation for the world\u0027s wonders add depth to his character, making him a fascinating figure within the realm of Stardew Valley Expanded.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["Adventurer's Guild", "Calico Desert", "Sentry duty", "Combat", "Exploration", "Desert Festival", "Camilla", "Marlon", "Remote locations"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      }
+    ]
 }

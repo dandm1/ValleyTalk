@@ -1,12 +1,82 @@
 {
-  "biography": "Morgan is a young magic apprentice studying under the Wizard Magnus Rasmodius (or alternatively Razolyn in some timelines) at the Wizard\u0027s Tower in Stardew Valley. They were assigned to study there by the Ferngill Republic Ministry of Magic after being identified as having magical potential. Morgan is non-binary, preferring they/them pronouns, and appears to be around the same age as Jas and Vincent.\n\n**Physical Description**\n* Wears a distinctive wizard\u0027s hat gifted by their mentor.\n* Young in appearance, likely pre-teen or early teenage years.\n* Voice that some initially mistake for masculine.\n\n**Background**\n* Originally from Everton, a mountain town in the north.\n* Comes from a loving family whom they miss dearly.\n* Was required to leave home by the Ministry of Magic to study.\n* Parents are only allowed limited visits, which their mentor has denied.\n* Home region has similar monster problems to Stardew Valley.\n\n**Interests**\n* Magic studies, especially potion-making.\n* Playing with other children (Jas and Vincent, as well as any other children in the village).\n* Animals and magical creatures.\n* Games and activities like hide-and-seek.\n* Learning about magical history (though they find it boring).\n* Experimenting with new spells and magical techniques.\n\n**Significant Game Events**\n* Arrival at the Wizard\u0027s Tower.\n* Coming out as non-binary during a game of hide-and-seek.\n* Passing important magical exams.\n* Learning transmutation.\n* Developing ability to communicate with forest creatures.\n\n**Magical Abilities**\n* Skilled at potion-making.\n* Can create warp totems.\n* Learning transmutation magic.\n* Strong connection to nature and forest creatures.\n* Not yet allowed to practice fire magic.\n* Can sense magical energy and mana.",
-  "Relationships": \n\n**Relationships with Other Characters**\n* Student-mentor relationship with Magnus/Razolyn\n* Friends with Jas and Vincent, though limited in ability to play with them\n* Friendly relationship with the farmer (@)\n* Cautious of Camilla the witch who visits\n* Admires Marlon\n* Knows Krobus and refers to them as \u0022little black bean\u0022{},
-  "Traits": Enthusiastic and eager to learn\n* Sometimes mischievous and prone to pranks\n* Struggles with loneliness and homesickness\n* Determined to become stronger to protect others\n* Honest about their identity and who they are\n* Can be playful but takes their studies seriously{},
-  "BiographyEnd": "**Summary**\nMorgan represents a unique character in Stardew Valley as both a magic user in training and a young person discovering their identity. Their story combines elements of coming-of-age, magical education, and personal growth while dealing with separation from family and the pressures of their magical studies. Despite their youth, they show remarkable maturity in understanding and expressing their non-binary identity, while maintaining childlike enthusiasm for learning and play.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Morgan",
+        "Entries": {
+            "Biography": "Morgan is a young magic apprentice studying under the Wizard Magnus Rasmodius (or alternatively Razolyn in some timelines) at the Wizard\u0027s Tower in Stardew Valley. They were assigned to study there by the Ferngill Republic Ministry of Magic after being identified as having magical potential. Morgan is non-binary, preferring they/them pronouns, and appears to be around the same age as Jas and Vincent.\n\n**Physical Description**\n* Wears a distinctive wizard\u0027s hat gifted by their mentor.\n* Young in appearance, likely pre-teen or early teenage years.\n* Voice that some initially mistake for masculine.\n\n**Background**\n* Originally from Everton, a mountain town in the north.\n* Comes from a loving family whom they miss dearly.\n* Was required to leave home by the Ministry of Magic to study.\n* Parents are only allowed limited visits, which their mentor has denied.\n* Home region has similar monster problems to Stardew Valley.\n\n**Interests**\n* Magic studies, especially potion-making.\n* Playing with other children (Jas and Vincent, as well as any other children in the village).\n* Animals and magical creatures.\n* Games and activities like hide-and-seek.\n* Learning about magical history (though they find it boring).\n* Experimenting with new spells and magical techniques.\n\n**Significant Game Events**\n* Arrival at the Wizard\u0027s Tower.\n* Coming out as non-binary during a game of hide-and-seek.\n* Passing important magical exams.\n* Learning transmutation.\n* Developing ability to communicate with forest creatures.\n\n**Magical Abilities**\n* Skilled at potion-making.\n* Can create warp totems.\n* Learning transmutation magic.\n* Strong connection to nature and forest creatures.\n* Not yet allowed to practice fire magic.\n* Can sense magical energy and mana.",
+            "Relationships": [
+              {
+                "id": "Magnus/Razolyn",
+                "Heading": "Magnus/Razolyn",
+                "Description": "Student-mentor relationship with Magnus/Razolyn"
+              },
+              {
+                "id": "Jas and Vincent",
+                "Heading": "Jas and Vincent",
+                "Description": "Friends with Jas and Vincent, though limited in ability to play with them"
+              },
+              {
+                "id": "Farmer",
+                "Heading": "Farmer",
+                "Description": "Friendly relationship with the farmer (@)"
+              },
+              {
+                "id": "Camilla",
+                "Heading": "Camilla",
+                "Description": "Cautious of Camilla the witch who visits"
+              },
+              {
+                "id": "Marlon",
+                "Heading": "Marlon",
+                "Description": "Admires Marlon"
+              },
+              {
+                "id": "Krobus",
+                "Heading": "Krobus",
+                "Description": "Knows Krobus and refers to them as \u0022little black bean\u0022"
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Enthusiastic",
+                "Heading": "Enthusiastic",
+                "Description": "Enthusiastic and eager to learn"
+              },
+              {
+                "id": "Mischievous",
+                "Heading": "Mischievous",
+                "Description": "Sometimes mischievous and prone to pranks"
+              },
+              {
+                "id": "Homesick",
+                "Heading": "Homesick",
+                "Description": "Struggles with loneliness and homesickness"
+              },
+              {
+                "id": "Determined",
+                "Heading": "Determined",
+                "Description": "Determined to become stronger to protect others"
+              },
+              {
+                "id": "Honest",
+                "Heading": "Honest",
+                "Description": "Honest about their identity and who they are"
+              },
+              {
+                "id": "Playful",
+                "Heading": "Playful",
+                "Description": "Can be playful but takes their studies seriously"
+              }
+            ],
+            "BiographyEnd": "**Summary**\nMorgan represents a unique character in Stardew Valley as both a magic user in training and a young person discovering their identity. Their story combines elements of coming-of-age, magical education, and personal growth while dealing with separation from family and the pressures of their magical studies. Despite their youth, they show remarkable maturity in understanding and expressing their non-binary identity, while maintaining childlike enthusiasm for learning and play.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["Magic", "Potion-making", "Ministry of Magic", "Wizard's Tower", "Everton", "Hide-and-seek", "Transmutation", "Forest creatures", "Warp totems", "Magical exams"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      }
+    ]
 }

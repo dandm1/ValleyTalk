@@ -8,14 +8,119 @@
           "Alesia": { 
             "Id": "Alesia",
             "Name": "Alesia",
-            "Description": "TBC."
+            "Description": "A skilled archer and monster hunter from Castle Village who is a member of the Adventurer's Guild and occasionally visits Stardew Valley to aid Marlon."
+          },
+          "Andy": { 
+            "Id": "Andy",
+            "Name": "Andy",
+            "Description": "A gruff, elderly farmer who lives and works alone at Fairhaven Farm, known for his stubborn personality but deep knowledge of farming and foraging."
+          },
+          "Apples": { 
+            "Id": "Apples",
+            "Name": "Apples",
+            "Description": "An energetic and friendly young Junimo who lives in Aurora Vineyard, which she has transformed into her magical forest home using her Junimo powers."
           },
           "Camilla": { 
             "Id": "Camilla",
             "Name": "Camilla",
-            "Description": "TBC."
+            "Description": "A mysterious and powerful witch who resides in Castle Village, known for protecting the village from monsters and occasionally aiding the player."
+          },
+          "Claire": { 
+            "Id": "Claire",
+            "Name": "Claire",
+            "Description": "A shy young woman who works first at Joja Mart and later at the movie theater, with dreams of becoming an actress and a passion for dance."
+          },
+          "Gunther": { 
+            "Id": "Gunther",
+            "Name": "Gunther",
+            "Description": "The intellectual curator of the museum and library in Pelican Town with a deep passion for history, archaeology, and preserving the cultural heritage of Stardew Valley."
+          },
+          "Hank": { 
+            "Id": "Hank",
+            "Name": "Hank",
+            "Description": "A friendly, middle-aged handyman from Grampleton who is married to Treyvon and helps raise his stepdaughter Scarlett."
+          },
+          "Henchman": { 
+            "Id": "Henchman",
+            "Name": "Henchman",
+            "Description": "A goblin character living in the marshlands who initially resents the player for causing him to lose his job with a witch, but later becomes friendlier."
+          },
+          "Isaac": { 
+            "Id": "Isaac",
+            "Name": "Isaac",
+            "Description": "A seasoned warrior and member of the Adventurers Guild who operates primarily in the badlands region and is known for his exceptional combat skills but abrasive personality."
+          },
+          "Jadu": { 
+            "Id": "Jadu",
+            "Name": "Jadu",
+            "Description": "A mysterious adventurer who guards the entrance to the Calico Desert, known for his enigmatic and aloof demeanor but reliable nature as a sentry for the Adventurer's Guild."
+          },
+          "Jolyne": { 
+            "Id": "Jolyne",
+            "Name": "Jolyne",
+            "Description": "The fearless leader of The First Slash, a guild of adventurers who protect the Fern Islands, recognized by her fiery red hair and fierce determination."
+          },
+          "Lance": { 
+            "Id": "Lance",
+            "Name": "Lance",
+            "Description": "An adventurer and researcher from Galdora who comes to Pelican Town to aid Marlon's monster eradication efforts, specializing in the study of magic relics, crops, and monsters."
+          },
+          "Marlon": { 
+            "Id": "Marlon",
+            "Name": "Marlon",
+            "Description": "The one-eyed leader of the Adventurer's Guild in Stardew Valley, known for his skill with a sword and his role as both mentor and supplier of weapons to new adventurers."
+          },
+          "Martin": { 
+            "Id": "Martin",
+            "Name": "Martin",
+            "Description": "A shy, kindhearted young man who works part-time at Joja Mart and is best friends with his co-worker Claire while searching for information about his birth parents."
+          },
+          "Morgan": { 
+            "Id": "Morgan",
+            "Name": "Morgan",
+            "Description": "A young non-binary magic apprentice studying under the Wizard at the Wizard's Tower, assigned there by the Ferngill Republic Ministry of Magic after being identified as having magical potential."
+          },
+          "Morris": { 
+            "Id": "Morris",
+            "Name": "Morris",
+            "Description": "The ambitious manager of Joja Corporation's Stardew Valley branch who strives to expand Joja's influence in the valley and may run against Lewis in the mayoral election."
+          },
+          "Olivia": { 
+            "Id": "Olivia",
+            "Name": "Olivia",
+            "Description": "A wealthy, refined widow originally from the Gotoro Empire who now lives in Pelican Town with her son Victor, working as a part-time stock trader after leaving her corporate career."
+          },
+          "Peaches": { 
+            "Id": "Peaches",
+            "Name": "Peaches",
+            "Description": "A cheerful Junimo character who is the best friend of Apples, often visiting her at home and helping her grow starfruit friends using magic."
+          },
+          "Scarlett": { 
+            "Id": "Scarlett",
+            "Name": "Scarlett",
+            "Description": "A warm-hearted young woman from Grampleton who works as a farmhand in Stardew Valley and is best friends with Sophia from Blue Moon Vineyard."
+          },
+          "Sophia": { 
+            "Id": "Sophia",
+            "Name": "Sophia",
+            "Description": "A young female vineyard owner with distinctive pink hair who inherited Blue Moon Vineyard from her parents and battles anxiety while pursuing her interests in anime and cosplay."
+          },
+          "Susan": { 
+            "Id": "Susan",
+            "Name": "Susan",
+            "Description": "An elderly farmer who owns Emerald Farm near the railroad station, known for her determination, curiosity about the world, and skill in farming and crafting."
+          },
+          "Treyvon": { 
+            "Id": "Treyvon",
+            "Name": "Treyvon",
+            "Description": "Scarlett's father and Hank's husband who owns a wholesale store called \"Treyvon's Essentials\" in Grampleton and has a contract with Marnie's Ranch in Stardew Valley."
+          },
+          "Victor": { 
+            "Id": "Victor",
+            "Name": "Victor",
+            "Description": "A young adult and son of Olivia who recently graduated from Pellcar University with an engineering degree and now works as an apprentice bridge engineer."
           }
-          }
-       }
+        }
+      }
     ]
 }

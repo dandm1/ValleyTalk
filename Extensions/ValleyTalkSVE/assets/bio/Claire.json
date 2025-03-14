@@ -1,12 +1,77 @@
 {
-  "biography": "Claire is a young woman who works first at Joja Mart and later at the movie theater in Pelican Town\n* Initially shy and reserved, she commutes from her small home in the countryside at 103 Prairie Road.\n* Has an elegant, graceful presence and shows natural talent for dance and performance.\n\n**Background**\n* Grew up in a rural area where she still lives.\n* Harbored dreams of becoming an actress since childhood.\n* Took dance classes when young, developing a lasting passion for dance.\n* Initially took the Joja Mart job out of necessity due to limited employment options in her area.\n* Lives next door to Smith\u0027s Orchard, which provides her with fresh fruit.\n\n**Interests \u0026 Hobbies**\n* Reading screenplays and watching classic films.\n* Dancing and choreography.\n* Cooking (especially after moving away from frozen meals).\n* Bird watching and nature appreciation.\n* Participates in weekly aerobics classes.\n* Has a particular love for thriller movies.\n\n**Significant Character Development**\n* Transitions from being isolated and lonely to becoming part of the community.\n* Moves from unhealthy eating habits to learning to cook fresh meals.\n* Gains confidence through participation in aerobics classes.\n* Pursues her acting dreams, eventually landing a lead role in \u0022The Thief of Justice\u0022.\n* Shows personal growth in overcoming her initial shyness.",
-  "Relationships": n\n**Relationships**\n* Best friends with Martin, her coworker\n* Becomes close with the women in Caroline\u0027s aerobics class\n* Gradually integrates into the Pelican Town community\n* Can develop a romantic relationship with the player character\n* Forms friendships with Emily and other townsfolk through social activities\{},
-  "Traits": Naturally shy and somewhat anxious in social situations\n* Deeply passionate about performing arts and dance\n* Kind and thoughtful toward others\n* Gets cold easily and prefers warm weather\n* Has a growing interest in cooking and healthy eating\n* Shows a special affinity for birds and nature{},
-  "BiographyEnd": "**Summary**\nClaire represents a character arc of personal growth and dream fulfillment. Starting as a shy retail worker who keeps to herself, she gradually becomes more integrated into the community and gains the confidence to pursue her acting aspirations. Her journey from eating frozen meals to cooking fresh food parallels her overall character development from isolation to connection.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Claire",
+        "Entries": {
+            "Biography": "Claire is a young woman who works first at Joja Mart and later at the movie theater in Pelican Town\n* Initially shy and reserved, she commutes from her small home in the countryside at 103 Prairie Road.\n* Has an elegant, graceful presence and shows natural talent for dance and performance.\n\n**Background**\n* Grew up in a rural area where she still lives.\n* Harbored dreams of becoming an actress since childhood.\n* Took dance classes when young, developing a lasting passion for dance.\n* Initially took the Joja Mart job out of necessity due to limited employment options in her area.\n* Lives next door to Smith\u0027s Orchard, which provides her with fresh fruit.\n\n**Interests \u0026 Hobbies**\n* Reading screenplays and watching classic films.\n* Dancing and choreography.\n* Cooking (especially after moving away from frozen meals).\n* Bird watching and nature appreciation.\n* Participates in weekly aerobics classes.\n* Has a particular love for thriller movies.\n\n**Significant Character Development**\n* Transitions from being isolated and lonely to becoming part of the community.\n* Moves from unhealthy eating habits to learning to cook fresh meals.\n* Gains confidence through participation in aerobics classes.\n* Pursues her acting dreams, eventually landing a lead role in \u0022The Thief of Justice\u0022.\n* Shows personal growth in overcoming her initial shyness.",
+            "Relationships": [
+              {
+                "id": "Martin",
+                "Heading": "Martin",
+                "Description": "Best friends with Martin, her coworker"
+              },
+              {
+                "id": "Caroline",
+                "Heading": "Caroline",
+                "Description": "Becomes close with the women in Caroline\u0027s aerobics class"
+              },
+              {
+                "id": "Pelican Town",
+                "Heading": "Pelican Town",
+                "Description": "Gradually integrates into the Pelican Town community"
+              },
+              {
+                "id": "Player",
+                "Heading": "Player",
+                "Description": "Can develop a romantic relationship with the player character"
+              },
+              {
+                "id": "Emily",
+                "Heading": "Emily",
+                "Description": "Forms friendships with Emily and other townsfolk through social activities"
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Shy",
+                "Heading": "Shy",
+                "Description": "Naturally shy and somewhat anxious in social situations"
+              },
+              {
+                "id": "Passionate",
+                "Heading": "Passionate",
+                "Description": "Deeply passionate about performing arts and dance"
+              },
+              {
+                "id": "Kind",
+                "Heading": "Kind",
+                "Description": "Kind and thoughtful toward others"
+              },
+              {
+                "id": "Cold-sensitive",
+                "Heading": "Cold-sensitive",
+                "Description": "Gets cold easily and prefers warm weather"
+              },
+              {
+                "id": "Health-conscious",
+                "Heading": "Health-conscious",
+                "Description": "Has a growing interest in cooking and healthy eating"
+              },
+              {
+                "id": "Nature-loving",
+                "Heading": "Nature-loving",
+                "Description": "Shows a special affinity for birds and nature"
+              }
+            ],
+            "BiographyEnd": "**Summary**\nClaire represents a character arc of personal growth and dream fulfillment. Starting as a shy retail worker who keeps to herself, she gradually becomes more integrated into the community and gains the confidence to pursue her acting aspirations. Her journey from eating frozen meals to cooking fresh food parallels her overall character development from isolation to connection.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["Dance", "Acting", "Joja Mart", "Movie theater", "Prairie Road", "Smith\u0027s Orchard", "Aerobics class", "Cooking", "Bird watching", "The Thief of Justice"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      }
+    ]
 }

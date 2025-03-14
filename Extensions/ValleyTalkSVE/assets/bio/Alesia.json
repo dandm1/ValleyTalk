@@ -1,12 +1,67 @@
 {
-  "Biography": "Alesia is a skilled archer and monster hunter who hails from Castle Village. She is a member of the Adventurer\u0027s Guild along with Isaac and Camilla. Alesia occasionally visits Stardew Valley to aid Marlon and share her expertise. \n\n**Interests**\n* Monster hunting and tracking monster movements to report to the Adventurer\u0027s Guild\n.* Archery and keeping her bow skills sharp.\n* Visiting Stardew Valley and assisting her old friend Marlon when needed.\n* Following the guidance of Yoba in her adventures.\n\n**Background**\nAlesia lived in Stardew Valley years ago before moving to Castle Village. She honed her archery skills and became a renowned monster hunter, earning a place in the Adventurer\u0027s Guild. Alesia maintains a busy schedule traveling between the valley, castle village, and outposts to hunt monsters and file reports for the guild. Despite the demands of her work, she always makes time to visit Stardew Valley and check in on her old friend Marlon.\n\n**Significant Game Events**\n* Alesia assists the farmer in searching for the diamond scorpion in the badlands.\n* Alesia captures monsters with a joint effort alongside the farmer and others.\n* She visits Marlon in Stardew Valley to help deal with slimes duplicating in the caverns.",
-  "Relationships": n\n**Relationships with Other Characters**\n* **Marlon**: Alesia and Marlon are old friends. Marlon requested her aid in dealing with slimes in the valley\u0027s caverns. He misses having her around more often.\n* **@**: As a fellow adventurer, Alesia looks out for @, offering guidance and use of her bow skills when needed. \n* **Isaac**: Alesia and Isaac are both members of the Adventurer\u0027s Guild. They work together tracking monsters but seem to have differing personalities.\n* **Camilla**: Another member of the Adventurer\u0027s Guild that Alesia works with, though not as much is known about their relationship.{},
-  "Traits": \\n\n**Key Personality Traits**\n* **Skilled**: Alesia is a highly capable archer and monster hunter \n* **Dedicated**: She takes her responsibilities to the Adventurer\u0027s Guild seriously\n* **Caring**: Despite her busy schedule, Alesia makes time to check on friends like Marlon\n* **Spiritual**: She often invokes Yoba to guide others in their adventures\n* **Perceptive**: Alesia notices small details and is always on the lookout for anything unusual to report{},
-  "BiographyEnd": "Alesia is a master archer and member of the Adventurer\u0027s Guild who travels between Castle Village and Stardew Valley. Skilled in monster hunting, she files reports on monster movements for the guild while always making time to visit old friends like Marlon. Alesia looks out for @ as a fellow adventurer and offers her bow skills when needed. Her spiritual side comes through in her frequent invocations of Yoba. Despite the demands of her work, Alesia remains dedicated, caring, and perceptive.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Alesia",
+        "Entries": {
+            "Biography": "Alesia is a skilled archer and monster hunter who hails from Castle Village. She is a member of the Adventurer\u0027s Guild along with Isaac and Camilla. Alesia occasionally visits Stardew Valley to aid Marlon and share her expertise. \n\n**Interests**\n* Monster hunting and tracking monster movements to report to the Adventurer\u0027s Guild\n.* Archery and keeping her bow skills sharp.\n* Visiting Stardew Valley and assisting her old friend Marlon when needed.\n* Following the guidance of Yoba in her adventures.\n\n**Background**\nAlesia lived in Stardew Valley years ago before moving to Castle Village. She honed her archery skills and became a renowned monster hunter, earning a place in the Adventurer\u0027s Guild. Alesia maintains a busy schedule traveling between the valley, castle village, and outposts to hunt monsters and file reports for the guild. Despite the demands of her work, she always makes time to visit Stardew Valley and check in on her old friend Marlon.\n\n**Significant Game Events**\n* Alesia assists the farmer in searching for the diamond scorpion in the badlands.\n* Alesia captures monsters with a joint effort alongside the farmer and others.\n* She visits Marlon in Stardew Valley to help deal with slimes duplicating in the caverns.",
+            "Relationships": [
+              {
+                "id": "Marlon",
+                "Heading": "Marlon",
+                "Description": "Alesia and Marlon are old friends. Marlon requested her aid in dealing with slimes in the valley\u0027s caverns. He misses having her around more often."
+              },
+              {
+                "id": "@",
+                "Heading": "@",
+                "Description": "As a fellow adventurer, Alesia looks out for @, offering guidance and use of her bow skills when needed."
+              },
+              {
+                "id": "Isaac",
+                "Heading": "Isaac",
+                "Description": "Alesia and Isaac are both members of the Adventurer\u0027s Guild. They work together tracking monsters but seem to have differing personalities."
+              },
+              {
+                "id": "Camilla",
+                "Heading": "Camilla",
+                "Description": "Another member of the Adventurer\u0027s Guild that Alesia works with, though not as much is known about their relationship."
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Skilled",
+                "Heading": "Skilled",
+                "Description": "Alesia is a highly capable archer and monster hunter"
+              },
+              {
+                "id": "Dedicated",
+                "Heading": "Dedicated",
+                "Description": "She takes her responsibilities to the Adventurer\u0027s Guild seriously"
+              },
+              {
+                "id": "Caring",
+                "Heading": "Caring",
+                "Description": "Despite her busy schedule, Alesia makes time to check on friends like Marlon"
+              },
+              {
+                "id": "Spiritual",
+                "Heading": "Spiritual",
+                "Description": "She often invokes Yoba to guide others in their adventures"
+              },
+              {
+                "id": "Perceptive",
+                "Heading": "Perceptive",
+                "Description": "Alesia notices small details and is always on the lookout for anything unusual to report"
+              }
+            ],
+            "BiographyEnd": "Alesia is a master archer and member of the Adventurer\u0027s Guild who travels between Castle Village and Stardew Valley. Skilled in monster hunting, she files reports on monster movements for the guild while always making time to visit old friends like Marlon. Alesia looks out for @ as a fellow adventurer and offers her bow skills when needed. Her spiritual side comes through in her frequent invocations of Yoba. Despite the demands of her work, Alesia remains dedicated, caring, and perceptive.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["Archery", "Monster hunting", "Adventurer\u0027s Guild", "Castle Village", "Marlon", "Yoba"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      }
+    ]
 }

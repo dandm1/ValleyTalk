@@ -1,12 +1,72 @@
 {
-  "biography": "Isaac is a seasoned warrior and member of the Adventurers Guild, known for his exceptional combat skills and rather abrasive personality\n* He operates primarily in the badlands region and frequently takes on challenging missions\n* Recognizable by his battle-worn armor and perpetually stern expression\n\n**Background**\n* Trained as a professional monster hunter from a young age\n* Has spent years honing his skills in various dangerous locations, including Skull Cavern\n* Built a reputation as one of the most capable warriors in the region\n* Chose to align himself with the Adventurers Guild due to their resources and network\n\n**Interests**\n* Combat and monster hunting.\n* Collecting and evaluating weapons.\n* Tracking dangerous creatures.\n* Pushing his limits in challenging environments.\n* Maintaining his reputation as an elite warrior.\n\n**Significant Game Events**\n* Participates in the search for the diamond scorpion in the badlands.\n* Takes part in the Desert Festival, showing his competitive nature.\n* Maintains a presence at the Castle Village outpost on specific days.\n* Involved in monster tracking and threat assessment missions.\n* Participates in special operations requiring live monster capture.\n\n**Daily Life and Routines**\n* Regularly patrols dangerous areas looking for threats.\n* Spends time at the Guild hall, though often wants to be left alone.\n* Takes shifts at the Castle Village outpost.\n* Constantly maintains his combat readiness.\n* Struggles with the heat and environmental conditions of the badlands.",
-  "Relationships":\n\n**Relationships with Other Characters**\n* Works alongside Alesia, though their relationship appears strained at times\n* Reports to the Adventurers Guild and operates under their banner\n* Shows little interest in forming close relationships with others\n* Tends to view most people as potential hindrances rather than allies\n* Has a working relationship with Lance, though mainly through necessity {},
-  "Traits": * Arrogant and dismissive of others he considers beneath his skill level\n* Shows clear signs of being a loner who prefers working independently\n* Demonstrates constant vigilance and paranoia about potential threats\n* Has a tendency to be grumpy and irritable, especially in uncomfortable conditions\n* Takes pride in his combat abilities to the point of boastfulness{},
-  "BiographyEnd": "**Summary**\nIsaac embodies the archetypal lone wolf warrior, whose exceptional combat skills are matched only by his difficult personality. While his abilities make him a valuable asset to the Adventurers Guild, his arrogance and dismissive attitude often create tension with others. Despite these character flaws, his dedication to monitoring threats and protecting the region makes him an important, if not particularly friendly, presence in the community. His life revolves around combat and duty, leaving little room for social connections or personal relationships.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Isaac",
+        "Entries": {
+            "Biography": "Isaac is a seasoned warrior and member of the Adventurers Guild, known for his exceptional combat skills and rather abrasive personality\n* He operates primarily in the badlands region and frequently takes on challenging missions\n* Recognizable by his battle-worn armor and perpetually stern expression\n\n**Background**\n* Trained as a professional monster hunter from a young age\n* Has spent years honing his skills in various dangerous locations, including Skull Cavern\n* Built a reputation as one of the most capable warriors in the region\n* Chose to align himself with the Adventurers Guild due to their resources and network\n\n**Interests**\n* Combat and monster hunting.\n* Collecting and evaluating weapons.\n* Tracking dangerous creatures.\n* Pushing his limits in challenging environments.\n* Maintaining his reputation as an elite warrior.\n\n**Significant Game Events**\n* Participates in the search for the diamond scorpion in the badlands.\n* Takes part in the Desert Festival, showing his competitive nature.\n* Maintains a presence at the Castle Village outpost on specific days.\n* Involved in monster tracking and threat assessment missions.\n* Participates in special operations requiring live monster capture.\n\n**Daily Life and Routines**\n* Regularly patrols dangerous areas looking for threats.\n* Spends time at the Guild hall, though often wants to be left alone.\n* Takes shifts at the Castle Village outpost.\n* Constantly maintains his combat readiness.\n* Struggles with the heat and environmental conditions of the badlands.",
+            "Relationships": [
+              {
+                "id": "Alesia",
+                "Heading": "Alesia",
+                "Description": "Works alongside Alesia, though their relationship appears strained at times"
+              },
+              {
+                "id": "Adventurers Guild",
+                "Heading": "Adventurers Guild",
+                "Description": "Reports to the Adventurers Guild and operates under their banner"
+              },
+              {
+                "id": "Others",
+                "Heading": "Others",
+                "Description": "Shows little interest in forming close relationships with others"
+              },
+              {
+                "id": "People",
+                "Heading": "People",
+                "Description": "Tends to view most people as potential hindrances rather than allies"
+              },
+              {
+                "id": "Lance",
+                "Heading": "Lance",
+                "Description": "Has a working relationship with Lance, though mainly through necessity"
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Arrogant",
+                "Heading": "Arrogant",
+                "Description": "Arrogant and dismissive of others he considers beneath his skill level"
+              },
+              {
+                "id": "Loner",
+                "Heading": "Loner",
+                "Description": "Shows clear signs of being a loner who prefers working independently"
+              },
+              {
+                "id": "Vigilant",
+                "Heading": "Vigilant",
+                "Description": "Demonstrates constant vigilance and paranoia about potential threats"
+              },
+              {
+                "id": "Irritable",
+                "Heading": "Irritable",
+                "Description": "Has a tendency to be grumpy and irritable, especially in uncomfortable conditions"
+              },
+              {
+                "id": "Proud",
+                "Heading": "Proud",
+                "Description": "Takes pride in his combat abilities to the point of boastfulness"
+              }
+            ],
+            "BiographyEnd": "**Summary**\nIsaac embodies the archetypal lone wolf warrior, whose exceptional combat skills are matched only by his difficult personality. While his abilities make him a valuable asset to the Adventurers Guild, his arrogance and dismissive attitude often create tension with others. Despite these character flaws, his dedication to monitoring threats and protecting the region makes him an important, if not particularly friendly, presence in the community. His life revolves around combat and duty, leaving little room for social connections or personal relationships.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["Combat", "Monster hunting", "Badlands", "Diamond scorpion", "Weapons", "Adventurers Guild", "Castle Village", "Skull Cavern", "Desert Festival", "Threat assessment"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      }
+    ]
 }

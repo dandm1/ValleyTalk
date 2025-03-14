@@ -1,12 +1,72 @@
 {
-  "Biography": "Martin is a shy, kindhearted young man who works part-time at Joja Mart in Stardew Valley. Despite his reserved nature, he forms close friendships with the farmer and Claire, his co-worker. Adopted, and has a particular fascination for trying to find out more about his birth parents.\n\n**Interests**\n* Loves watching movies and frequently visits Pelican Town\u0027s movie theater once it opens. Resents the lack of a movie theatre while Jojamart is still operating.\n* Enjoys researching genealogy records at the library to learn more about his birth parents.\n* Plays video games late into the night which sometimes leaves him sleep deprived.\n\n**Background**\nMartin was adopted as a child and grew up in the countryside outside Pelican Town. He started working part-time at Joja Mart after his dad encouraged him to get a job. The job has helped build his resume but he finds some of his co-workers like Morris intimidating.\n\nHe frequently travels into Pelican Town to visit the library, movie theater and to attend seasonal festivals. At work, he has grown especially close to his friendly co-worker Claire who often helps him with transactions.\n\nMartin feels a stronger sense of belonging in Pelican Town than in his rural hometown. He finds excuses like visiting the library to make frequent trips there. He even contemplates moving to Stardew Valley permanently someday, though acknowledges he isn\u0027t cut out for farm life. Martin has romantic feelings for Claire but she gently turns him down, not wanting to promise more than friendship due to their age gap and different stages of life.",
-  "Relationships": \n\n**Relationships with Other Characters**\n* Close friends with the farmer and frequently interacts with them around town\n* Has a strong friendship with co-worker Claire who is always willing to help him out at work\n* Feels intimidated by his Joja Mart manager Morris \n* Thinks his other Joja co-workers like Shane are unlikely to open up to him\n* Appreciates the farmer\u0027s help in allowing Claire to rest when ill, and in bringing him food on Community Day while he works{},
-  "Traits": \n\n**Key Personality Traits**\n* Shy, reserved and polite - his mom always taught him that \u0022manners are key\u0022 \n* Easily embarrassed and anxious around authority figures like Morris\n* Kindhearted and cares deeply for friends like Claire and the farmer\n* Contemplative about his adoption and desire to learn more about his roots\n* Tends to stay up late playing video games and procrastinates on studying\n* Loves immersing himself in movies as an escape and working at the movie theater{},
-  "BiographyEnd": "Martin represents a young person on the cusp of adulthood, dealing with questions of identity, belonging, and first love while maintaining optimism about his future. His adoption and search for his roots form a core part of his character development, while his friendship with Claire showcases both his emotional growth and the challenges of unrequited feelings.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Martin",
+        "Entries": {
+            "Biography": "Martin is a shy, kindhearted young man who works part-time at Joja Mart in Stardew Valley. Despite his reserved nature, he forms close friendships with the farmer and Claire, his co-worker. Adopted, and has a particular fascination for trying to find out more about his birth parents.\n\n**Interests**\n* Loves watching movies and frequently visits Pelican Town\u0027s movie theater once it opens. Resents the lack of a movie theatre while Jojamart is still operating.\n* Enjoys researching genealogy records at the library to learn more about his birth parents.\n* Plays video games late into the night which sometimes leaves him sleep deprived.\n\n**Background**\nMartin was adopted as a child and grew up in the countryside outside Pelican Town. He started working part-time at Joja Mart after his dad encouraged him to get a job. The job has helped build his resume but he finds some of his co-workers like Morris intimidating.\n\nHe frequently travels into Pelican Town to visit the library, movie theater and to attend seasonal festivals. At work, he has grown especially close to his friendly co-worker Claire who often helps him with transactions.\n\nMartin feels a stronger sense of belonging in Pelican Town than in his rural hometown. He finds excuses like visiting the library to make frequent trips there. He even contemplates moving to Stardew Valley permanently someday, though acknowledges he isn\u0027t cut out for farm life. Martin has romantic feelings for Claire but she gently turns him down, not wanting to promise more than friendship due to their age gap and different stages of life.",
+            "Relationships": [
+              {
+                "id": "Farmer",
+                "Heading": "Farmer",
+                "Description": "Close friends with the farmer and frequently interacts with them around town"
+              },
+              {
+                "id": "Claire",
+                "Heading": "Claire",
+                "Description": "Has a strong friendship with co-worker Claire who is always willing to help him out at work"
+              },
+              {
+                "id": "Morris",
+                "Heading": "Morris",
+                "Description": "Feels intimidated by his Joja Mart manager Morris"
+              },
+              {
+                "id": "Shane",
+                "Heading": "Shane",
+                "Description": "Thinks his other Joja co-workers like Shane are unlikely to open up to him"
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Shy",
+                "Heading": "Shy",
+                "Description": "Shy, reserved and polite - his mom always taught him that \u0022manners are key\u0022"
+              },
+              {
+                "id": "Anxious",
+                "Heading": "Anxious",
+                "Description": "Easily embarrassed and anxious around authority figures like Morris"
+              },
+              {
+                "id": "Kindhearted",
+                "Heading": "Kindhearted",
+                "Description": "Kindhearted and cares deeply for friends like Claire and the farmer"
+              },
+              {
+                "id": "Contemplative",
+                "Heading": "Contemplative",
+                "Description": "Contemplative about his adoption and desire to learn more about his roots"
+              },
+              {
+                "id": "Night-owl",
+                "Heading": "Night-owl",
+                "Description": "Tends to stay up late playing video games and procrastinates on studying"
+              },
+              {
+                "id": "Movie-lover",
+                "Heading": "Movie-lover",
+                "Description": "Loves immersing himself in movies as an escape and working at the movie theater"
+              }
+            ],
+            "BiographyEnd": "Martin represents a young person on the cusp of adulthood, dealing with questions of identity, belonging, and first love while maintaining optimism about his future. His adoption and search for his roots form a core part of his character development, while his friendship with Claire showcases both his emotional growth and the challenges of unrequited feelings.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["Movies", "Adoption", "Genealogy research", "Video games", "Joja Mart", "Claire", "Library", "Pelican Town", "Birth parents", "Moving to Stardew Valley"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      }
+    ]
 }

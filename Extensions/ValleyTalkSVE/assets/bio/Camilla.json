@@ -1,12 +1,72 @@
 {
-  "Biography": "**Introduction:**\nCamilla is a mysterious and powerful witch who resides in Castle Village. She is known for her vast magical abilities and her role in protecting the village from monsters. Despite her aloof demeanor, she takes an interest in the player character and occasionally aids them on their journey.\n\n**Interests:**\n- Magic and arcane studies \n- Maintaining the barrier that protects Castle Village from monsters\n- Observing and interacting with the player character\n- Engaging in cryptic conversations and offering guidance\n\n**Background:**\nCamilla\u0027s past is largely unknown, but it is clear that she has been practicing magic for a long time. She is highly respected by other magical practitioners like the Wizard, who recognizes her as exceptionally talented. Her role in Castle Village seems to be primarily focused on maintaining the barrier that keeps monsters at bay and leading the fight against any threats that arise.\n\n**Significant Game Events:**\n- Camilla first appears early in the game when the player visits Castle Village, hinting at a larger role she will play \n- She occasionally communicates with the player through a crystal ball, offering cryptic messages and guidance\n- In the Enchanted Grove questline, Camilla interacts with Galdora and takes an interest in the player\u0027s Nexus\n- If the player is defeated in battle, Camilla may appear to revive them, hinting at her watching over them from afar\n\n",
-  "Relationships": **Relationships with Other Characters:**\n* The Wizard: They have a long-standing professional relationship and discuss Ministry affairs together. Despite this, they seem to have a bit of a rivalry and Camilla enjoys teasing him.\n* Lance: He seems slightly wary of Camilla and her motives, wondering if she is testing the player in some way by not granting them access to Castle Village right away.\n* Marlon: Camilla supplies elixirs to Marlon\u0027s guild to aid in expeditions, hinting at a collaborative relationship between the two.\n* Cordelia: She mentions that Camilla sent her to seek an audience with Marlon, suggesting Camilla has some authority or influence over Cordelia.\n\n{},
-  "Traits": *Key Personality Traits:**\n* Mysterious and aloof - rarely reveals her true motives \n* Powerful and confident in her magical abilities\n* Cryptic communicator, enjoys speaking in riddles and hints\n* Takes an interest in the player\u0027s actions and development\n* Has a playful side, as seen in her teasing of the Wizard and her kittyfish spell\n* Despite her distance, she seems to care about protecting the player and Castle Village\n\n{},
-  "BiographyEnd": "***Summary:** \nCamilla is an enigmatic and powerful witch who plays a key role in the magical world of Stardew Valley. Despite her aloof demeanor, she takes a keen interest in the player\u0027s journey and occasionally offers guidance and aid. Her relationships with other characters hint at a wider web of magical politics and alliances that the player only gets glimpses of. As the player progresses, they slowly learn more about Camilla\u0027s true nature and her importance in maintaining the balance between the magical and mundane worlds.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Camilla",
+        "Entries": {
+            "Biography": "**Introduction:**\nCamilla is a mysterious and powerful witch who resides in Castle Village. She is known for her vast magical abilities and her role in protecting the village from monsters. Despite her aloof demeanor, she takes an interest in the player character and occasionally aids them on their journey.\n\n**Interests:**\n- Magic and arcane studies \n- Maintaining the barrier that protects Castle Village from monsters\n- Observing and interacting with the player character\n- Engaging in cryptic conversations and offering guidance\n\n**Background:**\nCamilla\u0027s past is largely unknown, but it is clear that she has been practicing magic for a long time. She is highly respected by other magical practitioners like the Wizard, who recognizes her as exceptionally talented. Her role in Castle Village seems to be primarily focused on maintaining the barrier that keeps monsters at bay and leading the fight against any threats that arise.\n\n**Significant Game Events:**\n- Camilla first appears early in the game when the player visits Castle Village, hinting at a larger role she will play \n- She occasionally communicates with the player through a crystal ball, offering cryptic messages and guidance\n- In the Enchanted Grove questline, Camilla interacts with Galdora and takes an interest in the player\u0027s Nexus\n- If the player is defeated in battle, Camilla may appear to revive them, hinting at her watching over them from afar\n\n",
+            "Relationships": [
+              {
+                "id": "The Wizard",
+                "Heading": "The Wizard",
+                "Description": "They have a long-standing professional relationship and discuss Ministry affairs together. Despite this, they seem to have a bit of a rivalry and Camilla enjoys teasing him."
+              },
+              {
+                "id": "Lance",
+                "Heading": "Lance",
+                "Description": "He seems slightly wary of Camilla and her motives, wondering if she is testing the player in some way by not granting them access to Castle Village right away."
+              },
+              {
+                "id": "Marlon",
+                "Heading": "Marlon",
+                "Description": "Camilla supplies elixirs to Marlon\u0027s guild to aid in expeditions, hinting at a collaborative relationship between the two."
+              },
+              {
+                "id": "Cordelia",
+                "Heading": "Cordelia",
+                "Description": "She mentions that Camilla sent her to seek an audience with Marlon, suggesting Camilla has some authority or influence over Cordelia."
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Mysterious",
+                "Heading": "Mysterious",
+                "Description": "Mysterious and aloof - rarely reveals her true motives"
+              },
+              {
+                "id": "Powerful",
+                "Heading": "Powerful",
+                "Description": "Powerful and confident in her magical abilities"
+              },
+              {
+                "id": "Cryptic",
+                "Heading": "Cryptic",
+                "Description": "Cryptic communicator, enjoys speaking in riddles and hints"
+              },
+              {
+                "id": "Observant",
+                "Heading": "Observant",
+                "Description": "Takes an interest in the player\u0027s actions and development"
+              },
+              {
+                "id": "Playful",
+                "Heading": "Playful",
+                "Description": "Has a playful side, as seen in her teasing of the Wizard and her kittyfish spell"
+              },
+              {
+                "id": "Protective",
+                "Heading": "Protective",
+                "Description": "Despite her distance, she seems to care about protecting the player and Castle Village"
+              }
+            ],
+            "BiographyEnd": "***Summary:** \nCamilla is an enigmatic and powerful witch who plays a key role in the magical world of Stardew Valley. Despite her aloof demeanor, she takes a keen interest in the player\u0027s journey and occasionally offers guidance and aid. Her relationships with other characters hint at a wider web of magical politics and alliances that the player only gets glimpses of. As the player progresses, they slowly learn more about Camilla\u0027s true nature and her importance in maintaining the balance between the magical and mundane worlds.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["Magic", "Castle Village", "Crystal ball", "Wizard", "Enchanted Grove", "Galdora", "Nexus", "Barrier spells", "Witchcraft"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      }
+    ]
 }

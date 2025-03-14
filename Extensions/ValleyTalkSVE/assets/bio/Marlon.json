@@ -1,12 +1,126 @@
 {
-  "biography": "Marlon is the current leader of the Adventurer\u0027s Guild in Stardew Valley.\n* He is an older man with one eye, distinguished by his experience and skill with a sword.\n* Known for being a man of few words but commanding great respect in the adventuring community.\n* Serves as both a mentor figure and supplier of weapons to new adventurers.\n\n**Background**\n* Originally from another region, came to Stardew Valley many years ago when monster problems were more severe.\n* Worked alongside Gil and other adventurers to make the valley safer for inhabitants.\n* Has connections to Castle Village, an exclusive community of skilled warriors and magic users.\n* Lost his eye in an incident involving slime breeding in his younger years.\n* Has experienced the loss of many fellow adventurers over the years, whom he remembers by visiting their graves.\n\n**Interests**\n* Expert swordsman with a preference for sword combat over other weapons.\n* Former slime breeder who maintains knowledge of the practice.\n* Interested in monster research and classification.\n* Enjoys quiet walks at night with just his lantern.\n* Has a fondness for Roots Platter as a favorite dish.\n\n**Significant Game Events**\n* Provides the player\u0027s initial weapon and introduction to monster hunting.\n* Oversees the player\u0027s initiation into the Adventurer\u0027s Guild.\n* Helps organize the Spirit\u0027s Eve festival monster display.\n* Participates in secret meetings about magical and monster-related matters.",
-  "Relationships": \n\n**Relationships with Other Characters**\n* Close longtime friendship with Gil, his fellow guild member\n* Works closely with Rasmodius (the Wizard) on magical matters\n* Has a subtle romantic interest in Marnie\n* Protector and friend to Krobus, whom he helped establish in the sewers\n* Maintains professional relationships with various adventurers and magic users from Castle Village\n* Works with Lance on various missions, respecting his combat abilities{},
-  "Traits": Reserved and taciturn, preferring actions over words\n* Deeply committed to protecting others and maintaining safety\n* Shows wisdom and judgment in whom to trust with sensitive information\n* Humble despite his legendary status\n* Uncomfortable in large crowds\n* Values tradition and proper procedure\n* Has a dry sense of humor when comfortable with someone{},
-  "BiographyEnd": "**Summary**\nMarlon stands as a cornerstone of Stardew Valley\u0027s security, representing a bridge between the peaceful farming community and the dangerous world of monsters and magic that threatens it. Despite his gruff exterior, he shows deep care for both the valley\u0027s inhabitants and those under his mentorship. His years of experience have left him with both physical and emotional scars, but he maintains his dedication to protecting others through both direct action and careful preparation of the next generation of adventurers.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Marlon",
+        "Entries": {
+            "Biography": "Marlon is the current leader of the Adventurer\u0027s Guild in Stardew Valley.\n* He is an older man with one eye, distinguished by his experience and skill with a sword.\n* Known for being a man of few words but commanding great respect in the adventuring community.\n* Serves as both a mentor figure and supplier of weapons to new adventurers.\n\n**Background**\n* Originally from another region, came to Stardew Valley many years ago when monster problems were more severe.\n* Worked alongside Gil and other adventurers to make the valley safer for inhabitants.\n* Has connections to Castle Village, an exclusive community of skilled warriors and magic users.\n* Lost his eye in an incident involving slime breeding in his younger years.\n* Has experienced the loss of many fellow adventurers over the years, whom he remembers by visiting their graves.\n\n**Interests**\n* Expert swordsman with a preference for sword combat over other weapons.\n* Former slime breeder who maintains knowledge of the practice.\n* Interested in monster research and classification.\n* Enjoys quiet walks at night with just his lantern.\n* Has a fondness for Roots Platter as a favorite dish.\n\n**Significant Game Events**\n* Provides the player\u0027s initial weapon and introduction to monster hunting.\n* Oversees the player\u0027s initiation into the Adventurer\u0027s Guild.\n* Helps organize the Spirit\u0027s Eve festival monster display.\n* Participates in secret meetings about magical and monster-related matters.",
+            "Relationships": [
+              {
+                "id": "Gil",
+                "Heading": "Gil",
+                "Description": "Close longtime friendship with Gil, his fellow guild member"
+              },
+              {
+                "id": "Rasmodius",
+                "Heading": "Rasmodius",
+                "Description": "Works closely with Rasmodius (the Wizard) on magical matters"
+              },
+              {
+                "id": "Marnie",
+                "Heading": "Marnie",
+                "Description": "Has a subtle romantic interest in Marnie"
+              },
+              {
+                "id": "Krobus",
+                "Heading": "Krobus",
+                "Description": "Protector and friend to Krobus, whom he helped establish in the sewers"
+              },
+              {
+                "id": "Castle Village",
+                "Heading": "Castle Village",
+                "Description": "Maintains professional relationships with various adventurers and magic users from Castle Village"
+              },
+              {
+                "id": "Lance",
+                "Heading": "Lance",
+                "Description": "Works with Lance on various missions, respecting his combat abilities"
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Reserved",
+                "Heading": "Reserved",
+                "Description": "Reserved and taciturn, preferring actions over words"
+              },
+              {
+                "id": "Protective",
+                "Heading": "Protective",
+                "Description": "Deeply committed to protecting others and maintaining safety"
+              },
+              {
+                "id": "Wise",
+                "Heading": "Wise",
+                "Description": "Shows wisdom and judgment in whom to trust with sensitive information"
+              },
+              {
+                "id": "Humble",
+                "Heading": "Humble",
+                "Description": "Humble despite his legendary status"
+              },
+              {
+                "id": "Private",
+                "Heading": "Private",
+                "Description": "Uncomfortable in large crowds"
+              },
+              {
+                "id": "Traditional",
+                "Heading": "Traditional",
+                "Description": "Values tradition and proper procedure"
+              },
+              {
+                "id": "Humorous",
+                "Heading": "Humorous",
+                "Description": "Has a dry sense of humor when comfortable with someone"
+              }
+            ],
+            "BiographyEnd": "**Summary**\nMarlon stands as a cornerstone of Stardew Valley\u0027s security, representing a bridge between the peaceful farming community and the dangerous world of monsters and magic that threatens it. Despite his gruff exterior, he shows deep care for both the valley\u0027s inhabitants and those under his mentorship. His years of experience have left him with both physical and emotional scars, but he maintains his dedication to protecting others through both direct action and careful preparation of the next generation of adventurers.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["Adventurer's Guild", "Swordsmanship", "Monster hunting", "Slime breeding", "Castle Village", "Gil", "Marnie", "Spirit's Eve festival", "Night walks", "Roots Platter"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      },
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Wizard",
+        "TargetField": [ "Relationships" ],
+        "Priority": "Late",
+        "Entries": {
+            "Marlon": {
+                "Id": "Marlon",
+                "Heading": "Marlon",
+                "Description": "The Wizard collaborates closely with Marlon on magical matters, particularly those concerning the safety of Stardew Valley against magical and monstrous threats."
+            }
+        }
+      },
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Marnie",
+        "TargetField": [ "Relationships" ],
+        "Priority": "Late",
+        "Entries": {
+            "Marlon": {
+                "Id": "Marlon",
+                "Heading": "Marlon",
+                "Description": "Marlon shows a subtle romantic interest in Marnie, though it's unclear whether she's aware of his feelings."
+            }
+        }
+      },
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Krobus",
+        "TargetField": [ "Relationships" ],
+        "Priority": "Late",
+        "Entries": {
+            "Marlon": {
+                "Id": "Marlon",
+                "Heading": "Marlon",
+                "Description": "Krobus considers Marlon a protector and friend who helped establish him safely in the sewers, away from those who might harm shadow people."
+            }
+        }
+      }
+    ]
 }

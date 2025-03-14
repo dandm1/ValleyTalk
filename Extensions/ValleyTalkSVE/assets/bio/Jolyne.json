@@ -1,12 +1,62 @@
 {
-  "Biography": "Jolyne is the fearless leader of The First Slash, a guild of adventurers who protect the Fern Islands. Known for her fiery red hair and fierce determination, Jolyne commands respect from her team and strikes fear into her enemies. \n\n*Background*\nBorn on the Fern Islands, Jolyne grew up exploring its lush jungles and crystal blue waters. From a young age, she dreamed of adventure beyond the island\u0027s shores. As she grew older and honed her combat skills, Jolyne founded The First Slash to defend her beloved home from external threats.\n\n*Significant Game Events*\n- Requests the player\u0027s help to restore The First Slash\u0027s mana elixir cache using special coral and ingredients from Galdora \n- Organizes a group to explore a recently discovered sea cave\n- Studies an ocean floor map with Lance, revealing the world\u0027s deepest trench at 13 miles down\n- Asks the player to help keep the oceans safe by catching weaponized \u0022torpedo trout\u0022 fish created by mages in the Gotoro Empire\n\n*Interests*\nJolyne\u0027s interests revolve around protecting her island home through adventuring. She loves studying ancient maps, exploring underwater caves, and using her magic responsibly. In quieter moments, she enjoys chatting with guild members and relaxing on the island.",
-  "Relationships": **Lance**: Jolyne\u0027s trusted second-in-command and close friend. They share many adventurer stories together.\n- **Drake**: A guild member who looks up to Lance as a role model and dyes his hair to match. \n- The rest of **The First Slash**: A tight-knit group who always have each other\u0027s backs. Jolyne has known them for years.{},
-  "Traits": \n\n*Key Personality Traits*\n- Fierce and fearless leader, but also welcoming and caring towards friends\n- Adventurous spirit with a love of exploration \n- Strong sense of duty to protect the Fern Islands and its coral reefs\n- Resourceful and responsible in her use of magic, such as using totems to change the weather\n- Values the close bonds between guild members and never sends anyone in alone{},
-  "BiographyEnd": "As leader of The First Slash, Jolyne is a fierce warrior driven to protect the Fern Islands at all costs. Resourceful and responsible, she balances her adventurous spirit with a strong sense of duty. Jolyne values the close bonds between her guild members and always looks out for friends new and old. While fearless in battle, she also has a welcoming and caring side. With Jolyne at the helm, The First Slash is in good hands to keep their island haven safe from external threats.",
-  "ExtraPortraits": {},
-  "Unique": "",
-  "Preoccupations": [],
-  "Dialogue": {},
-  "HomeLocationBed": false,
-  "UsePatchedDialogue": true
+    "Changes": [
+      {
+        "Action": "EditData",
+        "Target": "ValleyTalk/Bios/Jolyne",
+        "Entries": {
+            "Biography": "Jolyne is the fearless leader of The First Slash, a guild of adventurers who protect the Fern Islands. Known for her fiery red hair and fierce determination, Jolyne commands respect from her team and strikes fear into her enemies. \n\n*Background*\nBorn on the Fern Islands, Jolyne grew up exploring its lush jungles and crystal blue waters. From a young age, she dreamed of adventure beyond the island\u0027s shores. As she grew older and honed her combat skills, Jolyne founded The First Slash to defend her beloved home from external threats.\n\n*Significant Game Events*\n- Requests the player\u0027s help to restore The First Slash\u0027s mana elixir cache using special coral and ingredients from Galdora \n- Organizes a group to explore a recently discovered sea cave\n- Studies an ocean floor map with Lance, revealing the world\u0027s deepest trench at 13 miles down\n- Asks the player to help keep the oceans safe by catching weaponized \u0022torpedo trout\u0022 fish created by mages in the Gotoro Empire\n\n*Interests*\nJolyne\u0027s interests revolve around protecting her island home through adventuring. She loves studying ancient maps, exploring underwater caves, and using her magic responsibly. In quieter moments, she enjoys chatting with guild members and relaxing on the island.",
+            "Relationships": [
+              {
+                "id": "Lance",
+                "Heading": "Lance",
+                "Description": "Jolyne\u0027s trusted second-in-command and close friend. They share many adventurer stories together."
+              },
+              {
+                "id": "Drake",
+                "Heading": "Drake",
+                "Description": "A guild member who looks up to Lance as a role model and dyes his hair to match."
+              },
+              {
+                "id": "The First Slash",
+                "Heading": "The First Slash",
+                "Description": "A tight-knit group who always have each other\u0027s backs. Jolyne has known them for years."
+              }
+            ],
+            "Traits": [
+              {
+                "id": "Fierce",
+                "Heading": "Fierce",
+                "Description": "Fierce and fearless leader, but also welcoming and caring towards friends"
+              },
+              {
+                "id": "Adventurous",
+                "Heading": "Adventurous",
+                "Description": "Adventurous spirit with a love of exploration"
+              },
+              {
+                "id": "Dutiful",
+                "Heading": "Dutiful",
+                "Description": "Strong sense of duty to protect the Fern Islands and its coral reefs"
+              },
+              {
+                "id": "Resourceful",
+                "Heading": "Resourceful",
+                "Description": "Resourceful and responsible in her use of magic, such as using totems to change the weather"
+              },
+              {
+                "id": "Loyal",
+                "Heading": "Loyal",
+                "Description": "Values the close bonds between guild members and never sends anyone in alone"
+              }
+            ],
+            "BiographyEnd": "As leader of The First Slash, Jolyne is a fierce warrior driven to protect the Fern Islands at all costs. Resourceful and responsible, she balances her adventurous spirit with a strong sense of duty. Jolyne values the close bonds between her guild members and always looks out for friends new and old. While fearless in battle, she also has a welcoming and caring side. With Jolyne at the helm, The First Slash is in good hands to keep their island haven safe from external threats.",
+            "ExtraPortraits": {},
+            "Unique": "",
+            "Preoccupations": ["The First Slash", "Fern Islands", "Mana elixir", "Sea caves", "Lance", "Ocean exploration", "Coral reefs", "Torpedo trout", "Gotoro Empire", "Magic totems"],
+            "Dialogue": {},
+            "HomeLocationBed": false,
+            "UsePatchedDialogue": true
+        }
+      }
+    ]
 }
