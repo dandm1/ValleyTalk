@@ -42,15 +42,9 @@ public class Prompts
 
     private static void LoadStardewSummary()
     {
-        var gameSummaryDict = Util.ReadLocalisedJson<Dictionary<string,string>>("assets/bio/Stardew","txt");
-        _stardewSummary = gameSummaryDict["Text"];
-        var gameSummaryTranslations = Util.GetString("gameSummaryTranslations");
-        if (!string.IsNullOrWhiteSpace(gameSummaryTranslations))
-        {
-            _stardewSummary += $"\n{gameSummaryTranslations}";
-        }
+        var builder = new GameSummaryBuilder();
+        _stardewSummary = builder.Build();
     }
-
 
     [JsonIgnore]
     static string _stardewSummary;
