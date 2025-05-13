@@ -104,12 +104,12 @@ public class EventHistoryReader
             }
         }
 
-        // If the name is empty, create a name as a hexadecimal string from the hash code of the name
+        // If the name is empty (no valid characters), take a hexadecimal representation of the string bytes
         if (string.IsNullOrEmpty(saveName))
         {
-            saveName = name.GetHashCode().ToString("X");
+            saveName = BitConverter.ToString(name.Select(ch => (byte)ch).ToArray()).Replace("-", "");
         }
-        
+
         // If the name is too long, truncate it to 50 characters
         if (saveName.Length > 50)
         {
