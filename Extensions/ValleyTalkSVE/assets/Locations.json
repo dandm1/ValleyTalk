@@ -15,9 +15,33 @@
             "id": "CindersapForest",
             "Region": "Cindersap Forest",
             "Name": "Cindersap Forest",
-            "Description": "Contains Leah's Cottage, Marnie's Ranch, the Wizard's Tower, the Blue Moon Vineyard and Fairhaven Farm.  It is visted on Fridays and Sundays by a traveling cart which sells rare items."
+            "Description": "Contains Leah's Cottage, Marnie's Ranch, the Wizard's Tower, the Blue Moon Vineyard and Fairhaven Farm. It is visited on Fridays and Sundays by a traveling cart which sells rare items."
+          },
+          "FairhavenFarm": {
+            "id": "FairhavenFarm",
+            "Region": "Cindersap Forest",
+            "Name": "Fairhaven Farm",
+            "Description": "Andy's farm, located in Cindersap Forest. Known for its traditional farming practices."
+          },
+          "AuroraVineyard": {
+            "id": "AuroraVineyard",
+            "Region": "West Cindersap Forest",
+            "Name": "Aurora Vineyard",
+            "Description": "A magical vineyard that is home to Apples the Junimo. Features unique crops and a distinct magical ambiance."
+          },
+          "Grampleton": {
+            "id": "Grampleton",
+            "Region": "Grampleton",
+            "Name": "Grampleton",
+            "Description": "A neighboring town accessible via Shearwater Bridge, featuring new shops and characters like Scarlett and Andy's family."
+          },
+          "Highlands": {
+            "id": "Highlands",
+            "Region": "Highlands",
+            "Name": "Highlands",
+            "Description": "A vast, explorable mountainous area north of Pelican Town, accessible after certain conditions are met. Home to Lance and various new challenges and discoveries."
           }
-          }
+        }
        }
     ]
 }

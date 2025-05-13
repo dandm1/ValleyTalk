@@ -6,6 +6,7 @@ using StardewValley;
 using StardewValley.Network;
 using ValleyTalk;
 using Newtonsoft.Json.Linq;
+using System;
 
 namespace StardewDialogue;
 
@@ -49,12 +50,15 @@ internal class GameSummaryBuilder
                 {
                     builder.AppendLine(entry.Value.ToString());
                 }
-                else if (entry.Value is JArray subDict)
+                else if (entry.Value is JObject subDictObj) // Changed from JArray subDict
                 {
                     switch(section.Key)
                     {
                         case "Seasons":
-                            var seasons = subDict.ToObject<List<SeasonObject>>();
+                            try
+                            {
+                            var seasonsData = subDictObj.ToObject<Dictionary<string, SeasonObject>>();
+                            var seasons = seasonsData.Values; // Iterate over the values of the dictionary
                             foreach(var season in seasons)
                             {
                                 builder.Append($"- **{season.Name}** - {season.Description} ");
@@ -67,9 +71,15 @@ internal class GameSummaryBuilder
                                     builder.AppendLine($"{Util.GetString("seasonForage")} {Util.ConcatAnd(season.Forage)}.");
                                 }
                             }
+                            }
+                            catch (Exception ex)
+                            {
+                                ModEntry.SMonitor.Log($"Error parsing seasons: {ex}", StardewModdingAPI.LogLevel.Error);
+                            }
                             break;
                         case "Locations":
-                            var locations = subDict.ToObject<List<LocationObject>>();
+                            var locationsData = subDictObj.ToObject<Dictionary<string, LocationObject>>();
+                            var locations = locationsData.Values.ToList(); // Convert values to list for GroupBy
                             var regions = locations.GroupBy(x => x.Region);
                             foreach(var region in regions)
                             {
@@ -80,7 +90,8 @@ internal class GameSummaryBuilder
                             }
                             break;
                         default:
-                            var items = subDict.ToObject<List<GeneralObject>>();
+                            var itemsData = subDictObj.ToObject<Dictionary<string, GeneralObject>>();
+                            var items = itemsData.Values; // Iterate over the values of the dictionary
                             foreach(var item in items)
                             {
                                 builder.AppendLine($"- **{item.Name}** - {item.Description}");
