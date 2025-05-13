@@ -88,39 +88,39 @@
         "Target": "ValleyTalk/Bios/Wizard",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": {
-            "Marlon": {
-                "Id": "Marlon",
+        "Entries": [
+            {
+                "id": "Marlon",
                 "Heading": "Marlon",
                 "Description": "The Wizard collaborates closely with Marlon on magical matters, particularly those concerning the safety of Stardew Valley against magical and monstrous threats."
             }
-        }
+        ]
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Marnie",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": {
-            "Marlon": {
-                "Id": "Marlon",
+        "Entries": [
+            {
+                "id": "Marlon",
                 "Heading": "Marlon",
                 "Description": "Marlon shows a subtle romantic interest in Marnie, though it's unclear whether she's aware of his feelings."
             }
-        }
+        ]
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Krobus",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": {
-            "Marlon": {
-                "Id": "Marlon",
+        "Entries": [
+            {
+                "id": "Marlon",
                 "Heading": "Marlon",
                 "Description": "Krobus considers Marlon a protector and friend who helped establish him safely in the sewers, away from those who might harm shadow people."
             }
-        }
+        ]
       }
     ]
 }

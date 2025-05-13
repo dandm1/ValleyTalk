@@ -48,26 +48,26 @@
         "Target": "ValleyTalk/Bios/Emily",
       	"TargetField": [ "Relationships" ],
       	"Priority": "Late",
-        "Entries": {
-            "Sophia": {
-                "Id": "Sophia",
-                "Heading": "Sophia",
-                "Description": "Emily is close friends with Sophia, who shares her interests in sowing and exotic clothing."
-              }
+        "Entries": [
+          {
+            "id": "Sophia",
+            "Heading": "Sophia",
+            "Description": "Emily is close friends with Sophia, who shares her interests in sowing and exotic clothing."
           }
+        ]
        },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Haley",
       	"TargetField": [ "Relationships" ],
       	"Priority": "Late",
-        "Entries": {
-            "Sophia": {
-                "Id": "Sophia",
-                "Heading": "Sophia",
-                "Description": "Haley is close friends with Sophia, who shares her interests in fashion and shopping in Zuzu City."
-              }
+        "Entries": [
+          {
+            "id": "Sophia",
+            "Heading": "Sophia",
+            "Description": "Haley is close friends with Sophia, who shares her interests in fashion and shopping in Zuzu City."
           }
+        ]
        }
     ]
 }
