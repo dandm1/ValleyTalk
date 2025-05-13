@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -91,15 +92,29 @@ public class EventHistoryReader
         {
             return saveName;
         }
-        // Define a constant list of punctionation characters to strip out
-        const string punctuation = "!\"#$%&'()*+,/:;<=>?@[\\]^`{|}~ ";
+        // Create a list of characters that are valid - letters, numbers, underscores, periods, or hyphens
+        const string validCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-.";
         saveName = name;
-        // Strip out any punctuation
-        foreach (var ch in punctuation)
+        // Strip out any characters that are not valid
+        foreach (var ch in name.Distinct())
         {
-            saveName = saveName.Replace(ch.ToString(), string.Empty);
+            if (!validCharacters.Contains(ch))
+            {
+                saveName = saveName.Replace(ch.ToString(), string.Empty);
+            }
+        }
+
+        // If the name is empty, create a name as a hexadecimal string from the hash code of the name
+        if (string.IsNullOrEmpty(saveName))
+        {
+            saveName = name.GetHashCode().ToString("X");
         }
         
+        // If the name is too long, truncate it to 50 characters
+        if (saveName.Length > 50)
+        {
+            saveName = saveName.Substring(0, 50);
+        }
         _conversionCache[name] = saveName;
         return saveName;
     }
