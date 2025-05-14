@@ -78,13 +78,13 @@
         "Target": "ValleyTalk/Bios/Shane",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-          {
+        "Entries": {
+          "Claire": {
             "id": "Claire",
             "Heading": "Claire",
             "Description": "Shane has a supportive friendship with Claire, whom he met while she worked at JojaMart. He appreciates her kindness and understanding."
           }
-        ]
+        }
       }
     ]
 }

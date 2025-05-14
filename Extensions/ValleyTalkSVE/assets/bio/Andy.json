@@ -63,26 +63,26 @@
         "Target": "ValleyTalk/Bios/Lewis",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Andy": {
                 "id": "Andy",
                 "Heading": "Andy",
                 "Description": "Lewis has a strained relationship with Andy, a local farmer who often disagrees with his decisions as mayor and feels unsupported by the local government."
             }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Pierre",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Andy": {
                 "id": "Andy",
                 "Heading": "Andy",
                 "Description": "Pierre has a tense relationship with Andy, a local farmer who criticizes his business practices, particularly his refusal to sell Andy's crops in his store."
             }
-        ]
+        }
       }
     ]
 }

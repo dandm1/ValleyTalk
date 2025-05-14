@@ -98,52 +98,52 @@
         "Target": "ValleyTalk/Bios/Caroline",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Olivia": {
                 "id": "Olivia",
                 "Heading": "Olivia",
                 "Description": "Caroline has formed a close friendship with Olivia, a refined woman who moved to Pelican Town from the Gotoro Empire. They often spend time together at aerobics class and social gatherings."
             }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Jodi",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Olivia": {
                 "id": "Olivia",
                 "Heading": "Olivia",
                 "Description": "Jodi has become best friends with Olivia, appreciating her cultured perspective and the chance to socialize with another adult in town."
             }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Pam",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Olivia": {
                 "id": "Olivia",
                 "Heading": "Olivia",
                 "Description": "Pam is aware that Olivia dislikes her and tends to avoid her. Their differences in lifestyle and social status create tension between them."
             }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Leah",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Olivia": {
                 "id": "Olivia",
                 "Heading": "Olivia",
                 "Description": "Leah works with Olivia to help improve her painting skills. Despite their different backgrounds, they share a passion for art."
             }
-        ]
+        }
       }
     ]
 }

@@ -83,39 +83,39 @@
         "Target": "ValleyTalk/Bios/Penny",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Gunther": {
                 "id": "Gunther",
                 "Heading": "Gunther",
                 "Description": "Penny works closely with Gunther at the library, where she tutors children. She appreciates his academic knowledge and the educational environment he maintains."
             }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Willy",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Gunther": {
                 "id": "Gunther",
                 "Heading": "Gunther",
                 "Description": "Willy occasionally shares fishing stories and unusual sightings with Gunther, including rumors about a glowing Angler creature stealing bait at night."
             }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Robin",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Gunther": {
                 "id": "Gunther",
                 "Heading": "Gunther",
                 "Description": "Robin appreciates Gunther's compliments about her carpentry work, particularly his admiration for her design of Pam's new house."
             }
-        ]
+        }
       }
     ]
 }

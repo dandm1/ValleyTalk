@@ -68,26 +68,26 @@
         "Target": "ValleyTalk/Bios/Lewis",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-          {
+        "Entries": {
+          "Susan": {
             "id": "Susan",
             "Heading": "Susan",
             "Description": "Lewis, as mayor, assists Susan with issues related to Joja Corporation, such as the rockslide that affected her farm."
           }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Marnie",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-          {
+        "Entries": {
+          "Susan": {
             "id": "Susan",
             "Heading": "Susan",
             "Description": "Susan and Marnie share an interest in farming, with Susan focusing on crops and Marnie on animals. They are part of the same agricultural community."
           }
-        ]
+        }
       }
     ]
 }

@@ -68,13 +68,13 @@
         "Target": "ValleyTalk/Bios/Marlon",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-          {
+        "Entries": {
+          "Alesia": {
             "id": "Alesia",
             "Heading": "Alesia",
             "Description": "Alesia and Marlon are old friends. Marlon requested her aid in dealing with slimes in the valley's caverns. He misses having her around more often."
           }
-        ]
+        }
       }
     ]
 }

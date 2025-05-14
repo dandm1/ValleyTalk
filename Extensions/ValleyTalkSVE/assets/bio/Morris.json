@@ -73,39 +73,39 @@
         "Target": "ValleyTalk/Bios/Lewis",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Morris": {
                 "id": "Morris",
                 "Heading": "Morris",
                 "Description": "Lewis and Morris are rivals, especially during the mayoral election. They have differing views on how to manage Pelican Town's future, with Lewis favoring tradition while Morris pushes for corporate development."
             }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Pierre",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Morris": {
                 "id": "Morris",
                 "Heading": "Morris",
                 "Description": "Pierre views Morris, the manager of JojaMart, as a direct threat to his business. Their relationship is defined by competition and Pierre's ongoing struggle to keep his store afloat against JojaMart's corporate power."
             }
-        ]
+        }
       },
       {
         "Action": "EditData",
         "Target": "ValleyTalk/Bios/Shane",
         "TargetField": [ "Relationships" ],
         "Priority": "Late",
-        "Entries": [
-            {
+        "Entries": {
+            "Morris": {
                 "id": "Morris",
                 "Heading": "Morris",
                 "Description": "Shane works under Morris at JojaMart but holds a grudge against him for making him work overtime and for Morris's corporate management style."
             }
-        ]
+        }
       }
     ]
 }
