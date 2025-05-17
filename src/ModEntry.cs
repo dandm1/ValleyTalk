@@ -154,16 +154,61 @@ namespace ValleyTalk
                 return;
             }
 
+            RegisterDataModels(helper);
+
             Llm.SetLlm(llmType, modelName: Config.ModelName, apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
 
             DialogueBuilder.Instance.Config = Config;
-
+            
             CheckContentPacks();
 
             var harmony = new Harmony(ModManifest.UniqueID);
             harmony.PatchAll();
 
             Log.Debug($"[{DateTime.Now}] Mod loaded");
+
+        }
+
+        private void RegisterDataModels(IModHelper helper)
+        {
+            helper.Events.Content.AssetRequested += (sender, e) =>
+            {
+                if (!e.Name.StartsWith(VtConstants.ContentPrefix))
+                    return;
+
+                var suffix = e.Name.Name.EndsWith(".") ? "." : string.Empty;
+                if (e.NameWithoutLocale.IsEquivalentTo(VtConstants.GameSummaryPath + suffix))
+                {
+                    e.LoadFrom(() => new Dictionary<string, object>(), AssetLoadPriority.Exclusive);
+                }
+                else if (e.NameWithoutLocale.IsEquivalentTo(VtConstants.PromptsPath + suffix))
+                {
+                    e.LoadFrom(() => new Dictionary<string, object>(), AssetLoadPriority.Exclusive);
+                }
+                else if (e.NameWithoutLocale.StartsWith(VtConstants.BiosPath))
+                {
+                    e.LoadFrom(() => new BioData(), AssetLoadPriority.Exclusive);
+                }
+            };
+            helper.Events.Content.AssetReady += (sender, e) =>
+            {
+                try
+                {
+                    if (e.Name.StartsWith(VtConstants.ContentPrefix))
+                    {
+                        var _ = Game1.content.Load<Dictionary<string, object>>(e.Name.Name);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Error loading asset {e.Name}: {ex}");
+                }
+            };
+            helper.Events.GameLoop.GameLaunched += (sender, e) =>
+            {
+                var _ = Game1.content.Load<Dictionary<string, object>>(VtConstants.GameSummaryPath);
+                var __ = Game1.content.Load<Dictionary<string, object>>(VtConstants.PromptsPath);
+            };
 
         }
 

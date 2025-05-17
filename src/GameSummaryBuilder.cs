@@ -15,7 +15,7 @@ internal class GameSummaryBuilder
     private Dictionary<string,object> gameSummaryDict;
     public GameSummaryBuilder()
     {
-        gameSummaryDict = Game1.content.LoadLocalized<Dictionary<string,object>>("ValleyTalk/GameSummary");
+        gameSummaryDict = Game1.content.LoadLocalized<Dictionary<string,object>>(VtConstants.GameSummaryPath);
     }
 
     internal string Build()

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using StardewDialogue;
 using StardewModdingAPI;
 using StardewValley;
 
@@ -19,7 +20,7 @@ public class PromptCache
     public Dictionary<string,string> Cache => RefreshPromptCache();
     private Dictionary<string,string> RefreshPromptCache()
     {
-        if (_promptLocaleCache != ModEntry.Language || _promptGenderCache != Game1.getPlayerOrEventFarmer()?.Gender || _promptCache != null )
+        if (_promptLocaleCache != ModEntry.Language || _promptGenderCache != Game1.getPlayerOrEventFarmer()?.Gender || _promptCache != null || _promptCache.Count == 0)
         {
             _promptLocaleCache = ModEntry.Language;
             _promptGenderCache = Game1.getPlayerOrEventFarmer()?.Gender;
@@ -27,7 +28,7 @@ public class PromptCache
             Dictionary<string,object> promptDict;
             try
             {
-                promptDict = Game1.content.LoadLocalized<Dictionary<string,object>>("ValleyTalk/Prompts");
+                promptDict = Game1.content.LoadLocalized<Dictionary<string,object>>(VtConstants.PromptsPath);
             }
             catch (System.Exception ex)
             {

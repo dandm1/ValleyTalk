@@ -91,6 +91,7 @@ public class BioData
 
     public Dictionary<string,string> PromptOverrides { get; set; } = new Dictionary<string, string>();
     public bool UsePatchedDialogue { get; set; } = false;
+    public bool Missing { get; internal set; }
 
     public class ListEntry
     {

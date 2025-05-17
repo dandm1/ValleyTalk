@@ -25,22 +25,18 @@ public class Character
     internal IEnumerable<Tuple<StardewTime,IHistory>> EventHistory => eventHistory.AllTypes;
 
     public NPC StardewNpc { get; internal set; }
-    public List<string> ValidPortraits { get; }
+    public List<string> ValidPortraits { get; internal set; }
 
     public Character(string name, NPC stardewNpc)
     {
         Name = name;
-        BioFilePath = $"ValleyTalk/Bios/{RemoveDotSuffixes(Name)}";
+        BioFilePath = $"{VtConstants.BiosPath}/{RemoveDotSuffixes(Name)}";
         StardewNpc = stardewNpc;
 
         // Load and process the dialogue file
-        LoadBio();
+        CheckBio();
         //LoadDialogue();
         LoadEventHistory();
-        ValidPortraits = new List<string>() { "h", "s", "l", "a" };
-        ValidPortraits.AddRange(_bioData.ExtraPortraits.Keys);
-        PossiblePreoccupations = new List<string>(_bioData.Preoccupations);
-        PossiblePreoccupations.AddRange(GetLovedAndHatedGiftNames());
     }
 
     private string RemoveDotSuffixes(string name)
@@ -152,8 +148,13 @@ public class Character
         }
     }
 
-    private void LoadBio()
+    private void CheckBio()
     {
+        if (_bioData != null && ( _bioData.Biography.Length > 0 || _bioData.Missing))
+        {
+            return;
+        }
+
         BioData bioData;
         try
         {
@@ -161,12 +162,20 @@ public class Character
         }
         catch (Exception)
         {
-            bioData = new BioData();
+            _bioData = new BioData();
+            _bioData.Name = Name;
+            _bioData.Missing = true;
             ModEntry.SMonitor.Log($"No bio file found for {Name}.", StardewModdingAPI.LogLevel.Warn);
+            return;
         }
 
         bioData.Name = Name;
         _bioData = bioData;
+        _bioData.Missing = false;
+        ValidPortraits = new List<string>() { "h", "s", "l", "a" };
+        ValidPortraits.AddRange(_bioData.ExtraPortraits.Keys);
+        PossiblePreoccupations = new List<string>(_bioData.Preoccupations);
+        PossiblePreoccupations.AddRange(GetLovedAndHatedGiftNames());
     }
 
     private void LoadEventHistory()
@@ -516,9 +525,13 @@ public class Character
     public ConcurrentBag<Tuple<DialogueContext,DialogueValue>> CreatedDialogue { get; private set; } = new ();
     internal BioData Bio
     {
-        get => _bioData;
+        get
+        { 
+            CheckBio(); 
+            return _bioData; 
+        }
     }
-    public List<string> PossiblePreoccupations { get; }
+    public List<string> PossiblePreoccupations { get; internal set;}
     public string Preoccupation { get; internal set; }
     public WorldDate PreoccupationDate { get; internal set; }
 }

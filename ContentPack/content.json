@@ -2,12 +2,6 @@
     "Format": "2.3.0",
     "Changes": [
         {
-            "Action": "Load",
-            "Target": "ValleyTalk/Prompts,ValleyTalk/GameSummary,ValleyTalk/Bios/Abigail,ValleyTalk/Bios/Alex,ValleyTalk/Bios/Caroline,ValleyTalk/Bios/Clint,ValleyTalk/Bios/Demetrius,ValleyTalk/Bios/Dwarf,ValleyTalk/Bios/Elliott,ValleyTalk/Bios/Emily,ValleyTalk/Bios/Evelyn,ValleyTalk/Bios/George,ValleyTalk/Bios/Gus,ValleyTalk/Bios/Haley,ValleyTalk/Bios/Harvey,ValleyTalk/Bios/Jas,ValleyTalk/Bios/Jodi,ValleyTalk/Bios/Kent,ValleyTalk/Bios/Krobus,ValleyTalk/Bios/Leah,ValleyTalk/Bios/Lewis,ValleyTalk/Bios/Linus,ValleyTalk/Bios/Marnie,ValleyTalk/Bios/Maru,ValleyTalk/Bios/Pam,ValleyTalk/Bios/Penny,ValleyTalk/Bios/Pierre,ValleyTalk/Bios/Robin,ValleyTalk/Bios/Sam,ValleyTalk/Bios/Sandy,ValleyTalk/Bios/Sebastian,ValleyTalk/Bios/Shane,ValleyTalk/Bios/Vincent,ValleyTalk/Bios/Willy,ValleyTalk/Bios/Wizard",
-            "FromFile": "assets/Empty.json",
-            "Priority": 0
-        },
-        {
             "Action": "Include",
             "FromFile": "assets/Prompts.json"
         },

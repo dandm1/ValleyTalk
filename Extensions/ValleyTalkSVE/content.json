@@ -2,12 +2,6 @@
     "Format": "2.3.0",
     "Changes": [
         {
-            "Action": "Load",
-            "Target": "ValleyTalk/Bios/Sophia,ValleyTalk/Bios/Alesia,ValleyTalk/Bios/Camilla,ValleyTalk/Bios/Claire,ValleyTalk/Bios/Gunther,ValleyTalk/Bios/Hank,ValleyTalk/Bios/Henchman,ValleyTalk/Bios/Issac,ValleyTalk/Bios/Jadu,ValleyTalk/Bios/Jolyne,ValleyTalk/Bios/Marlon,ValleyTalk/Bios/Martin,ValleyTalk/Bios/Morgan,ValleyTalk/Bios/Olivia,ValleyTalk/Bios/Peaches,ValleyTalk/Bios/Scarlett,ValleyTalk/Bios/Treyvon,ValleyTalk/Bios/Victor,ValleyTalk/Bios/Susan,ValleyTalk/Bios/Apples,ValleyTalk/Bios/Morris,ValleyTalk/Bios/Lance,ValleyTalk/Bios/Andy",
-            "FromFile": "assets/Empty.json",
-            "Priority": 0
-        },
-        {
             "Action": "Include",
             "FromFile": "assets/Locations.json"
         },
