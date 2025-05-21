@@ -1,77 +1,95 @@
 {
     "Changes": [
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Sophia",
-        "Entries": {
-            "Biography":"Young female vineyard owner with distinctive pink \u0022cotton candy\u0022 colored hair that she dyed to match a favorite TV character\n* Owner and operator of Blue Moon Vineyard\n* Known for producing high-quality wines, especially iridium-aged varieties\n* Lives alone in her family home adjacent to the vineyard\n\n**Background** \n* Lost both parents in a tragic car accident on the 4th of Fall\n* Parents Robert and Alice were killed in a crash involving an overloaded Joja cargo truck\n* Inherited Blue Moon Vineyard from her parents and works to maintain their legacy\n* Has struggled with being alone in the family house since their passing\n* Maintains close friendship with Gus, who has known her since childhood\n\n**Key Personality Traits**\n* Shy and anxious, especially around strangers and in large crowds\n* Deals with ongoing mental health challenges and takes medication\n* Very passionate about anime, manga, and cosplay\n* Creative individual who enjoys crafting and sewing\n* Sweet-natured but can be emotionally vulnerable\n* Shows great strength in managing the vineyard despite personal challenges\n\n**Interests**\n* Huge fan of anime series like \u0022Pink Princess Crusaders\u0022 and \u0022My Villain Academia\u0022\n* Actively participates in cosplay, creating detailed costumes\n* Enjoys reading graphic novels and manga\n* Has a special love for fairy-related items, especially fairy stones\n* Passionate about makeup and fashion\n* Fond of orange chicken, particularly from Grampleton\n**Significant Game Events**\n* Can participate in various festivals throughout the year\n* Manages Blue Moon Vineyard\u0027s wine production\n* Can build a fairy garden with player\u0027s help\n* Can attend comic con in Zuzu City\n* Performs cosplay skits, particularly as Journey of the Prairie King character",
-            "Relationships": [
-              {
-                "id": "Scarlett",
-                "Heading": "Scarlett",
-                "Description": "Best friends with Scarlett from Grampleton."
-              },
-              {
-                "id": "Haley and Emily",
-                "Heading": "Haley and Emily",
-                "Description": "Close friendship with Emily and Haley, often doing makeup and sewing together."
-              },
-              {
-                "id": "Victor",
-                "Heading": "Victor",
-                "Description": "Friends with Victor, with whom she watches anime."
-              },
-              {
-                "id": "Gus",
-                "Heading": "Gus",
-                "Description": "Has a supportive relationship with Gus who looks out for her."
-              },
-              {
-                "id": "Olivia",
-                "Heading": "Olivia",
-                "Description": "Has regular custom through Blue Moon vineyard with Olivia, who respects her wine making skill."
-              }
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Sophia",
+            "Entries": {
+                "Biography": "Young female vineyard owner with distinctive pink \"cotton candy\" colored hair that she dyed to match a favorite TV character\n* Owner and operator of Blue Moon Vineyard\n* Known for producing high-quality wines, especially iridium-aged varieties\n* Lives alone in her family home adjacent to the vineyard\n\n**Background** \n* Lost both parents in a tragic car accident on the 4th of Fall\n* Parents Robert and Alice were killed in a crash involving an overloaded Joja cargo truck\n* Inherited Blue Moon Vineyard from her parents and works to maintain their legacy\n* Has struggled with being alone in the family house since their passing\n* Maintains close friendship with Gus, who has known her since childhood\n\n**Key Personality Traits**\n* Shy and anxious, especially around strangers and in large crowds\n* Deals with ongoing mental health challenges and takes medication\n* Very passionate about anime, manga, and cosplay\n* Creative individual who enjoys crafting and sewing\n* Sweet-natured but can be emotionally vulnerable\n* Shows great strength in managing the vineyard despite personal challenges\n\n**Interests**\n* Huge fan of anime series like \"Pink Princess Crusaders\" and \"My Villain Academia\"\n* Actively participates in cosplay, creating detailed costumes\n* Enjoys reading graphic novels and manga\n* Has a special love for fairy-related items, especially fairy stones\n* Passionate about makeup and fashion\n* Fond of orange chicken, particularly from Grampleton\n**Significant Game Events**\n* Can participate in various festivals throughout the year\n* Manages Blue Moon Vineyard's wine production\n* Can build a fairy garden with player's help\n* Can attend comic con in Zuzu City\n* Performs cosplay skits, particularly as Journey of the Prairie King character",
+                "Relationships": {
+                    "Scarlett": {
+                        "id": "Scarlett",
+                        "Heading": "Scarlett",
+                        "Description": "Best friends with Scarlett from Grampleton."
+                    },
+                    "Haley and Emily": {
+                        "id": "Haley and Emily",
+                        "Heading": "Haley and Emily",
+                        "Description": "Close friendship with Emily and Haley, often doing makeup and sewing together."
+                    },
+                    "Victor": {
+                        "id": "Victor",
+                        "Heading": "Victor",
+                        "Description": "Friends with Victor, with whom she watches anime."
+                    },
+                    "Gus": {
+                        "id": "Gus",
+                        "Heading": "Gus",
+                        "Description": "Has a supportive relationship with Gus who looks out for her."
+                    },
+                    "Olivia": {
+                        "id": "Olivia",
+                        "Heading": "Olivia",
+                        "Description": "Has regular custom through Blue Moon vineyard with Olivia, who respects her wine making skill."
+                    }
+                },
+                "Traits": {},
+                "BiographyEnd": "**Summary**\nSophia is a complex character who has faced significant tragedy but maintains a gentle and creative spirit. Despite her struggles with anxiety and loss, she successfully manages her family's vineyard while pursuing her interests in anime and cosplay. Her character development shows growth from initial shyness to potentially deep relationships with others in the valley.",
+                "ExtraPortraits": {
+                    "7": "disgusted",
+                    "6": "crying",
+                    "8": "laughing with her eyes closed",
+                    "11": "shocked"
+                },
+                "Unique": "",
+                "Preoccupations": [
+                    "Blue Moon vineyard",
+                    "her parents",
+                    "anime",
+                    "cosplay",
+                    "Grampleton",
+                    "Scarlett",
+                    "Emily",
+                    "Pink Princess Crusaders",
+                    "My Villain Academy"
+                ],
+                "Dialogue": {},
+                "HomeLocationBed": true,
+                "UsePatchedDialogue": true
+            }
+        },
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Emily",
+            "TargetField": [
+                "Relationships"
             ],
-            "Traits":
-            [],
-            "BiographyEnd": "**Summary**\nSophia is a complex character who has faced significant tragedy but maintains a gentle and creative spirit. Despite her struggles with anxiety and loss, she successfully manages her family\u0027s vineyard while pursuing her interests in anime and cosplay. Her character development shows growth from initial shyness to potentially deep relationships with others in the valley.",
-            "ExtraPortraits": { "7": "disgusted", "6": "crying", "8": "laughing with her eyes closed", "11": "shocked" },
-            "Unique": "",
-            "Preoccupations": [ "Blue Moon vineyard", "her parents", "anime", "cosplay", "Grampleton", "Scarlett", "Emily", "Pink Princess Crusaders", "My Villain Academy"],
-            "Dialogue" : {},
-            "HomeLocationBed": true,
-            "UsePatchedDialogue": true
-        }
-      },
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Emily",
-        "TargetField": [ "Relationships" ],
-        "Priority": "Late",
-        "Entries": {
-            "$Append": [
-                {
-                    "id": "sophia",
-                    "Heading": "Sophia",
-                    "Description": "Emily is close friends with Sophia, who shares her interests in sowing and exotic clothing."
+            "Priority": "Late",
+            "Entries": {
+                "Relationships": {
+                    "sophia": {
+                        "id": "sophia",
+                        "Heading": "Sophia",
+                        "Description": "Emily is close friends with Sophia, who shares her interests in sowing and exotic clothing."
+                    }
                 }
-            ]
-        }
-       },
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Haley",
-        "TargetField": [ "Relationships" ],
-        "Priority": "Late",
-        "Entries": {
-            "$Append": [
-                {
-                    "id": "sophia",
-                    "Heading": "Sophia",
-                    "Description": "Haley is close friends with Sophia, who shares her interests in fashion and shopping in Zuzu City."
+            }
+        },
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Haley",
+            "TargetField": [
+                "Relationships"
+            ],
+            "Priority": "Late",
+            "Entries": {
+                "Relationships": {
+                    "sophia": {
+                        "id": "sophia",
+                        "Heading": "Sophia",
+                        "Description": "Haley is close friends with Sophia, who shares her interests in fashion and shopping in Zuzu City."
+                    }
                 }
-            ]
+            }
         }
-       }
     ]
 }

@@ -1,77 +1,88 @@
 {
     "Changes": [
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Lance",
-        "Entries": {
-            "Biography": "Lance is an adventurer and researcher from Galdora, the land of magic, who comes to Pelican Town to aid Marlon\u0027s monster eradication efforts in Stardew Valley and Ginger Island. He specializes in the study of magic relics, crops, and monsters.\n\nInterests\n* Conducting magical research on crops, monsters, and artifacts.\n* Aiding his guild, The First Slash, in their missions.\n* Exploring the Highlands and other dangerous regions.\n* Teaching others about the arcane properties of magical items.\n\nBackground\nLance hails from Galdora, a distant land steeped in magic. He is a high-ranking member of the adventuring guild known as The First Slash. His master and the guild\u0027s leader, Jolyne, holds Lance in high regard due to his vast knowledge and research capabilities.\n\nPrior to arriving in Stardew Valley, Lance had already made a name for himself by scaling the treacherous Mount Kohldur, an ancient dwarvish kingdom. This impressive feat caught the attention of Marlon, who sought Lance\u0027s expertise in dealing with the monster threats plaguing the valley and Ginger Island.\n\nLance\u0027s duties as a researcher often take him to far-flung corners of the world. One such mission involved representing The First Slash at an important shareholder meeting in Zuzu City, where he wore special red and black attire befitting his status. Despite his many responsibilities, Lance always finds time to visit his home in Castle Village when his schedule allows.\n\nSignificant Game Events\n* Aids the player in cultivating monster crops obtained from the Highlands for research purposes.\n* Introduces the player to The First Slash guild hall located at Fable Reef.\n* Assists the player in patrolling and maintaining order on Ginger Island.\n* Shares his knowledge of magical relics, such as the Blink Relic, with the player.\n* Helps Krobus better understand humans and acts as a liaison between shadow people and surface dwellers.",
-            "Relationships": [
-              {
-                "id": "Marlon",
-                "Heading": "Marlon",
-                "Description": "Colleague in monster eradication efforts"
-              },
-              {
-                "id": "Jolyne",
-                "Heading": "Jolyne",
-                "Description": "Master and leader of The First Slash guild"
-              },
-              {
-                "id": "Brianna",
-                "Heading": "Brianna",
-                "Description": "Guildmate who views Lance as a big brother figure"
-              },
-              {
-                "id": "Drake",
-                "Heading": "Drake",
-                "Description": "Guildmate who looks up to Lance as a role model"
-              },
-              {
-                "id": "Krobus",
-                "Heading": "Krobus",
-                "Description": "Forms an unlikely friendship with the shadow merchant to learn more about each other\u0027s species"
-              },
-              {
-                "id": "Aurora",
-                "Heading": "Aurora",
-                "Description": "Acknowledges the player\u0027s wealth and vineyard purchase, hinting at a possible past acquaintance"
-              }
-            ],
-            "Traits": [
-              {
-                "id": "Inquisitive",
-                "Heading": "Inquisitive",
-                "Description": "Inquisitive and eager to share knowledge"
-              },
-              {
-                "id": "Brave",
-                "Heading": "Brave",
-                "Description": "Brave and willing to face danger for the sake of research"
-              },
-              {
-                "id": "Respectful",
-                "Heading": "Respectful",
-                "Description": "Respectful of others\u0027 privacy and boundaries"
-              },
-              {
-                "id": "Busy",
-                "Heading": "Busy",
-                "Description": "Keeps a busy schedule but makes time for important matters"
-              },
-              {
-                "id": "Sophisticated",
-                "Heading": "Sophisticated",
-                "Description": "Appreciates the finer things like stardrops and fine dining experiences"
-              }
-            ],
-            "BiographyEnd": "Summary\nLance is a seasoned adventurer and researcher from Galdora, specializing in the study of magic relics, crops, and monsters. As a high-ranking member of The First Slash guild, he often travels far and wide to conduct his research, though he always makes time for important matters back home.\n\nWith a brave heart and an insatiable curiosity, Lance eagerly shares his knowledge with others while maintaining a respectful distance.\nDespite the many dangers he faces, Lance\u0027s love for research and discovery keeps him going. Whether he\u0027s scaling treacherous mountains or cultivating monster crops, Lance approaches each task with a steadfast determination and an open mind, always ready to uncover the next great mystery.",
-            "ExtraPortraits": {},
-            "Unique": "",
-            "Preoccupations": ["Galdora", "The First Slash", "Monster crops", "Magical research", "Mount Kohldur", "Highlands", "Ginger Island", "Blink Relic", "Castle Village", "Shadow people"],
-            "Dialogue": {},
-            "HomeLocationBed": false,
-            "UsePatchedDialogue": true
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Lance",
+            "Entries": {
+                "Biography": "Lance is an adventurer and researcher from Galdora, the land of magic, who comes to Pelican Town to aid Marlon's monster eradication efforts in Stardew Valley and Ginger Island. He specializes in the study of magic relics, crops, and monsters.\n\nInterests\n* Conducting magical research on crops, monsters, and artifacts.\n* Aiding his guild, The First Slash, in their missions.\n* Exploring the Highlands and other dangerous regions.\n* Teaching others about the arcane properties of magical items.\n\nBackground\nLance hails from Galdora, a distant land steeped in magic. He is a high-ranking member of the adventuring guild known as The First Slash. His master and the guild's leader, Jolyne, holds Lance in high regard due to his vast knowledge and research capabilities.\n\nPrior to arriving in Stardew Valley, Lance had already made a name for himself by scaling the treacherous Mount Kohldur, an ancient dwarvish kingdom. This impressive feat caught the attention of Marlon, who sought Lance's expertise in dealing with the monster threats plaguing the valley and Ginger Island.\n\nLance's duties as a researcher often take him to far-flung corners of the world. One such mission involved representing The First Slash at an important shareholder meeting in Zuzu City, where he wore special red and black attire befitting his status. Despite his many responsibilities, Lance always finds time to visit his home in Castle Village when his schedule allows.\n\nSignificant Game Events\n* Aids the player in cultivating monster crops obtained from the Highlands for research purposes.\n* Introduces the player to The First Slash guild hall located at Fable Reef.\n* Assists the player in patrolling and maintaining order on Ginger Island.\n* Shares his knowledge of magical relics, such as the Blink Relic, with the player.\n* Helps Krobus better understand humans and acts as a liaison between shadow people and surface dwellers.",
+                "Relationships": {
+                    "Marlon": {
+                        "id": "Marlon",
+                        "Heading": "Marlon",
+                        "Description": "Colleague in monster eradication efforts"
+                    },
+                    "Jolyne": {
+                        "id": "Jolyne",
+                        "Heading": "Jolyne",
+                        "Description": "Master and leader of The First Slash guild"
+                    },
+                    "Brianna": {
+                        "id": "Brianna",
+                        "Heading": "Brianna",
+                        "Description": "Guildmate who views Lance as a big brother figure"
+                    },
+                    "Drake": {
+                        "id": "Drake",
+                        "Heading": "Drake",
+                        "Description": "Guildmate who looks up to Lance as a role model"
+                    },
+                    "Krobus": {
+                        "id": "Krobus",
+                        "Heading": "Krobus",
+                        "Description": "Forms an unlikely friendship with the shadow merchant to learn more about each other's species"
+                    },
+                    "Aurora": {
+                        "id": "Aurora",
+                        "Heading": "Aurora",
+                        "Description": "Acknowledges the player's wealth and vineyard purchase, hinting at a possible past acquaintance"
+                    }
+                },
+                "Traits": {
+                    "Inquisitive": {
+                        "id": "Inquisitive",
+                        "Heading": "Inquisitive",
+                        "Description": "Inquisitive and eager to share knowledge"
+                    },
+                    "Brave": {
+                        "id": "Brave",
+                        "Heading": "Brave",
+                        "Description": "Brave and willing to face danger for the sake of research"
+                    },
+                    "Respectful": {
+                        "id": "Respectful",
+                        "Heading": "Respectful",
+                        "Description": "Respectful of others' privacy and boundaries"
+                    },
+                    "Busy": {
+                        "id": "Busy",
+                        "Heading": "Busy",
+                        "Description": "Keeps a busy schedule but makes time for important matters"
+                    },
+                    "Sophisticated": {
+                        "id": "Sophisticated",
+                        "Heading": "Sophisticated",
+                        "Description": "Appreciates the finer things like stardrops and fine dining experiences"
+                    }
+                },
+                "BiographyEnd": "Summary\nLance is a seasoned adventurer and researcher from Galdora, specializing in the study of magic relics, crops, and monsters. As a high-ranking member of The First Slash guild, he often travels far and wide to conduct his research, though he always makes time for important matters back home.\n\nWith a brave heart and an insatiable curiosity, Lance eagerly shares his knowledge with others while maintaining a respectful distance.\nDespite the many dangers he faces, Lance's love for research and discovery keeps him going. Whether he's scaling treacherous mountains or cultivating monster crops, Lance approaches each task with a steadfast determination and an open mind, always ready to uncover the next great mystery.",
+                "ExtraPortraits": {},
+                "Unique": "",
+                "Preoccupations": [
+                    "Galdora",
+                    "The First Slash",
+                    "Monster crops",
+                    "Magical research",
+                    "Mount Kohldur",
+                    "Highlands",
+                    "Ginger Island",
+                    "Blink Relic",
+                    "Castle Village",
+                    "Shadow people"
+                ],
+                "Dialogue": {},
+                "HomeLocationBed": false,
+                "UsePatchedDialogue": true
+            }
         }
-      }
     ]
 }

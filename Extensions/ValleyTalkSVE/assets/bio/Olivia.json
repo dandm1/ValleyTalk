@@ -1,149 +1,168 @@
 {
     "Changes": [
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Olivia",
-        "Entries": {
-            "Biography": "Wealthy, refined woman originally from the Gotoro Empire who now lives in Pelican Town.\n* Mother to Victor, widow of Edward.\n* Lives in an elegant manor house.\n* Former corporate professional turned part-time stock trader.\n* Cultured and sophisticated with expensive tastes.\n\n**Background**\n* Born in the Gotoro Empire to parents who later immigrated to the Ferngill Republic.\n* Still has family trapped in the Gotoro Empire due to ongoing war.\n* Previously worked in a corporate position at Joja Corporation in Zuzu City.\n* Was married to Edward who passed away some time ago.\n* Moved to Pelican Town with her son Victor after leaving corporate life.\n* Semi-retired but continues to trade stocks part-time (approximately 15 hours per week).\n\n**Interests \u0026 Hobbies**\n* Wine connoisseur with extensive knowledge of vintages.\n* Practices and teaches yoga.\n* Passionate about painting.\n* Collects Gotoran art and china.\n* Enjoys hosting elegant social gatherings.\n* Regular aerobics participant.\n* Interest in fine dining and cooking.",
-            "Relationships": [
-              {
-                "id": "Caroline and Jodi",
-                "Heading": "Caroline and Jodi",
-                "Description": "Best friends with Caroline and Jodi"
-              },
-              {
-                "id": "Victor",
-                "Heading": "Victor",
-                "Description": "Close relationship with her son Victor"
-              },
-              {
-                "id": "Pam",
-                "Heading": "Pam",
-                "Description": "Dislikes Pam and tends to avoid her"
-              },
-              {
-                "id": "Leah",
-                "Heading": "Leah",
-                "Description": "Works with Leah to improve her painting"
-              },
-              {
-                "id": "Pierre",
-                "Heading": "Pierre",
-                "Description": "Regular social interactions with Pierre and other townspeople"
-              },
-              {
-                "id": "Sophia",
-                "Heading": "Sophia",
-                "Description": "Maintains connections with Sophia regarding wine purchases"
-              },
-              {
-                "id": "Player",
-                "Heading": "Player",
-                "Description": "Values friendship with the player character"
-              }
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Olivia",
+            "Entries": {
+                "Biography": "Wealthy, refined woman originally from the Gotoro Empire who now lives in Pelican Town.\n* Mother to Victor, widow of Edward.\n* Lives in an elegant manor house.\n* Former corporate professional turned part-time stock trader.\n* Cultured and sophisticated with expensive tastes.\n\n**Background**\n* Born in the Gotoro Empire to parents who later immigrated to the Ferngill Republic.\n* Still has family trapped in the Gotoro Empire due to ongoing war.\n* Previously worked in a corporate position at Joja Corporation in Zuzu City.\n* Was married to Edward who passed away some time ago.\n* Moved to Pelican Town with her son Victor after leaving corporate life.\n* Semi-retired but continues to trade stocks part-time (approximately 15 hours per week).\n\n**Interests & Hobbies**\n* Wine connoisseur with extensive knowledge of vintages.\n* Practices and teaches yoga.\n* Passionate about painting.\n* Collects Gotoran art and china.\n* Enjoys hosting elegant social gatherings.\n* Regular aerobics participant.\n* Interest in fine dining and cooking.",
+                "Relationships": {
+                    "Caroline and Jodi": {
+                        "id": "Caroline and Jodi",
+                        "Heading": "Caroline and Jodi",
+                        "Description": "Best friends with Caroline and Jodi"
+                    },
+                    "Victor": {
+                        "id": "Victor",
+                        "Heading": "Victor",
+                        "Description": "Close relationship with her son Victor"
+                    },
+                    "Pam": {
+                        "id": "Pam",
+                        "Heading": "Pam",
+                        "Description": "Dislikes Pam and tends to avoid her"
+                    },
+                    "Leah": {
+                        "id": "Leah",
+                        "Heading": "Leah",
+                        "Description": "Works with Leah to improve her painting"
+                    },
+                    "Pierre": {
+                        "id": "Pierre",
+                        "Heading": "Pierre",
+                        "Description": "Regular social interactions with Pierre and other townspeople"
+                    },
+                    "Sophia": {
+                        "id": "Sophia",
+                        "Heading": "Sophia",
+                        "Description": "Maintains connections with Sophia regarding wine purchases"
+                    },
+                    "Player": {
+                        "id": "Player",
+                        "Heading": "Player",
+                        "Description": "Values friendship with the player character"
+                    }
+                },
+                "Traits": {
+                    "Elegant": {
+                        "id": "Elegant",
+                        "Heading": "Elegant",
+                        "Description": "Elegant and refined with sophisticated tastes"
+                    },
+                    "Quality-focused": {
+                        "id": "Quality-focused",
+                        "Heading": "Quality-focused",
+                        "Description": "Values quality and presentation"
+                    },
+                    "Elitist": {
+                        "id": "Elitist",
+                        "Heading": "Elitist",
+                        "Description": "Can be somewhat elitist and judgmental at times"
+                    },
+                    "Caring": {
+                        "id": "Caring",
+                        "Heading": "Caring",
+                        "Description": "Deeply caring toward those close to her"
+                    },
+                    "Grieving": {
+                        "id": "Grieving",
+                        "Heading": "Grieving",
+                        "Description": "Struggles with grief over lost husband"
+                    },
+                    "Traditional": {
+                        "id": "Traditional",
+                        "Heading": "Traditional",
+                        "Description": "Values marriage and commitment highly"
+                    },
+                    "Romantic": {
+                        "id": "Romantic",
+                        "Heading": "Romantic",
+                        "Description": "Has a romantic and sentimental side"
+                    },
+                    "Melancholic": {
+                        "id": "Melancholic",
+                        "Heading": "Melancholic",
+                        "Description": "Can be moody and melancholic, especially regarding past losses"
+                    }
+                },
+                "BiographyEnd": "**Summary**\nOlivia is a complex character who balances sophisticated taste with deep emotional wounds. While maintaining an elegant exterior and successful part-time career in stock trading, she deals with the loss of her husband and concerns about family in her war-torn homeland. She has built a new life in Pelican Town centered around art, wine, yoga, and close friendships, though she sometimes struggles with melancholy. Despite past hurts, she remains open to love and new experiences while maintaining high standards in all aspects of her life.",
+                "ExtraPortraits": {},
+                "Unique": "",
+                "Preoccupations": [
+                    "Wine",
+                    "Yoga",
+                    "Painting",
+                    "Gotoro Empire",
+                    "Edward",
+                    "Victor",
+                    "Stock trading",
+                    "Gotoran art",
+                    "Elegance",
+                    "Manor house"
+                ],
+                "Dialogue": {},
+                "HomeLocationBed": false,
+                "UsePatchedDialogue": true
+            }
+        },
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Caroline",
+            "TargetField": [
+                "Relationships"
             ],
-            "Traits": [
-              {
-                "id": "Elegant",
-                "Heading": "Elegant",
-                "Description": "Elegant and refined with sophisticated tastes"
-              },
-              {
-                "id": "Quality-focused",
-                "Heading": "Quality-focused",
-                "Description": "Values quality and presentation"
-              },
-              {
-                "id": "Elitist",
-                "Heading": "Elitist",
-                "Description": "Can be somewhat elitist and judgmental at times"
-              },
-              {
-                "id": "Caring",
-                "Heading": "Caring",
-                "Description": "Deeply caring toward those close to her"
-              },
-              {
-                "id": "Grieving",
-                "Heading": "Grieving",
-                "Description": "Struggles with grief over lost husband"
-              },
-              {
-                "id": "Traditional",
-                "Heading": "Traditional",
-                "Description": "Values marriage and commitment highly"
-              },
-              {
-                "id": "Romantic",
-                "Heading": "Romantic",
-                "Description": "Has a romantic and sentimental side"
-              },
-              {
-                "id": "Melancholic",
-                "Heading": "Melancholic",
-                "Description": "Can be moody and melancholic, especially regarding past losses"
-              }
+            "Priority": "Late",
+            "Entries": {
+                "Olivia": {
+                    "id": "Olivia",
+                    "Heading": "Olivia",
+                    "Description": "Caroline has formed a close friendship with Olivia, a refined woman who moved to Pelican Town from the Gotoro Empire. They often spend time together at aerobics class and social gatherings."
+                }
+            }
+        },
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Jodi",
+            "TargetField": [
+                "Relationships"
             ],
-            "BiographyEnd": "**Summary**\nOlivia is a complex character who balances sophisticated taste with deep emotional wounds. While maintaining an elegant exterior and successful part-time career in stock trading, she deals with the loss of her husband and concerns about family in her war-torn homeland. She has built a new life in Pelican Town centered around art, wine, yoga, and close friendships, though she sometimes struggles with melancholy. Despite past hurts, she remains open to love and new experiences while maintaining high standards in all aspects of her life.",
-            "ExtraPortraits": {},
-            "Unique": "",
-            "Preoccupations": ["Wine", "Yoga", "Painting", "Gotoro Empire", "Edward", "Victor", "Stock trading", "Gotoran art", "Elegance", "Manor house"],
-            "Dialogue": {},
-            "HomeLocationBed": false,
-            "UsePatchedDialogue": true
-        }
-      },
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Caroline",
-        "TargetField": [ "Relationships" ],
-        "Priority": "Late",
-        "Entries": {
-            "Olivia": {
-                "id": "Olivia",
-                "Heading": "Olivia",
-                "Description": "Caroline has formed a close friendship with Olivia, a refined woman who moved to Pelican Town from the Gotoro Empire. They often spend time together at aerobics class and social gatherings."
+            "Priority": "Late",
+            "Entries": {
+                "Olivia": {
+                    "id": "Olivia",
+                    "Heading": "Olivia",
+                    "Description": "Jodi has become best friends with Olivia, appreciating her cultured perspective and the chance to socialize with another adult in town."
+                }
+            }
+        },
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Pam",
+            "TargetField": [
+                "Relationships"
+            ],
+            "Priority": "Late",
+            "Entries": {
+                "Olivia": {
+                    "id": "Olivia",
+                    "Heading": "Olivia",
+                    "Description": "Pam is aware that Olivia dislikes her and tends to avoid her. Their differences in lifestyle and social status create tension between them."
+                }
+            }
+        },
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Leah",
+            "TargetField": [
+                "Relationships"
+            ],
+            "Priority": "Late",
+            "Entries": {
+                "Olivia": {
+                    "id": "Olivia",
+                    "Heading": "Olivia",
+                    "Description": "Leah works with Olivia to help improve her painting skills. Despite their different backgrounds, they share a passion for art."
+                }
             }
         }
-      },
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Jodi",
-        "TargetField": [ "Relationships" ],
-        "Priority": "Late",
-        "Entries": {
-            "Olivia": {
-                "id": "Olivia",
-                "Heading": "Olivia",
-                "Description": "Jodi has become best friends with Olivia, appreciating her cultured perspective and the chance to socialize with another adult in town."
-            }
-        }
-      },
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Pam",
-        "TargetField": [ "Relationships" ],
-        "Priority": "Late",
-        "Entries": {
-            "Olivia": {
-                "id": "Olivia",
-                "Heading": "Olivia",
-                "Description": "Pam is aware that Olivia dislikes her and tends to avoid her. Their differences in lifestyle and social status create tension between them."
-            }
-        }
-      },
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Leah",
-        "TargetField": [ "Relationships" ],
-        "Priority": "Late",
-        "Entries": {
-            "Olivia": {
-                "id": "Olivia",
-                "Heading": "Olivia",
-                "Description": "Leah works with Olivia to help improve her painting skills. Despite their different backgrounds, they share a passion for art."
-            }
-        }
-      }
     ]
 }

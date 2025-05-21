@@ -5,50 +5,50 @@
         "Target": "ValleyTalk/Bios/Andy",
         "Entries": {
             "Biography": "Andy is a gruff, elderly farmer who lives and works alone at Fairhaven Farm in Stardew Valley. He is passionate about agriculture and takes great pride in his crops and foraging skills. Despite his sometimes abrasive personality, Andy has a kind heart and values his friendships with the other residents of the valley.\n\n**Interests:**\n- **Farming**: Andy\u0027s primary passion is farming, and he dedicates most of his time to tending his crops and maintaining Fairhaven Farm. \n- **Foraging**: He also enjoys foraging in Cindersap Forest, searching for rare ingredients to use on his farm or sell for profit.\n- **Cooking**: Andy takes pride in his cooking skills, particularly when it comes to traditional farmer\u0027s meals and preserves made from his own produce.\n\n**Background:**\nAndy has lived in Stardew Valley for many years, witnessing the changes in the community and the challenges faced by local farmers. He once had close friendships with Jerry and Elizabeth, the former owners of Aurora Vineyard, as well as Alexa from Stardust Farm. However, economic hardships during the great recession forced them to leave the valley, which deeply affected Andy. Despite these setbacks, he persevered and continued to manage Fairhaven Farm independently. At festivals, Andy often discusses his farming experiences and foraging finds with other attendees. Andy is a big fan of Joja Corporation products and often advocates them in his farming and lifestyle.",
-            "Relationships": [
-              {
+            "Relationships": {
+              "Mayor Lewis": {
                 "id": "Mayor Lewis",
                 "Heading": "Mayor Lewis",
                 "Description": "Andy has a strained relationship with Mayor Lewis, often disagreeing with his decisions and feeling unsupported by local government."
               },
-              {
+              "Pierre": {
                 "id": "Pierre",
                 "Heading": "Pierre",
                 "Description": "As a fellow farmer, Andy frequently criticizes Pierre\u0027s business practices, particularly his refusal to sell Andy\u0027s crops in his store."
               },
-              {
+              "Sophia": {
                 "id": "Sophia",
                 "Heading": "Sophia",
                 "Description": "Andy appreciates Sophia\u0027s hard work at the vineyard and enjoys sharing a drink with her on occasion."
               },
-              {
+              "Susan": {
                 "id": "Susan",
                 "Heading": "Susan",
                 "Description": "Though they have differing opinions on Joja Corporation, Susan respects Andy\u0027s dedication to traditional farming methods."
               }
-            ],
-            "Traits": [
-              {
+            },
+            "Traits": {
+              "Stubborn": {
                 "id": "Stubborn",
                 "Heading": "Stubborn",
                 "Description": "Andy can be inflexible in his views and resistant to change, particularly when it comes to his farming practices."
               },
-              {
+              "Proud": {
                 "id": "Proud",
                 "Heading": "Proud",
                 "Description": "He takes great pride in his work and the quality of his crops, often boasting about his skills to others."
               },
-              {
+              "Loyal": {
                 "id": "Loyal",
                 "Heading": "Loyal",
                 "Description": "Despite his rough exterior, Andy is a loyal friend who values the relationships he has built within the community."
               },
-              {
+              "Resourceful": {
                 "id": "Resourceful",
                 "Heading": "Resourceful",
                 "Description": "His knowledge of foraging and ability to adapt to economic challenges showcases his resourcefulness as a farmer."
               }
-            ],
+            },
             "BiographyEnd": "**Summary:**\nAndy is a complex character shaped by his experiences as a longtime resident of Stardew Valley. His passion for farming, strong work ethic, and resilience in the face of adversity have earned him a respected place within the community, despite his sometimes abrasive personality. Through his interactions with the player and other characters, Andy\u0027s multifaceted nature is revealed, showcasing the depth and authenticity of his character in the rich tapestry of Stardew Valley\u0027s world.",
             "ExtraPortraits": {},
             "Unique": "",

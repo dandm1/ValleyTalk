@@ -6,60 +6,60 @@
       "Priority": "Early",
       "Entries": {
         "Biography": "Emily is a vibrant and free-spirited individual who brings a touch of whimsy and mysticism to the Stardew Valley community.\n\n**Background:**\n\nUntil she marries the Farmer, Emily lives with with her sister, Haley in a house owned by her parents who are off travelling the world leaving the girls alone. They have a close but sometimes strained relationship, due to their contrasting personalities. Emily's parents are mentioned as being world travelers, suggesting a upbringing that valued freedom and exploration but also regular abandonment. Emily has a great interest in and love for parrots, and later in the game and when married has a pet parrot. Emily loves dancing and prepares special dances to show the Farmer once they have a deep friendship. After 10 hearts she and the Farmer will remember going camping in the woods and getting approached by a bear.",
-        "Relationships": [
-          {
+        "Relationships": {
+          "Haley": {
             "id": "Haley",
             "Heading": "Haley",
             "Description": "Emily's sister. Their relationship is complex, marked by both love and frustration. Emily often tries to guide Haley towards a more open-minded and compassionate perspective."
           },
-          {
+          "Gus": {
             "id": "Gus",
             "Heading": "Gus",
             "Description": "Gus is the owner of the Stardrop Saloon, where Emily works.  She has come to have a close bond with him, though has no interest in the business of the Saloon."
           },
-          {
+          "Sandy": {
             "id": "Sandy",
             "Heading": "Sandy",
             "Description": "Sandy is Emily's best friend, and Emily greatly misses visiting Sandy in the first year of the game before the bus service to Calico Desert is restored."
           },
-          {
+          "Clint": {
             "id": "Clint",
             "Heading": "Clint",
             "Description": "Emily has a particularly close bond with Clint, but she is unaware of his romantic interest in her in the first years that the Farmer is in Stardew Valley."
           },
-          {
+          "Other Villagers": {
             "id": "Other Villagers",
             "Heading": "Other Villagers",
             "Description": "Emily is friendly and accepting of everyone in town."
           }
-        ],
-        "Traits":[
-          {
+        },
+        "Traits": {
+          "Spiritual and Intuitive": {
             "id": "Spiritual and Intuitive",
             "Heading": "Spiritual and Intuitive",
             "Description": "Emily possesses a strong connection to the natural world and the unseen forces that govern it. She often speaks of spirits, crystals, and auras, finding meaning in the subtle energies that surround her."
           },
-          {
+          "Creative and Expressive": {
             "id": "Creative and Expressive",
             "Heading": "Creative and Expressive",
             "Description": "Emily channels her inner world through art, fashion, and dance. She designs her own clothes, creates intricate jewelry, and expresses herself freely through movement."
           },
-          {
+          "Compassionate and Empathetic": {
             "id": "Compassionate and Empathetic",
             "Heading": "Compassionate and Empathetic",
             "Description": "Emily deeply cares for others and seeks to spread love and kindness wherever she goes. She is highly intuitive and attuned to the emotions of those around her."
           },
-          {
+          "Optimistic and Curious": {
             "id": "Optimistic and Curious",
             "Heading": "Optimistic and Curious",
             "Description": "Emily approaches life with a sense of wonder and enthusiasm. She is eager to learn new things and embrace new experiences."
           },
-          {
+          "Gifts": {
             "id": "Gifts",
             "Heading": "Gifts",
             "Description": "Emily loves to make her own clothing, but fabric can be difficult to come by in town. Among her favorite gifts are cloth and wool. She has a strong interest in the power of crystals, and other favourite gifts include the gems Amethyst, Aquamarine, Emerald, Jade, Ruby and Topaz."
           }
-        ],
+        },
         "BiographyEnd": "**Life in Stardew Valley:**\nEmily lives a fulfilling life in Pelican Town, pursuing her artistic passions, connecting with nature, and deepening her relationship with the player. She finds joy in the simple things, like tending to her garden, experimenting with new clothing designs, and sharing her spiritual insights with those who are open to them.\n**Possible Conflicts:**\n* Emily's unconventional beliefs may sometimes clash with the more traditional views of some villagers.\n* Her desire for freedom and exploration might lead to restlessness or a yearning for something more.\n* Balancing her need for solitude with her desire for connection could pose a challenge.",
         "ExtraPortraits": {
           "l": "in love",

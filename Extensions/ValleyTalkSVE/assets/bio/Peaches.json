@@ -1,62 +1,72 @@
 {
     "Changes": [
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Peaches",
-        "Entries": {
-            "Biography": "Peaches is a Junimo character who is a close friend of another Junimo named Apples, and the two are often seen playing together in the forests around Pelican Town. \n\n**Interests**  \n* Playing and exploring in the forest with Apples.\n* Helping Apples grow starfruit friends using magic.\n* Visiting Apples at their home and meeting new friends.\n* Spreading joy and friendship to Apples and other Junimos.\n\n**Background**\nLittle is known about Peaches\u0027 background, as she is a minor character who primarily appears in relation to her friend Apples. However she has been friends with Apples for some time, as they are frequently seen playing together and Peaches seems quite familiar with Apples\u0027 home and daily life. Peaches also appears to have knowledge of magic that can be used to help grow starfruit.\n\n**Significant Game Events**\n* Visiting Apples at their home to play and meet Apples\u0027 friend (the player character)\n* Helping Apples grow bigger starfruit friends using magic\n* Deciding to stay with Apples when they restore an old building, rather than returning home\n* Helping Apples make a home for the player character in the forest before returning to other Junimo friends\n* Playing with Apples all day in the forest\n\n",
-            "Relationships": [
-              {
-                "id": "Apples",
-                "Heading": "Apples",
-                "Description": "Peaches\u0027 best friend and constant companion. The two love playing together and Peaches often visits Apples at home."
-              },
-              {
-                "id": "Player",
-                "Heading": "Player",
-                "Description": "Peaches is happy to meet the player through Apples, and helps make them a home in the forest before leaving Apples to return to other friends."
-              },
-              {
-                "id": "Other Junimos",
-                "Heading": "Other Junimos",
-                "Description": "Mentioned as other friends of Peaches who she returns to after helping Apples. Likely the community of Junimos that live in the forest."
-              }
-            ],
-            "Traits": [
-              {
-                "id": "Cheerful",
-                "Heading": "Cheerful",
-                "Description": "Cheerful and excitable, often expressing joy with exclamations like \u0022Yay!\u0022"
-              },
-              {
-                "id": "Playful",
-                "Heading": "Playful",
-                "Description": "Loves playing and exploring with her best friend Apples"
-              },
-              {
-                "id": "Caring",
-                "Heading": "Caring",
-                "Description": "Caring and helpful, assists Apples with magic to grow starfruit friends"
-              },
-              {
-                "id": "Friendly",
-                "Heading": "Friendly",
-                "Description": "Friendly and open to meeting new people through Apples"
-              },
-              {
-                "id": "Adventurous",
-                "Heading": "Adventurous",
-                "Description": "Adventurous and energetic, always ready for a forest romp or visit to Apples\u0027 home"
-              }
-            ],
-            "BiographyEnd": "**Summary**\nPeaches is an upbeat, adventurous Junimo who is the best friend of Apples. The two love playing together in the forests surrounding Pelican Town. Peaches helps Apples grow starfruit friends using magic and is excited to meet new people that Apples befriends. While she lives with other Junimos, Peaches is always eager to visit Apples at their home or spend a day exploring the forest together. Her cheerful presence and caring nature make her a beloved companion to Apples.",
-            "ExtraPortraits": {},
-            "Unique": "",
-            "Preoccupations": ["Apples", "Junimos", "Forest", "Starfruit", "Magic", "Playing", "Exploring", "Friendship", "Home-making"],
-            "Dialogue": {},
-            "HomeLocationBed": false,
-            "UsePatchedDialogue": true
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Peaches",
+            "Entries": {
+                "Biography": "Peaches is a Junimo character who is a close friend of another Junimo named Apples, and the two are often seen playing together in the forests around Pelican Town. \n\n**Interests**  \n* Playing and exploring in the forest with Apples.\n* Helping Apples grow starfruit friends using magic.\n* Visiting Apples at their home and meeting new friends.\n* Spreading joy and friendship to Apples and other Junimos.\n\n**Background**\nLittle is known about Peaches' background, as she is a minor character who primarily appears in relation to her friend Apples. However she has been friends with Apples for some time, as they are frequently seen playing together and Peaches seems quite familiar with Apples' home and daily life. Peaches also appears to have knowledge of magic that can be used to help grow starfruit.\n\n**Significant Game Events**\n* Visiting Apples at their home to play and meet Apples' friend (the player character)\n* Helping Apples grow bigger starfruit friends using magic\n* Deciding to stay with Apples when they restore an old building, rather than returning home\n* Helping Apples make a home for the player character in the forest before returning to other Junimo friends\n* Playing with Apples all day in the forest\n\n",
+                "Relationships": {
+                    "Apples": {
+                        "id": "Apples",
+                        "Heading": "Apples",
+                        "Description": "Peaches' best friend and constant companion. The two love playing together and Peaches often visits Apples at home."
+                    },
+                    "Player": {
+                        "id": "Player",
+                        "Heading": "Player",
+                        "Description": "Peaches is happy to meet the player through Apples, and helps make them a home in the forest before leaving Apples to return to other friends."
+                    },
+                    "Other Junimos": {
+                        "id": "Other Junimos",
+                        "Heading": "Other Junimos",
+                        "Description": "Mentioned as other friends of Peaches who she returns to after helping Apples. Likely the community of Junimos that live in the forest."
+                    }
+                },
+                "Traits": {
+                    "Cheerful": {
+                        "id": "Cheerful",
+                        "Heading": "Cheerful",
+                        "Description": "Cheerful and excitable, often expressing joy with exclamations like \"Yay!\""
+                    },
+                    "Playful": {
+                        "id": "Playful",
+                        "Heading": "Playful",
+                        "Description": "Loves playing and exploring with her best friend Apples"
+                    },
+                    "Caring": {
+                        "id": "Caring",
+                        "Heading": "Caring",
+                        "Description": "Caring and helpful, assists Apples with magic to grow starfruit friends"
+                    },
+                    "Friendly": {
+                        "id": "Friendly",
+                        "Heading": "Friendly",
+                        "Description": "Friendly and open to meeting new people through Apples"
+                    },
+                    "Adventurous": {
+                        "id": "Adventurous",
+                        "Heading": "Adventurous",
+                        "Description": "Adventurous and energetic, always ready for a forest romp or visit to Apples' home"
+                    }
+                },
+                "BiographyEnd": "**Summary**\nPeaches is an upbeat, adventurous Junimo who is the best friend of Apples. The two love playing together in the forests surrounding Pelican Town. Peaches helps Apples grow starfruit friends using magic and is excited to meet new people that Apples befriends. While she lives with other Junimos, Peaches is always eager to visit Apples at their home or spend a day exploring the forest together. Her cheerful presence and caring nature make her a beloved companion to Apples.",
+                "ExtraPortraits": {},
+                "Unique": "",
+                "Preoccupations": [
+                    "Apples",
+                    "Junimos",
+                    "Forest",
+                    "Starfruit",
+                    "Magic",
+                    "Playing",
+                    "Exploring",
+                    "Friendship",
+                    "Home-making"
+                ],
+                "Dialogue": {},
+                "HomeLocationBed": false,
+                "UsePatchedDialogue": true
+            }
         }
-      }
     ]
 }

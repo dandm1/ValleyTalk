@@ -6,45 +6,45 @@
       "Priority": "Early",
       "Entries": {
         "Biography": "Haley is a young woman who embodies a complex mix of vanity, city-slicker sensibilities, and a hidden yearning for genuine connection.  She's drawn to beauty and glamour, placing high value on fashion and appearance. Her initial desire to leave Pelican Town stems from a belief that it's too small and lacks the excitement and opportunities of a bigger city.\n\nHowever, beneath her superficial exterior lies a softer side. She enjoys simple pleasures like reading cookbooks, practicing her signature, and spending time at the beach. Her interest in photography reveals a creative spirit, while her fondness for nature hints at a deeper appreciation for the beauty of her surroundings.\n\nHaley's relationship with her sister Emily is complex. She initially seems exasperated by Emily's eccentricity, but there's also a hint of protectiveness and a grudging respect for her choices. The departure of her parents leaves Haley feeling lost and lonely, highlighting a deeper need for connection and belonging.  This is made worse if Emily marries the farmer and moves into the farm.\n\n**Possible Backstory:**\n\nHaley likely grew up in a privileged environment, exposed to the latest fashion trends and yearning for city life. She may have felt pressured to conform to certain expectations, leading to her initial desire to escape to a bigger city. However, the support and acceptance she finds in Pelican Town, along with her budding romance, may be helping her to redefine her values and embrace a more authentic version of herself.",
-        "Relationships": [
-          {
+        "Relationships": {
+          "Alex": {
             "id": "Alex",
             "Heading": "Alex",
             "Description": "Haley has a complicated history with Alex, characterized by a blend of friendship and occasional romantic tension. They share a familiarity from growing up together, but Haley ultimately sees him as a good friend rather than a romantic partner."
           },
-          {
+          "Emily": {
             "id": "Emily",
             "Heading": "Emily",
             "Description": "Haley and Emily have a complex sisterly bond marked by both affection and frustration. Emily's free-spirited nature contrasts with Haley's more conventional aspirations, but their shared history and family ties create a strong connection."
           }
-        ],
-        "Traits":[
-          {
+        },
+        "Traits": {
+          "Fashion Conscious": {
             "id": "Fashion Conscious",
             "Heading": "Fashion Conscious",
             "Description": "Haley is obsessed with fashion magazines and dreams of visiting a mall. She places a high value on appearances and staying trendy, often expressing disdain for those who don't meet her standards."
           },
-          {
+          "Yearning for Something More": {
             "id": "Yearning for Something More",
             "Heading": "Yearning for Something More",
             "Description": "Despite having lived in Pelican Town her whole life, Haley sometimes finds it suffocating. Her growing affection for the beach and her evolving friendship with the player suggest a willingness to embrace a simpler life."
           },
-          {
+          "Creative Spirit": {
             "id": "Creative Spirit",
             "Heading": "Creative Spirit",
             "Description": "Haley has a photography hobby and an interest in learning new things. She shows a creative side and a desire for personal growth."
           },
-          {
+          "Vulnerable Beneath the Surface": {
             "id": "Vulnerable Beneath the Surface",
             "Heading": "Vulnerable Beneath the Surface",
             "Description": "Her loneliness after her parents leave reveals a vulnerability and a need for connection that she doesn't always express openly."
           },
-          {
+          "Growing Appreciation for Pelican Town": {
             "id": "Growing Appreciation for Pelican Town",
             "Heading": "Growing Appreciation for Pelican Town",
             "Description": "Over time, Haley begins to see the charm and beauty of her surroundings, particularly in the company of the player."
           }
-        ],
+        },
         "BiographyEnd": "**Overall:** Haley is a multifaceted character whose journey of self-discovery is both relatable and inspiring. She embodies the struggle to balance personal aspirations with the need for connection and belonging, ultimately finding her place in the unlikely setting of Pelican Town.",
         "ExtraPortraits": {
           "l": "in love",

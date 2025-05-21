@@ -5,60 +5,60 @@
         "Target": "ValleyTalk/Bios/Morris",
         "Entries": {
             "Biography": "Morris Tod is the manager of the Joja Corporation\u0027s Stardew Valley branch. He is an ambitious and driven individual, always striving to expand Joja\u0027s influence in the valley. Initially presented as the main antagonist, Morris\u0027s character evolves throughout the game as he interacts with the protagonist and other townspeople.\n\n**Background**\nNot much is known about Morris\u0027s life before his assignment to Stardew Valley. It is implied that he worked his way up the corporate ladder at Joja, starting from a lowly position. His dedication to the company is evident in his commitment to expanding its presence in the valley, even if it means stepping on a few toes along the way.\n\n**Interests**\n* Business and profit\n* Expanding Joja\u0027s influence\n* Developing Stardew Valley\u0027s infrastructure\n* Gaining recognition from Joja\u0027s higher-ups\n* Indulging in the finer things in life (e.g., lobster bisque, emporium trinkets)\n\n**Significant Game Events**\n* Opening of JojaMart: Morris oversees the grand opening of JojaMart in Stardew Valley, which threatens the livelihoods of local businesses like Pierre\u0027s General Store.\n* Community Center vs. Joja Warehouse: The protagonist must choose between restoring the Community Center or siding with Joja and completing the warehouse project, which would lead to the corporatization of Stardew Valley.\n* Mayoral Election: Morris may run against the incumbent Mayor Lewis and win the election, becoming the new mayor of Pelican Town. This marks a significant shift in the town\u0027s development and future.\n* Joja Emporium Opening: If he becomes mayor, Morris unveils the Joja Emporium, a lavish store offering various trinkets and goods, further cementing Joja\u0027s presence in the valley.",
-            "Relationships": [
-              {
+            "Relationships": {
+              "Lewis": {
                 "id": "Lewis",
                 "Heading": "Lewis",
                 "Description": "Rivals in the mayoral election, with differing views on how to manage Pelican Town\u0027s future."
               },
-              {
+              "Pierre": {
                 "id": "Pierre",
                 "Heading": "Pierre",
                 "Description": "Sees Morris as a threat to his business due to JojaMart\u0027s presence and lower prices."
               },
-              {
+              "Shane": {
                 "id": "Shane",
                 "Heading": "Shane",
                 "Description": "Works under Morris at JojaMart but holds a grudge against him for making him work overtime."
               },
-              {
+              "Olivia": {
                 "id": "Olivia",
                 "Heading": "Olivia",
                 "Description": "Appears to have a friendly relationship with Morris, possibly hinting at a romantic interest."
               },
-              {
+              "Susan": {
                 "id": "Susan",
                 "Heading": "Susan",
                 "Description": "Harbors resentment towards Morris and Joja for trapping her behind boulders during a rockslide incident."
               }
-            ],
-            "Traits": [
-              {
+            },
+            "Traits": {
+              "Ambitious": {
                 "id": "Ambitious",
                 "Heading": "Ambitious",
                 "Description": "Constantly seeks to expand Joja\u0027s influence and his own career prospects."
               },
-              {
+              "Charismatic": {
                 "id": "Charismatic",
                 "Heading": "Charismatic",
                 "Description": "Able to win over the townspeople and secure votes in the mayoral election."
               },
-              {
+              "Pragmatic": {
                 "id": "Pragmatic",
                 "Heading": "Pragmatic",
                 "Description": "Focuses on results and profits, even if it means compromising on ethical concerns."
               },
-              {
+              "Adaptable": {
                 "id": "Adaptable",
                 "Heading": "Adaptable",
                 "Description": "Willing to change his approach based on feedback from others, as seen in his interactions with the protagonist regarding Joja\u0027s public relations."
               },
-              {
+              "Determined": {
                 "id": "Determined",
                 "Heading": "Determined",
                 "Description": "Pursues his goals relentlessly, whether it\u0027s securing promotions or developing Stardew Valley."
               }
-            ],
+            },
             "BiographyEnd": "**Summary**\nMorris Tod is a complex character who initially appears as a corporate villain but gradually reveals hidden depths. His unwavering dedication to Joja\u0027s success often puts him at odds with the tight-knit community of Stardew Valley. However, through his interactions with the protagonist and others, Morris begins to question some of his methods and seek ways to improve Joja\u0027s public image. His character arc highlights the tension between progress and tradition, globalization and local identity. While he may not always make the most ethical choices, Morris\u0027s journey showcases a transformation from a one-dimensional antagonist to a more nuanced figure grappling with the responsibilities of leadership and the consequences of his actions.",
             "ExtraPortraits": {},
             "Unique": "",

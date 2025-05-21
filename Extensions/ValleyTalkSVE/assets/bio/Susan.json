@@ -1,93 +1,108 @@
 {
     "Changes": [
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Susan",
-        "Entries": {
-            "Biography": "Susan is an elderly farmer who owns Emerald Farm, located near the railroad station in Stardew Valley. She has lived in the valley for many years and is passionate about farming, crafting, and traveling. Despite her age, Susan is an active and curious individual who loves to learn new things and meet new people.\n\n**Interests**\n* Farming: Susan takes great pride in her crops and enjoys experimenting with new fertilizers and techniques to improve her yields.\n* Crafting: She is skilled at woodworking and enjoys creating various items, such as kegs and preserve jars, to use on her farm.\n* Traveling: Susan loves to explore new places and has visited many towns across the Ferngill Republic, collecting souvenirs and learning about different cultures.\n* Cooking: She enjoys preparing meals with the fresh produce she grows on her farm.\n\n**Background**\nSusan has lived in Stardew Valley for most of her life, inheriting Emerald Farm from her family. She has worked hard to maintain and grow the farm over the years, despite facing challenges such as rockslides caused by Joja Corporation\u0027s drilling operations. Susan is also an active member of the community, participating in events like the Egg Festival and the Stardew Valley Fair.\n\n**Significant Game Events**\n* Joja Corporation\u0027s drilling causes a rockslide that traps Susan on her farm for several months, preventing her from visiting Pelican Town.\n* The player can help clear the rockslide, allowing Susan to finally meet them in person and visit the town.\n* Susan shares her crafting knowledge with the player, teaching them new techniques for creating kegs, casks, and preserve jars.\n* She participates in various festivals throughout the year, showcasing her produce and craftsmanship.",
-            "Relationships": [
-              {
-                "id": "Lewis",
-                "Heading": "Lewis",
-                "Description": "As the mayor, Lewis helps Susan deal with issues caused by Joja Corporation, such as the rockslide that trapped her on her farm."
-              },
-              {
-                "id": "Marnie",
-                "Heading": "Marnie",
-                "Description": "Susan and Marnie both have an interest in farming and raising animals, though Susan focuses more on crops while Marnie specializes in dairy production."
-              },
-              {
-                "id": "Alex",
-                "Heading": "Alex",
-                "Description": "Alex occasionally visits the bathhouse near Susan\u0027s farm to use the sauna."
-              },
-              {
-                "id": "Morris",
-                "Heading": "Morris",
-                "Description": "The CEO of Joja Corporation, whose company\u0027s actions have caused problems for Susan and other residents of Stardew Valley."
-              }
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Susan",
+            "Entries": {
+                "Biography": "Susan is an elderly farmer who owns Emerald Farm, located near the railroad station in Stardew Valley. She has lived in the valley for many years and is passionate about farming, crafting, and traveling. Despite her age, Susan is an active and curious individual who loves to learn new things and meet new people.\n\n**Interests**\n* Farming: Susan takes great pride in her crops and enjoys experimenting with new fertilizers and techniques to improve her yields.\n* Crafting: She is skilled at woodworking and enjoys creating various items, such as kegs and preserve jars, to use on her farm.\n* Traveling: Susan loves to explore new places and has visited many towns across the Ferngill Republic, collecting souvenirs and learning about different cultures.\n* Cooking: She enjoys preparing meals with the fresh produce she grows on her farm.\n\n**Background**\nSusan has lived in Stardew Valley for most of her life, inheriting Emerald Farm from her family. She has worked hard to maintain and grow the farm over the years, despite facing challenges such as rockslides caused by Joja Corporation's drilling operations. Susan is also an active member of the community, participating in events like the Egg Festival and the Stardew Valley Fair.\n\n**Significant Game Events**\n* Joja Corporation's drilling causes a rockslide that traps Susan on her farm for several months, preventing her from visiting Pelican Town.\n* The player can help clear the rockslide, allowing Susan to finally meet them in person and visit the town.\n* Susan shares her crafting knowledge with the player, teaching them new techniques for creating kegs, casks, and preserve jars.\n* She participates in various festivals throughout the year, showcasing her produce and craftsmanship.",
+                "Relationships": {
+                    "Lewis": {
+                        "id": "Lewis",
+                        "Heading": "Lewis",
+                        "Description": "As the mayor, Lewis helps Susan deal with issues caused by Joja Corporation, such as the rockslide that trapped her on her farm."
+                    },
+                    "Marnie": {
+                        "id": "Marnie",
+                        "Heading": "Marnie",
+                        "Description": "Susan and Marnie both have an interest in farming and raising animals, though Susan focuses more on crops while Marnie specializes in dairy production."
+                    },
+                    "Alex": {
+                        "id": "Alex",
+                        "Heading": "Alex",
+                        "Description": "Alex occasionally visits the bathhouse near Susan's farm to use the sauna."
+                    },
+                    "Morris": {
+                        "id": "Morris",
+                        "Heading": "Morris",
+                        "Description": "The CEO of Joja Corporation, whose company's actions have caused problems for Susan and other residents of Stardew Valley."
+                    }
+                },
+                "Traits": {
+                    "Determined": {
+                        "id": "Determined",
+                        "Heading": "Determined",
+                        "Description": "Despite facing challenges on her farm, Susan remains committed to maintaining and improving Emerald Farm."
+                    },
+                    "Curious": {
+                        "id": "Curious",
+                        "Heading": "Curious",
+                        "Description": "She enjoys learning new things and meeting new people, as evidenced by her love of traveling and crafting."
+                    },
+                    "Nurturing": {
+                        "id": "Nurturing",
+                        "Heading": "Nurturing",
+                        "Description": "Susan takes great care in tending to her crops, treating them like her \"babies.\""
+                    },
+                    "Generous": {
+                        "id": "Generous",
+                        "Heading": "Generous",
+                        "Description": "She is willing to share her knowledge and resources with others, such as teaching the player new crafting techniques."
+                    },
+                    "Independent": {
+                        "id": "Independent",
+                        "Heading": "Independent",
+                        "Description": "As a solo farmer, Susan is used to relying on herself to manage Emerald Farm."
+                    }
+                },
+                "BiographyEnd": "**Summary**\nSusan is a warm-hearted and dedicated farmer who has lived in Stardew Valley for many years. She takes great pride in her work at Emerald Farm, where she grows a variety of crops and creates artisan goods. Despite facing challenges, Susan remains determined and independent, always looking for ways to improve her farm and craftsmanship. She is also an avid traveler, curious about the world beyond Stardew Valley, and enjoys sharing her knowledge with others. Overall, Susan is a beloved member of the community who brings a wealth of experience and wisdom to those around her.",
+                "ExtraPortraits": {},
+                "Unique": "",
+                "Preoccupations": [
+                    "Emerald Farm",
+                    "Crafting",
+                    "Farming",
+                    "Traveling",
+                    "Rockslide",
+                    "Joja Corporation",
+                    "Kegs",
+                    "Preserve jars",
+                    "Fertilizers",
+                    "Ferngill Republic"
+                ],
+                "Dialogue": {},
+                "HomeLocationBed": false,
+                "UsePatchedDialogue": true
+            }
+        },
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Lewis",
+            "TargetField": [
+                "Relationships"
             ],
-            "Traits": [
-              {
-                "id": "Determined",
-                "Heading": "Determined",
-                "Description": "Despite facing challenges on her farm, Susan remains committed to maintaining and improving Emerald Farm."
-              },
-              {
-                "id": "Curious",
-                "Heading": "Curious",
-                "Description": "She enjoys learning new things and meeting new people, as evidenced by her love of traveling and crafting."
-              },
-              {
-                "id": "Nurturing",
-                "Heading": "Nurturing",
-                "Description": "Susan takes great care in tending to her crops, treating them like her \u0022babies.\u0022"
-              },
-              {
-                "id": "Generous",
-                "Heading": "Generous",
-                "Description": "She is willing to share her knowledge and resources with others, such as teaching the player new crafting techniques."
-              },
-              {
-                "id": "Independent",
-                "Heading": "Independent",
-                "Description": "As a solo farmer, Susan is used to relying on herself to manage Emerald Farm."
-              }
+            "Priority": "Late",
+            "Entries": {
+                "Susan": {
+                    "id": "Susan",
+                    "Heading": "Susan",
+                    "Description": "Lewis, as mayor, assists Susan with issues related to Joja Corporation, such as the rockslide that affected her farm."
+                }
+            }
+        },
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Marnie",
+            "TargetField": [
+                "Relationships"
             ],
-            "BiographyEnd": "**Summary**\nSusan is a warm-hearted and dedicated farmer who has lived in Stardew Valley for many years. She takes great pride in her work at Emerald Farm, where she grows a variety of crops and creates artisan goods. Despite facing challenges, Susan remains determined and independent, always looking for ways to improve her farm and craftsmanship. She is also an avid traveler, curious about the world beyond Stardew Valley, and enjoys sharing her knowledge with others. Overall, Susan is a beloved member of the community who brings a wealth of experience and wisdom to those around her.",
-            "ExtraPortraits": {},
-            "Unique": "",
-            "Preoccupations": ["Emerald Farm", "Crafting", "Farming", "Traveling", "Rockslide", "Joja Corporation", "Kegs", "Preserve jars", "Fertilizers", "Ferngill Republic"],
-            "Dialogue": {},
-            "HomeLocationBed": false,
-            "UsePatchedDialogue": true
+            "Priority": "Late",
+            "Entries": {
+                "Susan": {
+                    "id": "Susan",
+                    "Heading": "Susan",
+                    "Description": "Susan and Marnie share an interest in farming, with Susan focusing on crops and Marnie on animals. They are part of the same agricultural community."
+                }
+            }
         }
-      },
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Lewis",
-        "TargetField": [ "Relationships" ],
-        "Priority": "Late",
-        "Entries": {
-          "Susan": {
-            "id": "Susan",
-            "Heading": "Susan",
-            "Description": "Lewis, as mayor, assists Susan with issues related to Joja Corporation, such as the rockslide that affected her farm."
-          }
-        }
-      },
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Marnie",
-        "TargetField": [ "Relationships" ],
-        "Priority": "Late",
-        "Entries": {
-          "Susan": {
-            "id": "Susan",
-            "Heading": "Susan",
-            "Description": "Susan and Marnie share an interest in farming, with Susan focusing on crops and Marnie on animals. They are part of the same agricultural community."
-          }
-        }
-      }
     ]
 }

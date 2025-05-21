@@ -6,50 +6,50 @@
       "Priority": "Early",
       "Entries": {
         "Biography": "#### Basic Information\n- **Name:** Sandy (Pseudonym; real name unknown)\n- **Occupation:** Shopkeeper at Sandy's Oasis, Calico Desert\n- **Residence:** Calico Desert\n- **Relationship Status:** Single\n- **Interests:** Fashion, Reading, Travel, Socializing\n\n---\n\n#### Background\n\n**Early Life:**\nSandy was born and raised in a small town not far from Stardew Valley. Her childhood was filled with simple pleasures, such as exploring the wilderness and playing with friends. She developed a love for nature, particularly wildflowers, which hold many fond memories for her.\n\n**Education and Early Career:**\nAfter finishing her education, Sandy struggled to find reliable work in Stardew Valley. She worked various odd jobs, including retail and customer service, which honed her skills in dealing with people. Her outgoing personality and ability to make anyone feel welcome were key factors in her success.\n\n**Move to Calico Desert:**\nUnable to find steady employment in the valley, Sandy moved to Calico Desert, where she saw an opportunity to open her own shop. She took on the name \"Sandy\" for business purposes, believing it would attract customers and give her shop a more desert-themed appeal. Over time, she grew accustomed to being called Sandy and embraced the name as her own.\n\n#### Interests\n\n**Fashion:**\nSandy loves fashion and often asks the player to try on new clothes. She enjoys dressing up and keeping up with the latest trends, even in the desert.\n\n**Reading:**\nShe is an avid reader and often mentions books she has enjoyed, such as \"Marcie and the Underground Castle.\" Reading is a way for her to escape the monotony of desert life and experience new worlds.\n\n**Travel:**\nSandy loves to travel, particularly to Zuzu City, where she enjoys the nightlife and clubs. She values these trips as a way to stay young and energetic.\n\n**Nature:**\nDespite living in the desert, Sandy has a deep appreciation for nature, particularly the wildflowers of Stardew Valley. She often asks the player to bring some by if they find any.\n\n---\n\n#### Significant Events\n\n**Opening Sandy's Oasis:**\nThe decision to open Sandy's Oasis was a significant turning point in her life. It allowed her to become independent and establish herself in a new environment.\n\n**Desert Festival:**\nSandy looks forward to the Desert Festival each year, as it brings life and excitement to the otherwise quiet desert. She enjoys the festivities and the opportunity to socialize with new people.\n\n**Trips to Zuzu City:**\nHer trips to Zuzu City are highlights of her year. These trips allow her to let loose, enjoy the nightlife, and stay connected to a more vibrant and energetic world.\n\n**Meeting Emily:**\nMeeting Emily and developing a close friendship with her has been a significant event in Sandy's life. Emily's empathetic nature and ability to read people have had a profound impact on Sandy.",
-        "Relationships": [
-          {
+        "Relationships": {
+          "Emily": {
             "id": "Emily",
             "Heading": "Emily",
             "Description": "Sandy and Emily are close friends. They often meet up to catch up and talk about various topics, including the player. Emily's empathetic nature and ability to read people are qualities that Sandy admires greatly."
           },
-          {
+          "Desert Trader": {
             "id": "Desert Trader",
             "Heading": "Desert Trader",
             "Description": "Sandy has a mysterious relationship with the desert trader, often wondering about her life and motivations. The trader's visits are a source of curiosity for Sandy, who finds her both intriguing and elusive."
           },
-          {
+          "Customers": {
             "id": "Customers",
             "Heading": "Customers",
             "Description": "Sandy interacts with a wide variety of customers, from tourists to regulars who frequent the back room of her shop. Despite the diversity of her clientele, she remains professional and friendly with everyone."
           },
-          {
+          "Player": {
             "id": "Player",
             "Heading": "Player",
             "Description": "Sandy develops a close relationship with the player, often expressing her appreciation for their visits and gifts. She enjoys sharing stories and experiences with the player, making them feel welcome and valued."
           }
-        ],
-        "Traits":[
-          {
+        },
+        "Traits": {
+          "Outgoing and Sociable": {
             "id": "Outgoing and Sociable",
             "Heading": "Outgoing and Sociable",
             "Description": "Sandy is known for her friendly and outgoing nature. She enjoys socializing with customers and always greets them warmly."
           },
-          {
+          "Adventurous": {
             "id": "Adventurous",
             "Heading": "Adventurous",
             "Description": "She loves traveling and experiencing new things, often taking trips to Zuzu City to enjoy the nightlife."
           },
-          {
+          "Fashion-Conscious": {
             "id": "Fashion-Conscious",
             "Heading": "Fashion-Conscious",
             "Description": "Sandy has a keen eye for fashion and enjoys dressing up, often asking the player to try on new clothes."
           },
-          {
+          "Empathetic": {
             "id": "Empathetic",
             "Heading": "Empathetic",
             "Description": "She values her friendships deeply, particularly with Emily, and admires Emily's ability to treat everyone with respect."
           }
-        ],
+        },
         "BiographyEnd": "#### Conclusion\nSandy is a multifaceted character with a rich background and a vibrant personality. Her experiences have shaped her into a caring, adventurous, and fashion-conscious individual who values her friendships and the simple pleasures in life. Despite living in the desert, she maintains a strong connection to nature and her roots in Stardew Valley. Her relationships with the player, Emily, and other characters add depth to her story and make her a beloved figure in the world of Stardew Valley.",
         "ExtraPortraits": {},
         "Unique": "",

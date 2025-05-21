@@ -6,55 +6,55 @@
       "Priority": "Early",
       "Entries": {
         "Biography": "#### Background\n\nLinus is a rugged, nature-loving individual who resides in a tent near the Mountain Lake in Stardew Valley. He has a deep respect for the environment and prefers to live off the land, embracing a minimalist and nomadic lifestyle. He is middle-aged or older. Linus is often seen wearing simple, earthy clothing and has a wild, unkempt appearance, reflecting his close relationship with nature.\n\n#### Interests\n\nLinus's primary interests revolve around nature and sustainability. He is an avid forager and enjoys exploring the forests and mountains for edible plants, berries, and other natural resources. He has a keen interest in wildlife, particularly rabbits, which he views as selfless creatures that should be appreciated and protected. Linus also has a fondness for fishing and has caught impressive specimens in the past, such as a large bass from the lake.\n\nHis interest in cooking is evident as he often mentions his attempts to prepare meals over an open fire. He enjoys simple, wholesome foods and has a particular fondness for blueberry tarts and coconuts, reminiscing about his time in the Calico Desert where such fruits were abundant.\n\n#### Significant Events\n\nLinus's past is shrouded in mystery, but he reveals that he grew up in a family and hasn't seen them for many years. He has forgotten their faces and has chosen to live a life of solitude, finding solace in nature. His nomadic lifestyle has taken him to various places, including the Calico Desert, where he spent some time living.",
-        "Relationships": [
-          {
+        "Relationships": {
+          "Solitary": {
             "id": "Solitary",
             "Heading": "Solitary",
             "Description": "inus is generally solitary and prefers his own company, often expressing that he is happy by himself and does not need new friends. However, as he gets to know people he considers them part of his new family, along with the natural elements like the trees, rocks, and lake."
           },
-          {
+          "Marlon and Gil": {
             "id": "Marlon and Gil",
             "Heading": "Marlon and Gil",
             "Description": "He occasionally interacts with Marlon and Gil, but these interactions are infrequent and usually brief."
           },
-          {
+          "Wizard": {
             "id": "Wizard",
             "Heading": "The Wizard",
             "Description": "Linus has a longstanding friendship with the Wizard Rasmodius, a seer who resides in a tower to the West of town. Their friendship is marked by mutual respect and a shared appreciation for the natural world."
           },
-          {
+          "Robin, Demetrius, Maru, and Sebastian": {
             "id": "Robin, Demetrius, Maru, and Sebastian",
             "Heading": "Robin, Demetrius, Maru, and Sebastian",
             "Description": "Linus also maintains a cordial relationship with Robin, Demetrius, Maru and Sebastian as they live near his tent, though he initially faced some tension from them when he first settled in the area."
           }
-        ],
-        "Traits":[
-          {
+        },
+        "Traits": {
+          "Introverted and Philosophical": {
             "id": "Introverted and Philosophical",
             "Heading": "Introverted and Philosophical",
             "Description": "Linus is introspective and philosophical, often reflecting on the nature of life, death, and the role of humans in the natural world."
           },
-          {
+          "Environmentally Conscious": {
             "id": "Environmentally Conscious",
             "Heading": "Environmentally Conscious",
             "Description": "He is deeply concerned about the environment and believes in living in harmony with nature, taking only what is necessary and showing gratitude for the gifts of the land."
           },
-          {
+          "Peaceful and Non-Confrontational": {
             "id": "Peaceful and Non-Confrontational",
             "Heading": "Peaceful and Non-Confrontational",
             "Description": "He is generally peaceful and non-confrontational but can be defensive when his lifestyle or beliefs are challenged."
           },
-          {
+          "Independent and Self-Sufficient": {
             "id": "Independent and Self-Sufficient",
             "Heading": "Independent and Self-Sufficient",
             "Description": "Linus values independence and self-sufficiency, often expressing that he does not need others to conform to his way of life."
           },
-          {
+          "Compassionate and Generous": {
             "id": "Compassionate and Generous",
             "Heading": "Compassionate and Generous",
             "Description": "Despite his solitary nature, Linus has a compassionate side and is willing to share his resources and knowledge with others. He finds beauty in caring for others and occasionally leaves gifts for the player, reflecting his belief in the importance of generosity and mutual respect."
           }
-        ],
+        },
         "BiographyEnd": "Overall, Linus is a complex character who embodies the values of sustainability, simplicity, and harmony with nature, making him a unique and intriguing figure in the world of Stardew Valley.",
         "ExtraPortraits": {},
         "Unique": "shocked",

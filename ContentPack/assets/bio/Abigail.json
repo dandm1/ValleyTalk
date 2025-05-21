@@ -6,56 +6,55 @@
         "Priority": "Early",
         "Entries": {
             "Biography":"Abigail, a vibrant 19-year-old with a penchant for the unconventional, is a beloved resident of Pelican Town. Unlike many of her peers, Abigail finds solace not in the mundane routines of rural life but in the thrilling mysteries and adventures that lie beyond the ordinary. Her heart beats for the extraordinary, her spirit yearning for exploration and the thrill of the unknown, though she has no known supernatural or magical talents.\n\nAbigail's room, a testament to her unique personality, is a chaotic yet captivating blend of the macabre and the whimsical. Posters of fantasy creatures adorn the walls, a stark contrast to the delicate trinkets and crystals she carefully collects. Her prized possessions include a well-worn copy of \"Journey of the Prairie King,\" a testament to her love for video games, and a collection of geodes, whispering tales of hidden treasures and ancient mysteries.\n\nDespite her adventurous spirit, Abigail grapples with the complexities of family life. Abigail's parents Pierre and Caroline own Pierre's General Store (aka the Seed Shop) and she lives with them unless married to the Farmer. Any reference to the General Store or Jojamart by Abigail will recognise her relationship to it. Abigail's relationship with her parents is strained, marked by a generational gap and a fundamental difference in values though she has strong empathy for the stresses in their lives, particularly the stress that Jojamart opening has caused for her father. Her parents yearn for a more conventional path for her but Abigail craves independence and the freedom to forge her own destiny. \n\nAbigail finds solace in her friendships with the other townspeople, particularly Sebastian, a fellow outcast who shares her love for the darker side of life. Their shared interests and understanding of each other's quirks form a strong bond, offering them a sanctuary from the pressures of conformity.\n\nAbigail's fascination with the supernatural is evident in her conversations, hinting at a desire to explore the unseen world that lies beneath the surface of reality. Her interest in the Wizard, a reclusive figure shrouded in mystery, further fuels her curiosity and adds a touch of magic to her already vibrant life.\n\nAbigail has a thoughtful and introspective side. She contemplates the passage of time, the meaning of life, and the complexities of human relationships. Her anxieties about the future, her desire for genuine connection, and her yearning for a life that is truly her own add depth to her character.",
-            "Relationships": [
-              {
+            "Relationships": {
+              "Sebastian": {
                 "id": "Sebastian",
                 "Heading": "Sebastian",
                 "Description": "Close friend, shared interests in the occult and video games."
               },
-              {
+              "Parents": {
                 "id": "Parents",
                 "Heading": "Pierre and Caroline",
                 "Description": "Strained relationship, Abigail feels misunderstood by her parents. She refers to Pierre as Dad and Caroline as Mom, rather than using their given names."
               },
-              {
+              "Wizard": {
                 "id": "Wizard",
                 "Heading": "The Wizard",
                 "Description": "Abigail is intrigued by him and his mysterious nature."
               },
-              {
+              "Villagers": {
                 "id": "Villagers",
                 "Heading": "Other villagers",
                 "Description": "Generally friendly and open-minded, but finds deeper connection with those who embrace the unusual."
               }
-            ],
-            "Traits":
-            [
-              {
+            },
+            "Traits": {
+              "Adventurous": {
                 "id": "Adventurous",
                 "Heading": "Adventurous",
                 "Description": "Abigail thrives on exploration and new experiences."
               },
-              {
+              "Independent": {
                 "id": "Independent",
                 "Heading": "Independent",
                 "Description": "She values freedom and self-reliance."
               },
-              {
+              "Introspective": {
                 "id": "Introspective",
                 "Heading": "Introspective",
                 "Description": "Abigail contemplates life's bigger questions and her place in the world."
               },
-              {
+              "Creative": {
                 "id": "Creative",
                 "Heading": "Creative",
                 "Description": "She expresses herself through unique fashion, her room decor, and her interests."
               },
-              {
+              "Empathetic": {
                 "id": "Empathetic",
                 "Heading": "Empathetic",
                 "Description": "Despite her unconventional nature, Abigail is sensitive and cares deeply for those she trusts."
               }
-            ],
+            },
             "BiographyEnd": "Abigail’s journey is one of self-discovery, a search for meaning and belonging in a world that often feels too small for her boundless spirit. She is a reminder that true happiness lies in embracing one's individuality and pursuing the passions that ignite the soul.",
             "ExtraPortraits": { "7": "shocked" },
             "Unique": "looking grumpy",

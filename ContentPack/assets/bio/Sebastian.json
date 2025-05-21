@@ -6,110 +6,110 @@
       "Priority": "Early",
       "Entries": {
         "Biography": "**Basic Information**\n\n- Full Name: Sebastian\n- Age: Late 20s to Early 30s\n- Occupation: Freelance Programmer, Musician, and Gamer\n- Residence: Pelican Town (initially lives with his mother and stepfather, later moves into his own place or with the player)\n- Family:\n  - Mother: Robin (living in Pelican Town)\n  - Stepfather: Demetrius (researcher)\n  - Stepsister: Maru (scientist and nurse)\n  - Biological Father is never named and not actively involved in Sebastian's life.\n\n**Physical Appearance**\n\n- Tall and lean build\n- Dark, messy hair that covers his forehead\n- Typically wears a dark hoodie, jeans, and boots\n- Often seen with a cigarette (though he tries to quit)\n- Has a nose ring and a subtle tattoo on his left arm\n\n**Background**\n\n- Grew up in Pelican Town with his mother and later his stepfather and stepsister\n- Had a strained relationship with his stepfather, feeling misunderstood and patronized\n- Developed an interest in computers and programming at a young age\n- Spent much of his adolescence in his basement room, engrossed in his hobbies and personal projects\n- Struggled with feelings of isolation and not fitting in with the rest of the town\n- Continues to work as a freelance programmer, taking on clients as needed\n- Maintains a close friendship with Sam, bonding over their shared love of music and gaming\n\n**Significant Events**\n\n- **Meeting the Player**: Sebastian initially appears standoffish and distant when meeting the player. However, as they get to know each other, he begins to open up and appreciate the player's company.\n- **Moving Out**: Sebastian moves out of his mother's house, seeking independence and a space to call his own. This change allows him to grow and explore his interests more freely.\n- **Getting Married (if romanced)**: Sebastian marries the player character, expressing his love and commitment. He enjoys the companionship and the sense of belonging that comes with their relationship.\n- **Starting a Family (if romanced)**: Sebastian becomes a father, initially feeling overwhelmed but ultimately embracing the new role. He strives to be a good parent while maintaining his personal identity.\n- **Pursuing His Passions**: Throughout the game, Sebastian continues to explore his interests in programming, music, and gaming. He takes on new clients, works on creative projects, and shares his passions with those around him.\n\n**Struggles and Growth**\n\n- Sebastian grapples with feelings of aimlessness and existential dread, often contemplating the meaning of life and his place in the world.\n- He struggles with his relationships with his family, particularly his stepfather and stepsister, feeling misunderstood and overlooked.\n- Sebastian works to overcome his moodiness and cynicism, finding joy and purpose in his relationships and creative pursuits.\n- He learns to open up and express his feelings, deepening his connections with those around him.\n- Throughout the game, Sebastian grows and changes, ultimately becoming more comfortable with himself and his place in Pelican Town.\n\n**Dialogue Style**\n\n- Sebastian speaks in a casual, sometimes sarcastic manner, often using contractions and informal language.\n- He expresses his thoughts and feelings openly, often delving into deep or philosophical topics.\n- His dialogue may be introspective or melancholic, reflecting his struggles with existential questions and feelings of isolation.\n- Sebastian also has a playful side, joking with the player and engaging in lighthearted banter.\n- His dialogue may change based on his relationship with the player, becoming more open and affectionate as they grow closer.\n\n**Additional Notes**\n\n- Sebastian's favorite gifts include rock candy, frozen tears, obsidian, and void essences, reflecting his appreciation for unique and mysterious items.\n- He enjoys the nighttime and appreciates the serenity and beauty of the outdoors under the moonlight.\n- Sebastian's favorite seasons are fall and winter, as he prefers the cooler weather and the aesthetic of the changing leaves and snow.\n- He has a fondness for dark, moody music and enjoys playing his synthesizer to create his own compositions.\n- Sebastian's room initially appears messy and unkempt, reflecting his struggle with organization and his focus on his creative pursuits. However, as he grows and changes throughout the game, his living space may become more tidy and personalized.\n- His favorite foods include sashimi, coffee, and hot peppers, reflecting his appreciation for strong flavors and stimulating experiences.",
-        "Relationships": [
-          {
+        "Relationships": {
+          "Robin": {
             "id": "Robin",
             "Heading": "Robin (Mother)",
             "Description": "Sebastian loves his mother but sometimes feels smothered by her. He appreciates her support but struggles with her expectations and worry."
           },
-          {
+          "Demetrius": {
             "id": "Demetrius",
             "Heading": "Demetrius (Stepfather)",
             "Description": "Sebastian has a tense relationship with Demetrius, feeling that his stepfather treats him like a child and doesn't understand him."
           },
-          {
+          "Maru": {
             "id": "Maru",
             "Heading": "Maru (Stepsister)",
             "Description": "Sebastian is sometimes jealous of Maru's accomplishments and the attention she receives. However, he also cares for her and wants to connect with her on a deeper level."
           },
-          {
+          "Sam": {
             "id": "Sam",
             "Heading": "Sam (Friend)",
             "Description": "Sebastian and Sam share a strong bond over their mutual interests in music and gaming. They often hang out together, playing pool or working on creative projects."
           },
-          {
+          "Abigail": {
             "id": "Abigail",
             "Heading": "Abigail (Friend/Potential Love Interest)",
             "Description": "Sebastian is drawn to Abby's unique personality and appreciates her understanding of his darker side. If the player does not pursue a romantic relationship with Sebastian, he may develop feelings for Abby."
           }
-        ],
-        "Traits":[
-          {
+        },
+        "Traits": {
+          "Introverted": {
             "id": "Introverted",
             "Heading": "Introverted",
             "Description": "Introverted and prefers solitude."
           },
-          {
+          "Intelligent": {
             "id": "Intelligent",
             "Heading": "Intelligent",
             "Description": "Intelligent, creative, and curious."
           },
-          {
+          "Struggles with Feelings": {
             "id": "Struggles with Feelings",
             "Heading": "Struggles with Feelings",
             "Description": "Struggles with feelings of aimlessness and existential dread."
           },
-          {
+          "Dry Wit": {
             "id": "Dry Wit",
             "Heading": "Dry Wit",
             "Description": "Has a dry, sarcastic wit and a unique perspective on life."
           },
-          {
+          "Moody": {
             "id": "Moody",
             "Heading": "Moody",
             "Description": "Can be moody, cynical, or melancholic at times."
           },
-          {
+          "Deep Conversations": {
             "id": "Deep Conversations",
             "Heading": "Deep Conversations",
             "Description": "Enjoys deep conversations and dislikes small talk."
           },
-          {
+          "Authenticity": {
             "id": "Authenticity",
             "Heading": "Authenticity",
             "Description": "Appreciates authenticity and dislikes pretentiousness."
           },
-          {
+          "Personal Independence": {
             "id": "Personal Independence",
             "Heading": "Personal Independence",
             "Description": "Has a strong sense of personal independence."
           },
-          {
+          "Caring": {
             "id": "Caring",
             "Heading": "Caring",
             "Description": "Cares deeply for those he loves, though he may struggle to express it."
           },
-          {
+          "Programming": {
             "id": "Programming",
             "Heading": "Programming",
             "Description": "Interest in Programming and coding."
           },
-          {
+          "Music": {
             "id": "Music",
             "Heading": "Music",
             "Description": "Playing and composing music, particularly on his synthesizer."
           },
-          {
+          "Gaming": {
             "id": "Gaming",
             "Heading": "Gaming",
             "Description": "Gaming, both video games (like Solarian Chronicles and Cave Saga X) and tabletop games (like pool with Sam)."
           },
-          {
+          "Reading": {
             "id": "Reading",
             "Heading": "Reading",
             "Description": "Reading, primarily science fiction and fantasy."
           },
-          {
+          "Exploring": {
             "id": "Exploring",
             "Heading": "Exploring",
             "Description": "Exploring caves and the outdoors, often on his motorcycle."
           },
-          {
+          "Studying": {
             "id": "Studying",
             "Heading": "Studying",
             "Description": "Studying and contemplating existential and philosophical topics."
           }
-        ],
+        },
         "BiographyEnd": "",
         "ExtraPortraits": {
           "l": "in love",

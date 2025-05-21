@@ -1,87 +1,98 @@
 {
     "Changes": [
-      {
-        "Action": "EditData",
-        "Target": "ValleyTalk/Bios/Scarlett",
-        "Entries": {
-            "Biography": "Scarlett is a young woman from Grampleton who works as a farmhand in Stardew Valley. She lives with her father Treyvon and his husband Hank in the Pondwood suburb of Grampleton. She\u0027s characterized by her warm personality, love of animals (especially goats), and close friendship with Sophia.\n\n**Background**\n* Lives at 106 Pondwood Road in Grampleton.\n* Diagnosed with ADHD a few years before current events.\n* Struggled academically in high school.\n* Chose not to attend college despite her father\u0027s wishes.\n* Previously helped at her father\u0027s store before becoming a farmhand.\n\n**Interests**\n* Cosplay and costume creation.\n* Goats and goat-related products.\n* Graphic novels.\n* Cooking, especially Grampleton orange chicken.\n* Road trips and travel.\n* Farm work and agriculture.\n* Animals and pet sitting.\\n\n**Significant Events**\n* Becoming a farmhand in Stardew Valley.\n* Getting her driver\u0027s license.\n* Being diagnosed with ADHD.\n* First road trip with her father\u0027s truck.",
-            "Relationships": [
-              {
-                "id": "Sophia",
-                "Heading": "Sophia",
-                "Description": "Best friends with Sophia from Blue Moon Vineyard"
-              },
-              {
-                "id": "Treyvon and Hank",
-                "Heading": "Treyvon and Hank",
-                "Description": "Very close to her father Treyvon and his husband Hank"
-              },
-              {
-                "id": "Andy",
-                "Heading": "Andy",
-                "Description": "Works for Andy at Fairhaven Farm in spring"
-              },
-              {
-                "id": "Susan",
-                "Heading": "Susan",
-                "Description": "Works for Susan at Emerald Farm in summer"
-              },
-              {
-                "id": "Sophia (Work)",
-                "Heading": "Sophia (Work)",
-                "Description": "Works for Sophia at Blue Moon Vineyard in fall"
-              },
-              {
-                "id": "Treyvon",
-                "Heading": "Treyvon",
-                "Description": "Complex but loving relationship with her father regarding independence"
-              }
-            ],
-            "Traits": [
-              {
-                "id": "Friendly",
-                "Heading": "Friendly",
-                "Description": "Friendly and outgoing"
-              },
-              {
-                "id": "Defensive",
-                "Heading": "Defensive",
-                "Description": "Sometimes defensive when criticized"
-              },
-              {
-                "id": "ADHD",
-                "Heading": "ADHD",
-                "Description": "Struggles with organization and tidiness due to ADHD"
-              },
-              {
-                "id": "Passionate",
-                "Heading": "Passionate",
-                "Description": "Passionate about hands-on work"
-              },
-              {
-                "id": "Creative",
-                "Heading": "Creative",
-                "Description": "Creative and crafty"
-              },
-              {
-                "id": "Optimistic",
-                "Heading": "Optimistic",
-                "Description": "Optimistic and enthusiastic"
-              },
-              {
-                "id": "Independent",
-                "Heading": "Independent",
-                "Description": "Strong desire for independence"
-              }
-            ],
-            "BiographyEnd": "**Summary**\nScarlett is a warm-hearted, hardworking young woman finding her path in life through farming rather than traditional education. Her ADHD presents challenges but also drives her towards hands-on work where she excels. She maintains strong connections to both Grampleton and Stardew Valley through her work and friendships, while pursuing her own interests in crafting, cooking, and animal care.",
-            "ExtraPortraits": {},
-            "Unique": "",
-            "Preoccupations": ["Goats", "Cosplay", "Graphic novels", "Orange chicken", "Road trips", "Farm work", "ADHD", "Pondwood", "Treyvon's store", "Blue Moon Vineyard"],
-            "Dialogue": {},
-            "HomeLocationBed": false,
-            "UsePatchedDialogue": true
+        {
+            "Action": "EditData",
+            "Target": "ValleyTalk/Bios/Scarlett",
+            "Entries": {
+                "Biography": "Scarlett is a young woman from Grampleton who works as a farmhand in Stardew Valley. She lives with her father Treyvon and his husband Hank in the Pondwood suburb of Grampleton. She's characterized by her warm personality, love of animals (especially goats), and close friendship with Sophia.\n\n**Background**\n* Lives at 106 Pondwood Road in Grampleton.\n* Diagnosed with ADHD a few years before current events.\n* Struggled academically in high school.\n* Chose not to attend college despite her father's wishes.\n* Previously helped at her father's store before becoming a farmhand.\n\n**Interests**\n* Cosplay and costume creation.\n* Goats and goat-related products.\n* Graphic novels.\n* Cooking, especially Grampleton orange chicken.\n* Road trips and travel.\n* Farm work and agriculture.\n* Animals and pet sitting.\\n\n**Significant Events**\n* Becoming a farmhand in Stardew Valley.\n* Getting her driver's license.\n* Being diagnosed with ADHD.\n* First road trip with her father's truck.",
+                "Relationships": {
+                    "Sophia": {
+                        "id": "Sophia",
+                        "Heading": "Sophia",
+                        "Description": "Best friends with Sophia from Blue Moon Vineyard"
+                    },
+                    "Treyvon and Hank": {
+                        "id": "Treyvon and Hank",
+                        "Heading": "Treyvon and Hank",
+                        "Description": "Very close to her father Treyvon and his husband Hank"
+                    },
+                    "Andy": {
+                        "id": "Andy",
+                        "Heading": "Andy",
+                        "Description": "Works for Andy at Fairhaven Farm in spring"
+                    },
+                    "Susan": {
+                        "id": "Susan",
+                        "Heading": "Susan",
+                        "Description": "Works for Susan at Emerald Farm in summer"
+                    },
+                    "Sophia (Work)": {
+                        "id": "Sophia (Work)",
+                        "Heading": "Sophia (Work)",
+                        "Description": "Works for Sophia at Blue Moon Vineyard in fall"
+                    },
+                    "Treyvon": {
+                        "id": "Treyvon",
+                        "Heading": "Treyvon",
+                        "Description": "Complex but loving relationship with her father regarding independence"
+                    }
+                },
+                "Traits": {
+                    "Friendly": {
+                        "id": "Friendly",
+                        "Heading": "Friendly",
+                        "Description": "Friendly and outgoing"
+                    },
+                    "Defensive": {
+                        "id": "Defensive",
+                        "Heading": "Defensive",
+                        "Description": "Sometimes defensive when criticized"
+                    },
+                    "ADHD": {
+                        "id": "ADHD",
+                        "Heading": "ADHD",
+                        "Description": "Struggles with organization and tidiness due to ADHD"
+                    },
+                    "Passionate": {
+                        "id": "Passionate",
+                        "Heading": "Passionate",
+                        "Description": "Passionate about hands-on work"
+                    },
+                    "Creative": {
+                        "id": "Creative",
+                        "Heading": "Creative",
+                        "Description": "Creative and crafty"
+                    },
+                    "Optimistic": {
+                        "id": "Optimistic",
+                        "Heading": "Optimistic",
+                        "Description": "Optimistic and enthusiastic"
+                    },
+                    "Independent": {
+                        "id": "Independent",
+                        "Heading": "Independent",
+                        "Description": "Strong desire for independence"
+                    }
+                },
+                "BiographyEnd": "**Summary**\nScarlett is a warm-hearted, hardworking young woman finding her path in life through farming rather than traditional education. Her ADHD presents challenges but also drives her towards hands-on work where she excels. She maintains strong connections to both Grampleton and Stardew Valley through her work and friendships, while pursuing her own interests in crafting, cooking, and animal care.",
+                "ExtraPortraits": {},
+                "Unique": "",
+                "Preoccupations": [
+                    "Goats",
+                    "Cosplay",
+                    "Graphic novels",
+                    "Orange chicken",
+                    "Road trips",
+                    "Farm work",
+                    "ADHD",
+                    "Pondwood",
+                    "Treyvon's store",
+                    "Blue Moon Vineyard"
+                ],
+                "Dialogue": {},
+                "HomeLocationBed": false,
+                "UsePatchedDialogue": true
+            }
         }
-      }
     ]
 }
