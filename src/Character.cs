@@ -11,6 +11,7 @@ using Polly.Retry;
 using System.Threading.Tasks;
 using Serilog;
 using Microsoft.Xna.Framework.Content;
+using StardewModdingAPI.Events;
 
 namespace StardewDialogue;
 
@@ -33,9 +34,21 @@ public class Character
         BioFilePath = $"{VtConstants.BiosPath}/{RemoveDotSuffixes(Name)}";
         StardewNpc = stardewNpc;
 
-        // Load and process the dialogue file
-        CheckBio();
-        //LoadDialogue();
+        ModEntry.SHelper.Events.Content.AssetRequested += (sender, e) =>
+        {
+            if (e.Name.IsEquivalentTo(BioFilePath))
+            {
+                e.LoadFrom(() => new BioData(), AssetLoadPriority.Exclusive);
+            }
+        };
+        ModEntry.SHelper.Events.Content.AssetsInvalidated += (object? sender, AssetsInvalidatedEventArgs e) =>
+        {
+            if (e.NamesWithoutLocale.Any(an => an.IsEquivalentTo(BioFilePath)))
+            {
+                _bioData = null;
+            }
+        };
+
         LoadEventHistory();
     }
 
@@ -531,6 +544,7 @@ public class Character
             return _bioData; 
         }
     }
+
     public List<string> PossiblePreoccupations { get; internal set;}
     public string Preoccupation { get; internal set; }
     public WorldDate PreoccupationDate { get; internal set; }

@@ -175,7 +175,7 @@ public class Prompts
             if (Character.Bio.Relationships.Any())
             {
                 npcConstantPrompt.AppendLine($"## {Util.GetString("biographyRelationships")}:");
-                foreach (var relationship in Character.Bio.Relationships)
+                foreach (var relationship in Character.Bio.Relationships.Values)
                 {
                     npcConstantPrompt.AppendLine($"* **{relationship.Heading}**: {relationship.Description}");
                 }
@@ -183,7 +183,7 @@ public class Prompts
             if (Character.Bio.Traits.Any())
             {
                 npcConstantPrompt.AppendLine($"## {Util.GetString("biographyPersonality")}:");
-                foreach (var trait in Character.Bio.Traits)
+                foreach (var trait in Character.Bio.Traits.Values)
                 {
                     npcConstantPrompt.AppendLine($"* **{trait.Heading}**: {trait.Description}");
                 }

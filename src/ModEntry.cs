@@ -19,7 +19,31 @@ namespace ValleyTalk
         public static IMonitor SMonitor;
         public static IModHelper SHelper { get; private set; }
         public static ModConfig Config;
-        public static Dictionary<string, Type> LlmMap;
+        public static Dictionary<string, Type> LlmMap
+        {
+            get
+            {
+                if (_llmMap == null)
+                {
+                // Build dictionary of LLM types (things that inherit from the LLM class)
+                _llmMap = new Dictionary<string, Type>(StringComparer.InvariantCultureIgnoreCase)
+                {
+#if DEBUG
+                    {"Dummy", typeof(LlmDummy)},
+#endif
+                    {"LlamaCpp", typeof(LlmLlamaCpp)},
+                    {"Google", typeof(LlmGemini)},
+                    {"Anthropic", typeof(LlmClaude)},
+                    {"OpenAI", typeof(LlmOpenAi)},
+                    {"Mistral", typeof(LlmMistral)},
+                    {"DeepSeek", typeof(LlmDeepSeek)},
+                    {"VolcEngine", typeof(LlmVolcEngine)},
+                    {"OpenAiCompatible", typeof(LlmOAICompatible)}
+                };
+                }
+                return _llmMap;
+            }
+        }
         public static bool BlockModdedContent { get; private set; } = false;
         private static CultureInfo _locale;
         public static string Language 
@@ -73,6 +97,8 @@ namespace ValleyTalk
 
         private static bool? _fixPunctuation = null;
         private static string _localeCacheFixPunctuation = string.Empty;
+        private static Dictionary<string, Type> _llmMap;
+
         public static bool FixPunctuation
         {
             get
@@ -87,10 +113,6 @@ namespace ValleyTalk
             }
         }
 
-        public ModEntry()
-        {
-            SHelper = Helper;
-        }
 
         public override object GetApi()
         {
@@ -99,10 +121,10 @@ namespace ValleyTalk
 
         public override void Entry(IModHelper helper)
         {
-            SHelper = Helper;
+            SHelper = helper;
             
-            Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
-
+            helper.Events.GameLoop.GameLaunched += OnGameLaunched;
+    
             Config = Helper.ReadConfig<ModConfig>();
 
             SMonitor = Monitor;
@@ -133,28 +155,12 @@ namespace ValleyTalk
             Log.Debug($"###############################################");
             Log.Debug($"###############################################");
 #endif
-            // Build dictionary of LLM types (things that inherit from the LLM class)
-            LlmMap = new Dictionary<string, Type>(StringComparer.InvariantCultureIgnoreCase)
-            {
-#if DEBUG
-                {"Dummy", typeof(LlmDummy)},
-#endif
-                {"LlamaCpp", typeof(LlmLlamaCpp)},
-                {"Google", typeof(LlmGemini)},
-                {"Anthropic", typeof(LlmClaude)},
-                {"OpenAI", typeof(LlmOpenAi)},
-                {"Mistral", typeof(LlmMistral)},
-                {"DeepSeek", typeof(LlmDeepSeek)},
-                {"VolcEngine", typeof(LlmVolcEngine)},
-                {"OpenAiCompatible", typeof(LlmOAICompatible)}
-            };
+
             if (!LlmMap.TryGetValue(Config.Provider, out var llmType))
             {
                 Log.Error($"Invalid LLM type: {Config.Provider}");
                 return;
             }
-
-            RegisterDataModels(helper);
 
             Llm.SetLlm(llmType, modelName: Config.ModelName, apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
 
@@ -166,49 +172,6 @@ namespace ValleyTalk
             harmony.PatchAll();
 
             Log.Debug($"[{DateTime.Now}] Mod loaded");
-
-        }
-
-        private void RegisterDataModels(IModHelper helper)
-        {
-            helper.Events.Content.AssetRequested += (sender, e) =>
-            {
-                if (!e.Name.StartsWith(VtConstants.ContentPrefix))
-                    return;
-
-                var suffix = e.Name.Name.EndsWith(".") ? "." : string.Empty;
-                if (e.NameWithoutLocale.IsEquivalentTo(VtConstants.GameSummaryPath + suffix))
-                {
-                    e.LoadFrom(() => new Dictionary<string, object>(), AssetLoadPriority.Exclusive);
-                }
-                else if (e.NameWithoutLocale.IsEquivalentTo(VtConstants.PromptsPath + suffix))
-                {
-                    e.LoadFrom(() => new Dictionary<string, object>(), AssetLoadPriority.Exclusive);
-                }
-                else if (e.NameWithoutLocale.StartsWith(VtConstants.BiosPath))
-                {
-                    e.LoadFrom(() => new BioData(), AssetLoadPriority.Exclusive);
-                }
-            };
-            helper.Events.Content.AssetReady += (sender, e) =>
-            {
-                try
-                {
-                    if (e.Name.StartsWith(VtConstants.ContentPrefix))
-                    {
-                        var _ = Game1.content.Load<Dictionary<string, object>>(e.Name.Name);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"Error loading asset {e.Name}: {ex}");
-                }
-            };
-            helper.Events.GameLoop.GameLaunched += (sender, e) =>
-            {
-                var _ = Game1.content.Load<Dictionary<string, object>>(VtConstants.GameSummaryPath);
-                var __ = Game1.content.Load<Dictionary<string, object>>(VtConstants.PromptsPath);
-            };
 
         }
 

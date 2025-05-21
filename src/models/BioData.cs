@@ -45,8 +45,8 @@ public class BioData
     }
 
     public string Biography { get; set; } = string.Empty;
-    public ListEntry[] Relationships { get; set; } = new ListEntry[0];
-    public ListEntry[] Traits { get; set; } = new ListEntry[0];
+    public Dictionary<string,ListEntry> Relationships { get; set; } = new Dictionary<string, ListEntry>();
+    public Dictionary<string,ListEntry> Traits { get; set; } = new Dictionary<string, ListEntry>();
     public string BiographyEnd { get; set; } = string.Empty;
     
     //Only update gender if the value passed is male or female

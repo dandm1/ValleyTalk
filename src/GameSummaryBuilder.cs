@@ -7,101 +7,122 @@ using StardewValley.Network;
 using ValleyTalk;
 using Newtonsoft.Json.Linq;
 using System;
+using StardewModdingAPI.Events;
+using StardewModdingAPI;
 
 namespace StardewDialogue;
 
 internal class GameSummaryBuilder
 {
-    private Dictionary<string,object> gameSummaryDict;
+    private GameSummary _gameSummaryDict;
+
+    private GameSummary GameSummaryDict
+    {
+        get
+        {
+            if (_gameSummaryDict == null)
+            {
+                _gameSummaryDict = Game1.content.LoadLocalized<GameSummary>(VtConstants.GameSummaryPath);
+            }
+            return _gameSummaryDict;
+        }
+    }
+
     public GameSummaryBuilder()
     {
-        gameSummaryDict = Game1.content.LoadLocalized<Dictionary<string,object>>(VtConstants.GameSummaryPath);
+        ModEntry.SHelper.Events.Content.AssetRequested += (sender, e) =>
+        {
+            if (e.Name.IsEquivalentTo(VtConstants.GameSummaryPath))
+            {
+                e.LoadFrom(() => new GameSummary(), AssetLoadPriority.Exclusive);
+            }
+        };
+        ModEntry.SHelper.Events.Content.AssetsInvalidated += (object? sender, AssetsInvalidatedEventArgs e) =>
+        {
+            if (e.NamesWithoutLocale.Any(an => an.IsEquivalentTo(VtConstants.GameSummaryPath)))
+            {
+                _gameSummaryDict = null;
+            }
+        };
     }
 
     internal string Build()
     {
         var builder = new StringBuilder();
-        // Load newtonsoft JArray object from SectionOrder key as dictionary
-        var sectionsObject = gameSummaryDict["SectionOrder"] as JObject;
-        var sections = sectionsObject.ToObject<Dictionary<string, bool>>();
+        Dictionary<string, bool> sections = GameSummaryDict.SectionOrder;
         if (sections == null)
         {
             ModEntry.SMonitor.Log("GameSummary is missing SectionOrder", StardewModdingAPI.LogLevel.Error);
             return string.Empty;
         }
-        foreach(var section in sections)
+        foreach (var section in sections)
         {
-            if (gameSummaryDict.Any(x => x.Key.StartsWith($"{section.Key}")))
+            IGameSummarySection sectionObject = GameSummaryDict.GetType().GetProperty(section.Key) as IGameSummarySection;
+            if (sectionObject == null)
             {
-                if (section.Value)
-                {
-                    builder.AppendLine($"### {section.Key} :");
-                }
-                if (gameSummaryDict.ContainsKey($"{section.Key}Intro"))
-                {
-                    builder.AppendLine(gameSummaryDict[$"{section.Key}Intro"].ToString());
-                }
-                var entry = gameSummaryDict.FirstOrDefault(x => x.Key == section.Key);
-                if (entry.Value == null)
-                {
-                    continue;
-                }
-                if (entry.Value is string)
-                {
-                    builder.AppendLine(entry.Value.ToString());
-                }
-                else if (entry.Value is JObject subDictObj) // Changed from JArray subDict
-                {
-                    switch(section.Key)
+                ModEntry.SMonitor.Log($"GameSummary is missing section {section.Key}", StardewModdingAPI.LogLevel.Error);
+                continue;
+            }
+            if (section.Value)
+            {
+                builder.AppendLine($"### {section.Key} :");
+            }
+
+            if (!string.IsNullOrWhiteSpace(sectionObject.Text))
+            {
+                builder.AppendLine(sectionObject.Text);
+            }
+
+            switch (section.Key)
+            {
+                case "Seasons":
+                    var seasonsList = sectionObject as IGameSummarySection<SeasonObject>;
+                    try
                     {
-                        case "Seasons":
-                            try
+                        var seasons = seasonsList.Entries.Values.ToList(); // Convert values to list for GroupBy
+                        foreach (var season in seasons)
+                        {
+                            builder.Append($"- **{season.Name}** - {season.Description} ");
+                            if (season.Crops != null && season.Crops.Any())
                             {
-                            var seasonsData = subDictObj.ToObject<Dictionary<string, SeasonObject>>();
-                            var seasons = seasonsData.Values; // Iterate over the values of the dictionary
-                            foreach(var season in seasons)
+                                builder.Append($"{Util.GetString("seasonCrops")} {Util.ConcatAnd(season.Crops)}. ");
+                            }
+                            if (season.Forage != null && season.Forage.Any())
                             {
-                                builder.Append($"- **{season.Name}** - {season.Description} ");
-                                if (season.Crops != null && season.Crops.Any())
-                                {
-                                    builder.Append($"{Util.GetString("seasonCrops")} {Util.ConcatAnd(season.Crops)}. ");
-                                }
-                                if (season.Forage != null && season.Forage.Any())
-                                {
-                                    builder.AppendLine($"{Util.GetString("seasonForage")} {Util.ConcatAnd(season.Forage)}.");
-                                }
+                                builder.AppendLine($"{Util.GetString("seasonForage")} {Util.ConcatAnd(season.Forage)}.");
                             }
-                            }
-                            catch (Exception ex)
-                            {
-                                ModEntry.SMonitor.Log($"Error parsing seasons: {ex}", StardewModdingAPI.LogLevel.Error);
-                            }
-                            break;
-                        case "Locations":
-                            var locationsData = subDictObj.ToObject<Dictionary<string, LocationObject>>();
-                            var locations = locationsData.Values.ToList(); // Convert values to list for GroupBy
-                            var regions = locations.GroupBy(x => x.Region);
-                            foreach(var region in regions)
-                            {
-                                foreach(var location in region)
-                                {
-                                    builder.AppendLine($"- **{location.Name}** - {location.Description}");
-                                }
-                            }
-                            break;
-                        default:
-                            var itemsData = subDictObj.ToObject<Dictionary<string, GeneralObject>>();
-                            var items = itemsData.Values; // Iterate over the values of the dictionary
-                            foreach(var item in items)
-                            {
-                                builder.AppendLine($"- **{item.Name}** - {item.Description}");
-                            }
-                            break;
+                        }
                     }
-                }
+                    catch (Exception ex)
+                    {
+                        ModEntry.SMonitor.Log($"Error parsing seasons: {ex}", StardewModdingAPI.LogLevel.Error);
+                    }
+                    break;
+                case "Locations":
+                    var locationsList = sectionObject as IGameSummarySection<LocationObject>;
+                    var locations = locationsList.Entries.Values.ToList(); // Convert values to list for GroupBy
+                    var regions = locations.GroupBy(x => x.Region);
+                    foreach (var region in regions)
+                    {
+                        foreach (var location in region)
+                        {
+                            builder.AppendLine($"- **{location.Name}** - {location.Description}");
+                        }
+                    }
+                    break;
+                default:
+                    var itemsList = sectionObject as IGameSummarySection<GeneralObject>;
+                    var items = itemsList.Entries.Values.ToList(); // Convert values to list for GroupBy
+                    foreach (var item in items)
+                    {
+                        builder.AppendLine($"- **{item.Name}** - {item.Description}");
+                    }
+                    break;
+
+
             }
         }
-        
+
         var gameSummaryTranslations = Util.GetString("gameSummaryTranslations");
         if (!string.IsNullOrWhiteSpace(gameSummaryTranslations))
         {
@@ -109,41 +130,60 @@ internal class GameSummaryBuilder
         }
         return builder.ToString();
     }
+}
 
-    private static string GetDisplay(string key)
-    {
-        string displayKey = key;
-        if (key.Contains("_"))
-        {
-            displayKey = key.Substring(key.IndexOf('_') + 1);
-        }
+public class GeneralObject
+{
+    public string id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+}
 
-        return displayKey;
-    }
+public interface IGameSummarySection
+{
+    public string Text { get; set; }
+}
 
-    private static void AppendLineIfKeyExists(StringBuilder builder, Dictionary<string, object> gameSummaryDict, string key, string prefix = "")
-    {
-        if (gameSummaryDict.ContainsKey(key))
-        {
-            builder.AppendLine(prefix + gameSummaryDict[key].ToString());
-        }
-    }
+public interface IGameSummarySection<T> : IGameSummarySection
+{
+    public Dictionary<string, T> Entries { get; set; }
+}
 
-    private class GeneralObject
-    {
-        public string id;
-        public string Name;
-        public string Description;
-    }
+public class GeneralList : IGameSummarySection<GeneralObject>
+{
+    public string Text { get; set; }
+    public Dictionary<string, GeneralObject> Entries { get; set; }
+}
 
-    private class LocationObject : GeneralObject
-    {
-        public string Region;
-    }
+public class LocationObject : GeneralObject
+{
+    public string Region { get; set; }
+}
 
-    private class SeasonObject : GeneralObject
-    {
-        public List<string> Crops;
-        public List<string> Forage;
-    }
+public class LocationList : IGameSummarySection<LocationObject>
+{
+    public string Text { get; set; }
+    public Dictionary<string, LocationObject> Entries { get; set; }
+}
+
+public class SeasonObject : GeneralObject
+{
+    public List<string> Crops { get; set; }
+    public List<string> Forage { get; set; }
+}
+
+public class SeasonList : IGameSummarySection<SeasonObject>
+{
+    public string Text { get; set; }
+    public Dictionary<string, SeasonObject> Entries { get; set; }
+}
+internal class GameSummary
+{
+    public Dictionary<string, bool> SectionOrder { get; set; }
+    public GeneralList Intro { get; set; }
+    public GeneralList FarmerDescription { get; set; }
+    public GeneralList Villagers { get; set; }
+    public SeasonList Seasons { get; set; }
+    public LocationList Locations { get; set; }
+    public GeneralList Outro { get; set; }
 }

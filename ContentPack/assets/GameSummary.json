@@ -14,10 +14,17 @@
           "Villagers": true,
           "Outro": false
         },
-        "Intro":"Stardew Valley is a game that focusses on simulating farming, relationships, mining, fishing and community development in a small town in the US Pacific Northwest named Pelican Town.",
-        "FarmerBackground":"The player, known as the farmer, gets fed up with city life and moves to Pelican Town to take over a rundown farm inherited from the farmer's grandfather. Prior to moving to Stardew Valley the farmer worked for Joja corporation, which he hated but gives the farmer some existing relationship with Jojamart. Write dialogue assuming that the farmer is female, if the farmer is actually male this will be changed later. The farmer did not know any of the people in Stardew Valley or Pelican Town before moving there. The farmer did not grow up with any of the characters, and did not move to Stardew Valley with any of the characters even if the farmer later marries one of them.  The farmer has a living mother from who occasional letters and gifts are received, but no other living relatives.",
-        "SeasonsIntro":"The year in Stardew Valley is divided into 4 seasons each 28 days long. The seasons are:",
+        "Intro":{
+          "Text": "Stardew Valley is a game that focusses on simulating farming, relationships, mining, fishing and community development in a small town in the US Pacific Northwest named Pelican Town.",
+          "Entries": {}
+        },
+        "FarmerBackground":{
+          "Text": "The player, known as the farmer, gets fed up with city life and moves to Pelican Town to take over a rundown farm inherited from the farmer's grandfather. Prior to moving to Stardew Valley the farmer worked for Joja corporation, which he hated but gives the farmer some existing relationship with Jojamart. Write dialogue assuming that the farmer is female, if the farmer is actually male this will be changed later. The farmer did not know any of the people in Stardew Valley or Pelican Town before moving there. The farmer did not grow up with any of the characters, and did not move to Stardew Valley with any of the characters even if the farmer later marries one of them.  The farmer has a living mother from who occasional letters and gifts are received, but no other living relatives.",
+          "Entries": {}
+        },
         "Seasons": {
+          "Text": "The year in Stardew Valley is divided into 4 seasons each 28 days long. The seasons are:",
+          "Entries": {
           "Spring": {
             "id": "Spring",
             "Name": "Spring",
@@ -59,10 +66,11 @@
               "Winter Root", "Crystal Fruit", "Snow Yam", "Crocus"
             ]
           }
-        },
-        "LocationsIntro": "The action in Stardew Valley includes the following buildings and places:",
-        "Locations":
-        {
+        }
+      },
+      "Locations": {
+        "Text": "The action in Stardew Valley includes the following buildings and places:",
+        "Entries": {
           "TheFarm": {
             "id": "TheFarm",
             "Region": "The Farm",
@@ -201,18 +209,18 @@
             "Name": "Skull Cavern",
             "Description": "A more dangerous mine that is inaccessible until the town mine is completed and the bus repaired.  Most town residents have no knowledge of this mine."
           }
-        },
-        "FestivalIntro":"The year in Pelican Town features a number of important festivals. These are:",
-        "Festivals": 
-        { 
-          "spring13": { 
-            "id": "spring13",
-            "Name": "Egg Festival",
-            "Description": "**Spring 13** - Features an egg hunt where players compete to find the most hidden eggs."
-          },
-          "spring24": { 
-            "id": "spring24",
-            "Name": "Flower Dance",
+        }},
+        "Festivals": {
+          "Text": "The year in Pelican Town features a number of important festivals. These are:",
+          "Entries": {
+            "spring13": {
+              "id": "spring13",
+              "Name": "Egg Festival",
+              "Description": "**Spring 13** - Features an egg hunt where players compete to find the most hidden eggs."
+            },
+            "spring24": {
+              "id": "spring24",
+              "Name": "Flower Dance",
             "Description": "**Spring 24** - A dance festival where players can ask an eligible bachelor or bachelorette to be their dance partner."
           },
           "summer11": { 
@@ -245,18 +253,19 @@
             "Name": "Feast of the Winter Star",
             "Description": "**Winter 25** - A gift-giving celebration similar to Christmas, where villagers give and receive gifts from a randomly assigned secret gift givers."
           }
+        }
         },
-        "VillagersIntro":"All of the villagers lived in Stardew Valley before the farmer arrives and knew each other already. The key characters are:",
-        "Villagers": 
-        { 
-          "Abigail": { 
-            "id": "Abigail",
-            "Name": "Abigail",
-            "Description": "The daughter of Pierre and Caroline, Abigail has a rebellious streak and loves the outdoors. She enjoys exploring the mines and has an adventurous spirit."
-          },
-          "Alex": { 
-            "id": "Alex",
-            "Name": "Alex",
+        "Villagers": {
+          "Text": "All of the villagers lived in Stardew Valley before the farmer arrives and knew each other already. The key characters are:",
+          "Entries": {
+            "Abigail": {
+              "id": "Abigail",
+              "Name": "Abigail",
+              "Description": "The daughter of Pierre and Caroline, Abigail has a rebellious streak and loves the outdoors. She enjoys exploring the mines and has an adventurous spirit."
+            },
+            "Alex": {
+              "id": "Alex",
+              "Name": "Alex",
             "Description": "A former high school football star with dreams of becoming a professional athlete. He lives with his grandparents, Evelyn and George."
           },
           "Caroline": { 
@@ -352,7 +361,7 @@
           "Maru": { 
             "id": "Maru",
             "Name": "Maru",
-            "Description": "The daughter of Demetrius and Robin, Maru is intelligent and enjoys working with electronics and gadgets. She works part-time at Harvey's Clinic."
+            "Description": "The daughter of Demetrius and Robin, Maru is intelligent and enjoys working with electronics and gadgets. She works part-time at Harvey's Clinic."   
           },
           "Pam": { 
             "id": "Pam",
@@ -409,8 +418,12 @@
             "Name": "Wizard",
             "Description": "Proper name is Magnus Rasmodius. A mysterious figure who lives in the Wizard's Tower. He is knowledgeable about magic and the supernatural elements of Stardew Valley."
           }
-        },
-        "Outro": "Note that in the context of the game Stardew Valley is a reasonably static place. New stores don't open, new people don't arrive and the stores don't significantly change what they sell."
+        }
+      }
+      },
+      "Outro":{ 
+        "Text": "Note that in the context of the game Stardew Valley is a reasonably static place. New stores don't open, new people don't arrive and the stores don't significantly change what they sell.",
+        "Entries": {}
       }
     }
   ]
