@@ -65,13 +65,11 @@
             ],
             "Priority": "Late",
             "Entries": {
-                "Relationships": {
-                    "sophia": {
-                        "id": "sophia",
+                    "Sophia": {
+                        "id": "Sophia",
                         "Heading": "Sophia",
                         "Description": "Emily is close friends with Sophia, who shares her interests in sowing and exotic clothing."
                     }
-                }
             }
         },
         {
@@ -82,13 +80,11 @@
             ],
             "Priority": "Late",
             "Entries": {
-                "Relationships": {
-                    "sophia": {
-                        "id": "sophia",
+                    "Sophia": {
+                        "id": "Sophia",
                         "Heading": "Sophia",
                         "Description": "Haley is close friends with Sophia, who shares her interests in fashion and shopping in Zuzu City."
                     }
-                }
             }
         }
     ]

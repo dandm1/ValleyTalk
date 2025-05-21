@@ -25,191 +25,192 @@
         "Seasons": {
           "Text": "The year in Stardew Valley is divided into 4 seasons each 28 days long. The seasons are:",
           "Entries": {
-          "Spring": {
-            "id": "Spring",
-            "Name": "Spring",
-            "Description": "Mild weather with occasional rain.",
-            "Crops": [
-              "Cauliflower", "Potatoes", "Parsnips", "Green Beans", "Strawberries"
-            ],
-            "Forage": [
-              "Wild Horseradish", "Daffodil", "Leek", "Dandelion"
-            ]
-          },
-          "Summer": {
-            "id": "Summer",
-            "Name": "Summer",
-            "Description": "Warm and sunny weather with occasional thunderstorms.",
-            "Crops": [
-              "Blueberries", "Melons", "Tomatoes", "Corn", "Hops"
-            ],
-            "Forage": [
-              "Spice Berry", "Grape", "Sweet Pea"
-            ]
-          },
-          "Fall": {
-            "id": "Fall",
-            "Name": "Fall",
-            "Description": "Cool and crisp weather with sporadic rain.",
-            "Crops": [
-              "Pumpkins", "Cranberries", "Eggplants", "Artichokes", "Bok Choy"
-            ],
-            "Forage": [
-              "Common Mushroom", "Wild Plum", "Hazelnut", "Blackberry"
-            ]
-          },
-          "Winter": {
-            "id": "Winter",
-            "Name": "Winter",
-            "Description": "Cold and snowy weather.",
-            "Forage": [
-              "Winter Root", "Crystal Fruit", "Snow Yam", "Crocus"
-            ]
+            "Spring": {
+              "id": "Spring",
+              "Name": "Spring",
+              "Description": "Mild weather with occasional rain.",
+              "Crops": [
+                "Cauliflower", "Potatoes", "Parsnips", "Green Beans", "Strawberries"
+              ],
+              "Forage": [
+                "Wild Horseradish", "Daffodil", "Leek", "Dandelion"
+              ]
+            },
+            "Summer": {
+              "id": "Summer",
+              "Name": "Summer",
+              "Description": "Warm and sunny weather with occasional thunderstorms.",
+              "Crops": [
+                "Blueberries", "Melons", "Tomatoes", "Corn", "Hops"
+              ],
+              "Forage": [
+                "Spice Berry", "Grape", "Sweet Pea"
+              ]
+            },
+            "Fall": {
+              "id": "Fall",
+              "Name": "Fall",
+              "Description": "Cool and crisp weather with sporadic rain.",
+              "Crops": [
+                "Pumpkins", "Cranberries", "Eggplants", "Artichokes", "Bok Choy"
+              ],
+              "Forage": [
+                "Common Mushroom", "Wild Plum", "Hazelnut", "Blackberry"
+              ]
+            },
+            "Winter": {
+              "id": "Winter",
+              "Name": "Winter",
+              "Description": "Cold and snowy weather.",
+              "Forage": [
+                "Winter Root", "Crystal Fruit", "Snow Yam", "Crocus"
+              ]
+            }
           }
-        }
-      },
-      "Locations": {
-        "Text": "The action in Stardew Valley includes the following buildings and places:",
-        "Entries": {
-          "TheFarm": {
-            "id": "TheFarm",
-            "Region": "The Farm",
-            "Name": "The Farm",
-            "Description": "The Farmer's home and the main center of action.  The farmhouse is initially dilapidated and the farm overgown. The farmhouse can be upgraded to add a kitchen and other rooms including a room for the player's spouse to use after marriage. The house is initially single story, though one of the later upgrades adds a cellar. The other farm buildings that may be referred to are: *Barn*: Used for housing cows and goats and providing a large storage space; *Coop*: Used for housing chickens, ducks, and rabbits; *Greenhouse*: A building where crops can be grown year-round; *Silo*: Stores hay for feeding animals; *Stable*: Houses a horse for faster travel; *Shed*: Can be used for storage or as a workshop space and *Fish Pond*: Allows breeding of fish and production of roe."
-          },
-          "PelicanTown/SeedShop": {
-            "id": "PelicanTown/SeedShop",
-            "Region": "Pelican Town",
-            "Name": "Pierre's General Store",
-            "Description": "Sells seeds, saplings, and vegetables. Owned by Pierre who lives there with his wife Caroline and their daughter Abigail, all of whom regard it as a shared family business. Pierre has a stall at most special events and festivals."
-          },
-          "PelicanTown/JojaMart": {
-            "id": "PelicanTown/JojaMart",
-            "Region": "Pelican Town",
-            "Name": "JojaMart",
-            "Description": "Offers a similar range of goods as Pierre's but at slightly different prices. Recently opened in Pelican Town and employs anti-competitive practices towards local businesses. Offers a membership program which the player can join."
-          },
-          "PelicanTown/StardropSaloon": {
-            "id": "PelicanTown/StardropSaloon",
-            "Region": "Pelican Town",
-            "Name": "Stardrop Saloon",
-            "Description": "A social hub where villagers gather. Offers food, drinks, pool, and arcade games. Owned by Gus. Food options rotate, but the standard offerings are pizza, salad, spaghetti, bread, coffee and beer."
-          },
-          "PelicanTown/HarveysClinic": {
-            "id": "PelicanTown/HarveysClinic",
-            "Region": "Pelican Town",
-            "Name": "Harvey's Clinic",
-            "Description": "Open during weekdays for health-related services and selling health items."
-          },
-          "PelicanTown/Blacksmith": {
-            "id": "PelicanTown/Blacksmith",
-            "Region": "Pelican Town",
-            "Name": "Blacksmith",
-            "Description": "Owned by Clint.  Allows the Farmer to upgrade tools, process geodes, or buy ores and coal."
-          },
-          "PelicanTown/LibraryMuseum": {
-            "id": "PelicanTown/LibraryMuseum",
-            "Region": "Pelican Town",
-            "Name": "Library & Museum",
-            "Description": "Donated artifacts and minerals are displayed here. Run by Gunther, who rewards players for donations."
-          },
-          "PelicanTown/CommunityCenter": {
-            "id": "PelicanTown/CommunityCenter",
-            "Region": "Pelican Town",
-            "Name": "Community Center",
-            "Description": "Formerly the social heart of Pelican Town. When the Farmer arrives it is dilapidated but unless the player chooses to buy a Jojamart membership can be restored later in the game.  If the player does buy a Jojamart membership it is converted into a Joja Warehouse."
-          },
-          "CindersapForest": {
-            "id": "CindersapForest",
-            "Region": "Cindersap Forest",
-            "Name": "Cindersap Forest",
-            "Description": "Contains Leah's Cottage, Marnie's Ranch and the Wizard's Tower.  It is visted on Fridays and Sundays by a traveling cart which sells rare items."
-          },
-          "CindersapForest/MarniesRanch": {
-            "id": "CindersapForest/MarniesRanch",
-            "Region": "Cindersap Forest",
-            "Name": "Marnie's Ranch",
-            "Description": "Sells animals and animal supplies. Marnie lives here with her pre-teen granddaughter Jas and her nephew Shane."
-          },
-          "CindersapForest/WizardsTower": {
-            "id": "CindersapForest/WizardsTower",
-            "Region": "Cindersap Forest",
-            "Name": "Wizard's Tower",
-            "Description": "Home to the Wizard. Is regarded with great suspicion by the other villagers.  Center of many magical activities in the game."
-          },
-          "Mountain": {
-            "id": "Mountain",
-            "Region": "Mountain",
-            "Name": "Mountain",
-            "Description": "North of Pelican Town, contains the Carpenter's Shop, the Tent where Linus lives, the Mines and the Adventurer's Guild."
-          },
-          "Mountain/AdventurersGuild": {
-            "id": "Mountain/AdventurersGuild",
-            "Region": "Mountain",
-            "Name": "Adventurer's Guild",
-            "Description": "Favored hang-out of mine explorers and other adventurers in Pelican Town.  Not visited and rarely mentioned by other villagers other than Abigail and Sebastian who hold it in awe."
-          },
-          "Mountain/TheMines": {
-            "id": "Mountain/TheMines",
-            "Region": "Mountain",
-            "Name": "The Mines",
-            "Description": "Generally regarded as spooky and dangerous by the townsfolk. Villagers other than the Farmer, Clint, Abigail, Linus and Sebastian are too afraid to ever enter them. Full of monsters, ore, gems and other collectible items."
-          },
-          "Mountain/Spa": {
-            "id": "Mountain/Spa",
-            "Region": "Mountain",
-            "Name": "Spa",
-            "Description": "Contains a swimming pool and gym. The gym is popular for sports training and the pool restores energy and health."
-          },
-          "Mountain/TrainStation": {
-            "id": "Mountain/TrainStation",
-            "Region": "Mountain",
-            "Name": "Train Station",
-            "Description": "North of the mountain, next to the Spa. Occasionally, trains pass through, often dropping items."
-          },
-          "Mountain/Quarry": {
-            "id": "Mountain/Quarry",
-            "Region": "Mountain",
-            "Name": "Quarry",
-            "Description": "Not accessible in the first year or so of the game. Just past the adventurers guild. Contains various rocks and ores to mine."
-          },
-          "Beach/FishShop": {
-            "id": "Beach/FishShop",
-            "Region": "Beach",
-            "Name": "Fish Shop",
-            "Description": "Run by and home to Willy, sells fishing supplies and fish-related items as well as buying fish. Once the ferry to Ginger Island is repaired it leaves from here."
-          },
-          "GingerIsland": {
-            "id": "GingerIsland",
-            "Region": "Ginger Island",
-            "Name": "Ginger Island",
-            "Description": "An island off the coast of Pelican Town which is popular as a day trip destination for the villagers.  Contains a resort, a farm and many tropical birds and animals. The island has a year round tropical climate and the contrast of this to Stardew Valley makes it a risk for sunburn and heatstroke for the villagers. Tends to be busy, particularly on the beach."
-          },
-          "Beach/TidePools": {
-            "id": "Beach/TidePools",
-            "Region": "Beach",
-            "Name": "Tide Pools",
-            "Description": "A series of rock pools that can be made accessible by a bridge on the beach.  A great place for forraging coral and sea urchins as well as shells from the beach."
-          },
-          "Desert": {
-            "id": "Desert",
-            "Region": "Desert",
-            "Name": "Desert",
-            "Description": "Not accessible until the Bus is repaired - typically late in year 1.  Contains the Oasis as well as the Skull Cavern and regular markets and merchants."
-          },
-          "Desert/Oasis": {
-            "id": "Desert/Oasis",
-            "Region": "Desert",
-            "Name": "Oasis",
-            "Description": "A shop run by Sandy, who also lives there. The shop sells unique seeds and items such as cactus, starfruit and beet seeds."
-          },
-          "Desert/SkullCavern": {
-            "id": "Desert/SkullCavern",
-            "Region": "Desert",
-            "Name": "Skull Cavern",
-            "Description": "A more dangerous mine that is inaccessible until the town mine is completed and the bus repaired.  Most town residents have no knowledge of this mine."
+        },
+        "Locations": {
+          "Text": "The action in Stardew Valley includes the following buildings and places:",
+          "Entries": {
+            "TheFarm": {
+              "id": "TheFarm",
+              "Region": "The Farm",
+              "Name": "The Farm",
+              "Description": "The Farmer's home and the main center of action.  The farmhouse is initially dilapidated and the farm overgown. The farmhouse can be upgraded to add a kitchen and other rooms including a room for the player's spouse to use after marriage. The house is initially single story, though one of the later upgrades adds a cellar. The other farm buildings that may be referred to are: *Barn*: Used for housing cows and goats and providing a large storage space; *Coop*: Used for housing chickens, ducks, and rabbits; *Greenhouse*: A building where crops can be grown year-round; *Silo*: Stores hay for feeding animals; *Stable*: Houses a horse for faster travel; *Shed*: Can be used for storage or as a workshop space and *Fish Pond*: Allows breeding of fish and production of roe."
+            },
+            "PelicanTown_SeedShop": {
+              "id": "PelicanTown/SeedShop",
+              "Region": "Pelican Town",
+              "Name": "Pierre's General Store",
+              "Description": "Sells seeds, saplings, and vegetables. Owned by Pierre who lives there with his wife Caroline and their daughter Abigail, all of whom regard it as a shared family business. Pierre has a stall at most special events and festivals."
+            },
+            "PelicanTown_JojaMart": {
+              "id": "PelicanTown/JojaMart",
+              "Region": "Pelican Town",
+              "Name": "JojaMart",
+              "Description": "Offers a similar range of goods as Pierre's but at slightly different prices. Recently opened in Pelican Town and employs anti-competitive practices towards local businesses. Offers a membership program which the player can join."
+            },
+            "PelicanTown_StardropSaloon": {
+              "id": "PelicanTown/StardropSaloon",
+              "Region": "Pelican Town",
+              "Name": "Stardrop Saloon",
+              "Description": "A social hub where villagers gather. Offers food, drinks, pool, and arcade games. Owned by Gus. Food options rotate, but the standard offerings are pizza, salad, spaghetti, bread, coffee and beer."
+            },
+            "PelicanTown_HarveysClinic": {
+              "id": "PelicanTown/HarveysClinic",
+              "Region": "Pelican Town",
+              "Name": "Harvey's Clinic",
+              "Description": "Open during weekdays for health-related services and selling health items."
+            },
+            "PelicanTown_Blacksmith": {
+              "id": "PelicanTown/Blacksmith",
+              "Region": "Pelican Town",
+              "Name": "Blacksmith",
+              "Description": "Owned by Clint.  Allows the Farmer to upgrade tools, process geodes, or buy ores and coal."
+            },
+            "PelicanTown_LibraryMuseum": {
+              "id": "PelicanTown/LibraryMuseum",
+              "Region": "Pelican Town",
+              "Name": "Library & Museum",
+              "Description": "Donated artifacts and minerals are displayed here. Run by Gunther, who rewards players for donations."
+            },
+            "PelicanTown_CommunityCenter": {
+              "id": "PelicanTown/CommunityCenter",
+              "Region": "Pelican Town",
+              "Name": "Community Center",
+              "Description": "Formerly the social heart of Pelican Town. When the Farmer arrives it is dilapidated but unless the player chooses to buy a Jojamart membership can be restored later in the game.  If the player does buy a Jojamart membership it is converted into a Joja Warehouse."
+            },
+            "CindersapForest": {
+              "id": "CindersapForest",
+              "Region": "Cindersap Forest",
+              "Name": "Cindersap Forest",
+              "Description": "Contains Leah's Cottage, Marnie's Ranch and the Wizard's Tower.  It is visted on Fridays and Sundays by a traveling cart which sells rare items."
+            },
+            "CindersapForest_MarniesRanch": {
+              "id": "CindersapForest/MarniesRanch",
+              "Region": "Cindersap Forest",
+              "Name": "Marnie's Ranch",
+              "Description": "Sells animals and animal supplies. Marnie lives here with her pre-teen granddaughter Jas and her nephew Shane."
+            },
+            "CindersapForest_WizardsTower": {
+              "id": "CindersapForest/WizardsTower",
+              "Region": "Cindersap Forest",
+              "Name": "Wizard's Tower",
+              "Description": "Home to the Wizard. Is regarded with great suspicion by the other villagers.  Center of many magical activities in the game."
+            },
+            "Mountain": {
+              "id": "Mountain",
+              "Region": "Mountain",
+              "Name": "Mountain",
+              "Description": "North of Pelican Town, contains the Carpenter's Shop, the Tent where Linus lives, the Mines and the Adventurer's Guild."
+            },
+            "Mountain_AdventurersGuild": {
+              "id": "Mountain/AdventurersGuild",
+              "Region": "Mountain",
+              "Name": "Adventurer's Guild",
+              "Description": "Favored hang-out of mine explorers and other adventurers in Pelican Town.  Not visited and rarely mentioned by other villagers other than Abigail and Sebastian who hold it in awe."
+            },
+            "Mountain_TheMines": {
+              "id": "Mountain/TheMines",
+              "Region": "Mountain",
+              "Name": "The Mines",
+              "Description": "Generally regarded as spooky and dangerous by the townsfolk. Villagers other than the Farmer, Clint, Abigail, Linus and Sebastian are too afraid to ever enter them. Full of monsters, ore, gems and other collectible items."
+            },
+            "Mountain_Spa": {
+              "id": "Mountain/Spa",
+              "Region": "Mountain",
+              "Name": "Spa",
+              "Description": "Contains a swimming pool and gym. The gym is popular for sports training and the pool restores energy and health."
+            },
+            "Mountain_TrainStation": {
+              "id": "Mountain/TrainStation",
+              "Region": "Mountain",
+              "Name": "Train Station",
+              "Description": "North of the mountain, next to the Spa. Occasionally, trains pass through, often dropping items."
+            },
+            "Mountain_Quarry": {
+              "id": "Mountain/Quarry",
+              "Region": "Mountain",
+              "Name": "Quarry",
+              "Description": "Not accessible in the first year or so of the game. Just past the adventurers guild. Contains various rocks and ores to mine."
+            },
+            "Beach_FishShop": {
+              "id": "Beach/FishShop",
+              "Region": "Beach",
+              "Name": "Fish Shop",
+              "Description": "Run by and home to Willy, sells fishing supplies and fish-related items as well as buying fish. Once the ferry to Ginger Island is repaired it leaves from here."
+            },
+            "GingerIsland": {
+              "id": "GingerIsland",
+              "Region": "Ginger Island",
+              "Name": "Ginger Island",
+              "Description": "An island off the coast of Pelican Town which is popular as a day trip destination for the villagers.  Contains a resort, a farm and many tropical birds and animals. The island has a year round tropical climate and the contrast of this to Stardew Valley makes it a risk for sunburn and heatstroke for the villagers. Tends to be busy, particularly on the beach."
+            },
+            "Beach_TidePools": {
+              "id": "Beach/TidePools",
+              "Region": "Beach",
+              "Name": "Tide Pools",
+              "Description": "A series of rock pools that can be made accessible by a bridge on the beach.  A great place for forraging coral and sea urchins as well as shells from the beach."
+            },
+            "Desert": {
+              "id": "Desert",
+              "Region": "Desert",
+              "Name": "Desert",
+              "Description": "Not accessible until the Bus is repaired - typically late in year 1.  Contains the Oasis as well as the Skull Cavern and regular markets and merchants."
+            },
+            "Desert_Oasis": {
+              "id": "Desert/Oasis",
+              "Region": "Desert",
+              "Name": "Oasis",
+              "Description": "A shop run by Sandy, who also lives there. The shop sells unique seeds and items such as cactus, starfruit and beet seeds."
+            },
+            "Desert_SkullCavern": {
+              "id": "Desert/SkullCavern",
+              "Region": "Desert",
+              "Name": "Skull Cavern",
+              "Description": "A more dangerous mine that is inaccessible until the town mine is completed and the bus repaired.  Most town residents have no knowledge of this mine."
+            }
           }
-        }},
+        },
         "Festivals": {
           "Text": "The year in Pelican Town features a number of important festivals. These are:",
           "Entries": {
@@ -420,11 +421,12 @@
           }
         }
       }
-      },
+      ,
       "Outro":{ 
         "Text": "Note that in the context of the game Stardew Valley is a reasonably static place. New stores don't open, new people don't arrive and the stores don't significantly change what they sell.",
         "Entries": {}
       }
     }
+  }
   ]
 }

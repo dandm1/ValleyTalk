@@ -3,7 +3,7 @@
       {
         "Action": "EditData",
         "Target": "ValleyTalk/GameSummary",
-        "TargetField": [ "Villagers" ],
+        "TargetField": [ "Villagers", "Entries" ],
         "Entries": {
           "Alesia": { 
             "id": "Alesia",

@@ -57,7 +57,8 @@ internal class GameSummaryBuilder
         }
         foreach (var section in sections)
         {
-            IGameSummarySection sectionObject = GameSummaryDict.GetType().GetProperty(section.Key) as IGameSummarySection;
+            var property = GameSummaryDict.GetType().GetProperty(section.Key);
+            var sectionObject = property?.GetValue(GameSummaryDict) as IGameSummarySection;
             if (sectionObject == null)
             {
                 ModEntry.SMonitor.Log($"GameSummary is missing section {section.Key}", StardewModdingAPI.LogLevel.Error);
@@ -181,9 +182,10 @@ internal class GameSummary
 {
     public Dictionary<string, bool> SectionOrder { get; set; }
     public GeneralList Intro { get; set; }
-    public GeneralList FarmerDescription { get; set; }
+    public GeneralList FarmerBackground { get; set; }
     public GeneralList Villagers { get; set; }
     public SeasonList Seasons { get; set; }
     public LocationList Locations { get; set; }
+    public GeneralList Festivals { get; set; }
     public GeneralList Outro { get; set; }
 }
