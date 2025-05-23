@@ -51,42 +51,8 @@ namespace ValleyTalk
             }
 
             // Show text entry dialog for the player to type their dialogue
-            TextInputManager.RequestTextInput($"What do you want to say to {__instance.displayName}?", __instance, "");
+            TextInputManager.RequestTextInput($"What do you want to say to {__instance.displayName}?", __instance);
             return false; // Prevent the original method from executing
-            string inputText = textInputHandler.GetString();
-            
-            // Process the input - if not empty, start a conversation
-            if (!string.IsNullOrWhiteSpace(inputText))
-            {
-                // Add the player's line to the conversation
-                DialogueBuilder.Instance.AddConversation(__instance, inputText, isPlayerLine: true);
-                
-                // Generate NPC response
-                var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(__instance, new[] { inputText });
-
-                try
-                {
-                    var newDialogue = newDialogueTask.Result;
-
-                    if (!newDialogue.Contains("$q")) // If not a question
-                    {
-                        DialogueBuilder.Instance.AddConversation(__instance, newDialogue);
-                    }
-
-                    // Show the dialogue response
-                    var dialogueObj = new Dialogue(__instance, null, newDialogue);
-                    // Add as the next dialogue line
-                    __instance.CurrentDialogue.Push(dialogueObj);
-                }
-                catch (Exception ex)
-                {
-                    ModEntry.SMonitor.Log($"Error generating response: {ex.Message}", StardewModdingAPI.LogLevel.Error);
-                }
-            }
-
-            // We've handled the interaction
-            //__result = true;
-            return true;
         }
     }
 }

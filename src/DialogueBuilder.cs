@@ -132,16 +132,15 @@ namespace ValleyTalk
             sb.Append($"#$q {responseIndex++} {SldConstants.DialogueKeyPrefix}Default#{Util.GetString("outputRespond")}");
             sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#{Util.GetString("outputStaySilent")}");
 
-            // Check config for typed response settings
-            if (ModEntry.Config.TypedResponses != "Never")
-            {
-                sb.Append($"#$r -999997 0 {SldConstants.DialogueKeyPrefix}TypedResponse#{Util.GetString("typeYourResponse")}");
-            }
-
             for (int i = 1; i < theLine.Length; i++)
             {
                 sb.Append($"#$r -999998 0 {SldConstants.DialogueKeyPrefix}Next#");
                 sb.Append(theLine[i]);
+            }
+            // Check config for typed response settings
+            if (ModEntry.Config.TypedResponses != "Never")
+            {
+                sb.Append($"#$r -999997 0 {SldConstants.DialogueKeyPrefix}TypedResponse#{Util.GetString("typeYourResponse")}");
             }
             return sb.ToString();
         }

@@ -85,24 +85,6 @@ namespace ValleyTalk
                 return false;
             }
             
-            string farmerReponse = response.responseText;
-            if (response.responseKey == $"{SldConstants.DialogueKeyPrefix}TypedResponse")
-            {
-                // Request deferred text input
-                TextInputManager.RequestTextInput(
-                    Util.GetString("yourResponse"), 
-                    __instance.speaker, 
-                    __instance.speaker.LoadedDialogueKey ?? "default");
-                
-                // Exit the current dialogue to allow text input
-                __result = true;
-                return false;
-            }
-            
-            // Set the isLastDialogueInteractive flag to false using reflection
-            finishedLastDialogueField.SetValue(__instance, false);
-
-            var key = __instance.speaker.LoadedDialogueKey;
             // Get the current dialogue string from __instance
             // If the last entry is "Respond:", remove it
             var dialogueStrings = __instance.dialogues;
@@ -114,6 +96,27 @@ namespace ValleyTalk
             var previous = DialogueBuilder.Instance.LastContext.ChatHistory;
             var dialogueStringIEnum = dialogueStrings.Where(x => !previous.Any(y => y.Contains(x.Text)) && x.Text != "skip").Select(x => x.Text);
             var dialogueStringConcat = string.Join(" ", dialogueStringIEnum);
+            
+            string farmerReponse = response.responseText;
+            if (response.responseKey == $"{SldConstants.DialogueKeyPrefix}TypedResponse")
+            {
+                // Request deferred text input
+                TextInputManager.RequestTextInput(
+                    Util.GetString("yourResponse"), 
+                    __instance.speaker, 
+                    __instance.speaker.LoadedDialogueKey ?? "default",
+                    dialogueStringConcat);
+                
+                // Exit the current dialogue to allow text input
+                __result = true;
+                return false;
+            }
+            
+            // Set the isLastDialogueInteractive flag to false using reflection
+            finishedLastDialogueField.SetValue(__instance, false);
+
+            var key = __instance.speaker.LoadedDialogueKey;
+
             var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(__instance.speaker, new [] { dialogueStringConcat,response.responseText}.ToArray());
 
             var newDialogue = newDialogueTask.Result;

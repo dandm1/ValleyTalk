@@ -17,6 +17,7 @@ namespace ValleyTalk
         private static string _inputTitle = "";
         private static NPC _currentNpc = null;
         private static string _currentDialogueKey = "";
+        private static string _currentResponse = "";
         
         /// <summary>
         /// Initialize the text input manager with mod events
@@ -29,12 +30,13 @@ namespace ValleyTalk
         /// <summary>
         /// Request text input - this will be handled on the next frame
         /// </summary>
-        public static void RequestTextInput(string title, NPC npc, string dialogueKey)
+        public static void RequestTextInput(string title, NPC npc, string dialogueKey = "", string dialogueStringConcat = "")
         {
             _awaitingTextInput = true;
             _inputTitle = title ?? "Enter your response";
             _currentNpc = npc;
             _currentDialogueKey = dialogueKey;
+            _currentResponse = dialogueStringConcat;
         }
 
         private static void OnUpdateTicked(object sender, UpdateTickedEventArgs e)
@@ -57,8 +59,6 @@ namespace ValleyTalk
             catch (Exception ex)
             {
                 ModEntry.SMonitor?.Log($"Error showing text input menu: {ex.Message}", StardewModdingAPI.LogLevel.Error);
-                // If we can't show the menu, treat it as empty input
-                OnTextEntered("");
             }
         }
 
@@ -98,12 +98,12 @@ namespace ValleyTalk
             }
         }
 
-        private static async void GenerateNpcResponse(string playerInput)
+        private static async void GenerateNpcResponse(string playerInput,string translationKey = "")
         {
             try
             {
                 var npc = _currentNpc;
-                var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(_currentNpc, new[] { playerInput }, true);
+                var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(_currentNpc, new[] { _currentResponse, playerInput }, true);
                 var newDialogue = await newDialogueTask;
 
                 if (!string.IsNullOrEmpty(newDialogue))
@@ -114,9 +114,7 @@ namespace ValleyTalk
                     var dialogue = new Dialogue(npc, _currentDialogueKey, newDialogue);
                     npc.CurrentDialogue.Push(dialogue);
 
-                    // Trigger the NPC's checkAction to resume dialogue naturally
-                    // This simulates the player clicking on the NPC again
-                    npc.checkAction(Game1.player, Game1.player.currentLocation);
+                    Game1.DrawDialogue(dialogue);
                 }
             }
             catch (Exception ex)
