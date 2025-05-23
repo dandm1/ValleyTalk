@@ -122,9 +122,9 @@ namespace ValleyTalk
         public override void Entry(IModHelper helper)
         {
             SHelper = helper;
-            
+
             helper.Events.GameLoop.GameLaunched += OnGameLaunched;
-    
+
             Config = Helper.ReadConfig<ModConfig>();
 
             SMonitor = Monitor;
@@ -133,6 +133,9 @@ namespace ValleyTalk
             {
                 return;
             }
+
+            // Initialize the text input manager
+            TextInputManager.Initialize();
 
 #if DEBUG
             if (Config.Debug)
@@ -165,14 +168,13 @@ namespace ValleyTalk
             Llm.SetLlm(llmType, modelName: Config.ModelName, apiKey: Config.ApiKey, url: Config.ServerAddress, promptFormat: Config.PromptFormat);
 
             DialogueBuilder.Instance.Config = Config;
-            
+
             CheckContentPacks();
 
             var harmony = new Harmony(ModManifest.UniqueID);
             harmony.PatchAll();
 
             Log.Debug($"[{DateTime.Now}] Mod loaded");
-
         }
 
         private void CheckContentPacks()

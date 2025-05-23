@@ -71,7 +71,7 @@ namespace ValleyTalk
             return _characters[instance.Name];
         }
 
-        internal async Task<string> GenerateResponse(NPC instance, string[] conversation)
+        internal async Task<string> GenerateResponse(NPC instance, string[] conversation, bool dontSkipNext = false)
         {
             var character = GetCharacter(instance);
             DialogueContext context = LastContext;
@@ -83,7 +83,7 @@ namespace ValleyTalk
             var theLine = await character.CreateBasicDialogue(context);
             string formattedLine = FormatLine(theLine);
             //return formattedLine;
-            return "skip#"+formattedLine;
+            return $"{(dontSkipNext ? "" : "skip#")}{formattedLine}";
         }
 
         internal async Task<Dialogue> GenerateGift(NPC instance, StardewValley.Object gift, int taste)
@@ -122,7 +122,7 @@ namespace ValleyTalk
 
         private string FormatLine(string[] theLine)
         {
-            if (theLine.Length == 1)
+            if (theLine.Length == 1 && ModEntry.Config.TypedResponses != "Always")
             {
                 return theLine[0];
             }
@@ -131,6 +131,13 @@ namespace ValleyTalk
             //sb.Append("#$b#Respond:");
             sb.Append($"#$q {responseIndex++} {SldConstants.DialogueKeyPrefix}Default#{Util.GetString("outputRespond")}");
             sb.Append($"#$r -999999 0 {SldConstants.DialogueKeyPrefix}Silent#{Util.GetString("outputStaySilent")}");
+
+            // Check config for typed response settings
+            if (ModEntry.Config.TypedResponses != "Never")
+            {
+                sb.Append($"#$r -999997 0 {SldConstants.DialogueKeyPrefix}TypedResponse#{Util.GetString("typeYourResponse")}");
+            }
+
             for (int i = 1; i < theLine.Length; i++)
             {
                 sb.Append($"#$r -999998 0 {SldConstants.DialogueKeyPrefix}Next#");
@@ -294,7 +301,7 @@ namespace ValleyTalk
             character.AddOverheardDialogue(instance, filteredDialogues, Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
         }
 
-        internal void AddConversation(NPC otherNpc, string newDialogue)
+        internal void AddConversation(NPC otherNpc, string newDialogue, bool isPlayerLine = false)
         {
             var character = GetCharacter(otherNpc);
             DialogueContext context = LastContext;
@@ -303,6 +310,8 @@ namespace ValleyTalk
             {
                 fullHistory.Add(newDialogue);
             }
+            // Store whether the last line was from the player to help the LLM format responses appropriately
+            context.LastLineIsPlayerInput = isPlayerLine;
             character.AddConversation(fullHistory.ToArray(), Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
         }
 

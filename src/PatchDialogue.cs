@@ -1,7 +1,11 @@
 ﻿using HarmonyLib;
 using StardewValley;
+using StardewValley.Menus;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+using StardewDialogue;
+using ValleyTalk; // Add reference to ValleyTalk namespace for TextInputHandler
 
 namespace ValleyTalk
 {
@@ -23,6 +27,7 @@ namespace ValleyTalk
                 __result = result;
                 return false;
             }
+            
             return true;
         }
     }
@@ -75,12 +80,26 @@ namespace ValleyTalk
             }
             if (response.responseKey == $"{SldConstants.DialogueKeyPrefix}Silent")
             {
-                DialogueBuilder.Instance.AddConversation(__instance.speaker,"");
+                DialogueBuilder.Instance.AddConversation(__instance.speaker, "", isPlayerLine: true);
                 __result = true;
                 return false;
             }
-            // Set the isLastDialogueInteractive flag to false using reflection
             
+            string farmerReponse = response.responseText;
+            if (response.responseKey == $"{SldConstants.DialogueKeyPrefix}TypedResponse")
+            {
+                // Request deferred text input
+                TextInputManager.RequestTextInput(
+                    Util.GetString("yourResponse"), 
+                    __instance.speaker, 
+                    __instance.speaker.LoadedDialogueKey ?? "default");
+                
+                // Exit the current dialogue to allow text input
+                __result = true;
+                return false;
+            }
+            
+            // Set the isLastDialogueInteractive flag to false using reflection
             finishedLastDialogueField.SetValue(__instance, false);
 
             var key = __instance.speaker.LoadedDialogueKey;
@@ -91,13 +110,7 @@ namespace ValleyTalk
             {
                 dialogueStrings.RemoveAt(dialogueStrings.Count - 1);
             }
-            // Find the last index of "Respond:" in the list
-            //var responseIndex = dialogueStrings.FindLastIndex(x => x.Text == "Respond:");
-            //if (responseIndex >= 0)
-            //{
-                // Remove all entries up to and including the last "Respond:"
-            //    dialogueStrings.RemoveRange(0, responseIndex + 1);
-           // }
+
             var previous = DialogueBuilder.Instance.LastContext.ChatHistory;
             var dialogueStringIEnum = dialogueStrings.Where(x => !previous.Any(y => y.Contains(x.Text)) && x.Text != "skip").Select(x => x.Text);
             var dialogueStringConcat = string.Join(" ", dialogueStringIEnum);

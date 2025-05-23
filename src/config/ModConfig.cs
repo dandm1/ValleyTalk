@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using StardewModdingAPI;
 using StardewValley.Network;
 
 namespace ValleyTalk
@@ -20,6 +21,7 @@ namespace ValleyTalk
         public int GeneralFrequency { get; set; } = 4;
         public int MarriageFrequency { get; set; } = 4;
         public int GiftFrequency { get; set; } = 4;
+        public string TypedResponses { get; set; } = "With Generated";
         public string DisableCharacters 
         { 
             get => disableCharacters; 
@@ -27,13 +29,14 @@ namespace ValleyTalk
             {
                 disableCharacters = value;
                 DisabledCharactersList = value
-                            .Split(new[] {',',' ' })
+                            .Split(new[] { ',', ' ' })
                             .Select(s => s.Trim().ToTitleCase())
                             .Where(s => !string.IsNullOrWhiteSpace(s))
                             .ToList();
             }
         }
-        
+
+        public SButton InitiateTypedDialogueKey { get; internal set; } = SButton.LeftAlt;
         internal List<string> DisabledCharactersList { get; private set; } = new List<string>();
     }
 }

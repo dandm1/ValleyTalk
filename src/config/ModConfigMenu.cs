@@ -123,6 +123,21 @@ namespace ValleyTalk
                     setValue: (value) =>{ Config.PromptFormat = value; SetLlm(); }
                 );
             }
+            ConfigMenu.AddTextOption(
+                mod: ModManifest,
+                name: () => Util.GetString("configTypedResponses", returnNull: true) ?? "Typed Responses",
+                tooltip: () => Util.GetString("configTypedResponsesTooltip", returnNull: true) ?? "When should the user be able to type responses?",
+                getValue: () => Config.TypedResponses,
+                allowedValues: new string[] { "Always", "With Generated", "Never" },
+                setValue: (value) =>{ Config.TypedResponses = value; }
+            );
+            ConfigMenu.AddKeybind(
+                mod: ModManifest,
+                name: () => Util.GetString("configKeybind", returnNull: true) ?? "Keybind for typed dialogue",
+                tooltip: () => Util.GetString("configKeybindTooltip", returnNull: true) ?? "Key to press while clicking on an NPC to initiate typed dialogue.",
+                getValue: () => ModEntry.Config.InitiateTypedDialogueKey,
+                setValue: (value) =>{ ModEntry.Config.InitiateTypedDialogueKey = value; }
+            );
             ConfigMenu.AddBoolOption(
                 mod: ModManifest,
                 name: () => Util.GetString("configTranslation", returnNull: true) ?? "Translate Outputs",

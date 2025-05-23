@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +34,7 @@ public class DialogueContext
     public string? Spouse { get; init; }
     public string ChatID { get; init; }
     public string[] ChatHistory { get; set; } = Array.Empty<string>();
+    public bool LastLineIsPlayerInput { get; set; } = false; // Tracks if the last line came from the player
 
     private string[] elements = Array.Empty<string>();
     public bool Married { get; set; } = false;
@@ -292,6 +292,7 @@ public class DialogueContext
         Married = context.Married;
         TargetSamples = context.TargetSamples;
         Location = context.Location;
+        LastLineIsPlayerInput = context.LastLineIsPlayerInput;
     }
 
     private string _value;
