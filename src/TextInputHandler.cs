@@ -64,26 +64,22 @@ namespace ValleyTalk
 
         private static void OnTextEntered(string enteredText)
         {
+            Game1.exitActiveMenu();
+
+            if (_currentNpc == null || string.IsNullOrWhiteSpace(enteredText))
+            {
+                // Reset state
+                _currentNpc = null;
+                _currentDialogueKey = "";
+                _inputTitle = "";
+                return;
+            }
             try
             {
-                Game1.exitActiveMenu();
+                DialogueBuilder.Instance.AddConversation(_currentNpc, enteredText, isPlayerLine: true);
 
-                if (_currentNpc != null && !string.IsNullOrEmpty(_currentDialogueKey))
-                {
-                    // Add the player's response to conversation history
-                    if (!string.IsNullOrWhiteSpace(enteredText))
-                    {
-                        DialogueBuilder.Instance.AddConversation(_currentNpc, enteredText, isPlayerLine: true);
-                    }
-                    else
-                    {
-                        // Empty input is treated as staying silent
-                        DialogueBuilder.Instance.AddConversation(_currentNpc, "", isPlayerLine: true);
-                    }
-
-                    // Generate NPC response to the typed input
-                    GenerateNpcResponse(enteredText);
-                }
+                // Generate NPC response to the typed input
+                GenerateNpcResponse(enteredText);
             }
             catch (Exception ex)
             {

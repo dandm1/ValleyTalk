@@ -51,7 +51,11 @@ namespace ValleyTalk
             }
 
             // Show text entry dialog for the player to type their dialogue
-            TextInputManager.RequestTextInput($"What do you want to say to {__instance.displayName}?", __instance);
+            TextInputManager.RequestTextInput
+            (
+                $"What do you want to say to {__instance.displayName}?",
+                __instance
+            );
             return false; // Prevent the original method from executing
         }
     }
