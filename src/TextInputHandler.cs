@@ -94,13 +94,26 @@ namespace ValleyTalk
             }
         }
 
-        private static async void GenerateNpcResponse(string playerInput,string translationKey = "")
+        private static async void GenerateNpcResponse(string playerInput, string translationKey = "")
         {
+            ThinkingWindow thinkingWindow = null;
+            
             try
             {
                 var npc = _currentNpc;
+                
+                // Show "Thinking..." window
+                thinkingWindow = new ThinkingWindow($"{npc.displayName} is thinking");
+                Game1.activeClickableMenu = thinkingWindow;
+                
                 var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(_currentNpc, new[] { _currentResponse, playerInput }, true);
                 var newDialogue = await newDialogueTask;
+
+                // Hide thinking window
+                if (Game1.activeClickableMenu == thinkingWindow)
+                {
+                    Game1.exitActiveMenu();
+                }
 
                 if (!string.IsNullOrEmpty(newDialogue))
                 {
@@ -116,6 +129,12 @@ namespace ValleyTalk
             catch (Exception ex)
             {
                 ModEntry.SMonitor?.Log($"Error generating NPC response: {ex.Message}", StardewModdingAPI.LogLevel.Error);
+                
+                // Make sure to hide thinking window even if there's an error
+                if (thinkingWindow != null && Game1.activeClickableMenu == thinkingWindow)
+                {
+                    Game1.exitActiveMenu();
+                }
             }
         }
     }
