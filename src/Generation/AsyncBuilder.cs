@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -18,7 +20,7 @@ public class AsyncBuilder
     private NPC _speakingNpc = null;
     private string _currentDialogueKey = "";
     private string _originalLine = null;
-    private string[] _currentConversation = null;
+    private IEnumerable<ConversationElement> _currentConversation = null;
     private StardewValley.Object _currentGift = null;
     private int _currentTaste = 0;
 
@@ -102,7 +104,7 @@ public class AsyncBuilder
         }
     }
 
-    internal void RequestNpcResponse(NPC currentNpc, string[] currentConversation)
+    internal void RequestNpcResponse(NPC currentNpc, IEnumerable<ConversationElement> currentConversation)
     {
         if (_awaitingGeneration)
         {
@@ -167,7 +169,7 @@ public class AsyncBuilder
     private async Task<Dialogue> GenerateNpcResponse()
     {
         var npc = _speakingNpc;
-        var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(npc, _currentConversation, true);
+        var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(npc, _currentConversation.ToList(), true);
         var newDialogue = await newDialogueTask;
         if (newDialogue == null)
         {

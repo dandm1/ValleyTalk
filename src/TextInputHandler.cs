@@ -2,6 +2,7 @@ using StardewValley;
 using System;
 using System.Threading.Tasks;
 using StardewModdingAPI.Events;
+using System.Collections.Generic;
 
 namespace ValleyTalk
 {
@@ -14,8 +15,8 @@ namespace ValleyTalk
         private static string _inputTitle = "";
         private static NPC _currentNpc = null;
         private static string _currentDialogueKey = "";
-        private static string _currentResponse = "";
-        
+        private static List<ConversationElement> _currentResponse = new List<ConversationElement>();
+
         /// <summary>
         /// Initialize the text input manager with mod events
         /// </summary>
@@ -27,13 +28,13 @@ namespace ValleyTalk
         /// <summary>
         /// Request text input - this will be handled on the next frame
         /// </summary>
-        public static void RequestTextInput(string title, NPC npc, string dialogueKey = "", string dialogueStringConcat = "")
+        public static void RequestTextInput(string title, NPC npc, string dialogueKey = "", List<ConversationElement> dialogueHistory = null)
         {
             _awaitingTextInput = true;
             _inputTitle = title ?? "Enter your response";
             _currentNpc = npc;
             _currentDialogueKey = dialogueKey;
-            _currentResponse = dialogueStringConcat;
+            _currentResponse = dialogueHistory ?? new List<ConversationElement>();
         }
 
         private static void OnUpdateTicked(object sender, UpdateTickedEventArgs e)
@@ -75,8 +76,9 @@ namespace ValleyTalk
             {
                 DialogueBuilder.Instance.AddConversation(_currentNpc, enteredText, isPlayerLine: true);
 
+                _currentResponse.Add(new ConversationElement(enteredText, true));
                 // Generate NPC response to the typed input
-                AsyncBuilder.Instance.RequestNpcResponse(_currentNpc, new string[] { enteredText, _currentResponse });
+                AsyncBuilder.Instance.RequestNpcResponse(_currentNpc, _currentResponse.ToArray());
             }
             catch (Exception ex)
             {

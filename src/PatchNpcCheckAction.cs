@@ -50,6 +50,7 @@ namespace ValleyTalk
                 return true; // Let the original method handle NPCs we can't patch
             }
 
+            DialogueBuilder.Instance.ClearContext();
             // Show text entry dialog for the player to type their dialogue
             TextInputManager.RequestTextInput
             (

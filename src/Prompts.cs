@@ -249,7 +249,7 @@ public class Prompts
 
     private void GetPreoccupation(StringBuilder prompt)
     {
-        if (Game1.random.NextDouble() < 0.5 || Context.ChatHistory.Length > 0 ) return;
+        if (Game1.random.NextDouble() < 0.5 || Context.ChatHistory.Any() ) return;
 
         var nPreoccupations = Character.PossiblePreoccupations.Count;
         string preoccupation;
@@ -284,14 +284,14 @@ public class Prompts
 
     private void GetCurrentConversation(StringBuilder prompt)
     {
-        if (Context.ChatHistory.Length == 0) return;
+        if (!Context.ChatHistory.Any()) return;
 
         prompt.AppendLine($"###{Util.GetString(Character,"currentConversationHeading")}");
         prompt.AppendLine(Util.GetString(Character,"currentConversationIntro", new { Name= Name }));
         // Append each line from the chat history, labelling each one alternatively with the NPC's name or 'Farmer'
-        for (int i = 0; i < Context.ChatHistory.Length; i++)
+        for (int i = 0; i < Context.ChatHistory.Count; i++)
         {
-            prompt.AppendLine(i % 2 == 0 ? $"- {Name}: {Context.ChatHistory[i]}" : $"- {Util.GetString(Character,"generalFarmerLabel")}: {Context.ChatHistory[i]}");
+            prompt.AppendLine(Context.ChatHistory[i].IsPlayerLine ?$"- {Util.GetString(Character,"generalFarmerLabel")}: {Context.ChatHistory[i].Text}" : $"- {Name}: {Context.ChatHistory[i].Text}" );
         }
     }
 
@@ -984,7 +984,7 @@ public class Prompts
         var commandPrompt = new StringBuilder();
         commandPrompt.AppendLine($"##{Util.GetString(Character,"commandHeading")}");
         commandPrompt.AppendLine(Util.GetString(Character,"commandIntro", new { Name= Name }));
-        if (!string.IsNullOrWhiteSpace(Context.ScheduleLine) && Context.ChatHistory.Length == 0)
+        if (!string.IsNullOrWhiteSpace(Context.ScheduleLine) && !Context.ChatHistory.Any())
         {
             commandPrompt.AppendLine();
             commandPrompt.AppendLine(Util.GetString(Character,"commandReplaceSchedule", new { ScheduleLine= Context.ScheduleLine }));

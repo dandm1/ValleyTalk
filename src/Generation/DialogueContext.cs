@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlTypes;
 using System.Linq;
 using StardewValley.Characters;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -33,7 +34,7 @@ public class DialogueContext
     public SpouseAction? SpouseAct { get; set; }
     public string? Spouse { get; init; }
     public string ChatID { get; init; }
-    public string[] ChatHistory { get; set; } = Array.Empty<string>();
+    public List<ConversationElement> ChatHistory { get; set; } = new List<ConversationElement>();
     public bool LastLineIsPlayerInput { get; set; } = false; // Tracks if the last line came from the player
 
     private string[] elements = Array.Empty<string>();

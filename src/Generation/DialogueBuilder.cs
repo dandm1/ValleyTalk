@@ -71,14 +71,15 @@ namespace ValleyTalk
             return _characters[instance.Name];
         }
 
-        internal async Task<string> GenerateResponse(NPC instance, string[] conversation, bool dontSkipNext = false)
+        internal async Task<string> GenerateResponse(NPC instance, List<ConversationElement> conversation, bool dontSkipNext = false)
         {
             var character = GetCharacter(instance);
-            DialogueContext context = LastContext;
+
+            DialogueContext context = LastContext ?? GetBasicContext(instance);
             context.CanGiveGift = false;
             var fullHistory = context.ChatHistory.ToList();
-            fullHistory.AddRange(conversation);
-            context.ChatHistory = fullHistory.ToArray();
+            fullHistory.AddRange(conversation.Where(x => !fullHistory.Any(y => y.Id == x.Id)));
+            context.ChatHistory = fullHistory;
             LastContext = context;
             var theLine = await character.CreateBasicDialogue(context);
             string formattedLine = FormatLine(theLine);
@@ -303,15 +304,15 @@ namespace ValleyTalk
         internal void AddConversation(NPC otherNpc, string newDialogue, bool isPlayerLine = false)
         {
             var character = GetCharacter(otherNpc);
-            DialogueContext context = LastContext;
+            DialogueContext context = LastContext ?? GetBasicContext(otherNpc);
             var fullHistory = context.ChatHistory.ToList();
             if (!string.IsNullOrEmpty(newDialogue))
             {
-                fullHistory.Add(newDialogue);
+                fullHistory.Add(new ConversationElement(newDialogue, isPlayerLine));
             }
             // Store whether the last line was from the player to help the LLM format responses appropriately
             context.LastLineIsPlayerInput = isPlayerLine;
-            character.AddConversation(fullHistory.ToArray(), Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+            character.AddConversation(fullHistory.Select(x => x.Text).ToArray(), Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
         }
 
         internal bool PatchNpc(NPC n,int probability=4,bool retainResult=false)
@@ -369,6 +370,11 @@ namespace ValleyTalk
             }
 
             return true;
+        }
+
+        internal void ClearContext()
+        {
+            LastContext = null;
         }
     }
 }

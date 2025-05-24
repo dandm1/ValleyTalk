@@ -42,7 +42,7 @@ namespace ValleyTalk
                     string text2 = __instance.IsGendered ? Game1.LoadStringByGender(n.Gender, text, __instance.Substitutions) : Game1.content.LoadString(text, __instance.Substitutions);
                     AddToNextDialogue.Add(text2);
                 }
-                catch (Exception _)
+                catch (Exception)
                 {
                     // If we can't find the canon line, just skip it
                 }
@@ -71,7 +71,7 @@ namespace ValleyTalk
                         string text2 = __instance.IsGendered ? Game1.LoadStringByGender(n.Gender, text, __instance.Substitutions) : Game1.content.LoadString(text, __instance.Substitutions);
                         AddToNextDialogue.Add(text2);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         // If we can't find the canon line, just skip it
                     }
@@ -161,9 +161,10 @@ namespace ValleyTalk
             }
 
             var previous = DialogueBuilder.Instance.LastContext.ChatHistory;
-            var dialogueStringIEnum = dialogueStrings.Where(x => !previous.Any(y => y.Contains(x.Text)) && x.Text != "skip").Select(x => x.Text);
-            var dialogueStringConcat = string.Join(" ", dialogueStringIEnum);
+            var dialogueStringIEnum = dialogueStrings.Where(x => !previous.Any(y => y.Text.Contains(x.Text)) && x.Text != "skip");
             
+            previous.AddRange(dialogueStringIEnum.Select(x => new ConversationElement(x.Text, false)));
+
             string farmerReponse = response.responseText;
             if (response.responseKey == $"{SldConstants.DialogueKeyPrefix}TypedResponse")
             {
@@ -172,7 +173,7 @@ namespace ValleyTalk
                     Util.GetString("yourResponse"), 
                     __instance.speaker, 
                     __instance.speaker.LoadedDialogueKey ?? "default",
-                    dialogueStringConcat);
+                    previous);
                 
                 // Exit the current dialogue to allow text input
                 __result = true;
@@ -184,7 +185,7 @@ namespace ValleyTalk
 
             var key = __instance.speaker.LoadedDialogueKey;
 
-            var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(__instance.speaker, new [] { dialogueStringConcat,response.responseText}.ToArray());
+            var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(__instance.speaker, previous.AddItem(new ConversationElement(farmerReponse, true)).ToList()); 
 
             var newDialogue = newDialogueTask.Result;
 
