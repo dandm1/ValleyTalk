@@ -1,10 +1,7 @@
 using StardewValley;
-using StardewValley.Menus;
 using System;
 using System.Threading.Tasks;
 using StardewModdingAPI.Events;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace ValleyTalk
 {
@@ -79,7 +76,7 @@ namespace ValleyTalk
                 DialogueBuilder.Instance.AddConversation(_currentNpc, enteredText, isPlayerLine: true);
 
                 // Generate NPC response to the typed input
-                GenerateNpcResponse(enteredText);
+                AsyncBuilder.Instance.RequestNpcResponse(_currentNpc, new string[] { enteredText, _currentResponse });
             }
             catch (Exception ex)
             {
@@ -93,111 +90,6 @@ namespace ValleyTalk
                 _inputTitle = "";
             }
         }
-
-        private static async void GenerateNpcResponse(string playerInput, string translationKey = "")
-        {
-            ThinkingWindow thinkingWindow = null;
-            
-            try
-            {
-                var npc = _currentNpc;
-                
-                // Show "Thinking..." window
-                thinkingWindow = new ThinkingWindow($"{npc.displayName} is thinking");
-                Game1.activeClickableMenu = thinkingWindow;
-                
-                var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(_currentNpc, new[] { _currentResponse, playerInput }, true);
-                var newDialogue = await newDialogueTask;
-
-                // Hide thinking window
-                if (Game1.activeClickableMenu == thinkingWindow)
-                {
-                    Game1.exitActiveMenu();
-                }
-
-                if (!string.IsNullOrEmpty(newDialogue))
-                {
-                    DialogueBuilder.Instance.AddConversation(npc, newDialogue);
-                    
-                    // Create a new dialogue with the response and add it to the NPC's dialogue stack
-                    var dialogue = new Dialogue(npc, _currentDialogueKey, newDialogue);
-                    npc.CurrentDialogue.Push(dialogue);
-
-                    Game1.DrawDialogue(dialogue);
-                }
-            }
-            catch (Exception ex)
-            {
-                ModEntry.SMonitor?.Log($"Error generating NPC response: {ex.Message}", StardewModdingAPI.LogLevel.Error);
-                
-                // Make sure to hide thinking window even if there's an error
-                if (thinkingWindow != null && Game1.activeClickableMenu == thinkingWindow)
-                {
-                    Game1.exitActiveMenu();
-                }
-            }
-        }
     }
 
-    /// <summary>
-    /// Wrapper to integrate DialogueTextInputMenu with Stardew Valley's menu system
-    /// </summary>
-    internal class DialogueTextInputMenuWrapper : IClickableMenu
-    {
-        private readonly DialogueTextInputMenu _innerMenu;
-
-        public DialogueTextInputMenuWrapper(DialogueTextInputMenu innerMenu) : base()
-        {
-            _innerMenu = innerMenu;
-        }
-
-        public override void draw(SpriteBatch b)
-        {
-            _innerMenu.Draw(b);
-        }
-
-        public override void receiveLeftClick(int x, int y, bool playSound = true)
-        {
-            _innerMenu.ReceiveLeftClick(x, y);
-        }
-
-        public override void receiveKeyPress(Keys key)
-        {
-            _innerMenu.ReceiveKeyPress(key);
-        }
-
-        public override bool overrideSnappyMenuCursorMovementBan()
-        {
-            return true;
-        }
-
-        protected override void cleanupBeforeExit()
-        {
-            _innerMenu.Close();
-            base.cleanupBeforeExit();
-        }
-    }
-
-    /// <summary>
-    /// Simple text input handler that uses the deferred system
-    /// </summary>
-    public class TextInputHandler
-    {
-        private readonly string _title;
-        
-        public TextInputHandler(string title)
-        {
-            _title = title ?? "Enter your response";
-        }
-
-        /// <summary>
-        /// Request text input - returns a special marker since actual input is deferred
-        /// </summary>
-        public string GetString()
-        {
-            // We can't return the actual text synchronously, so we'll need to 
-            // handle this differently in the dialogue patch
-            return "__TEXT_INPUT_DEFERRED__";
-        }
-    }
 }

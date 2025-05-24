@@ -60,7 +60,7 @@ namespace ValleyTalk
             var messageSize = Game1.dialogueFont.MeasureString(animatedMessage);
             var messagePos = new Vector2(
                 this.xPositionOnScreen + (this.width - messageSize.X) / 2,
-                this.yPositionOnScreen + this.height / 2 + Margin
+                this.yPositionOnScreen + this.height / 2 + Margin / 2
             );
             
             b.DrawString(Game1.dialogueFont, animatedMessage, messagePos, Game1.textColor);
