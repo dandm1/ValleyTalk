@@ -35,12 +35,19 @@ namespace ValleyTalk
             }
             if (_skipGeneratedDialogue.Contains(__instance.DialogueKey))
             {
-                // Look up the canon line
-                string text = __instance.DialogueFile + ":" + __instance.DialogueKey;
-                string text2 = __instance.IsGendered ? Game1.LoadStringByGender(n.Gender, text, __instance.Substitutions) : Game1.content.LoadString(text, __instance.Substitutions);
-                AddToNextDialogue.Add(text2);
+                try
+                {
+                    // Look up the canon line
+                    string text = __instance.DialogueFile + ":" + __instance.DialogueKey;
+                    string text2 = __instance.IsGendered ? Game1.LoadStringByGender(n.Gender, text, __instance.Substitutions) : Game1.content.LoadString(text, __instance.Substitutions);
+                    AddToNextDialogue.Add(text2);
+                }
+                catch (Exception _)
+                {
+                    // If we can't find the canon line, just skip it
+                }
                 // Skip the morning chores dialogue generation for these specific keys
-                __result = new Dialogue(n, __instance.DialogueKey, null);
+                    __result = new Dialogue(n, __instance.DialogueKey, null);
                 return false;
             }
             if (AsyncBuilder.Instance.AwaitingGeneration && AsyncBuilder.Instance.SpeakingNpc == n)
@@ -58,9 +65,16 @@ namespace ValleyTalk
                 Task<Dialogue> resultTask;
                 if (AddToNextDialogue.Count > 0)
                 {
-                    string text = __instance.DialogueFile + ":" + __instance.DialogueKey;
-                    string text2 = __instance.IsGendered ? Game1.LoadStringByGender(n.Gender, text, __instance.Substitutions) : Game1.content.LoadString(text, __instance.Substitutions);
-                    AddToNextDialogue.Add(text2);
+                    try
+                    {
+                        string text = __instance.DialogueFile + ":" + __instance.DialogueKey;
+                        string text2 = __instance.IsGendered ? Game1.LoadStringByGender(n.Gender, text, __instance.Substitutions) : Game1.content.LoadString(text, __instance.Substitutions);
+                        AddToNextDialogue.Add(text2);
+                    }
+                    catch (Exception ex)
+                    {
+                        // If we can't find the canon line, just skip it
+                    }
                     // If we have any lines to add to the next dialogue, do so
                     var nextDialogue = string.Join(" ", AddToNextDialogue);
                     AddToNextDialogue.Clear();
