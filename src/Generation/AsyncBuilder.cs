@@ -22,6 +22,9 @@ public class AsyncBuilder
     private StardewValley.Object _currentGift = null;
     private int _currentTaste = 0;
 
+    public bool AwaitingGeneration => _awaitingGeneration;
+    public NPC SpeakingNpc => _speakingNpc;
+    
     private void OnUpdateTicked(object sender, UpdateTickedEventArgs e)
     {
         ThinkingWindow thinkingWindow = null;
