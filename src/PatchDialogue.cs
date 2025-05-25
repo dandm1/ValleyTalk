@@ -183,20 +183,11 @@ namespace ValleyTalk
             // Set the isLastDialogueInteractive flag to false using reflection
             finishedLastDialogueField.SetValue(__instance, false);
 
-            var key = __instance.speaker.LoadedDialogueKey;
+            AsyncBuilder.Instance.RequestNpcResponse(
+                __instance.speaker, 
+                previous.AddItem(new ConversationElement(farmerReponse, true)).ToArray()
+            );
 
-            var newDialogueTask = DialogueBuilder.Instance.GenerateResponse(__instance.speaker, previous.AddItem(new ConversationElement(farmerReponse, true)).ToList()); 
-
-            var newDialogue = newDialogueTask.Result;
-
-            if (!newDialogue.Contains("$q"))
-            {
-                DialogueBuilder.Instance.AddConversation(__instance.speaker, newDialogue);
-            }
-            // Call parseDialogueString using reflection
-            parseDialogueStringMethod.Invoke(__instance, new object[] { newDialogue, key });
-            __instance.isCurrentStringContinuedOnNextScreen = true;
-            isLastDialogueInteractiveField.SetValue(__instance, newDialogue.Contains("$q"));
             __result = true;
             return false;
         }
