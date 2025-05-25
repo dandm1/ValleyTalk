@@ -902,6 +902,14 @@ public class Prompts
             
             foreach (var eventHistory in historySample)
             {
+                // Exclude the current conversation
+                if (eventHistory.Item2 is ConversationHistory conv && Context.ChatHistory.Any())
+                {
+                    if (conv.Id == Context.ChatHistory.First().Id)
+                    {
+                        continue;
+                    }
+                }
                 prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {eventHistory.Item2.Format(Name)}");
             }
         }
