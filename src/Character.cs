@@ -302,7 +302,7 @@ public class Character
     {
         var resultLines = resultString.Split('\n').AsEnumerable();
         // Remove any line breaks
-        resultLines = resultLines.Select(x => x.Replace("\n", "").Replace("\r", ""));
+        resultLines = resultLines.Select(x => x.Replace("\n", "").Replace("\r", "").Trim());
         resultLines = resultLines.Where(x => !string.IsNullOrWhiteSpace(x));
         // Find the first line that starts with '- ' and remove any lines before it
         resultLines = resultLines.SkipWhile(x => !x.StartsWith("- "));
@@ -513,7 +513,7 @@ public class Character
         AddHistory(newHistory,time);
     }
 
-    internal void AddConversation(string[] chatHistory, int year, StardewValley.Season season, int dayOfMonth, int timeOfDay)
+    internal void AddConversation(List<ConversationElement> chatHistory, int year, StardewValley.Season season, int dayOfMonth, int timeOfDay)
     {
         var time = new StardewTime(year,season, dayOfMonth, timeOfDay);
         var newHistory = new ConversationHistory(chatHistory);
