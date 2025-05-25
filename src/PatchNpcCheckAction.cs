@@ -1,9 +1,5 @@
 using HarmonyLib;
 using StardewValley;
-using StardewValley.Menus;
-using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using StardewModdingAPI;
 
 namespace ValleyTalk
@@ -51,10 +47,12 @@ namespace ValleyTalk
             }
 
             DialogueBuilder.Instance.ClearContext();
+            var character = DialogueBuilder.Instance.GetCharacter(__instance);  
+            var prompt = Util.GetString(character, "uiStartConversation", new { Name = __instance.displayName }) ?? $"What do you want to say to {__instance.displayName}?";
             // Show text entry dialog for the player to type their dialogue
             TextInputManager.RequestTextInput
             (
-                $"What do you want to say to {__instance.displayName}?",
+                prompt,
                 __instance
             );
             return false; // Prevent the original method from executing

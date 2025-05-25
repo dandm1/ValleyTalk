@@ -170,7 +170,7 @@ namespace ValleyTalk
             {
                 // Request deferred text input
                 TextInputManager.RequestTextInput(
-                    Util.GetString("yourResponse"), 
+                    Util.GetString("uiYourResponse"), 
                     __instance.speaker, 
                     __instance.speaker.LoadedDialogueKey ?? "default",
                     previous);

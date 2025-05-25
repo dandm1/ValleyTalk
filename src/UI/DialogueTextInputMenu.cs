@@ -106,7 +106,7 @@ namespace ValleyTalk
             _inputTextBox.Draw(spriteBatch);
 
             // Draw instruction text
-            var instruction = "Press Enter to submit or click OK. Press Escape to cancel.";
+            var instruction = Util.GetString("uiDialogueInstructions") ?? "Press Enter to submit or click OK. Press Escape to cancel.";
             var instructionSize = Game1.smallFont.MeasureString(instruction);
             var instructionPos = new Vector2(
                 _menuPosition.X + (MenuWidth - instructionSize.X) / 2,
@@ -117,20 +117,6 @@ namespace ValleyTalk
             // Draw buttons
             _okButton.draw(spriteBatch);
             _cancelButton.draw(spriteBatch);
-
-            // Draw button labels
-            //var okLabel = "OK";
-            //var cancelLabel = "Cancel";
-            //var okLabelSize = Game1.smallFont.MeasureString(okLabel);
-            //var cancelLabelSize = Game1.smallFont.MeasureString(cancelLabel);
-
-            //spriteBatch.DrawString(Game1.smallFont, okLabel,
-            //    new Vector2(_okButton.bounds.X + (ButtonSize - okLabelSize.X) / 2,
-            //               _okButton.bounds.Y + ButtonSize + 5), Game1.textColor);
-
-            //spriteBatch.DrawString(Game1.smallFont, cancelLabel,
-            //    new Vector2(_cancelButton.bounds.X + (ButtonSize - cancelLabelSize.X) / 2,
-            //               _cancelButton.bounds.Y + ButtonSize + 5), Game1.textColor);
 
             // Draw mouse cursor
             if (!Game1.options.hardwareCursor)

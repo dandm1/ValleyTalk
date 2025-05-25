@@ -34,8 +34,10 @@ public class AsyncBuilder
         if (_awaitingGeneration && Game1.activeClickableMenu == null)
         {
             _awaitingGeneration = false;
+            var character = DialogueBuilder.Instance.GetCharacter(_speakingNpc);
+            var display = Util.GetString(character, "uiThinking", new { Name = _speakingNpc.displayName }) ?? $"{_speakingNpc.displayName} is thinking";
             // Show "Thinking..." window
-            thinkingWindow = new ThinkingWindow($"{_speakingNpc.displayName} is thinking");
+            thinkingWindow = new ThinkingWindow(display);
             Game1.activeClickableMenu = thinkingWindow;
 
             _ = PerformGeneration(thinkingWindow);

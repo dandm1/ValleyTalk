@@ -141,7 +141,7 @@ namespace ValleyTalk
             // Check config for typed response settings
             if (ModEntry.Config.TypedResponses != "Never")
             {
-                sb.Append($"#$r -999997 0 {SldConstants.DialogueKeyPrefix}TypedResponse#{Util.GetString("typeYourResponse")}");
+                sb.Append($"#$r -999997 0 {SldConstants.DialogueKeyPrefix}TypedResponse#{Util.GetString("uiTypeYourResponse")}");
             }
             return sb.ToString();
         }
