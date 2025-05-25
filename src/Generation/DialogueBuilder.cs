@@ -312,7 +312,7 @@ namespace ValleyTalk
             }
             // Store whether the last line was from the player to help the LLM format responses appropriately
             context.LastLineIsPlayerInput = isPlayerLine;
-            character.AddConversation(fullHistory.Select(x => x.Text).ToArray(), Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+            character.AddConversation(fullHistory, Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
         }
 
         internal bool PatchNpc(NPC n,int probability=4,bool retainResult=false)

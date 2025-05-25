@@ -81,7 +81,13 @@ internal class StardewEventHistory
                 _dialogueHistory.Add(new(time,(DialogueHistory)theEvent));
                 break;
             case "ConversationHistory":
-                _conversationHistory.Add(new(time,(ConversationHistory)theEvent));
+                var chEvent = theEvent as ConversationHistory;
+                if (_conversationHistory.Any(x => ((ConversationHistory)x.Item2).Id == chEvent.Id))
+                {
+                    // If the conversation already exists, update it
+                    _conversationHistory.RemoveAll(x => ((ConversationHistory)x.Item2).Id == chEvent.Id);
+                }
+                _conversationHistory.Add(new(time,chEvent));
                 break;
             default:
                 throw new NotImplementedException();
