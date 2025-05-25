@@ -16,6 +16,7 @@ namespace ValleyTalk
         public string ModelName { get; set; } = "";
         public string ServerAddress { get; set; } = "https://openrouter.ai/api";
         public string PromptFormat { get; set; } = "[INST] {system}\n{prompt}[/INST]\n{response_start}";
+        public int QueryTimeout { get; set; } = 60;
         public string ApiKey { get; set; } = string.Empty;
         public bool ApplyTranslation { get; set; } = false;
         public int GeneralFrequency { get; set; } = 4;

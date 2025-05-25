@@ -113,16 +113,6 @@ namespace ValleyTalk
                     setValue: (value) =>{ Config.ServerAddress = value; SetLlm(); }
                 );
             }
-            if (constructorParameters.Contains("promptFormat", StringComparer.OrdinalIgnoreCase))
-            {
-                ConfigMenu.AddTextOption(
-                    mod: ModManifest,
-                    name: () => Util.GetString("configPromptFormat", returnNull: true) ?? "Propmpt Format",
-                    tooltip: () => Util.GetString("configPromptFormatTooltip", returnNull: true) ?? "Format of the prompt to send to the AI model.",
-                    getValue: () => Config.PromptFormat,
-                    setValue: (value) =>{ Config.PromptFormat = value; SetLlm(); }
-                );
-            }
             ConfigMenu.AddTextOption(
                 mod: ModManifest,
                 name: () => Util.GetString("configTypedResponses", returnNull: true) ?? "Typed Responses",

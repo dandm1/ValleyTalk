@@ -77,7 +77,7 @@ internal class LlmClaude : Llm, IGetModelNames
         // call out to URL passing the object as the body, and return the result
         var client = new HttpClient
         {
-            Timeout = TimeSpan.FromMinutes(1)
+            Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
         };
 
         int retry=3;

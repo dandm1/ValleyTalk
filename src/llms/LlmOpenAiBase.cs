@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -49,7 +50,7 @@ internal abstract class LlmOpenAiBase : Llm
         // call out to URL passing the object as the body, and return the result
         var client = new HttpClient
         {
-            Timeout = TimeSpan.FromMinutes(1)
+            Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
         };
 
         int retry=3;

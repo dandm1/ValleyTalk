@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -55,7 +56,7 @@ internal class LlmLlamaCpp : Llm
         // call out to URL passing the object as the body, and return the result
         var client = new HttpClient
         {
-            Timeout = TimeSpan.FromMinutes(5)
+            Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
         };
         bool retry=true;
         while (retry)
