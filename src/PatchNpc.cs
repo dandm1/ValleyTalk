@@ -75,14 +75,9 @@ namespace ValleyTalk
                         allLines = allLines.Skip(1).ToList();
                         originalLine = string.Join(" ", allLines.Select(x => x.Text));
                     }
-                    var newDialogueTask = DialogueBuilder.Instance.Generate(__instance, "default", originalLine);
-                    var newDialogue = newDialogueTask.Result;
-                    if (newDialogue != null)
-                    {
-                        __result.Push(newDialogue);
-                    }
-                    theLine = newDialogue.dialogues;
-                    DialogueBuilder.Instance.AddDialogueLine(__instance, newDialogue.dialogues);
+                    AsyncBuilder.Instance.RequestNpcBasic(__instance, "default", originalLine);
+                    __result = null;
+                    return;
                 }
                 else
                 {
