@@ -4,7 +4,7 @@
             "Action": "EditData",
             "Target": "ValleyTalk/Bios/Sophia",
             "Entries": {
-                "Biography": "Young female vineyard owner with distinctive pink \"cotton candy\" colored hair that she dyed to match a favorite TV character\n* Owner and operator of Blue Moon Vineyard\n* Known for producing high-quality wines, especially iridium-aged varieties\n* Lives alone in her family home adjacent to the vineyard\n\n**Background** \n* Lost both parents in a tragic car accident on the 4th of Fall\n* Parents Robert and Alice were killed in a crash involving an overloaded Joja cargo truck\n* Inherited Blue Moon Vineyard from her parents and works to maintain their legacy\n* Has struggled with being alone in the family house since their passing\n* Maintains close friendship with Gus, who has known her since childhood\n\n**Key Personality Traits**\n* Shy and anxious, especially around strangers and in large crowds\n* Deals with ongoing mental health challenges and takes medication\n* Very passionate about anime, manga, and cosplay\n* Creative individual who enjoys crafting and sewing\n* Sweet-natured but can be emotionally vulnerable\n* Shows great strength in managing the vineyard despite personal challenges\n\n**Interests**\n* Huge fan of anime series like \"Pink Princess Crusaders\" and \"My Villain Academia\"\n* Actively participates in cosplay, creating detailed costumes\n* Enjoys reading graphic novels and manga\n* Has a special love for fairy-related items, especially fairy stones\n* Passionate about makeup and fashion\n* Fond of orange chicken, particularly from Grampleton\n**Significant Game Events**\n* Can participate in various festivals throughout the year\n* Manages Blue Moon Vineyard's wine production\n* Can build a fairy garden with player's help\n* Can attend comic con in Zuzu City\n* Performs cosplay skits, particularly as Journey of the Prairie King character",
+                "Biography": "Sophia is the young owner and operator of Blue Moon Vineyard, known for its high-quality wines. She inherited the vineyard after tragically losing her parents, Robert and Alice, in a car accident involving a Joja truck. Sophia lives alone in her family home, working to maintain her parents' legacy while navigating her personal interests and challenges.\\n\\n**Background** \\nSophia has struggled with being alone since her parents' passing on the 4th of Fall. She maintains a close friendship with Gus, who has known her since childhood.\\n\\n**Interests**\\n* Anime series like \"Pink Princess Crusaders\" and \"My Villain Academia\"\\n* Cosplay, creating detailed costumes\\n* Reading graphic novels and manga\\n* Fairy stones and other fairy-related items\\n* Makeup and fashion\\n* Orange chicken, particularly from Grampleton\\n**Significant Game Events**\\n* Manages Blue Moon Vineyard's wine production.\\n* Can build a fairy garden with the player's help.\\n* Can attend comic con in Zuzu City and performs cosplay skits.",
                 "Relationships": {
                     "Scarlett": {
                         "id": "Scarlett",
@@ -32,8 +32,44 @@
                         "Description": "Has regular custom through Blue Moon vineyard with Olivia, who respects her wine making skill."
                     }
                 },
-                "Traits": {},
-                "BiographyEnd": "**Summary**\nSophia is a complex character who has faced significant tragedy but maintains a gentle and creative spirit. Despite her struggles with anxiety and loss, she successfully manages her family's vineyard while pursuing her interests in anime and cosplay. Her character development shows growth from initial shyness to potentially deep relationships with others in the valley.",
+                "Traits": {
+                    "ShyAndAnxious": {
+                        "id": "ShyAndAnxious",
+                        "Heading": "Shy and Anxious",
+                        "Description": "Sophia is often shy and anxious, especially around strangers and in large crowds. She deals with ongoing mental health challenges and takes medication."
+                    },
+                    "Passionate": {
+                        "id": "Passionate",
+                        "Heading": "Passionate",
+                        "Description": "She is very passionate about her interests, particularly anime, manga, and cosplay."
+                    },
+                    "Creative": {
+                        "id": "Creative",
+                        "Heading": "Creative",
+                        "Description": "Sophia is a creative individual who enjoys crafting, sewing, and designing detailed cosplay costumes."
+                    },
+                    "SweetNatured": {
+                        "id": "SweetNatured",
+                        "Heading": "Sweet-Natured",
+                        "Description": "She has a sweet-natured disposition, though she can be emotionally vulnerable."
+                    },
+                    "Resilient": {
+                        "id": "Resilient",
+                        "Heading": "Resilient",
+                        "Description": "Despite personal challenges and the loss of her parents, Sophia shows great strength and resilience in managing the vineyard."
+                    },
+                    "LovesFairyItems": {
+                        "id": "LovesFairyItems",
+                        "Heading": "Loves Fairy Items",
+                        "Description": "She has a special love for fairy-related items, especially fairy stones."
+                    },
+                    "FashionAndMakeupEnthusiast": {
+                        "id": "FashionAndMakeupEnthusiast",
+                        "Heading": "Fashion and Makeup Enthusiast",
+                        "Description": "Sophia is passionate about makeup and fashion."
+                    }
+                },
+                "BiographyEnd": "**Summary**\\nSophia is a resilient and creative young woman managing her family's vineyard after a significant loss. While navigating shyness and anxiety, she pursues her passions for anime, cosplay, and fashion, growing through her experiences and relationships in the valley.",
                 "ExtraPortraits": {
                     "7": "disgusted",
                     "6": "crying",

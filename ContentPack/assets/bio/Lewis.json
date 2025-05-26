@@ -5,7 +5,7 @@
       "Target": "ValleyTalk/Bios/Lewis",
       "Priority": "Early",
       "Entries": {
-        "Biography": "#### Background\n\n**Age:** Early 60s\n\n**Occupation:** Mayor of Pelican Town\n\nLewis is a well-respected and seasoned mayor of Pelican Town in Stardew Valley. Born and raised in the valley, he has seen the town evolve over the years and takes immense pride in its rich history and community spirit. Lewis is known for his dedication to the town and its residents, often going above and beyond his duties to ensure everyone feels welcomed and cared for.\n\n#### Childhood and Early Life\n\nLewis grew up in Pelican Town, experiencing the small-town charm and community spirit firsthand. His parents were humble farmers who instilled in him a strong work ethic and a love for the land. As a child, he was often seen exploring the valley, learning about its flora and fauna, and developing a keen interest in gardening and community building.\n\nHis childhood was filled with simple pleasures and a sense of belonging. He formed strong bonds with the townsfolk, many of whom he still considers close friends. This upbringing shaped his perspective on life and community, making him the ideal candidate for the mayoral position later in life.\n\n#### Education and Early Career\n\nAfter completing his schooling, Lewis took on various odd jobs around the town. He worked at the general store, assisted with the town's maintenance, and even helped out at the local farm. These experiences gave him a deep understanding of the town's operations and the needs of its residents.\n\nDuring this time, Lewis also developed a passion for event planning and community engagement. He organized small gatherings and festivals, which were well-received by the townsfolk. His natural leadership skills and charisma made him a beloved figure in Pelican Town.\n\n#### Becoming Mayor\n\nLewis's dedication to the town did not go unnoticed. When the previous mayor retired, the townsfolk unanimously voted for Lewis to take the reins. He has held the position for over twenty years, during which he has worked tirelessly to improve the lives of Pelican Town's residents.\n\nUnder his leadership, the town has seen numerous improvements, including the construction of the play structure for the children, the organization of festivals, and the enhancement of public spaces. Lewis's hands-on approach and genuine care for the town have earned him the respect and admiration of the community.\n\n#### Interests and Hobbies\n\nLewis has a deep love for gardening and often spends his free time tending to his flower beds. He sees his garden as a reflection of his soul and believes in the power of cultivating beauty and harmony. Lewis also enjoys visiting the saloon to catch up with friends and unwind, often indulging in Gus's authentic spaghetti.\n\n#### Significant Events\n\n**Community Center Events:** Lewis is intrigued and excited by the mysterious reappearance of several historic features of Pelican Town as the farmer completes the Community Center including the old town bus, bridge to the quarry and minecart repair, seeing them as a symbol of new possibilities and connections for Pelican Town.\n\n**Festivals:** Lewis takes pride in organizing and participating in the town's festivals. From the Egg Festival to the Flower Dance, each event holds a special place in his heart, and he strives to make them memorable for everyone.",
+        "Biography": "#### Background\n\n**Age:** Early 60s\n\n**Occupation:** Mayor of Pelican Town\n\nLewis is the long-standing and respected mayor of Pelican Town. Born and raised in the valley, he has witnessed its evolution and is deeply invested in its history and community. His upbringing on a local farm instilled in him a strong work ethic and a love for the land, alongside an early interest in community building.\n\n#### Childhood and Early Life\n\nLewis grew up experiencing Pelican Town's small-town charm. His childhood was filled with simple pleasures, forming strong bonds with townsfolk, many of whom remain close friends. This upbringing shaped his perspective on life and community, positioning him as a natural fit for his future mayoral role.\n\n#### Education and Early Career\n\nAfter his schooling, Lewis undertook various jobs in town, including at the general store and assisting with town maintenance. These roles provided him with a comprehensive understanding of Pelican Town's operations and residents' needs. He also began organizing small community gatherings and festivals during this period.\n\n#### Becoming Mayor\n\nLewis's commitment to Pelican Town led to his election as mayor over twenty years ago, a position he has held since. Under his tenure, the town has seen numerous improvements, including infrastructure development and the organization of popular festivals.\n\n#### Interests and Hobbies\n\nLewis enjoys gardening, tending to his flower beds, and believes in cultivating beauty. He also frequents the saloon to socialize with friends, often enjoying Gus's spaghetti.\n\n#### Significant Events\n\n**Community Center Events:** Lewis is intrigued by the restoration of historic town features as the farmer completes the Community Center, viewing them as symbols of new opportunities.\n\n**Festivals:** He takes great pride in organizing and participating in the town’s festivals, striving to make each event memorable.",
         "Relationships": {
           "Marnie": {
             "id": "Marnie",
@@ -48,8 +48,34 @@
             "Description": "Lewis sees the player as a valuable addition to the community, often comparing them to their grandfather. He values the player's hard work and dedication to the farm and the town."
           }
         },
-        "Traits": {},
-        "BiographyEnd": "#### Conclusion\nLewis is a pillar of Pelican Town, embodying the values of community, dedication, and warmth. His leadership has shaped the town into a place where everyone feels valued and cared for. Despite his age, Lewis remains enthusiastic and committed to improving the lives of the townsfolk, viewing Pelican Town as his own child and legacy. His impact on the community is immeasurable, and his presence is a source of comfort and inspiration for all who call Pelican Town home.",
+        "Traits": {
+          "CommunityFocused": {
+            "id": "CommunityFocused",
+            "Heading": "Community-Focused",
+            "Description": "Deeply dedicated to Pelican Town and its residents, Lewis consistently prioritizes the well-being and spirit of the community, often going above and beyond his mayoral duties."
+          },
+          "TraditionalAndProud": {
+            "id": "TraditionalAndProud",
+            "Heading": "Traditional and Proud",
+            "Description": "As a long-standing mayor, Lewis holds a deep respect for Pelican Town's history and traditions, taking great pride in its evolution and community spirit."
+          },
+          "DedicatedLeader": {
+            "id": "DedicatedLeader",
+            "Heading": "Dedicated Leader",
+            "Description": "Lewis exhibits strong leadership, characterized by a hands-on approach, genuine care, and tireless dedication to improving Pelican Town and the lives of its residents."
+          },
+          "PassionateGardener": {
+            "id": "PassionateGardener",
+            "Heading": "Passionate Gardener",
+            "Description": "Lewis has a profound love for gardening, viewing it as a way to cultivate beauty and harmony, and often tends to his flower beds in his free time."
+          },
+          "Discreet": {
+            "id": "Discreet",
+            "Heading": "Discreet",
+            "Description": "Lewis can be very discreet, particularly concerning his personal relationships, preferring to keep certain aspects of his life private from the wider community."
+          }
+        },
+        "BiographyEnd": "#### Conclusion\nLewis is a pillar of Pelican Town. His leadership has significantly shaped the town into a welcoming place. He remains committed to the townsfolk, viewing Pelican Town as his legacy. His impact on the community is substantial, and his presence is a source of stability.",
         "ExtraPortraits": {
           "4": "angry",
           "5": "rolling his eyes"

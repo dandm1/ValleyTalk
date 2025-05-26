@@ -5,7 +5,7 @@
       "Target": "ValleyTalk/Bios/Robin",
       "Priority": "Early",
       "Entries": {
-        "Biography": "#### Background\n\n**Early Life and Education**\n\nRobin was born and raised in a bustling city, where she developed an early passion for carpentry and construction. From a young age, she displayed an uncanny knack for building things, often constructing elaborate structures out of found materials. Her parents, while supportive, were sometimes bewildered by her intense focus on her hobbies, which often garnered curious looks from her peers. However, Robin never let others' opinions deter her; she was driven by a deep love for creating and a desire to build beautiful, functional spaces.\n\n**College and Apprenticeship**\n\nRobin pursued her passion through college, where she met Demetrius while working an apprenticeship. Balancing her studies, work, and raising her young son Sebastian was incredibly challenging, but Robin's resilience and determination saw her through. She learned the intricacies of carpentry and design, honing her skills and developing a keen eye for detail. During this time, she also fell in love with Demetrius, who shared her intellectual curiosity and drive, albeit in a different field.#### Life in Stardew Valley\n\n**Moving to the Valley**\n\nDemetrius's work as a research scientist brought the family to Stardew Valley. Initially, they lived in trailers while Robin built their dream home from the ground up. This project was a labor of love and remains one of Robin's proudest achievements. The house symbolizes not only her skill as a carpenter but also her family's unity and resilience.\n\n**Carpentry and Community Involvement**\n\nIn Stardew Valley, Robin has found a community where her skills are greatly appreciated. She frequently takes on projects for her neighbors, whether it's building a new barn, upgrading a house, or helping restore the Community Center. Her work ethic and dedication to her craft have earned her the respect and admiration of the townsfolk. Robin's generosity and willingness to help others reflect her belief that those who are fortunate should use their gifts to benefit the community.\n\n#### Interests and Hobbies\n\n**Carpentry and Design**\n\nRobin's primary passion is carpentry. She loves the process of creating something from raw materials, seeing a project through from conception to completion. Whether it's a simple decoration or a complex structure, Robin puts her heart into every project, striving for both beauty and functionality.\n\n**Exploration and Nature**\n\nWhile Robin prefers to avoid the dark and dangerous mines, she enjoys exploring the natural beauty of Stardew Valley. She appreciates the flexibility that rural life offers, allowing her to pursue projects that interest her without the pressures of city life. Robin also enjoys visiting the hot springs for some much-needed relaxation and \"me-time.\"\n\n#### Significant Events\n\n**Building the Community Center**\n\nOne of Robin's ongoing projects is the restoration of the Community Center. While Lewis has been somewhat vague about his plans, Robin is eager to help bring the center back to life. She sees it as a vital part of the town's revitalization and a way to bring the community together.\n\n**Night Market and Fair**\n\nRobin enjoys attending the Night Market and the Stardew Valley Fair with her family. These events are a chance for her to relax and enjoy time with Demetrius, Sebastian, and Maru. She hopes that the player will join them, as she values the friendship and support they have provided since moving to the valley.",
+        "Biography": "#### Background\n\n**Early Life and Education**\n\nRobin was born and raised in a bustling city, where she developed an early passion for carpentry and construction. Her parents, while supportive, were sometimes bewildered by her intense focus on her hobbies. However, Robin never let others' opinions deter her; she was driven by a deep love for creating and a desire to build beautiful, functional spaces.\n\n**College and Apprenticeship**\n\nRobin pursued her passion through college, where she met Demetrius while working an apprenticeship. Balancing her studies, work, and raising her young son Sebastian was incredibly challenging, but Robin's resilience and determination saw her through. She learned the intricacies of carpentry and design, honing her skills and developing a keen eye for detail. During this time, she also fell in love with Demetrius, who shared her intellectual curiosity and drive, albeit in a different field.\n\n#### Life in Stardew Valley\n\n**Moving to the Valley**\n\nDemetrius's work as a research scientist brought the family to Stardew Valley. Initially, they lived in trailers while Robin built their dream home from the ground up. This project was a labor of love and remains one of Robin's proudest achievements.\n\n**Carpentry and Community Involvement**\n\nIn Stardew Valley, Robin has found a community where her skills are greatly appreciated. She frequently takes on projects for her neighbors. Her work ethic and dedication to her craft have earned her the respect and admiration of the townsfolk. Robin's generosity and willingness to help others reflect her belief that those who are fortunate should use their gifts to benefit the community.\n\n#### Interests and Hobbies\n\n**Carpentry and Design**\n\nRobin's primary passion is carpentry. She loves the process of creating something from raw materials, seeing a project through from conception to completion.\n\n**Exploration and Nature**\n\nWhile Robin prefers to avoid the dark and dangerous mines, she enjoys exploring the natural beauty of Stardew Valley. She appreciates the flexibility that rural life offers. Robin also enjoys visiting the hot springs for some much-needed relaxation.\n\n#### Significant Events\n\n**Building the Community Center**\n\nOne of Robin's ongoing projects is the restoration of the Community Center. She sees it as a vital part of the town's revitalization and a way to bring the community together.\n\n**Night Market and Fair**\n\nRobin enjoys attending the Night Market and the Stardew Valley Fair with her family. These events are a chance for her to relax and enjoy time with Demetrius, Sebastian, and Maru.",
         "Relationships": {
           "Demetrius": {
             "id": "Demetrius",
@@ -23,8 +23,39 @@
             "Description": "Robin is incredibly proud of Maru, her daughter with Demetrius. Maru's interest in engineering and tinkering reminds Robin of her own passion for building, and she marvels at Maru's creativity and ingenuity. While Robin sometimes wishes Maru would pursue more practical projects, she respects her daughter's unique vision and encourages her to follow her dreams."
           }
         },
-        "Traits": {},
-        "BiographyEnd": "#### Conclusion\nRobin is a multifaceted character, defined by her passion for carpentry, her deep love for her family, and her commitment to the community. Her life has been shaped by challenges and triumphs, but through it all, she remains a beacon of warmth, creativity, and determination. Her story is one of resilience and the power of pursuing one's dreams, no matter the obstacles.",
+        "Traits": {
+          "PassionateCarpenter": {
+            "id": "PassionateCarpenter",
+            "Heading": "Passionate Carpenter",
+            "Description": "Robin has a deep-seated passion for carpentry and construction, driven by a love for creating beautiful and functional spaces. This is evident in her work and her dedication to building and improving structures in Pelican Town."
+          },
+          "ResilientAndDetermined": {
+            "id": "ResilientAndDetermined",
+            "Heading": "Resilient and Determined",
+            "Description": "Having balanced studies, work, and raising a young son, Robin has demonstrated incredible resilience and determination throughout her life."
+          },
+          "CommunityOrientedAndGenerous": {
+            "id": "CommunityOrientedAndGenerous",
+            "Heading": "Community-Oriented and Generous",
+            "Description": "Robin is actively involved in the community, often taking on projects for her neighbors and believing in using her skills to benefit others."
+          },
+          "FamilyFocused": {
+            "id": "FamilyFocused",
+            "Heading": "Family-Focused",
+            "Description": "Despite the complexities, Robin deeply loves her family—Demetrius, Sebastian, and Maru—and values their unity and well-being."
+          },
+          "ProudAndAccomplished": {
+            "id": "ProudAndAccomplished",
+            "Heading": "Proud and Accomplished",
+            "Description": "Robin takes great pride in her work, especially in building her family's home from the ground up, symbolizing her skill and her family's journey."
+          },
+          "EnjoysNatureAndRelaxation": {
+            "id": "EnjoysNatureAndRelaxation",
+            "Heading": "Enjoys Nature and Relaxation",
+            "Description": "While dedicated to her work, Robin also appreciates the natural beauty of Stardew Valley and enjoys moments of relaxation, like visiting the hot springs."
+          }
+        },
+        "BiographyEnd": "#### Conclusion\nRobin is a multifaceted character, defined by her passion for carpentry, her deep love for her family, and her commitment to the community. Her life has been shaped by challenges and triumphs, but through it all, she remains a beacon of warmth, creativity, and determination. Her story is one of resilience and the power of pursuing one's dreams.",
         "ExtraPortraits": {
           "3": "angry",
           "4": "no worries",

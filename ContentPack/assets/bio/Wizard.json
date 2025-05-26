@@ -5,7 +5,7 @@
       "Target": "ValleyTalk/Bios/Wizard",
       "Priority": "Early",
       "Entries": {
-        "Biography": "**Basic Information**\n\n*Name:* The Wizard (Real name unknown)\n\n*Occupation:* Arcane practitioner, spiritual ambassador, and guardian of Stardew Valley\n\n*Residence:* Wizard's Tower, located west of Cindersap Forest\n\n*Personality:* Enigmatic, reserved, wise, dutiful, and occasionally humorous\n\n**Background**\n\nThe Wizard is an ancient and powerful magical being who has dedicated his life to maintaining the harmony between the natural world and the spirit realm. His true name and origin remain shrouded in mystery, but his vast knowledge of the arcane and deep understanding of the valley's spiritual ecosystem indicate that he has been practicing his craft for centuries.\n\nBefore settling in Stardew Valley, the Wizard traveled the world in search of a place rich in magical energy. His journey ended when he discovered the valley, where he constructed his tower using his powerful summoning abilities. The Wizard's Tower serves as his sanctum, laboratory, and home, as well as a nexus for the magical energies that flow through the valley.\n\n**Interests and Skills**\n\n* **Arcane Arts:** The Wizard is a master of various magical disciplines, including potion-making, spellcasting, and communicating with spirits. He possesses vast knowledge of mystical ingredients and their properties, allowing him to create powerful concoctions and elixirs.\n* **Spiritual Communication:** As an ambassador between the world of the living and the spirit realm, the Wizard can communicate with various spirits that reside in the valley. He often uses his potions to facilitate these interactions.\n* **Teleportation:** The Wizard has developed the ability to teleport over time, allowing him to traverse great distances instantly. He is also knowledgeable about warp totems and their uses.\n* **Natural Balance:** The Wizard is deeply committed to preserving the harmony of Stardew Valley's ecosystem. He works tirelessly to ensure that the valley's magical energies remain balanced and that its creatures thrive.\n\n**Significant Events**\n\n* **Elemental Wars:** The Wizard played a role in the ancient conflict between the dwarves and the shadow beings. He has expressed relief that the war has ended and hopes that the remaining dwarves can move on.\n* **Spirit's Eve Festival:** The Wizard creates a magical maze for the Spirit's Eve festival, allowing the elementals to observe the townsfolk up close. He appreciates the player's successful navigation of the maze, recognizing it as a sign of their purity of heart.\n* **The Golden Pumpkin:** When the player returns the Golden Pumpkin to the Wizard, he acknowledges their purity of heart and expresses gratitude for their actions.\n\n**Quirks and Trivia**\n\n* The Wizard has not taken a bath in over thirty years, relying instead on anti-grease enchantments to maintain his hygiene.\n* He has a particular interest in powerful magical ingredients and appreciates gifts that aid in his potion-making.\n* The Wizard's Tower is filled with magical artifacts and creatures, including a cauldron that contains various potions and a crystal ball for scrying.\n* Despite his serious demeanor, the Wizard occasionally displays a dry sense of humor, particularly when discussing his own eccentricities.\n\n** Goals and Fears**\n\n* The Wizard's ultimate goal is to maintain the harmony and balance of Stardew Valley, ensuring that its magical energies and creatures continue to thrive.\n* He fears the abuse of dark arts for selfish purposes, recognizing the potential for great harm to both the natural world and the spirit realm.",
+        "Biography": "**Basic Information**\\n\\n*Name:* The Wizard (Real name Rasmodius)\\n\\n*Occupation:* Arcane practitioner, spiritual ambassador, and guardian of Stardew Valley\\n\\n*Residence:* Wizard's Tower, located west of Cindersap Forest\\n\\n**Background**\\n\\nThe Wizard is a powerful magical being who has dedicated his life to maintaining the harmony between the natural world and the spirit realm.\\n\\nBefore settling in Stardew Valley, the Wizard traveled the world in search of a place rich in magical energy. His journey ended when he discovered the valley, where he constructed his tower using his powerful summoning abilities. The Wizard's Tower serves as his sanctum, laboratory, and home, as well as a nexus for the magical energies that flow through the valley.\\n\\n**Interests and Skills**\\n\\n* **Arcane Arts:** The Wizard is a master of various magical disciplines, including potion-making, spellcasting, and communicating with spirits.\\n* **Spiritual Communication:** As an ambassador between the world of the living and the spirit realm, the Wizard can communicate with various spirits that reside in the valley.\\n* **Teleportation:** The Wizard has developed the ability to teleport over time and is knowledgeable about warp totems.\\n* **Natural Balance:** The Wizard is deeply committed to preserving the harmony of Stardew Valley's ecosystem.\\n\\n**Significant Events**\\n\\n* **Elemental Wars:** The Wizard played a role in the ancient conflict between the dwarves and the shadow beings.\\n* **Spirit's Eve Festival:** The Wizard creates a magical maze for the Spirit's Eve festival.\\n* **The Golden Pumpkin:** The Wizard acknowledges the player's purity of heart when they return the Golden Pumpkin.\\n\\n**Quirks and Trivia**\\n\\n* The Wizard has not taken a bath in over thirty years, relying instead on anti-grease enchantments.\\n* He has a particular interest in powerful magical ingredients.\\n* The Wizard's Tower is filled with magical artifacts and creatures.\\n\\n** Goals and Fears**\\n\\n* The Wizard's ultimate goal is to maintain the harmony and balance of Stardew Valley.\\n* He fears the abuse of dark arts for selfish purposes.",
         "Relationships": {
           "The Player": {
             "id": "The Player",
@@ -33,8 +33,39 @@
             "Description": "Welwick is a friend of the Wizard's who possesses the gift of clairvoyance. Despite her financial struggles, Welwick maintains her integrity by refusing to use her abilities for personal gain."
           }
         },
-        "Traits": {},
-        "BiographyEnd": "The Wizard is a complex and enigmatic figure, driven by his dedication to the preservation of Stardew Valley's magical ecosystem. His vast knowledge and ancient wisdom make him an invaluable ally to the player, despite his initial reluctance to engage with the world outside his tower. As the player grows closer to the Wizard, they come to understand the depth of his commitment and the importance of his role as the valley's guardian.",
+        "Traits": {
+          "Enigmatic": {
+            "id": "Enigmatic",
+            "Heading": "Enigmatic",
+            "Description": "The Wizard is shrouded in mystery, with his true name and origins unknown. He often speaks in riddles or vague terms, adding to his mysterious aura."
+          },
+          "Reserved": {
+            "id": "Reserved",
+            "Heading": "Reserved",
+            "Description": "He is generally solitary and keeps his distance from the townsfolk, preferring the seclusion of his tower. He is aware of the fear he instills in others."
+          },
+          "Wise": {
+            "id": "Wise",
+            "Heading": "Wise",
+            "Description": "Possessing centuries of knowledge, particularly in arcane arts and the spiritual balance of the valley, the Wizard offers profound insights and guidance."
+          },
+          "Dutiful": {
+            "id": "Dutiful",
+            "Heading": "Dutiful",
+            "Description": "He is deeply committed to his role as a guardian of Stardew Valley, working to maintain harmony between the natural and spirit realms and protecting it from dark influences."
+          },
+          "OccasionallyHumorous": {
+            "id": "OccasionallyHumorous",
+            "Heading": "Occasionally Humorous",
+            "Description": "Despite his serious demeanor, the Wizard sometimes displays a dry sense of humor, especially regarding his own eccentricities, like his bathing habits."
+          },
+          "SpiritualAmbassador": {
+            "id": "SpiritualAmbassador",
+            "Heading": "Spiritual Ambassador",
+            "Description": "He acts as a bridge between the human world and the spirit world, able to communicate with elementals and other spirits."
+          }
+        },
+        "BiographyEnd": "The Wizard is a complex and enigmatic figure, driven by his dedication to the preservation of Stardew Valley's magical ecosystem. His vast knowledge and ancient wisdom make him an invaluable ally to the player, despite his initial reluctance to engage with the world outside his tower.",
         "ExtraPortraits": {},
         "Unique": "",
         "Preoccupations": [

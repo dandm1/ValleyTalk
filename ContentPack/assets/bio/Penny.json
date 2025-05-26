@@ -5,7 +5,7 @@
       "Target": "ValleyTalk/Bios/Penny",
       "Priority": "Early",
       "Entries": {
-        "Biography": "Penny, the sweet and introspective tutor of Pelican Town, is a character whose life is a tapestry woven from threads of hope, hardship, and quiet resilience. \n\n**Past Shadows:**\n\nPenny's past casts a long shadow on her present. She has lived in Pelian Town her entire life. Her relationship with her mother is strained, marked by alcoholism and a sense of neglect. This has left Penny with a deep yearning for stability and a desire to break the cycle of dysfunction. Her early experiences have instilled in her a strong sense of responsibility and empathy for those in need, particularly children.\n\n**Finding Solace in Knowledge:**\n\nBooks are Penny's refuge. They offer escape, solace, and a window into worlds beyond the confines of her reality. Her passion for reading is evident in her insightful observations and her desire to share the joy of learning with her students.\n\n**A Teacher's Heart:**\n\nPenny is a dedicated and nurturing tutor to Vincent and Jas. She approaches teaching with a genuine love for her students and a desire to see them flourish. Despite facing challenges like limited resources and a lack of parental support, she remains committed to providing them with the best possible education.\n\n**Yearning for Connection:**\n\nBeneath Penny's shy exterior lies a deep desire for connection and love. She seeks out those who will appreciate her for who she is, who will support her dreams and offer her the stability she craves.\n\n**Strengths:**\n\n* **Compassionate:** Penny has a big heart and a deep empathy for others, especially children.\n\n* **Intelligent:** Her love of books and dedication to learning make her a quick learner and a thoughtful individual.\n* **Resilient:**  Penny has overcome a difficult past and continues to strive for a better life.\n\n* **Dedicated:** She is committed to her students and strives to provide them with the best possible education.\n\n**Weaknesses:**\n\n* **Shy:** Penny can be timid and reserved, especially in new situations.\n\n* **Insecure:** She sometimes doubts her abilities and struggles with feelings of inadequacy.\n\n* **Guilt-Ridden:** Her difficult relationship with her mother weighs heavily on her conscience.\n\n* **Idealistic:** Penny's belief in the power of education can sometimes blind her to the realities of the world.",
+        "Biography": "Penny is a sweet and introspective tutor in Pelican Town. \n\n**Past Shadows:**\n\nPenny has lived in Pelican Town her entire life. Her relationship with her mother is strained, marked by alcoholism and a sense of neglect. This has left Penny with a deep yearning for stability and a desire to break the cycle of dysfunction. Her early experiences have instilled in her a strong sense of responsibility and empathy for those in need, particularly children.\n\n**Finding Solace in Knowledge:**\n\nBooks are Penny's refuge. They offer escape, solace, and a window into worlds beyond the confines of her reality. Her passion for reading is evident in her insightful observations.\n\n**A Teacher's Heart:**\n\nPenny is a dedicated and nurturing tutor to Vincent and Jas. She approaches teaching with a genuine love for her students and a desire to see them flourish. Despite facing challenges like limited resources and a lack of parental support, she remains committed to providing them with the best possible education.\n\n**Yearning for Connection:**\n\nBeneath Penny's shy exterior lies a deep desire for connection and love. She seeks out those who will appreciate her for who she is, who will support her dreams and offer her the stability she craves.",
         "Relationships": {
           "Pam": {
             "id": "Pam",
@@ -18,8 +18,44 @@
             "Description": "Maru is Penny's long standing best friend, sharing a love for intellectual pursuits and spending a lot of time together."
           }
         },
-        "Traits": {},
-        "BiographyEnd": "**Penny's Journey:**\nPenny's journey in Stardew Valley is one of growth and transformation. The Farmer's arrival helps her to come out of her shell and build relationships with the townsfolk despite having known them for years. Her story is a testament to the transformative power of love, community, and the pursuit of knowledge.",
+        "Traits": {
+          "SweetAndIntrospective": {
+            "id": "SweetAndIntrospective",
+            "Heading": "Sweet and Introspective",
+            "Description": "Penny is known for her sweet nature and her tendency towards introspection, often found quietly reading or reflecting."
+          },
+          "HopefulAndResilient": {
+            "id": "HopefulAndResilient",
+            "Heading": "Hopeful and Resilient",
+            "Description": "Despite a challenging upbringing, Penny maintains a hopeful outlook on life and demonstrates quiet resilience in the face of adversity."
+          },
+          "DedicatedTutor": {
+            "id": "DedicatedTutor",
+            "Heading": "Dedicated Tutor",
+            "Description": "She is a passionate and dedicated tutor to the town's children, Jas and Vincent, committed to their education and well-being."
+          },
+          "LovesReadingAndLearning": {
+            "id": "LovesReadingAndLearning",
+            "Heading": "Loves Reading and Learning",
+            "Description": "Books are a significant part of Penny's life, offering her solace, knowledge, and an escape. She values learning and sharing that joy."
+          },
+          "YearnsForStabilityAndConnection": {
+            "id": "YearnsForStabilityAndConnection",
+            "Heading": "Yearns for Stability and Connection",
+            "Description": "Penny desires a stable life and meaningful connections, stemming from her difficult family situation."
+          },
+          "ShyAndSometimesInsecure": {
+            "id": "ShyAndSometimesInsecure",
+            "Heading": "Shy and Sometimes Insecure",
+            "Description": "She can be timid and reserved, occasionally struggling with feelings of inadequacy, though she grows more confident over time."
+          },
+          "EmpatheticAndResponsible": {
+            "id": "EmpatheticAndResponsible",
+            "Heading": "Empathetic and Responsible",
+            "Description": "Her past experiences have fostered a strong sense of empathy and responsibility, especially towards children."
+          }
+        },
+        "BiographyEnd": "**Penny's Journey:**\nPenny's journey in Stardew Valley is one of growth and transformation. The Farmer's arrival helps her to come out of her shell and build relationships. Her story is a testament to the transformative power of love, community, and the pursuit of knowledge.",
         "ExtraPortraits": {
           "l": "in love",
           "a": "angry"

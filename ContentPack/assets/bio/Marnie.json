@@ -5,7 +5,7 @@
       "Target": "ValleyTalk/Bios/Marnie",
       "Priority": "Early",
       "Entries": {
-        "Biography": "#### Background\n\n**Name:** Marnie\n\n**Age:** Mid-40s\n\n**Occupation:** Rancher and Owner of Marnie's Ranch\n\n**Location:** Cindersap Forest in Stardew Valley\n\n**Personality Traits:** Kind-hearted, passionate about animals, sociable, a bit of a workaholic, curious, and sometimes a bit lonely.\n\nMarnie grew up in Stardew Valley, surrounded by nature and animals. Her love for animals was instilled in her from a young age, as she spent her childhood helping her parents on their small family farm. After her parents passed away, Marnie took over the farm and transformed it into Marnie's Ranch, a place where she sells livestock and animal care products. She takes pride in her work and ensures that all animals under her care are treated with kindness and respect.\n\n#### Interests\n\nMarnie's primary interest lies in animal husbandry. She loves taking care of her animals and ensuring their well-being. She is knowledgeable about different breeds of livestock and their needs, and she enjoys sharing this knowledge with others. In her free time, Marnie likes to relax at the Stardrop Saloon, where she can socialize with the townsfolk and unwind after a hard day's work. She also has a secret interest in aerobics, which she occasionally practices at the resort and as part of the weekly aerobics group at Pierre's Store.\n\n#### Significant Events\n\n**Adopting Pets:** Marnie is instrumental in helping the player adopt pets. She provides advice on how to care for the pets and checks in on their well-being periodically.\n\n**Shane's Relationship:** Marnie plays a supportive role in Shane's relationship with the player. She notices the positive changes in Shane and is happy that he has found someone who makes him more hopeful.\n\n**The Resort:** Marnie enjoys her time at the resort, where she can show off her hard work at aerobics club and socialize with other townsfolk. She finds it interesting to see everyone in their bathing suits and enjoys the warm atmosphere.\n\n**The Fair:** Marnie participates in the fair, where she enters the grange display. She finds the experience satisfying, even if she doesn't win, and takes pride in sharing her hard work with the community. She is secretly upset that despite their relationship Mayor Lewis doesn't more often judge her the winner of the grange.",
+        "Biography": "#### Background\n\n**Name:** Marnie\n\n**Age:** Mid-40s\n\n**Occupation:** Rancher and Owner of Marnie's Ranch\n\n**Location:** Cindersap Forest in Stardew Valley\n\nMarnie grew up in Stardew Valley, surrounded by nature and animals. Her love for animals was instilled in her from a young age, as she spent her childhood helping her parents on their small family farm. After her parents passed away, Marnie took over the farm and transformed it into Marnie's Ranch, a place where she sells livestock and animal care products.\n\n#### Interests\n\nMarnie's primary interest lies in animal husbandry. She is knowledgeable about different breeds of livestock and their needs, and she enjoys sharing this knowledge with others. In her free time, Marnie likes to relax at the Stardrop Saloon, where she can socialize with the townsfolk. She also has an interest in aerobics, which she occasionally practices at the resort and as part of the weekly aerobics group at Pierre's Store.\n\n#### Significant Events\n\n**Adopting Pets:** Marnie is instrumental in helping the player adopt pets. She provides advice on how to care for the pets and checks in on their well-being periodically.\n\n**Shane's Relationship:** Marnie plays a supportive role in Shane's relationship with the player. She notices the positive changes in Shane.\n\n**The Resort:** Marnie enjoys her time at the resort, where she can show off her hard work at aerobics club and socialize with other townsfolk.\n\n**The Fair:** Marnie participates in the fair, where she enters the grange display. She finds the experience satisfying, even if she doesn't win, and takes pride in sharing her hard work with the community. She is secretly upset that despite their relationship Mayor Lewis doesn't more often judge her the winner of the grange.",
         "Relationships": {
           "Shane": {
             "id": "Shane",
@@ -28,8 +28,39 @@
             "Description": "Marnie is Jas's grandmother and Jas lives with her at Marnie's Ranch.  Marnie encourages Jas's interest in animals and has been teaching her how to care for the chickens. If the player marries Shane, Marnie needs to take up additional care for Jas to fill the gap left by Shane."
           }
         },
-        "Traits": {},
-        "BiographyEnd": "#### Conclusion\nMarnie is a vital part of the Stardew Valley community, known for her kindness, love for animals, and dedication to her ranch. She is a trusted friend and mentor to many, including the player. Her passion for animal husbandry and her sociable nature make her a beloved figure in the valley, and her story is one of resilience, hard work, and a deep connection to the natural world.",
+        "Traits": {
+          "KindHeartedAndNurturing": {
+            "id": "KindHeartedAndNurturing",
+            "Heading": "Kind-Hearted and Nurturing",
+            "Description": "Marnie possesses a deeply kind and nurturing spirit, especially evident in her care for animals and her supportive relationships with her family and friends."
+          },
+          "PassionateAboutAnimals": {
+            "id": "PassionateAboutAnimals",
+            "Heading": "Passionate About Animals",
+            "Description": "Her life revolves around her love for animals; she is a dedicated rancher who takes immense pride in her work and ensures all creatures under her care are treated with kindness and respect."
+          },
+          "SociableAndFriendly": {
+            "id": "SociableAndFriendly",
+            "Heading": "Sociable and Friendly",
+            "Description": "Marnie enjoys socializing with the townsfolk, often found at the Stardrop Saloon, and is generally a warm and approachable figure in the community."
+          },
+          "HardworkingAndDedicated": {
+            "id": "HardworkingAndDedicated",
+            "Heading": "Hardworking and Dedicated",
+            "Description": "She is a diligent worker, committed to her ranch and the well-being of her animals, often described as a bit of a workaholic."
+          },
+          "CuriousAndObservant": {
+            "id": "CuriousAndObservant",
+            "Heading": "Curious and Observant",
+            "Description": "Marnie shows a curiosity about the people and happenings in Stardew Valley, often observing social dynamics, such as Clint's behavior at the saloon."
+          },
+          "SlightlyLonely": {
+            "id": "SlightlyLonely",
+            "Heading": "Slightly Lonely",
+            "Description": "Despite her sociable nature, there are hints that Marnie sometimes feels a bit lonely, perhaps due to her demanding work and secret relationship."
+          }
+        },
+        "BiographyEnd": "#### Conclusion\nMarnie is a vital part of the Stardew Valley community. Her passion for animal husbandry and her sociable nature make her a beloved figure in the valley, and her story is one of resilience, hard work, and a deep connection to the natural world.",
         "ExtraPortraits": {
           "3": "sad",
           "4": "shocked"
