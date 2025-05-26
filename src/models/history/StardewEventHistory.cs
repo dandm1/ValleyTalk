@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using ValleyTalk;
 
 namespace StardewDialogue;
 
@@ -118,6 +119,22 @@ internal class StardewEventHistory
         else
         {
             return lastOverheardTime.CompareTo(lastDlg.Item2) > 0 ? lastOverheard : lastDlg.Item1;
+        }
+    }
+
+    internal void RemoveDialogueOverlapping(List<ConversationElement> chatHistory)
+    {
+        foreach (var chat in chatHistory)
+        {
+            _dialogueHistory.RemoveAll(x => ((DialogueHistory)x.Item2).Dialogues.Any(z => z.Text.Equals(chat.Text)));
+        }
+    }
+
+    internal void RemoveOverheardOverlapping(string name, List<StardewValley.DialogueLine> overheardDialogue)
+    {
+        foreach (var dialogue in overheardDialogue)
+        {
+            _overheardHistory.RemoveAll(x => ((DialogueEventOverheard)x.Item2).dialogues.Any(z => z.Text.Equals(dialogue.Text)) && ((DialogueEventOverheard)x.Item2).name.Equals(name));
         }
     }
 }

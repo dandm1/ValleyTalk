@@ -510,6 +510,7 @@ public class Character
     {
         var time = new StardewTime(year,season, dayOfMonth, timeOfDay);
         var newHistory = new DialogueEventOverheard(speaker.Name,filteredDialogues);
+        eventHistory.RemoveOverheardOverlapping(speaker.Name, filteredDialogues);
         AddHistory(newHistory,time);
     }
 
@@ -517,6 +518,8 @@ public class Character
     {
         var time = new StardewTime(year,season, dayOfMonth, timeOfDay);
         var newHistory = new ConversationHistory(chatHistory);
+        // Remove any items in the dialogue history that duplicate this conversation
+        eventHistory.RemoveDialogueOverlapping(chatHistory);
         AddHistory(newHistory,time);
     }
 
