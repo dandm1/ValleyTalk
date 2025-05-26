@@ -9,7 +9,6 @@ using StardewValley;
 using Polly;
 using Polly.Retry;
 using System.Threading.Tasks;
-using Serilog;
 using Microsoft.Xna.Framework.Content;
 using StardewModdingAPI.Events;
 

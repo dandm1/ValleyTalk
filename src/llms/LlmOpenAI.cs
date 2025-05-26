@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using ValleyTalk;
-using Serilog;
 
 namespace StardewDialogue;
 

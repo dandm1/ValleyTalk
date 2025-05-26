@@ -6,7 +6,6 @@ using StardewDialogue;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
-using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
@@ -137,26 +136,16 @@ namespace ValleyTalk
             // Initialize the text input manager
             TextInputManager.Initialize();
 
+            // Initialize cross-platform compatible logging
+            Log.Initialize(Monitor, Config.Debug);
+
 #if DEBUG
             if (Config.Debug)
             {
-                Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Console()
-                    .WriteTo.File("Generation.log", rollingInterval: RollingInterval.Day)
-                    .MinimumLevel.Debug()
-                    .CreateLogger();
+                Log.Debug("###############################################");
+                Log.Debug("###############################################");
+                Log.Debug("###############################################");
             }
-            else
-            {
-#endif
-                Log.Logger = new LoggerConfiguration()
-                    .WriteTo.Console()
-                    .CreateLogger();
-#if DEBUG
-            }
-            Log.Debug($"###############################################");
-            Log.Debug($"###############################################");
-            Log.Debug($"###############################################");
 #endif
 
             if (!LlmMap.TryGetValue(Config.Provider, out var llmType))
