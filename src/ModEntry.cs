@@ -1,16 +1,11 @@
 ﻿using System;
-using System.IO;
 using HarmonyLib;
-using Microsoft.VisualBasic;
 using StardewDialogue;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewValley;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
-using System.Net;
-using System.Collections;
 namespace ValleyTalk
 {
     public partial class ModEntry : Mod
