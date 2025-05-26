@@ -298,6 +298,7 @@ namespace ValleyTalk
         {
             var character = GetCharacter(otherNpc);
             var filteredDialogues = FilterForHistory(theLine, character);
+            
             character.AddOverheardDialogue(instance, filteredDialogues, Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
         }
 

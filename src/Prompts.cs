@@ -582,48 +582,53 @@ public class Prompts
     {
         if (Context.Location == null && Character.StardewNpc.DirectionsToNewLocation == null) return;
         
-        var bedTile = npcData.Home[0].Tile;
+        //var bedTile = npcData.Home[0].Tile;
+        //if (bedTile == null || bedTile.X <= 0 || bedTile.Y <= 0)
+        //{
+            // If the bed tile is not set, use the first tile of the home
+        //    bedTile = new Microsoft.Xna.Framework.Point(-1, -1);
+        //}
         if (Context.Location == npcData.Home[0].Location && Context.Inlaw != Name)
         {
-            if (Character.StardewNpc.TilePoint == bedTile && Character.Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel && StardewModdingAPI.Context.IsMainPlayer)
-            {
-                prompt.AppendLine(Util.GetString(Character,"locationBed", new { Name= Name }));
-            }
-            else
-            {
+            //if (Character.StardewNpc.TilePoint == bedTile && Character.Bio.HomeLocationBed && !Llm.Instance.IsHighlySensoredModel && StardewModdingAPI.Context.IsMainPlayer)
+            //{
+            //    prompt.AppendLine(Util.GetString(Character, "locationBed", new { Name = Name }));
+            //}
+            //else
+            //{
                 var mayBeInShop = Context.Location.Contains("Shop", StringComparison.OrdinalIgnoreCase)
                     || Context.Location.Contains("Science", StringComparison.OrdinalIgnoreCase);
-                var inShopString = mayBeInShop ? Util.GetString(Character,"locationAtHomeOrShop") : "";
-                prompt.AppendLine(Util.GetString(Character,"locationAtHome", new { Name= Name, inShopString= inShopString }));
-            }
+                var inShopString = mayBeInShop ? Util.GetString(Character, "locationAtHomeOrShop") : "";
+                prompt.AppendLine(Util.GetString(Character, "locationAtHome", new { Name = Name, inShopString = inShopString }));
+            //}
         }
         else if (Context.Location != null)
         {
             var locationName = GetLocationDisplayNameIfAvailable(Context.Location);
             prompt.Append(Context.Location switch
             {
-                "Town" => Util.GetString(Character,"locationTown", new { Name= Name }),
-                "Beach" => Util.GetString(Character,"locationBeach", new { Name= Name }),
-                "Desert" => Util.GetString(Character,"locationDesert", new { Name= Name }),
-                "BusStop" => Util.GetString(Character,"locationBusStop", new { Name= Name }),
-                "Railroad" => Util.GetString(Character,"locationRailroad", new { Name= Name }),
-                "Saloon" => $"{Util.GetString(Character,"locationSaloon", new { Name= Name })}{((npcData.Age == NpcAge.Child || Character.Name == "Emily") ? "" : Util.GetString(Character,"locationSaloonDrunk"))}",
-                "SeedShop" => Util.GetString(Character,"locationPierres", new { Name= Name }),
-                "JojaMart" => Util.GetString(Character,"locationJojaMart", new { Name= Name }),
-                "Resort_Chair" => Util.GetString(Character,"locationResortChair", new { Name= Name }),
-                "Resort_Towel" or "Resort_Towel_2" or "Resort_Towel_3" => Util.GetString(Character,"locationResortTowel", new { Name= Name }),
-                "Resort_Umbrella" or "Resort_Umbrella_2" or "Resort_Umbrella_3" => Util.GetString(Character,"locationResortUmbrella", new { Name= Name }),
-                "Resort_Bar" => $"{Util.GetString(Character,"locationResortBar", new { Name= Name })}{((npcData.Age == NpcAge.Child) ? "" : Util.GetString(Character,"locationSaloonDrunk"))}.",
-                "Resort_Entering" => Util.GetString(Character,"locationResortEntering", new { Name= Name }),
-                "Resort_Leaving" => Util.GetString(Character,"locationResortLeaving", new { Name= Name }),
-                "Resort_Shore" or "Resort_Shore_2" => Util.GetString(Character,"locationResortShore", new { Name= Name }),
-                "Resort_Wander" => Util.GetString(Character,"locationResortWander", new { Name= Name }),
-                "Resort" or "Resort_2" => Util.GetString(Character,"locationResort", new { Name= Name }),
-                "FarmHouse" => Util.GetString(Character,"locationFarmHouse", new { Name= Name }),
-                "Farm" => Util.GetString(Character,"locationFarm", new { Name= Name }),
-                _ => locationName.Length > 2 ? Util.GetString("locationGeneric", new {Name = Name, Location = locationName}) : string.Empty
+                "Town" => Util.GetString(Character, "locationTown", new { Name = Name }),
+                "Beach" => Util.GetString(Character, "locationBeach", new { Name = Name }),
+                "Desert" => Util.GetString(Character, "locationDesert", new { Name = Name }),
+                "BusStop" => Util.GetString(Character, "locationBusStop", new { Name = Name }),
+                "Railroad" => Util.GetString(Character, "locationRailroad", new { Name = Name }),
+                "Saloon" => $"{Util.GetString(Character, "locationSaloon", new { Name = Name })}{((npcData.Age == NpcAge.Child || Character.Name == "Emily") ? "" : Util.GetString(Character, "locationSaloonDrunk"))}",
+                "SeedShop" => Util.GetString(Character, "locationPierres", new { Name = Name }),
+                "JojaMart" => Util.GetString(Character, "locationJojaMart", new { Name = Name }),
+                "Resort_Chair" => Util.GetString(Character, "locationResortChair", new { Name = Name }),
+                "Resort_Towel" or "Resort_Towel_2" or "Resort_Towel_3" => Util.GetString(Character, "locationResortTowel", new { Name = Name }),
+                "Resort_Umbrella" or "Resort_Umbrella_2" or "Resort_Umbrella_3" => Util.GetString(Character, "locationResortUmbrella", new { Name = Name }),
+                "Resort_Bar" => $"{Util.GetString(Character, "locationResortBar", new { Name = Name })}{((npcData.Age == NpcAge.Child) ? "" : Util.GetString(Character, "locationSaloonDrunk"))}.",
+                "Resort_Entering" => Util.GetString(Character, "locationResortEntering", new { Name = Name }),
+                "Resort_Leaving" => Util.GetString(Character, "locationResortLeaving", new { Name = Name }),
+                "Resort_Shore" or "Resort_Shore_2" => Util.GetString(Character, "locationResortShore", new { Name = Name }),
+                "Resort_Wander" => Util.GetString(Character, "locationResortWander", new { Name = Name }),
+                "Resort" or "Resort_2" => Util.GetString(Character, "locationResort", new { Name = Name }),
+                "FarmHouse" => Util.GetString(Character, "locationFarmHouse", new { Name = Name }),
+                "Farm" => Util.GetString(Character, "locationFarm", new { Name = Name }),
+                _ => locationName.Length > 2 ? Util.GetString("locationGeneric", new { Name = Name, Location = locationName }) : string.Empty
             });
-            prompt.AppendLine(Util.GetString(Character,"locationOutro"));
+            prompt.AppendLine(Util.GetString(Character, "locationOutro"));
         }
 
         string destination = string.Empty;
