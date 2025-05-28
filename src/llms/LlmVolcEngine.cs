@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ValleyTalk;
 
 namespace StardewDialogue;
 
-internal class LlmVolcEngine : Llm
+internal class LlmVolcEngine : Llm, IGetModelNames
 {
     protected string apiKey;
     protected string modelName;
@@ -36,14 +38,14 @@ internal class LlmVolcEngine : Llm
     {
         if (string.IsNullOrEmpty(apiKey))
         {
-            return new string[] { };
+            return Array.Empty<string>();
         }
         return CoreGetModelNames();
     }
 
     internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
-        var inputString = JsonSerializer.Serialize(new
+        var inputString = JsonConvert.SerializeObject(new
             {
                 model = modelName,
                 max_tokens = n_predict,
@@ -84,8 +86,8 @@ internal class LlmVolcEngine : Llm
                 request.Headers.Add("Authorization", $"Bearer {apiKey}");
                 var response = await client.SendAsync(request);
                 // Return the 'content' element of the response json
-                var responseString = response.Content.ReadAsStringAsync().Result;
-                var responseJson = JsonDocument.Parse(responseString);
+                var responseString = await response.Content.ReadAsStringAsync();
+                var responseJson = JObject.Parse(responseString);
                 
                 if (responseJson == null)
                 {
@@ -94,13 +96,18 @@ internal class LlmVolcEngine : Llm
                 else
                 {
                     
-                    if (!responseJson.RootElement.TryGetProperty("choices", out var content)) { retry--; continue; }
-                    var completionArray = content.EnumerateArray();
-                    var completion = completionArray.MoveNext();
-                    if (completion == false) { retry--; continue; }
+                    if (!responseJson.TryGetValue("choices", out var choicesToken) || !(choicesToken is JArray choicesArray) || !choicesArray.HasValues) { retry--; continue; }
 
-                    var message = completionArray.Current.GetProperty("message");
-                    var text = message.GetProperty("content").GetString();
+                    var firstChoice = choicesArray.FirstOrDefault();
+                    if (firstChoice == null) { retry--; continue; }
+
+                    var messageToken = firstChoice["message"];
+                    if (messageToken == null) { retry--; continue; }
+
+                    var contentToken = messageToken["content"];
+                    if (contentToken == null) { retry--; continue; }
+                    
+                    var text = contentToken.ToString();
                     return text ?? string.Empty;
                 }
             }
@@ -141,19 +148,28 @@ internal class LlmVolcEngine : Llm
         }
         var response = client.SendAsync(request).Result;
         var responseString = response.Content.ReadAsStringAsync().Result;
-        var responseJson = JsonDocument.Parse(responseString);
-        var models = responseJson.RootElement.GetProperty("data").EnumerateArray();
-        var modelNames = new List<string>();
-        foreach (var model in models)
+        var responseJson = JObject.Parse(responseString);
+        var dataToken = responseJson["data"];
+        if (!(dataToken is JArray modelsArray))
         {
-            modelNames.Add(model.GetProperty("id").GetString());
+            return Array.Empty<string>();
+        }
+
+        var modelNames = new List<string>();
+        foreach (var model in modelsArray)
+        {
+            var idToken = model["id"];
+            if (idToken != null)
+            {
+                modelNames.Add(idToken.ToString());
+            }
         }
         return modelNames.ToArray();
         }
         catch (Exception ex)
         {
             Log.Error(ex.Message);
-            return new string[] { };
+            return Array.Empty<string>();
         }
     }
 }

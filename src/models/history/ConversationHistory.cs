@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using ValleyTalk;
 
 namespace StardewDialogue;
@@ -29,6 +29,7 @@ internal class ConversationHistory : IHistory
     [JsonIgnore]
     public List<ConversationElement> ConversationElements => _conversationElements;
 
+    [JsonConstructor]
     public ConversationHistory(string[] chatHistory)
     {
         this.chatHistory = chatHistory;

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq; // Added
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json; // Changed
+using Newtonsoft.Json.Linq; // Added
 using System.Threading;
 using System.Threading.Tasks;
 using ValleyTalk;
@@ -36,17 +38,24 @@ internal class LlmGemini : Llm, IGetModelNames
         var client = new HttpClient();
         var response = client.GetAsync(modelsUrl).Result;
         var responseString = response.Content.ReadAsStringAsync().Result;
-        var responseJson = JsonDocument.Parse(responseString);
-        var models = responseJson.RootElement.GetProperty("models");
+        var responseJson = JObject.Parse(responseString); // Changed
+        var modelsToken = responseJson["models"]; // Changed
         var modelNames = new List<string>();
-        foreach (var model in models.EnumerateArray())
+        if (modelsToken is JArray modelsArray) // Changed
         {
-            var name = model.GetProperty("name").GetString();
-            if (name.StartsWith("models/"))
+            foreach (var model in modelsArray)
             {
-                name = name.Substring(7);
+                var nameToken = model["name"]; // Changed
+                if (nameToken != null)
+                {
+                    var name = nameToken.ToString(); // Changed
+                    if (name.StartsWith("models/"))
+                    {
+                        name = name.Substring(7);
+                    }
+                    modelNames.Add(name);
+                }
             }
-            modelNames.Add(name);
         }
         return modelNames.ToArray();
         }
@@ -68,7 +77,7 @@ internal class LlmGemini : Llm, IGetModelNames
         }
 
         var json = new StringContent(
-            System.Text.Json.JsonSerializer.Serialize(new
+            JsonConvert.SerializeObject(new // Changed
             {
                 safetySettings = new[] 
                 { 
@@ -98,7 +107,7 @@ internal class LlmGemini : Llm, IGetModelNames
                 var response = await client.PostAsync(fullUrl, json);
                 // Return the 'content' element of the response json
                 var responseString = await response.Content.ReadAsStringAsync();
-                var responseJson = JsonDocument.Parse(responseString);
+                var responseJson = JObject.Parse(responseString); // Changed
                 
                 if (responseJson == null)
                 {
@@ -107,17 +116,27 @@ internal class LlmGemini : Llm, IGetModelNames
                 else
                 {
                     
-                    if (!responseJson.RootElement.TryGetProperty("candidates", out var candidates)) { retry--; continue; }
-                    var candidateEnumerator = candidates.EnumerateArray();
-                    if (!candidateEnumerator.MoveNext()) { retry--; continue; }
-                    var candidate = candidateEnumerator.Current;
-                    if (!candidate.TryGetProperty("finishReason", out var finishReason)) { retry--; continue; }
-                    if (finishReason.GetString() != "STOP") { retry--; continue; }
-                    if (!candidate.TryGetProperty("content", out var content)) { retry--; continue; }
-                    var parts = content.GetProperty("parts").EnumerateArray();
-                    if (!parts.MoveNext()) { retry--; continue; }
-                    var firstPart = parts.Current;
-                    var text = firstPart.GetProperty("text").GetString();
+                    if (!responseJson.TryGetValue("candidates", out var candidatesToken) || !(candidatesToken is JArray candidatesArray) || !candidatesArray.HasValues) { retry--; continue; } // Changed
+                    
+                    var firstCandidate = candidatesArray.FirstOrDefault();
+                    if (firstCandidate == null) { retry--; continue; } // Changed
+
+                    var finishReasonToken = firstCandidate["finishReason"];
+                    if (finishReasonToken == null || finishReasonToken.ToString() != "STOP") { retry--; continue; } // Changed
+
+                    var contentToken = firstCandidate["content"];
+                    if (contentToken == null) { retry--; continue; } // Changed
+
+                    var partsToken = contentToken["parts"];
+                    if (!(partsToken is JArray partsArray) || !partsArray.HasValues) { retry--; continue; } // Changed
+
+                    var firstPart = partsArray.FirstOrDefault();
+                    if (firstPart == null) { retry--; continue; } // Changed
+
+                    var textToken = firstPart["text"];
+                    if (textToken == null) { retry--; continue; } // Changed
+                    
+                    var text = textToken.ToString(); // Changed
                     return text ?? string.Empty;
                 }
             }

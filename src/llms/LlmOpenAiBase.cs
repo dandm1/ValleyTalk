@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq; // Added
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json; // Changed
+using Newtonsoft.Json.Linq; // Added
 using System.Threading;
 using System.Threading.Tasks;
 using ValleyTalk;
@@ -22,7 +24,7 @@ internal abstract class LlmOpenAiBase : Llm
 
     internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
-        var inputString = JsonSerializer.Serialize(new
+        var inputString = JsonConvert.SerializeObject(new // Changed
             {
                 model = modelName,
                 max_tokens = n_predict,
@@ -63,8 +65,8 @@ internal abstract class LlmOpenAiBase : Llm
                 request.Headers.Add("Authorization", $"Bearer {apiKey}");
                 var response = await client.SendAsync(request);
                 // Return the 'content' element of the response json
-                var responseString = response.Content.ReadAsStringAsync().Result;
-                var responseJson = JsonDocument.Parse(responseString);
+                var responseString = await response.Content.ReadAsStringAsync(); // Changed .Result to await
+                var responseJson = JObject.Parse(responseString); // Changed
                 
                 if (responseJson == null)
                 {
@@ -73,13 +75,20 @@ internal abstract class LlmOpenAiBase : Llm
                 else
                 {
                     
-                    if (!responseJson.RootElement.TryGetProperty("choices", out var content)) { retry--; continue; }
-                    var completionArray = content.EnumerateArray();
-                    var completion = completionArray.MoveNext();
-                    if (completion == false) { retry--; continue; }
+                    if (!responseJson.TryGetValue("choices", out var choicesToken) || choicesToken.Type == JTokenType.Null) { retry--; continue; } // Changed
+                    var choicesArray = choicesToken as JArray;
+                    if (choicesArray == null || !choicesArray.HasValues) { retry--; continue; } // Changed
 
-                    var message = completionArray.Current.GetProperty("message");
-                    var text = message.GetProperty("content").GetString();
+                    var firstChoice = choicesArray.FirstOrDefault();
+                    if (firstChoice == null) { retry--; continue; } // Changed
+
+                    var messageToken = firstChoice["message"];
+                    if (messageToken == null || messageToken.Type == JTokenType.Null) { retry--; continue; } // Changed
+
+                    var contentToken = messageToken["content"];
+                    if (contentToken == null || contentToken.Type == JTokenType.Null) { retry--; continue; } // Changed
+                    
+                    var text = contentToken.ToString(); // Changed
                     return text ?? string.Empty;
                 }
             }
@@ -120,12 +129,21 @@ internal abstract class LlmOpenAiBase : Llm
         }
         var response = client.SendAsync(request).Result;
         var responseString = response.Content.ReadAsStringAsync().Result;
-        var responseJson = JsonDocument.Parse(responseString);
-        var models = responseJson.RootElement.GetProperty("data").EnumerateArray();
-        var modelNames = new List<string>();
-        foreach (var model in models)
+        var responseJson = JObject.Parse(responseString); // Changed
+        var dataToken = responseJson["data"];
+        if (dataToken == null || dataToken.Type == JTokenType.Null || !(dataToken is JArray modelsArray)) // Changed and added checks
         {
-            modelNames.Add(model.GetProperty("id").GetString());
+            return Array.Empty<string>(); // Return empty array if data is not as expected
+        }
+
+        var modelNames = new List<string>();
+        foreach (var model in modelsArray)
+        {
+            var idToken = model["id"];
+            if (idToken != null && idToken.Type != JTokenType.Null)
+            {
+                modelNames.Add(idToken.ToString()); // Changed
+            }
         }
         return modelNames.ToArray();
         }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
+using Newtonsoft.Json;
 using ValleyTalk;
 using StardewValley;
 using Polly;
@@ -263,7 +263,7 @@ public class Character
                 Log.Debug($"Gift: {context.Accept}");
                 Log.Debug($"Spouse Action: {context.SpouseAct}");
                 Log.Debug($"Random Action: {context.RandomAct}");
-                Log.Debug($"Prompts: {JsonSerializer.Serialize(prompts)}");
+                Log.Debug($"Prompts: {JsonConvert.SerializeObject(prompts)}");
                 if (context.ScheduleLine != "")
                 {
                     Log.Debug($"Original Line: {context.ScheduleLine}");

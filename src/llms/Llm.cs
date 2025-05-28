@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq; // Added
 using System.Threading.Tasks;
 using ValleyTalk;
 
@@ -112,12 +113,14 @@ internal abstract class Llm
     
     internal abstract Dictionary<string,double>[] RunInferenceProbabilities(string fullPrompt,int n_predict = 1);
 
-    protected void AddToStats(JsonElement token_stats)
+    protected void AddToStats(JObject token_stats) // Changed JsonElement to JObject
     {
-        _totalPrompts += token_stats.GetProperty("prompt_n").GetInt32();
-        _totalPromptTime += token_stats.GetProperty("prompt_ms").GetDouble();
-        _totalInference += token_stats.GetProperty("predicted_n").GetInt32();
-        _totalInferenceTime += token_stats.GetProperty("predicted_ms").GetDouble();
+        if (token_stats == null) return; // Added null check
+
+        _totalPrompts += token_stats.Value<long?>("prompt_n") ?? 0; // Changed to use JObject access
+        _totalPromptTime += token_stats.Value<double?>("prompt_ms") ?? 0.0; // Changed to use JObject access
+        _totalInference += token_stats.Value<long?>("predicted_n") ?? 0; // Changed to use JObject access
+        _totalInferenceTime += token_stats.Value<double?>("predicted_ms") ?? 0.0; // Changed to use JObject access
     }
 
     internal double[] GetProbabilities(string prompt, string[][] options)

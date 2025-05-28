@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json; // Changed
+using Newtonsoft.Json.Linq; // Added
 using System.Threading;
 using System.Threading.Tasks;
 using ValleyTalk;
@@ -38,7 +39,7 @@ internal class LlmLlamaCpp : Llm
         var fullPrompt = BuildPrompt(systemPromptString, promptString, responseStart);
         // Create a JSON object with the prompt and other parameters
         var json = new StringContent(
-            System.Text.Json.JsonSerializer.Serialize(new
+            JsonConvert.SerializeObject(new // Changed
             {
                 prompt = fullPrompt,
                 n_predict = n_predict,
@@ -66,10 +67,10 @@ internal class LlmLlamaCpp : Llm
                 var response = await client.PostAsync(url, json);
                 // Return the 'content' element of the response json
                 var responseString = await response.Content.ReadAsStringAsync();
-                var responseJson = JsonDocument.Parse(responseString);
+                var responseJson = JObject.Parse(responseString); // Changed
                 
-                var token_stats = responseJson.RootElement.GetProperty("timings");
-                AddToStats(token_stats);
+                var token_stats = responseJson["timings"] as JObject; // Changed and cast to JObject
+                AddToStats(token_stats); // No change needed here now
                 
                 if (responseJson == null)
                 {
@@ -77,7 +78,8 @@ internal class LlmLlamaCpp : Llm
                 }
                 else
                 {
-                    return responseJson.RootElement.GetProperty("content").GetString() ?? string.Empty;
+                    var contentToken = responseJson["content"];
+                    return contentToken?.ToString() ?? string.Empty; // Changed
                 }
             }
             catch(Exception ex)
@@ -95,7 +97,7 @@ internal class LlmLlamaCpp : Llm
     {
       // Create a JSON object with the prompt and other parameters
         var json = new StringContent(
-            System.Text.Json.JsonSerializer.Serialize(new
+            JsonConvert.SerializeObject(new // Changed
             {
                 prompt = fullPrompt,
                 n_predict = n_predict,
@@ -126,10 +128,11 @@ internal class LlmLlamaCpp : Llm
                 var response = client.PostAsync(url, json).Result;
                 // Return the 'content' element of the response json
                 var responseString = response.Content.ReadAsStringAsync().Result;
-                var responseJson = System.Text.Json.JsonDocument.Parse(responseString);
+                var responseJson = JObject.Parse(responseString); // Changed
                 
-                var token_stats = responseJson.RootElement.GetProperty("timings");
-                AddToStats(token_stats);
+                var token_stats = responseJson["timings"] as JObject; // Changed and cast to JObject
+                AddToStats(token_stats); // No change needed here now
+
                 if (responseJson == null)
                 {
                     throw new Exception("Failed to parse response");
@@ -137,18 +140,27 @@ internal class LlmLlamaCpp : Llm
                 else
                 {
                     var result = new List<Dictionary<string, double>>();
-                    var probs = responseJson.RootElement.GetProperty("completion_probabilities");
-                    foreach (var prob in probs.EnumerateArray())
+                    var probsToken = responseJson["completion_probabilities"]; // Changed
+                    if (probsToken is JArray probsArray) // Changed
                     {
-                        var probDict = new Dictionary<string,double>();
-                        foreach (var prop in prob.GetProperty("probs").EnumerateArray())
+                        foreach (var prob in probsArray)
                         {
-                            if (prop.TryGetProperty("tok_str", out var token) && prop.TryGetProperty("prob", out var probability))
+                            var probDict = new Dictionary<string,double>();
+                            var innerProbsToken = prob["probs"];
+                            if (innerProbsToken is JArray innerProbsArray) // Changed
                             {
-                                probDict[token.GetString() ?? string.Empty] = probability.GetDouble();
+                                foreach (var prop in innerProbsArray)
+                                {
+                                    var token = prop["tok_str"]?.ToString(); // Changed
+                                    var probability = prop["prob"]?.Value<double>(); // Changed
+                                    if (token != null && probability.HasValue)
+                                    {
+                                        probDict[token] = probability.Value;
+                                    }
+                                }
                             }
+                            result.Add(probDict);
                         }
-                        result.Add(probDict);
                     }
                     return result.ToArray();
                 }

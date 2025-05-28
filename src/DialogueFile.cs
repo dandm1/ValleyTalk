@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace StardewDialogue;
 
@@ -249,90 +249,68 @@ public class DialogueCommand : IDialogueElement
 
 public sealed class DialogueValueJsonConverter : JsonConverter<DialogueValue>
 {
-    public override DialogueValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DialogueValue ReadJson(JsonReader reader, Type objectType, DialogueValue existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
-        return new DialogueValue(reader.GetString() ?? string.Empty);
+        return new DialogueValue(reader.Value?.ToString() ?? string.Empty);
     }
 
-    public override void Write(Utf8JsonWriter writer, DialogueValue value, JsonSerializerOptions options)
+    public override void WriteJson(JsonWriter writer, DialogueValue value, JsonSerializer serializer)
     {
-        writer.WriteStringValue(value.Value);
-    }
-
-    public override void WriteAsPropertyName(Utf8JsonWriter writer, [DisallowNull] DialogueValue value, JsonSerializerOptions options)
-    {
-        writer.WritePropertyName(value.Value);
-    }
-
-    public override DialogueValue ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-    {
-        string? value = reader.GetString();
-        return new DialogueValue(value ?? string.Empty);
+        writer.WriteValue(value.Value);
     }
 }
 
 public sealed class RandomisedDialogueJsonConverter : JsonConverter<RandomisedDialogue>
 {
-    public override RandomisedDialogue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override RandomisedDialogue ReadJson(JsonReader reader, Type objectType, RandomisedDialogue existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
-        var dialogue = JsonSerializer.Deserialize<List<DialogueValue>>(ref reader, options);
+        var dialogue = serializer.Deserialize<List<DialogueValue>>(reader);
         return new RandomisedDialogue(dialogue);
     }
 
-    public override void Write(Utf8JsonWriter writer, RandomisedDialogue value, JsonSerializerOptions options)
+    public override void WriteJson(JsonWriter writer, RandomisedDialogue value, JsonSerializer serializer)
     {
         if (value.Dialogue.Count() <= 1)
         {
-            JsonSerializer.Serialize(writer, value.Dialogue.FirstOrDefault()?.Value, options);
+            serializer.Serialize(writer, value.Dialogue.FirstOrDefault()?.Value);
             return;
         }
         var builder = new StringBuilder();
         builder.Append("Random{{");
-        builder.Append(JsonSerializer.Serialize(value.Dialogue.First(), options));
+        builder.Append(JsonConvert.SerializeObject(value.Dialogue.First()));
         foreach (var dialogue in value.Dialogue.Skip(1))
         {
             builder.Append("++");
-            builder.Append(JsonSerializer.Serialize(dialogue, options));
+            builder.Append(JsonConvert.SerializeObject(dialogue));
         }
         builder.Append("|inputSeparator=++}}");
 
-        JsonSerializer.Serialize(writer, builder.ToString(), options);
+        serializer.Serialize(writer, builder.ToString());
     }
 }
 
 public sealed class IDialogueValueJsonConverter : JsonConverter<IDialogueValue>
 {
-    public override IDialogueValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override IDialogueValue ReadJson(JsonReader reader, Type objectType, IDialogueValue existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
-        return JsonSerializer.Deserialize<DialogueValue>(ref reader, options);
+        return serializer.Deserialize<DialogueValue>(reader);
     }
 
-    public override void Write(Utf8JsonWriter writer, IDialogueValue value, JsonSerializerOptions options)
+    public override void WriteJson(JsonWriter writer, IDialogueValue value, JsonSerializer serializer)
     {
-        JsonSerializer.Serialize(writer, value, options);
+        serializer.Serialize(writer, value);
     }
 }
 
 public sealed class DialogueContextJsonConverter : JsonConverter<DialogueContext>
 {
-    public override DialogueContext Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override DialogueContext ReadJson(JsonReader reader, Type objectType, DialogueContext existingValue, bool hasExistingValue, JsonSerializer serializer)
     {
-        return new DialogueContext(reader.GetString() ?? string.Empty);
+        return new DialogueContext(reader.Value?.ToString() ?? string.Empty);
     }
 
-    public override void Write(Utf8JsonWriter writer, DialogueContext value, JsonSerializerOptions options)
+    public override void WriteJson(JsonWriter writer, DialogueContext value, JsonSerializer serializer)
     {
-        writer.WriteStringValue(value.Value);
-    }
-
-    public override void WriteAsPropertyName(Utf8JsonWriter writer, [DisallowNull] DialogueContext value, JsonSerializerOptions options)
-    {
-        writer.WritePropertyName(value.Value);
-    }
-
-    public override DialogueContext ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-    {
-        string? key = reader.GetString();
-        return new DialogueContext(key ?? string.Empty);
+        writer.WriteValue(value.Value);
     }
 }
