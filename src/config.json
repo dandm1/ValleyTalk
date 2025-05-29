@@ -1,14 +1,17 @@
 {
   "EnableMod": true,
   "Debug": false,
-  "Provider": "Mistral",
-  "ModelName": "",
+  "Provider": "OpenAI",
+  "ModelName": "gpt-4o",
   "ServerAddress": "https://openrouter.ai/api",
   "PromptFormat": "[INST] {system}\n{prompt}[/INST]\n{response_start}",
-  "ApiKey": "",
+  "QueryTimeout": 30,
+  "ApiKey": "ENTER YOUR KEY",
   "ApplyTranslation": false,
   "GeneralFrequency": 4,
   "MarriageFrequency": 4,
   "GiftFrequency": 4,
-  "DisableCharacters": ""
+  "TypedResponses": "With Generated",
+  "DisableCharacters": "",
+  "InitiateTypedDialogueKey": "LeftAlt"
 }
