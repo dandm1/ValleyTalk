@@ -21,20 +21,19 @@ namespace ValleyTalk
         /// </summary>
         public static bool Prefix(ref NPC __instance, ref bool __result, Farmer who, GameLocation l)
         {
-
             // Check if the Alt key is being held down (or whatever key is configured)
             bool wasTriggerKeyDown = ModEntry.SHelper.Input.IsDown(InitiateTypedDialogueKey);
 
-            // If the key is not held down, let the original method handle it
-            if (!wasTriggerKeyDown)
+            // Check for cases when we should not allow initiating typed dialogue
+            if (
+                __instance.IsInvisible ||
+                __instance.isSleeping.Value ||
+                !who.CanMove ||
+                !wasTriggerKeyDown ||
+                !DialogueBuilder.Instance.PatchNpc(__instance)
+                )
             {
                 return true;
-            }
-
-            // Make sure we can process dialogue with this NPC
-            if (!DialogueBuilder.Instance.PatchNpc(__instance))
-            {
-                return true; // Let the original method handle NPCs we can't patch
             }
 
             DialogueBuilder.Instance.ClearContext();
