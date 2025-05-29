@@ -201,7 +201,7 @@ public class Character
         var commandPrompt = prompts.Command;
 
         const int maxRetryAttempts = 4;
-        const int timeoutSeconds = 10;
+        int timeoutSeconds = ModEntry.Config.QueryTimeout;
         int retryCount = 0;
         Exception lastException = null;
 
@@ -215,6 +215,7 @@ public class Character
                 if (attempt >= 2)
                 {
                     await Task.Delay(TimeSpan.FromSeconds(5));
+                    timeoutSeconds *= 2; // Double the timeout for each retry after the first
                 }
 
                 // Execute with timeout
