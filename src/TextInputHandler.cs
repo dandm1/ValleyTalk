@@ -77,6 +77,8 @@ namespace ValleyTalk
                 DialogueBuilder.Instance.AddConversation(_currentNpc, enteredText, isPlayerLine: true);
 
                 _currentResponse.Add(new ConversationElement(enteredText, true));
+                _currentNpc.grantConversationFriendship(Game1.player);
+                
                 // Generate NPC response to the typed input
                 AsyncBuilder.Instance.RequestNpcResponse(_currentNpc, _currentResponse.ToArray());
             }
