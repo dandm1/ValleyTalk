@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq; // Added
 using System.Threading;
 using System.Threading.Tasks;
 using ValleyTalk;
+using ValleyTalk.Platform;
 
 namespace StardewDialogue;
 
@@ -35,9 +36,20 @@ internal class LlmGemini : Llm, IGetModelNames
     {
         try{
         var modelsUrl = $"https://generativelanguage.googleapis.com/v1beta/models?key="+apiKey;
-        var client = new HttpClient();
-        var response = client.GetAsync(modelsUrl).Result;
-        var responseString = response.Content.ReadAsStringAsync().Result;
+        
+        // Use Android-compatible network helper
+        string responseString;
+        if (AndroidHelper.IsAndroid && NetworkHelper.IsNetworkAvailable())
+        {
+            responseString = NetworkHelper.MakeRequestAsync(modelsUrl).Result;
+        }
+        else
+        {
+            var client = new HttpClient();
+            var response = client.GetAsync(modelsUrl).Result;
+            responseString = response.Content.ReadAsStringAsync().Result;
+        }
+        
         var responseJson = JObject.Parse(responseString); // Changed
         var modelsToken = responseJson["models"]; // Changed
         var modelNames = new List<string>();
@@ -76,8 +88,7 @@ internal class LlmGemini : Llm, IGetModelNames
             useContext = CacheContexts[cacheContext];
         }
 
-        var json = new StringContent(
-            JsonConvert.SerializeObject(new // Changed
+        var jsonData = JsonConvert.SerializeObject(new // Changed
             {
                 safetySettings = new[] 
                 { 
@@ -88,25 +99,43 @@ internal class LlmGemini : Llm, IGetModelNames
                 contents = new { parts = new { text = promptString } },
                 generationConfig = new { maxOutputTokens = n_predict, temperature = 1.5, topP = 0.9 },
                 //cachedContent= useContext
-            }),
+            });
+
+        var json = new StringContent(
+            jsonData,
             Encoding.UTF8,
             "application/json"
         );
 
         // call out to URL passing the object as the body, and return the result
-        var client = new HttpClient
-        {
-            Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
-        };
-        int retry=3;
+        int retry = 3;
         var fullUrl = url + apiKey;
+        
+        // Check network availability on Android
+        if (AndroidHelper.IsAndroid && !NetworkHelper.IsNetworkAvailable())
+        {
+            throw new InvalidOperationException("Network not available");
+        }
+        
         while (retry > 0)
         {
             try
             {
-                var response = await client.PostAsync(fullUrl, json);
-                // Return the 'content' element of the response json
-                var responseString = await response.Content.ReadAsStringAsync();
+                string responseString;
+                if (AndroidHelper.IsAndroid)
+                {
+                    responseString = await NetworkHelper.MakeRequestAsync(fullUrl, jsonData);
+                }
+                else
+                {
+                    var client = new HttpClient
+                    {
+                        Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
+                    };
+                    var response = await client.PostAsync(fullUrl, json);
+                    responseString = await response.Content.ReadAsStringAsync();
+                }
+                
                 var responseJson = JObject.Parse(responseString); // Changed
                 
                 if (responseJson == null)

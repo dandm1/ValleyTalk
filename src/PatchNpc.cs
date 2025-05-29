@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace ValleyTalk
 {
+
     [HarmonyPatch(typeof(NPC), nameof(NPC.GetGiftReaction))]
     public class NPC_GetGiftReaction_Patch
     {
@@ -21,6 +22,14 @@ namespace ValleyTalk
                 // If we are already awaiting a generation, skip this one
                 return true;
             }
+                        
+            // Check network availability early (Android only)
+            if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
+            {
+                ModEntry.SMonitor.Log($"Network not available, skipping AI gift reaction for {__instance.Name}", StardewModdingAPI.LogLevel.Info);
+                return true; // Use default behavior
+            }
+            
             AsyncBuilder.Instance.RequestNpcGiftResponse(__instance, gift, taste);
             var result = new Dialogue(__instance, null, null);
             result.exitCurrentDialogue();
@@ -35,15 +44,24 @@ namespace ValleyTalk
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, string dialogueKey)
         {
             ModEntry.SMonitor.Log($"NPC {__instance.Name} trying to get marriage specific dialogue with key '{dialogueKey}'", StardewModdingAPI.LogLevel.Debug);
-            if (!DialogueBuilder.Instance.PatchNpc(__instance, ModEntry.Config.MarriageFrequency))
+             if (!DialogueBuilder.Instance.PatchNpc(__instance, ModEntry.Config.MarriageFrequency))
             {
                 return true;
             }
+                       
+            // Check network availability early (Android only)
+            if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
+            {
+                ModEntry.SMonitor.Log($"Network not available, skipping AI marriage dialogue for {__instance.Name}", StardewModdingAPI.LogLevel.Info);
+                return true; // Use default behavior
+            }            
+
             if (dialogueKey.StartsWith("funReturn_") || dialogueKey.StartsWith("jobReturn_"))
             {
                 __result = new Dialogue(__instance, dialogueKey, SldConstants.DialogueGenerationTag);
                 return false;
             }
+            
             return true;
         }
     }
@@ -69,6 +87,18 @@ namespace ValleyTalk
                 if (nextLine.Text == SldConstants.DialogueGenerationTag)
                 {
                     ModEntry.SMonitor.Log($"NPC {__instance.Name} is generating dialogue", StardewModdingAPI.LogLevel.Debug);
+                    
+                    // Check network availability early (Android only)
+                    if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
+                    {
+                        ModEntry.SMonitor.Log($"Network not available, skipping AI dialogue generation for {__instance.Name}", StardewModdingAPI.LogLevel.Info);
+                        // In this context we need to return a single line of dialogue "..."
+                        __result.Pop();
+                        __result.Push(new Dialogue(__instance, "", "..."));
+                        // Let default dialogue continue
+                        return;
+                    }
+                    
                     __result.Pop();
                     if (allLines.Count > 1)
                     {
@@ -114,10 +144,18 @@ namespace ValleyTalk
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, string preface, int heartLevel, string appendToEnd)
         {
             ModEntry.SMonitor.Log($"NPC {__instance.Name} trying to retrieve dialogue with preface '{preface}' at heart level {heartLevel}", StardewModdingAPI.LogLevel.Debug);
+            
             if (!DialogueBuilder.Instance.PatchNpc(__instance, ModEntry.Config.GeneralFrequency, true))
             {
                 return true;
+            }            
+            // Check network availability early (Android only)
+            if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
+            {
+                ModEntry.SMonitor.Log($"Network not available, skipping AI dialogue retrieval for {__instance.Name}", StardewModdingAPI.LogLevel.Info);
+                return true; // Use default behavior
             }
+
             __result = new Dialogue(__instance, $"{preface}_{heartLevel}", SldConstants.DialogueGenerationTag);
             return false;
         }
@@ -134,6 +172,14 @@ namespace ValleyTalk
             {
                 return true;
             }
+
+            // Check network availability early (Android only)
+            if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
+            {
+                ModEntry.SMonitor.Log($"Network not available, skipping AI new dialogue check for {__instance.Name}", StardewModdingAPI.LogLevel.Info);
+                return true; // Use default behavior
+            }
+            
             if (Game1.player.currentLocation.Name == "Saloon" || Game1.player.currentLocation.Name == "IslandSouth")
             {
                 var newDialogue = new Dialogue(__instance, Game1.player.currentLocation.Name, SldConstants.DialogueGenerationTag);
@@ -149,10 +195,20 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref NPC __instance, string translationKey)
         {
+            ModEntry.SMonitor.Log($"NPC {__instance.Name} pushing temporary dialogue with key '{translationKey}'", StardewModdingAPI.LogLevel.Debug);
+            
             if (!DialogueBuilder.Instance.PatchNpc(__instance, ModEntry.Config.GeneralFrequency, true))
             {
                 return true;
             }
+            
+            // Check network availability early (Android only)
+            if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
+            {
+                ModEntry.SMonitor.Log($"Network not available, skipping AI temporary dialogue for {__instance.Name}", StardewModdingAPI.LogLevel.Info);
+                return true; // Use default behavior
+            }
+
             try
             {
                 if (translationKey.StartsWith("Resort"))

@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq; // Added
 using System.Threading;
 using System.Threading.Tasks;
 using ValleyTalk;
+using ValleyTalk.Platform;
 
 namespace StardewDialogue;
 
@@ -54,19 +55,45 @@ internal class LlmLlamaCpp : Llm
         );
 
         // call out to URL passing the object as the body, and return the result
-        var client = new HttpClient
+        bool retry = true;
+        
+        // Check network availability on Android
+        if (AndroidHelper.IsAndroid && !NetworkHelper.IsNetworkAvailable())
         {
-            Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
-        };
-        bool retry=true;
+            throw new InvalidOperationException("Network not available");
+        }
+        
         while (retry)
         {
             try
             {
-                retry=false;
-                var response = await client.PostAsync(url, json);
-                // Return the 'content' element of the response json
-                var responseString = await response.Content.ReadAsStringAsync();
+                retry = false;
+                string responseString;
+                
+                if (AndroidHelper.IsAndroid)
+                {
+                    var jsonData = JsonConvert.SerializeObject(new
+                    {
+                        prompt = fullPrompt,
+                        n_predict = n_predict,
+                        stream = false,
+                        temperature = n_predict == 1 ? 0 : 1.5,
+                        top_p = 0.88,
+                        min_p = 0.05,
+                        repeat_penalty = 1.05,
+                    });
+                    responseString = await NetworkHelper.MakeRequestAsync(url, jsonData);
+                }
+                else
+                {
+                    var client = new HttpClient
+                    {
+                        Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
+                    };
+                    var response = await client.PostAsync(url, json);
+                    responseString = await response.Content.ReadAsStringAsync();
+                }
+                
                 var responseJson = JObject.Parse(responseString); // Changed
                 
                 var token_stats = responseJson["timings"] as JObject; // Changed and cast to JObject

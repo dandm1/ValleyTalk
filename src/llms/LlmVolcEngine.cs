@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ValleyTalk;
+using ValleyTalk.Platform;
 
 namespace StardewDialogue;
 
@@ -70,23 +71,21 @@ internal class LlmVolcEngine : Llm, IGetModelNames
         );
 
         // call out to URL passing the object as the body, and return the result
-        var client = new HttpClient
-        {
-            Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
-        };
-
-        int retry=3;
+        int retry = 3;
         var fullUrl = $"{url}/chat/completions";
+        
+        // Check network availability on Android
+        if (AndroidHelper.IsAndroid && !NetworkHelper.IsNetworkAvailable())
+        {
+            throw new InvalidOperationException("Network not available");
+        }
+        
         while (retry > 0)
         {
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, fullUrl);
-                request.Content = json;
-                request.Headers.Add("Authorization", $"Bearer {apiKey}");
-                var response = await client.SendAsync(request);
-                // Return the 'content' element of the response json
-                var responseString = await response.Content.ReadAsStringAsync();
+                // Use Android-compatible network helper
+                var responseString = await NetworkHelper.MakeRequestAsync(fullUrl, inputString, CancellationToken.None, apiKey);
                 var responseJson = JObject.Parse(responseString);
                 
                 if (responseJson == null)
@@ -135,19 +134,30 @@ internal class LlmVolcEngine : Llm, IGetModelNames
         }
         try 
         {
-        var client = new HttpClient
-        {
-            Timeout = TimeSpan.FromMinutes(1)
-        };
         var fullUrl = $"{url}/models";
-        var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
-        request.Headers.Add("Authorization", $"Bearer {apiKey}");
-        foreach (var header in extraHeaders)
+        
+        // Use Android-compatible network helper
+        string responseString;
+        if (AndroidHelper.IsAndroid && NetworkHelper.IsNetworkAvailable())
         {
-            request.Headers.Add(header.Key, header.Value);
+            responseString = NetworkHelper.MakeRequestAsync(fullUrl, null, CancellationToken.None, apiKey).Result;
         }
-        var response = client.SendAsync(request).Result;
-        var responseString = response.Content.ReadAsStringAsync().Result;
+        else
+        {
+            var client = new HttpClient
+            {
+                Timeout = TimeSpan.FromMinutes(1)
+            };
+            var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
+            request.Headers.Add("Authorization", $"Bearer {apiKey}");
+            foreach (var header in extraHeaders)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+            var response = client.SendAsync(request).Result;
+            responseString = response.Content.ReadAsStringAsync().Result;
+        }
+        
         var responseJson = JObject.Parse(responseString);
         var dataToken = responseJson["data"];
         if (!(dataToken is JArray modelsArray))

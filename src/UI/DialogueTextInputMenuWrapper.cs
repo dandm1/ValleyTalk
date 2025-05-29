@@ -1,6 +1,7 @@
 using StardewValley.Menus;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ValleyTalk.Platform;
 
 namespace ValleyTalk
 {
@@ -14,6 +15,15 @@ namespace ValleyTalk
         public DialogueTextInputMenuWrapper(DialogueTextInputMenu innerMenu) : base()
         {
             _innerMenu = innerMenu;
+            
+            // Adjust position for Android virtual keyboard
+            if (AndroidHelper.IsAndroid)
+            {
+                var adjustedPosition = AndroidHelper.AdjustPositionForKeyboard(
+                    new Microsoft.Xna.Framework.Vector2(xPositionOnScreen, yPositionOnScreen));
+                xPositionOnScreen = (int)adjustedPosition.X;
+                yPositionOnScreen = (int)adjustedPosition.Y;
+            }
         }
 
         public override void draw(SpriteBatch b)

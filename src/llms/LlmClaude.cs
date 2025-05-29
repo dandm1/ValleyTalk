@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using ValleyTalk;
+using ValleyTalk.Platform;
 using System.Threading.Tasks;
 
 namespace StardewDialogue;
@@ -75,25 +76,27 @@ internal class LlmClaude : Llm, IGetModelNames
         );
 
         // call out to URL passing the object as the body, and return the result
-        var client = new HttpClient
-        {
-            Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
-        };
-
-        int retry=3;
+        int retry = 3;
         var fullUrl = url;
+        
+        // Check network availability on Android
+        if (AndroidHelper.IsAndroid && !NetworkHelper.IsNetworkAvailable())
+        {
+            throw new InvalidOperationException("Network not available");
+        }
+        
         while (retry > 0)
         {
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, fullUrl);
-                request.Content = json;
-                request.Headers.Add("x-api-key", apiKey);
-                request.Headers.Add("anthropic-version", "2023-06-01");
-                request.Headers.Add("anthropic-beta", "prompt-caching-2024-07-31");
-                var response = await client.SendAsync(request);
-                // Return the 'content' element of the response json
-                var responseString = await response.Content.ReadAsStringAsync();
+                // Use Android-compatible network helper with Claude-specific headers
+                var headers = new Dictionary<string, string>
+                {
+                    { "x-api-key", apiKey },
+                    { "anthropic-version", "2023-06-01" },
+                    { "anthropic-beta", "prompt-caching-2024-07-31" }
+                };
+                var responseString = await NetworkHelper.MakeRequestWithCustomHeadersAsync(fullUrl, inputString, headers);
                 var responseJson = JObject.Parse(responseString);
                 
                 if (responseJson == null)

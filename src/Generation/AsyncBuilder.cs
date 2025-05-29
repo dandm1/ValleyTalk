@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using StardewModdingAPI.Events;
 using StardewValley;
+using ValleyTalk.Platform;
 
 namespace ValleyTalk;
 public class AsyncBuilder
@@ -69,17 +70,37 @@ public class AsyncBuilder
             }
 
             var newDialogue = await dialogueTask;
-            // Hide thinking window
-            if (Game1.activeClickableMenu == thinkingWindow)
+            
+            // Ensure UI updates happen on main thread for Android compatibility
+            if (AndroidHelper.IsAndroid)
             {
-                Game1.exitActiveMenu();
+                // Schedule UI update for next game tick on main thread
+                EventHandler<UpdateTickedEventArgs> updateHandler = null;
+                updateHandler = (sender, e) =>
+                {
+                    UpdateUI();
+                    ModEntry.SHelper.Events.GameLoop.UpdateTicked -= updateHandler;
+                };
+                ModEntry.SHelper.Events.GameLoop.UpdateTicked += updateHandler;
+            }
+            else
+            {
+                UpdateUI();
             }
 
-            if (newDialogue != null && newDialogue.dialogues.Count > 0)
+            void UpdateUI()
             {
-                npc.CurrentDialogue.Push(newDialogue);
+                // Hide thinking window
+                if (Game1.activeClickableMenu == thinkingWindow)
+                {
+                    Game1.exitActiveMenu();
+                }
 
-                Game1.DrawDialogue(newDialogue);
+                if (newDialogue != null && newDialogue.dialogues.Count > 0)
+                {
+                    npc.CurrentDialogue.Push(newDialogue);
+                    Game1.DrawDialogue(newDialogue);
+                }
             }
         }
         catch (Exception ex)
@@ -87,9 +108,25 @@ public class AsyncBuilder
             ModEntry.SMonitor?.Log($"Error generating NPC response: {ex.Message}", StardewModdingAPI.LogLevel.Error);
 
             // Make sure to hide thinking window even if there's an error
-            if (thinkingWindow != null && Game1.activeClickableMenu == thinkingWindow)
+            if (AndroidHelper.IsAndroid)
             {
-                Game1.exitActiveMenu();
+                EventHandler<UpdateTickedEventArgs> errorHandler = null;
+                errorHandler = (sender, e) =>
+                {
+                    if (thinkingWindow != null && Game1.activeClickableMenu == thinkingWindow)
+                    {
+                        Game1.exitActiveMenu();
+                    }
+                    ModEntry.SHelper.Events.GameLoop.UpdateTicked -= errorHandler;
+                };
+                ModEntry.SHelper.Events.GameLoop.UpdateTicked += errorHandler;
+            }
+            else
+            {
+                if (thinkingWindow != null && Game1.activeClickableMenu == thinkingWindow)
+                {
+                    Game1.exitActiveMenu();
+                }
             }
         }
         finally

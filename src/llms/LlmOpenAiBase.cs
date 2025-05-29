@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq; // Added
 using System.Threading;
 using System.Threading.Tasks;
 using ValleyTalk;
+using ValleyTalk.Platform;
 
 namespace StardewDialogue;
 
@@ -49,24 +50,22 @@ internal abstract class LlmOpenAiBase : Llm
         );
 
         // call out to URL passing the object as the body, and return the result
-        var client = new HttpClient
-        {
-            Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
-        };
-
-        int retry=3;
+        int retry = 3;
         var fullUrl = $"{url}/v1/chat/completions";
+        
+        // Check network availability on Android
+        if (AndroidHelper.IsAndroid && !NetworkHelper.IsNetworkAvailable())
+        {
+            throw new InvalidOperationException("Network not available");
+        }
+        
         while (retry > 0)
         {
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, fullUrl);
-                request.Content = json;
-                request.Headers.Add("Authorization", $"Bearer {apiKey}");
-                var response = await client.SendAsync(request);
-                // Return the 'content' element of the response json
-                var responseString = await response.Content.ReadAsStringAsync(); // Changed .Result to await
-                var responseJson = JObject.Parse(responseString); // Changed
+                // Use Android-compatible network helper
+                var responseString = await NetworkHelper.MakeRequestAsync(fullUrl, inputString, CancellationToken.None, apiKey);
+                var responseJson = JObject.Parse(responseString);
                 
                 if (responseJson == null)
                 {

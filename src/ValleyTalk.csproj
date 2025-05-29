@@ -10,6 +10,10 @@
     <Platforms>AnyCPU;x64</Platforms>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <BundleExtraAssemblies>ThirdParty, System</BundleExtraAssemblies>
+    <!-- Android compatibility settings -->
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <AndroidSupportedAbis>arm64-v8a;armeabi-v7a</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="newtonsoft.json" Version="13.0.3" />
@@ -19,11 +23,18 @@
     <None Update="manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="config.json" Condition="'$(Configuration)' == 'Release'">
+    <None Update="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <!-- Copy ContentPack folder to output -->
+  <ItemGroup>
+    <None Include="../ContentPack/**/*">
+      <Link>ContentPack/%(RecursiveDir)%(Filename)%(Extension)</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ContentPacks Include="/home/david/VSCode/ValleyTalk/ContentPack" FolderName="[CP] ValleyTalk Base" Version="$(Version)" />
+    <ContentPacks Include="../ContentPack" FolderName="[CP] ValleyTalk Base" Version="$(Version)" />
   </ItemGroup>
 </Project>
