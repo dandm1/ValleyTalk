@@ -45,6 +45,7 @@ namespace ValleyTalk
                 prompt,
                 __instance
             );
+            __result = false;
             return false; // Prevent the original method from executing
         }
     }

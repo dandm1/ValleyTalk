@@ -30,7 +30,7 @@ public class AsyncBuilder
     
     private void OnUpdateTicked(object sender, UpdateTickedEventArgs e)
     {
-        ThinkingWindow thinkingWindow = null;
+        ThinkingWindow thinkingWindow;
         // Only perform generation if we are awaiting it
         if (_awaitingGeneration && Game1.activeClickableMenu == null)
         {

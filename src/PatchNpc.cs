@@ -106,7 +106,8 @@ namespace ValleyTalk
                         originalLine = string.Join(" ", allLines.Select(x => x.Text));
                     }
                     AsyncBuilder.Instance.RequestNpcBasic(__instance, "default", originalLine);
-                    __result = null;
+                    Game1.currentSpeaker = __instance;
+                    __result.Clear();
                     return;
                 }
                 else
