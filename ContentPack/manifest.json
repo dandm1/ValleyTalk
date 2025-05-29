@@ -1,8 +1,8 @@
 {
     "Name": "ValleyTalk Content Pack",
     "Author": "dandm1",
-    "Version": "%ProjectVersion%",
-    "Description": "Infinite dialogue for Stardew Valley",
+    "Version": "1.0.0",
+    "Description": "CP Infinite dialogue for Stardew Valley",
     "UniqueID": "dandm1.CPValleyTalk",
     "MinimumApiVersion": "4.1.0",
     "UpdateKeys": [ "Nexus:30319" ],
