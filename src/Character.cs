@@ -39,7 +39,7 @@ public class Character
                 e.LoadFrom(() => new BioData(), AssetLoadPriority.Exclusive);
             }
         };
-        ModEntry.SHelper.Events.Content.AssetsInvalidated += (object? sender, AssetsInvalidatedEventArgs e) =>
+        ModEntry.SHelper.Events.Content.AssetsInvalidated += (object sender, AssetsInvalidatedEventArgs e) =>
         {
             if (e.NamesWithoutLocale.Any(an => an.IsEquivalentTo(BioFilePath)))
             {
@@ -109,7 +109,7 @@ public class Character
                     }
                 }
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 // If it fails, just continue
             }
@@ -130,7 +130,7 @@ public class Character
                     }
                 }
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 // If it fails, just continue
             }
@@ -524,7 +524,7 @@ public class Character
     public string Name { get; }
     public string DialogueFilePath { get; }
     public string BioFilePath { get; }
-    public DialogueFile? DialogueData 
+    public DialogueFile DialogueData 
     { 
         get 
         {

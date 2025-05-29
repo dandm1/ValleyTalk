@@ -1099,7 +1099,7 @@ public class Prompts
                     ?? Array.Empty<DialogueValue>();
     }
 
-    private IDialogueValue? SelectExactDialogue()
+    private IDialogueValue SelectExactDialogue()
     {
         return (Character.DialogueData
                     ?.AllEntries

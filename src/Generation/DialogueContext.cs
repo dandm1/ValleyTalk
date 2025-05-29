@@ -12,27 +12,27 @@ namespace StardewDialogue;
 
 public class DialogueContext
 {
-    private static readonly string[] singles =new string[] {"Emily", "Haley", "Maru", "Penny", "Sam", "Sebastian", "Shane", "Abigail", "Elliott", "Harvey", "Leah", "Alex", "Krobus"};
-    private static readonly int[] heartsOptions = new int[] {0, 2, 4, 6, 8, 10};
-    private static readonly int[] friendHeartOptions = new int[] {0, 6, 8, 10};
-    private static readonly Season?[] seasonOptions = new StardewDialogue.Season?[] {StardewDialogue.Season.Spring, StardewDialogue.Season.Summer, StardewDialogue.Season.Fall, StardewDialogue.Season.Winter, null};
-    public static readonly string[] locations = new string[] {"Beach", "Desert", "Railroad", "Saloon", "SeedShop", "JojaMart"};
-    public static readonly string[] resortTags = new string[] {"Resort", "Resort_Entering", "Resort_Leaving"};
-    private static readonly int[] yearOptions = new int[] {1, 2};
-    public static string[] specialContexts = new string[] {"cc_Boulder", "cc_Bridge", "cc_Bus", "cc_Greenhouse", "cc_Minecart", "cc_Complete", "movieTheater", "pamHouseUpgrade", "pamHouseUpgradeAnonymous", "jojaMartStruckByLightning", "babyBoy", "babyGirl", "wedding", "event_postweddingreception", "luauBest", "luauShorts", "luauPoisoned", "Characters_MovieInvite_Invited", "DumpsterDiveComment", "SpouseStardrop", "FlowerDance_Accept_Spouse", "FlowerDance_Accept", "FlowerDance_Decline", "GreenRain", "GreenRainFinished", "GreenRain_2", "Rainy"};
-   
+    private static readonly string[] singles = new string[] { "Emily", "Haley", "Maru", "Penny", "Sam", "Sebastian", "Shane", "Abigail", "Elliott", "Harvey", "Leah", "Alex", "Krobus" };
+    private static readonly int[] heartsOptions = new int[] { 0, 2, 4, 6, 8, 10 };
+    private static readonly int[] friendHeartOptions = new int[] { 0, 6, 8, 10 };
+    private static readonly Season?[] seasonOptions = new StardewDialogue.Season?[] { StardewDialogue.Season.Spring, StardewDialogue.Season.Summer, StardewDialogue.Season.Fall, StardewDialogue.Season.Winter, null };
+    public static readonly string[] locations = new string[] { "Beach", "Desert", "Railroad", "Saloon", "SeedShop", "JojaMart" };
+    public static readonly string[] resortTags = new string[] { "Resort", "Resort_Entering", "Resort_Leaving" };
+    private static readonly int[] yearOptions = new int[] { 1, 2 };
+    public static string[] specialContexts = new string[] { "cc_Boulder", "cc_Bridge", "cc_Bus", "cc_Greenhouse", "cc_Minecart", "cc_Complete", "movieTheater", "pamHouseUpgrade", "pamHouseUpgradeAnonymous", "jojaMartStruckByLightning", "babyBoy", "babyGirl", "wedding", "event_postweddingreception", "luauBest", "luauShorts", "luauPoisoned", "Characters_MovieInvite_Invited", "DumpsterDiveComment", "SpouseStardrop", "FlowerDance_Accept_Spouse", "FlowerDance_Accept", "FlowerDance_Decline", "GreenRain", "GreenRainFinished", "GreenRain_2", "Rainy" };
+
     public int? Hearts { get; init; }
     public Season? Season { get; init; }
     public int? Year { get; init; }
-    public Weekday? Day {get; set; }
+    public Weekday? Day { get; set; }
     public int? DayOfSeason { get; init; }
-    public string? Inlaw { get; init; }
+    public string Inlaw { get; init; }
     public StardewValley.Object Accept { get; set; }
-    public string? TimeOfDay { get; init; }
+    public string TimeOfDay { get; init; }
     public RandomAction? RandomAct { get; set; }
     public int? RandomValue { get; init; }
     public SpouseAction? SpouseAct { get; set; }
-    public string? Spouse { get; init; }
+    public string Spouse { get; init; }
     public string ChatID { get; init; }
     public List<ConversationElement> ChatHistory { get; set; } = new List<ConversationElement>();
     public bool LastLineIsPlayerInput { get; set; } = false; // Tracks if the last line came from the player
@@ -57,7 +57,7 @@ public class DialogueContext
         var newElements = new List<string>();
         if (ChatID != null)
         {
-            elements = new string[] {ChatID};
+            elements = new string[] { ChatID };
             return;
         }
 
@@ -90,7 +90,7 @@ public class DialogueContext
         {
             newElements.Add(DayOfSeason.ToString());
         }
-        else if (Spouse != null && SpouseAct == null && RandomAct == null)       
+        else if (Spouse != null && SpouseAct == null && RandomAct == null)
         {
             newElements.Add(Spouse);
         }
@@ -199,7 +199,7 @@ public class DialogueContext
             elements = elements.Skip(1).ToArray();
         }
         // Check if the first element is a day of the week followed by a number.  If so, set the day and use the number as a heart level.
-        else if (elements[0].Length >= 3 && Enum.TryParse<Weekday>(elements[0].Substring(0,3), true, out var day))
+        else if (elements[0].Length >= 3 && Enum.TryParse<Weekday>(elements[0].Substring(0, 3), true, out var day))
         {
             Day = day;
             if (elements[0].Length > 3)
@@ -232,7 +232,7 @@ public class DialogueContext
         else if (elements.Length >= 1 && Enum.TryParse<RandomAction>(elements[0], true, out var randomAction))
         {
             RandomAct = randomAction;
-            if (( randomAction == RandomAction.Rainy || randomAction == RandomAction.Indoor) && elements.Length >= 2)
+            if ((randomAction == RandomAction.Rainy || randomAction == RandomAction.Indoor) && elements.Length >= 2)
             {
                 TimeOfDay = elements[1];
                 elements = elements.Skip(2).ToArray();
@@ -297,8 +297,8 @@ public class DialogueContext
     }
 
     private string _value;
-    public string Value 
-    { 
+    public string Value
+    {
         get
         {
             BuildElements();
@@ -310,8 +310,8 @@ public class DialogueContext
             _value = value;
         }
     }
-    public string[] Elements 
-    { 
+    public string[] Elements
+    {
         get
         {
             if (elements.Length == 0)
@@ -323,7 +323,7 @@ public class DialogueContext
         }
     }
 
-    public string? Gender { get; internal set; }
+    public string Gender { get; internal set; }
     public string Location { get; internal set; }
     public bool Birthday { get; internal set; } = false;
     public bool MaleFarmer { get; internal set; }
@@ -364,13 +364,13 @@ public class DialogueContext
         }
         if (TimeOfDay != other.TimeOfDay)
         {
-            difference+= 20;
+            difference += 20;
         }
-        difference += CompareValues(RandomAct, other.RandomAct,0,200,2000);
-        difference += CompareValues(SpouseAct, other.SpouseAct,0,200,2000);
-        difference += CompareValuesNull(Spouse, other.Spouse,0,10000,2000);
-        difference += CompareValues(Year, other.Year,0,200,200);
-        difference += CompareValuesNull(Inlaw, other.Inlaw,0,500,1000);
+        difference += CompareValues(RandomAct, other.RandomAct, 0, 200, 2000);
+        difference += CompareValues(SpouseAct, other.SpouseAct, 0, 200, 2000);
+        difference += CompareValuesNull(Spouse, other.Spouse, 0, 10000, 2000);
+        difference += CompareValues(Year, other.Year, 0, 200, 200);
+        difference += CompareValuesNull(Inlaw, other.Inlaw, 0, 500, 1000);
         // Add a random factor
         difference += new Random().Next(0, 10);
 
@@ -395,7 +395,7 @@ public class DialogueContext
         {
             return ifEqual;
         }
-        
+
         return ifDifferent;
     }
 
@@ -417,7 +417,7 @@ public class DialogueContext
         {
             return ifEqual;
         }
-        
+
         return ifDifferent;
     }
 
@@ -446,9 +446,17 @@ public class DialogueContext
                 ChatID == other.ChatID &&
                 Married == other.Married &&
                 Location == other.Location &&
-                Birthday == other.Birthday ;
-            
+                Birthday == other.Birthday;
+
         }
         return false;
+    }
+    
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(
+            HashCode.Combine(Hearts, Season, Year, Day, DayOfSeason, Inlaw, Accept),
+            HashCode.Combine(TimeOfDay, RandomAct, SpouseAct, ChatID, Married, Location, Birthday)
+        );
     }
 }

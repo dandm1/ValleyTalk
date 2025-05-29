@@ -50,7 +50,7 @@ public class BioData
     public string BiographyEnd { get; set; } = string.Empty;
     
     //Only update gender if the value passed is male or female
-    public string? Gender {
+    public string Gender {
         get{ return isMale == null ? null : (isMale.Value ? male : female); }
         set
         {

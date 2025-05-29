@@ -35,7 +35,7 @@ internal class GameSummaryBuilder
                 e.LoadFrom(() => new GameSummary(), AssetLoadPriority.Exclusive);
             }
         };
-        ModEntry.SHelper.Events.Content.AssetsInvalidated += (object? sender, AssetsInvalidatedEventArgs e) =>
+        ModEntry.SHelper.Events.Content.AssetsInvalidated += (object sender, AssetsInvalidatedEventArgs e) =>
         {
             if (e.NamesWithoutLocale.Any(an => an.IsEquivalentTo(VtConstants.GameSummaryPath)))
             {

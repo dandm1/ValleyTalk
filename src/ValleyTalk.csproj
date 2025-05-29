@@ -1,12 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <AssemblyName>ValleyTalk</AssemblyName>
+    <RootNamespace>ValleyTalk</RootNamespace>
     <Version>1.0.0</Version>
     <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <GamePath>/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley</GamePath>
     <EnableHarmony>true</EnableHarmony>
     <Platforms>AnyCPU;x64</Platforms>
-    <BundleExtraAssemblies>All</BundleExtraAssemblies>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <BundleExtraAssemblies>ThirdParty, System</BundleExtraAssemblies>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="newtonsoft.json" Version="13.0.3" />
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
+    <PackageReference Include="Polly.Core" Version="8.4.2" />
+  </ItemGroup>
   <ItemGroup>
     <None Update="manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -16,11 +25,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ContentPacks Include="ContentPack" Version="$(Version)" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="newtonsoft.json" Version="13.0.3" />
-    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
-    <PackageReference Include="Polly.Core" Version="8.4.2" />
+    <ContentPacks Include="/home/david/VSCode/ValleyTalk/ContentPack" FolderName="[CP] ValleyTalk Base" Version="$(Version)" />
   </ItemGroup>
 </Project>

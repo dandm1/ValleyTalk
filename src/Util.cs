@@ -54,7 +54,7 @@ namespace ValleyTalk
             return builder.ToString();
         }
 
-        internal static string GetString(StardewDialogue.Character npc,string key,object? tokens = null,bool returnNull = false)
+        internal static string GetString(StardewDialogue.Character npc,string key,object tokens = null,bool returnNull = false)
         {
             if (npc == null) return string.Empty;
 
@@ -93,7 +93,7 @@ namespace ValleyTalk
             return result;
         }
 
-        internal static string GetString(string key,object? tokens = null,bool returnNull = false)
+        internal static string GetString(string key, object tokens = null, bool returnNull = false)
         {
             string result = string.Empty;
             if (!PromptCache.Instance.Cache.TryGetValue(key, out result) && returnNull)

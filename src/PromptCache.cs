@@ -21,7 +21,7 @@ public class PromptCache
                 e.LoadFrom(() => new Dictionary<string, string>(), AssetLoadPriority.Exclusive);
             }
         };
-        ModEntry.SHelper.Events.Content.AssetsInvalidated += (object? sender, AssetsInvalidatedEventArgs e) =>
+        ModEntry.SHelper.Events.Content.AssetsInvalidated += (object sender, AssetsInvalidatedEventArgs e) =>
         {
             if (e.NamesWithoutLocale.Any(an => an.IsEquivalentTo(VtConstants.PromptsPath)))
             {
