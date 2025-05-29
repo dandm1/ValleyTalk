@@ -18,62 +18,19 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="newtonsoft.json" Version="13.0.3" />
-    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0" />
   </ItemGroup>
   <ItemGroup>
     <None Update="manifest.json">
-      <Link>ValleyTalk/%(Filename)%(Extension)</Link>
+      <Link>%(Filename)%(Extension)</Link> <!-- Changed: Removed 'ValleyTalk/' prefix -->
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="config.json">
-      <Link>ValleyTalk/%(Filename)%(Extension)</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <!-- Copy ContentPack folder to output -->
-  <ItemGroup>
-    <None Include="../ContentPack/**/*">
-      <Link>[CP] ValleyTalk Base/%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Link>%(Filename)%(Extension)</Link> <!-- Changed: Removed 'ValleyTalk/' prefix -->
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ContentPacks Include="../ContentPack" FolderName="[CP] ValleyTalk Base" Version="$(Version)" />
   </ItemGroup>
-
-  <!-- Remove the duplicate DLL files from root after zip creation -->
-  <Target Name="FixZipStructure" AfterTargets="CreateModReleaseZip;CreateModZip">
-    <!-- Delete the old zip -->
-    <Delete Files="$(OutputPath)$(AssemblyName) $(Version).zip" Condition="Exists('$(OutputPath)$(AssemblyName) $(Version).zip')" />
-    
-    <!-- Remove root DLL files to clean up structure -->
-    <Delete Files="$(OutputPath)$(AssemblyName).dll" Condition="Exists('$(OutputPath)$(AssemblyName).dll')" />
-    <Delete Files="$(OutputPath)Newtonsoft.Json.dll" Condition="Exists('$(OutputPath)Newtonsoft.Json.dll')" />
-    <Delete Files="$(OutputPath)manifest.json" Condition="Exists('$(OutputPath)manifest.json')" />
-    <Delete Files="$(OutputPath)config.json" Condition="Exists('$(OutputPath)config.json')" />
-    
-    <!-- Create a new zip with correct structure -->
-    <Exec Command="cd '$(OutputPath)' &amp;&amp; zip -r '$(AssemblyName) $(Version).zip' '[CP] ValleyTalk Base' 'ValleyTalk'" 
-          WorkingDirectory="$(OutputPath)" />
-  </Target>
-  
-  <!-- Also organize in deployed location after deployment -->
-  <Target Name="OrganizeDeployedFiles" AfterTargets="AfterBuild">
-    <!-- Wait a moment for ModBuildConfig to finish deployment -->
-    <Exec Command="sleep 1" />
-    
-    <PropertyGroup>
-      <DeployedModPath>$(GamePath)/Mods/$(AssemblyName)</DeployedModPath>
-    </PropertyGroup>
-    <ItemGroup>
-      <DeployedDlls Include="$(DeployedModPath)/ValleyTalk.dll" Condition="Exists('$(DeployedModPath)/ValleyTalk.dll')" />
-      <DeployedDlls Include="$(DeployedModPath)/Newtonsoft.Json.dll" Condition="Exists('$(DeployedModPath)/Newtonsoft.Json.dll')" />
-    </ItemGroup>
-    
-    <!-- Ensure ValleyTalk directory exists in deployed location -->
-    <MakeDir Directories="$(DeployedModPath)/ValleyTalk" Condition="Exists('$(DeployedModPath)')" />
-    
-    <!-- Move DLLs to ValleyTalk subfolder in deployed location -->
-    <Move SourceFiles="@(DeployedDlls)" DestinationFolder="$(DeployedModPath)/ValleyTalk" Condition="Exists('$(DeployedModPath)') And '@(DeployedDlls)' != ''" />
-  </Target>
 </Project>
