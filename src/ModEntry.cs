@@ -77,7 +77,7 @@ namespace ValleyTalk
                 _locale = CultureInfo.GetCultureInfo(SHelper.Translation.Locale);
                 _localeCache = SHelper.Translation.Locale;
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 _locale = null;
                 _localeCache = string.Empty;
