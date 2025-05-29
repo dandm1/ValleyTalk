@@ -5,11 +5,10 @@ using System.Linq;
 using Newtonsoft.Json;
 using ValleyTalk;
 using StardewValley;
-using Polly;
-using Polly.Retry;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using StardewModdingAPI.Events;
+using System.Threading;
 
 namespace StardewDialogue;
 
@@ -198,101 +197,115 @@ public class Character
     public async Task<string[]> CreateBasicDialogue(DialogueContext context)
     {
         string[] results = Array.Empty<string>();
-        var prompts = new Prompts(context,this);
-
-        var pipeline = new ResiliencePipelineBuilder()
-                    .AddRetry(
-                        new RetryStrategyOptions() 
-                        { 
-                            MaxRetryAttempts = 4,
-                            DelayGenerator = static args =>
-                            {
-                                var delay = args.AttemptNumber < 2 ? 0 : 5;
-                                return new ValueTask<TimeSpan?>(TimeSpan.FromSeconds(delay));
-                            }
-                        }
-                    )
-                    .AddTimeout(TimeSpan.FromSeconds(10))
-                    .Build();
-        int retryCount = 0;
+        var prompts = new Prompts(context, this);
         var commandPrompt = prompts.Command;
 
-        // Acquire a ResilienceContext from the pool
-        var rc = ResilienceContextPool.Shared.Get();
+        const int maxRetryAttempts = 4;
+        const int timeoutSeconds = 10;
+        int retryCount = 0;
+        Exception lastException = null;
 
-        var outcome = await pipeline.ExecuteOutcomeAsync(async (rc,state) =>
+        for (int attempt = 0; attempt <= maxRetryAttempts; attempt++)
         {
-            retryCount++;
-            string[] resultsInternal;
-            string resultString = string.Empty;
+            retryCount = attempt + 1;
+            
             try
             {
-                resultString = await Llm.Instance.RunInference
-                        (
-                            prompts.System, 
-                            prompts.GameConstantContext, 
-                            prompts.NpcConstantContext, 
-                            $"{prompts.CorePrompt}{commandPrompt}{prompts.Instructions}", 
-                            prompts.ResponseStart
-                        );
+                // Apply delay before retry (no delay for first attempt or second attempt)
+                if (attempt >= 2)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5));
+                }
 
-                // Apply relaxed validation if this is the second retry
-                resultsInternal = ProcessLines(resultString, retryCount > 2).ToArray();
+                // Execute with timeout
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds));
+                
+                string[] resultsInternal;
+                string resultString = string.Empty;
+
+                try
+                {
+                    var inferenceTask = Llm.Instance.RunInference(
+                        prompts.System,
+                        prompts.GameConstantContext,
+                        prompts.NpcConstantContext,
+                        $"{prompts.CorePrompt}{commandPrompt}{prompts.Instructions}",
+                        prompts.ResponseStart
+                    );
+
+                    resultString = await inferenceTask.WaitAsync(cts.Token);
+
+                    // Apply relaxed validation if this is the second retry
+                    resultsInternal = ProcessLines(resultString, retryCount > 2).ToArray();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, $"Error generating AI response for {Name}");
+                    throw;
+                }
+
+                if (resultsInternal.Length == 0)
+                {
+                    throw new Exception($"No valid results returned from AI. AI returned \"{resultString}\".");
+                }
+
+                if (ModEntry.Config.Debug)
+                {
+                    // Open 'generation.log' and append values to it
+                    Log.Debug($"Context:");
+                    Log.Debug($"Name: {Name}");
+                    Log.Debug($"Marriage: {context.Married}");
+                    Log.Debug($"Birthday: {context.Birthday}");
+                    Log.Debug($"Location: {context.Location}");
+                    Log.Debug($"Weather: {string.Concat(context.Weather)}");
+                    Log.Debug($"Time of Day: {context.TimeOfDay}");
+                    Log.Debug($"Day of Season: {context.DayOfSeason}");
+                    Log.Debug($"Gift: {context.Accept}");
+                    Log.Debug($"Spouse Action: {context.SpouseAct}");
+                    Log.Debug($"Random Action: {context.RandomAct}");
+                    Log.Debug($"Prompts: {JsonConvert.SerializeObject(prompts)}");
+                    if (context.ScheduleLine != "")
+                    {
+                        Log.Debug($"Original Line: {context.ScheduleLine}");
+                    }
+                    Log.Debug($"Results: {resultsInternal[0]}");
+                    if (resultsInternal.Length > 1)
+                    {
+                        foreach (var result in resultsInternal.Skip(1))
+                        {
+                            Log.Debug($"Response: {result}");
+                        }
+                    }
+                    Log.Debug("--------------------------------------------------");
+                }
+
+                results = resultsInternal;
+                break; // Success, exit retry loop
             }
             catch (Exception ex)
             {
-                Log.Error(ex, $"Error generating AI response for {Name}");
-                return Outcome.FromException<string[]>(ex);
-            }
-            if (resultsInternal.Length == 0)
-            {
-                //Force a retry in the pipeline
-                return Outcome.FromException<string[]>(new Exception($"No valid results returned from AI. AI returned \"{resultString}\"."));
-            }
-            if (ModEntry.Config.Debug)
-            {
-                // Open 'generation.log' and append values to it
-                Log.Debug($"Context:");
-                Log.Debug($"Name: {Name}");
-                Log.Debug($"Marriage: {context.Married}");
-                Log.Debug($"Birthday: {context.Birthday}");
-                Log.Debug($"Location: {context.Location}");
-                Log.Debug($"Weather: {string.Concat(context.Weather)}");
-                Log.Debug($"Time of Day: {context.TimeOfDay}");
-                Log.Debug($"Day of Season: {context.DayOfSeason}");
-                Log.Debug($"Gift: {context.Accept}");
-                Log.Debug($"Spouse Action: {context.SpouseAct}");
-                Log.Debug($"Random Action: {context.RandomAct}");
-                Log.Debug($"Prompts: {JsonConvert.SerializeObject(prompts)}");
-                if (context.ScheduleLine != "")
+                lastException = ex;
+                
+                // If this is the last attempt, don't continue
+                if (attempt == maxRetryAttempts)
                 {
-                    Log.Debug($"Original Line: {context.ScheduleLine}");
+                    break;
                 }
-                Log.Debug($"Results: {resultsInternal[0]}");
-                if (resultsInternal.Length > 1)
-                {
-                    foreach (var result in resultsInternal.Skip(1))
-                    {
-                        Log.Debug($"Response: {result}");
-                    }
-                }
-                Log.Debug("--------------------------------------------------");
             }
-            return Outcome.FromResult(resultsInternal);
-        },rc,"basic-state");
-        if (outcome.Exception != null)
+        }
+
+        // Handle final result
+        if (results.Length == 0 && lastException != null)
         {
-            ModEntry.SMonitor.Log($"Error generating AI response for {Name}: {outcome.Exception}",StardewModdingAPI.LogLevel.Error);
+            ModEntry.SMonitor.Log($"Error generating AI response for {Name}: {lastException}", StardewModdingAPI.LogLevel.Error);
             results = new string[] { "..." };
         }
-        else
-        {
-            results = outcome.Result;
-        }
+
         if (!string.IsNullOrWhiteSpace(prompts.GiveGift) && results.Length > 0)
         {
             results[0] += $"[{prompts.GiveGift}]";
         }
+        
         return results;
     }
 
