@@ -482,4 +482,5 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
-translations/Translation fr-FR.zip
+translations/*.zip
+Extensions/*.zip
