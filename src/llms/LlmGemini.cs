@@ -97,7 +97,7 @@ internal class LlmGemini : Llm, IGetModelNames
                 },
                 system_instruction = new { parts = new { text = systemPromptString } },
                 contents = new { parts = new { text = promptString } },
-                generationConfig = new { maxOutputTokens = n_predict, temperature = 1.5, topP = 0.9 },
+                generationConfig = new { maxOutputTokens = n_predict, temperature = 1.5, topP = 0.9, thinkingConfig = new { thinkingBudget = 0 } },
                 //cachedContent= useContext
             });
 
