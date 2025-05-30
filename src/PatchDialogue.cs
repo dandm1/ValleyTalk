@@ -26,7 +26,7 @@ namespace ValleyTalk
         private static List<string> AddToNextDialogue = new List<string>();
         public static bool Prefix(ref MarriageDialogueReference __instance, ref Dialogue __result, NPC n)
         {
-            ModEntry.SMonitor.Log($"MarriageDialogueReference.GetDialogue called for {n.Name} with key {__instance.DialogueKey}", StardewModdingAPI.LogLevel.Debug);
+            ModEntry.SMonitor.Log($"MarriageDialogueReference.GetDialogue called for {n.Name} with key {__instance.DialogueKey}", StardewModdingAPI.LogLevel.Trace);
             var trace = new System.Diagnostics.StackTrace().GetFrames();
 
             if (!DialogueBuilder.Instance.PatchNpc(n, ModEntry.Config.MarriageFrequency))
@@ -102,7 +102,7 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref GameLocation __instance, ref string __result, NPC character)
         {
-            ModEntry.SMonitor.Log($"GameLocation.GetLocationOverrideDialogue called for {character?.Name} in {__instance.Name}", StardewModdingAPI.LogLevel.Debug);
+            ModEntry.SMonitor.Log($"GameLocation.GetLocationOverrideDialogue called for {character?.Name} in {__instance.Name}", StardewModdingAPI.LogLevel.Trace);
             if (character == null)
             {
                 return true;
@@ -136,7 +136,7 @@ namespace ValleyTalk
 
         public static bool Prefix(ref Dialogue __instance, ref bool __result, Response response)
         {
-            ModEntry.SMonitor.Log($"Dialogue.chooseResponse called with response key: {response.responseKey}", StardewModdingAPI.LogLevel.Debug);
+            ModEntry.SMonitor.Log($"Dialogue.chooseResponse called with response key: {response.responseKey}", StardewModdingAPI.LogLevel.Trace);
             if (!DialogueBuilder.Instance.PatchNpc(__instance.speaker))
             {
                 return true;
@@ -198,7 +198,7 @@ namespace ValleyTalk
     {
         public static bool Prefix(ref Dialogue __instance, ref Dialogue __result, NPC speaker, string translationKey)
         {
-            ModEntry.SMonitor.Log($"Dialogue.TryGetDialogue called for {speaker.Name} with key {translationKey}", StardewModdingAPI.LogLevel.Debug);
+            ModEntry.SMonitor.Log($"Dialogue.TryGetDialogue called for {speaker.Name} with key {translationKey}", StardewModdingAPI.LogLevel.Trace);
             if (!DialogueBuilder.Instance.PatchNpc(speaker, ModEntry.Config.GeneralFrequency, true))
             {
                 return true;
