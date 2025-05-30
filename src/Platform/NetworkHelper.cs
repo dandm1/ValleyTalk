@@ -17,25 +17,18 @@ namespace ValleyTalk.Platform
         {
             var handler = new HttpClientHandler();
             
+            // Increase timeout for mobile networks
+            _httpClient = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
+            };
+
             // Android-specific configuration
             if (AndroidHelper.IsAndroid)
             {
-                // Increase timeout for mobile networks
-                _httpClient = new HttpClient(handler)
-                {
-                    Timeout = TimeSpan.FromSeconds(30)
-                };
-                
                 // Add mobile-friendly headers
-                _httpClient.DefaultRequestHeaders.Add("User-Agent", 
+                _httpClient.DefaultRequestHeaders.Add("User-Agent",
                     "ValleyTalk/1.0 (Android; Stardew Valley Mod)");
-            }
-            else
-            {
-                _httpClient = new HttpClient(handler)
-                {
-                    Timeout = TimeSpan.FromSeconds(10)
-                };
             }
         }
 
