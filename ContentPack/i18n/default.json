@@ -32,7 +32,7 @@
   "otherNpcsIntro": "As well as the farmer and {{Name}} the following villagers are present:",
   "otherNpcsOutro": "The dialogue should account for the presence of these other villagers, and may reference them or be addressed to them as well as to the farmer.",
   "currentConversationHeading": "Current Conversation:",
-  "currentConversationIntro": "The farmer and {{Name}} are in the middle of a conversation. The dialogue should be a continuation of the conversation, and should build on the previous lines without repetition. The previous lines were:",
+  "currentConversationIntro": "The farmer and {{Name}} are in the middle of a conversation. The dialogue should be a continuation of the conversation, and should build on the previous lines. It should not repeat previous lines. Do not start the new line with '{{Name}}: ', that's just part of the history. The previous lines were:",
   "generalFarmerLabel": "Farmer",
   "generalGayMale": "gay",
   "generalHeterosexual": "heterosexual",

@@ -155,4 +155,21 @@ internal class StardewTime : IComparable<StardewTime>
         }
         return timeOfDay - other.timeOfDay;
     }
+
+    internal bool After(StardewTime compareTo)
+    {
+        if (year != compareTo.year)
+        {
+            return year > compareTo.year;
+        }
+        if (SeasonToInt(season) != SeasonToInt(compareTo.season))
+        {
+            return SeasonToInt(season) > SeasonToInt(compareTo.season);
+        }
+        if (dayOfMonth != compareTo.dayOfMonth)
+        {
+            return dayOfMonth > compareTo.dayOfMonth;
+        }
+        return true; // Return true on the same day
+    }
 }

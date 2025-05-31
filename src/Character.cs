@@ -23,11 +23,25 @@ public class Character
     private int? _sampleCacheDay;
     private int? _sampleCacheHeartLevel;
     private DialogueValue[] _sampleCache;
+    private StardewTime _historyCutoff;
+    private WorldDate _historyCutoffCacheDate;
 
     internal IEnumerable<Tuple<StardewTime,IHistory>> EventHistory => eventHistory.AllTypes;
 
     public NPC StardewNpc { get; internal set; }
     public List<string> ValidPortraits { get; internal set; }
+    private readonly Dictionary<string,string> HistoryEvents = new()
+    {
+        { "cc_Bus", Util.GetString("cc_Bus_Repaired") },
+        { "cc_Boulder", Util.GetString("cc_Boulder_Removed") },
+        { "cc_Bridge", Util.GetString("cc_Bridge") },
+        { "cc_Complete", Util.GetString("cc_Complete") },
+        { "cc_Greenhouse", Util.GetString("cc_Greenhouse") },
+        { "cc_Minecart", Util.GetString("cc_Minecart") },
+        { "wonIceFishing", Util.GetString("wonIceFishing") },
+        { "wonGrange", Util.GetString("wonGrange") },
+        { "wonEggHunt", Util.GetString("wonEggHunt") }
+    };
 
     public Character(string name, NPC stardewNpc)
     {
@@ -254,9 +268,9 @@ public class Character
                 {
                     var inferenceTask = Llm.Instance.RunInference(
                         prompts.System,
-                        $"{prompts.GameConstantContext}{prompts.Instructions}",
+                        $"{prompts.GameConstantContext}",
                         $"{prompts.NpcConstantContext}",
-                        $"{prompts.CorePrompt}{prompts.Command}",
+                        $"{prompts.CorePrompt}{prompts.Instructions}{prompts.Command}",
                         prompts.ResponseStart
                     );
 
@@ -568,6 +582,32 @@ public class Character
         // Remove any items in the dialogue history that duplicate this conversation
         eventHistory.RemoveDialogueOverlapping(chatHistory);
         AddHistory(newHistory,time);
+    }
+
+    internal IEnumerable<Tuple<StardewTime, IHistory>> EventHistorySample()
+    {
+
+        var allPreviousActivities = Game1.getPlayerOrEventFarmer().previousActiveDialogueEvents.First();
+        var previousActivites = allPreviousActivities.Where(x => HistoryEvents.ContainsKey(x.Key) && (x.Value < 112 || x.Value % 112 == 0)).ToList();
+
+        var fullHistory = EventHistory.Concat(previousActivites.Select(x => MakeActivityHistory(x)));
+        if (!fullHistory.Any())
+        {
+            return Array.Empty<Tuple<StardewTime, IHistory>>();
+        }
+        if (Game1.Date != _historyCutoffCacheDate)
+        {
+            _historyCutoff = fullHistory.OrderBy(x => x.Item1).TakeLast(20).FirstOrDefault()?.Item1;
+            _historyCutoffCacheDate = Game1.Date;
+        }
+        return fullHistory.Where(x => x.Item1.After(_historyCutoff)).OrderBy(x => x.Item1);
+    }
+
+    private Tuple<StardewTime, IHistory> MakeActivityHistory(KeyValuePair<string, int> x)
+    {
+        var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
+        var targetDate = timeNow.AddDays(-x.Value);
+        return new(targetDate, new ActivityHistory(x.Key));
     }
 
     public string Name { get; }

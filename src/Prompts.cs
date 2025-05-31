@@ -12,20 +12,6 @@ namespace StardewDialogue;
 
 public class Prompts
 {
-    [JsonIgnore]
-    private readonly Dictionary<string,string> HistoryEvents = new()
-    {
-        { "cc_Bus", Util.GetString("cc_Bus_Repaired") },
-        { "cc_Boulder", Util.GetString("cc_Boulder_Removed") },
-        { "cc_Bridge", Util.GetString("cc_Bridge") },
-        { "cc_Complete", Util.GetString("cc_Complete") },
-        { "cc_Greenhouse", Util.GetString("cc_Greenhouse") },
-        { "cc_Minecart", Util.GetString("cc_Minecart") },
-        { "wonIceFishing", Util.GetString("wonIceFishing") },
-        { "wonGrange", Util.GetString("wonGrange") },
-        { "wonEggHunt", Util.GetString("wonEggHunt") }
-    };
-
     public Prompts()
     {
     }
@@ -46,13 +32,10 @@ public class Prompts
         _stardewSummary = builder.Build();
     }
 
-    [JsonIgnore]
     static string _stardewSummary;
     private string _system;
-    [JsonIgnore]
     public string System { get => _system ??= GetSystemPrompt(); internal set => _system = value; }
     private string _gameConstantContext;
-    [JsonIgnore]
     public string GameConstantContext { get => _gameConstantContext ??= GetGameConstantContext(); internal set => _gameConstantContext = value; }
     private string _npcConstantContext;
     public string NpcConstantContext { get => _npcConstantContext ??= GetNpcConstantContext(); internal set => _npcConstantContext = value; }
@@ -65,39 +48,25 @@ public class Prompts
     private string _instructions;
     public string Instructions { get => _instructions ??= GetInstructions(); internal set => _instructions = value; }
 
-    [JsonIgnore]
     public string Name { get; internal set; }
     
-    [JsonIgnore]
     public string Gender { get; internal set; }
-    
-    
-    [JsonIgnore]
-    public Character Character { get; internal set;}
-    
-    [JsonIgnore]
+
+
+    public Character Character { get; internal set; }
+
     internal DialogueContext Context { private get; set; }
 
-    [JsonIgnore]
     CharacterData npcData;
-    
-    [JsonIgnore]
     bool npcIsMale;
-    
-    [JsonIgnore]
+
     IEnumerable<DialogueValue> dialogueSample;
-    
-    [JsonIgnore]
+
     IDialogueValue exactLine;
-    
-    [JsonIgnore]
-    SerializableDictionary<string,int> allPreviousActivities;
-    
-    [JsonIgnore]
-    List<KeyValuePair<string,int>> previousActivites;
-    [JsonIgnore]
+
     string giveGift;
-    [JsonIgnore]
+    private SerializableDictionary<string, int> allPreviousActivities;
+
     public string GiveGift => giveGift;
 
     public Prompts(DialogueContext context, Character character)
@@ -112,7 +81,6 @@ public class Prompts
         exactLine = SelectExactDialogue();
         giveGift = context.CanGiveGift ? SelectGiftGiven() : string.Empty;
         allPreviousActivities = Game1.getPlayerOrEventFarmer().previousActiveDialogueEvents.First();
-        previousActivites = allPreviousActivities.Where(x => HistoryEvents.ContainsKey(x.Key) && (x.Value < 112 || x.Value % 112 == 0)).ToList();
 
         Name = character.StardewNpc.displayName;
         Gender = character.Bio.Gender;
@@ -161,16 +129,7 @@ public class Prompts
     private string GetNpcConstantContext()
     {
         var npcConstantPrompt = new StringBuilder();
-        // Include the final instructions - which vary by character
-        if (!Character.Bio.ExtraPortraits.ContainsKey("!"))
-        {
-            var extraPortraits = new StringBuilder();
-            foreach (var portrait in Character.Bio.ExtraPortraits)
-            {
-                extraPortraits.Append(Util.GetString(Character,"instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
-            }
-            npcConstantPrompt.AppendLine(Util.GetString(Character,"instructionsEmotion", new { extraPortraits= extraPortraits }));
-        }
+
         var intro = Util.GetString(Character,"npcContextIntro", new { Name = Name });
         npcConstantPrompt.AppendLine(intro);
         if ((Character.Bio?.Biography ?? string.Empty).Length > 10)
@@ -906,15 +865,14 @@ public class Prompts
     private void GetEventHistory(StringBuilder prompt)
     {
         var timeNow = new StardewTime(Game1.Date, Game1.timeOfDay);
-        var fullHistory = Character.EventHistory.Concat(previousActivites.Select(x => MakeActivityHistory(x)));
+        var historySample = Character.EventHistorySample();
 
-        if (fullHistory.Any())
+        if (historySample.Any())
         {
-            prompt.AppendLine($"##{Util.GetString(Character,"eventHistoryHeading")}");
-            prompt.AppendLine(Util.GetString(Character,"eventHistoryIntro", new { Name= Name }));
-            prompt.AppendLine(Util.GetString(Character,"eventHistorySubheading"));
-            var historySample = fullHistory.OrderBy(x => x.Item1).TakeLast(30);
-            
+            prompt.AppendLine($"##{Util.GetString(Character, "eventHistoryHeading")}");
+            prompt.AppendLine(Util.GetString(Character, "eventHistoryIntro", new { Name = Name }));
+            prompt.AppendLine(Util.GetString(Character, "eventHistorySubheading"));
+
             foreach (var eventHistory in historySample)
             {
                 // Exclude the current conversation
@@ -930,12 +888,6 @@ public class Prompts
         }
     }
 
-    private Tuple<StardewTime, IHistory> MakeActivityHistory(KeyValuePair<string, int> x)
-    {
-        var timeNow = new StardewTime(Game1.year, Game1.season, Game1.dayOfMonth, Game1.timeOfDay);
-        var targetDate = timeNow.AddDays(-x.Value);
-        return new(targetDate, new ActivityHistory(x.Key));
-    }
 
     private void GetSampleDialogue(StringBuilder prompt)
     {
@@ -1032,6 +984,15 @@ public class Prompts
         instructions.AppendLine(Util.GetString(Character,"instructionsBreaks"));
         instructions.AppendLine(Util.GetString(Character,"instructionsSingleLine"));
         instructions.AppendLine(Util.GetString(Character,"instructionsResponses", new { Name= Name }));
+        if (!Character.Bio.ExtraPortraits.ContainsKey("!"))
+        {
+            var extraPortraits = new StringBuilder();
+            foreach (var portrait in Character.Bio.ExtraPortraits)
+            {
+                extraPortraits.Append(Util.GetString(Character,"instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
+            }
+            instructions.AppendLine(Util.GetString(Character,"instructionsEmotion", new { extraPortraits= extraPortraits }));
+        }
         if (!string.IsNullOrWhiteSpace(Llm.Instance.ExtraInstructions))
         {
             instructions.AppendLine(Llm.Instance.ExtraInstructions);
