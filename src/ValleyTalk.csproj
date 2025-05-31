@@ -2,7 +2,7 @@
   <PropertyGroup>
     <AssemblyName>ValleyTalk</AssemblyName>
     <RootNamespace>ValleyTalk</RootNamespace>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <GamePath>/home/david/snap/steam/common/.local/share/Steam/steamapps/common/Stardew Valley</GamePath>
@@ -22,11 +22,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Update="manifest.json">
-      <Link>%(Filename)%(Extension)</Link> <!-- Changed: Removed 'ValleyTalk/' prefix -->
+      <Link>%(Filename)%(Extension)</Link> 
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="config.json">
-      <Link>%(Filename)%(Extension)</Link> <!-- Changed: Removed 'ValleyTalk/' prefix -->
+      <Link>%(Filename)%(Extension)</Link> 
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
