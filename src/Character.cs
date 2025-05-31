@@ -312,9 +312,9 @@ public class Character
                     Log.Debug($"-------------------");
                     Log.Debug($"System Prompt: {prompts.System}");
                     Log.Debug($"Game Constant Context: {prompts.GameConstantContext}");
-                    Log.Debug($"Instructions: {prompts.Instructions}");
                     Log.Debug($"NPC Constant Context: {prompts.NpcConstantContext}");
                     Log.Debug($"Core Prompt: {prompts.CorePrompt}");
+                    Log.Debug($"Instructions: {prompts.Instructions}");
                     Log.Debug($"Command: {prompts.Command}");
                     Log.Debug($"Response Start: {prompts.ResponseStart}");
                     Log.Debug($"-------------------");
