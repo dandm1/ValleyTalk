@@ -43,12 +43,6 @@ internal abstract class LlmOpenAiBase : Llm
                     }
                 }
             });
-        var json = new StringContent(
-            inputString,
-            Encoding.UTF8,
-            "application/json"
-        );
-
         // call out to URL passing the object as the body, and return the result
         int retry = 3;
         var fullUrl = $"{url}/v1/chat/completions";

@@ -46,6 +46,8 @@ namespace ValleyTalk.Platform
                     var request = new HttpRequestMessage(HttpMethod.Get, url);
                     if (!string.IsNullOrEmpty(authToken))
                         request.Headers.Add("Authorization", $"Bearer {authToken}");
+                    // Set application/json header for GET requests
+                    request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                     response = await _httpClient.SendAsync(request, cancellationToken);
                 }
                 else
@@ -54,6 +56,8 @@ namespace ValleyTalk.Platform
                     var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = stringContent };
                     if (!string.IsNullOrEmpty(authToken))
                         request.Headers.Add("Authorization", $"Bearer {authToken}");
+                    // Set application/json header for POST requests
+                    request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
                     response = await _httpClient.SendAsync(request, cancellationToken);
                 }
 

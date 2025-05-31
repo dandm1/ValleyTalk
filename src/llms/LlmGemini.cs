@@ -101,12 +101,6 @@ internal class LlmGemini : Llm, IGetModelNames
                 //cachedContent= useContext
             });
 
-        var json = new StringContent(
-            jsonData,
-            Encoding.UTF8,
-            "application/json"
-        );
-
         // call out to URL passing the object as the body, and return the result
         int retry = 3;
         var fullUrl = url + apiKey;
@@ -121,20 +115,7 @@ internal class LlmGemini : Llm, IGetModelNames
         {
             try
             {
-                string responseString;
-                if (AndroidHelper.IsAndroid)
-                {
-                    responseString = await NetworkHelper.MakeRequestAsync(fullUrl, jsonData);
-                }
-                else
-                {
-                    var client = new HttpClient
-                    {
-                        Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
-                    };
-                    var response = await client.PostAsync(fullUrl, json);
-                    responseString = await response.Content.ReadAsStringAsync();
-                }
+                string responseString = await NetworkHelper.MakeRequestAsync(fullUrl, jsonData);
                 
                 var responseJson = JObject.Parse(responseString); // Changed
                 

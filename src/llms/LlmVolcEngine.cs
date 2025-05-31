@@ -64,11 +64,6 @@ internal class LlmVolcEngine : Llm, IGetModelNames
                     }
                 }
             });
-        var json = new StringContent(
-            inputString,
-            Encoding.UTF8,
-            "application/json"
-        );
 
         // call out to URL passing the object as the body, and return the result
         int retry = 3;
