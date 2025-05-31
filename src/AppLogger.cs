@@ -10,7 +10,6 @@ namespace ValleyTalk
     public static class Log
     {
         private static IMonitor _monitor;
-        private static bool _debugEnabled;
         private static string _logPrefix = "[ValleyTalk] ";
         
         /// <summary>
@@ -18,10 +17,9 @@ namespace ValleyTalk
         /// </summary>
         /// <param name="monitor">The SMAPI monitor instance</param>
         /// <param name="enableDebug">Whether debug logging is enabled</param>
-        public static void Initialize(IMonitor monitor, bool enableDebug = false)
+        public static void Initialize(IMonitor monitor)
         {
             _monitor = monitor;
-            _debugEnabled = enableDebug;
         }
 
         /// <summary>
@@ -53,7 +51,6 @@ namespace ValleyTalk
         /// </summary>
         public static void Debug(string message)
         {
-            if (_debugEnabled)
                 _monitor?.Log($"{_logPrefix}{message}", LogLevel.Debug);
         }
 
@@ -62,7 +59,6 @@ namespace ValleyTalk
         /// </summary>
         public static void Debug(string format, params object[] args)
         {
-            if (_debugEnabled)
                 _monitor?.Log($"{_logPrefix}{string.Format(format, args)}", LogLevel.Debug);
         }
 

@@ -19,6 +19,10 @@ public class Character
     private static readonly Dictionary<string,TimeSpan> filterTimes = new() { { "House", TimeSpan.Zero }, { "Action", TimeSpan.Zero }, { "Received Gift", TimeSpan.Zero }, { "Given Gift", TimeSpan.Zero }, { "Editorial", TimeSpan.Zero }, { "Gender", TimeSpan.Zero }, { "Question", TimeSpan.Zero } };
     private StardewEventHistory eventHistory = new();
     private DialogueFile dialogueData;
+    private Season? _sampleCacheSeason;
+    private int? _sampleCacheDay;
+    private int? _sampleCacheHeartLevel;
+    private DialogueValue[] _sampleCache;
 
     internal IEnumerable<Tuple<StardewTime,IHistory>> EventHistory => eventHistory.AllTypes;
 
@@ -194,11 +198,33 @@ public class Character
 
     }
 
+    internal IEnumerable<DialogueValue> SelectDialogueSample(DialogueContext context)
+    {
+        if (_sampleCacheSeason == context.Season &&
+            _sampleCacheHeartLevel == context.Hearts &&
+            _sampleCacheDay == context.DayOfSeason)
+        {
+            return _sampleCache;
+        }
+        _sampleCacheSeason = context.Season;
+        _sampleCacheDay = context.DayOfSeason;
+        _sampleCacheHeartLevel = context.Hearts;
+        // Pick 20 most relevant dialogue entries
+        var orderedDialogue = DialogueData
+                    ?.AllEntries
+                   .OrderBy(x => context.CompareTo(x.Key));
+        _sampleCache = orderedDialogue
+                    ?.Where(x => x.Value != null)
+                    .SelectMany(x => x.Value.AllValues)
+                    .Take(20).ToArray()
+                    ?? Array.Empty<DialogueValue>();
+        return _sampleCache;
+    }
+    
     public async Task<string[]> CreateBasicDialogue(DialogueContext context)
     {
         string[] results = Array.Empty<string>();
         var prompts = new Prompts(context, this);
-        var commandPrompt = prompts.Command;
 
         const int maxRetryAttempts = 4;
         int timeoutSeconds = ModEntry.Config.QueryTimeout;
@@ -208,7 +234,7 @@ public class Character
         for (int attempt = 0; attempt <= maxRetryAttempts; attempt++)
         {
             retryCount = attempt + 1;
-            
+
             try
             {
                 // Apply delay before retry (no delay for first attempt or second attempt)
@@ -220,7 +246,7 @@ public class Character
 
                 // Execute with timeout
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds));
-                
+
                 string[] resultsInternal;
                 string resultString = string.Empty;
 
@@ -228,9 +254,9 @@ public class Character
                 {
                     var inferenceTask = Llm.Instance.RunInference(
                         prompts.System,
-                        prompts.GameConstantContext,
-                        prompts.NpcConstantContext,
-                        $"{prompts.CorePrompt}{commandPrompt}{prompts.Instructions}",
+                        $"{prompts.GameConstantContext}{prompts.Instructions}",
+                        $"{prompts.NpcConstantContext}",
+                        $"{prompts.CorePrompt}{prompts.Command}",
                         prompts.ResponseStart
                     );
 
@@ -254,6 +280,7 @@ public class Character
                 {
                     // Open 'generation.log' and append values to it
                     Log.Debug($"Context:");
+                    Log.Debug($"-------------------");
                     Log.Debug($"Name: {Name}");
                     Log.Debug($"Marriage: {context.Married}");
                     Log.Debug($"Birthday: {context.Birthday}");
@@ -264,11 +291,19 @@ public class Character
                     Log.Debug($"Gift: {context.Accept}");
                     Log.Debug($"Spouse Action: {context.SpouseAct}");
                     Log.Debug($"Random Action: {context.RandomAct}");
-                    Log.Debug($"Prompts: {JsonConvert.SerializeObject(prompts)}");
                     if (context.ScheduleLine != "")
                     {
                         Log.Debug($"Original Line: {context.ScheduleLine}");
                     }
+                    Log.Debug($"-------------------");
+                    Log.Debug($"System Prompt: {prompts.System}");
+                    Log.Debug($"Game Constant Context: {prompts.GameConstantContext}");
+                    Log.Debug($"Instructions: {prompts.Instructions}");
+                    Log.Debug($"NPC Constant Context: {prompts.NpcConstantContext}");
+                    Log.Debug($"Core Prompt: {prompts.CorePrompt}");
+                    Log.Debug($"Command: {prompts.Command}");
+                    Log.Debug($"Response Start: {prompts.ResponseStart}");
+                    Log.Debug($"-------------------");
                     Log.Debug($"Results: {resultsInternal[0]}");
                     if (resultsInternal.Length > 1)
                     {
@@ -286,7 +321,7 @@ public class Character
             catch (Exception ex)
             {
                 lastException = ex;
-                
+
                 // If this is the last attempt, don't continue
                 if (attempt == maxRetryAttempts)
                 {
@@ -306,7 +341,7 @@ public class Character
         {
             results[0] += $"[{prompts.GiveGift}]";
         }
-        
+
         return results;
     }
 
@@ -427,7 +462,7 @@ public class Character
                 upToDollar = upToDollar.Trim();
                 if (upToDollar.Length > 0 && !upToDollar.EndsWith(".") && !upToDollar.EndsWith("!") && !upToDollar.EndsWith("?"))
                 {
-                    elements[i] = upToDollar + "." + (element.Length > upToDollar.Length ? element[dollarIndex..] : "");
+                    elements[i] = upToDollar + "." + ((element.Length > upToDollar.Length && dollarIndex > 0 ) ? element[dollarIndex..] : "");
                 }
             }
             line = string.Join("#", elements);

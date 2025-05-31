@@ -108,7 +108,7 @@ public class Prompts
         Context = context;
         Character = character;
 
-        dialogueSample = SelectDialogueSample();
+        dialogueSample = character.SelectDialogueSample(context);
         exactLine = SelectExactDialogue();
         giveGift = context.CanGiveGift ? SelectGiftGiven() : string.Empty;
         allPreviousActivities = Game1.getPlayerOrEventFarmer().previousActiveDialogueEvents.First();
@@ -161,6 +161,16 @@ public class Prompts
     private string GetNpcConstantContext()
     {
         var npcConstantPrompt = new StringBuilder();
+        // Include the final instructions - which vary by character
+        if (!Character.Bio.ExtraPortraits.ContainsKey("!"))
+        {
+            var extraPortraits = new StringBuilder();
+            foreach (var portrait in Character.Bio.ExtraPortraits)
+            {
+                extraPortraits.Append(Util.GetString(Character,"instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
+            }
+            npcConstantPrompt.AppendLine(Util.GetString(Character,"instructionsEmotion", new { extraPortraits= extraPortraits }));
+        }
         var intro = Util.GetString(Character,"npcContextIntro", new { Name = Name });
         npcConstantPrompt.AppendLine(intro);
         if ((Character.Bio?.Biography ?? string.Empty).Length > 10)
@@ -1002,6 +1012,10 @@ public class Prompts
             commandPrompt.AppendLine();
             commandPrompt.AppendLine(Util.GetString(Character,"commandReplaceSchedule", new { ScheduleLine= Context.ScheduleLine }));
         }
+        if (ModEntry.Config.ApplyTranslation)
+        {
+            commandPrompt.AppendLine(Util.GetString(Character,"instructionsTranslate", new { Language= ModEntry.Language }));
+        }
         return commandPrompt.ToString();
     }
 
@@ -1016,21 +1030,8 @@ public class Prompts
         }
         instructions.AppendLine(Util.GetString(Character,"instructionsFarmersName"));
         instructions.AppendLine(Util.GetString(Character,"instructionsBreaks"));
-        if (!Character.Bio.ExtraPortraits.ContainsKey("!"))
-        {
-            var extraPortraits = new StringBuilder();
-            foreach (var portrait in Character.Bio.ExtraPortraits)
-            {
-                extraPortraits.Append(Util.GetString(Character,"instructionsExtraPortraitLine", new { Key= portrait.Key, Value= portrait.Value }));
-            }
-            instructions.AppendLine(Util.GetString(Character,"instructionsEmotion", new { extraPortraits= extraPortraits }));
-        }
         instructions.AppendLine(Util.GetString(Character,"instructionsSingleLine"));
         instructions.AppendLine(Util.GetString(Character,"instructionsResponses", new { Name= Name }));
-        if (ModEntry.Config.ApplyTranslation)
-        {
-            instructions.AppendLine(Util.GetString(Character,"instructionsTranslate", new { Language= ModEntry.Language }));
-        }
         if (!string.IsNullOrWhiteSpace(Llm.Instance.ExtraInstructions))
         {
             instructions.AppendLine(Llm.Instance.ExtraInstructions);
@@ -1084,19 +1085,6 @@ public class Prompts
         }
 
         return thisName;
-    }
-    
-    private IEnumerable<DialogueValue> SelectDialogueSample()
-    {
-        // Pick 20 most relevant dialogue entries
-        var orderedDialogue = Character.DialogueData
-                    ?.AllEntries
-                   .OrderBy(x => Context.CompareTo(x.Key));
-        return orderedDialogue
-                    ?.Where(x => x.Value != null)
-                    .SelectMany(x => x.Value.AllValues)
-                    .Take(20)
-                    ?? Array.Empty<DialogueValue>();
     }
 
     private IDialogueValue SelectExactDialogue()

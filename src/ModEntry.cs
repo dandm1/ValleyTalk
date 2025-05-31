@@ -132,7 +132,7 @@ namespace ValleyTalk
             TextInputManager.Initialize();
 
             // Initialize cross-platform compatible logging
-            Log.Initialize(Monitor, Config.Debug);
+            Log.Initialize(Monitor);
 
 #if DEBUG
             if (Config.Debug)

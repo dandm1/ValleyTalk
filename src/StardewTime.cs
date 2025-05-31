@@ -56,7 +56,6 @@ internal class StardewTime : IComparable<StardewTime>
         days += (other.year - year) * 112;
         days += (SeasonToInt(other.season) - SeasonToInt(season)) * 28;
         days += other.dayOfMonth - dayOfMonth;
-        days += (other.timeOfDay - timeOfDay) / 2400.0;
         return days;
     }
 
