@@ -8,7 +8,7 @@ namespace ValleyTalk
 {
     internal static class ModConfigMenu
     {
-        private static IGenericModConfigMenuApi ConfigMenu;
+        public static IGenericModConfigMenuApi ConfigMenu { get; private set; }
         private static IManifest ModManifest;
         private static ModEntry _modEntry;
 

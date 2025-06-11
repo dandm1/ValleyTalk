@@ -34,9 +34,42 @@ internal class LlmGemini : Llm, IGetModelNames
 
     public string[] GetModelNames()
     {
-        try{
-        var modelsUrl = $"https://generativelanguage.googleapis.com/v1beta/models?key="+apiKey;
-        
+        try
+        {
+            var modelNames = new List<string>();
+            var modelsArray = GetModelArray();
+            if (modelsArray == null || modelsArray.Count == 0)
+            {
+                Log.Debug("No models found.");
+                return new string[] { };
+            }
+            foreach (var model in modelsArray)
+            {
+                var nameToken = model["name"];
+                if (nameToken != null)
+                {
+                    var name = nameToken.ToString();
+                    if (name.StartsWith("models/"))
+                    {
+                        name = name.Substring(7);
+                    }
+                    modelNames.Add(name);
+                }
+            }
+
+            return modelNames.ToArray();
+        }
+        catch (Exception ex)
+        {
+            Log.Debug(ex.Message);
+            return new string[] { };
+        }
+    }
+
+    private JArray GetModelArray()
+    {
+        var modelsUrl = $"https://generativelanguage.googleapis.com/v1beta/models?key=" + apiKey;
+
         // Use Android-compatible network helper
         string responseString;
         if (AndroidHelper.IsAndroid && NetworkHelper.IsNetworkAvailable())
@@ -49,32 +82,70 @@ internal class LlmGemini : Llm, IGetModelNames
             var response = client.GetAsync(modelsUrl).Result;
             responseString = response.Content.ReadAsStringAsync().Result;
         }
-        
-        var responseJson = JObject.Parse(responseString); // Changed
-        var modelsToken = responseJson["models"]; // Changed
-        var modelNames = new List<string>();
-        if (modelsToken is JArray modelsArray) // Changed
+
+        var responseJson = JObject.Parse(responseString);
+        var modelsToken = responseJson["models"];
+        return modelsToken as JArray;
+    }
+
+    internal string GetNewestFreeModel()
+    {
+        try
         {
+            var modelNames = new List<string>();
+            var modelsArray = GetModelArray();
+            if (modelsArray == null || modelsArray.Count == 0)
+            {
+                Log.Debug("No models found.");
+                return "";
+            }
+
+            // Find applicable models (those that are gemini, not 'lite', not 'thinking', not 'tts' and have 'generateContent' as a generation method)
             foreach (var model in modelsArray)
             {
-                var nameToken = model["name"]; // Changed
+                var nameToken = model["name"];
                 if (nameToken != null)
                 {
-                    var name = nameToken.ToString(); // Changed
-                    if (name.StartsWith("models/"))
+                    var name = nameToken.ToString();
+                    if (name.Contains("gemini") && 
+                        !name.Contains("lite") && 
+                        !name.Contains("thinking") && 
+                        !name.Contains("tts") &&
+                        model["generationMethods"] != null && 
+                        model["generationMethods"].ToObject<List<string>>().Contains("generateContent"))
                     {
-                        name = name.Substring(7);
+                        if (name.StartsWith("models/"))
+                        {
+                            name = name.Substring(7);
+                        }
+                        modelNames.Add(name);
                     }
-                    modelNames.Add(name);
                 }
             }
+            double maxModelNumber = 0;
+            foreach (var name in modelNames)
+            {
+                var parts = name.Split('-');
+                if (parts.Length > 2 && double.TryParse(parts[2], out double version))
+                {
+                    if (version > maxModelNumber)
+                    {
+                        maxModelNumber = version;
+                    }
+                }
+            }
+            if (maxModelNumber != 0)
+            {
+                modelNames = modelNames
+                    .Where(name => name.Contains($"gemini-{maxModelNumber}"))
+                    .ToList();
+            }
+            return modelNames.OrderByDescending(name => name).FirstOrDefault();
         }
-        return modelNames.ToArray();
-        }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Log.Debug(ex.Message);
-            return new string[] { };
+            return null;
         }
     }
 

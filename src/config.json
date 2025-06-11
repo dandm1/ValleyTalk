@@ -1,8 +1,8 @@
 {
   "EnableMod": true,
   "Debug": false,
-  "Provider": "OpenAI",
-  "ModelName": "gpt-4o",
+  "Provider": "Google",
+  "ModelName": "",
   "ServerAddress": "https://openrouter.ai/api",
   "PromptFormat": "[INST] {system}\n{prompt}[/INST]\n{response_start}",
   "QueryTimeout": 30,

@@ -6,6 +6,7 @@ using StardewModdingAPI.Events;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using System.ComponentModel.DataAnnotations;
 namespace ValleyTalk
 {
     public partial class ModEntry : Mod
@@ -183,6 +184,16 @@ namespace ValleyTalk
         private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
         {
             ModConfigMenu.Register(this);
+
+            // If GMCM is loaded and the mod needs configuration, open the GMCM menu for this mod.
+            if (ModConfigMenu.ConfigMenu != null &&
+                string.Equals(Config.ApiKey, "ENTER YOUR KEY") &&
+                string.Equals(Config.Provider, "Google") &&
+                string.IsNullOrWhiteSpace(Config.ModelName))
+            {
+                SMonitor.Log("ValleyTalk requires configuration. Opening Generic Mod Config Menu...", LogLevel.Info);
+                ModConfigMenu.ConfigMenu.OpenModMenu(ModManifest);
+            }
         }
     }
 }
