@@ -610,6 +610,20 @@ public class Character
         return new(targetDate, new ActivityHistory(x.Key));
     }
 
+    internal bool SpokeJustNow()
+    {
+        if (!eventHistory.Any())
+        {
+            return false;
+        }
+        var lastEvent = eventHistory.Last();
+        if (lastEvent.Item2 is DialogueHistory || lastEvent.Item2 is ConversationHistory || lastEvent.Item2 is DialogueEventHistory)
+        {
+            return lastEvent.Item1.IsJustNow();
+        }
+        return false;
+    }
+
     public string Name { get; }
     public string DialogueFilePath { get; }
     public string BioFilePath { get; }

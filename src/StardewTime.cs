@@ -19,7 +19,7 @@ internal class StardewTime : IComparable<StardewTime>
         timeOfDay = 600;
     }
 
-    public StardewTime(WorldDate date,int time)
+    public StardewTime(WorldDate date, int time)
     {
         year = date.Year;
         season = date.Season;
@@ -71,15 +71,15 @@ internal class StardewTime : IComparable<StardewTime>
         return days switch
         {
             < 0 => Util.GetString("timeInTheFuture"),
-            < (double)1/120 => Util.GetString("timeJustNow"),
-            < (double)1/24 => Util.GetString("timeInTheLastHour"),
+            < (double)1 / 120 => Util.GetString("timeJustNow"),
+            < (double)1 / 24 => Util.GetString("timeInTheLastHour"),
             < 1 => other.dayOfMonth == dayOfMonth ? Util.GetString("timeEarlierToday") : Util.GetString("timeYesterday"),
-            < 14 => Util.GetString("timeDaysAgo", new {days = (int)days}),
-            < 56 => Util.GetString("timeDaysAgoSeasonDay", new {days = (int)days, day = this.dayOfMonth, season = seasonDisplay}),
-            < 112 => other.year == year ? 
-                        Util.GetString("timeEarlierThisYear", new {day = this.dayOfMonth, season = seasonDisplay})
-                      : Util.GetString("timeLastYear", new {day = this.dayOfMonth, season = seasonDisplay}),
-            _ => Util.GetString("timeALongTimeAgo", new {day = this.dayOfMonth, season = seasonDisplay, year = this.year})
+            < 14 => Util.GetString("timeDaysAgo", new { days = (int)days }),
+            < 56 => Util.GetString("timeDaysAgoSeasonDay", new { days = (int)days, day = this.dayOfMonth, season = seasonDisplay }),
+            < 112 => other.year == year ?
+                        Util.GetString("timeEarlierThisYear", new { day = this.dayOfMonth, season = seasonDisplay })
+                      : Util.GetString("timeLastYear", new { day = this.dayOfMonth, season = seasonDisplay }),
+            _ => Util.GetString("timeALongTimeAgo", new { day = this.dayOfMonth, season = seasonDisplay, year = this.year })
         };
     }
 
@@ -130,13 +130,13 @@ internal class StardewTime : IComparable<StardewTime>
             {
                 if (targetYear == 0)
                 {
-                    return new StardewTime(0,0,0,600);
+                    return new StardewTime(0, 0, 0, 600);
                 }
                 targetYear--;
                 targetSeason = 3;
             }
         }
-        return new StardewTime(targetYear,IntToSeason(targetSeason),targetDay,600);
+        return new StardewTime(targetYear, IntToSeason(targetSeason), targetDay, 600);
     }
 
     public int CompareTo(StardewTime other)
@@ -171,5 +171,15 @@ internal class StardewTime : IComparable<StardewTime>
             return dayOfMonth > compareTo.dayOfMonth;
         }
         return true; // Return true on the same day
+    }
+
+    internal bool IsJustNow(StardewTime other = null)
+    {
+        if (other == null)
+        {
+            other = new StardewTime(Game1.Date, Game1.timeOfDay);
+        }
+        var elapsed = DaysSince(other);
+        return elapsed < (double)1 / 100 && elapsed >= 0;
     }
 }
