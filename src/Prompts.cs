@@ -897,7 +897,7 @@ public class Prompts
 
     private void GetSampleDialogue(StringBuilder prompt)
     {
-        if (!dialogueSample.Any()) return;
+        if (dialogueSample == null || !dialogueSample.Any()) return;
 
         prompt.AppendLine($"##{Util.GetString(Character,"sampleDialogueHeading", new { Name= Name })}");
         prompt.AppendLine(Util.GetString(Character,"sampleDialogueIntro", new { Name= Name }));
