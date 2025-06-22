@@ -227,8 +227,14 @@ public class Character
         var orderedDialogue = DialogueData
                     ?.AllEntries
                    .OrderBy(x => context.CompareTo(x.Key));
-        _sampleCache = orderedDialogue
-                    ?.Where(x => x.Value != null)
+        var firstStep = orderedDialogue
+                    ?.Where(x => x.Value != null);
+        if (firstStep == null || !firstStep.Any())
+        {
+            _sampleCache = Array.Empty<DialogueValue>();
+            return _sampleCache;
+        }
+        _sampleCache = firstStep
                     .SelectMany(x => x.Value.AllValues)
                     .Take(20).ToArray()
                     ?? Array.Empty<DialogueValue>();
