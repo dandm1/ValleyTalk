@@ -104,7 +104,8 @@ namespace ValleyTalk
         {
             var character = GetCharacter(instance);
             DialogueContext context = GetBasicContext(instance);
-            var firstElement = dialogueKey.Split('_')[0];
+            var splitKey = dialogueKey.Split('_');
+            var firstElement = splitKey.Any() ? splitKey[0] : "";
             if (Enum.TryParse<RandomAction>(firstElement, true, out var randomAction))
             {
                 context.RandomAct = randomAction;
