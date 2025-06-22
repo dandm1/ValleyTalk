@@ -100,6 +100,7 @@ public class AsyncBuilder
                 {
                     npc.CurrentDialogue.Push(newDialogue);
                     Game1.DrawDialogue(newDialogue);
+                    npc.CurrentDialogue.TryPop(out var _);
                 }
             }
         }
