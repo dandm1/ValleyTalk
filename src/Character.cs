@@ -53,7 +53,7 @@ public class Character
         {
             if (e.Name.IsEquivalentTo(BioFilePath))
             {
-                e.LoadFrom(() => new BioData(), AssetLoadPriority.Exclusive);
+                e.LoadFrom(() => new BioData(), AssetLoadPriority.High);
             }
         };
         ModEntry.SHelper.Events.Content.AssetsInvalidated += (object sender, AssetsInvalidatedEventArgs e) =>

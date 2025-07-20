@@ -18,7 +18,7 @@ public class PromptCache
         {
             if (e.Name.IsEquivalentTo(VtConstants.PromptsPath))
             {
-                e.LoadFrom(() => new Dictionary<string, string>(), AssetLoadPriority.Exclusive);
+                e.LoadFrom(() => new Dictionary<string, string>(), AssetLoadPriority.High);
             }
         };
         ModEntry.SHelper.Events.Content.AssetsInvalidated += (object sender, AssetsInvalidatedEventArgs e) =>

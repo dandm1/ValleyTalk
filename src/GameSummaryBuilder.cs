@@ -32,7 +32,7 @@ internal class GameSummaryBuilder
         {
             if (e.Name.IsEquivalentTo(VtConstants.GameSummaryPath))
             {
-                e.LoadFrom(() => new GameSummary(), AssetLoadPriority.Exclusive);
+                e.LoadFrom(() => new GameSummary(), AssetLoadPriority.High);
             }
         };
         ModEntry.SHelper.Events.Content.AssetsInvalidated += (object sender, AssetsInvalidatedEventArgs e) =>
