@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net;
 using static StardewValley.LocalizedContentManager;
 
 namespace ValleyTalk
@@ -7,8 +8,9 @@ namespace ValleyTalk
     {
         internal static readonly string DialogueKeyPrefix = "SLD_";
         internal static readonly string DialogueGenerationTag = "$$$%%%";
-        internal static readonly string[] PermitListContentPacks = 
-        new string[] {};
+        internal static readonly string DialogueSkipTag = "$$%%";
+        internal static readonly string[] PermitListContentPacks =
+        new string[] { };
 
         public static Dictionary<LanguageCode,string> Languages = new Dictionary<LanguageCode, string>
         {

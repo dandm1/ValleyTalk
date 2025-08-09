@@ -4,8 +4,6 @@ using StardewValley.Menus;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using StardewDialogue;
-using ValleyTalk;
 using System.Collections.Generic; // Add reference to ValleyTalk namespace for TextInputHandler
 
 namespace ValleyTalk
@@ -14,7 +12,7 @@ namespace ValleyTalk
     public class MarriageDialogueReference_GetDialogue_Patch
     {
         
-        private static List<string> _skipGeneratedDialogue = new List<string>
+        public static List<string> SkipGeneratedDialogue = new List<string>
         {
             "NPC.cs.4463", // #$e#I also filled {0}'s water bowl.
             "NPC.cs.4462", // I got up early and watered some crops for you. I hope it makes your job a little easier today.
@@ -33,7 +31,7 @@ namespace ValleyTalk
             {
                 return true;
             }
-            if (_skipGeneratedDialogue.Contains(__instance.DialogueKey))
+            if (SkipGeneratedDialogue.Contains(__instance.DialogueKey))
             {
                 try
                 {

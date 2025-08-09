@@ -31,7 +31,7 @@ namespace ValleyTalk
             }
 
             AsyncBuilder.Instance.RequestNpcGiftResponse(__instance, gift, taste);
-            var result = new Dialogue(__instance, null, null);
+            var result = new Dialogue(__instance, null, SldConstants.DialogueSkipTag);
             result.exitCurrentDialogue();
             __result = result;
             return false; // Prevent default behavior
@@ -79,7 +79,7 @@ namespace ValleyTalk
                 trace.GetMethod().Name.Contains("drawDialogue")
             )
             {
-                List<DialogueLine> theLine;
+                List<StardewValley.DialogueLine> theLine;
                 var allLines = __result.Peek().dialogues;
                 var nextLine = allLines.First();
 
@@ -244,10 +244,10 @@ namespace ValleyTalk
     public class NPC_AddMarriageDialogue_Patch
     {
         // Add logic to handle nulls being returned - so we can skip the first porch lines
-        public static bool Prefix(ref NPC __instance, ref Dialogue __result, string dialogue_file, string dialogue_key, bool gendered, string[] substitutions)
+        public static bool Prefix(ref NPC __instance, string dialogue_file, string dialogue_key, bool gendered, string[] substitutions)
         {
             var dialogueRef = new MarriageDialogueReference(dialogue_file, dialogue_key, gendered, substitutions);
-            if (!string.IsNullOrWhiteSpace(dialogueRef.GetText()))
+            if (!MarriageDialogueReference_GetDialogue_Patch.SkipGeneratedDialogue.Contains(dialogue_key))
             {
                 __instance.shouldSayMarriageDialogue.Value = true;
                 __instance.currentMarriageDialogue.Add(dialogueRef);
