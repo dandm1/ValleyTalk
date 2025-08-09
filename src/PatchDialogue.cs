@@ -47,7 +47,7 @@ namespace ValleyTalk
                     // If we can't find the canon line, just skip it
                 }
                 // Skip the morning chores dialogue generation for these specific keys
-                    __result = new Dialogue(n, __instance.DialogueKey, null);
+                __result = new Dialogue(n, __instance.DialogueKey, null);
                 return false;
             }
             if (AsyncBuilder.Instance.AwaitingGeneration && AsyncBuilder.Instance.SpeakingNpc == n)

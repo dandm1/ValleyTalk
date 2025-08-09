@@ -22,14 +22,14 @@ namespace ValleyTalk
                 // If we are already awaiting a generation, skip this one
                 return true;
             }
-                        
+
             // Check network availability early (Android only)
             if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
             {
                 ModEntry.SMonitor.Log($"Network not available, skipping AI gift reaction for {__instance.Name}", StardewModdingAPI.LogLevel.Trace);
                 return true; // Use default behavior
             }
-            
+
             AsyncBuilder.Instance.RequestNpcGiftResponse(__instance, gift, taste);
             var result = new Dialogue(__instance, null, null);
             result.exitCurrentDialogue();
@@ -37,31 +37,31 @@ namespace ValleyTalk
             return false;
         }
     }
-    
+
     [HarmonyPatch(typeof(NPC), nameof(NPC.tryToGetMarriageSpecificDialogue))]
     public class NPC_TryToGetMarriageSpecificDialogue_Patch
     {
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, string dialogueKey)
         {
             ModEntry.SMonitor.Log($"NPC {__instance.Name} trying to get marriage specific dialogue with key '{dialogueKey}'", StardewModdingAPI.LogLevel.Trace);
-             if (!DialogueBuilder.Instance.PatchNpc(__instance, ModEntry.Config.MarriageFrequency))
+            if (!DialogueBuilder.Instance.PatchNpc(__instance, ModEntry.Config.MarriageFrequency))
             {
                 return true;
             }
-                       
+
             // Check network availability early (Android only)
             if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
             {
                 ModEntry.SMonitor.Log($"Network not available, skipping AI marriage dialogue for {__instance.Name}", StardewModdingAPI.LogLevel.Trace);
                 return true; // Use default behavior
-            }            
+            }
 
             if (dialogueKey.StartsWith("funReturn_") || dialogueKey.StartsWith("jobReturn_"))
             {
                 __result = new Dialogue(__instance, dialogueKey, SldConstants.DialogueGenerationTag);
                 return false;
             }
-            
+
             return true;
         }
     }
@@ -87,7 +87,7 @@ namespace ValleyTalk
                 if (nextLine.Text == SldConstants.DialogueGenerationTag)
                 {
                     ModEntry.SMonitor.Log($"NPC {__instance.Name} is generating dialogue", StardewModdingAPI.LogLevel.Trace);
-                    
+
                     // Check network availability early (Android only)
                     if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
                     {
@@ -98,7 +98,7 @@ namespace ValleyTalk
                         // Let default dialogue continue
                         return;
                     }
-                    
+
                     __result.Pop();
                     if (allLines.Count > 1)
                     {
@@ -131,7 +131,7 @@ namespace ValleyTalk
                         }
                     }
                 }
-                foreach(var npc in Util.GetNearbyNpcs(__instance))
+                foreach (var npc in Util.GetNearbyNpcs(__instance))
                 {
                     DialogueBuilder.Instance.AddOverheardLine(npc, __instance, theLine);
                 }
@@ -145,11 +145,11 @@ namespace ValleyTalk
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, string preface, int heartLevel, string appendToEnd)
         {
             ModEntry.SMonitor.Log($"NPC {__instance.Name} trying to retrieve dialogue with preface '{preface}' at heart level {heartLevel}", StardewModdingAPI.LogLevel.Trace);
-            
+
             if (!DialogueBuilder.Instance.PatchNpc(__instance, ModEntry.Config.GeneralFrequency, true))
             {
                 return true;
-            }            
+            }
             // Check network availability early (Android only)
             if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
             {
@@ -160,7 +160,7 @@ namespace ValleyTalk
             __result = new Dialogue(__instance, $"{preface}_{heartLevel}", SldConstants.DialogueGenerationTag);
             return false;
         }
-        
+
     }
 
     [HarmonyPatch(typeof(NPC), nameof(NPC.checkForNewCurrentDialogue))]
@@ -180,7 +180,7 @@ namespace ValleyTalk
                 ModEntry.SMonitor.Log($"Network not available, skipping AI new dialogue check for {__instance.Name}", StardewModdingAPI.LogLevel.Trace);
                 return true; // Use default behavior
             }
-            
+
             if (Game1.player.currentLocation.Name == "Saloon" || Game1.player.currentLocation.Name == "IslandSouth")
             {
                 var newDialogue = new Dialogue(__instance, Game1.player.currentLocation.Name, SldConstants.DialogueGenerationTag);
@@ -197,12 +197,12 @@ namespace ValleyTalk
         public static bool Prefix(ref NPC __instance, string translationKey)
         {
             ModEntry.SMonitor.Log($"NPC {__instance.Name} pushing temporary dialogue with key '{translationKey}'", StardewModdingAPI.LogLevel.Trace);
-            
+
             if (!DialogueBuilder.Instance.PatchNpc(__instance, ModEntry.Config.GeneralFrequency, true))
             {
                 return true;
             }
-            
+
             // Check network availability early (Android only)
             if (!NetworkAvailabilityChecker.IsNetworkAvailableWithRetry())
             {
@@ -240,4 +240,19 @@ namespace ValleyTalk
         }
     }
 
+    [HarmonyPatch(typeof(NPC), nameof(NPC.addMarriageDialogue))]
+    public class NPC_AddMarriageDialogue_Patch
+    {
+        public static bool Prefix(ref NPC __instance, ref Dialogue __result, string dialogue_file, string dialogue_key, bool gendered, string[] substitutions)
+        {
+            var dialogueRef = new MarriageDialogueReference(dialogue_file, dialogue_key, gendered, substitutions);
+            if (!string.IsNullOrWhiteSpace(dialogueRef.GetText()))
+            {
+                __instance.shouldSayMarriageDialogue.Value = true;
+                __instance.currentMarriageDialogue.Add(dialogueRef);
+            }
+
+            return false; // Skip original method
+        }
+    }        
 }
