@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GenericModConfigMenu;
-using StardewDialogue;
 using StardewModdingAPI;
+
 namespace ValleyTalk
 {
     internal static class ModConfigMenu

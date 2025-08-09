@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class DialogueEventOverheard : IHistory
 {

@@ -8,7 +8,7 @@ using System;
 using StardewModdingAPI.Events;
 using StardewModdingAPI;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class GameSummaryBuilder
 {

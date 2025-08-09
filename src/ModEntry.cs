@@ -1,6 +1,5 @@
 ﻿using System;
 using HarmonyLib;
-using StardewDialogue;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using System.Collections.Generic;

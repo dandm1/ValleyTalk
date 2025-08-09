@@ -8,7 +8,7 @@ using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 public class Prompts
 {

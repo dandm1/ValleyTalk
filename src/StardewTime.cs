@@ -1,8 +1,7 @@
 using System;
 using StardewValley;
-using ValleyTalk;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class StardewTime : IComparable<StardewTime>
 {

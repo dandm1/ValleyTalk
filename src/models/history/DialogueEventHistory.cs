@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using StardewValley;
-using ValleyTalk;
+
+namespace ValleyTalk;
 
 internal class DialogueEventHistory : IHistory
 {
-    public DialogueEventHistory(IEnumerable<NPC> listeners, IEnumerable<DialogueLine> dialogues, string eventName = "")
+    public DialogueEventHistory(IEnumerable<NPC> listeners, IEnumerable<StardewValley.DialogueLine> dialogues, string eventName = "")
     {
         Dialogues = dialogues;
         Listeners = listeners;
@@ -17,11 +18,11 @@ internal class DialogueEventHistory : IHistory
     {
         var totalDialogue = string.Join(" : ", Dialogues.Select(x => x.Text));
         var allListeners = string.Join(", ", Listeners.Select(x => x.Name));
-        var festivalNameString = string.IsNullOrWhiteSpace(EventName) ? "" : Util.GetString("historyThirdPartyFestival", new { festivalName= EventName });
-        return Util.GetString("historyDialogueFormat", new { npcName= npcName, allListeners= allListeners, festivalNameString= festivalNameString, totalDialogue= totalDialogue });
+        var festivalNameString = string.IsNullOrWhiteSpace(EventName) ? "" : Util.GetString("historyThirdPartyFestival", new { festivalName = EventName });
+        return Util.GetString("historyDialogueFormat", new { npcName = npcName, allListeners = allListeners, festivalNameString = festivalNameString, totalDialogue = totalDialogue });
     }
 
-    public IEnumerable<DialogueLine> Dialogues { get; }
+    public IEnumerable<StardewValley.DialogueLine> Dialogues { get; }
     public IEnumerable<NPC> Listeners { get; }
     public string EventName { get; }
 }

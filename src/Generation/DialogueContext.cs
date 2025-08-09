@@ -8,14 +8,14 @@ using System.Linq;
 using StardewValley.Characters;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 public class DialogueContext
 {
     private static readonly string[] singles = new string[] { "Emily", "Haley", "Maru", "Penny", "Sam", "Sebastian", "Shane", "Abigail", "Elliott", "Harvey", "Leah", "Alex", "Krobus" };
     private static readonly int[] heartsOptions = new int[] { 0, 2, 4, 6, 8, 10 };
     private static readonly int[] friendHeartOptions = new int[] { 0, 6, 8, 10 };
-    private static readonly Season?[] seasonOptions = new StardewDialogue.Season?[] { StardewDialogue.Season.Spring, StardewDialogue.Season.Summer, StardewDialogue.Season.Fall, StardewDialogue.Season.Winter, null };
+    private static readonly Season?[] seasonOptions = new ValleyTalk.Season?[] { ValleyTalk.Season.Spring, ValleyTalk.Season.Summer, ValleyTalk.Season.Fall, ValleyTalk.Season.Winter, null };
     public static readonly string[] locations = new string[] { "Beach", "Desert", "Railroad", "Saloon", "SeedShop", "JojaMart" };
     public static readonly string[] resortTags = new string[] { "Resort", "Resort_Entering", "Resort_Leaving" };
     private static readonly int[] yearOptions = new int[] { 1, 2 };

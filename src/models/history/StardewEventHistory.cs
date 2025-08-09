@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json; 
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class StardewEventHistory
 {

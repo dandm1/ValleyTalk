@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using ValleyTalk;
 using ValleyTalk.Platform;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal abstract class LlmOpenAiBase : Llm
 {

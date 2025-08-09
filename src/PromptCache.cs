@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using StardewDialogue;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;

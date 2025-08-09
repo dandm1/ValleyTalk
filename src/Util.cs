@@ -1,4 +1,3 @@
-using StardewDialogue;
 using StardewValley;
 using System;
 using System.Collections.Generic;
@@ -54,7 +53,7 @@ namespace ValleyTalk
             return builder.ToString();
         }
 
-        internal static string GetString(StardewDialogue.Character npc,string key,object tokens = null,bool returnNull = false)
+        internal static string GetString(ValleyTalk.Character npc,string key,object tokens = null,bool returnNull = false)
         {
             if (npc == null) return string.Empty;
 

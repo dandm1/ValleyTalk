@@ -1,6 +1,6 @@
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class LlmOAICompatible : LlmOpenAiBase, IGetModelNames
 {

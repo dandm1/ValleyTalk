@@ -4,7 +4,7 @@ using System.ComponentModel.Design.Serialization;
 using StardewValley;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 public class BioData
 {

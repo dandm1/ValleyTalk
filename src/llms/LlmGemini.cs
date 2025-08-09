@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using ValleyTalk;
 using ValleyTalk.Platform;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class LlmGemini : Llm, IGetModelNames
 {

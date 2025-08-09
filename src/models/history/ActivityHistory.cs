@@ -1,4 +1,4 @@
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class ActivityHistory : IHistory
 {

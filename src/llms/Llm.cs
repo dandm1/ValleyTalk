@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq; // Added
 using System.Threading.Tasks;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal abstract class Llm
 {

@@ -1,4 +1,4 @@
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 public enum Weekday
 {

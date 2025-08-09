@@ -10,7 +10,7 @@ using ValleyTalk;
 using ValleyTalk.Platform;
 using System.Threading.Tasks;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class LlmClaude : Llm, IGetModelNames
 {

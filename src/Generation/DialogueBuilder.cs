@@ -5,7 +5,6 @@ using System.Net.Mime;
 using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
-using StardewDialogue;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Characters;
@@ -32,14 +31,14 @@ namespace ValleyTalk
         public bool LlmDisabled { get; set; } = false;
 
         private static DialogueBuilder _instance;
-        private Dictionary<string, StardewDialogue.Character> _characters;
+        private Dictionary<string, ValleyTalk.Character> _characters;
         private Random _random;
         private int _patchDate;
         private Dictionary<string, bool> _patchCharacters;
 
         private DialogueBuilder()
         {
-            _characters = new Dictionary<string, StardewDialogue.Character>();
+            _characters = new Dictionary<string, ValleyTalk.Character>();
             _random = new Random();
         }
 
@@ -55,7 +54,7 @@ namespace ValleyTalk
             }
         }
 
-        public StardewDialogue.Character GetCharacter(NPC instance)
+        public ValleyTalk.Character GetCharacter(NPC instance)
         {
             if (instance == null)
             {
@@ -63,7 +62,7 @@ namespace ValleyTalk
             }
             if (!_characters.ContainsKey(instance.Name))
             {
-                var newCharacter = new StardewDialogue.Character(
+                var newCharacter = new ValleyTalk.Character(
                     instance.Name, 
                     instance);
                 _characters.Add(instance.Name, newCharacter);
@@ -150,20 +149,20 @@ namespace ValleyTalk
         private DialogueContext GetBasicContext(NPC instance)
         {
             var farmer = Game1.getPlayerOrEventFarmer();
-            StardewDialogue.Season season;
+            ValleyTalk.Season season;
             switch (Game1.currentSeason)
             {
                 case "spring":
-                    season = StardewDialogue.Season.Spring;
+                    season = ValleyTalk.Season.Spring;
                     break;
                 case "summer":
-                    season = StardewDialogue.Season.Summer;
+                    season = ValleyTalk.Season.Summer;
                     break;
                 case "fall":
-                    season = StardewDialogue.Season.Fall;
+                    season = ValleyTalk.Season.Fall;
                     break;
                 case "winter":
-                    season = StardewDialogue.Season.Winter;
+                    season = ValleyTalk.Season.Winter;
                     break;
                 default:
                     throw new Exception("Invalid season");
@@ -191,29 +190,29 @@ namespace ValleyTalk
                     break;
             }
             timeOfDay += $" ({(Game1.timeOfDay / 100) % 24}:{Game1.timeOfDay % 100:00})";
-            StardewDialogue.Weekday day;
+            ValleyTalk.Weekday day;
             switch (Game1.dayOfMonth % 7)
             {
                 case 0:
-                    day = StardewDialogue.Weekday.Sun;
+                    day = ValleyTalk.Weekday.Sun;
                     break;
                 case 1:
-                    day = StardewDialogue.Weekday.Mon;
+                    day = ValleyTalk.Weekday.Mon;
                     break;
                 case 2:
-                    day = StardewDialogue.Weekday.Tue;
+                    day = ValleyTalk.Weekday.Tue;
                     break;
                 case 3:
-                    day = StardewDialogue.Weekday.Wed;
+                    day = ValleyTalk.Weekday.Wed;
                     break;
                 case 4:
-                    day = StardewDialogue.Weekday.Thu;
+                    day = ValleyTalk.Weekday.Thu;
                     break;
                 case 5:
-                    day = StardewDialogue.Weekday.Fri;
+                    day = ValleyTalk.Weekday.Fri;
                     break;
                 case 6:
-                    day = StardewDialogue.Weekday.Sat;
+                    day = ValleyTalk.Weekday.Sat;
                     break;
                 default:
                     throw new Exception("Invalid day");
@@ -232,7 +231,7 @@ namespace ValleyTalk
                                 farmer.friendshipData[instance.Name].Points / 250
                     ) 
                     : -1;
-            var context = new StardewDialogue.DialogueContext()
+            var context = new ValleyTalk.DialogueContext()
             {
                 Season = season,
                 DayOfSeason = Game1.dayOfMonth,
@@ -277,7 +276,7 @@ namespace ValleyTalk
             return true;
         }
 
-        private static List<StardewValley.DialogueLine> FilterForHistory(List<StardewValley.DialogueLine> dialogues, StardewDialogue.Character character)
+        private static List<StardewValley.DialogueLine> FilterForHistory(List<StardewValley.DialogueLine> dialogues, ValleyTalk.Character character)
         {
             if (character.MatchLastDialogue(dialogues))
             {

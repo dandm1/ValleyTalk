@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Content;
 using StardewModdingAPI.Events;
 using System.Threading;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 public class Character
 {

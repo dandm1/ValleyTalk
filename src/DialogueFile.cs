@@ -6,7 +6,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 public class DialogueFile
 {

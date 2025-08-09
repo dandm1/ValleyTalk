@@ -5,7 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using ValleyTalk;
 
-namespace StardewDialogue;
+namespace ValleyTalk;
 
 internal class ConversationHistory : IHistory
 {
