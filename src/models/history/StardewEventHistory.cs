@@ -122,6 +122,26 @@ internal class StardewEventHistory
         }
     }
 
+    internal void RemoveAfter(StardewTime timeNow)
+    {
+        if (_eventHistory.Any(x => x.Item1.After(timeNow)))
+        {
+            _eventHistory.RemoveAll(x => x.Item1.After(timeNow));
+        }
+        if (_overheardHistory.Any(x => x.Item1.After(timeNow)))
+        {
+            _overheardHistory.RemoveAll(x => x.Item1.After(timeNow));
+        }
+        if (_dialogueHistory.Any(x => x.Item1.After(timeNow)))
+        {
+            _dialogueHistory.RemoveAll(x => x.Item1.After(timeNow));
+        }
+        if (_conversationHistory.Any(x => x.Item1.After(timeNow)))
+        {
+            _conversationHistory.RemoveAll(x => x.Item1.After(timeNow));
+        }
+    }
+
     internal void RemoveDialogueOverlapping(List<ConversationElement> chatHistory)
     {
         foreach (var chat in chatHistory)

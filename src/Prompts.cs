@@ -737,8 +737,6 @@ public class Prompts
         }
     }
 
-
-
     private void GetFarmAnimals(StringBuilder prompt)
     {
         var allAnimals = GetAnimals();
@@ -879,7 +877,9 @@ public class Prompts
             prompt.AppendLine(Util.GetString(Character, "eventHistoryIntro", new { Name = Name }));
             prompt.AppendLine(Util.GetString(Character, "eventHistorySubheading"));
 
-            foreach (var eventHistory in historySample)
+            int remainingLength = 4000;
+            List<string> historyLines = new List<string>();
+            foreach (var eventHistory in historySample.Reverse())
             {
                 // Exclude the current conversation
                 if (eventHistory.Item2 is ConversationHistory conv && Context.ChatHistory.Any())
@@ -889,7 +889,14 @@ public class Prompts
                         continue;
                     }
                 }
-                prompt.AppendLine($"- {eventHistory.Item1.SinceDescription(timeNow)}: {eventHistory.Item2.Format(Name)}");
+                var line = $"- {eventHistory.Item1.SinceDescription(timeNow)}: {eventHistory.Item2.Format(Name)}";
+                historyLines.Add(line);
+                remainingLength -= line.Length + 1;
+                if (remainingLength < 0) break;
+            }
+            foreach (var line in historyLines.Reverse<string>())
+            {
+                prompt.AppendLine(line);
             }
         }
     }
