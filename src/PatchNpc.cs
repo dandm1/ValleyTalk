@@ -34,7 +34,7 @@ namespace ValleyTalk
             var result = new Dialogue(__instance, null, null);
             result.exitCurrentDialogue();
             __result = result;
-            return false;
+            return false; // Prevent default behavior
         }
     }
 
@@ -243,6 +243,7 @@ namespace ValleyTalk
     [HarmonyPatch(typeof(NPC), nameof(NPC.addMarriageDialogue))]
     public class NPC_AddMarriageDialogue_Patch
     {
+        // Add logic to handle nulls being returned - so we can skip the first porch lines
         public static bool Prefix(ref NPC __instance, ref Dialogue __result, string dialogue_file, string dialogue_key, bool gendered, string[] substitutions)
         {
             var dialogueRef = new MarriageDialogueReference(dialogue_file, dialogue_key, gendered, substitutions);
