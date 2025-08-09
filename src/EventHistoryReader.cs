@@ -72,10 +72,10 @@ public class EventHistoryReader
             try
             {
                 var history = ModEntry.SHelper.Data.ReadSaveData<StardewEventHistory>(eventKey);
-                // Remove anything from the history that happens after the current game time
-                history.RemoveAfter(new StardewTime(Game1.Date,Game1.timeOfDay));
                 if (history != null)
                 {
+                    // Remove anything from the history that happens after the current game time
+                    history.RemoveAfter(new StardewTime(Game1.Date,Game1.timeOfDay));
                     return history;
                 }
             }
