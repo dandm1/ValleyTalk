@@ -12,23 +12,38 @@ public class EventHistoryReader
     public static EventHistoryReader Instance { get; } = new EventHistoryReader();
 
     private static readonly Dictionary<string, string> _conversionCache = new();
-    
-    private EventHistoryReader() 
-    { 
+
+    private EventHistoryReader()
+    {
         if (!Context.IsMainPlayer)
         {
             _multiplayerFilename = $"multiplayer/{Constants.SaveFolderName}.json";
             _fileEventHistories = ModEntry.SHelper.Data.ReadJsonFile<Dictionary<string, StardewEventHistory>>(_multiplayerFilename) ?? new();
-            ModEntry.SHelper.Events.GameLoop.Saving += OnSaving;
+            ModEntry.SHelper.Events.GameLoop.Saving += OnSavingFile;
+        }
+        else
+        {
+            _saveCache = new();
+            ModEntry.SHelper.Events.GameLoop.Saving += OnSavingGameData;
         }
     }
 
-    private void OnSaving(object sender, SavingEventArgs e)
+    private void OnSavingFile(object sender, SavingEventArgs e)
     {
         ModEntry.SHelper.Data.WriteJsonFile(_multiplayerFilename, _fileEventHistories);
     }
 
+    private void OnSavingGameData(object sender, SavingEventArgs e)
+    {
+        foreach (var kvp in _saveCache)
+        {
+            ModEntry.SHelper.Data.WriteSaveData(kvp.Key, kvp.Value);
+        }
+        _saveCache.Clear();
+    }
+
     private Dictionary<string, StardewEventHistory> _fileEventHistories = new();
+    private Dictionary<string, StardewEventHistory> _saveCache;
     private readonly string _multiplayerFilename;
 
     internal StardewEventHistory GetEventHistory(string name)
@@ -76,7 +91,7 @@ public class EventHistoryReader
         {
             var saveName = GetSaveName(name);
             var eventKey = $"EventHistory_{saveName}";
-            ModEntry.SHelper.Data.WriteSaveData(eventKey, eventHistory);
+            _saveCache[eventKey] = eventHistory;
         }
         else
         {
