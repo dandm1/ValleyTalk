@@ -8,7 +8,7 @@ namespace ValleyTalk
     /// Patch for NPC.checkAction to allow initiating a conversation with typed dialogue
     /// </summary>
     [HarmonyPatch(typeof(NPC), nameof(NPC.checkAction))]
-    public class PatchNpcCheckAction
+    public class NPC_CheckAction_Patch
     {
 
         /// <summary>
