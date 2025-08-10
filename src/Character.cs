@@ -209,7 +209,6 @@ public class Character
     private void LoadEventHistory()
     {
         eventHistory = EventHistoryReader.Instance.GetEventHistory(Name);
-
     }
 
     internal IEnumerable<DialogueValue> SelectDialogueSample(DialogueContext context)

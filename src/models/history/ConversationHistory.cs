@@ -10,44 +10,45 @@ namespace ValleyTalk;
 internal class ConversationHistory : IHistory
 {
     private readonly Guid _id;
+
+    [Obsolete("Use ConversationElements instead")]
     public string[] chatHistory
     {
-        get => _conversationElements.ConvertAll(ce => ce.Text).ToArray();
+        get => ConversationElements.Select(ce => ce.Text).ToArray();
         set
         {
-            _conversationElements.Clear();
+            ConversationElements.Clear();
             for (int i = 0; i < value.Length; i++)
             {
-                _conversationElements.Add(new ConversationElement(value[i], i % 2 != 0));
+                ConversationElements.Add(new ConversationElement(value[i], i % 2 != 0));
             }
         }
     }
-    
-    private List<ConversationElement> _conversationElements = new List<ConversationElement>();
+    public bool ShouldSerializechatHistory() => false;
     [JsonIgnore]
     public Guid Id => _id;
-    [JsonIgnore]
-    public List<ConversationElement> ConversationElements => _conversationElements;
+
+    public List<ConversationElement> ConversationElements { get; set; } = new List<ConversationElement>();
+
 
     [JsonConstructor]
-    public ConversationHistory(string[] chatHistory)
+    public ConversationHistory()
     {
-        this.chatHistory = chatHistory;
         _id = Guid.NewGuid();
     }
 
     public ConversationHistory(List<ConversationElement> chatHistory)
     {
-        _conversationElements = chatHistory;
+        ConversationElements = chatHistory;
         _id = chatHistory.FirstOrDefault()?.Id ?? Guid.NewGuid();
     }
 
     public string Format(string npcName)
     {
         var builder = new StringBuilder();
-        for (int i = 0; i < _conversationElements.Count; i++)
+        for (int i = 0; i < ConversationElements.Count; i++)
         {
-            builder.Append(!_conversationElements[i].IsPlayerLine ? $"- {npcName}: {_conversationElements[i].Text}" : $"- {Util.GetString("generalFarmerLabel")}: {_conversationElements[i].Text}");
+            builder.Append(!ConversationElements[i].IsPlayerLine ? $"- {npcName}: {ConversationElements[i].Text}" : $"- {Util.GetString("generalFarmerLabel")}: {ConversationElements[i].Text}");
             builder.Append(" --- ");
         }
         return Util.GetString("historyConversationFormat", new { builder = builder });

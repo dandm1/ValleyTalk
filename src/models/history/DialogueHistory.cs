@@ -1,12 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using StardewValley;
 
 namespace ValleyTalk;
 
 internal class DialogueHistory : IHistory
 {
+    [JsonConstructor]
+    public DialogueHistory()
+    {
+        Dialogues = new List<StardewValley.DialogueLine>();
+    }
+
     public DialogueHistory(IEnumerable<StardewValley.DialogueLine> dialogues)
     {
         Dialogues = dialogues;
@@ -18,5 +25,5 @@ internal class DialogueHistory : IHistory
         return Util.GetString("dialogueHistoryFormat", new { npcName = npcName, totalDialogue = totalDialogue });
     }
 
-    public IEnumerable<StardewValley.DialogueLine> Dialogues { get; }
+    public IEnumerable<StardewValley.DialogueLine> Dialogues { get; set; }
 }
