@@ -860,7 +860,9 @@
             "modelCheckInsecure.MaleNpc": "{{i18n:modelCheckInsecure.MaleNpc}}",
             "modelCheckGetNames.MaleNpc": "{{i18n:modelCheckGetNames.MaleNpc}}",
             "modelCheckGenericError.MaleNpc": "{{i18n:modelCheckGenericError.MaleNpc}}",
-            "modelCheckSuccess.MaleNpc": "{{i18n:modelCheckSuccess.MaleNpc}}"
+            "modelCheckSuccess.MaleNpc": "{{i18n:modelCheckSuccess.MaleNpc}}",
+            "trinketsFairyBox": "{{i18n:trinketsFairyBox}}",
+            "trinketsCompanionFrog": "{{i18n:trinketsCompanionFrog}}"
             }
         }
     ]

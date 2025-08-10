@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using ValleyTalk;
 using StardewValley;
 using StardewValley.GameData.Characters;
+using StardewValley.Objects.Trinkets;
 
 namespace ValleyTalk;
 
@@ -192,8 +193,8 @@ public class Prompts
             }
 
             GetSpouse(prompt);
-
             GetFarmContents(prompt);
+            GetTrinkets(prompt);
             GetWealth(prompt);
             GetMarriageFeelings(prompt);
         }
@@ -793,33 +794,48 @@ public class Prompts
         }
     }
 
+    private void GetTrinkets(StringBuilder prompt)
+    {
+        var trinkets = Game1.getPlayerOrEventFarmer().trinketItems;
+        if (trinkets == null || !trinkets.Any()) return;
+
+        if (trinkets.Any(x => x.GetEffect() is FairyBoxTrinketEffect))
+        {
+            prompt.AppendLine(Util.GetString(Character,"trinketsFairyBox", new {}));
+        }
+        if (trinkets.Any(x => x.GetEffect() is CompanionTrinketEffect))
+        {
+            prompt.AppendLine(Util.GetString(Character,"trinketsCompanionFrog", new { }));
+        }
+    }
+
     private void GetChildren(StringBuilder prompt, Friendship friendship)
     {
         if (Context.Children.Count == 0)
         {
-            prompt.AppendLine(Util.GetString(Character,"childrenNone", new { Name= Name }));
+            prompt.AppendLine(Util.GetString(Character, "childrenNone", new { Name = Name }));
         }
         else
         {
             if (Context.Children.Count > 1)
             {
                 var count = Context.Children.Count;
-                prompt.AppendLine(Util.GetString(Character,"childrenMultiple", new { Name= Name, count= count }));
+                prompt.AppendLine(Util.GetString(Character, "childrenMultiple", new { Name = Name, count = count }));
             }
             else
             {
-                prompt.AppendLine(Util.GetString(Character,"childrenSingle", new { Name= Name }));
+                prompt.AppendLine(Util.GetString(Character, "childrenSingle", new { Name = Name }));
             }
             prompt.AppendLine();
             foreach (var child in Context.Children)
             {
-                prompt.AppendLine($"- {Util.GetString(Character,child.IsMale ? "childrenDescriptionBoy" : "childDescriptionGirl", new { Name= child.Name, Age= child.Age })}");
+                prompt.AppendLine($"- {Util.GetString(Character, child.IsMale ? "childrenDescriptionBoy" : "childDescriptionGirl", new { Name = child.Name, Age = child.Age })}");
             }
         }
         if (friendship.DaysUntilBirthing > 0)
         {
             var daysUntilBirth = friendship.DaysUntilBirthing;
-            prompt.AppendLine(Util.GetString(Character,"childrenPregnant", new { Name= Name, daysUntilBirth= daysUntilBirth }));
+            prompt.AppendLine(Util.GetString(Character, "childrenPregnant", new { Name = Name, daysUntilBirth = daysUntilBirth }));
         }
     }
 
