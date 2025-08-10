@@ -40,8 +40,8 @@ namespace ValleyTalk
             var totalHeight = Margin * 8 + titleSize.Y + TextBoxHeight + ButtonSize * 2 ;
             // Center the menu
             _menuPosition = new Vector2(
-                (Game1.viewport.Width - MenuWidth) / 2,
-                (Game1.viewport.Height - totalHeight) / 2
+                (Game1.uiViewport.Width - MenuWidth) / 2,
+                (Game1.uiViewport.Height - totalHeight) / 2
             );
             
             _menuBounds = new Rectangle((int)_menuPosition.X, (int)_menuPosition.Y, MenuWidth, MenuHeight);

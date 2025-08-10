@@ -27,8 +27,8 @@ namespace ValleyTalk
             // Center the window
             this.width = (int)messageSize.X + 6 * Margin;
             this.height = (int)messageSize.Y + 6 * Margin;
-            this.xPositionOnScreen = (Game1.viewport.Width - this.width) / 2;
-            this.yPositionOnScreen = (Game1.viewport.Height - this.height) / 2;
+            this.xPositionOnScreen = (Game1.uiViewport.Width - this.width) / 2;
+            this.yPositionOnScreen = (Game1.uiViewport.Height - this.height) / 2;
         }
 
         public override void update(GameTime time)
