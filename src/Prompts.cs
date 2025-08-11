@@ -194,11 +194,11 @@ public class Prompts
 
             GetSpouse(prompt);
             GetFarmContents(prompt);
-            GetTrinkets(prompt);
             GetWealth(prompt);
             GetMarriageFeelings(prompt);
         }
         GetLocation(prompt);
+        GetTrinkets(prompt);
         GetRecentEvents(prompt);
 
         GetSpecialDatesAndBirthday(prompt);
@@ -664,16 +664,16 @@ public class Prompts
         switch (wealth)
         {
             case < 1000:
-                prompt.AppendLine(Util.GetString(Character,"wealthPoor", new { wealth= wealth, Name = Name }));
+                prompt.AppendLine(Util.GetString(Character,"wealthPoor", new { wealth,  Name }));
                 break;
             case < 10000:
-                prompt.AppendLine(Util.GetString(Character,"wealthMiddle", new { wealth= wealth, Name = Name }));
+                prompt.AppendLine(Util.GetString(Character,"wealthMiddle", new { wealth, Name }));
                 break;
             case < 100000:
-                prompt.AppendLine(Util.GetString(Character,"wealthRich", new { wealth= wealth, Name = Name }));
+                prompt.AppendLine(Util.GetString(Character,"wealthRich", new { wealth, Name }));
                 break;
             default:
-                prompt.AppendLine(Util.GetString(Character,"wealthVeryRich", new { wealth= wealth, Name = Name }));
+                prompt.AppendLine(Util.GetString(Character,"wealthVeryRich", new { wealth, Name }));
                 break;
         }
     }
@@ -801,11 +801,19 @@ public class Prompts
 
         if (trinkets.Any(x => x.GetEffect() is FairyBoxTrinketEffect))
         {
-            prompt.AppendLine(Util.GetString(Character,"trinketsFairyBox", new {}));
+            prompt.AppendLine(Util.GetString(Character, "trinketsFairyBox", new { Name }));
         }
         if (trinkets.Any(x => x.GetEffect() is CompanionTrinketEffect))
         {
-            prompt.AppendLine(Util.GetString(Character,"trinketsCompanionFrog", new { }));
+            CompanionTrinketEffect companionEffect = trinkets.First(x => x.GetEffect() is CompanionTrinketEffect).GetEffect() as CompanionTrinketEffect;
+            if (companionEffect.Companion is StardewValley.Companions.HungryFrogCompanion)
+            {
+                prompt.AppendLine(Util.GetString(Character, "trinketsCompanionFrog", new { Name }));
+            }
+            else
+            {
+                prompt.AppendLine(Util.GetString(Character, "trinketsCompanionParrot", new { Name }));
+            }
         }
     }
 

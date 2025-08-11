@@ -862,7 +862,8 @@
             "modelCheckGenericError.MaleNpc": "{{i18n:modelCheckGenericError.MaleNpc}}",
             "modelCheckSuccess.MaleNpc": "{{i18n:modelCheckSuccess.MaleNpc}}",
             "trinketsFairyBox": "{{i18n:trinketsFairyBox}}",
-            "trinketsCompanionFrog": "{{i18n:trinketsCompanionFrog}}"
+            "trinketsCompanionFrog": "{{i18n:trinketsCompanionFrog}}",
+            "trinketsCompanionParrot": "{{i18n:trinketsCompanionParrot}}"
             }
         }
     ]
