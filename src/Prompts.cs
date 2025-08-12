@@ -803,14 +803,14 @@ public class Prompts
         {
             prompt.AppendLine(Util.GetString(Character, "trinketsFairyBox", new { Name }));
         }
-        if (trinkets.Any(x => x.GetEffect() is CompanionTrinketEffect))
+        else if (trinkets.Any(x => x.GetEffect() is TrinketEffect))
         {
-            CompanionTrinketEffect companionEffect = trinkets.First(x => x.GetEffect() is CompanionTrinketEffect).GetEffect() as CompanionTrinketEffect;
+            TrinketEffect companionEffect = trinkets.First(x => x.GetEffect() is TrinketEffect).GetEffect() as TrinketEffect;
             if (companionEffect.Companion is StardewValley.Companions.HungryFrogCompanion)
             {
                 prompt.AppendLine(Util.GetString(Character, "trinketsCompanionFrog", new { Name }));
             }
-            else
+            else if (companionEffect.Companion is StardewValley.Companions.FlyingCompanion)
             {
                 prompt.AppendLine(Util.GetString(Character, "trinketsCompanionParrot", new { Name }));
             }
