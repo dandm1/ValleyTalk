@@ -296,5 +296,8 @@
   "biographyPersonality": "Personality",
   "trinketsFairyBox": "The farmer is being followed around by a tiny fairy, who is hovering in the air and watching everything. After seeing the fairy a few times, she becomes unremarkable to {{Name}}.",
   "trinketsCompanionFrog": "The farmer is being followed around by a frog, who is hopping along behind the farmer and watching everything. After seeing the frog a few times, it becomes unremarkable to {{Name}}.",
-  "trinketsCompanionParrot": "The farmer is being followed around by a parrot, who is fluttering near the farmer's shoulder. After seeing the parrot a few times, it becomes unremarkable to {{Name}}."
+  "trinketsCompanionParrot": "The farmer is being followed around by a parrot, who is fluttering near the farmer's shoulder. After seeing the parrot a few times, it becomes unremarkable to {{Name}}.",
+  "uiClearHistoryConfirm": "Are you sure you want to clear the dialogue history for {{Name}}? This cannot be undone.",
+  "uiClearHistoryAllConfirm": "Are you sure you want to clear the dialogue history for all villagers? This cannot be undone.",
+  "uiClearHover": "Clear dialogue history for {{Name}} ([Shift] for all)"
 }

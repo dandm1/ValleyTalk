@@ -629,6 +629,12 @@ public class Character
         return false;
     }
 
+    internal void ClearConversationHistory()
+    {
+        eventHistory.ClearConversationHistory();
+        EventHistoryReader.Instance.UpdateEventHistory(Name, eventHistory);
+    }
+
     public string Name { get; }
     public string DialogueFilePath { get; }
     public string BioFilePath { get; }

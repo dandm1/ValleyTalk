@@ -51,7 +51,7 @@ namespace ValleyTalk
         {
             try
             {
-                var textInputMenu = new DialogueTextInputMenu(_inputTitle, OnTextEntered);
+                var textInputMenu = new DialogueTextInputMenu(_inputTitle, OnTextEntered, _currentNpc);
                 Game1.activeClickableMenu = new DialogueTextInputMenuWrapper(textInputMenu);
             }
             catch (Exception ex)

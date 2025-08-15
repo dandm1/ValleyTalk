@@ -863,7 +863,10 @@
             "modelCheckSuccess.MaleNpc": "{{i18n:modelCheckSuccess.MaleNpc}}",
             "trinketsFairyBox": "{{i18n:trinketsFairyBox}}",
             "trinketsCompanionFrog": "{{i18n:trinketsCompanionFrog}}",
-            "trinketsCompanionParrot": "{{i18n:trinketsCompanionParrot}}"
+            "trinketsCompanionParrot": "{{i18n:trinketsCompanionParrot}}",
+            "uiClearHistoryConfirm": "{{i18n:uiClearHistoryConfirm}}",
+            "uiClearHistoryAllConfirm": "{{i18n:uiClearHistoryAllConfirm}}",
+            "uiClearHover": "{{i18n:uiClearHover}}"
             }
         }
     ]

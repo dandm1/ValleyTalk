@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using StardewValley;
+using StardewValley.GameData.HomeRenovations;
 using StardewValley.Menus;
 using System;
 
@@ -18,7 +19,9 @@ namespace ValleyTalk
         private readonly DialogueTextInputBox _inputTextBox;
         private readonly ClickableTextureComponent _okButton;
         private readonly ClickableTextureComponent _cancelButton;
+        private readonly ClickableTextureComponent _clearHistory;
         private readonly TextSubmittedDelegate _onTextSubmitted;
+        private readonly string _npcName;
 
         // Menu dimensions
         private const int MenuWidth = 1200;
@@ -31,19 +34,20 @@ namespace ValleyTalk
         private readonly Vector2 _menuPosition;
         private readonly Rectangle _menuBounds;
 
-        public DialogueTextInputMenu(string title, TextSubmittedDelegate callback)
+        public DialogueTextInputMenu(string title, TextSubmittedDelegate callback, NPC currentNpc)
         {
             _title = title ?? "Enter your response";
             var titleSize = Game1.dialogueFont.MeasureString(_title);
             _onTextSubmitted = callback;
+            _npcName = currentNpc.Name;
 
-            var totalHeight = Margin * 8 + titleSize.Y + TextBoxHeight + ButtonSize * 2 ;
+            var totalHeight = Margin * 8 + titleSize.Y + TextBoxHeight + ButtonSize * 2;
             // Center the menu
             _menuPosition = new Vector2(
                 (Game1.uiViewport.Width - MenuWidth) / 2,
                 (Game1.uiViewport.Height - totalHeight) / 2
             );
-            
+
             _menuBounds = new Rectangle((int)_menuPosition.X, (int)_menuPosition.Y, MenuWidth, MenuHeight);
 
             // Create text input box
@@ -79,6 +83,18 @@ namespace ValleyTalk
                 Game1.mouseCursors,
                 Game1.getSourceRectForStandardTileSheet(Game1.mouseCursors, 47, -1, -1),
                 1f);
+
+            var springTownTilesheet = Game1.content.Load<Texture2D>("Maps\\spring_town");
+            // Create a button in the bottom left corner to clear the conversation history with this character
+            _clearHistory = new ClickableTextureComponent(
+                new Rectangle(
+                    (int)_menuPosition.X + 2 * Margin,
+                    (int)_menuPosition.Y + MenuHeight - 2 * Margin - ButtonSize,
+                    ButtonSize, ButtonSize),
+                springTownTilesheet,
+                new Rectangle(224, 26, 16, 22),
+                3f);
+            _clearHistory.hoverText = Util.GetString("uiClearHover", new { Name = _npcName }) ?? $"Clear conversation history with {_npcName} ([Shift] for all)";
         }
 
         public void Close()
@@ -117,6 +133,7 @@ namespace ValleyTalk
             // Draw buttons
             _okButton.draw(spriteBatch);
             _cancelButton.draw(spriteBatch);
+            _clearHistory.draw(spriteBatch);
 
             // Draw mouse cursor
             if (!Game1.options.hardwareCursor)
@@ -139,9 +156,81 @@ namespace ValleyTalk
                 Game1.playSound("cancel");
                 Submit("");
             }
+            else if (_clearHistory.containsPoint(x, y))
+            {
+                // Check if the left shift key is pressed
+                if (Game1.input.GetKeyboardState().IsKeyDown(Keys.LeftShift))
+                {
+                    // Prompt for confirmation
+                    var confirmText = Util.GetString("uiClearHistoryAllConfirm", new { }) ?? $"Are you sure you want to clear the conversation history with all villagers? This action cannot be undone.";
+                    ConfirmAction(confirmText, () =>
+                    {
+                        Game1.playSound("trashcan");
+                        ClearHistory();
+                    });
+                }
+                else
+                {
+                    var confirmText = Util.GetString("uiClearHistoryConfirm", new { Name = _npcName }) ?? $"Are you sure you want to clear the conversation history with {_npcName}? This action cannot be undone.";
+
+                    ConfirmAction(confirmText, () =>
+                    {
+                        Game1.playSound("trashcan");
+                        ClearHistory(_npcName);
+                    });
+                }
+            }
             else if (_inputTextBox.ContainsPoint(x, y))
             {
                 Game1.keyboardDispatcher.Subscriber = _inputTextBox;
+            }
+        }
+
+        // Display a confirmation dialog using standard game UI
+        // Returns true if the action is confirmed, false otherwise
+        private void ConfirmAction(string confirmText, Action onConfirm)
+        {
+            var tempTextInput = Game1.activeClickableMenu;
+            Game1.exitActiveMenu();
+            Game1.activeClickableMenu = null; // Clear the current menu to avoid conflicts
+            var confirmMenu = new ConfirmationDialog(confirmText, (farmer) =>
+            {
+                onConfirm?.Invoke();
+                Game1.exitActiveMenu();
+                Game1.activeClickableMenu = null;
+                Game1.activeClickableMenu = tempTextInput; // Restore the previous menu
+            }, (_) =>
+            {
+                Game1.exitActiveMenu();
+                Game1.activeClickableMenu = null;
+                Game1.activeClickableMenu = tempTextInput; // Restore the previous menu
+            });
+            Game1.activeClickableMenu = confirmMenu;
+        }
+
+        private void ClearHistory(string npcName = "")
+        {
+            if (string.IsNullOrEmpty(npcName))
+            {
+                // Clear all conversation history
+                var characters = Game1.characterData.Keys;
+                foreach (var characterName in characters)
+                {
+                    var character = DialogueBuilder.Instance.GetCharacterByName(characterName);
+                    if (character != null)
+                    {
+                        character.ClearConversationHistory();
+                    }
+                }
+            }
+            else
+            {
+                // Clear all conversation history
+                var character = DialogueBuilder.Instance.GetCharacterByName(_npcName);
+                if (character != null)
+                {
+                    character.ClearConversationHistory();
+                }
             }
         }
 

@@ -70,6 +70,15 @@ namespace ValleyTalk
             return _characters[instance.Name];
         }
 
+        public ValleyTalk.Character GetCharacterByName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name) || !_characters.ContainsKey(name))
+            {
+                return null;
+            }
+            return _characters[name];
+        }
+        
         internal async Task<string> GenerateResponse(NPC instance, List<ConversationElement> conversation, bool dontSkipNext = false)
         {
             var character = GetCharacter(instance);

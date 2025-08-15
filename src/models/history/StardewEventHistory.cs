@@ -61,6 +61,13 @@ internal class StardewEventHistory
         }
     }
 
+    public void ClearConversationHistory()
+    {
+        _conversationHistory.Clear();
+        _dialogueHistory.Clear();
+        _overheardHistory.Clear();
+    }
+
     [JsonIgnore]
     public IEnumerable<Tuple<StardewTime, IHistory>> AllTypes => 
         _eventHistory.AsEnumerable<Tuple<StardewTime, IHistory>>()
