@@ -1013,7 +1013,7 @@ public class Prompts
         var instructions = new StringBuilder();
         instructions.AppendLine($"##{Util.GetString(Character,"instructionsHeading")}");
         instructions.AppendLine(Util.GetString(Character,"instructionsIntro", new { Name= Name }));
-        if (dialogueSample.Any())
+        if (dialogueSample != null && dialogueSample.Any())
         {
             instructions.AppendLine(Util.GetString(Character,"instructionsSampleDialogue", new { Name= Name }));
         }
