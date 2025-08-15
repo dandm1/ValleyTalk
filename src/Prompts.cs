@@ -797,15 +797,17 @@ public class Prompts
     private void GetTrinkets(StringBuilder prompt)
     {
         var trinkets = Game1.getPlayerOrEventFarmer().trinketItems;
-        if (trinkets == null || !trinkets.Any()) return;
-
-        if (trinkets.Any(x => x.GetEffect() is FairyBoxTrinketEffect))
+        if (trinkets == null) return;
+        var nonNullTrinkets = trinkets.Where(x => x != null).ToList();
+        if (!nonNullTrinkets.Any()) return;
+        
+        if (nonNullTrinkets.Any(x => x.GetEffect() is FairyBoxTrinketEffect))
         {
             prompt.AppendLine(Util.GetString(Character, "trinketsFairyBox", new { Name }));
         }
-        else if (trinkets.Any(x => x.GetEffect() is TrinketEffect))
+        else if (nonNullTrinkets.Any(x => x.GetEffect() is not null))
         {
-            TrinketEffect companionEffect = trinkets.First(x => x.GetEffect() is TrinketEffect).GetEffect() as TrinketEffect;
+            TrinketEffect companionEffect = nonNullTrinkets.First(x => x.GetEffect() is TrinketEffect).GetEffect() as TrinketEffect;
             if (companionEffect.Companion is StardewValley.Companions.HungryFrogCompanion)
             {
                 prompt.AppendLine(Util.GetString(Character, "trinketsCompanionFrog", new { Name }));
