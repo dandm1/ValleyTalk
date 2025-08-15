@@ -29,6 +29,9 @@ internal abstract class Llm
 
     private static async Task<bool> CheckConnection(string apiKey, string modelName)
     {
+        if (ModEntry.Config.SuppressConnectionCheck)
+            return true;
+
         var response = await Instance.RunInference("You are performing LLM connection testing", "Please just ", "respond with ", "'Connection successful'");
         if (response.Length < 5)
         {

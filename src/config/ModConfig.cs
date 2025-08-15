@@ -21,9 +21,9 @@ namespace ValleyTalk
         public int MarriageFrequency { get; set; } = 4;
         public int GiftFrequency { get; set; } = 4;
         public string TypedResponses { get; set; } = "With Generated";
-        public string DisableCharacters 
-        { 
-            get => disableCharacters; 
+        public string DisableCharacters
+        {
+            get => disableCharacters;
             set
             {
                 disableCharacters = value;
@@ -37,5 +37,6 @@ namespace ValleyTalk
 
         public SButton InitiateTypedDialogueKey { get; internal set; } = SButton.LeftAlt;
         internal List<string> DisabledCharactersList { get; private set; } = new List<string>();
+        public bool SuppressConnectionCheck { get; set; } = false;
     }
 }

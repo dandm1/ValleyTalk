@@ -13,5 +13,6 @@
   "GiftFrequency": 4,
   "TypedResponses": "With Generated",
   "DisableCharacters": "",
-  "InitiateTypedDialogueKey": "LeftAlt"
+  "InitiateTypedDialogueKey": "LeftAlt",
+  "SupressConnectionCheck": false
 }
