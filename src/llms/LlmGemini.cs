@@ -21,7 +21,7 @@ internal class LlmGemini : Llm, IGetModelNames
     public LlmGemini(string apiKey, string modelName = null)
     {
         this.apiKey = apiKey;
-        this.modelName = modelName ?? "gemini-1.5-flash";
+        this.modelName = modelName ?? "gemini-2.5-flash";
 
         url = $"https://generativelanguage.googleapis.com/v1beta/models/{this.modelName}:generateContent?key=";
     }
@@ -88,6 +88,7 @@ internal class LlmGemini : Llm, IGetModelNames
             useContext = CacheContexts[cacheContext];
         }
 
+        int thinkingBudget = modelName.Contains("flash", StringComparison.OrdinalIgnoreCase) ? 0 : 128;
         var jsonData = JsonConvert.SerializeObject(new // Changed
             {
                 safetySettings = new[] 
@@ -97,8 +98,7 @@ internal class LlmGemini : Llm, IGetModelNames
                 },
                 system_instruction = new { parts = new { text = systemPromptString } },
                 contents = new { parts = new { text = promptString } },
-                generationConfig = new { maxOutputTokens = n_predict, temperature = 1.5, topP = 0.9, thinkingConfig = new { thinkingBudget = 0 } },
-                //cachedContent= useContext
+                generationConfig = new { maxOutputTokens = n_predict, temperature = 1.5, topP = 0.9, thinkingConfig = new { thinkingBudget  } }
             });
 
         var json = new StringContent(
