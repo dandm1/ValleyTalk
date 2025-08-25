@@ -267,7 +267,7 @@ public class Character
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds));
 
                 string[] resultsInternal;
-                string resultString = string.Empty;
+                LlmResponse result;
 
                 try
                 {
@@ -279,10 +279,17 @@ public class Character
                         prompts.ResponseStart
                     );
 
-                    resultString = await inferenceTask.WaitAsync(cts.Token);
+                    result = await inferenceTask.WaitAsync(cts.Token);
 
-                    // Apply relaxed validation if this is the second retry
-                    resultsInternal = ProcessLines(resultString, retryCount > 2).ToArray();
+                    if (result.IsSuccess)
+                    {
+                        // Apply relaxed validation if this is the second retry
+                        resultsInternal = ProcessLines(result.Text, retryCount > 2).ToArray();
+                    }
+                    else
+                    {
+                        resultsInternal = Array.Empty<string>();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -292,7 +299,15 @@ public class Character
 
                 if (resultsInternal.Length == 0)
                 {
-                    throw new Exception($"No valid results returned from AI. AI returned \"{resultString}\".");
+                    Log.Warning("No valid response generated from AI model.");
+                    if (result != null && !string.IsNullOrWhiteSpace(result.ErrorMessage))
+                    {
+                        Log.Warning($"API Error Message: {result.ErrorMessage}");
+                    }
+                    else if (result != null && !string.IsNullOrWhiteSpace(result.Text))
+                    {
+                        Log.Warning($"API Response: {result.Text}");
+                    }
                 }
 
                 if (ModEntry.Config.Debug)
@@ -326,9 +341,9 @@ public class Character
                     Log.Debug($"Results: {resultsInternal[0]}");
                     if (resultsInternal.Length > 1)
                     {
-                        foreach (var result in resultsInternal.Skip(1))
+                        foreach (var resultLine in resultsInternal.Skip(1))
                         {
-                            Log.Debug($"Response: {result}");
+                            Log.Debug($"Response: {resultLine}");
                         }
                     }
                     Log.Debug("--------------------------------------------------");

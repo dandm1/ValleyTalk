@@ -39,7 +39,7 @@ internal class LlmClaude : Llm, IGetModelNames
 
     public override bool IsHighlySensoredModel => true;
 
-    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<LlmResponse> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var promptCached = gameCacheString;
         var inputString = JsonConvert.SerializeObject(new
@@ -85,6 +85,8 @@ internal class LlmClaude : Llm, IGetModelNames
             throw new InvalidOperationException("Network not available");
         }
         
+        string responseString = "";
+        int apiResponseCode = 500;
         while (retry > 0)
         {
             try
@@ -96,16 +98,16 @@ internal class LlmClaude : Llm, IGetModelNames
                     { "anthropic-version", "2023-06-01" },
                     { "anthropic-beta", "prompt-caching-2024-07-31" }
                 };
-                var responseString = await NetworkHelper.MakeRequestWithCustomHeadersAsync(fullUrl, inputString, headers);
+                responseString = await NetworkHelper.MakeRequestWithCustomHeadersAsync(fullUrl, inputString, headers);
                 var responseJson = JObject.Parse(responseString);
-                
+
                 if (responseJson == null)
                 {
                     throw new Exception("Failed to parse response");
                 }
                 else
                 {
-                    
+
                     if (!responseJson.TryGetValue("content", out var contentToken) || contentToken.Type == JTokenType.Null) { retry--; continue; }
                     var contentArray = contentToken as JArray;
                     if (contentArray == null || !contentArray.HasValues) { retry--; continue; }
@@ -114,18 +116,29 @@ internal class LlmClaude : Llm, IGetModelNames
                     if (firstContentElement == null || firstContentElement["text"] == null) { retry--; continue; }
 
                     var text = firstContentElement["text"].ToString();
-                    return text ?? string.Empty;
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        return new LlmResponse(text);
+                    }
+                    else
+                    {
+                        retry--;
+                    }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                if (ex.InnerException is HttpRequestException)
+                {
+                    apiResponseCode = (int)((HttpRequestException)ex.InnerException).StatusCode;
+                }
                 Log.Debug(ex.Message);
                 Log.Debug("Retrying...");
                 retry--;
                 Thread.Sleep(100);
             }
         }
-        return "";
+        return new LlmResponse(responseString, apiResponseCode);
     }
 
     internal override Dictionary<string, double>[] RunInferenceProbabilities(string fullPrompt, int n_predict = 1)

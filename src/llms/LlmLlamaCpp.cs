@@ -33,7 +33,7 @@ internal class LlmLlamaCpp : Llm
             .Replace("{response_start}", responseStart);
     }
 
-    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<LlmResponse> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
 
         promptString = gameCacheString + npcCacheString + promptString;
@@ -62,14 +62,14 @@ internal class LlmLlamaCpp : Llm
         {
             throw new InvalidOperationException("Network not available");
         }
-        
+       
+        string responseString = "";
         while (retry)
         {
             try
             {
                 retry = false;
-                string responseString;
-                
+
                 if (AndroidHelper.IsAndroid)
                 {
                     var jsonData = JsonConvert.SerializeObject(new
@@ -93,12 +93,12 @@ internal class LlmLlamaCpp : Llm
                     var response = await client.PostAsync(url, json);
                     responseString = await response.Content.ReadAsStringAsync();
                 }
-                
-                var responseJson = JObject.Parse(responseString); // Changed
-                
-                var token_stats = responseJson["timings"] as JObject; // Changed and cast to JObject
+
+                var responseJson = JObject.Parse(responseString);
+
+                var token_stats = responseJson["timings"] as JObject;
                 AddToStats(token_stats); // No change needed here now
-                
+
                 if (responseJson == null)
                 {
                     throw new Exception("Failed to parse response");
@@ -106,20 +106,30 @@ internal class LlmLlamaCpp : Llm
                 else
                 {
                     var contentToken = responseJson["content"];
-                    return contentToken?.ToString() ?? string.Empty; // Changed
+                    if (!string.IsNullOrWhiteSpace(contentToken?.ToString()))
+                    {
+                        return new LlmResponse(contentToken.ToString());
+                    }
+                    else
+                    {
+                        throw new Exception("No content in response");
+                    }
+
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Debug(ex.Message);
                 Log.Debug("Retrying...");
-                retry=true;
+                retry = true;
                 Thread.Sleep(1000);
             }
         }
-        return "";
+        return new LlmResponse(
+            responseString, 500
+        );
     }
-
+    
     internal override Dictionary<string,double>[] RunInferenceProbabilities(string fullPrompt,int n_predict = 1)
     {
       // Create a JSON object with the prompt and other parameters

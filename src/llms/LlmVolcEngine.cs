@@ -44,7 +44,7 @@ internal class LlmVolcEngine : Llm, IGetModelNames
         return CoreGetModelNames();
     }
 
-    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<LlmResponse> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var inputString = JsonConvert.SerializeObject(new
             {
@@ -79,22 +79,24 @@ internal class LlmVolcEngine : Llm, IGetModelNames
         {
             throw new InvalidOperationException("Network not available");
         }
-        
+
+        int apiResponseCode = 500;
+        string responseString = "";
         while (retry > 0)
         {
             try
             {
                 // Use Android-compatible network helper
-                var responseString = await NetworkHelper.MakeRequestAsync(fullUrl, inputString, CancellationToken.None, apiKey);
+                responseString = await NetworkHelper.MakeRequestAsync(fullUrl, inputString, CancellationToken.None, apiKey);
                 var responseJson = JObject.Parse(responseString);
-                
+
                 if (responseJson == null)
                 {
                     throw new Exception("Failed to parse response");
                 }
                 else
                 {
-                    
+
                     if (!responseJson.TryGetValue("choices", out var choicesToken) || !(choicesToken is JArray choicesArray) || !choicesArray.HasValues) { retry--; continue; }
 
                     var firstChoice = choicesArray.FirstOrDefault();
@@ -105,20 +107,32 @@ internal class LlmVolcEngine : Llm, IGetModelNames
 
                     var contentToken = messageToken["content"];
                     if (contentToken == null) { retry--; continue; }
-                    
+
                     var text = contentToken.ToString();
-                    return text ?? string.Empty;
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        return new LlmResponse(text);
+                    }
+                    else
+                    {
+                        retry--;
+                        continue;
+                    }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                if (ex.InnerException is HttpRequestException)
+                {
+                    apiResponseCode = (int)((HttpRequestException)ex.InnerException).StatusCode;
+                }
                 Log.Debug(ex.Message);
                 Log.Debug("Retrying...");
                 retry--;
                 Thread.Sleep(100);
             }
         }
-        return "";
+        return new LlmResponse(responseString, apiResponseCode);
     }
 
     internal override Dictionary<string, double>[] RunInferenceProbabilities(string fullPrompt, int n_predict = 1)

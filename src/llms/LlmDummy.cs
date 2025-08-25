@@ -16,15 +16,15 @@ internal class LlmDummy : Llm
 
     public override bool IsHighlySensoredModel => true;
 
-    internal override Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override Task<LlmResponse> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         if (rand.NextDouble()<0.5)
         {
-            return Task.FromResult("- LLM generated string.");
+            return Task.FromResult(new LlmResponse("- LLM generated string."));
         }
         else
         {
-            return Task.FromResult("- LLM generated question\n% One answer\n% Another answer\n% A third answer");
+            return Task.FromResult(new LlmResponse("- LLM generated question\n% One answer\n% Another answer\n% A third answer"));
         }
     }
 

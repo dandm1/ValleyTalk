@@ -78,7 +78,7 @@ internal class LlmGemini : Llm, IGetModelNames
         }
     }
 
-    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<LlmResponse> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var useContext = string.Empty;
 
@@ -116,12 +116,13 @@ internal class LlmGemini : Llm, IGetModelNames
         {
             throw new InvalidOperationException("Network not available");
         }
-        
+
+        string responseString = "";
+        HttpResponseMessage response = new HttpResponseMessage();
         while (retry > 0)
         {
             try
             {
-                string responseString;
                 if (AndroidHelper.IsAndroid)
                 {
                     responseString = await NetworkHelper.MakeRequestAsync(fullUrl, jsonData);
@@ -132,7 +133,7 @@ internal class LlmGemini : Llm, IGetModelNames
                     {
                         Timeout = TimeSpan.FromSeconds(ModEntry.Config.QueryTimeout)
                     };
-                    var response = await client.PostAsync(fullUrl, json);
+                    response = await client.PostAsync(fullUrl, json);
                     responseString = await response.Content.ReadAsStringAsync();
                 }
                 
@@ -148,25 +149,28 @@ internal class LlmGemini : Llm, IGetModelNames
                     if (!responseJson.TryGetValue("candidates", out var candidatesToken) || !(candidatesToken is JArray candidatesArray) || !candidatesArray.HasValues) { retry--; continue; } // Changed
                     
                     var firstCandidate = candidatesArray.FirstOrDefault();
-                    if (firstCandidate == null) { retry--; continue; } // Changed
+                    if (firstCandidate == null) { retry--; continue; } 
 
                     var finishReasonToken = firstCandidate["finishReason"];
-                    if (finishReasonToken == null || finishReasonToken.ToString() != "STOP") { retry--; continue; } // Changed
-
+                    if (finishReasonToken == null || finishReasonToken.ToString() != "STOP") { retry--; continue; } 
                     var contentToken = firstCandidate["content"];
-                    if (contentToken == null) { retry--; continue; } // Changed
+                    if (contentToken == null) { retry--; continue; } 
 
                     var partsToken = contentToken["parts"];
-                    if (!(partsToken is JArray partsArray) || !partsArray.HasValues) { retry--; continue; } // Changed
+                    if (!(partsToken is JArray partsArray) || !partsArray.HasValues) { retry--; continue; } 
 
                     var firstPart = partsArray.FirstOrDefault();
-                    if (firstPart == null) { retry--; continue; } // Changed
+                    if (firstPart == null) { retry--; continue; } 
 
                     var textToken = firstPart["text"];
-                    if (textToken == null) { retry--; continue; } // Changed
+                    if (textToken == null) { retry--; continue; } 
                     
-                    var text = textToken.ToString(); // Changed
-                    return text ?? string.Empty;
+                    var text = textToken.ToString(); 
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        return new LlmResponse(text);
+                    }
+                    return new LlmResponse("Empty response", (int)response.StatusCode);
                 }
             }
             catch(Exception ex)
@@ -177,7 +181,7 @@ internal class LlmGemini : Llm, IGetModelNames
                 Thread.Sleep(100);
             }
         }
-        return "";
+        return new LlmResponse(responseString, (int)response.StatusCode);
     }
 
     internal override Dictionary<string, double>[] RunInferenceProbabilities(string fullPrompt, int n_predict = 1)

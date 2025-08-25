@@ -23,7 +23,7 @@ internal abstract class LlmOpenAiBase : Llm
         public string content { get; set; }
     }
 
-    internal override async Task<string> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
+    internal override async Task<LlmResponse> RunInference(string systemPromptString, string gameCacheString, string npcCacheString, string promptString, string responseStart = "",int n_predict = 2048,string cacheContext="")
     {
         var inputString = JsonConvert.SerializeObject(new // Changed
             {
@@ -59,47 +59,61 @@ internal abstract class LlmOpenAiBase : Llm
             throw new InvalidOperationException("Network not available");
         }
         
+        string responseString = "";
+        int apiResponseCode = 500;
         while (retry > 0)
         {
             try
             {
                 // Use Android-compatible network helper
-                var responseString = await NetworkHelper.MakeRequestAsync(fullUrl, inputString, CancellationToken.None, apiKey);
+                responseString = await NetworkHelper.MakeRequestAsync(fullUrl, inputString, CancellationToken.None, apiKey);
                 var responseJson = JObject.Parse(responseString);
-                
+
                 if (responseJson == null)
                 {
                     throw new Exception("Failed to parse response");
                 }
                 else
                 {
-                    
+
                     if (!responseJson.TryGetValue("choices", out var choicesToken) || choicesToken.Type == JTokenType.Null) { retry--; continue; } // Changed
                     var choicesArray = choicesToken as JArray;
-                    if (choicesArray == null || !choicesArray.HasValues) { retry--; continue; } // Changed
+                    if (choicesArray == null || !choicesArray.HasValues) { retry--; continue; }
 
                     var firstChoice = choicesArray.FirstOrDefault();
-                    if (firstChoice == null) { retry--; continue; } // Changed
+                    if (firstChoice == null) { retry--; continue; }
 
                     var messageToken = firstChoice["message"];
-                    if (messageToken == null || messageToken.Type == JTokenType.Null) { retry--; continue; } // Changed
+                    if (messageToken == null || messageToken.Type == JTokenType.Null) { retry--; continue; }
 
                     var contentToken = messageToken["content"];
-                    if (contentToken == null || contentToken.Type == JTokenType.Null) { retry--; continue; } // Changed
-                    
-                    var text = contentToken.ToString(); // Changed
-                    return text ?? string.Empty;
+                    if (contentToken == null || contentToken.Type == JTokenType.Null) { retry--; continue; }
+
+                    var text = contentToken.ToString();
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        return new LlmResponse(text);
+                    }
+                    else
+                    {
+                        retry--;
+                        continue;
+                    }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                if (ex.InnerException is HttpRequestException)
+                {
+                    apiResponseCode = (int)((HttpRequestException)ex.InnerException).StatusCode;
+                }
                 Log.Debug(ex.Message);
                 Log.Debug("Retrying...");
                 retry--;
                 Thread.Sleep(100);
             }
         }
-        return "";
+        return new LlmResponse(responseString, apiResponseCode);
     }
 
     internal override Dictionary<string, double>[] RunInferenceProbabilities(string fullPrompt, int n_predict = 1)

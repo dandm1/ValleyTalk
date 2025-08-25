@@ -37,9 +37,9 @@ namespace ValleyTalk.Platform
         /// </summary>
         public static async Task<string> MakeRequestAsync(string url, string content = null, CancellationToken cancellationToken = default, string authToken = null)
         {
+            HttpResponseMessage response = null;
             try
             {
-                HttpResponseMessage response;
                 
                 if (string.IsNullOrEmpty(content))
                 {
@@ -70,7 +70,12 @@ namespace ValleyTalk.Platform
             }
             catch (HttpRequestException ex)
             {
-                throw new InvalidOperationException($"Network request failed: {ex.Message}", ex);
+                string message = ex.Message;
+                if (response != null && response.Content != null)
+                {
+                    message += $"\n (HTTP {(int)response.StatusCode} - {response.Content.ReadAsStringAsync().Result})";
+                }
+                throw new InvalidOperationException($"Network request failed: {message}", ex);
             }
         }
 
