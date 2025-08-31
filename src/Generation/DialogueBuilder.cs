@@ -132,6 +132,10 @@ namespace ValleyTalk
 
         private string FormatLine(string[] theLine)
         {
+            if (theLine == null || theLine.Length == 0)
+            {
+                return string.Empty;
+            }
             if (theLine.Length == 1 && ModEntry.Config.TypedResponses != "Always")
             {
                 return theLine[0];
