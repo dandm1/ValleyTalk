@@ -249,7 +249,8 @@ public class Character
         int timeoutSeconds = ModEntry.Config.QueryTimeout;
         int retryCount = 0;
         Exception lastException = null;
-
+        LlmResponse result;
+        
         for (int attempt = 0; attempt <= maxRetryAttempts; attempt++)
         {
             retryCount = attempt + 1;
@@ -267,7 +268,6 @@ public class Character
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds));
 
                 string[] resultsInternal;
-                LlmResponse result;
 
                 try
                 {
@@ -293,23 +293,26 @@ public class Character
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, $"Error generating AI response for {Name}");
+                    Log.Error(ex, $"Error generating AI response for {StardewNpc.displayName}");
                     throw;
                 }
 
-                if (resultsInternal.Length == 0)
+                if (resultsInternal.Length > 0)
                 {
-                    Log.Warning("No valid response generated from AI model.");
-                    if (result != null && !string.IsNullOrWhiteSpace(result.ErrorMessage))
-                    {
-                        Log.Warning($"API Error Message: {result.ErrorMessage}");
-                    }
-                    else if (result != null && !string.IsNullOrWhiteSpace(result.Text))
-                    {
-                        Log.Warning($"API Response: {result.Text}");
-                    }
+                    results = resultsInternal;
+                    break; // Success, exit retry loop
                 }
 
+                Log.Warning("No valid response generated from AI model.");
+                if (result != null && !string.IsNullOrWhiteSpace(result.ErrorMessage))
+                {
+                    Log.Warning($"API Error Message: {result.ErrorMessage}");
+                }
+                else if (result != null && !string.IsNullOrWhiteSpace(result.Text))
+                {
+                    Log.Warning($"API Response: {result.Text}");
+                }
+            
                 if (ModEntry.Config.Debug)
                 {
                     // Open 'generation.log' and append values to it
@@ -349,8 +352,6 @@ public class Character
                     Log.Debug("--------------------------------------------------");
                 }
 
-                results = resultsInternal;
-                break; // Success, exit retry loop
             }
             catch (Exception ex)
             {
