@@ -109,7 +109,7 @@ namespace ValleyTalk
 
         public override object GetApi()
         {
-            return new ModConfig();
+            return new ValleyTalkInterface();
         }
 
         public override void Entry(IModHelper helper)

@@ -70,9 +70,9 @@ public class Prompts
 
     public string GiveGift => giveGift;
 
+    Dictionary<string, IEnumerable<string>> PromptOverrides = new Dictionary<string, IEnumerable<string>>();
     public Prompts(DialogueContext context, Character character)
     {
-
         npcData = character.StardewNpc.GetData();
         npcIsMale = npcData.Gender == StardewValley.Gender.Male;
         Context = context;
@@ -85,6 +85,26 @@ public class Prompts
 
         Name = character.StardewNpc.displayName;
         Gender = character.Bio.Gender;
+
+        PromptOverrides = ModInteropManager.Instance.GetPromptOverrides(character);
+    }
+
+    private void DefaultOrOverride(string promptElement, Action<StringBuilder> defaultPromptFunction, StringBuilder prompt)
+    {
+        if (!PromptOverrides.TryGetValue(promptElement, out var overrideTexts))
+        {
+            defaultPromptFunction(prompt);
+        }
+        else
+        {
+            foreach (var overrideText in overrideTexts)
+            {
+                if (!string.IsNullOrWhiteSpace(overrideText))
+                {
+                    prompt.AppendLine(overrideText);
+                }
+            }
+        }
     }
 
     private string SelectGiftGiven()
@@ -166,22 +186,22 @@ public class Prompts
     private string GetCorePrompt()
     {
         var prompt = new StringBuilder();
-        GetGameState(prompt);
-        GetSampleDialogue(prompt);
-        GetEventHistory(prompt);
+        DefaultOrOverride("GameState",GetGameState,prompt);
+        DefaultOrOverride("SampleDialogue",GetSampleDialogue,prompt);
+        DefaultOrOverride("EventHistory",GetEventHistory,prompt);
 
         prompt.AppendLine($"## {Util.GetString(Character,"coreInstructionHeading")}");
         prompt.AppendLine($"### {Util.GetString(Character,"coreContextHeading")}");
         prompt.AppendLine(Util.GetString(Character,"coreFarmerGender"));
-        GetDateAndTime(prompt);
-        GetWeather(prompt);
-        GetOtherNpcs(prompt);
+        DefaultOrOverride("DateAndTime", GetDateAndTime, prompt);
+        DefaultOrOverride("Weather", GetWeather, prompt);
+        DefaultOrOverride("OtherNpcs", GetOtherNpcs, prompt);
         Game1.getPlayerOrEventFarmer().friendshipData.TryGetValue(Character.Name, out Friendship friendship);
         if (friendship.IsMarried() || friendship.IsRoommate())
         {
             if (friendship.IsRoommate())
             {
-                prompt.AppendLine(Util.GetString(Character,"coreRoommates", new { Name= Name }));
+                DefaultOrOverride("coreRoommates", p => { p.AppendLine(Util.GetString(Character, "coreRoommates", new { Name = Name })); }, prompt);
             }
             else
             {
@@ -189,30 +209,30 @@ public class Prompts
                 var dateNow = new StardewTime(Game1.Date,600);
                 var whenMarried = dateNow.AddDays(-friendship.DaysMarried);
                 prompt.AppendLine(Util.GetString(Character,"coreMarriedSince", new { Name= Name, RelativeDate = whenMarried.SinceDescription(dateNow) }));
-                GetChildren(prompt, friendship);
+                DefaultOrOverride("Children", p => GetChildren(p, friendship), prompt);
             }
 
-            GetSpouse(prompt);
-            GetFarmContents(prompt);
-            GetWealth(prompt);
-            GetMarriageFeelings(prompt);
+            DefaultOrOverride("Spouse", GetSpouse, prompt);
+            DefaultOrOverride("FarmContents", GetFarmContents, prompt);
+            DefaultOrOverride("Wealth", GetWealth, prompt);
+            DefaultOrOverride("MarriageFeelings", GetMarriageFeelings, prompt);
         }
-        GetLocation(prompt);
-        GetTrinkets(prompt);
-        GetRecentEvents(prompt);
+        DefaultOrOverride("Location", GetLocation, prompt);
+        DefaultOrOverride("Trinkets", GetTrinkets, prompt);
+        DefaultOrOverride("RecentEvents", GetRecentEvents, prompt);
 
-        GetSpecialDatesAndBirthday(prompt);
-        GetGift(prompt);
-        GetSpouseAction(prompt);
+        DefaultOrOverride("SpecialDatesAndBirthday", GetSpecialDatesAndBirthday, prompt);
+        DefaultOrOverride("Gift", GetGift, prompt);
+        DefaultOrOverride("SpouseAction", GetSpouseAction, prompt);
         if (!friendship.IsMarried())
         {
-            GetNonSpouseFriendshipLevel(prompt);
-            GetSpouse(prompt);
-            GetSpecialRelationshipStatus(prompt, friendship);
+            DefaultOrOverride("NonSpouseFriendshipLevel", GetNonSpouseFriendshipLevel, prompt);
+            DefaultOrOverride("Spouse", GetSpouse, prompt);
+            DefaultOrOverride("SpecialRelationshipStatus", p => GetSpecialRelationshipStatus(p, friendship), prompt);
         }
-        prompt.AppendLine(Util.GetString(Character,"coreGenderReferences"));
-        GetPreoccupation(prompt);
-        GetCurrentConversation(prompt);
+        DefaultOrOverride("coreGenderReferences", p => p.AppendLine(Util.GetString(Character,"coreGenderReferences")), prompt);
+        DefaultOrOverride("Preoccupation", GetPreoccupation, prompt);
+        DefaultOrOverride("CurrentConversation", GetCurrentConversation, prompt);
 
         return prompt.ToString();
     }
@@ -996,16 +1016,18 @@ public class Prompts
     private string GetCommand()
     {
         var commandPrompt = new StringBuilder();
-        commandPrompt.AppendLine($"##{Util.GetString(Character,"commandHeading")}");
-        commandPrompt.AppendLine(Util.GetString(Character,"commandIntro", new { Name= Name }));
-        if (!string.IsNullOrWhiteSpace(Context.ScheduleLine) && !Context.ChatHistory.Any() && !Character.SpokeJustNow())
-        {
-            commandPrompt.AppendLine();
-            commandPrompt.AppendLine(Util.GetString(Character,"commandReplaceSchedule", new { ScheduleLine= Context.ScheduleLine }));
-        }
+        commandPrompt.AppendLine($"##{Util.GetString(Character, "commandHeading")}");
+        commandPrompt.AppendLine(Util.GetString(Character, "commandIntro", new { Name = Name }));
+        DefaultOrOverride("ReplaceSchedule", p => {
+            if (!string.IsNullOrWhiteSpace(Context.ScheduleLine) && !Context.ChatHistory.Any() && !Character.SpokeJustNow())
+            {
+                p.AppendLine();
+                p.AppendLine(Util.GetString(Character, "commandReplaceSchedule", new { ScheduleLine = Context.ScheduleLine }));
+            }
+        }, commandPrompt);
         if (ModEntry.Config.ApplyTranslation)
         {
-            commandPrompt.AppendLine(Util.GetString(Character,"instructionsTranslate", new { Language= ModEntry.Language }));
+            commandPrompt.AppendLine(Util.GetString(Character, "instructionsTranslate", new { Language = ModEntry.Language }));
         }
         return commandPrompt.ToString();
     }
