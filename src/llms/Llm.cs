@@ -56,7 +56,7 @@ internal abstract class Llm
                     var modelNames = getList.GetModelNames();
                     if (modelNames.Any())
                     {
-                        if (modelName.Contains(modelName))
+                        if (modelNames.Contains(modelName))
                         {
                             ModEntry.SMonitor.Log(Util.GetString("modelCheckValidModelName", returnNull: true) ?? "Can retreive model names and model name is a valid option.  Possible causes - model is not a text generation model, insecure endpoint specified or incorrect API key (some providers).", StardewModdingAPI.LogLevel.Error);
                         }
