@@ -1,0 +1,50 @@
+
+[size=5][u][b]Installation[/b][/u][/size]
+[size=4]Installation varies from other mods in that it is necessary to get an API Key from Google, Mistral, Anthropic, OpenAI, etc and insert it into the configuration before use.  There are a lot of further configuration options, but that's the only one that is necessary.[/size]
+
+[size=3][b]General Installation Instructions:[/b][/size]
+[list]
+[*][size=3]Download the zip file. Ensure you have the prerequisites installed.[/size]
+[*][size=3]Extract the contents of the zip file into a folder named “ValleyTalk” in your mods folder.[/size]
+[*][size=3]Select which LLM provider to use.[/size]
+[*][size=3]If using a commercial providers, set up an account and get an API key.[/size]
+[*][size=3]Update the config.json file with the necessary details (see below).[/size]
+[*][size=3]Play as normal.[/size]
+[/list][size=3]
+You can add the mod with an existing Stardew save game, though the characters won’t remember any conversations that happened before the mod was installed.[/size]
+[size=3]
+To delete the mod simply delete the ValleyTalk folder.[/size]
+[size=3]
+To update the mod it is safest to delete the existing folder and recreate it. Before deleting the folder you will want to take a copy of the config.json file, and put it back into the new folder.[/size]
+
+[size=5][u][b]Configuring[/b][/u][/size]
+[size=3]You can configure the mod either directly in the config.json file or using the Generic Mod Configuration Menu mod.[/size]
+
+[size=4][b]AI Model Configuration[/b][/size]
+[size=3]You can configure the model using either config.json or through the user interface using Generic Mod Config Menu.  There are a few additional configuration options in the config.json file, but the important options are available either way.
+[/size]
+[size=3]The main limitation in GMCM support is that the configuration options are more dynamic than GMCM can support, so please note that:[/size]
+[list]
+[*][size=3]The models supported by a particular provider are only updated when the ValleyTalk screen in GMCM is opened. Therefore, after selecting a provider and entering your API key for it you will need to hit “Save & Close” on the config screen and reopen it to get an updated list of model names.[/size]
+[*][size=3]The model providers dropdown list has more than 5 items but only 5 are initially displayed. You can scroll to the rest of the list using the scroll wheel on a mouse or the second stick on a game controller.[/size]
+[*][size=3]Only the inputs that are needed for the selected provider will be displayed.  These also are only updated when the screen is opened.[/size]
+[/list]
+[size=3]A walk through of how to configure the mod for API access using Claude 3.5 Haiku via OpenRouter is here:[/size]
+
+[youtube]7dCPPH92DUA[/youtube]
+[size=3]An additional video showing how to configure the free Mixtral 8x22b model is included in the mod videos.[/size]
+
+[size=4][b]How Often to Use AI Dialogue[/b][/size]
+[size=3]ValleyTalk has three configuration options that allow users to configure how often generated dialogue is shown.  For each of these the frequency is specified on a scale from 0 (never show) to 4 (always show).  The three fields are:[/size]
+[list]
+[*][size=3]MarriageFrequency - how often to use ValleyTalk when talking to a spouse.[/size]
+[*][size=3]GiftFrequency - how often to use ValleyTalk when a gift is given.[/size]
+[*][size=3]GeneralFrequency - how often to use ValleyTalk for any other dialogue.[/size]
+[/list][size=3]When ValleyTalk is not applied Stardew will show dialogue from any dialogue mods you have installed.[/size]
+
+[size=3]Users can also specify a list of characters for which the mod should not be applied, as a list of character names divided by commas in the "DisableCharacters" field.
+[/size]
+[size=4][b]Manual Response Input[/b][/size]
+[size=3]You can configure in the config system whether the game should give the option of a manually typed response Always (including when no computer generated options are provided), only when generated options are available or Never.
+
+It is also possible to configure the key which is used to trigger the ability to enter your own comments to start a conversation - which defaults to the Left Alt key. [/size]

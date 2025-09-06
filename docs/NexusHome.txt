@@ -1,0 +1,67 @@
+[size=3][size=3]ValleyTalk brings infinite dialogue to Stardew Valley. It allows all villagers to respond naturally to the farmer in conversation with deep knowledge of the world – whether they are accepting an apple during a summer storm, playing with the kids before starting a day on the farm, meeting an unknown new farmer on the beach or any other combination.[/size]
+
+[size=5][u][b]Overview[/b][/u][/size]
+[size=3]ValleyTalk uses the power of modern AI to make Stardew Valley conversations immersive in a way that was not possible previously. Talk to your spouse about options for home schooling your children, discuss your latest finds in the mines, have the villagers remember you are married when you give them a gift, let the villagers refer to each other when talking in a group – the options are endless. See the demo video for just a few conversations that happened playing three days in the game (still needs updating to show text input for v1.0+).
+[/size]
+[center][youtube]WU-xZdV8yX8[/youtube][/center][left][/left][/size][u][size=5][b]Features[/b][/size][/u]
+[size=3][list]
+[*]When talking to any villager they will react based on friendship level and season as normal, as well as other factors including weather, time of day, where they are standing, who else is present, community events, bundle completion, how they feel about any gift they've been given and their history with the player.
+[*]When talking to a spouse they will also be aware of buildings, animals and crops currently on the farm, pets, children, happiness in the marriage, how long they've been married, any other spouses (if using a polyamory mod) and more.
+[*]You can respond to questions from villagers by typing your own response, or selecting from 3 or 4 options proposed by the LLM.
+[*]Villagers and spouses remember past conversations and refer back to them in the future.
+[*]All villagers respond in character.
+[*]The farmer is able to have long back and forth conversations with the villagers, exploring aspects of their character and relationship.
+[*]Can be run in conjunction with other dialogue mods and custom NPCs. 
+[*]Full biographies for SVE villagers are available in the see separate [url=https://www.nexusmods.com/stardewvalley/mods/34341]ValleyTalk for SVE[/url]﻿ mod content pack.  You are welcome to follow this approach to make your own content packs to  extend coverage to your own villagers and locations.
+[*]Works with all major large-language model providers, including free options.
+[*]Combines contextually aware conversation with standard (or modded) dialogue for events and festivals.  [b]NOTE: [/b]Many villagers have "event" dialogue for when they first speak to the farmer, so the first conversation with these villagers will use the standard lines.
+[*]Support for languages other than English either using translation packs or using the LLM directly to translate on the fly.
+[/list][/size]
+[size=3]See the Changelogs above for what has changed in each new upgrade.[/size]
+
+[size=5][b][u]Quick Start[/u][/b][/size]
+[size=3]For most users the quickest way to get started with ValleyTalk will be using a Free Tier Google AI account to access Google Gemini 2.5.  You can always upgrade to a different model later.
+
+To install and configure the mod using Gemini 2.5 Flash (which is configured by default in the config file) follow the steps below.  Before you start unzip the mod into your mods folder as usual and ensure you have Generic Mod Config Menu installed.
+[list=1]
+[*]Open a web browser and navigate to Google AI Studio at https://aistudio.google.com/apikey .
+[*][size=3]Login to your Google account if prompted.  In some places you may need to verify you are 18+ to access AI Studio.[/size]
+[*][size=3]Click on 'Create API Key' and create a project.  [/size]Copy the returned API Key.
+[*][size=3]Open Stardew Valley and find the ValleyTalk option in GMCM.[/size]
+[*][size=3]Delete the existing contents of the 'API Key' field and press Ctrl-V to paste the new key.[/size]
+[*][size=3]Press 'Save & Close'.  Confirm that the SMAPI window shows 'Connected to the model successfully'.[/size]
+[/list]
+If you have trouble getting a Google key many other providers are supported, see: [url=https://www.nexusmods.com/stardewvalley/articles/3554]Latest Provider Overview[/url]
+
+For more details on other configuration options please see: [/size][url=https://www.nexusmods.com/stardewvalley/articles/3553][size=3]Installation and Configuration[/size][/url]
+
+[size=5][b][u]To Do[/u][/b][/size]
+[size=3]The mod is now quite mature, but there are still a few features I would like in include such as [/size]Festival dialogue and understanding of the rooms within buildings.
+
+I still plan to create Android support, but so far I have hit a wall on this technically.
+
+[size=3]There is an issue w[/size]hen playing with a controller that it may become difficult to select a response as conversations get longer. This appears to be a bug in the base game, and has been reported. The desired response can always be selected with a mouse.[size=3]
+[/size]
+[size=5][b][u]Prerequisites[/u][/b][/size]
+[size=3][list]
+[*]Stardew Valley 1.6.14 (note that as this is a code patch, later versions may break)
+[*]SMAPI 4.1.7
+[*](Optional) Generic Mod Config Menu 1.14.1 or later.
+[*]Content Patcher 2.6.1 or later.
+[/list][/size]
+The mod has been tested on Windows, Mac and Linux and support networked multiplayer mode.  It is known [i]not[/i] to be compatible with Android. Compatibility with other platforms is unknown.
+
+[size=3]ValleyTalk is generally compatible with most other mods and doesn't use content from any other mod.  There are a few known compatibility issues however detailed in: [url=https://www.nexusmods.com/stardewvalley/articles/3552]Relationship with Other Mods[/url]
+[/size]
+[b][size=5][u]Running Costs[/u][/size][/b]
+[size=3]The mod is free, and if you operate with a locally hosted large language model or a free hosted model that can be free too.  The mod is structured to make effective use of prompt caching when running locally using LlamaCpp or similar, but local hosting will still typically be slow.
+[/size]
+[size=3]If you are using one of the commercial LLM providers, then you just pay for what you use. Pricing is usually quoted as a cost per million “tokens” – broken down into inputs, cached inputs and outputs. In testing I found I got between 100 and 150 conversations per million tokens of input – with up to 80% of that cached. The output tokens were minimal by comparison. Using Claude Sonnet 4 at $3.00 per million tokens of non-cached input that works out to about 1 US cent per conversation.
+[/size]
+[size=5][b][u]Disclaimer[/u][/b][/size]
+[size=3]The mod relies on AI returning responses in a specific format to interpret them. On occasion this doesn’t happen, usually because the model being used is not clever enough or the model has been trained to refuse to engage in the topics being discussed. If this happens the mod will try four times to get a valid response and then give up. This may result in longer than usual delays and higher than usual costs.[/size]
+[size=3]
+The information provided to the models is generally family friendly, though does indicate physical relationships between happily married and seriously dating couples. Despite this, responses using uncensored and NSFW language models may be unpredictable.
+
+[/size]Code
+Source code is available on [url=https://github.com/dandm1/ValleyTalk]GitHub[/url] .

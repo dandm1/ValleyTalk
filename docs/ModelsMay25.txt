@@ -1,0 +1,134 @@
+[size=5][u]
+[/u][/size][size=3]TL;DR:
+[list]
+[*][size=3]If you want to try the mod for free, I would recommend Google's Gemini 2.5 Flash model - which seems to be fast and smart enough to give a good experience.  [/size]
+[*][size=3]The best overall experience still seems to come from using Anthropic's Claude models - particularly Sonnet 4. Claude Opus 4 gives even better results, but not enough better to justify lower performance and higher cost.[/size]
+[*][size=3]OpenAI's gpt-4o, Mistral's Mistral Large and Anthropic's Claude 3.5 Haiku also work well.[/size]
+[/list][/size]
+[size=3]Note that I am not affiliated with any LLM provider, and my recommendations are based purely on performance and cost.  These also change a lot, so sorry if my suggestions get stale.[/size][size=3]
+[/size]
+[size=3]The mod works with most major providers of large language models and also has support for self-hosted models via LlamaCpp and OpenAI compatibility. For any of the commercial large language model providers (OpenAI, Anthropic, Google, DeepSeek, VolcEngine and Mistral are directly supported) you will need to supply an API key in the configuration file for access.
+[/size]
+[size=4][u][b]Google / Gemini[/b][/u]
+[/size][size=3]Google Gemini Flash 2.5 is currently the strongest model for ValleyTalk which can be used for free. Once you sign up for a Google API key, Gemini 2.5 Flash can be used for free.[/size]
+[size=3]
+The outputs from Gemini 2.5 Flash are good, though I have witnessed occasional confusion about the Stardew world and it isn't as creative as Claude.[/size]
+[size=3]
+[b]Getting an API key[/b][/size]
+[size=3]You can create an API key at: https://aistudio.google.com/apikey - using a new or existing Google account.
+
+You can access the free tier of Gemini flash without adding funds / billing details.
+
+[b]Config Details[/b]
+[list]
+[*]Provider: Google
+[*]ModelName: see below
+[*]ApiKey: Required
+[*]Debug: Optional
+[*]EnableMod: true
+[*]ServerAddress and PromptFormat are ignored.
+[/list]
+Best models
+[/size][list]
+[size=3][/size][*][size=3]gemini-2.5-flash[/size]
+[*][size=3]gemini-2.5-pro[/size]
+[/list]
+[size=4][u][b]Mistral / Mistral Large[/b][/u][/size]
+[size=3]Mistral Large is the strongest of the open weights models currently available to host yourself, though for better performance you will likely do better on La Plateforme.[/size]
+[size=3]
+Mistral Large has good world knowledge and is noticeably more liberal than the other hosted models in what topics it is willing to discuss.[/size]
+[size=3]
+[b]Getting an API key[/b][/size]
+[size=3]You can create an account at: https://auth.mistral.ai/ui/registration
+
+You will need to add billing details to use Mistral Large.
+
+[b]Config Details[/b][/size]
+[list]
+[*][size=3]Provider: Mistral[/size]
+[*][size=3]ModelName: see below[/size]
+[*][size=3]ApiKey: Required[/size]
+[*][size=3]Debug: Optional[/size]
+[*][size=3]EnableMod: true[/size]
+[*][size=3]ServerAddress and PromptFormat are ignored.[/size]
+[/list][size=3]
+[b]Best Models[/b][/size]
+[list]
+[*][size=3]mistral-large-latest[/size]
+[/list]
+[size=4][u][b]Anthropic / Claude[/b][/u]
+[/size][size=3]Claude 4 Sonnet gives the best overall dialogue quality at the cost of being slower and more expensive than many other models. Claude Sonnet seems to have lots of knowledge about Stardew in its built in knowledge, so is able to respond with more game details than most other models.
+[/size]
+[size=3]Claude 4 Haiku is still one of the best models, but significantly cheaper and faster than Sonnet. It is still somewhat prudish and has less intrinsic game knowledge than Claude Sonnet.
+[/size]
+[size=3][b]Via OpenRouter.ai[/b][/size]
+[size=3]The easiest way I've found to access the Anthropic models is via operrouter.ai - which also offers most of the other models listed here. 
+
+You can sign up at: https://openrouter.ai/
+
+[size=3][b]Config Details[/b]
+[/size][list]
+[*][size=3]Provider: OpenAiCompatible[/size]
+[*][size=3]ModelName: see below[/size]
+[*][size=3]ApiKey: Required[/size]
+[*][size=3]Debug: Optional[/size]
+[*][size=3]EnableMod: true[/size]
+[*][size=3]ServerAddress: https://openrouter.ai/api[/size]
+[*][size=3]PromptFormat is ignored.[/size]
+[/list]
+[b]Getting an API key Directly[/b]
+As at December 2024, Anthropic were seeking to restrict their direct APIs to business use, so you need to give business details when signing up. To use Anthropic's models directly, sign-up at: https://www.anthropic.com/api[/size][size=3]
+[/size]
+[size=4][u][b]Open AI / GPT-4o[/b][/u][/size]
+[size=3]OpenAI’s models work with ValleyTalk and come very close to matching the performance of Claude Sonnet. Best results seem to come from using the GPT-4 series models rather than the newer o1 & o3 model.  I'm yet to test GPT-5, but performance will be hampered by its mandatory reasoning steps.[/size]
+[size=3]
+[b]Getting an API key[/b][/size]
+[size=3]You can create an account at https://openai.com/index/openai-api/ .
+
+[b]Config Details[/b]
+[list]
+[*]Provider: OpenAI
+[*]ModelName: see below
+[*]ApiKey: Required
+[*]Debug: Optional
+[*]EnableMod: true
+[*]ServerAddress and PromptFormat are ignored.
+[/list]
+[b]Best models[/b]
+[list]
+[*]gpt-4o-2024-11-20
+[/list]
+OpenAI have a lot of non-text models such as Dalle and Whisper.  Those cannot be used with ValleyTalk.[/size]
+
+[size=4][u][b]OpenAI Compatible[/b][/u][/size]
+[size=3]This adapter is designed for use with any completely OpenAI compatible hosts, such as those provided by OpenRouter and locally hosted models (Ollama, etc). It supports defining the URL of the server to use (just input the host name – up to the “v1” part of the URL as well as submitting the relevant API key.
+[/size]
+[size=3][b]Best models[/b][/size]
+[size=3]Valley Talk requires a high-quality text generation models to operate.  Don't expect to get good results with a 7b or 32b parameter model.  Beyond that many models can be used. I cannot guarantee that outputs will remain SFW if run with a model that has been tuned to give NSFW responses.
+[/size]
+[size=3][b]Config Details[/b]
+[/size][list]
+[*][size=3]Provider: OpenAiCompatible[/size]
+[*][size=3]ModelName: Depends on server[/size]
+[*][size=3]ApiKey: Depends on server[/size]
+[*][size=3]Debug: Optional[/size]
+[*][size=3]EnableMod: true[/size]
+[*][size=3]ServerAddress: Required (for example “http://localhost:8080/api/v1/”)[/size]
+[*][size=3]PromptFormat is ignored.[/size]
+[/list]
+[size=4][u][b]LlamaCpp / Ollama[/b][/u][/size]
+[size=3][i][b]Advanced.[/b][/i] This adapter supports connections to the non-OpenAI APIs of the standard LlamaCpp server. It is useful for models that don’t come with embedded prompt structures that would permit the OpenAI compatible APIs to be used.
+
+Generally if you can use the OpenAI compatible provider, I would recommend that.
+[/size]
+[size=3]This is the only adapter that requires a “Prompt Format” input containing details of the prompt to pass to the target model. In this format you can use \n to represent a new line, and you should include “{system}”, “{prompt}” and “{response_start}” in the format somewhere as these will be substituted with details generated by the mod.
+[/size]
+[size=3][b]Config Details[/b]
+[/size][list]
+[size=3][*]Provider: LlamaCpp
+[*]Debug: Optional
+[*]EnableMod: true
+[*]ServerAddress: Required (for example “http://localhost:8080/completion”)
+[*]PromptFormat: Required
+[/size][*][size=3]ModelName and ApiKey are ignored.[/size]
+[/list]

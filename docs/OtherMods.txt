@@ -1,0 +1,24 @@
+[size=3]ValleyTalk is the result of months of work tuning prompts for modern AI models to give good Stardew dialogue in the authentic voice of the characters and hooking this into the Stardew code in a way that allows it to reflect the full game situation.  
+
+It was not built using content from any other mods, and when running does not use any content from other mods to generate outputs even if they are installed together, unless a content pack like ValleyTalk for SVE is installed to configure details for newly introduced characters.[/size]
+
+[size=3]ValleyTalk can be installed in conjunction with most other mods, but it operates independently and the dialogue generated won't reflect changes to characters or game scenarios from those mods. [/size]
+
+[b][size=5]Known Compatible Mods[/size][/b]
+[list]
+[*][size=3]Stardew Valley Extended - full support with the ValleyTalk for SVE Content Pack.[/size]
+[*][size=3]Polyamory Sweet - all villagers are aware of and talk about all of your spouses.[/size]
+[*][size=3]Immersive Spouses - spouses and other villagers know their plans for the rest of the day, and can talk about them.[/size]
+[*][size=3]Generic Mod Config Menu - gives a configuration UI for ValleyTalk.[/size]
+[*][size=3]Most other operational mods that don't patch the dialogue code - Automate, SpaceCore, Farm Type Manager, Expanded Preconditions, etc are the ones I have tested.[/size]
+[/list][size=3]
+[/size][size=5][b]Incompatible Mods[/b]
+[/size][size=3]ValleyTalk is known not to work with the following mods:
+[list]
+[*]Cooperative Egg Hunt
+[*]Button's Extra Trigger Action Stuff
+[*]Some users have reported incompatibility with XtardewValley.
+[/list]If you see all dialogue coming back as $%%% (or the equivalent in Stardew fonts) then most likely you have a mod installed that is overriding parts of the mod logic.  If you work out which one please let me know, so I can list it here.
+
+[/size][b][size=5]Creating Content Packs[/size][/b]
+For v1.0.0 ValleyTalk is designed to work with content packs that can add characters, locations, change characters and relationships and more.  You are free to produce any content packs you like, using ValleyTalk for SVE as a template or otherwise and to release them on Nexus.  It would be nice if you let me know, 
