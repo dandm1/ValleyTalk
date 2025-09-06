@@ -15,19 +15,6 @@
 - 📚 **Content Pack Support**: Full Content Patcher support and content pack for SVE.
 - ⚙️ **Highly Configurable**: Extensive configuration options through Generic Mod Config Menu
 
-## Installation
-
-### Requirements
-- [SMAPI](https://smapi.io/) 4.1.0 or higher
-- Stardew Valley 1.5.6 or higher
-
-### Steps
-1. Install [SMAPI](https://smapi.io/)
-2. Download ValleyTalk from [Nexus Mods](https://www.nexusmods.com/stardewvalley/mods/30319)
-3. Extract the mod files to your `Mods` folder
-4. Configure your AI provider settings (see Configuration section)
-5. Launch the game through SMAPI
-
 ## Configuration
 
 ValleyTalk requires configuration of an AI language model provider. The mod supports:
