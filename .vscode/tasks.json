@@ -6,25 +6,22 @@
 			"task": "build",
 			"group": "build",
             "options": {
-                "cwd": "${workspaceFolder}/ValleyTalk"
+                "cwd": "${workspaceFolder}/src"
             },
-			"problemMatcher": [],
+			"problemMatcher": "$msCompile",
             "label": "dotnet: build ValleyTalk"
 		},			
 		{
-			"type": "dotnet",
-			"task": "build",
+			"type": "shell",
+			"command": "dotnet",
+			"args": ["build", "--configuration", "Release"],
 			"group": "build",
-			
 			"options": {
-				"cwd": "${workspaceFolder}/ValleyTalk",
-				"shell": {
-					"executable": "/bin/bash",
-					"args": ["--configuration Release"]
-				}
+				"cwd": "${workspaceFolder}/src"
 			},
-			"problemMatcher": [],
-			"label": "dotnet: build ValleyTalk Prod"
+			"problemMatcher": "$msCompile",
+			"label": "dotnet: build ValleyTalk Prod",
+			"detail": "Release configuration build"
 		}
 	]
 }
