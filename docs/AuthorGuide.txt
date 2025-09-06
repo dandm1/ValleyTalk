@@ -1,3 +1,8 @@
 [size=1]Adding Content to ValleyTalk[/size]
 
+- Creating Content Packs
+- Using the API
+- Updating Files Directly
+- Translations
+
 Coming soon
