@@ -24,11 +24,20 @@ ValleyTalk requires configuration of an AI language model provider. The mod supp
 - **Google Gemini**
 - **Mistral AI**
 - **DeepSeek**
+- **SiliconFlow** (international) and **SiliconFlowCN** (China)
 - **VolcEngine**
 - **LlamaCpp** (for local models)
 - **OpenAI-Compatible APIs**
 
 Configure your preferred provider through the mod's config file or using Generic Mod Config Menu.
+
+### SiliconFlow
+
+Choose `SiliconFlow` for the international platform or `SiliconFlowCN` for the China platform. Enter an API key from the matching platform and the full ID of a chat model available to that account (including any organization prefix). A model name is required; no default model is assumed across the two platforms.
+
+The providers use `https://api.siliconflow.com` and `https://api.siliconflow.cn`, respectively. The adapter appends `/v1/chat/completions` and queries `/v1/models?sub_type=chat` for dialogue models. No Server Address setting is required.
+
+Create keys at [SiliconFlow International](https://cloud.siliconflow.com) or [SiliconFlow China](https://cloud.siliconflow.cn). Switching providers clears the API key, following the existing configuration menu behavior; also select a model available on the destination platform. Keep API keys and personal configuration files out of commits and issue reports.
 
 ## Architecture
 

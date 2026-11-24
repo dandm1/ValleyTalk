@@ -121,7 +121,7 @@ internal abstract class LlmOpenAiBase : Llm
         throw new NotImplementedException();
     }
 
-    public string[] CoreGetModelNames(Dictionary<string, string> extraHeaders = null)
+    public string[] CoreGetModelNames(Dictionary<string, string> extraHeaders = null, string query = "")
     {
         if (extraHeaders == null)
         {
@@ -133,7 +133,7 @@ internal abstract class LlmOpenAiBase : Llm
         {
             Timeout = TimeSpan.FromMinutes(1)
         };
-        var fullUrl = $"{url}/v1/models";
+        var fullUrl = $"{url}/v1/models{query}";
         var request = new HttpRequestMessage(HttpMethod.Get, fullUrl);
         request.Headers.Add("Authorization", $"Bearer {apiKey}");
         foreach (var header in extraHeaders)
