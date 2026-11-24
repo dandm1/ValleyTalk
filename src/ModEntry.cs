@@ -30,6 +30,8 @@ namespace ValleyTalk
                     {"OpenAI", typeof(LlmOpenAi)},
                     {"Mistral", typeof(LlmMistral)},
                     {"DeepSeek", typeof(LlmDeepSeek)},
+                    {"SiliconFlow", typeof(LlmSiliconFlow)},
+                    {"SiliconFlowCN", typeof(LlmSiliconFlowCN)},
                     {"VolcEngine", typeof(LlmVolcEngine)},
                     {"OpenAiCompatible", typeof(LlmOAICompatible)}
                 };
